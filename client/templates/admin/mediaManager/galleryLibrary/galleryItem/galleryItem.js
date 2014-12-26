@@ -1,8 +1,15 @@
-Template.galleryItem.helpers ({
-  isList: function () {
-    return Session.equals('media-list-style', 'list');
-  },
-});
+// Template.galleryItem.helpers({
+//   featured: function () {
+//       var url = this.media[0].thumb;
+//       _.each(this.media, function (m) {
+//          if(m.isFeatured === 1) {
+//             url = m.thumb;
+//          }
+//       });
+//       console.log(url);
+//       return url;
+//   }
+// });
 
 Template.galleryItem.events({
 	'click .destroy': function () {
@@ -11,7 +18,7 @@ Template.galleryItem.events({
         Galleries.remove({_id: { $in: delArr }});
       }
   	},
-   'change input[type=checkbox]': function(e) {
+  'change input[type=checkbox]': function(e) {
       e.preventDefault();
       var numChecked = SelectionAction.getCheckedCount();
       if(!numChecked) numChecked = 0;
@@ -29,5 +36,5 @@ Template.galleryItem.events({
           else
             SelectionAction.setCheckedCount(0);
         }
-    }
+  }
 });

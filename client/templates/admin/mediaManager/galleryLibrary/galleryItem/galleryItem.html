@@ -1,54 +1,13 @@
 <template name="galleryItem">
-
- {{#if isList}}
-
-     <tr>
-      <td><input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" /></td>
-      <td >
-        <div id="{{thumbId}}" class="list">
-      {{#if this.isUploaded}}
-          {{#if isImage }}
-          <a href="#" class="modal-show" data-toggle="modal" data-target="modal-{{this._id}}">
-            <img src="{{this.url store='thumb'}}" alt="">
-          </a>
-        
-         {{else}}
-          <div class="ratio"></div>
-          {{/if}}
-      {{else}}
-       {{> FS.UploadProgressBar bootstrap=true}}
-      {{/if}}
-        </div>
-      </td>
-      <td>{{this.original.name}}</td>
-      <td>{{formatDate this.copies.image_lg.updatedAt 'short'}}</td>
-      <td><a href="#" class="trashcan destroy"><span class="glyphicon glyphicon-trash"></span></a></td>
-    </tr>
-    
-
-  {{ else }}
-
-    <div id="thumb-{{this._id}}" class="thumb-container">
+    <div id="thumb-{{this._id}}" class="thumb thumb-container">
       <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
       <div class="thumbnail">
-      {{#if this.isUploaded}}
-        <a href="#" class="modal-show" data-toggle="modal" data-target="modal-{{this._id}}">
-            <div class="caption">
-                <h4>{{this.title}}</h4>
-            </div>
-          
-            <img src="{{this.url store='thumb'}}"  alt="">
-          </a>
-            
-      {{else}}
-       {{> FS.UploadProgressBar bootstrap=true}}
-      {{/if}}
+        <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
+            <img src="{{this.featured}}"  alt="">
+            <div class="title"><h4>{{ this.title }}</h4></div>
+        </a>
       </div>
     </div>
-  {{/if}}
-
-  {{> galleryEdit }}
-   
 </template>
 
 

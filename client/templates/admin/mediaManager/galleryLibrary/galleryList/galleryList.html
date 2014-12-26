@@ -2,26 +2,7 @@
 <template name="galleryList">
   {{> searchResults }}
       <div id="item-list">
-        {{ #if isList }}
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr class="info">
-                <th width="40px"></th>
-                <th>Featured Image</th>
-                <th>Gallery Title</th>
-                <th>Description</th>
-                <th>Last Modified</th>
-                <th width="40px">Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each galleryItems}}
-               {{> galleryItem}}
-              {{/each}}
-            </tbody>
-          </table>
-
-          {{ else }}
+        
            <div class="row">
           
           {{#each galleryItems}}
@@ -30,7 +11,7 @@
             </div>
           {{/each}}
           </div>
-        {{/if}}
+        
       </div>
       <div class="clear"></div>
 

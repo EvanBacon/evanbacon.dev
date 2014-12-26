@@ -21,6 +21,11 @@ Meteor.publish('gallery', function (id, options) {
     return null;
 });
 
+Meteor.publish("galleries", function() {
+      //if (Authorize.isAdmin) {
+    return Galleries.find({}, { fields: {media: 0}});
+});
+
 Meteor.methods({
     removeGalleries: function (galleries) {
       Galleries.remove({_id: { $in: galleries }});
