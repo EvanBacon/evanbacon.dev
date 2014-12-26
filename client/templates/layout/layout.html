@@ -1,0 +1,18 @@
+<template name="layout">  
+  <div class="container-fluid"> 
+    {{> yield region="header"}}
+
+    <div id="main" class="row-fluid">      
+      {{> yield}}    
+    </div> 
+
+    {{> yield region="footer"}} 
+  </div>
+</template>
+
+
+<template name="layout_no_header">
+    <div id="main" class="row-fluid">      
+      {{> yield }}    
+    </div>  
+</template>

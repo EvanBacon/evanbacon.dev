@@ -1,0 +1,51 @@
+<template name="mediaItem">
+
+ {{#if isList}}
+
+     <tr>
+      <td><input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" /></td>
+      <td >
+        <div id="{{thumbId}}" class="thumb list">
+      {{#if this.isUploaded}}
+          <a href="#" class="modal-show" data-toggle="modal" data-target="{{modalTarget}}">
+            <img  src="{{this.url store='thumb'}}" alt="">
+          </a>
+        
+      {{else}}
+       {{> FS.UploadProgressBar bootstrap=true}}
+      {{/if}}
+        </div>
+      </td>
+      <td>{{this.original.name}}</td>
+      <td>{{formatDate this.copies.image_lg.updatedAt 'short'}}</td>
+      <td><a href="#" class="trashcan destroy"><span class="glyphicon glyphicon-trash"></span></a></td>
+    </tr>
+    
+
+  {{ else }}
+
+    <div id="{{thumbId}}" class="thumb thumb-container">
+      <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+      <div class="thumbnail">
+      {{#if this.isUploaded}}
+        <a href="#" class="modal-show" data-toggle="modal" data-target="{{modalTarget}}">
+            <div class="caption">
+                <h4>{{this.metadata.title}}</h4>
+                <p>{{this.original.name}}</p>
+            </div>
+          
+            <img src="{{this.url store='thumb'}}"  alt="">
+          </a>
+        
+      {{else}}
+       {{> FS.UploadProgressBar bootstrap=true}}
+      {{/if}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{> mediaEdit }}
+   
+</template>
+
+

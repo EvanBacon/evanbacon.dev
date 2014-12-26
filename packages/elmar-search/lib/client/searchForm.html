@@ -1,0 +1,12 @@
+<template name="searchForm">
+  <div class="btn-group">
+    <form><input id="searchinput" type="text" placeholder="Search {{pageTitle}}" value="{{keywords}}" class="form-control"></form>
+    <span id="clear-search" class="glyphicon glyphicon-remove-circle"></span>
+  </div>
+</template>
+
+<template name="searchResults">
+	{{#if searchQuery}}
+    <h4 class="text-center">{{ searchQuery }}</h4>
+    {{/if}}
+</template>

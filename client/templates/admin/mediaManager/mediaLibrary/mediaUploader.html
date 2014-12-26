@@ -1,0 +1,29 @@
+<template name="mediaUploader">
+	<div class="uploadArea">
+		<form id="upload" action="/upload" method="POST" enctype="multipart/form-data"> 
+			<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" /> 
+			<div> 
+				<div id="dropzone" class="fade">Drop Files Here or 
+					<span class="btn btn-sm btn-default btn-file">
+						Select Files<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+					</span>
+					<div style="margin:10px auto">
+						 {{#unless dataLoaded}}
+					        <h1 class="wait loading-spin"></h1>
+					     {{/unless}}
+					  	
+					  </div>
+				</div> 
+			</div> 
+		</form> 
+	    <div id="messages"> 
+		  <!-- {{#if error}} -->
+			<span id="errormsg" style="color: red;">
+			  {{error}}
+			</span>
+		<!--   {{/if}} -->
+		</div>
+	</div>
+ </template>
+   
+

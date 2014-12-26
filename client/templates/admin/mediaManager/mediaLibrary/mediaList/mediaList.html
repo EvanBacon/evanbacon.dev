@@ -1,0 +1,51 @@
+
+<template name="mediaList">
+  {{> searchResults }}
+      <div id="item-list">
+        {{ #if isList }}
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr class="info">
+                <th width="40px"></th>
+                <th>Thumbnail</th>
+                <th>Title</th>
+                <th>Caption</th>
+                <th>Last Modified</th>
+                <th width="40px">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each mediaItems}}
+               {{> mediaItem}}
+              {{/each}}
+            </tbody>
+          </table>
+
+          {{ else }}
+           <div class="row">
+          
+          {{#each mediaItems}}
+            <div class="col-lg-2 col-md-2 col-sm-3"> 
+               {{> mediaItem}}
+            </div>
+          {{/each}}
+          </div>
+        {{/if}}
+      </div>
+      <div class="clear"></div>
+
+  <div> 
+  {{#if nextPath}}   
+     <a href="{{nextPath}}" class="load-more btn btn-info btn-md btn-block">Load more</a>
+  {{else}}
+    {{#unless ready}}        
+        {{> spinner}}      
+    {{/unless}}
+  {{/if}}
+  </div>
+  
+</template>
+
+
+
+

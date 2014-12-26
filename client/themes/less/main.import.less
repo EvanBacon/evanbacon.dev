@@ -1,0 +1,247 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+ul {
+    list-style: none;
+}
+
+label {
+  font-weight: bolder;
+}
+
+hr {
+  margin: 20px 0;
+}
+
+
+#bgrd{
+  position: relative; 
+  // z-index:1; 
+  // width:100%; 
+  // height:100%;
+  width: 100%;
+  background: #444;
+  padding: 20px;
+}
+
+#bgrd img {
+  border: 7px solid #FFF;
+  width: 100%;
+}
+
+#bgrd .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border-right: 7px solid #FFF;
+  border-bottom: 7px solid #FFF;
+  background: #444;
+  width: 70px;
+  height: 70px;
+  padding: 9px;
+}
+
+#bgrd .icon .mid {
+  background: #CCC;
+  border: 1px solid #222;
+  // margin: 4px;
+  width: 44px;
+  height: 44px;
+}
+
+.adminbox {
+  width: 230px;
+}
+
+.box {
+    padding: 5px;
+    background: #FFF;
+    border: none;
+    margin: 5px;
+  }
+
+  .inner-box {
+    padding: 0;
+    margin: 0;
+  }
+
+@media (min-width: 768px) {
+  .box {
+      margin-bottom: 20px;
+      padding: 15px 15px;
+      border: 1px solid #333;
+      background: #555;
+      // background: rgba(255,255,255,0.9);
+  }
+
+  .inner-box {
+      padding: 10px;
+      background: #FFF;
+      margin: 10px;
+      -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+      box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+  }
+}
+
+@media (min-width: 1200px) {
+  .box {
+      margin-bottom: 20px;
+      padding: 15px 15px;
+      border: 1px solid #333;
+      background: #555;
+      width: 1200px;
+      // background: rgba(255,255,255,0.9);
+  }
+
+  .box img {
+    max-width: 1800px
+  }
+
+  .inner-box {
+      padding: 10px;
+      background: #FFF;
+      margin: 10px;
+      -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+      box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+  }
+}
+
+.invisible {
+  visibility: hidden; 
+}
+
+/* opacity allows user-friendly image saving */
+.transparent {
+  /* trigger hasLayout for ie filters below */
+  zoom: 1;
+  /* 0 opacity in ms filters still displays layout */
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0; 
+}
+
+#fixed-div {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 20;
+}
+
+.underline {
+  text-decoration: underline !important;
+}
+
+.clear {
+    clear:both;
+}
+
+.modal-dialog.full {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.modal-content.full {
+  height: 100%;
+  border-radius: 0;
+}
+
+#iron-router-progress {
+    background-color : #57D2F7;
+    box-shadow       : 0 0 7px #57D2F7;
+}
+
+#iron-router-progress.spinner:before {
+    border-color : #57D2F7;
+}
+
+.signup {
+  width:300px;
+}
+
+.inner-shadow {
+   -moz-box-shadow:    inset 0 0 10px #444444;
+   -webkit-box-shadow: inset 0 0 10px #444444;
+   box-shadow:         inset 0 0 10px #444444;
+}
+
+.shadow {
+   -moz-box-shadow:    0 0 3px #999999;
+   -webkit-box-shadow: 0 0 3px #999999;
+   box-shadow:         0 0 3px #999999;
+}
+
+.no-shadow {
+  -moz-box-shadow:     none !important;
+   -webkit-box-shadow: none !important;
+   box-shadow:         none !important;
+}
+
+.required {
+  color: Red;
+  font-size:7px;
+  vertical-align: top;
+  margin-left:0;
+}
+
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }
+
+.question {
+  font-size: 18px;
+  padding:0;
+  margin:0;
+  color: #999999;
+}
+
+.load-more {
+  color: #FFFFFF !important;
+}
+
+.loading-spin {
+  width: 30px;
+  height: 30px;
+  margin: 10px auto auto;
+  text-align:center;
+  background-image:url('/images/loading.gif');
+  background-repeat: no-repeat
+}
+
+.loading-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-collapse {
+  background: #FFF; 
+  z-index: 1500; 
+}
+
+.no-gutter  {
+  /*padding-left:0;
+  padding-right:0;*/
+  padding: 0;
+  margin: 0;
+}
+
+.no-gutter-right  {
+  padding-right:0;
+}
+
+.no-gutter-left {
+  padding-left: 0;
+}
+
+.no-gutter-bottom {
+  padding-bottom: 0;
+}

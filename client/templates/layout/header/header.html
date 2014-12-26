@@ -1,0 +1,43 @@
+<template name="header">
+  <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">
+            ElMar Creative
+          </span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav">
+          </ul>
+         
+          <ul class="nav navbar-nav navbar-right">
+            
+              {{#if isLoggedIn}}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+                <ul class="dropdown-menu adminbox" role="menu">
+                  <li><a href="{{pathFor 'mediaManager'}}">Media Manager</a></li>
+                  <li><a href="{{pathFor route='signOut'}}">Sign Out</a></li>                
+                </ul>
+              </li>
+              {{else}}
+               <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
+                <ul class="dropdown-menu adminbox" role="menu">
+                  <li>{{> atForm}}</li>                
+                </ul>
+              </li>
+              {{/if}}
+          </ul>
+        </div>
+      </div>
+  </nav>
+</template>
+

@@ -1,0 +1,14 @@
+<template name="selectionAction">
+	<div class="btn-group">
+	  <button class="btn {{btnType}} btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+	    Selection Action <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	  		<li class="{{disabled}}"><a id="btncreate" href="#">Create {{create}}</a></li>
+		    <li class="{{disabled}}"><a id="btndelete" href="#">Delete Selected</a></li>
+		    <li class="{{disabled}}"><a id="btnclear" href="#">Clear Selected</a></li>
+		</ul>
+	</div>
+		<br><br>
+
+</template>
