@@ -1,21 +1,4 @@
 <template name="mediaManager">
-	<h2>Media Manager</h2>
-	<ul class="nav nav-tabs">
-	    <li class="active"><a href="#media-tab" data-toggle="tab">IMAGES</a></li>
-    	<li><a href="#gallery-tab" data-toggle="tab">GALLERIES</a></li>
-        <li><a href="#album-tab" data-toggle="tab">ALBUMS</a></li>
-	</ul>
-	<div class="tab-content">
-        <div class="tab-pane active" id="media-tab">
-            {{> mediaLibrary }}
-        </div>
-        
-        <div class="tab-pane" id="gallery-tab">
-            {{> galleryLibrary }}
-        </div>
-
-        <div class="tab-pane" id="album-tab">
-            {{> albumLibrary }}
-        </div>
-    </div>
+    {{> managerHeader }}
+    {{> mediaLibrary }}
 </template>
