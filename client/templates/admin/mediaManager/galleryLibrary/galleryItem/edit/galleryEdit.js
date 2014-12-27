@@ -1,11 +1,8 @@
-
 Template.galleryEdit.helpers({
 	galleryAction: function () {
-		console.log(this.gallery._id);
 		return (!!Router.current().params._id) ? 'Edit' : 'New';
 	},
 	isVisible: function () {
-		console.log(this.gallery._id);
 		if (! this._id) {
 			return true;
 		}
@@ -45,10 +42,8 @@ Template.galleryEdit.events({
 		g.media = getMediaData();
 
 		var featEl = $('li[data-feat="1"]');
-		g.featuredId = featEl.data('mediaid');
+		g.featured = featEl.data('thumb');
 
-		featEl = $('li[data-feat="0"]');
-		
 	    updateSaveButton('wait');
 
 	    if (Validation.isNotEmpty(g.title)) {

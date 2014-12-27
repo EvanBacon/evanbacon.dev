@@ -14,7 +14,7 @@ var blockDimensions = function () {
 var gridsort = null;
 
 var getBlockHTML = function (id, featured, thumb) {
-	var btnFeat = ( featured === '1' ) ? 'btn-danger' : 'btn-default';
+	var btnFeat = ( featured === 1 ) ? 'btn-danger' : 'btn-default';
 	var html =  '<li class="ui-state-default" data-mediaid="' + id + '" data-feat="' + featured + '" data-thumb="' + thumb + '">' +
             			'<header><div class="btn-toolbar">' + 
 							'<button type="button" title="Set as Featured Image" class="btn btn-sm ' + btnFeat + ' set-featured">' +

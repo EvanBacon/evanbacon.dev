@@ -61,8 +61,7 @@ Meteor.methods({
                       'slug': slug,
                       'title': gallery.title,
                       'isVisible': gallery.isVisible,
-                      'featuredId': gallery.featuredId,
-                      'serialization': gallery.serialization,
+                      'featured': gallery.featured,
                       'lastModified': (new Date()).getTime()
                       };
 
