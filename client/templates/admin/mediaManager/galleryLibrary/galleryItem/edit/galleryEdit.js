@@ -1,3 +1,15 @@
+var getMediaIds = function () {
+	var mediaIds = [];
+	$.each($('.sortable li'), function (index, item) {
+		mediaIds.push($(item).data('mediaid'));
+	});    
+    return mediaIds;
+};
+
+var isNewGallery = function (obj) {
+	return (typeof obj === undefined || obj === '');
+};
+
 Template.galleryEdit.helpers({
 	isVisible: function () {
 		if (! this.gallery._id) {
@@ -7,23 +19,15 @@ Template.galleryEdit.helpers({
 	},
 	isNew: function () {
 		// only show cancel button if this is a newly created gallery (never saved)
-		return typeof this.gallery.slug === undefined || this.gallery.slug === '';
+		return isNewGallery(this.gallery.slug);
 	},
 	saveBtnWidth: function () {
-		return (typeof this.gallery.slug === undefined || this.gallery.slug === '') ? 'col-sm-9' : 'col-sm-12';
+		return isNewGallery(this.gallery.slug) ? 'col-sm-9' : 'col-sm-12';
 	},
 	cancelBtnWidth: function () {
-		return (typeof this.gallery.slug === undefined || this.gallery.slug === '') ? 'col-sm-3' : '';
+		return isNewGallery(this.gallery.slug) ? 'col-sm-3' : '';
 	}
 });
-
-var getMediaIds = function () {
-	var mediaIds = [];
-	$.each($('.sortable li'), function (index, item) {
-		mediaIds.push($(item).data('mediaid'));
-	});    
-    return mediaIds;
-};
 
 Template.galleryEdit.events({
 	'change :input, keyup :input': function (e) {
@@ -32,16 +36,16 @@ Template.galleryEdit.events({
 	'click .add-images': function (e) {
 		Session.set('selected-images', getMediaIds());
 	},
-	'click #cancel-gallery': function (e) {
+	'click #cancel-gallery, click .return-list': function (e) {
 		e.preventDefault();
-		if(confirm("Changes will be lost. Would you like to continue?")) {
-			Galleries.remove({ _id: this.gallery._id });
-			Router.go('galleryManager');
+		if (isNewGallery(this.gallery.slug)) {
+			if(confirm("Changes will be lost. Would you like to continue?")) {
+				Galleries.remove({ _id: this.gallery._id });
+			}
 		}
+		Router.go('galleryManager');
 	},
 	'click #save-gallery': function (e, t) {
-		//updateSaveButton('reset');
-		
 		var g = {};
 	    g.id = this.gallery._id;
 		g.title = Validation.trimInput(t.find('.inputTitle').value);

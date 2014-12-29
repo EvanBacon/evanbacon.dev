@@ -78,5 +78,8 @@ Meteor.methods({
         Galleries.update({ 'media.id': mediaId },  
                          { $pull: { media: {'id': mediaId} }}
         );
+    },
+    removeUnusedGalleries: function () {
+      Galleries.remove({ slug: "" });
     }
 });
