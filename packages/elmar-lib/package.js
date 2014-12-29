@@ -17,13 +17,11 @@ Package.onUse(function (api) {
   api.add_files([
     'lib/lib.js',
     'lib/medialibrary.js',
-    // 'lib/users.js',
     'lib/validation.js',
   ], ['client', 'server']);
 
   api.add_files([
     'lib/client/sortAction.js',
-    'lib/client/sessions.js'
     ], ['client']);
   
   api.export([
@@ -43,8 +41,8 @@ Package.onUse(function (api) {
     // 'isAdmin',
     // 'MediaLibrary',
     // 'Sorting',
-    'pageChanged',
-    'hasPageChanged'
+    // 'pageChanged',
+    // 'hasPageChanged'
   ]);
 });
 

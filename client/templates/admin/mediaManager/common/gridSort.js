@@ -81,16 +81,10 @@ Template.gridSort.events({
 		e.preventDefault();
 		pageChanged( true );
 		setFeatured( $(e.currentTarget).closest('li') );
-		// $('li').attr('data-feat', '0');
-		// $('.set-featured').removeClass('btn-danger');
-		// $(e.currentTarget).closest('.set-featured').addClass('btn-danger');
-		// $(e.currentTarget).closest('li').attr('data-feat', '1');
-
 	}, 
 	'click .delete-block': function (e) {
 		e.preventDefault();
 		pageChanged(true);
-
 		$('#gridsort').remove($(e.currentTarget).closest("li"));
 	},
 });	

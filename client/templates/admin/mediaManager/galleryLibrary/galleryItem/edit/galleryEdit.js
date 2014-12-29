@@ -26,12 +26,10 @@ var getMediaIds = function () {
 };
 
 Template.galleryEdit.events({
-	'change :input': function (e) {
+	'change :input, keyup :input': function (e) {
 		pageChanged(true);
-		updateSaveButton('reset');
 	},
 	'click .add-images': function (e) {
-		pageChanged(true);
 		Session.set('selected-images', getMediaIds());
 	},
 	'click #cancel-gallery': function (e) {
@@ -42,7 +40,7 @@ Template.galleryEdit.events({
 		}
 	},
 	'click #save-gallery': function (e, t) {
-		updateSaveButton('reset');
+		//updateSaveButton('reset');
 		
 		var g = {};
 	    g.id = this.gallery._id;

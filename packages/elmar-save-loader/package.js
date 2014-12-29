@@ -13,11 +13,14 @@ Package.onUse(function (api) {
 
   api.add_files([
     'lib/client/saving_loader.html',
-    'lib/client/saving_loader.js'
+    'lib/client/saving_loader.js',
+    'lib/client/track_changes.js'
   ], ['client']);
 
   api.export([
-    'SaveLoader'
+    'SaveLoader',
+    'pageChanged',
+    'hasPageChanged'
   ]);
 });
 

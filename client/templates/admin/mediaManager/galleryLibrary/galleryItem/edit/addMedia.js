@@ -34,6 +34,7 @@ Template.addMedia.events({
         }
     },
     'click .save': function (e) {
+        pageChanged(true);
         var images = $(".thumbnail.selected").each(function(){
         addMedia($(this).data("id"), 0, $(this).data("url"));
   		});
