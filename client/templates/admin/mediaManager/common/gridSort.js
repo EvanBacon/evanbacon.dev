@@ -54,6 +54,14 @@ getMediaData = function () {
 	return media;
 };	
 
+setFeatured = function (obj) {
+	$('li').attr('data-feat', '0'); // make all non-featured
+	$('.set-featured').removeClass('btn-danger'); // remove btn class for featured
+	
+	obj.find('.set-featured').addClass('btn-danger');
+	obj.attr('data-feat', '1');
+};
+
 
 
 Template.gridSort.rendered = function () {
@@ -71,11 +79,12 @@ Template.gridSort.rendered = function () {
 Template.gridSort.events({
 	'click .set-featured': function (e) {
 		e.preventDefault();
-		pageChanged(true);
-		$('li').attr('data-feat', '0');
-		$('.set-featured').removeClass('btn-danger');
-		$(e.currentTarget).closest('.set-featured').addClass('btn-danger');
-		$(e.currentTarget).closest('li').attr('data-feat', '1');
+		pageChanged( true );
+		setFeatured( $(e.currentTarget).closest('li') );
+		// $('li').attr('data-feat', '0');
+		// $('.set-featured').removeClass('btn-danger');
+		// $(e.currentTarget).closest('.set-featured').addClass('btn-danger');
+		// $(e.currentTarget).closest('li').attr('data-feat', '1');
 
 	}, 
 	'click .delete-block': function (e) {
