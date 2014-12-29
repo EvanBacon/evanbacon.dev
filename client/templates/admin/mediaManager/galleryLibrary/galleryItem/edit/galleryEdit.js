@@ -1,13 +1,15 @@
 var getMediaIds = function () {
+	// compile a list of already used images so not to display those when selecting new images
 	var mediaIds = [];
-	$.each($('.sortable li'), function (index, item) {
+	$.each($('#gridsort li'), function (index, item) {
 		mediaIds.push($(item).data('mediaid'));
 	});    
     return mediaIds;
 };
 
-var isNewGallery = function (obj) {
-	return (typeof obj === undefined || obj === '');
+var isNewGallery = function (item) {
+	// determine if this is a newly created gallery (this item should be empty if not saved)
+	return (typeof item === undefined || item === '');
 };
 
 Template.galleryEdit.helpers({
