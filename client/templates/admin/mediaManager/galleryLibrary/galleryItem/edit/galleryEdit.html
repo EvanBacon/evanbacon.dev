@@ -1,8 +1,13 @@
 <template name="galleryEdit">
 	<div class="row">
+		<div class="col-sm-12">
+			<a class="btn btn-sm btn-default" href="{{ pathFor route='galleryManager'}}"><span class="glyphicon glyphicon-arrow-left"></span> Return to List</a>
+		</div>
+		<br>
+		<br>
 		<div class="col-sm-8 col-md-9">
 			<!-- {{> errors}} -->
-		
+			
 			<div class="col-sm-3 no-gutter-left">
 				<h2 style="margin:0 0 4px">Edit Gallery</h2>
 			</div>
@@ -25,15 +30,18 @@
 		</div>
 		
 		<div id="submit-gallery" class="col-sm-4 col-md-3">
-            <button class="btn btn-md btn-primary col-sm-12" id="save-gallery" type="button">{{> savingLoader text="Save Gallery"}}
-            </button>
-
+			<div class="btn-group btn-group-md col-sm-12 no-gutter" role="group">
+				<button class="btn btn-primary {{saveBtnWidth}}" id="save-gallery" type="button">{{> savingLoader text="Save Gallery"}}</button>
+				{{ #if isNew }}
+				<button class="btn btn-default {{cancelBtnWidth}}" id="cancel-gallery" type="button">Cancel</button>
+				{{/if}}
+			</div>
 		    <br>
 		    <br>
 		   
 			<div class="form-group text-center">
-				  <label for="cb-visible">Visible</label>
-				  <input id="cb-visible" type="checkbox" checked="{{this.gallery.isVisible}}">
+				<input id="cb-visible" type="checkbox" checked="{{this.gallery.isVisible}}">
+				<label for="cb-visible">Make Gallery Visible</label>
 			</div>
 			<div class="form-group">
 		        <label class="control-label" for="title">Title</label>

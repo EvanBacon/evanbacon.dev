@@ -1,12 +1,19 @@
 Template.galleryEdit.helpers({
-	galleryAction: function () {
-		return (!!Router.current().params._id) ? 'Edit' : 'New';
-	},
 	isVisible: function () {
-		if (! this._id) {
+		if (! this.gallery._id) {
 			return true;
 		}
-		return this.isVisible;
+		return this.gallery.isVisible;
+	},
+	isNew: function () {
+		// only show cancel button if this is a newly created gallery (never saved)
+		return typeof this.gallery.slug === undefined || this.gallery.slug === '';
+	},
+	saveBtnWidth: function () {
+		return (typeof this.gallery.slug === undefined || this.gallery.slug === '') ? 'col-sm-9' : 'col-sm-12';
+	},
+	cancelBtnWidth: function () {
+		return (typeof this.gallery.slug === undefined || this.gallery.slug === '') ? 'col-sm-3' : '';
 	}
 });
 
@@ -26,6 +33,13 @@ Template.galleryEdit.events({
 	'click .add-images': function (e) {
 		pageChanged(true);
 		Session.set('selected-images', getMediaIds());
+	},
+	'click #cancel-gallery': function (e) {
+		e.preventDefault();
+		if(confirm("Changes will be lost. Would you like to continue?")) {
+			Galleries.remove({ _id: this.gallery._id });
+			Router.go('galleryManager');
+		}
 	},
 	'click #save-gallery': function (e, t) {
 		updateSaveButton('reset');
