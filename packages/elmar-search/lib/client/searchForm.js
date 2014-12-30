@@ -7,14 +7,6 @@ GetSearch = function () {
   return Session.get("search-query");
 };
 
-var delay = (function(){
-  var timer = 0;
-  return function(callback, ms){
-    clearTimeout (timer);
-    timer = setTimeout(callback, ms);
-  };
-})();
-
 Template.searchForm.rendered = function () {
   SetSearch('');
 };
@@ -36,9 +28,8 @@ Template.searchResults.helpers({
 
 Template.searchForm.events({
   'keyup input#searchinput': function (e, t) {
-     if (e.which === 13) {
-       SetSearch (t.find("#searchinput").value);
-     }
+     //if (e.which === 13) 
+     SetSearch (t.find("#searchinput").value);
      if(t.find("#searchinput").value === "") {
      	 SetSearch('');
      }
