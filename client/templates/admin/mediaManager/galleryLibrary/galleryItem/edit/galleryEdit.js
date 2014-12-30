@@ -59,12 +59,11 @@ Template.galleryEdit.events({
 		g.isVisible = (e.currentTarget.id === 'save-show') ? 1 : 0;
 
 		var featEl = $('li[data-feat="1"]');
-		
-		if (!featEl) {
+
+		if ( !featEl.length ) {
 			// if no featured image, then set it to first image
 			featEl = $('#gridsort li').first();
 			setFeatured( featEl );
-			// featEl.data('feat', 1);
 		}
 		g.featured = featEl.data('thumb');
 		g.media = getMediaData();
