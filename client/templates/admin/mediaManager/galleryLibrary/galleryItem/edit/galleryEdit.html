@@ -1,44 +1,19 @@
 <template name="galleryEdit">
 	<div class="row">
 		<div class="col-sm-12">
-			<button class="btn btn-sm btn-default return-list" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Return to List</button>
+			<h1 style="margin:0 0 10px">Edit Gallery</h1>
+			<hr>
 		</div>
 		<br>
 		<br>
-		<div class="col-sm-8 col-md-9">
-			<!-- {{> errors}} -->
-			
-			<div class="col-sm-3 no-gutter-left">
-				<h2 style="margin:0 0 4px">Edit Gallery</h2>
-			</div>
-			<div class="col-sm-4">
-				<a href="#" class="btn btn-md btn-info add-images modal-show" data-toggle="modal" data-target="#media-selection"><span class="glyphicon glyphicon-plus"></span> Add Images</a>
-			</div>
-			
-			<br>
-			<div class="clear"></div>
-			<hr class="no-gutter">
-			<br>
-			<div class="col-sm-12">
-				<span class="instructions"><strong>Drag images</strong> to rearrange order. <strong>Click star</strong> to set featured image.</span>
-			</div>
-			
-			<div id="grid-blocks" class="col-sm-12">
-				{{> gridSort mediadata=this.gallery.media }}
-			</div>
-			<br>
-		</div>
-		
 		<div id="submit-gallery" class="col-sm-4 col-md-3">
 			<div class="btn-group btn-group-md col-sm-12 no-gutter" role="group">
-				<button class="btn btn-primary {{saveBtnWidth}}" id="save-gallery" type="button">{{> savingLoader text="Save Gallery"}}</button>
-				{{ #if isNew }}
-				<button class="btn btn-default {{cancelBtnWidth}}" id="cancel-gallery" type="button">Cancel</button>
-				{{/if}}
+				<button class="btn btn-default return-list col-sm-6" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Return to List</button>
+				<button class="btn btn-primary col-sm-6" id="save-gallery" type="button">{{> savingLoader text="Save Gallery"}}</button>
 			</div>
 		    <br>
 		    <br>
-		   
+		   <!-- {{> errors}} -->
 			<div class="form-group text-center">
 				<input id="cb-visible" type="checkbox" checked="{{this.gallery.isVisible}}">
 				<label for="cb-visible">Make Gallery Visible</label>
@@ -70,6 +45,26 @@
 		        </div>
 		    </div> 
 		</div>
+
+		<div class="col-sm-8 col-md-9">
+			
+			<div class="col-sm-4">
+				<a href="#" class="btn btn-md btn-info add-images modal-show" data-toggle="modal" data-target="#media-selection"><span class="glyphicon glyphicon-plus"></span> Add Images</a>
+			</div>
+			
+			<br>
+			<div class="clear"></div>
+			<hr>
+			<div class="col-sm-12">
+				<span class="instructions"><strong>Drag images</strong> to rearrange order. <strong>Click star</strong> to set featured image.</span>
+			</div>
+			
+			<div id="grid-blocks" class="col-sm-12">
+				{{> gridSort mediadata=this.gallery.media }}
+			</div>
+			<br>
+		</div>
+		
 	</div>
 
 	{{> addMedia }}

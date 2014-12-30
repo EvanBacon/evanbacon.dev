@@ -22,12 +22,6 @@ Template.galleryEdit.helpers({
 	isNew: function () {
 		// only show cancel button if this is a newly created gallery (never saved)
 		return isNewGallery(this.gallery.slug);
-	},
-	saveBtnWidth: function () {
-		return isNewGallery(this.gallery.slug) ? 'col-sm-9' : 'col-sm-12';
-	},
-	cancelBtnWidth: function () {
-		return isNewGallery(this.gallery.slug) ? 'col-sm-3' : '';
 	}
 });
 
@@ -38,14 +32,19 @@ Template.galleryEdit.events({
 	'click .add-images': function (e) {
 		Session.set('selected-images', getMediaIds());
 	},
-	'click #cancel-gallery, click .return-list': function (e) {
+	'click .return-list': function (e) {
 		e.preventDefault();
-		if (isNewGallery(this.gallery.slug)) {
-			if(confirm("Changes will be lost. Would you like to continue?")) {
-				Galleries.remove({ _id: this.gallery._id });
+		if( hasPageChanged() || isNewGallery(this.gallery.slug) ) {
+			if(confirm("Changes will be lost. Would you like to leave this page?")) {
+				if (isNewGallery(this.gallery.slug)) { 
+					Galleries.remove({ _id: this.gallery._id });
+				}
+				Router.go('galleryManager');
 			}
+		} else {
+			Router.go('galleryManager');
 		}
-		Router.go('galleryManager');
+		
 	},
 	'click #save-gallery': function (e, t) {
 		var g = {};
