@@ -24,18 +24,32 @@ Template.selectionAction.helpers({
 Template.selectionAction.events({
 	'click #btndelete' : function (e) {
 		e.preventDefault();
+
+		var page = Router.current().route.getName();
+
 		if (SelectionAction.getCheckedCount() > 0) {
 			if(confirm("Delete selected " + this.name + "?")) {
 				var selected = $( "input:checked" );
-		
+				
 			    _.each(selected, function (item) {
-			    	Media.remove({ _id: item.defaultValue });
+			    	var removeFromMethod;
+			    	if (page === 'mediaManager') {
+			    		Media.remove({ _id: item.defaultValue });
+			    		removeFromMethod = 'removeFromGalleries';
+			    	}
+			    	if (page === 'galleryManager') {
+			    		Galleries.remove({ _id: item.defaultValue });
+			    		//removeFromMethod = 'removeFromAlbums';
+			    	}
+			    	// if (page === 'albumManager')
+			    	// 	Albums.remove({ _id: item.defaultValue });
 
-			    	Meteor.call('removeFromGalleries', item.defaultValue, function(err) {
-			            if(err) {
-			                console.log(err.reason);
-			            } 
-			        });
+			    	if ( !! removeFromMethod )
+				    	Meteor.call(removeFromMethod, item.defaultValue, function(err) {
+				            if(err) {
+				                console.log(err.reason);
+				            } 
+				        });
 			    });
 
 
@@ -55,17 +69,31 @@ Template.selectionAction.events({
 		e.preventDefault();
 		e.stopPropagation();
 		
-		var	images   = [];
+		var page = Router.current().route.getName(),
+			methodInfo = {},
+			items   = [];
 		$.each($( "input:checked" ), function (index, item) {
 			var thumbURL = $(this).closest('div.thumb').find('img').attr('src');
-			images.push( { id: item.defaultValue, thumb: thumbURL, isFeatured: 0 } );
+			items.push( { id: item.defaultValue, thumb: thumbURL, isFeatured: 0 } );
 		});
-    	Meteor.call('createGallery', images, function (err, id) { 
-			    	if (err) console.log(err);
-			    	
-			    	if (!! id) {
-			    		Router.go( 'galleryEdit', {_id: id} );
-			    	}
-		});
+
+		if (page === 'mediaManager') {
+			methodInfo.call = 'createGallery';
+			methodInfo.route = 'galleryEdit';
+		}
+
+		// if (page === 'galleryManager') {
+		// 	methodInfo.call = 'createAlbum';
+		// 	methodInfo.route = 'albumEdit';
+		// }
+
+		if (!! methodInfo)
+	    	Meteor.call(methodInfo.call, items, function (err, id) { 
+				    	if (err) console.log(err);
+				    	
+				    	if (!! id) {
+				    		Router.go( methodInfo.route, {_id: id} );
+				    	}
+			});
 	 }
 });
