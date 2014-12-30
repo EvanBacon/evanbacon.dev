@@ -4,11 +4,9 @@
         <div class="thumbnail">
           <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
             <img src="{{this.featured}}"  alt="">
+            <div class="title"><h5>{{ this.title }}</h5></div>
           </a>
         </div>
-        <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
-     	  <div class="title"><h5>{{ this.title }}</h5></div>
- 	    </a>
     </div>
 </template>
 
