@@ -31,6 +31,11 @@ var getBlockHTML = function (id, featured, thumb) {
     return html;
 };
 
+var updatePosition = function (){
+    $('#gridsort li').each(function(i){
+        $(this).html(i + 1);
+    });
+};
 
 initGridSort = function (media) {
 	$('#gridsort').empty();
@@ -73,6 +78,8 @@ Template.gridSort.rendered = function () {
 	if (!! this.data.mediadata) {
 		initGridSort(this.data.mediadata);
 	}
+
+	$('#gridsort').on( 'remove', 'li', updatePosition );
  
 };
 
@@ -85,7 +92,7 @@ Template.gridSort.events({
 	'click .delete-block': function (e) {
 		e.preventDefault();
 		pageChanged(true);
-		$('#gridsort').remove($(e.currentTarget).closest("li"));
+		$(e.currentTarget).closest("li").remove();
 	},
 });	
 
