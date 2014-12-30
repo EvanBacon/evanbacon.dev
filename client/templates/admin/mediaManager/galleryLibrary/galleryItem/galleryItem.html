@@ -1,12 +1,14 @@
 <template name="galleryItem">
     <div id="thumb-{{this._id}}" class="thumb thumb-container">
-      <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
-      <div class="thumbnail">
-        <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
+        <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+        <div class="thumbnail">
+          <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
             <img src="{{this.featured}}"  alt="">
-            <div class="title"><h4>{{ this.title }}</h4></div>
-        </a>
-      </div>
+          </a>
+        </div>
+        <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
+     	  <div class="title"><h5>{{ this.title }}</h5></div>
+ 	    </a>
     </div>
 </template>
 
