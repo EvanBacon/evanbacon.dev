@@ -19,10 +19,13 @@
                     {{#unless mediaUsed }}
                     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">   
                        <div id="tm-{{this._id}}" class="thumbnail" data-id="{{this._id}}" data-url="{{this.url store='thumb'}}" data-checked="">
-                          <a href="#" class="modal-show" data-toggle="modal" data-target="modal-{{this._id}}">
-                            <img src="{{this.url store='thumb'}}" alt="">
-                          </a>
-                        <h5>{{this.original.name}}</h5>
+                           <img src="{{this.url store='thumb'}}" alt="">
+                            {{#if this.metadata.title }}
+                            <div class="title">
+                                <h5>{{this.metadata.title}}</h5>
+                            </div>
+                            {{/if}}
+                           <div class="checked hidden"><span class="glyphicon glyphicon-ok"></span></div>
                        </div>
                     </div>
                     {{/unless}}

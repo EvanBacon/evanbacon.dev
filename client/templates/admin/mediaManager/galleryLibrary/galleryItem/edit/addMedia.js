@@ -1,4 +1,13 @@
-
+Template.addMedia.rendered = function () {
+  $('.thumbnail').hover(
+        function(){
+            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+        },
+        function(){
+            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+        }
+    ); 
+};
 
 Template.addMedia.helpers ({
   images: function () {
@@ -19,7 +28,6 @@ Template.addMedia.helpers ({
 });
 
 Template.addMedia.events({
-    
    'click .thumbnail': function(e) {
         e.preventDefault();
       
@@ -27,9 +35,11 @@ Template.addMedia.events({
         var thumbId = "#tm-" + this._id;
         if($(thumbId).data('checked') === 'checked') {
           $(thumbId).removeClass("selected");
+          $(thumbId).find('.checked').addClass("hidden");
           $(thumbId).data('checked', '');
         } else {
           $(thumbId).addClass("selected");
+          $(thumbId).find('.checked').removeClass("hidden");
           $(thumbId).data('checked', 'checked');
         }
     },
