@@ -131,13 +131,14 @@ Media = new FS.Collection("media", {
         largeStore
       ],
       filter: {
-        maxSize: getSetting('imageMaxSize', 548576), //in bytes (548 KB)
+        maxSize: getSetting('imageMaxSize', 1000000), //in bytes (1 Mb)
         allow: {
           contentTypes: ['image/*'] 
         },
-        onInvalid: function (message) {
-           throw new Meteor.Error(413, "Invalid file or file too large."); 
-        }
+        // onInvalid: function (message) {
+        //   alert("One or more files are invalid or too large.")
+        //   // throw new Meteor.Error(413, "Invalid file or file too large."); 
+        // }
       }
     });
 

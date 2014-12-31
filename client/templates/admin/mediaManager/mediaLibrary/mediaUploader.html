@@ -7,22 +7,15 @@
 					<span class="btn btn-sm btn-default btn-file">
 						Select Files<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
 					</span>
-					<div style="margin:10px auto">
-						 {{#unless dataLoaded}}
-					        <h1 class="wait loading-spin"></h1>
-					     {{/unless}}
-					  	
+					{{#if error}}
+					  <div class="alert alert-danger">
+					    <button type="button" class="close" data-dismiss="alert">&times;</button>
+					    {{ error }}
 					  </div>
+				    {{/if}}
 				</div> 
 			</div> 
 		</form> 
-	    <div id="messages"> 
-		  <!-- {{#if error}} -->
-			<span id="errormsg" style="color: red;">
-			  {{error}}
-			</span>
-		<!--   {{/if}} -->
-		</div>
 	</div>
  </template>
    
