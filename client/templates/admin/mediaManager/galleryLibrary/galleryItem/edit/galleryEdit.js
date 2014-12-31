@@ -29,6 +29,15 @@ Template.galleryEdit.events({
 	'change :input, keyup :input': function (e) {
 		pageChanged(true);
 	},
+	'change #inputTitle:input': function (e, t) {
+		if(Validation.isNotEmpty(t.find('#inputTitle').value)) {
+			$('#inputTitle').closest('.form-group').removeClass('has-error');
+			$('#helpTitle').addClass('hidden');
+		} else {
+			$('#inputTitle').closest('.form-group').addClass('has-error');
+			$('#helpTitle').removeClass('hidden');
+		}
+	},
 	'click .add-images': function (e) {
 		Session.set('selected-images', getMediaIds());
 	},
@@ -49,7 +58,7 @@ Template.galleryEdit.events({
 	'click #save-gallery': function (e, t) {
 		var g = {};
 	    g.id = this.gallery._id;
-		g.title = Validation.trimInput(t.find('.inputTitle').value);
+		g.title = Validation.trimInput(t.find('#inputTitle').value);
 
 		g.slug = t.find('.inputSlug').value;
 		g.description  = t.find('.inputDesc').value;
@@ -70,15 +79,15 @@ Template.galleryEdit.events({
 	    updateSaveButton('wait');
 
 	    if (Validation.isNotEmpty(g.title)) {
+	    	$('#inputTitle').closest('.form-group').removeClass('has-error');
+	    	$('#helpTitle').addClass('hidden');
 			try {
 			  Meteor.call('updateGallery', g, function (err, id) { 
 			    	if (err) {
 			    		console.log(err);
-			    		//throwError(err.reason);
 			    		updateSaveButton('error');
 			    	} else {
 			    		updateSaveButton('complete');	
-					    //clearErrors();
 					    pageChanged(false);
 			    	}
 			    	
@@ -88,6 +97,10 @@ Template.galleryEdit.events({
 		    }
 		} else {
 			updateSaveButton('error');
+			$('#inputTitle').closest('.form-group').addClass('has-error');
+			$('#helpTitle').removeClass('hidden');
+			pageChanged(false);
+
 		}
 
 	}
@@ -96,7 +109,7 @@ Template.galleryEdit.events({
 Template.galleryEdit.rendered = function () {
 	$('[data-toggle="popover"]').popover({
 	    trigger: 'hover',
-	        'placement': 'left'
+	        'placement': 'right'
 	});          
 };
 
