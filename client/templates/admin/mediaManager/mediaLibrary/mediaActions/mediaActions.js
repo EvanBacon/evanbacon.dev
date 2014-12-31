@@ -4,8 +4,6 @@ Template.mediaActions.rendered = function () {
 	$('#sortDir').prop('selectedIndex',0);
 	$('input[type=checkbox] .type-box').prop('checked', true);
 	SortAction.setSortBy( {"uploadedAt": -1});
-    //setClientSetting('media-list-style', 'thumbnail');
-	// Session.set("media-list-style", 'thumbnail');
 };
 
 Template.mediaActions.events({
@@ -19,7 +17,6 @@ Template.mediaActions.events({
 
     },
     'click .list-style': function (e) {
-    	//Session.set('media-list-style', e.currentTarget.id);
         setClientSetting('media-list-style', e.currentTarget.id);
     }
 });

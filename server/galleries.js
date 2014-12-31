@@ -23,7 +23,7 @@ Meteor.publish('gallery', function (id, options) {
 
 Meteor.publish("galleries", function() {
       //if (Authorize.isAdmin) {
-    return Galleries.find({}, { fields: {media: 0}});
+    return Galleries.find({});
 });
 
 Meteor.methods({
@@ -80,6 +80,6 @@ Meteor.methods({
         );
     },
     removeUnusedGalleries: function () {
-      Galleries.remove({ slug: "" });
+        Galleries.remove({ slug: "" });
     }
 });
