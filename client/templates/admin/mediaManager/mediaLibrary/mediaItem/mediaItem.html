@@ -17,7 +17,9 @@
         </div>
       </td>
       <td>{{this.original.name}}</td>
-      <td>{{formatDate this.copies.image_lg.updatedAt 'short'}}</td>
+      <td>{{this.metadata.title}}</td>
+      <td>{{this.metadata.caption}}</td>
+      <td>{{formatDate this.uploadedAt 'short'}}</td>
       <td><a href="#" class="trashcan destroy"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     

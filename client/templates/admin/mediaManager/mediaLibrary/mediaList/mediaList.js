@@ -1,6 +1,5 @@
 Template.mediaList.rendered = function () {
-    SortAction.setSortBy( null );
-    // $("[rel='tooltip']").tooltip();    
+    SortAction.setSortBy( { "uploadedAt": -1 } );   
  
     $('.thumbnail').hover(
         function(){
