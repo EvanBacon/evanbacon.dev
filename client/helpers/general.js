@@ -13,6 +13,16 @@ UI.registerHelper("formatDate", function(datetime, format) {
   }
 });
 
+UI.registerHelper("getFeaturedUrl", function(mediaList) {
+   var url = mediaList[0].thumb;
+   _.each(mediaList, function (m) {
+       if(m.isFeatured === 1) {
+          url = m.thumb;
+       }
+  });
+  return url;
+});
+
 
 // function to update save loader status if package is available
 updateSaveButton = function (type) {

@@ -1,12 +1,11 @@
 // Template.galleryItem.helpers({
-//   featured: function () {
+//   featuredUrl: function () {
 //       var url = this.media[0].thumb;
 //       _.each(this.media, function (m) {
 //          if(m.isFeatured === 1) {
 //             url = m.thumb;
 //          }
 //       });
-//       console.log(url);
 //       return url;
 //   }
 // });
