@@ -37,7 +37,7 @@ Meteor.methods({
                         'slug': '',
                         'title': '',
                         'isVisible': 1,
-                        'featuredId': null,
+                        //'featuredId': null,
                         'lastModified': null
                         };
         if (!! media)
@@ -61,7 +61,7 @@ Meteor.methods({
                       'slug': slug,
                       'title': gallery.title,
                       'isVisible': gallery.isVisible,
-                      'featured': gallery.featured,
+                      //'featured': gallery.featured,
                       'lastModified': (new Date()).getTime()
                       };
 
