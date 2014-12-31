@@ -20,7 +20,7 @@
 			<div class="form-group has-feedback">
 		        <label class="control-label" for="inputTitle">Title</label>
 		        <span class="required glyphicon glyphicon-star"></span>
-	            <input class="form-control input-sm" id="inputTitle" type="text" maxlength="40" value="{{this.gallery.title}}" placeholder="Title">
+	            <input class="form-control input-md" id="inputTitle" type="text" maxlength="40" value="{{this.gallery.title}}" placeholder="Title">
 				<!-- <span class="glyphicon glyphicon-remove form-control-feedback hidden" id="glyphTitle" aria-hidden="true"></span> -->
 				<span id="helpTitle" class="help-block hidden">Title is required.</span>
 		    </div>
@@ -31,7 +31,7 @@
 							<span class="question glyphicon glyphicon-question-sign"></span>
 						</a>
 		        <div class="controls">
-		        	<input class="form-control inputSlug input-sm" name="slug" type="text" value="{{this.gallery.slug}}" placeholder="Slug"/>
+		        	<input class="form-control input-md" id="inputSlug" name="slug" type="text" value="{{this.gallery.slug}}" placeholder="Slug"/>
 		        </div>
 		    </div> 
 
@@ -40,7 +40,7 @@
 		        <label class="control-label" for="description">Description</label>
 		        
 		        <div class="controls">
-		            <textarea name="description" rows="4" maxlength="300" class="form-control inputDesc input-sm" type="text" value="{{this.gallery.description}}"></textarea>
+		            <textarea name="description" id="inputDesc" rows="4" maxlength="300" class="form-control input-md" type="text" value="{{this.gallery.description}}"></textarea>
 		        </div>
 		    </div> 
 		</div>

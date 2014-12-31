@@ -60,8 +60,8 @@ Template.galleryEdit.events({
 	    g.id = this.gallery._id;
 		g.title = Validation.trimInput(t.find('#inputTitle').value);
 
-		g.slug = t.find('.inputSlug').value;
-		g.description  = t.find('.inputDesc').value;
+		g.slug = t.find('#inputSlug').value;
+		g.description  = t.find('#inputDesc').value;
 		
 
 		g.isVisible = (e.currentTarget.id === 'save-show') ? 1 : 0;
