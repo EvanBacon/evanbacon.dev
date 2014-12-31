@@ -13,7 +13,7 @@ Template.mediaList.rendered = function () {
 
 Template.mediaList.helpers({
     isList: function () {
-        return Session.equals('media-list-style', 'list');
+        return getClientSetting('media-list-style') === 'list';
     }
 }); 
 

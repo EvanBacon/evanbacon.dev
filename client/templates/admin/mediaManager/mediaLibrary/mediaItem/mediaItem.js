@@ -1,17 +1,10 @@
-Template.mediaItem.rendered = function () {
-    Session.set('is-uploading', 'false');
-}
+// Template.mediaItem.rendered = function () {
+//     Session.set('is-uploading', 'false');
+// }
 
 Template.mediaItem.helpers ({
   isList: function () {
-    return Session.equals('media-list-style', 'list');
-  },
-  ownAsset: function() {
-  	return this.userId == Meteor.userId();
-  },
-  src: function() {
-  	printlog(this);
-  	return this.copies.default.key;
+    return getClientSetting('media-list-style') === 'list';
   },
   thumbId: function() {
     return "thumb-" + this._id;
