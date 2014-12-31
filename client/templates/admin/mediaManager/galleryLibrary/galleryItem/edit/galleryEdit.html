@@ -2,11 +2,10 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h1 style="margin:0 0 10px">Edit Gallery <small>{{ this.gallery.title }}</small></h1>
-			<hr>
+			<hr class="no-gutter">
 		</div>
-		<br>
-		<br>
 		<div id="submit-gallery" class="col-sm-4 col-md-3">
+			<br>
 			<div class="btn-group btn-group-md col-sm-12 no-gutter" role="group">
 				<button class="btn btn-default return-list col-sm-6" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Return to List</button>
 				<button class="btn btn-primary col-sm-6" id="save-gallery" type="button">{{> savingLoader text="Save Gallery"}}</button>
@@ -46,14 +45,14 @@
 		</div>
 
 		<div class="col-sm-8 col-md-9">
-			
+			<br>
 			<div class="col-sm-4">
 				<a href="#" class="btn btn-md btn-info add-images modal-show" data-toggle="modal" data-target="#media-selection"><span class="glyphicon glyphicon-plus"></span> Add Images</a>
 			</div>
 			
 			<br>
 			<div class="clear"></div>
-			<hr>
+
 			<div class="col-sm-12">
 				<span class="instructions"><strong>Drag images</strong> to rearrange order. <strong>Click star</strong> to set featured image.</span>
 			</div>

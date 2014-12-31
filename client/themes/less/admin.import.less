@@ -31,6 +31,60 @@ textarea {
   z-index: 10;
 }
 
+.thumb-icon {
+  cursor: pointer;
+  position:relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 2px 5px;
+}
+
+.thumb-icon img {
+    width: 95%;
+    height: 95%;
+    margin: auto;
+}
+
+.thumb-icon .title {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #FFF;
+  overflow: hidden;
+  font-size: 0.5em;
+  color: #000;
+  text-align: left;
+  padding: 0 5px;
+  // white-space: nowrap;
+  filter: alpha(opacity=60);
+  opacity: .6;
+
+}
+
+.thumb-icon:hover {
+  filter: alpha(opacity=80);
+  opacity: .8;
+}
+
+.thumb-icon .checked {
+  position: absolute;
+  bottom: 0px;
+  right: 3px;
+  font-size: 2em;
+  color: @brand-primary;
+  filter: alpha(opacity=70);
+  opacity: .7;
+  padding: 0 2px;
+  background-color: #FFF;
+  -webkit-box-shadow: -3px -3px 5px 0px rgba(0,0,0,1);
+  -moz-box-shadow: -3px -3px 5px 0px rgba(0,0,0,1);
+  box-shadow: -3px -3px 5px 0px rgba(0,0,0,1);
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+}
+
 .thumbnail {
     position:relative;
     width: 150px;
@@ -44,7 +98,7 @@ textarea {
   background-color: #FFF;
   width: 140px;
   overflow: hidden;
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #000;
   text-align: center;
   padding: 0 5px;
@@ -69,26 +123,10 @@ textarea {
     text-align: center;
 }
 
-.thumbnail .checked {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  font-size: 2em;
-  color: @brand-primary;
-  filter: alpha(opacity=70);
-  opacity: .7;
-  padding: 0 2px;
-  background-color: #FFF;
-  border: 1px solid #777;
-  -webkit-border-top-left-radius: 4px;
-  -moz-border-radius-topleft: 4px;
-  border-top-left-radius: 4px;
-}
-
 .selected {
-   -webkit-box-shadow: inset 0px 0px 0px 4px @brand-primary;
-   -moz-box-shadow: inset 0px 0px 0px 4px @brand-primary;
-   box-shadow: inset 0px 0px 0px 4px @brand-primary;
+   -webkit-box-shadow: inset 0px 0px 0px 3px @brand-primary;
+   -moz-box-shadow: inset 0px 0px 0px 3px @brand-primary;
+   box-shadow: inset 0px 0px 0px 3px @brand-primary;
 }
 
 .caption {
@@ -104,7 +142,6 @@ textarea {
     height:100%;
 }
 
-
 .media-action-item {
   display:inline-block;
   margin-left:20px;
@@ -119,6 +156,10 @@ textarea {
     display:inline;
     margin-left:5px;
     font-size:11px;
+}
+
+#submit-gallery {
+  background-color: #E1E1E1;
 }
 
 .modal-img {
@@ -299,6 +340,11 @@ h4 .wait, h4 .saved, h4 .notsaved {
 }
 
 
+.list-group, .modal-footer {
+  //max-height: none;
+  // overflow-y: scroll;
+  background-color: #FFF;
+}
 
 #item-list .list {
   width: 120px;
