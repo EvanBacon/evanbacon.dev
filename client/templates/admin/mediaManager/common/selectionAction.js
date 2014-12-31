@@ -44,12 +44,11 @@ Template.selectionAction.events({
 			    	// if (page === 'albumManager')
 			    	// 	Albums.remove({ _id: item.defaultValue });
 
-			    	if ( !! removeFromMethod )
+			    	if ( !! removeFromMethod ) {
 				    	Meteor.call(removeFromMethod, item.defaultValue, function(err) {
-				            if(err) {
-				                console.log(err.reason);
-				            } 
+				            if(err) console.log(err.reason);
 				        });
+				    }
 			    });
 
 
