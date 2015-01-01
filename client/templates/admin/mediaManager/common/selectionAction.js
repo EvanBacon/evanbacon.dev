@@ -69,7 +69,8 @@ Template.selectionAction.events({
 		e.stopPropagation();
 		
 		var page = Router.current().route.getName(),
-			methodInfo = {},
+			routeTo,
+			createType,
 			items   = [];
 		$.each($( "input:checked" ), function (index, item) {
 			var thumbURL = $(this).closest('div.thumb').find('img').attr('src');
@@ -77,22 +78,24 @@ Template.selectionAction.events({
 		});
 
 		if (page === 'mediaManager') {
-			methodInfo.call = 'createGallery';
-			methodInfo.route = 'galleryEdit';
+			// methodInfo.call = 'createGallery';
+			routeTo = 'galleryEdit';
+			createType = 'gallery'
 		}
 
-		// if (page === 'galleryManager') {
-		// 	methodInfo.call = 'createAlbum';
-		// 	methodInfo.route = 'albumEdit';
-		// }
+		if (page === 'galleryManager') {
+			// methodInfo.call = 'createAlbum';
+			routeTo = 'albumEdit';
+			createType = 'album';
+		}
 
-		if (!! methodInfo)
-	    	Meteor.call(methodInfo.call, items, function (err, id) { 
-				    	if (err) console.log(err);
-				    	
-				    	if (!! id) {
-				    		Router.go( methodInfo.route, {_id: id} );
-				    	}
+		if (!! routeTo)
+	    	Meteor.call('createGallery', createType, items, function (err, id) { 
+		    	if (err) console.log(err);
+		    	
+		    	if (!! id) {
+		    		Router.go( methodInfo.route, {_id: id} );
+		    	}
 			});
 	 }
 });

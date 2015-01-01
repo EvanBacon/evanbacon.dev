@@ -3,7 +3,7 @@
         <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
         <div class="thumbnail">
           <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
-            <img src="{{ getFeaturedUrl this.media }}"  alt="">
+            <img src="{{ getFeaturedUrl this.content }}"  alt="">
             <div class="title"><h5>{{ this.title }}</h5></div>
           </a>
         </div>

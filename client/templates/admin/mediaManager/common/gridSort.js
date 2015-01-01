@@ -15,7 +15,7 @@ var gridsort = null;
 
 var getBlockHTML = function (id, featured, thumb) {
 	var btnFeat = ( featured === 1 ) ? 'btn-danger' : 'btn-default';
-	var html =  '<li class="ui-state-default" data-mediaid="' + id + '" data-feat="' + featured + '" data-thumb="' + thumb + '">' +
+	var html =  '<li class="ui-state-default" data-contentid="' + id + '" data-feat="' + featured + '" data-thumb="' + thumb + '">' +
             			'<header><div class="btn-toolbar">' + 
 							'<button type="button" title="Set as Featured Image" class="btn btn-sm ' + btnFeat + ' set-featured">' +
 								'<span class="glyphicon glyphicon-star"></span></button>' +
@@ -37,26 +37,26 @@ var updatePosition = function (){
     });
 };
 
-initGridSort = function (media) {
+initGridSort = function (content) {
 	$('#gridsort').empty();
 
-	_.each(media, function(m) {
-		addMedia(m.id, m.isFeatured, m.thumb);
+	_.each(content, function(c) {
+		addContent(c.id, c.isFeatured, c.thumb);
     });
     
 };
 
-addMedia = function (id, isFeatured, thumb) {
+addContent = function (id, isFeatured, thumb) {
 	var html = getBlockHTML(id, isFeatured, thumb);
 	$('#gridsort').append(html);
 };
 
-getMediaData = function () {
-	var media = [];
+getContentData = function () {
+	var content = [];
 	$.each($('#gridsort li'), function (index, item) {
-		media.push({ 'id': $(item).data('mediaid'), 'thumb': $(item).data('thumb'), 'isFeatured': $(item).data('feat') });
+		content.push({ 'id': $(item).data('contentid'), 'thumb': $(item).data('thumb'), 'isFeatured': $(item).data('feat') });
 	});
-	return media;
+	return content;
 };	
 
 setFeatured = function (obj) {
@@ -75,8 +75,8 @@ Template.gridSort.rendered = function () {
 	});
 	$('#gridsort').disableSelection();
 
-	if (!! this.data.mediadata) {
-		initGridSort(this.data.mediadata);
+	if (!! this.data.contentdata) {
+		initGridSort(this.data.contentdata);
 	}
 
 	$('#gridsort').on( 'remove', 'li', updatePosition );

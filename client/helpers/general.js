@@ -13,16 +13,27 @@ UI.registerHelper("formatDate", function(datetime, format) {
   }
 });
 
-UI.registerHelper("getFeaturedUrl", function(mediaList) {
-   var url = mediaList[0].thumb;
-   _.each(mediaList, function (m) {
-       if(m.isFeatured === 1) {
-          url = m.thumb;
+UI.registerHelper("getFeaturedUrl", function(list) {
+  if (!! list) {
+    var url = list[0].thumb;
+    _.each(list, function (i) {
+       if(i.isFeatured === 1) {
+          url = i.thumb;
        }
-  });
-  return url;
+    });
+    return url;
+  }
 });
 
+
+// getGalleryType = function () {
+//   var page = Router.current().route.getName();
+//   if (page === 'mediaManager')
+//     return 'gallery';
+//   if (page === 'galleryManager')
+//     return 'albu'
+
+// };
 
 // function to update save loader status if package is available
 updateSaveButton = function (type) {

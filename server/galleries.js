@@ -31,17 +31,18 @@ Meteor.methods({
       Galleries.remove({_id: { $in: galleries }});
       // TODO: remove galleries from albums too
     },
-    createGallery: function (media) {
+    createGallery: function (type, content) {
         var dataObj = { 
                         'description': '',
                         'slug': '',
                         'title': '',
                         'isVisible': 1,
                         //'featuredId': null,
-                        'lastModified': null
+                        'lastModified': null,
+                        'type': type 
                         };
-        if (!! media)
-            dataObj.media = media;
+        if (!! content)
+            dataObj.content = content;
         var galleryId = Galleries.insert(dataObj); 
         if (galleryId) 
             return galleryId;
@@ -56,7 +57,7 @@ Meteor.methods({
         slug = galleryFuncs.getUniqueSlug(gallery.id, slug); // this makes sure the slug is unique, increments if it is not
 
         var dataObj = { 
-                      'media': gallery.media,
+                      'content': gallery.content,
                       'description': gallery.description,
                       'slug': slug,
                       'title': gallery.title,
@@ -74,9 +75,9 @@ Meteor.methods({
         }
 
     },
-    removeFromGalleries: function (mediaId) {
-        Galleries.update({ 'media.id': mediaId },  
-                         { $pull: { media: {'id': mediaId} }}
+    removeFromGalleries: function (itemId) {
+        Galleries.update({ 'content.id': itemId },  
+                         { $pull: { content: {'id': itemId} }}
         );
     },
     removeUnusedGalleries: function () {

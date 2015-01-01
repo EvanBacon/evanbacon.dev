@@ -4,7 +4,9 @@
 	    Selection Action <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
+	  	{{#if create}}
 	  		<li class="{{disabled}}"><a id="btncreate" href="#">Create {{create}}</a></li>
+  		{{/if}}
 		    <li class="{{disabled}}"><a id="btndelete" href="#">Delete Selected</a></li>
 		    <li class="{{disabled}}"><a id="btnclear" href="#">Clear Selected</a></li>
 		</ul>

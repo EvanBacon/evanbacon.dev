@@ -1,15 +1,19 @@
-var getMediaIds = function () {
+var getContentIds = function () {
 	// compile a list of already used images so not to display those when selecting new images
-	var mediaIds = [];
+	var contentIds = [];
 	$.each($('#gridsort li'), function (index, item) {
-		mediaIds.push($(item).data('mediaid'));
+		contentIds.push($(item).data('contentid'));
 	});    
-    return mediaIds;
+    return contentIds;
 };
 
 var isNewGallery = function (item) {
 	// determine if this is a newly created gallery (this item should be empty if not saved)
 	return (typeof item === undefined || item === '');
+};
+
+var getName = function () {
+	return Router.current().route.getName().replace('Edit', '');
 };
 
 Template.galleryEdit.helpers({
@@ -22,6 +26,22 @@ Template.galleryEdit.helpers({
 	isNew: function () {
 		// only show cancel button if this is a newly created gallery (never saved)
 		return isNewGallery(this.gallery.slug);
+	},
+	type: function () {
+		return capitalizeFirst(getName());
+	},
+	itemType: function (plural, capitalized) {
+		var type = getName();
+			text = '';
+		if (type === 'album') {
+			text = plural ? 'galleries' : 'gallery';
+		} else {
+			text = plural ? 'images' : 'image';
+		}
+		return capitalized ? capitalizeFirst(text) : text;
+	},
+	saveText: function () {
+		return 'Save ' + capitalizeFirst(getName());;
 	}
 });
 
@@ -39,7 +59,7 @@ Template.galleryEdit.events({
 		}
 	},
 	'click .add-images': function (e) {
-		Session.set('selected-images', getMediaIds());
+		Session.set('selected-images', getContentIds());
 	},
 	'click .return-list': function (e) {
 		e.preventDefault();
@@ -48,10 +68,10 @@ Template.galleryEdit.events({
 				if (isNewGallery(this.gallery.slug)) { 
 					Galleries.remove({ _id: this.gallery._id });
 				}
-				Router.go('galleryManager');
+				Router.go(getName() + 'Manager');
 			}
 		} else {
-			Router.go('galleryManager');
+			Router.go(getName() + 'Manager');
 		}
 		
 	},
@@ -74,7 +94,7 @@ Template.galleryEdit.events({
 			setFeatured( featEl );
 		}
 		g.featured = featEl.data('thumb');
-		g.media = getMediaData();
+		g.content = getContentData();
 
 	    updateSaveButton('wait');
 

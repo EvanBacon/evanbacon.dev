@@ -50,7 +50,7 @@ Template.mediaAdd.events({
     'click .save': function (e) {
         pageChanged(true);
         var images = $(".thumb-icon.selected").each(function(){
-        addMedia($(this).data("id"), 0, $(this).data("url"));
+        addContent($(this).data("id"), 0, $(this).data("url"));
   		});
 
       $('.thumb-icon').removeClass("selected");

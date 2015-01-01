@@ -1,20 +1,20 @@
 <template name="galleryEdit">
 	<div class="row">
 		<div class="col-sm-12">
-			<h1 style="margin:0 0 10px">Edit Gallery <small>{{ this.gallery.title }}</small></h1>
+			<h1 style="margin:0 0 10px">Edit {{type}} <small>{{ this.gallery.title }}</small></h1>
 			<hr class="no-gutter">
 		</div>
 		<div id="submit-gallery" class="col-sm-4 col-md-3">
 			<br>
 			<div class="btn-group btn-group-md col-sm-12 no-gutter" role="group">
 				<button class="btn btn-default return-list col-sm-6" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Return to List</button>
-				<button class="btn btn-primary col-sm-6" id="save-gallery" type="button">{{> savingLoader text="Save Gallery"}}</button>
+				<button class="btn btn-primary col-sm-6" id="save-gallery" type="button">{{> savingLoader text=saveText}}</button>
 			</div>
 		    <br>
 		    <br>
 			<div class="form-group text-center">
 				<input id="cb-visible" type="checkbox" checked="{{this.gallery.isVisible}}">
-				<label for="cb-visible">Make Gallery Visible</label>
+				<label for="cb-visible">Make {{type}} Visible</label>
 			</div>
 			<div class="form-group has-feedback">
 		        <label class="control-label" for="inputTitle">Title</label>
@@ -47,18 +47,18 @@
 		<div class="col-sm-8 col-md-9">
 			<br>
 			<div class="col-sm-4">
-				<a href="#" class="btn btn-md btn-info add-images modal-show" data-toggle="modal" data-target="#media-selection"><span class="glyphicon glyphicon-plus"></span> Add Images</a>
+				<a href="#" class="btn btn-md btn-info add-images modal-show" data-toggle="modal" data-target="#media-selection"><span class="glyphicon glyphicon-plus"></span> Add {{itemType true true}}</a>
 			</div>
 			
 			<br>
 			<div class="clear"></div>
 
 			<div class="col-sm-12">
-				<span class="instructions"><strong>Drag images</strong> to rearrange order. <strong>Click star</strong> to set featured image.</span>
+				<span class="instructions"><strong>Drag {{itemType true false}}</strong> to rearrange order. <strong>Click star</strong> to set featured {{itemType false false}}.</span>
 			</div>
 			
 			<div id="grid-blocks" class="col-sm-12">
-				{{> gridSort mediadata=this.gallery.media }}
+				{{> gridSort contentdata=this.gallery.content }}
 			</div>
 			<br>
 		</div>
