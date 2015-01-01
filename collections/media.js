@@ -36,7 +36,7 @@ var thumbStore = new FS.Store.FileSystem("thumb", {
       var transformer = gm(readStream, fileObj.name({store: 'thumb'}));
       transformer.size({bufferStream: true}, FS.Utility.safeCallback(function (err, size) {
         if (!err) {
-          var newSize = resizeImage(size.width, size.height, getSetting('imageWidthThumb', 400)),
+          var newSize = resizeImage(size.width, size.height, getSetting('imageWidthThumb', 200)),
               width = newSize.width,
               height = newSize.height,
               cropLen = (width - height) > 0 ? height : width, // choose shortest side's length
@@ -123,12 +123,50 @@ var largeStore = new FS.Store.FileSystem("image_lg",  {
   }
 );
 
+var mediumStore = new FS.Store.FileSystem("image_md",  {
+    beforeWrite: function(fileObj) {
+          // change the filename to lowercase
+        var newName = MediaLibrary.appendToFileName(fileObj.name().toLowerCase(), '-md');
+        return {
+          name: newName
+        }       
+    },
+    transformWrite: function(fileObj, readStream, writeStream) {
+      var transformer = gm(readStream, fileObj.name({store: 'image_md'}));
+      transformer.size({bufferStream: true}, FS.Utility.safeCallback(function (err, size) {
+        if (!err) {
+          
+            var width = size.width;
+            var height = size.height;
+            var mdWidth = getSetting('imageWidthMedium', 450);
+
+            if(width > mdWidth || height > mdWidth) {
+                var newSize = resizeImage(width, height, mdWidth);
+                width = newSize.width;
+                height = newSize.height;
+            }
+            
+            transformer.resize(width, height).autoOrient().stream().pipe(writeStream);
+
+            // save dimensions
+            fileObj.update({$set: {'metadata.widthMd': width, 'metadata.heightMd': height}});
+            
+          } 
+
+      }));
+      
+    },
+    maxTries: 2
+  }
+);
+
 
 Media = new FS.Collection("media", {
       stores: [
         thumbStore,
         imageStore,
-        largeStore
+        largeStore,
+        mediumStore
       ],
       filter: {
         maxSize: getSetting('imageMaxSize', 1000000), //in bytes (1 Mb)
