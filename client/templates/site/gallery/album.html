@@ -1,0 +1,8 @@
+<template name="album">
+<h1>{{ this.gallery.title }} <small>{{ this.gallery.description }}</small></h1>
+	<div id="gallery">
+	  {{#each mediaItems}}
+	    <a href="#"><img src="{{this.url store='image_md'}}" /></a>
+	  {{/each}}
+	</div>
+</template>
