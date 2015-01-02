@@ -21,5 +21,6 @@ elmar-lib
 useraccounts:bootstrap
 less
 nemo64:bootstrap
-mrt:jquery-ui-sortable
 micah:justified-gallery
+mrt:jquery-ui-sortable
+horka:swipebox
