@@ -17,7 +17,7 @@ Meteor.publish('gallery', function (id, options) {
       return Galleries.find({ _id: id }, options);
     if (!! id)
       return Galleries.find({ _id: id });
-  //}
+
     return null;
 });
 
@@ -70,6 +70,10 @@ Meteor.methods({
               Galleries.update({ _id: gallery.id },  
                   { $set: dataObj}
               );
+              // _.each(gallery.content, function (c) {
+              //     c.id, search and update metadata.galleries
+              //     Media.update({_id: c.id}, { $push: { "metadata.galleries": gallery.id }}); 
+              // });
         } catch (err) {
             mongoError (err);
         }

@@ -19,6 +19,19 @@ Media.allow({
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
+ Meteor.publish("galleryMedia", function(galleryId) {
+      //if (Authorize.isAdmin) {
+      var gallery = Galleries.findOne(galleryId);
+      var content = gallery.content,
+          images = [];
+
+      _.each(content, function (c) {
+          images.push(c.id);
+      });
+
+      return Media.find({ _id: { $in: images }}, { fields: {"copies.default": 0, "copies.thumb": 0, "original": 0}});
+ });
+
 Meteor.methods({
       uploadMedia: function(asset) {
         Media.insert(asset, function (err, fileObj) { 

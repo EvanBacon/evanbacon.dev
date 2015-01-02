@@ -1,7 +1,11 @@
 <template name="galleryEdit">
 	<div class="row">
 		<div class="col-sm-12">
-			<h1 style="margin:0 0 10px">Edit {{type}} <small>{{ this.gallery.title }}</small></h1>
+			<h1 style="margin:0 0 10px">Edit {{type}} 
+				<small>
+					<a href="{{ pathFor route='album' _id=this.gallery._id}}">{{ this.gallery.title }}</a>
+				</small>
+			</h1>
 			<hr class="no-gutter">
 		</div>
 		<div id="submit-gallery" class="col-sm-4 col-md-3">
