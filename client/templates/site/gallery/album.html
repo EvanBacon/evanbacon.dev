@@ -9,20 +9,9 @@
 	</h1>
 	<div id="gallery">
 	  {{#each mediaItems}}
-	    <a class="swipebox" href="{{this.url store='image_lg'}}" title="{{this.metadata.caption}}">
-	    	<img alt="{{this.metadata.title}}" src="{{this.url store='image_md'}}" />
+	    <a class="swipebox" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
+	    	<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
 	    </a>
 	  {{/each}}
 	</div>
-		<!-- <a class="fancybox" href="/cfs/files/media/2CKGjWnaDC86Z7wYc/_dsc0577-lg.jpg" title="test 1">
-	    	<img alt="title 1" src="/cfs/files/media/2CKGjWnaDC86Z7wYc/_dsc0577-lg.jpg" />
-	    </a>
-	    <a class="fancybox" href="/cfs/files/media/2gGNbBNtbtqR9bkjY/hsb_dsc0623-lg.jpg" title="test 3">
-	    	<img alt="title 2" src="/cfs/files/media/2gGNbBNtbtqR9bkjY/hsb_dsc0623-lg.jpg" />
-	    </a>
-	    <a class="fancybox" href="/cfs/files/media/MN9iFbfCorMSe6nZh/asc_dsc0351-lg.jpg" title="test 3">
-	    	<img alt="title 3" src="/cfs/files/media/MN9iFbfCorMSe6nZh/asc_dsc0351-lg.jpg" />
-	    </a>
- -->
-	   
 </template>
