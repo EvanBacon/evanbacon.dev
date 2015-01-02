@@ -78,13 +78,11 @@ Template.selectionAction.events({
 		});
 
 		if (page === 'mediaManager') {
-			// methodInfo.call = 'createGallery';
 			routeTo = 'galleryEdit';
 			createType = 'gallery'
 		}
 
 		if (page === 'galleryManager') {
-			// methodInfo.call = 'createAlbum';
 			routeTo = 'albumEdit';
 			createType = 'album';
 		}
@@ -94,7 +92,7 @@ Template.selectionAction.events({
 		    	if (err) console.log(err);
 		    	
 		    	if (!! id) {
-		    		Router.go( methodInfo.route, {_id: id} );
+		    		Router.go( routeTo, {_id: id} );
 		    	}
 			});
 	 }
