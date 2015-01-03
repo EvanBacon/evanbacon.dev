@@ -8,9 +8,17 @@ Template.album.rendered = function () {
 	  captions: true,
 	  margins: 3,
 	});
+
+	// var $container = $('#gallery').imagesLoaded( function() {
+ //  		$container.isotope({
+	// 	   itemSelector: '.item',
+	//   		masonry: {} 
+	// 	  });
+	// });
 };
 
 Template.album.events({
+
 	'click .swipebox': function (e) {
 	  	e.preventDefault();
 		$.swipebox({

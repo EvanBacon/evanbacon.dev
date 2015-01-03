@@ -9,9 +9,13 @@
 	</h1>
 	<div id="gallery">
 	  {{#each mediaItems}}
-	    <a class="swipebox" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
-	    	<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
-	    </a>
+	   <!-- <div class="item"> -->
+	   	<a class="swipebox" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
+	   	<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
+	   </a>
+	   <!-- </div> -->
 	  {{/each}}
 	</div>
+
+	
 </template>
