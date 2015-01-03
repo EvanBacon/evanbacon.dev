@@ -69,8 +69,8 @@ mongo@1.0.10
 mongo-livedata@1.0.7
 mrt:jquery-ui-sortable@1.10.3
 mrt:moment@2.8.1
-nemo64:bootstrap@3.3.0_1
-nemo64:bootstrap-data@3.3.0_1
+nemo64:bootstrap@3.3.1_1
+nemo64:bootstrap-data@3.3.1_1
 npm-bcrypt@0.7.7
 observe-sequence@1.0.4
 ordered-dict@1.0.2

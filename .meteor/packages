@@ -20,7 +20,7 @@ elmar-save-loader
 elmar-lib
 useraccounts:bootstrap
 less
-nemo64:bootstrap
 micah:justified-gallery
 mrt:jquery-ui-sortable
 horka:swipebox
+nemo64:bootstrap
