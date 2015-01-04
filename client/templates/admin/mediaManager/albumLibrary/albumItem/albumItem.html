@@ -1,8 +1,8 @@
-<template name="galleryItem">
+<template name="albumItem">
     <div id="thumb-{{this._id}}" class="thumb thumb-container">
         <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
         <div class="thumbnail">
-          <a href="{{ pathFor route='galleryEdit' _id=this._id}}">
+          <a href="{{ pathFor route='albumEdit' _id=this._id}}">
             <img src="{{ getFeaturedUrl this.content }}"  alt="">
             <div class="title"><h5>{{ this.title }}</h5></div>
           </a>

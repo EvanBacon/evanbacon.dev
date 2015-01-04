@@ -1,4 +1,4 @@
-Template.galleryList.rendered = function () {
+Template.albumList.rendered = function () {
     SortAction.setSortBy( null );
     // $("[rel='tooltip']").tooltip();    
  
@@ -12,9 +12,9 @@ Template.galleryList.rendered = function () {
     ); 
 };
 
-Template.galleryList.helpers({
+Template.albumList.helpers({
     isList: function () {
-        return Session.equals('gallery-list-style', 'list');
+        return Session.equals('album-list-style', 'list');
     },
 }); 
 

@@ -7,8 +7,8 @@ var getContentIds = function () {
     return contentIds;
 };
 
-var isNewGallery = function (item) {
-	// determine if this is a newly created gallery (this item should be empty if not saved)
+var isNewAlbum = function (item) {
+	// determine if this is a newly created album (this item should be empty if not saved)
 	return (typeof item === undefined || item === '');
 };
 
@@ -16,28 +16,19 @@ var getName = function () {
 	return Router.current().route.getName().replace('Edit', '');
 };
 
-Template.galleryEdit.helpers({
+Template.albumEdit.helpers({
 	isVisible: function () {
-		if (! this.gallery._id) {
+		if (! this.album._id) {
 			return true;
 		}
-		return this.gallery.isVisible;
+		return this.album.isVisible;
 	},
 	isNew: function () {
-		// only show cancel button if this is a newly created gallery (never saved)
-		return isNewGallery(this.gallery.slug);
-	},
-	type: function () {
-		return capitalizeFirst(getName());
+		// only show cancel button if this is a newly created album (never saved)
+		return isNewAlbum(this.album.slug);
 	},
 	itemType: function (plural, capitalized) {
-		var type = getName();
-			text = '';
-		if (type === 'album') {
-			text = plural ? 'galleries' : 'gallery';
-		} else {
-			text = plural ? 'images' : 'image';
-		}
+		text = plural ? 'images' : 'image';
 		return capitalized ? capitalizeFirst(text) : text;
 	},
 	saveText: function () {
@@ -45,7 +36,7 @@ Template.galleryEdit.helpers({
 	}
 });
 
-Template.galleryEdit.events({
+Template.albumEdit.events({
 	'change :input, keyup :input': function (e) {
 		pageChanged(true);
 	},
@@ -63,10 +54,10 @@ Template.galleryEdit.events({
 	},
 	'click .return-list': function (e) {
 		e.preventDefault();
-		if( hasPageChanged() || isNewGallery(this.gallery.slug) ) {
+		if( hasPageChanged() || isNewAlbum(this.album.slug) ) {
 			if(confirm("Changes will be lost. Would you like to leave this page?")) {
-				if (isNewGallery(this.gallery.slug)) { 
-					Galleries.remove({ _id: this.gallery._id });
+				if (isNewAlbum(this.album.slug)) { 
+					Albums.remove({ _id: this.album._id });
 				}
 				Router.go(getName() + 'Manager');
 			}
@@ -75,9 +66,9 @@ Template.galleryEdit.events({
 		}
 		
 	},
-	'click #save-gallery': function (e, t) {
+	'click #save-album': function (e, t) {
 		var g = {};
-	    g.id = this.gallery._id;
+	    g.id = this.album._id;
 		g.title = Validation.trimInput(t.find('#inputTitle').value);
 
 		g.slug = t.find('#inputSlug').value;
@@ -102,7 +93,7 @@ Template.galleryEdit.events({
 	    	$('#inputTitle').closest('.form-group').removeClass('has-error');
 	    	$('#helpTitle').addClass('hidden');
 			try {
-			  Meteor.call('updateGallery', g, function (err, id) { 
+			  Meteor.call('updateAlbum', g, function (err, id) { 
 			    	if (err) {
 			    		console.log(err);
 			    		updateSaveButton('error');
@@ -120,13 +111,11 @@ Template.galleryEdit.events({
 			$('#inputTitle').closest('.form-group').addClass('has-error');
 			$('#helpTitle').removeClass('hidden');
 			pageChanged(false);
-
 		}
-
 	}
 });
 
-Template.galleryEdit.rendered = function () {
+Template.albumEdit.rendered = function () {
 	$('[data-toggle="popover"]').popover({
 	    trigger: 'hover',
 	        'placement': 'right'

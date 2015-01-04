@@ -180,4 +180,4 @@ Media = new FS.Collection("media", {
       }
     });
 
-Galleries = new Meteor.Collection('galleries');
+Albums = new Meteor.Collection('albums');

@@ -35,15 +35,13 @@ Template.selectionAction.events({
 			    	var removeFromMethod;
 			    	if (page === 'mediaManager') {
 			    		Media.remove({ _id: item.defaultValue });
-			    		removeFromMethod = 'removeFromGalleries';
+			    		removeFromMethod = 'removeFromAlbums';
 			    	}
-			    	if (page === 'galleryManager') {
-			    		Galleries.remove({ _id: item.defaultValue });
+			    	if (page === 'albumManager') {
+			    		Albums.remove({ _id: item.defaultValue });
 			    		//removeFromMethod = 'removeFromAlbums';
 			    	}
-			    	// if (page === 'albumManager')
-			    	// 	Albums.remove({ _id: item.defaultValue });
-
+			    	
 			    	if ( !! removeFromMethod ) {
 				    	Meteor.call(removeFromMethod, item.defaultValue, function(err) {
 				            if(err) console.log(err.reason);
@@ -70,7 +68,7 @@ Template.selectionAction.events({
 		
 		var page = Router.current().route.getName(),
 			routeTo,
-			createType,
+			//createType,
 			items   = [];
 		$.each($( "input:checked" ), function (index, item) {
 			var thumbURL = $(this).closest('div.thumb').find('img').attr('src');
@@ -78,17 +76,17 @@ Template.selectionAction.events({
 		});
 
 		if (page === 'mediaManager') {
-			routeTo = 'galleryEdit';
-			createType = 'gallery'
+			routeTo = 'albumEdit';
+			//createType = 'album'
 		}
 
-		if (page === 'galleryManager') {
+		if (page === 'albumManager') {
 			routeTo = 'albumEdit';
-			createType = 'album';
+			//createType = 'album';
 		}
 
 		if (!! routeTo)
-	    	Meteor.call('createGallery', createType, items, function (err, id) { 
+	    	Meteor.call('createAlbum', items, function (err, id) { 
 		    	if (err) console.log(err);
 		    	
 		    	if (!! id) {

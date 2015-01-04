@@ -1,4 +1,4 @@
-// Template.galleryItem.helpers({
+// Template.albumItem.helpers({
 //   featuredUrl: function () {
 //       var url = this.media[0].thumb;
 //       _.each(this.media, function (m) {
@@ -10,11 +10,11 @@
 //   }
 // });
 
-Template.galleryItem.events({
+Template.albumItem.events({
 	'click .destroy': function () {
-      if(confirm("Delete gallery?")) {
+      if(confirm("Delete album?")) {
         delArr = [this._id];
-        Galleries.remove({_id: { $in: delArr }});
+        Albums.remove({_id: { $in: delArr }});
       }
   	},
   'change input[type=checkbox]': function(e) {

@@ -1,41 +1,41 @@
-<template name="galleryEdit">
+<template name="albumEdit">
 
 	<div class="row">
 		<div class="col-sm-12">
-			<h1 style="margin:0 0 10px">Edit {{type}} 
+			<h1 style="margin:0 0 10px">Edit Album 
 				<small>
-					<a href="{{ pathFor route='album' _id=this.gallery._id}}">{{ this.gallery.title }}</a>
+					<a href="{{ pathFor route='album' _id=this.album._id}}">{{ this.album.title }}</a>
 				</small>
 			</h1>
 			<hr class="no-gutter">
 		</div>
-		<div id="submit-gallery" class="col-sm-4 col-md-3">
+		<div id="submit-album" class="col-sm-4 col-md-3">
 			<br>
 			<div class="btn-group btn-group-md col-sm-12 no-gutter" role="group">
 				<button class="btn btn-default return-list col-sm-6" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Library</button>
-				<button class="btn btn-primary col-sm-6" id="save-gallery" type="button">{{> savingLoader text=saveText}}</button>
+				<button class="btn btn-primary col-sm-6" id="save-album" type="button">{{> savingLoader text=saveText}}</button>
 			</div>
 		    <br>
 		    <br>
 			<div class="form-group text-center">
-				<input id="cb-visible" type="checkbox" checked="{{this.gallery.isVisible}}">
-				<label for="cb-visible">Make {{type}} Visible</label>
+				<input id="cb-visible" type="checkbox" checked="{{this.album.isVisible}}">
+				<label for="cb-visible">Make Album Visible</label>
 			</div>
 			<div class="form-group has-feedback">
 		        <label class="control-label" for="inputTitle">Title</label>
 		        <span class="required glyphicon glyphicon-star"></span>
-	            <input class="form-control input-md" id="inputTitle" type="text" maxlength="40" value="{{this.gallery.title}}" placeholder="Title">
+	            <input class="form-control input-md" id="inputTitle" type="text" maxlength="40" value="{{this.album.title}}" placeholder="Title">
 				<!-- <span class="glyphicon glyphicon-remove form-control-feedback hidden" id="glyphTitle" aria-hidden="true"></span> -->
 				<span id="helpTitle" class="help-block hidden">Title is required.</span>
 		    </div>
 
 		    <div class="form-group">
 		        <label class="control-label" for="slug">Slug</label>
-		        <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="The slug is the URL-friendly version of the gallery name. It is usually all lowercase and contains only letters, numbers, and hyphens. Ex. nocturnal-photos">
+		        <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="The slug is the URL-friendly version of the album name. It is usually all lowercase and contains only letters, numbers, and hyphens. Ex. nocturnal-photos">
 							<span class="question glyphicon glyphicon-question-sign"></span>
 						</a>
 		        <div class="controls">
-		        	<input class="form-control input-md" id="inputSlug" name="slug" type="text" value="{{this.gallery.slug}}" placeholder="Slug"/>
+		        	<input class="form-control input-md" id="inputSlug" name="slug" type="text" value="{{this.album.slug}}" placeholder="Slug"/>
 		        </div>
 		    </div> 
 
@@ -44,7 +44,7 @@
 		        <label class="control-label" for="description">Description</label>
 		        
 		        <div class="controls">
-		            <textarea name="description" id="inputDesc" rows="4" maxlength="300" class="form-control input-md" type="text" value="{{this.gallery.description}}"></textarea>
+		            <textarea name="description" id="inputDesc" rows="4" maxlength="300" class="form-control input-md" type="text" value="{{this.album.description}}"></textarea>
 		        </div>
 		    </div> 
 		</div>
@@ -63,7 +63,7 @@
 			</div>
 			
 			<div id="grid-blocks" class="col-sm-12">
-				{{> gridSort contentdata=this.gallery.content }}
+				{{> gridSort contentdata=this.album.content }}
 			</div>
 			<br>
 		</div>

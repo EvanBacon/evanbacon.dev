@@ -1,6 +1,6 @@
-galleryFuncs = {
-	isSlugUnique: function (galleryId, slug) {
-		var count = Galleries.find({$and: [{_id: { $ne: galleryId }}, {'slug': slug} ] }).count();
+albumFuncs = {
+	isSlugUnique: function (albumId, slug) {
+		var count = Albums.find({$and: [{_id: { $ne: albumId }}, {'slug': slug} ] }).count();
 		return count === 0;
 	},
 	slugify: function (text) {
@@ -12,9 +12,9 @@ galleryFuncs = {
 	      .replace(/^-+/, '')          // Trim - from start of text
 	      .replace(/-+$/, '');         // Trim - from end of text
 	},
-	getUniqueSlug: function (galleryId, slug) {
+	getUniqueSlug: function (albumId, slug) {
 		var query = new RegExp( slug, 'i' );
-		var slugs = Galleries.find({ $and: [{'slug': query}, {_id: { $ne: galleryId }} ] }, { $sort: {slug: -1}} ).fetch();
+		var slugs = Albums.find({ $and: [{'slug': query}, {_id: { $ne: albumId }} ] }, { $sort: {slug: -1}} ).fetch();
 		if (slugs && slugs.length > 0) {
 
 			var unique = true;
