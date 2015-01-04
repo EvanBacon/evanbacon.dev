@@ -36,7 +36,7 @@ var thumbStore = new FS.Store.FileSystem("thumb", {
       var transformer = gm(readStream, fileObj.name({store: 'thumb'}));
       transformer.size({bufferStream: true}, FS.Utility.safeCallback(function (err, size) {
         if (!err) {
-          var newSize = resizeImage(size.width, size.height, getSetting('imageWidthThumb', 200)),
+          var newSize = resizeImage(size.width, size.height, getSetting('imageWidthThumb', 250)),
               width = newSize.width,
               height = newSize.height,
               cropLen = (width - height) > 0 ? height : width, // choose shortest side's length
