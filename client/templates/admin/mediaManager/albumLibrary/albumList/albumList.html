@@ -1,20 +1,23 @@
 <template name="albumList">
   {{> searchResults }}
-      <div id="item-list">
-        
-           <div class="row">
-          
+
+  <div id="album">
+    {{#each items}}
+      {{> albumItem }}
+    {{/each}}
+  </div>
+     <!--  <div id="item-list">
+          <div class="row">
           {{#each items}}
-            <div class="col-lg-3 col-md-3 col-sm-4"> 
+            <div class="col-lg-3 col-md-4 col-sm-5"> 
                {{> albumItem}}
             </div>
           {{/each}}
           </div>
-        
       </div>
       <div class="clear"></div>
 
-  <div> 
+  <div>  -->
   {{#if nextPath}}   
      <a href="{{nextPath}}" class="load-more btn btn-info btn-md btn-block">Load more</a>
   {{else}}
@@ -22,7 +25,7 @@
         {{> spinner}}      
     {{/unless}}
   {{/if}}
-  </div>
+ <!--  </div> -->
   
 </template>
 

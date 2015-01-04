@@ -25,17 +25,37 @@ hr {
   border-radius: 3px;
 }
 
-#bgrd{
-  position: relative; 
-  width: 100%;
-  background: #444;
-  padding: 20px;
+.caption {
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  height: 30px;
+  text-align:center;
+  color:#FFF !important;
+  z-index:10;
+  .rounded(3px);
+
 }
 
-#bgrd img {
-  border: 7px solid #FFF;
-  width: 100%;
+.caption .badge {
+  color: #000;
+  font-weight: bold;
 }
+
+#bgrd{
+    background: #333;
+
+  border: 3px dashed #555;
+  // position: relative; 
+  // width: 100%;
+  // background: #444;
+  // padding: 20px;
+}
+
+// #bgrd img {
+//   // border: 7px solid #FFF;
+//   width: 100%;
+// }
 
 #bgrd .icon {
   position: absolute;

@@ -1,39 +1,25 @@
-// Template.albumItem.helpers({
-//   featuredUrl: function () {
-//       var url = this.media[0].thumb;
-//       _.each(this.media, function (m) {
-//          if(m.isFeatured === 1) {
-//             url = m.thumb;
-//          }
-//       });
-//       return url;
-//   }
-// });
+Template.albumItem.helpers({
+  count: function () {
+    return this.content.length;
+  },
+});
 
 Template.albumItem.events({
-	'click .destroy': function () {
-      if(confirm("Delete album?")) {
-        delArr = [this._id];
-        Albums.remove({_id: { $in: delArr }});
-      }
-  	},
-  'change input[type=checkbox]': function(e) {
-      e.preventDefault();
-      var numChecked = SelectionAction.getCheckedCount();
-      if(!numChecked) numChecked = 0;
-        var checked = $('#' + this._id).prop('checked');
-        var thumbId = "#thumb-" + this._id;
-        if(checked) {
-          $(thumbId).addClass("selected");
-          $(thumbId).removeClass("editing");
-          SelectionAction.setCheckedCount(++numChecked);
-        } else {
-
-          $(thumbId).removeClass("selected");
-          if (numChecked > 0) 
-            SelectionAction.setCheckedCount(--numChecked);
-          else
-            SelectionAction.setCheckedCount(0);
-        }
-  }
+	// 'click .destroy': function () {
+ //      if(confirm("Delete album?")) {
+ //        delArr = [this._id];
+ //        Albums.remove({_id: { $in: delArr }});
+ //      }
+ //  	},
+  
+ //   }
+    'click .album-link': function (e) {
+        e.preventDefault();
+        var curr = Router.current().route.getName(),
+            routeTo = 'album';
+        if (curr === 'albumManager') {
+          routeTo = 'albumEdit';
+        } 
+        Router.go( routeTo, {_id: this._id});
+    }
 });
