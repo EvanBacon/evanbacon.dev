@@ -1,14 +1,17 @@
 <template name="album">
-	<h1>{{ this.gallery.title }} 
+	<h1>{{ this.album.title }} 
 		<small>
-			{{ this.gallery.description }} 
+			{{ this.album.description }} 
 			{{#if isAdmin}}
-			<a href="{{ pathFor route='galleryEdit' _id=this.gallery._id}}">edit</a>
+			<a href="{{ pathFor route='albumEdit' _id=this.album._id}}">edit</a>
 			{{/if}}
 		</small>
 	</h1>
-	<div id="gallery">
-	  {{#each mediaItems}}
+	<!-- {{#each sortedItems}}
+	  	<h4>{{this.url store='image_lg'}}</h4>
+    {{/each}} -->
+	<div id="album">
+	  {{#each sortedItems}}
 	   <!-- <div class="item"> -->
 	   	<a class="swipebox" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
 	   	<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />

@@ -1,5 +1,5 @@
 Template.album.rendered = function () {
-	$('#gallery').justifiedGallery({
+	$('#album').justifiedGallery({
 	  // option: default,
 	  rowHeight: 200,
 	  maxRowHeight: 0,
@@ -16,6 +16,22 @@ Template.album.rendered = function () {
 	// 	  });
 	// });
 };
+
+Template.album.helpers({
+	sortedItems: function () {
+		var results = [];
+
+		for(var i = 0; i < this.album.content.length; i++)
+			results.push(null);
+
+		var list = _.pluck(this.album.content, "id");
+		_.each(Media.find().fetch(), function (m) {
+			var index = list.indexOf(m._id);
+			results[index] = m;
+		});
+		return results;
+	}
+});
 
 Template.album.events({
 

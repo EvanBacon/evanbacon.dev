@@ -19,17 +19,18 @@ Media.allow({
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
- Meteor.publish("galleryMedia", function(galleryId) {
+ Meteor.publish("albumMedia", function(albumId) {
       //if (Authorize.isAdmin) {
-      var gallery = Galleries.findOne(galleryId);
-      var content = gallery.content,
+      var album = Albums.findOne(albumId);
+      var content = album.content,
           images = [];
 
       _.each(content, function (c) {
           images.push(c.id);
       });
 
-      return Media.find({ _id: { $in: images }}, { fields: {"copies.default": 0, "copies.thumb": 0, "original": 0}});
+      return Media.find({ _id: { $in: images }});
+
  });
 
 Meteor.methods({
@@ -54,6 +55,54 @@ Meteor.methods({
 
         var writeStream = fileObj.createWriteStream('image_md');
         gm(readStream, fileObj.name({store: 'default'})).drawText(20, 20, 'Copyright', 'center').stream().pipe(writeStream);
+      },
+      getSortedMedia: function(list) {
+          var images = [],
+              weightCond = [],
+              wtCount = 0;
+
+          _.each(list, function (c) {
+              images.push(c.id);
+          });
+
+          var stack = [];
+
+          for ( var i = images.length-1; i > 0; i-- ) {
+              var rec = {
+                  "$cond": [
+                      { "$eq": [ "$_id", images[i-1] ] },
+                      i
+                  ]
+              };
+              if ( stack.length == 0 ) {
+                  rec["$cond"].push( i+1 );
+              } else {
+                  var lval = stack.pop();
+                  rec["$cond"].push( lval );
+              }
+              stack.push( rec );
+          }
+
+          var pipeline = [
+            {
+              $match: { _id: { $in: images }}
+            }, 
+            {
+              $project: {
+                "weight": stack[0],
+                "metadata.caption": 1,
+                "metadata.title": 1,
+                "metadata.credit": 1,
+                "copies.image_lg": 1,
+                "copies.image_md": 1
+              }
+            },
+            {
+              $sort: {"weight": 1}
+            }
+          ];
+
+          return Media.aggregate(pipeline);
       }
 });
 
