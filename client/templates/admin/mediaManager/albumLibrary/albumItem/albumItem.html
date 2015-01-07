@@ -1,11 +1,13 @@
 <template name="albumItem">
 
 <!-- 	<a href="{{ pathFor route='albumEdit' _id=this._id}}" class="album-link" title="{{this.title}}">
- -->        
+ -->      
+ 	<div class="thumb">  
 	<a href="#" class="album-link" title="{{this.title}}">
- 			<img alt="{{this.description}}" src="{{getFeaturedUrl this.content}}" />
+ 		<img alt="{{this.description}}" src="{{getFeaturedUrl this.content}}" />
         <div class="caption">{{this.title}} <span class="badge">{{count}}</span></div>
     </a>
+	</div>
     
 </template>
 

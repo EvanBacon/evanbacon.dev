@@ -1,8 +1,8 @@
 var $container;
 
 var initGrid = function () {
+	$('#album').addClass('hidden');
 	Meteor.defer(function () {
-		$('#album').addClass('hidden');
 		if (!typeof $container === undefined )
 			$container.packery('destroy');
 		$container = $('#album').imagesLoaded( function() {

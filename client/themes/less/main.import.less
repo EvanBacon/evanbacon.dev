@@ -25,15 +25,51 @@ hr {
   border-radius: 3px;
 }
 
+.thumb {
+  position: relative;
+  border: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 4px solid #777;
+}
+
+.thumb img {
+  width: 100%;
+}
+
+.thumb:hover {
+  .opacity(.9);
+}
+
+// .thumbnail .title {
+//   position: absolute;
+//   top: 4px;
+//   left: 4px;
+//   background-color: #FFF;
+//   width: 95%;
+//   overflow: hidden;
+//   font-size: 0.8em;
+//   color: #000;
+//   text-align: center;
+//   padding: 0 5px;
+//   // white-space: nowrap;
+
+//   .opacity(.4);
+// }
+
 .caption {
   position:absolute;
   bottom:0px;
   left:0px;
   height: 30px;
-  text-align:center;
+  text-align: center;
   color:#FFF !important;
   z-index:10;
-  .rounded(3px);
+  background: #000;
+  .opacity(.6);
+  width: 100%;
+  padding-top: 3px;
 
 }
 
