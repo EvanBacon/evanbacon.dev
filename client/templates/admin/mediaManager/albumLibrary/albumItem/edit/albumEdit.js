@@ -18,10 +18,10 @@ var getName = function () {
 
 Template.albumEdit.helpers({
 	isVisible: function () {
-		if (! this.album._id) {
+		if (typeof this.album._id === undefined) {
 			return true;
 		}
-		return this.album.isVisible;
+		return this.album.isVisible === 1;
 	},
 	isNew: function () {
 		// only show cancel button if this is a newly created album (never saved)
@@ -76,8 +76,7 @@ Template.albumEdit.events({
 		g.slug = t.find('#inputSlug').value;
 		g.description  = t.find('#inputDesc').value;
 		
-
-		g.isVisible = (e.currentTarget.id === 'save-show') ? 1 : 0;
+		g.isVisible = $('#cb-visible').prop('checked') ? 1 : 0;
 
 		var featEl = $('li[data-feat="1"]');
 

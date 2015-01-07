@@ -21,9 +21,9 @@ Template.albumList.rendered = function () {
     //justifyGrid();
 };
 
-// Template.albumList.helpers({
-//     isList: function () {
-//         return Session.equals('album-list-style', 'list');
-//     }
-// }); 
+Template.albumList.helpers({
+    isVisible: function () {
+    	return this.isVisible === 1;
+    }
+}); 
 

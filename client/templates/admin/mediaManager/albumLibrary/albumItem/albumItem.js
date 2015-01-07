@@ -4,9 +4,6 @@ Template.albumItem.helpers({
   },
   thumbId: function() {
     return "thumb-" + this._id;
-  },
-  isAdminSide: function() {
-    return isAdmin() && Router.current().route.getName() === 'albumManager';
   }
 });
 

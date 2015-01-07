@@ -3,11 +3,18 @@
 
   <div id="album">
     {{#each items}}
-      <div class="col-lg-2 col-md-3 col-sm-4">
-      {{> albumItem }}
-      </div>
+      {{#if isVisible }}
+        <div class="col-lg-2 col-md-3 col-sm-4">
+        {{> albumItem }}
+        </div>
+      {{else}}
+        {{#if isAdminAlbum}}
+          <div class="col-lg-2 col-md-3 col-sm-4">
+          {{> albumItem }}
+          </div>
+        {{/if}}
+      {{/if}}
     {{/each}}
-
   </div>
      <!--  <div id="item-list">
           <div class="row">
