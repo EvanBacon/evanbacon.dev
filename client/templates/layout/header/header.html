@@ -25,10 +25,14 @@
               {{#if isLoggedIn}}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
-                <ul class="dropdown-menu adminbox" role="menu">
+                <ul class="dropdown-menu">
+                  <li><a href="{{pathFor 'mediaManager'}}"><span class="glyphicon glyphicon-th"></span> Gallery Manager</a></li>
+                  <li><a href="{{pathFor route='signOut'}}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                </ul>
+                <!-- <ul class="dropdown-menu adminbox" role="menu">
                   <li><a href="{{pathFor 'mediaManager'}}">Media Manager</a></li>
                   <li><a href="{{pathFor route='signOut'}}">Sign Out</a></li>                
-                </ul>
+                </ul> -->
               </li>
               {{else}}
                <li class="dropdown">

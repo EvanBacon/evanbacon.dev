@@ -1,7 +1,8 @@
 <template name="managerHeader">
-	<h2>Media Manager</h2>
-	<ul class="nav nav-tabs">
+	<h2>Gallery Manager</h2>
+	<ul class="nav nav-pills">
 	    <li class="{{ isActive 'mediaManager'}}"><a href="{{ pathFor route='mediaManager'}}">IMAGES</a></li>
         <li class="{{ isActive 'albumManager'}}"><a href="{{ pathFor route='albumManager'}}">ALBUMS</a></li>
+        <li class="{{ isActive 'settings'}}"><a href="{{ pathFor route='settings'}}">SETTINGS</a></li>
 	</ul>
 </template>
