@@ -1,12 +1,12 @@
 Media.allow({
       insert: function(userId) {
-        return true;
+        return isAdminById(userId);
       },
       update: function(userId) {
-        return true;
+        return isAdminById(userId);
       },
       remove: function(userId) {
-        return true;
+        return isAdminById(userId);
       },
       download: function(userId) {
         return true;
@@ -15,12 +15,14 @@ Media.allow({
     });
 
  Meteor.publish("media", function(options) {
-      //if (Authorize.isAdmin) {
+      // if (!isAdminById(this.userId)) 
+      //     throw new Meteor.Error(403, 'Permission denied'); 
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
  Meteor.publish("albumMedia", function(albumId, options) {
-      //if (Authorize.isAdmin) {
+      // if (!isAdminById(this.userId)) 
+      //     throw new Meteor.Error(403, 'Permission denied');  
       var album = Albums.findOne(albumId);
       var content = album.content,
           images = [];
@@ -41,11 +43,13 @@ Meteor.methods({
         });   
       },
       removeAssets: function(assets) {
+        if (!isAdmin()) 
+          throw new Meteor.Error(403, 'Permission denied'); 
         Media.remove({_id: { $in: assets }});
       },
       updateMedia: function(options) {
-        // if(!Meteor.user())
-        //   throw new Meteor.Error();
+        if (!isAdmin()) 
+          throw new Meteor.Error(403, 'Permission denied');
         gm(200, 400, "#ddff99f3").drawText(10, 50, "from scratch").write("/watermarks/newimg.jpg", function (err) {});
 
 

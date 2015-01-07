@@ -24,9 +24,9 @@ Template.mediaEdit.events({
 		updateSaveButton('reset');
 	},
 	'click .save': function (e, t) {
-		// if (! Meteor.userId()) // TODO - CHANGE TO ADMIN PERMISSION/ must be logged in to create events
-  //     		throwError('You must be logged in.');
-
+		if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
+  
       	updateSaveButton('reset');
 		// clearErrors(); // in case user is trying to submit form again
 

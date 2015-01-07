@@ -11,7 +11,7 @@ Package.onUse(function (api) {
   ], ['client', 'server']);
 
   api.add_files([
-    'lib/server/authorization.js',
+
   ], ['server']);
 
   api.add_files([
@@ -36,9 +36,9 @@ Package.onUse(function (api) {
     'replaceAll',
     'SortAction',
     'MediaLibrary',
-    'Authorize',
     'Validation',
     'isAdmin',
+    'isAdminById'
     // 'MediaLibrary',
     // 'Sorting',
     // 'pageChanged',

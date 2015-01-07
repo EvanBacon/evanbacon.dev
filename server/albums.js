@@ -1,37 +1,40 @@
 Albums.allow({
       insert: function(userId) {
-        return true;
+        return isAdminById(userId);
       },
       update: function(userId) {
-        return true;
+        return isAdminById(userId);
       },
       remove: function(userId) {
-        return true;
+        return isAdminById(userId);
       },
       fetch: []
     });
 
 Meteor.publish("album", function (id, options) {
-  //if(isAdminById(this.userId)){
-    //if (!! options && !! id) 
-      return Albums.find({ _id: id }, options);
-    // if (!! id)
-    // return Albums.find({ _id: id });
-
-    // return null;
+    // if (!isAdminById(this.userId)) 
+    //     throw new Meteor.Error(403, 'Permission denied'); 
+    if (!! options && !! id) 
+        return Albums.find({ _id: id }, options);
+    if (!! id)
+        return Albums.find({ _id: id });
 });
 
 Meteor.publish("albums", function(options) {
-      //if (Authorize.isAdmin) {
+    // if (!isAdminById(this.userId)) 
+    //       throw new Meteor.Error(403, 'Permission denied'); 
     return Albums.find({}, options);
 });
 
 Meteor.methods({
     removeAlbums: function (albums) {
+      if (!isAdmin()) 
+          throw new Meteor.Error(403, 'Permission denied'); 
       Albums.remove({_id: { $in: albums }});
-      // TODO: remove albums from albums too
     },
     createAlbum: function (content) {
+        if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
         var dataObj = { 
                         'description': '',
                         'slug': '',
@@ -47,6 +50,9 @@ Meteor.methods({
                 
     },
     updateAlbum: function (album) {
+        if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied');
+
         var slug = album.slug;
         if (! slug) { // if a slug was not provided, create one from the title
           slug = albumFuncs.slugify(album.title); 
@@ -77,11 +83,15 @@ Meteor.methods({
 
     },
     removeFromAlbums: function (itemId) {
+        if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
         Albums.update({ 'content.id': itemId },  
                          { $pull: { content: {'id': itemId} }}
         );
     },
     removeUnusedAlbums: function () {
+        if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
         Albums.remove({ slug: "" });
     }
 });

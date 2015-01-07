@@ -40,7 +40,7 @@ var initGrid = function () {
 
 
 Template.album.rendered = function () {
-
+	$('#album').addClass('hidden');
 	// this.autorun(function(){
 	//     //initGrid();
 	//     Meteor.defer(function() {

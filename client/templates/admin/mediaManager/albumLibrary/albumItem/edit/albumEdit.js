@@ -67,6 +67,8 @@ Template.albumEdit.events({
 		
 	},
 	'click #save-album': function (e, t) {
+		if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
 		var g = {};
 	    g.id = this.album._id;
 		g.title = Validation.trimInput(t.find('#inputTitle').value);
