@@ -13,17 +13,17 @@ Albums.allow({
 
 Meteor.publish("album", function (id, options) {
   //if(isAdminById(this.userId)){
-    if (!! options && !! id) 
+    //if (!! options && !! id) 
       return Albums.find({ _id: id }, options);
-    if (!! id)
-      return Albums.find({ _id: id });
+    // if (!! id)
+    // return Albums.find({ _id: id });
 
-    return null;
+    // return null;
 });
 
-Meteor.publish("albums", function() {
+Meteor.publish("albums", function(options) {
       //if (Authorize.isAdmin) {
-    return Albums.find({});
+    return Albums.find({}, options);
 });
 
 Meteor.methods({

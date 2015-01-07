@@ -109,7 +109,7 @@ var largeStore = new FS.Store.FileSystem("image_lg",  {
                 height = newSize.height;
             }
             
-            transformer.resize(width, height).autoOrient().stream().pipe(writeStream);
+            transformer.resize(width, height).autoOrient().quality(60).stream().pipe(writeStream);
 
             // save dimensions
             fileObj.update({$set: {'metadata.widthLg': width, 'metadata.heightLg': height}});
@@ -146,7 +146,7 @@ var mediumStore = new FS.Store.FileSystem("image_md",  {
                 height = newSize.height;
             }
             
-            transformer.resize(width, height).autoOrient().stream().pipe(writeStream);
+            transformer.resize(width, height).autoOrient().quality(60).stream().pipe(writeStream);
 
             // save dimensions
             fileObj.update({$set: {'metadata.widthMd': width, 'metadata.heightMd': height}});

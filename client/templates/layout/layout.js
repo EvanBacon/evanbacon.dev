@@ -1,18 +1,18 @@
-justifyGrid = function () {
-    $('#album').justifiedGallery({
-      // option: default,
-      rowHeight: 200,
-      maxRowHeight: 0,
-      lastRow: 'nojustify',
-      fixedHeight: false,
-      captions: true,
-      margins: 3,
-      captionSettings: { animationDuration: 500,
-            visibleOpacity: 0.8,
-            nonVisibleOpacity: 0.6
-      }
-    }); 
-};
+// justifyGrid = function () {
+//     $('#album').justifiedGallery({
+//       // option: default,
+//       rowHeight: 200,
+//       maxRowHeight: 0,
+//       lastRow: 'nojustify',
+//       fixedHeight: false,
+//       captions: true,
+//       margins: 3,
+//       captionSettings: { animationDuration: 500,
+//             visibleOpacity: 0.8,
+//             nonVisibleOpacity: 0.6
+//       }
+//     }); 
+// };
 
 Template.layout.rendered = function () {
 	// $('.thumbnail').hover(
@@ -25,14 +25,13 @@ Template.layout.rendered = function () {
  //    );
 };
 
-Template.layout.events({
-	'keyup input#searchinput': function (e) {
-	    if (e.which === 8) {
-	    	console.log('backspace', e.keyCode);
-	    	justifyGrid();
-	    }
-   },
-   'click #clear-search': function (e) {
-        justifyGrid();
-   }
-});
+// Template.layout.events({
+// 	'keyup input#searchinput': function (e) {
+// 	    if (e.which === 8) {
+// 	    	//justifyGrid();
+// 	    }
+//    },
+//    'click #clear-search': function (e) {
+//         //justifyGrid();
+//    }
+// });

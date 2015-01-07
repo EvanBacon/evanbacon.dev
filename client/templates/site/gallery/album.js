@@ -1,36 +1,92 @@
-Template.album.rendered = function () {
-	$('#album').justifiedGallery({
-	  // option: default,
-	  rowHeight: 200,
-	  maxRowHeight: 0,
-	  lastRow: 'nojustify',
-	  fixedHeight: false,
-	  captions: true,
-	  margins: 3,
-	});
+var $container;
 
-	// var $container = $('#gallery').imagesLoaded( function() {
- //  		$container.isotope({
-	// 	   itemSelector: '.item',
-	//   		masonry: {} 
-	// 	  });
+var initGrid = function () {
+	Meteor.defer(function () {
+		$('#album').addClass('hidden');
+		if (!typeof $container === undefined )
+			$container.packery('destroy');
+		$container = $('#album').imagesLoaded( function() {
+			$container.packery({
+			   itemSelector: '.item',
+		  	   gutter: '.gutter-sizer',
+		  	   columnWidth: '.grid-sizer'
+			});
+		});
+		$('#album').fadeIn().removeClass('hidden');
+	});
+};
+
+
+// var getItemElement = function(item) {
+//   var mdURL = item.url('image_md');
+//   var lgURL = item.url('image_lg');
+//   var elem = $('<a></a>')//document.createElement('a');
+//   var wRand = Math.random();
+//   var hRand = Math.random();
+//   var widthClass = wRand > 0.85 ? 'w4' : wRand > 0.7 ? 'w2' : '';
+//   var heightClass = hRand > 0.85 ? 'h4' : hRand > 0.7 ? 'h2' : '';
+
+//   elem.className = 'swipebox item'; // + widthClass + ' ' + heightClass;
+//   elem.attr('href', lgURL);
+//   elem.attr('title', item.metadata.title);
+
+//   var image = $('<img>'); //document.createElement('img');
+//   image.attr('src', mdURL);
+//   image.attr('alt', item.metadata.caption);
+//   elem.html(image);
+
+//   return elem;
+// }
+
+
+Template.album.rendered = function () {
+
+	// this.autorun(function(){
+	//     //initGrid();
+	//     Meteor.defer(function() {
+	//     	 console.log('reloading');
+	//     	 // if(!! $container) 
+	//     	//$container.packery('reloadItems');
+	//     	 initGrid();
+	    	
+	//     });
+	   
+	//  });
+
+
+
+	// $('#album').justifiedGallery({
+	//   // option: default,
+	//   rowHeight: 200,
+	//   maxRowHeight: 0,
+	//   lastRow: 'nojustify',
+	//   fixedHeight: false,
+	//   captions: true,
+	//   margins: 3,
 	// });
+
+	//initGrid();
+
+	
 };
 
 Template.album.helpers({
 	sortedItems: function () {
-		var results = [];
+		initGrid();
+		return this.items;
+		// var results = [];
 
-		for(var i = 0; i < this.album.content.length; i++)
-			results.push(null);
+		// for(var i = 0; i < this.album.content.length; i++)
+		// 	results.push(null);
 
-		var list = _.pluck(this.album.content, "id");
-		_.each(Media.find().fetch(), function (m) {
-			var index = list.indexOf(m._id);
-			results[index] = m;
-		});
-		return results;
+		// var list = _.pluck(this.album.content, "id");
+		// _.each(Media.find().fetch(), function (m) {
+		// 	var index = list.indexOf(m._id);
+		// 	results[index] = m;
+		// });
+		// return results;
 	}
+
 });
 
 Template.album.events({
@@ -46,7 +102,33 @@ Template.album.events({
 			afterOpen: null, // called after opening
 			loopAtEnd: false // true will return to the first image after the last image i
 		});
-  	}
+   	},
+   	'click .load-more': function (e) {
+   		//e.preventDefault();
+   		// $('#album').addClass('hidden');
+   		// $container.packery('destroy');
+   		//isActive = false;
+
+  //  		var elems = [];
+  //  		//var start = Router.current().params.limit || 0;
+  //  		var items = Media.find({}, {limit: Router.current().params.limit }).fetch();
+  //  		//console.log(items);
+  //  		_.each(items, function (i) {
+  //  			//console.log(i.metadata.title);
+  //  			var elem = getItemElement(i);
+  //  			elems.push( elem );
+  //  		});
+		// // // for ( var i = start; i < this.items.count(); i++ ) {
+		// // //     var elem = getItemElement();
+		// // //     elems.push( elem );
+		// // // }
+
+		// // append elements to container
+		// $container.append( elems );
+		// // add and lay out newly appended elements
+		// $container.packery( 'appended', elems );
+
+   	}
 //  'click .fancybox': function(e, t){
 	//     link = $(e.currentTarget);
 	//     $(this).fancybox({

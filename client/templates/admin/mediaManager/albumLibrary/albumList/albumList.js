@@ -18,7 +18,7 @@
 
 Template.albumList.rendered = function () {
     // SortAction.setSortBy( null );
-    justifyGrid();
+    //justifyGrid();
 };
 
 // Template.albumList.helpers({
