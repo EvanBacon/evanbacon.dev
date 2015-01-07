@@ -27,22 +27,31 @@
   {{ else }}
 
     <div id="{{thumbId}}" class="thumb thumb-container">
-      <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
-      <div class="thumbnail">
-      {{#if this.isUploaded}}
+      <div class="checkbox">
+        <label>
+          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+          <!-- override icon here -->
+          <span class="glyphicon glyphicon-ok"></span>
+        </label>
+      </div>
+     <!--  <div class="thumbnail"> -->
+      <!-- {{#if this.isUploaded}} -->
         <a href="#" class="modal-show" data-toggle="modal" data-target="{{modalTarget}}">
             <div class="caption">
-                <h4>{{this.metadata.title}}</h4>
+              {{#if this.metadata.title }}
+                <h5>{{this.metadata.title}}</h5>
+              {{else}}
                 <p>{{this.original.name}}</p>
+              {{/if}}
             </div>
           
             <img src="{{this.url store='thumb'}}"  alt="">
           </a>
         
-      {{else}}
+      <!-- {{else}}
        {{> FS.UploadProgressBar bootstrap=true}}
-      {{/if}}
-      </div>
+      {{/if}} -->
+     <!--  </div> -->
     </div>
   {{/if}}
 

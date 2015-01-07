@@ -1,12 +1,18 @@
 <template name="albumItem">
-
-<!-- 	<a href="{{ pathFor route='albumEdit' _id=this._id}}" class="album-link" title="{{this.title}}">
- -->      
- 	<div class="thumb">  
-	<a href="#" class="album-link" title="{{this.title}}">
- 		<img alt="{{this.description}}" src="{{getFeaturedUrl this.content}}" />
-        <div class="caption">{{this.title}} <span class="badge">{{count}}</span></div>
-    </a>
+    
+ 	<div id="{{thumbId}}" class="thumb thumb-container"> 
+ 		{{#if isAdminSide}}
+ 		<div class="checkbox">
+        <label>
+          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+          <span class="glyphicon glyphicon-ok"></span>
+        </label>
+	    </div>
+	    {{/if}}
+		<a href="#" class="album-link" title="{{this.title}}">
+	 		<img alt="{{this.description}}" src="{{getFeaturedUrl this.content}}" />
+	        <div class="caption">{{this.title}} <span class="badge">{{count}}</span></div>
+	    </a>
 	</div>
     
 </template>
