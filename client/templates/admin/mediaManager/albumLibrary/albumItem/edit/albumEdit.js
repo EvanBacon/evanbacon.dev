@@ -18,9 +18,10 @@ var getName = function () {
 
 Template.albumEdit.helpers({
 	isVisible: function () {
-		if (typeof this.album._id === undefined) {
-			return true;
-		}
+		// if (typeof this.album._id === undefined) {
+		// 	return true;
+		// }
+		//if (!! this.album.isVisible)
 		return this.album.isVisible === 1;
 	},
 	isNew: function () {
@@ -37,6 +38,13 @@ Template.albumEdit.helpers({
 });
 
 Template.albumEdit.events({
+	'click .delete-album': function (e) {
+		e.preventDefault();
+		if(confirm("Delete album? ")) {	
+			Albums.remove({ _id: this.album._id });
+			Router.go('albumManager');
+		}
+	},
 	'change :input, keyup :input': function (e) {
 		pageChanged(true);
 	},

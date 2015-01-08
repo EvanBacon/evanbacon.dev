@@ -1,12 +1,18 @@
 <template name="albumEdit">
 
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-10">
 			<h1 style="margin:0 0 10px">Edit Album 
 				<small>
-					<a href="{{ pathFor route='album' _id=this.album._id}}">{{ this.album.title }}</a>
+					<a href="{{ pathFor route='album' _id=this.album._id}}">{{ this.album.title }}</a> 
 				</small>
 			</h1>
+		</div>
+		<div class="col-sm-2">
+			<br>
+			<a href="#" class="btn btn-sm btn-default delete-album"><span class="glyphicon glyphicon-trash"></span> Delete Album</a>
+		</div>
+		<div class="col-sm-12 no-gutter">
 			<hr class="no-gutter">
 		</div>
 		<div id="submit-album" class="col-sm-4 col-md-3">

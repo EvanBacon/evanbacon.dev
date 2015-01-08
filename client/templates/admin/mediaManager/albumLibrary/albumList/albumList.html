@@ -16,26 +16,15 @@
       {{/if}}
     {{/each}}
   </div>
-     <!--  <div id="item-list">
-          <div class="row">
-          {{#each items}}
-            <div class="col-lg-3 col-md-4 col-sm-5"> 
-               {{> albumItem}}
-            </div>
-          {{/each}}
-          </div>
-      </div>
-      <div class="clear"></div>
-
-  <div>  -->
+   <br>
+   <br>
   {{#if nextPath}}   
-     <a href="{{nextPath}}" class="load-more btn btn-info btn-md btn-block">Load more</a>
+     <a href="{{nextPath}}" class="col-sm-6 col-sm-offset-3 load-more btn btn-info btn-md btn-block">Load more</a>
   {{else}}
     {{#unless ready}}        
         {{> spinner}}      
     {{/unless}}
   {{/if}}
- <!--  </div> -->
   
 </template>
 

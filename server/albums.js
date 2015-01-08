@@ -12,7 +12,10 @@ Albums.allow({
     });
 
 Meteor.publish("album", function (id, options) {
-    var isVisible = Albums.findOne({ _id: id }).isVisible;
+    var album = Albums.findOne({ _id: id }, { fields: {isVisible: 1}});
+    var isVisible = true;
+    if (!! album) isVisible = !! album.isVisible;
+
     if (!! isVisible || isAdminById(this.userId)) {
       if (!! options && !! id) 
           return Albums.find({ _id: id }, options);
@@ -23,9 +26,7 @@ Meteor.publish("album", function (id, options) {
     }
 });
 
-Meteor.publish("albums", function(options) {
-    // if (!isAdminById(this.userId)) 
-    //       throw new Meteor.Error(403, 'Permission denied'); 
+Meteor.publish("albums", function(options) { 
     return Albums.find({}, options);
 });
 
@@ -41,6 +42,7 @@ Meteor.methods({
         var dataObj = { 
                         'description': '',
                         'slug': '',
+                        'content': [],
                         'title': '',
                         'isVisible': 1,
                         'lastModified': null
@@ -87,10 +89,9 @@ Meteor.methods({
     },
     removeFromAlbums: function (itemId) {
         if (!isAdmin()) 
-            throw new Meteor.Error(403, 'Permission denied'); 
-        Albums.update({ 'content.id': itemId },  
-                         { $pull: { content: {'id': itemId} }}
-        );
+            throw new Meteor.Error(403, 'Permission denied');
+        console.log(itemId);
+        Albums.update({'content.id': itemId}, { $pull: { 'content': {'id': itemId} }});
     },
     removeUnusedAlbums: function () {
         if (!isAdmin()) 

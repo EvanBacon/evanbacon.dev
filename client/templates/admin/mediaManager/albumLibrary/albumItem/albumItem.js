@@ -1,6 +1,7 @@
 Template.albumItem.helpers({
   count: function () {
-    return this.content.length;
+    if (!! this.content)
+      return this.content.length;
   },
   thumbId: function() {
     return "thumb-" + this._id;

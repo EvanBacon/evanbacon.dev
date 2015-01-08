@@ -32,26 +32,20 @@ Template.selectionAction.events({
 				var selected = $( "input:checked" );
 				
 			    _.each(selected, function (item) {
-			    	var removeFromMethod;
 			    	if (page === 'mediaManager') {
 			    		Media.remove({ _id: item.defaultValue });
-			    		removeFromMethod = 'removeFromAlbums';
-			    	}
-			    	if (page === 'albumManager') {
-			    		Albums.remove({ _id: item.defaultValue });
-			    		//removeFromMethod = 'removeFromAlbums';
-			    	}
-			    	
-			    	if ( !! removeFromMethod ) {
-				    	Meteor.call(removeFromMethod, item.defaultValue, function(err) {
+			    		console.log(item.defaultValue);
+			    		Meteor.call('removeFromAlbums', item.defaultValue, function(err) {
 				            if(err) console.log(err.reason);
 				        });
-				    }
+			    	}
+			    	if (page === 'albumManager') {
+			    		console.log(item.defaultValue);
+			    		Albums.remove({ _id: item.defaultValue });
+			    	}
 			    });
 
-
 			    SelectionAction.setCheckedCount(0);
-			    
 			}
 		}
 	 },

@@ -14,7 +14,7 @@ UI.registerHelper("formatDate", function(datetime, format) {
 });
 
 UI.registerHelper("getFeaturedUrl", function(list) {
-  if (!! list) {
+  if (!! list && list.length > 0) {
     var url = list[0].thumb;
     _.each(list, function (i) {
        if(i.isFeatured === 1) {
@@ -22,6 +22,8 @@ UI.registerHelper("getFeaturedUrl", function(list) {
        }
     });
     return url;
+  } else {
+    return '/img/placeholder.png';
   }
 });
 
