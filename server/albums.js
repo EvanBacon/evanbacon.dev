@@ -12,12 +12,15 @@ Albums.allow({
     });
 
 Meteor.publish("album", function (id, options) {
-    // if (!isAdminById(this.userId)) 
-    //     throw new Meteor.Error(403, 'Permission denied'); 
-    if (!! options && !! id) 
-        return Albums.find({ _id: id }, options);
-    if (!! id)
-        return Albums.find({ _id: id });
+    var isVisible = Albums.findOne({ _id: id }).isVisible;
+    if (!! isVisible || isAdminById(this.userId)) {
+      if (!! options && !! id) 
+          return Albums.find({ _id: id }, options);
+      if (!! id)
+          return Albums.find({ _id: id });
+    } else {
+      return null;
+    }
 });
 
 Meteor.publish("albums", function(options) {
@@ -93,5 +96,13 @@ Meteor.methods({
         if (!isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
         Albums.remove({ slug: "" });
+    },
+    toggleAlbumVisibility: function (id) {
+        if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied');
+        var obj = Albums.findOne({_id: id}, { fields: {isVisible: 1}}); 
+        Albums.update({ _id: id },  
+                      { $set: { isVisible: (obj.isVisible ? 0 : 1) }}
+        );
     }
 });

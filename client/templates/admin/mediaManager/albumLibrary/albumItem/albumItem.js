@@ -4,6 +4,9 @@ Template.albumItem.helpers({
   },
   thumbId: function() {
     return "thumb-" + this._id;
+  },
+  visibleIcon: function () {
+    return this.isVisible === 1 ? 'glyphicon-eye-open' : 'glyphicon-eye-close';
   }
 });
 
@@ -34,5 +37,12 @@ Template.albumItem.events({
           routeTo = 'albumEdit';
         } 
         Router.go( routeTo, {_id: this._id});
+    },
+    'click .toggle-display': function (e) {
+        e.preventDefault();
+        Meteor.call('toggleAlbumVisibility', this._id, function (err) { 
+            if (err) console.log(err);
+        });
+        
     }
 });

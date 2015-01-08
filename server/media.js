@@ -25,13 +25,18 @@ Media.allow({
       //     throw new Meteor.Error(403, 'Permission denied');  
       var album = Albums.findOne(albumId);
       var content = album.content,
-          images = [];
+          images = [],
+          visible = !! album.isVisible;
 
-      _.each(content, function (c) {
-          images.push(c.id);
-      });
+      if (visible || isAdminById(this.userId)) {
+        _.each(content, function (c) {
+            images.push(c.id);
+        });
 
-      return Media.find({ _id: { $in: images }}, options);
+        return Media.find({ _id: { $in: images }}, options);
+      } else {
+        return null;
+      }
 
  });
 
