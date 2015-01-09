@@ -94,6 +94,13 @@
 
     };
 
+    getIndexOf = function (arr, itemId) {
+      for(var i = 0, len = arr.length; i < len; i++) {
+          if (arr[i]._id === itemId) return i;
+      }
+      return -1;
+    };
+
     // currentPostType = function () {
 
     //   /**

@@ -34,6 +34,7 @@ Package.onUse(function (api) {
     'randomStr',
     'appendToFileName',
     'replaceAll',
+    'getIndexOf',
     'SortAction',
     'MediaLibrary',
     'Validation',

@@ -4,18 +4,28 @@ var initGrid = function () {
 	$('#album').addClass('hidden');
 	Meteor.defer(function () {
 		if (!typeof $container === undefined )
-			$container.packery('destroy');
+			$container.isotope('destroy');
 		$container = $('#album').imagesLoaded( function() {
-			$container.packery({
+			$container.isotope({
+			   layoutMode: 'packery',
 			   itemSelector: '.item',
-		  	   gutter: '.gutter-sizer',
-		  	   columnWidth: '.grid-sizer'
+		  	   packery: {
+		  	   	gutter: '.gutter-sizer',
+		  	   columnWidth: '.grid-sizer',
+		  	   }
 			});
 		});
 		$('#album').fadeIn().removeClass('hidden');
 	});
 };
 
+// $('#container').isotope({
+//   // options...
+//   itemSelector: '.item',
+//   masonry: {
+//     columnWidth: 200
+//   }
+// });
 
 // var getItemElement = function(item) {
 //   var mdURL = item.url('image_md');

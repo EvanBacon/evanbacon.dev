@@ -24,4 +24,5 @@ mrt:jquery-ui-sortable
 horka:swipebox
 nemo64:bootstrap
 mrt:jquery-imagesloaded
-dburles:packery
+mizzao:autocomplete
+elmar-isotope-packery

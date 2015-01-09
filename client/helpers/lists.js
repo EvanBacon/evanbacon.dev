@@ -64,14 +64,6 @@ var compareLengths = function (a, b) {
   return 0;
 };
 
-var getIndexOf = function (arr, searchId) {
-
-    for(var i = 0, len = arr.length; i < len; i++) {
-        if (arr[i]._id === searchId) return i;
-    }
-    return -1;
-}
-
 var categoryHierarchy = function (catId) {
 
 	var categories;

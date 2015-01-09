@@ -16,7 +16,6 @@ Template.mediaEdit.helpers({
 		return !! SaveLoader;
 	}
 
-
 });
 
 Template.mediaEdit.events({

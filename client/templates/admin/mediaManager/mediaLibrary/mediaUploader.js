@@ -79,7 +79,9 @@ var Submission = {
 
               newFile.metadata = { 
                                    title: '',
-                                   caption: ''
+                                   caption: '',
+                                   credit: '',
+                                   tags: []
                                   };
 
               Media.insert(newFile, function (err, fileObj) {

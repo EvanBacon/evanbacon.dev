@@ -1,6 +1,7 @@
 
 <template name="mediaList">
   {{> searchResults }}
+
   <div id="item-list">
     {{ #if isList }}
       <table class="table table-striped table-hover">
@@ -17,7 +18,7 @@
         </thead>
         <tbody>
           {{#each items}}
-           {{> mediaItem}}
+           {{> mediaItem }}
           {{/each}}
         </tbody>
       </table>
@@ -27,7 +28,7 @@
       
       {{#each items}}
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6"> 
-           {{> mediaItem}}
+           {{> mediaItem }}
         </div>
       {{/each}}
       </div>

@@ -11,16 +11,15 @@ Template.mediaItem.helpers ({
   },
   modalTarget: function() {
     return '#md-' + this._id;
-  }
+  },
+  // tags: function() {
+  //   console.log(Template.parentData(1).tags);
+  //     return Template.parentData(1).tags;
+  // }
+  
 });
 
 Template.mediaItem.events({
-	'click .destroy': function () {
-      if(confirm("Delete image?")) {
-        delArr = [this._id];
-        Media.remove({_id: { $in: delArr }});
-      }
-  	},
    'change input[type=checkbox]': function(e) {
       e.preventDefault();
       var numChecked = SelectionAction.getCheckedCount();

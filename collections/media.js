@@ -179,5 +179,3 @@ Media = new FS.Collection("media", {
         // }
       }
     });
-
-Albums = new Meteor.Collection('albums');

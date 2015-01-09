@@ -16,11 +16,16 @@
               <p class="text-center"><img class="modal-img" src='{{this.url store="image_md"}}'></p>
             </a><br>
             
-            
+            <br>
+            <h3>Tags</h3>
+            {{> tagManager }}
+            <!-- {{#if this.metadata.tags}}
+              {{#each this.metadata.tags}}
+              <p>{{this.name}}</p>
+              {{/each}}
+            {{/if}} -->
 
             <br>
-            <h3>Galleries</h3>
-
             <h3>Details</h3>
             <ul class="list-group"> 
               <li class="list-group-item">

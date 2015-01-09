@@ -90,7 +90,6 @@ Meteor.methods({
     removeFromAlbums: function (itemId) {
         if (!isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied');
-        console.log(itemId);
         Albums.update({'content.id': itemId}, { $pull: { 'content': {'id': itemId} }});
     },
     removeUnusedAlbums: function () {
@@ -107,3 +106,12 @@ Meteor.methods({
         );
     }
 });
+
+// // Fixtures
+// if (Albums.find().count() === 0) {
+
+//   Albums._ensureIndex({slug: 1}, {unique: 1});
+//   
+  
+
+// }
