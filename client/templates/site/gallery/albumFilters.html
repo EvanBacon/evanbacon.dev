@@ -1,0 +1,30 @@
+<template name="albumFilters">
+  <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarFilters">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">
+            <h3 class="filters">Tags</h3>
+          </span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarFilters">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#" class="btn btn-link filter-btn" data-filter="*">show all</a>
+            </li>
+            {{#each tags}}
+            <li>
+                <a href="#" class="btn btn-link filter-btn" data-filter=".{{this.slug}}">{{this.name}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+  </nav>
+</template>

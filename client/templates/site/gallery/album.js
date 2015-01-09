@@ -96,17 +96,7 @@ Template.album.helpers({
 		// });
 		// return results;
 	},
-	tags: function () {
-		var tags = [];
-		_.each(Media.find().fetch(), function(m) {
-			_.each(m.metadata.tags, function (t) {
-				if(getIndexOf(tags, t._id) < 0) {
-					tags.push(t);
-				}
-			});
-		});
-		return tags;
-	}
+	
 
 });
 

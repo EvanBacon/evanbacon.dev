@@ -20,20 +20,22 @@ Media.allow({
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
- Meteor.publish("albumMedia", function(albumId, options) { 
-      var album = Albums.findOne(albumId);
-      var content = album.content,
-          images = [],
-          visible = !! album.isVisible;
+ Meteor.publish("albumMedia", function(albumSlug, options) { 
+      var album = Albums.findOne({slug: albumSlug});
+      if (!! album) {
+        var content = album.content,
+            images = [],
+            visible = !! album.isVisible;
 
-      if (visible || isAdminById(this.userId)) {
-        _.each(content, function (c) {
-            images.push(c.id);
-        });
+        if (visible || isAdminById(this.userId)) {
+          _.each(content, function (c) {
+              images.push(c.id);
+          });
 
-        return Media.find({ _id: { $in: images }}, options);
-      } else {
-        return null;
+          return Media.find({ _id: { $in: images }}, options);
+        } else {
+          return null;
+        }
       }
 
  });

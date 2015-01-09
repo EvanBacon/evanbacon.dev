@@ -11,16 +11,25 @@ Albums.allow({
       fetch: []
     });
 
-Meteor.publish("album", function (id, options) {
-    var album = Albums.findOne({ _id: id }, { fields: {isVisible: 1}});
+Meteor.publish("album", function (id) {
+    // var album = Albums.findOne({ _id: id }, { fields: {isVisible: 1}});
+    // var isVisible = true;
+   // if (!! album) isVisible = !! album.isVisible;
+
+   // if (!! isVisible || isAdminById(this.userId)) {
+      return Albums.findOne({ _id: id });
+    // } else {
+    //   return null;
+    // }
+});
+
+Meteor.publish("albumBySlug", function (slug) {
+    var album = Albums.findOne({ 'slug': slug }, { fields: {isVisible: 1}});
     var isVisible = true;
     if (!! album) isVisible = !! album.isVisible;
 
     if (!! isVisible || isAdminById(this.userId)) {
-      if (!! options && !! id) 
-          return Albums.find({ _id: id }, options);
-      if (!! id)
-          return Albums.find({ _id: id });
+      return Albums.find({ 'slug': slug });
     } else {
       return null;
     }

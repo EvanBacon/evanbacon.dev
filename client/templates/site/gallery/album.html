@@ -1,5 +1,5 @@
 <template name="album">
-	<div class="col-sm-5">
+	<div class="col-sm-12">
 		<h1>{{ this.album.title }} 
 			<small>
 				{{ this.album.description }} 
@@ -9,13 +9,14 @@
 			</small>
 		</h1>
 	</div>
-	<div class="col-sm-7">
-		<div id="filters" class="button-group">
+	<div class="col-sm-12">
+		{{> albumFilters }}
+		<!-- <div id="filters" class="button-group">
 			<button class="btn btn-default filter-btn" data-filter="*">show all</button>
 			{{#each tags}}
 		  	<button class="btn btn-default filter-btn" data-filter=".{{this.slug}}">{{this.name}}</button>
 		    {{/each}}
-		</div>
+		</div> -->
 	</div>
 	<br class="clear">
 	<br>

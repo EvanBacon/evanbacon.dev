@@ -36,8 +36,10 @@ Template.albumItem.events({
             routeTo = 'album';
         if (curr === 'albumManager') {
           routeTo = 'albumEdit';
-        } 
-        Router.go( routeTo, {_id: this._id});
+          Router.go( routeTo, {_id: this._id});
+        } else {
+          Router.go( routeTo, {slug: this.slug});
+        }
     },
     'click .toggle-display': function (e) {
         e.preventDefault();
