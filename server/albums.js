@@ -17,7 +17,7 @@ Meteor.publish("album", function (id) {
    // if (!! album) isVisible = !! album.isVisible;
 
    // if (!! isVisible || isAdminById(this.userId)) {
-      return Albums.findOne({ _id: id });
+      return Albums.find({_id: id});
     // } else {
     //   return null;
     // }
