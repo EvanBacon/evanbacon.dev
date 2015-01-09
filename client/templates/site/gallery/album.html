@@ -1,18 +1,30 @@
 <template name="album">
-	<h1>{{ this.album.title }} 
-		<small>
-			{{ this.album.description }} 
-			{{#if isAdmin}}
-			<a href="{{ pathFor route='albumEdit' _id=this.album._id}}">edit</a>
-			{{/if}}
-		</small>
-	</h1>
+	<div class="col-sm-5">
+		<h1>{{ this.album.title }} 
+			<small>
+				{{ this.album.description }} 
+				{{#if isAdmin}}
+				<a href="{{ pathFor route='albumEdit' _id=this.album._id}}">edit</a>
+				{{/if}}
+			</small>
+		</h1>
+	</div>
+	<div class="col-sm-7">
+		<div id="filters" class="button-group">
+			<button class="btn btn-default filter-btn" data-filter="*">show all</button>
+			{{#each tags}}
+		  	<button class="btn btn-default filter-btn" data-filter=".{{this.slug}}">{{this.name}}</button>
+		    {{/each}}
+		</div>
+	</div>
+	<br class="clear">
+	<br>
 
 	<div id="album">
 	  <div class="gutter-sizer"></div>
       <div class="grid-sizer"></div>
 	  {{#each sortedItems}}
-	   	<a class="swipebox item" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
+	   	<a class="swipebox item {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
 	   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
 	    </a>
 	  {{/each}}

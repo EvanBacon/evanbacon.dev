@@ -60,10 +60,10 @@ Meteor.methods({
 
         var slug = album.slug;
         if (! slug) { // if a slug was not provided, create one from the title
-          slug = albumFuncs.slugify(album.title); 
+          slug = slugFuncs.slugify(album.title); 
         }
 
-        slug = albumFuncs.getUniqueSlug(album.id, slug); // this makes sure the slug is unique, increments if it is not
+        slug = slugFuncs.getUniqueSlug(album.id, slug, Albums); // this makes sure the slug is unique, increments if it is not
 
         var dataObj = { 
                       'content': album.content,

@@ -95,6 +95,17 @@ Template.album.helpers({
 		// 	results[index] = m;
 		// });
 		// return results;
+	},
+	tags: function () {
+		var tags = [];
+		_.each(Media.find().fetch(), function(m) {
+			_.each(m.metadata.tags, function (t) {
+				if(getIndexOf(tags, t._id) < 0) {
+					tags.push(t);
+				}
+			});
+		});
+		return tags;
 	}
 
 });
@@ -112,6 +123,11 @@ Template.album.events({
 			afterOpen: null, // called after opening
 			loopAtEnd: false // true will return to the first image after the last image i
 		});
+   	},
+   	'click .filter-btn': function (e) {
+   		e.preventDefault();
+   		var filterValue = $(e.currentTarget).attr('data-filter');
+  		$container.isotope({ filter: filterValue });
    	},
    	'click .load-more': function (e) {
    		//e.preventDefault();

@@ -45,14 +45,16 @@ Meteor.methods({
 
         var tag = Tags.findOne({name: tagName}),
             tagId = !! tag && tag._id,
-            media = Media.findOne(mediaId);
+            media = Media.findOne(mediaId),
+            tagSlug = !! tag && tag.slug;
 
         if (! tagId) {
-           tagId = Tags.insert({ name: tagName });
+           tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
+           tagId = Tags.insert({ 'name': tagName, 'slug': tagSlug });
         }
 
         if(getIndexOf(media.metadata.tags, tagId) < 0)
-           Media.update({_id: mediaId}, { $push: { 'metadata.tags': { 'name': tagName, '_id': tagId }}});
+           Media.update({_id: mediaId}, { $push: { 'metadata.tags': { '_id': tagId, 'name': tagName, 'slug': tagSlug }}});
                 
     },
     removeTag: function (tagId, mediaId) {
@@ -73,25 +75,29 @@ if (Tags.find().count() === 0) {
   
   Tags.insert( 
     { 
-      name: 'storms', 
+      name: 'storms',
+      slug: 'storms' 
     }
   );
 
   Tags.insert( 
     { 
       name: '2014', 
+      slug: '2014'
     }
   );
 
   Tags.insert( 
     { 
-      name: '2013', 
+      name: '2013',
+      slug: '2013' 
     }
   );
 
   Tags.insert( 
     { 
-      name: 'kansas', 
+      name: 'kansas',
+      slug: 'kansas' 
     }
   );
 }

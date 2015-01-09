@@ -20,9 +20,7 @@ Media.allow({
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
- Meteor.publish("albumMedia", function(albumId, options) {
-      // if (!isAdminById(this.userId)) 
-      //     throw new Meteor.Error(403, 'Permission denied');  
+ Meteor.publish("albumMedia", function(albumId, options) { 
       var album = Albums.findOne(albumId);
       var content = album.content,
           images = [],

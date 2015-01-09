@@ -21,6 +21,7 @@ Template.tagManager.events({
         Meteor.call('addTag', tagName, this._id, function (err, result) {
           if (err) console.log(err);
         });
+        t.find("#searchTag").value = '';
       }
   },
 });
