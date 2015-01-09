@@ -19,33 +19,34 @@
 		</div> -->
 	</div>
 	<br class="clear">
-	<br>
 
-	<div id="album">
-	  <div class="gutter-sizer"></div>
-      <div class="grid-sizer"></div>
-	  {{#each sortedItems}}
-	   	<a class="swipebox item {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
-	   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
-	    </a>
-	  {{/each}}
-	</div>
+	<div class="col-sm-12">
+		<div id="album">
+		  <div class="gutter-sizer"></div>
+	      <div class="grid-sizer"></div>
+		  {{#each sortedItems}}
+		   	<a class="swipebox item {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
+		   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
+		    </a>
+		  {{/each}}
+		</div>
 
-	<div class="clear"></div>
+		<div class="clear"></div>
 
-  	<br>
-  
-	<div class="col-sm-6 col-sm-offset-3">
-	{{#unless ready}}        
-      {{> spinner}}      
-  	{{/unless}}
-    {{#if nextPath}}   
-       <a href="{{nextPath}}" class="load-more btn btn-default btn-lg btn-block">Load more</a>
-    {{else}}
-      <!-- {{#unless ready}}        
-          {{> spinner}}      
-      {{/unless}} -->
-    {{/if}}
+	  	<br>
+	  
+		<div class="col-sm-6 col-sm-offset-3">
+		{{#unless ready}}        
+	      {{> spinner}}      
+	  	{{/unless}}
+	    {{#if nextPath}}   
+	       <a href="{{nextPath}}" class="load-more btn btn-default btn-lg btn-block">Load more</a>
+	    {{else}}
+	      <!-- {{#unless ready}}        
+	          {{> spinner}}      
+	      {{/unless}} -->
+	    {{/if}}
+		</div>
 	</div>
 	<br>
 	<br>
