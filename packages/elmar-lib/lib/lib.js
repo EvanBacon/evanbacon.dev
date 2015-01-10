@@ -4,12 +4,12 @@
     };
 
     getSetting = function(setting, defaultValue){
-      // var settings = Settings.find().fetch()[0];
-      // if(settings && (typeof settings[setting] !== 'undefined')){
-      //   return settings[setting];
-      // }else{
-      //   return typeof defaultValue === 'undefined' ? '' : defaultValue;
-      // }
+      var settings = Settings.find().fetch()[0];
+      if(settings && (typeof settings[setting] !== 'undefined')){
+        return settings[setting];
+      }else{
+        return typeof defaultValue === 'undefined' ? '' : defaultValue;
+      }
       return defaultValue;
     };
 
@@ -93,6 +93,33 @@
       return window.location.host;
 
     };
+
+    // getCurrentPage = function () {
+    //   var notFound = {
+    //     notFound: true,
+    //     title: 'Sorry, we couldn\'t find the requested page'
+    //   };
+    //   if (!Router.current() || !Router.current().path)
+    //   return notFound;
+    //   var slug = Router.current().path.split('/')[1];
+    //   var page = !!slug && Albums.findOne({ 'slug': slug });;
+      
+    //   // if (!slug || slug == '') {
+    //   // title = Azimuth.utils.getSetting('indexPage');
+    //   // page = Azimuth.collections.Pages.findOne({ slug: page_slug });
+    //   // if (!page) {
+    //   // page = Azimuth.collections.Pages.findOne();
+    //   // if (!page)
+    //   // return notFound;
+    //   // else
+    //   // page_slug = page.slug;
+    //   // }
+    //   // }
+    //   // page = Albums.findOne({ 'slug': slug });
+    //   // if (!page)
+    //   //   return notFound;
+    //   return page;
+    // };
 
     getIndexOf = function (arr, itemId) {
       for(var i = 0, len = arr.length; i < len; i++) {

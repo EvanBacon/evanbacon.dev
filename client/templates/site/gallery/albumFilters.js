@@ -1,3 +1,7 @@
+// Template.albumFilters.rendered = function () {
+// 	$('.filter-btn[data-filter="*"]').addClass('active');
+// };
+
 Template.albumFilters.helpers({
 	tags: function () {
 		var tags = [];

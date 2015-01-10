@@ -1,0 +1,12 @@
+<template name="settings">
+	<h4>Site Settings</h4>
+    <div class="col-sm-7 settings">
+    {{#if this.hasSettings}}
+      {{> quickForm collection="Settings" doc=this.settings id="updateSettingsForm" type="update" label-class="control-label" input-col-class="controls" template="settings"}}
+    {{else}}
+      {{> quickForm collection="Settings" doc=this.settings id="insertSettingsForm" type="insert" label-class="control-label" input-col-class="controls" template="settings"}}
+    {{/if}}
+
+    </div>
+
+</template>

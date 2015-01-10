@@ -1,0 +1,29 @@
+<template name="albumLinks">
+  {{#if albums}}
+  <nav class="navbar navbar-inverse navbar-albums" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarAlbums">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">
+            <h3 class="albums">Albums</h3>
+          </span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarAlbums">
+          <ul class="nav navbar-nav">
+            {{#each albums}}
+            <li>
+                <a href="#" class="btn btn-link album-btn {{isActive this.slug}}">{{this.title}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+  </nav>
+  {{/if}}
+</template>

@@ -1,10 +1,16 @@
 var $container;
+var loadCount = 0;
 
 var initGrid = function () {
 	$('#album').addClass('hidden');
+	$('.item img').addClass('hidden');
 	Meteor.defer(function () {
-		if (!typeof $container === undefined )
+		if (typeof $container !== undefined && document.readyState === "complete" && loadCount > 0)  {
+			// console.log($container);
 			$container.isotope('destroy');
+			loadCount = 0;
+		}
+		// if (loadedCount = 0) {
 		$container = $('#album').imagesLoaded( function() {
 			$container.isotope({
 			   layoutMode: 'packery',
@@ -15,6 +21,10 @@ var initGrid = function () {
 		  	   }
 			});
 		});
+		loadCount++;
+		// console.log(loadCount)
+		// }
+		$('.item img').removeClass('hidden');
 		$('#album').fadeIn().removeClass('hidden');
 	});
 };
@@ -51,6 +61,17 @@ var initGrid = function () {
 
 Template.album.rendered = function () {
 	$('#album').addClass('hidden');
+	$('.item img').addClass('hidden');
+	$('.item').hover(
+        function(){
+            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+        },
+        function(){
+            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+        }
+    );
+
+	// initGrid();
 	// this.autorun(function(){
 	//     //initGrid();
 	//     Meteor.defer(function() {

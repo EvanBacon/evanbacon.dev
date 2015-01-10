@@ -1,4 +1,7 @@
 <template name="album">
+	<!-- <div class="col-sm-12"> -->
+		{{> albumLinks }}
+	<!-- </div> -->
 	<div class="col-sm-12">
 		<h1>{{ this.album.title }} 
 			<small>
@@ -11,15 +14,8 @@
 	</div>
 	<div class="col-sm-12">
 		{{> albumFilters }}
-		<!-- <div id="filters" class="button-group">
-			<button class="btn btn-default filter-btn" data-filter="*">show all</button>
-			{{#each tags}}
-		  	<button class="btn btn-default filter-btn" data-filter=".{{this.slug}}">{{this.name}}</button>
-		    {{/each}}
-		</div> -->
 	</div>
 	<br class="clear">
-
 	<div class="col-sm-12">
 		<div id="album">
 		  <div class="gutter-sizer"></div>
@@ -27,6 +23,19 @@
 		  {{#each sortedItems}}
 		   	<a class="swipebox item {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
 		   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
+		   		<div class="caption">
+	              {{#if this.metadata.title }}
+	                <h5>{{this.metadata.title}}</h5>
+	              {{else}}
+	                <p>{{this.original.name}}</p>
+	              {{/if}}
+	              <!-- {{#if this.metadata.caption }}
+	              	<p>{{this.metadata.caption}}</p>
+	              {{/if}} -->
+	              {{#if this.metadata.credit }}
+	              	<p>{{this.metadata.credit}}</p>
+	              {{/if}}
+	            </div>
 		    </a>
 		  {{/each}}
 		</div>

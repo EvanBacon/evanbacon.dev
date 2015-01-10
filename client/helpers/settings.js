@@ -1,10 +1,6 @@
 // a place to store temporary preference settings for the client
 ClientSettings = new Meteor.Collection(null);
 
-// addClientSetting = function(name, value) {  
-// 	ClientSettings.insert({'setting': name, 'value': value });
-// };
-
 removeClientSetting = function(name) {  
 	ClientSettings.remove({'setting': name});
 };
@@ -22,3 +18,12 @@ setClientSetting = function(name, value) {
 		ClientSettings.update({'setting': name}, { $set: { 'value': value }});
 	}
 };
+
+UI.registerHelper('getSetting', function(setting, defaultArgument){
+  var defaultArgument = (typeof defaultArgument !== 'undefined') ? defaultArgument : '';
+  var setting = getSetting(setting, defaultArgument);
+  if (typeof setting === "string" || typeof setting === "number" || typeof setting === "boolean")
+  	return setting;
+  else
+  	return '';
+});

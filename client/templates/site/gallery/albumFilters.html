@@ -1,5 +1,6 @@
 <template name="albumFilters">
-  <nav class="navbar navbar-inverse" role="navigation">
+  {{#if tags}}
+  <nav class="navbar navbar-filters" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarFilters">
@@ -27,4 +28,5 @@
         </div>
       </div>
   </nav>
+  {{/if}}
 </template>

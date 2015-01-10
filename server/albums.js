@@ -39,6 +39,10 @@ Meteor.publish("albums", function(options) {
     return Albums.find({}, options);
 });
 
+Meteor.publish("albumLinks", function() { 
+    return Albums.find({'isVisible': 1}, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1}});
+});
+
 Meteor.methods({
     removeAlbums: function (albums) {
       if (!isAdmin()) 

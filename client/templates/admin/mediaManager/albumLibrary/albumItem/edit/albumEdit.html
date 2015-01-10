@@ -1,10 +1,11 @@
 <template name="albumEdit">
 
-	<div class="row">
 		<div class="col-sm-10">
-			<h1 style="margin:0 0 10px">Edit Album 
+			<h1>Edit Album 
 				<small>
-					<a href="{{ pathFor route='album' _id=this.album._id}}">{{ this.album.title }}</a> 
+					<a href="{{ pathFor route='album' slug=this.album.slug}}">{{ this.album.title }}
+						<span class="glyphicon glyphicon-circle-arrow-right font-smaller"></span>
+					</a> 
 				</small>
 			</h1>
 		</div>
@@ -18,8 +19,8 @@
 		<div id="submit-album" class="col-sm-4 col-md-3">
 			<br>
 			<div class="btn-group btn-group-md col-sm-12 no-gutter" role="group">
-				<button class="btn btn-default return-list col-sm-6" type="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Library</button>
-				<button class="btn btn-primary col-sm-6" id="save-album" type="button">{{> savingLoader text=saveText}}</button>
+				<button class="btn btn-default return-list col-sm-5" type="button"><span class="glyphicon glyphicon-circle-arrow-left"></span> Library</button>
+				<button class="btn btn-primary col-sm-7" id="save-album" type="button">{{> savingLoader text=saveText}}</button>
 			</div>
 		    <br>
 		    <br>
@@ -74,7 +75,6 @@
 			<br>
 		</div>
 		
-	</div>
 
 	{{> mediaAdd }}
 
