@@ -1,3 +1,4 @@
+
 <template name="mediaEdit">
 
 <div class="modal fade" id="md-{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="theModalLabel" aria-hidden="true">
@@ -7,7 +8,10 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <div class="text-center">
           <h3 class="modal-title" id="theModalLabel">{{original.name}}</h3>
-          <p>{{this.url store="image_lg"}}</p>
+          <div class="form-group">
+            <label for="inputURL" class="control-label">URL: </label> 
+            <input class="form-control inputURL input-sm image-block-input" style="width:40%" value="{{this.url store='image_lg'}}" type="text">
+          </div>
         </div>
       </div>
       <div class="modal-body">
@@ -18,13 +22,12 @@
             </a><br>
             
             <br>
-            <h3>Tags</h3>
+            <div class="well alert-info">
+            <h3>Tags <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="A tag is a keyword assigned to individual images. You can search images by tag names. Tags also enable a visitor to filter the images of an album. An image may have multiple tags. Ex. Nature, Flowers.">
+              <span class="question glyphicon glyphicon-question-sign"></span>
+            </a></h3>
             {{> tagManager }}
-            <!-- {{#if this.metadata.tags}}
-              {{#each this.metadata.tags}}
-              <p>{{this.name}}</p>
-              {{/each}}
-            {{/if}} -->
+            </div>
 
             <br>
             <h3>Details</h3>
@@ -70,14 +73,12 @@
       </div>
 
 
-
-
       </div>
       <div class="modal-footer" style="border:none">
 
         
-        <button type="button" class="btn btn-default close-box" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary save">
+        <button type="button" class="btn btn-md btn-default close-box" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-md btn-primary save">
           {{#if saveLoader }}
             {{> savingLoader text='Save changes'}}
           {{else}}

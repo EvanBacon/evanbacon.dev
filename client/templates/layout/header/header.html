@@ -1,5 +1,5 @@
 <template name="header">
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar navbar-default navbar-main" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -9,15 +9,15 @@
             <span class="icon-bar"></span>
           </button>
           <span class="navbar-brand logo">
-            <a href="{{ pathFor route='home'}}"><img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" alt="{{ getSetting 'title'}}"> {{ getSetting 'title' }}</a>
+            <a href="{{ pathFor route='home'}}"><img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" alt="{{ getSetting 'title'}}"><!--  <span>{{ getSetting 'title' }}</span> --></a>
           </span>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
-            <li>
-              <a href="{{ pathFor route='albums'}}">Albums</a>
-            </li>
+            <li><a href="{{ pathFor route='albums'}}">Albums</a></li>
+            <li><a href="{{ pathFor route='albums'}}">About</a></li>
+            <li><a href="{{ pathFor route='albums'}}">Contact</a></li>
           </ul>
          
           <ul class="nav navbar-nav navbar-right">
@@ -30,10 +30,6 @@
                   <li role="presentation" class="divider"></li>
                   <li><a href="{{pathFor route='signOut'}}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
                 </ul>
-                <!-- <ul class="dropdown-menu adminbox" role="menu">
-                  <li><a href="{{pathFor 'mediaManager'}}">Media Manager</a></li>
-                  <li><a href="{{pathFor route='signOut'}}">Sign Out</a></li>                
-                </ul> -->
               </li>
               {{else}}
                <li class="dropdown">
