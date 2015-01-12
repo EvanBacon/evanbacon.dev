@@ -1,8 +1,13 @@
 <template name="managerHeader">
-	<h2>Gallery Manager</h2>
-	<ul class="nav nav-pills">
-	    <li class="{{ isActive 'mediaManager'}}"><a href="{{ pathFor route='mediaManager'}}">IMAGES</a></li>
-        <li class="{{ isActive 'albumManager'}}"><a href="{{ pathFor route='albumManager'}}">ALBUMS</a></li>
-        <li class="{{ isActive 'settings'}}"><a href="{{ pathFor route='settings'}}">SETTINGS</a></li>
-	</ul>
+	<div class="col-sm-12">
+		<h2>Gallery Manager</h2>
+	</div>
+	<div class="col-sm-12">
+		<ul class="nav nav-pills">
+		    <li class="{{ isActive 'mediaManager'}}"><a href="{{ pathFor route='mediaManager'}}">IMAGES</a></li>
+	        <li class="{{ isActive 'albumManager'}}"><a href="{{ pathFor route='albumManager'}}">ALBUMS</a></li>
+	        <li class="{{ isActive 'settings'}}"><a href="{{ pathFor route='settings'}}">SETTINGS</a></li>
+		</ul>
+		<hr class="pills-border">
+	</div>
 </template>
