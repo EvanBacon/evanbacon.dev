@@ -34,13 +34,11 @@ Template.selectionAction.events({
 			    _.each(selected, function (item) {
 			    	if (page === 'mediaManager') {
 			    		Media.remove({ _id: item.defaultValue });
-			    		console.log(item.defaultValue);
 			    		Meteor.call('removeFromAlbums', item.defaultValue, function(err) {
 				            if(err) console.log(err.reason);
 				        });
 			    	}
 			    	if (page === 'albumManager') {
-			    		console.log(item.defaultValue);
 			    		Albums.remove({ _id: item.defaultValue });
 			    	}
 			    });

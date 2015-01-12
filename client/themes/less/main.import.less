@@ -46,8 +46,13 @@ h2 {
   border: 1px solid @brand-info;
 }
 
-input, select, textarea, .btn-default {
-  border: 1px solid lighten(@gray-light, 5%) !important;
+input, select, textarea {
+  border: 1px solid lighten(@gray-light, 10%) !important;
+}
+
+.btn-default {
+  .box-shadow(inset 0px -8px 10px 0px rgba(0,0,0,0.1));
+  border: 1px solid lighten(@gray-light, 15%) !important;
 }
 
 hr.pills-border {
@@ -90,7 +95,7 @@ hr.pills-border {
 // }
 
 .navbar-main {
-  padding-bottom: 4px !important;
+  padding: 4px 0 8px 0 !important;
 }
 
 .navbar-main a {

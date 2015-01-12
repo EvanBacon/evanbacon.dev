@@ -26,6 +26,10 @@ Template.mediaEdit.events({
 	'change :input, keyup input, click .close-box, click .close': function (e) {
 		updateSaveButton('reset');
 	},
+	'click .select-button': function (e) {
+	 	e.preventDefault();
+	 	$('.image-url').select();
+	 },
 	'click .save': function (e, t) {
 		if (!isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 

@@ -8,27 +8,20 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <div class="text-center">
           <h3 class="modal-title" id="theModalLabel">{{original.name}}</h3>
-          <div class="form-group">
-            <label for="inputURL" class="control-label">URL: </label> 
-            <input class="form-control inputURL input-sm image-block-input" style="width:40%" value="{{this.url store='image_lg'}}" type="text">
-          </div>
+          <!-- <div class="form-group"> -->
+            <strong>URL: </strong> 
+            <input class="image-url" style="width:40%" value="{{this.url store='image_lg'}}" type="text">
+          <!-- </div> -->
+          <button class="select-button btn btn-info btn-xs" title="Click to select text.">Select</button>
+
         </div>
       </div>
       <div class="modal-body">
-        <div class="col-lg-5 col-md-5 col-sm-5">
-          <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-sm-5">
+          <!-- <div class="col-sm-12"> -->
             <a href="#" data-toggle="modal" data-target="#sub-{{this._id}}">
               <p class="text-center"><img class="modal-img" src='{{this.url store="image_md"}}'></p>
             </a><br>
-            
-            <br>
-            <div class="well alert-info">
-            <h3>Tags <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="A tag is a keyword assigned to individual images. You can search images by tag names. Tags also enable a visitor to filter the images of an album. An image may have multiple tags. Ex. Nature, Flowers.">
-              <span class="question glyphicon glyphicon-question-sign"></span>
-            </a></h3>
-            {{> tagManager }}
-            </div>
-
             <br>
             <h3>Details</h3>
             <ul class="list-group"> 
@@ -62,21 +55,25 @@
               {{/if}}
             </ul>
            
-           </div>
+           <!-- </div> -->
         </div>
-        <div class="col-lg-7 col-md-7 col-sm-7">
+        <div class="col-sm-7">
           <!-- {{> errors }} -->
 
           {{> mediaDetailsForm this.metadata}}
          
+          <!-- <div class="tag-box"> -->
+          <label for="inputImgCaption" class="control-label">Tags</label> <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="A tag is a keyword assigned to individual images. Tags make it easier to search images as well as filter an album down to specific topics. An image may have multiple tags, and tags are reusable. Ex. Nature, Flowers.">
+            <span class="question glyphicon glyphicon-question-sign"></span>
+          </a>
+          {{> tagManager }}
+          <!-- </div> -->
           <br>
       </div>
 
 
       </div>
       <div class="modal-footer" style="border:none">
-
-        
         <button type="button" class="btn btn-md btn-default close-box" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-md btn-primary save">
           {{#if saveLoader }}
