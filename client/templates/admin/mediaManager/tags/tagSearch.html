@@ -1,0 +1,18 @@
+<template name="tagSearch">
+   
+  <div class="input-group">
+    {{> inputAutocomplete settings=settings id="searchTag" type="text" class="form-control" placeholder="Enter New or Select Existing Tag"}}
+      <span class="input-group-btn">
+        <button class="btn btn-default disabled add-tag" type="button"><span class="glyphicon glyphicon-plus"></span> Add</button>
+      </span>
+    </div>
+
+    {{> currentTags }}
+</template>
+
+<template name="currentTags">
+  {{#each this.metadata.tags}}
+  	<p class="tag-item">{{this.name}} <button data-tagid="{{this._id}}" data-mediaid="{{ ../_id}}" class="btn btn-xs btn-success remove-tag" type="button"><span class="glyphicon glyphicon-remove"></span></button></p>
+  {{/each}}
+  <div class="clear"></div>
+</template>

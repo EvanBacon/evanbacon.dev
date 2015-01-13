@@ -12,14 +12,10 @@ Tags.allow({
     });
 
 Meteor.publish("tag", function (id, options) {
-    // if (!! isVisible || isAdminById(this.userId)) {
       if (!! options && !! id) 
           return Tags.find({ _id: id }, options);
       if (!! id)
           return Tags.find({ _id: id });
-    // } else {
-    //   return null;
-    // }
 });
 
 Meteor.publish("tags", function(options) { 
@@ -30,12 +26,7 @@ Meteor.publish("tags", function(options) {
 });
 
 Meteor.methods({
-    removeTags: function (tags) {
-      if (!isAdmin()) 
-          throw new Meteor.Error(403, 'Permission denied'); 
-      Tags.remove({_id: { $in: tags }});
-    },
-    addTag: function (tagName, mediaId) {
+    addNewTag: function (tagName) {
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
 
@@ -45,26 +36,57 @@ Meteor.methods({
 
         var tag = Tags.findOne({name: tagName}),
             tagId = !! tag && tag._id,
-            media = Media.findOne(mediaId),
             tagSlug = !! tag && tag.slug;
 
         if (! tagId) {
            tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
            tagId = Tags.insert({ 'name': tagName, 'slug': tagSlug });
-        }
+        } 
 
-        if(getIndexOf(media.metadata.tags, tagId) < 0)
-           Media.update({_id: mediaId}, { $push: { 'metadata.tags': { '_id': tagId, 'name': tagName, 'slug': tagSlug }}});
-                
+        return { _id: tagId, name: tagName, slug: tagSlug };     
     },
-    removeTag: function (tagId, mediaId) {
+    addTag: function (tagName, mediaId) {
+        if (! isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
+
+        var tag = this.addNewTag(tagName);
+
+        if(getIndexOf(media.metadata.tags, tag._id) < 0) {
+           Media.update({_id: mediaId}, { $push: { 'metadata.tags': { '_id': tag._id, 'name': tag.name, 'slug': tag.slug }}});
+        } 
+
+    },
+    updateTag: function (tagId, tagName) {
+        if (! isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied'); 
+
+        if (! Validation.isNotEmpty(tagName))
+            throw new Meteor.Error(413, 'Tag name cannot be empty.');
+        tagName = tagName.toLowerCase();
+
+        var tagsCount = Tags.find({$and: [{_id: { $ne: tagId }}, {name: tagName}]}).count();
+
+        if (tagsCount < 1) {
+           tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
+           Tags.update({ _id: tagId }, { $set: {'name': tagName, 'slug': tagSlug }});
+           Media.update({ 'metadata.tags._id': tagId}, {$set: {'metadata.tags.$.name' : tagName,
+                                                               'metadata.tags.$.slug' : tagSlug }});
+
+        } else {
+          throw new Meteor.Error(413, 'Tag name "' + tagName + '" already exists.');
+        }
+    },
+    removeTagFromMediaId: function (tagId, mediaId) { 
+        if (!isAdmin()) 
+          throw new Meteor.Error(403, 'Permission denied'); 
         Media.update({_id: mediaId}, { $pull: { 'metadata.tags': {'_id': tagId}}});
     },
-    removeFromMedia: function (tagId) {
-        if (! isAdmin()) 
-            throw new Meteor.Error(403, 'Permission denied');
+    removeTag: function (tagId, mediaId) {
+        if (!isAdmin()) 
+          throw new Meteor.Error(403, 'Permission denied');
         Media.update({'metadata.tags._id': tagId}, { $pull: { 'metadata.tags': {'_id': tagId} }});
-    },
+        Tags.remove({_id: tagId});
+    }
 });
 
 // Fixtures

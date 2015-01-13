@@ -1,0 +1,21 @@
+<template name="tagItem">
+	<p class="tag-item">
+		<div class="input-group">
+			<input value={{this.name}} id="tag-{{ this._id}}" class="form-control inputTag" type="text">
+	    	<span class="input-group-btn">
+	    	  <button id="update-{{ this._id }}" class="btn btn-default update-tag" type="button">{{> tagUpdateText}}</button>
+	   		</span>
+    	</div>
+		Tagged: 
+		<a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="{{mediaList}}">
+            <span class="badge">{{mediaCount}}</span>
+          </a>
+		<button data-tagid="{{this._id}}" data-mediaid="{{ ../_id}}" class="btn btn-xs btn-primary remove-tag" type="button" title="Delete Tag"><span class="glyphicon glyphicon-trash"></span>
+		</button>
+	</p>
+</template>
+
+<template name="tagUpdateText">
+	<div class="updateText">Update</div>
+	<div class="savedText hidden"><span class="glyphicon glyphicon-ok"></span></div>
+</template>

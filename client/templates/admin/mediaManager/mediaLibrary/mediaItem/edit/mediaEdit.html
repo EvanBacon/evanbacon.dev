@@ -18,7 +18,6 @@
       </div>
       <div class="modal-body">
         <div class="col-sm-5">
-          <!-- <div class="col-sm-12"> -->
             <a href="#" data-toggle="modal" data-target="#sub-{{this._id}}">
               <p class="text-center"><img class="modal-img" src='{{this.url store="image_md"}}'></p>
             </a><br>
@@ -54,20 +53,15 @@
               </li>
               {{/if}}
             </ul>
-           
-           <!-- </div> -->
         </div>
         <div class="col-sm-7">
-          <!-- {{> errors }} -->
 
           {{> mediaDetailsForm this.metadata}}
          
-          <!-- <div class="tag-box"> -->
           <label for="inputImgCaption" class="control-label">Tags</label> <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="A tag is a keyword assigned to individual images. Tags make it easier to search images as well as filter an album down to specific topics. An image may have multiple tags, and tags are reusable. Ex. Nature, Flowers.">
             <span class="question glyphicon glyphicon-question-sign"></span>
           </a>
-          {{> tagManager }}
-          <!-- </div> -->
+          {{> tagSearch }}
           <br>
       </div>
 
@@ -88,7 +82,6 @@
   </div>
 </div>
 
-<!-- image modal -->
             <div id="sub-{{this._id}}" class="modal sub-modal fade">
               <div class="modal-dialog">
               <div class="modal-content">

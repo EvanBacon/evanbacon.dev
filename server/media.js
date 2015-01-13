@@ -15,8 +15,6 @@ Media.allow({
     });
 
  Meteor.publish("media", function(options) {
-      // if (!isAdminById(this.userId)) 
-      //     throw new Meteor.Error(403, 'Permission denied'); 
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
@@ -38,6 +36,10 @@ Media.allow({
         }
       }
 
+ });
+
+ Meteor.publish("mediaTags", function(options) { 
+      return Media.find({}, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1}});
  });
 
 Meteor.methods({

@@ -175,12 +175,13 @@ textarea {
 }
 
 #dropzone {
-  border: 3px dashed #ccc;
+  border: 4px dashed #AAA;
   margin: 5px 0;
   padding: 10px;
   text-align:center;
   font-size:18px;
   display: block;
+  background-color: #F1F1F1;
 }
 
 #dropzone.drag-in {
@@ -502,14 +503,35 @@ fieldset {
 
 .tag-item {
   float: left;
-  margin: 3px;
-  padding: 2px 3px;
-  border: 1px solid #AAA;
+  margin: 7px 3px;
+  padding: 5px 4px;
+  // border: 1px solid #AAA;
+  text-align: center;
+  border: 1px solid #DDD;
   .rounded(3px);
-  font-weight: bold;
-  background-color: #F1F1F1;
+  // background-color: #F1F1F1;
   font-size: 1.0em;
-  .box-shadow(inset 0px 10px 10px 0px rgba(0,0,0,0.1));
+  width: 30%;
+  .box-shadow(inset 0px 50px 50px 4px rgba(0,0,0,0.1));
+}
+
+.tag-item .input-group {
+  margin-bottom: 3px;
+}
+
+.tag-item input {
+  // border: none;
+  padding: 2px 4px;
+
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin: 0 4px 4px;
+  .box-shadow(inset 3px 3px 3px 0px rgba(0,0,0,0.1));
+}
+
+.tag-item .badge {
+  margin-right: 10px;
 }
 
 
