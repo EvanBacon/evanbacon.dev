@@ -13,26 +13,6 @@
       return defaultValue;
     };
 
-    // getThemeSetting = function(setting, defaultValue){
-    //   if(typeof themeSettings[setting] !== 'undefined'){
-    //     return themeSettings[setting];
-    //   }else{
-    //     return typeof defaultValue === 'undefined' ? '' : defaultValue;
-    //   }
-    // };
-
-    // camelToDash = function (str) {
-    //   return str.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-    // }
-
-    // camelCaseify = function(str) {
-    //   return dashToCamel(str.replace(' ', '-'));
-    // };
-
-    // dashToCamel = function (str) {
-    //   return str.replace(/(\-[a-z])/g, function($1){return $1.toUpperCase().replace('-','');});
-    // };
-
     trimWords = function(s, numWords) {
       expString = s.split(/\s+/,numWords);
       if(expString.length >= numWords)
@@ -94,50 +74,9 @@
 
     };
 
-    // getCurrentPage = function () {
-    //   var notFound = {
-    //     notFound: true,
-    //     title: 'Sorry, we couldn\'t find the requested page'
-    //   };
-    //   if (!Router.current() || !Router.current().path)
-    //   return notFound;
-    //   var slug = Router.current().path.split('/')[1];
-    //   var page = !!slug && Albums.findOne({ 'slug': slug });;
-      
-    //   // if (!slug || slug == '') {
-    //   // title = Azimuth.utils.getSetting('indexPage');
-    //   // page = Azimuth.collections.Pages.findOne({ slug: page_slug });
-    //   // if (!page) {
-    //   // page = Azimuth.collections.Pages.findOne();
-    //   // if (!page)
-    //   // return notFound;
-    //   // else
-    //   // page_slug = page.slug;
-    //   // }
-    //   // }
-    //   // page = Albums.findOne({ 'slug': slug });
-    //   // if (!page)
-    //   //   return notFound;
-    //   return page;
-    // };
-
     getIndexOf = function (arr, itemId) {
       for(var i = 0, len = arr.length; i < len; i++) {
           if (arr[i]._id === itemId) return i;
       }
       return -1;
     };
-
-    // currentPostType = function () {
-
-    //   /**
-    //    *  Return the type of post (page or post) based on the URL
-    //    */
-    //   var currPath = currentPath().split('/');
-    //   if(currPath.indexOf('posts') >= 0) 
-    //     return 'post';
-    //   if(currPath.indexOf('products') >= 0) 
-    //     return 'product';
-    //   return 'page';
-
-    // };

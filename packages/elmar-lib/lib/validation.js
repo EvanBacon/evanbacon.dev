@@ -9,8 +9,6 @@ Validation = {
 		if (value && value !== ''){
 			return true;
 		}
-		// if(Meteor.isClient)
-		// 	ErrorMsgs.throwError('Please fill in all required fields.');
 		return false;
 	},
 
@@ -19,8 +17,6 @@ Validation = {
 		if (filter.test(value)) {
 			return true;
 		}
-		// if( Meteor.isClient )
-		// 	ErrorMsgs.throwError('Only alphanumeric characters, dashes, and underscores allowed.');
 		return false;
 	},
 
@@ -31,8 +27,6 @@ Validation = {
 		}
 		if (!fieldName)
 			fieldName = 'email';
-		// if(Meteor.isClient)
-		// 	ErrorMsgs.throwError('Please enter a valid ' + fieldName + '.');
 		return false;
 	},
 
@@ -44,21 +38,16 @@ Validation = {
 		}
 		if(!fieldName)
 			fieldName = 'date';
-		// if (Meteor.isClient)
-		// 	ErrorMsgs.throwError('Please enter a valid ' + fieldName + '.');
 		return false;
 	},
 
 	isShortTime: function(value, fieldName) {
-		// var filter = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 		var filter = /^[0-1][0-2]\:[0-5][0-9]$/; 
 		if (filter.test(value)) {
 			return true;
 		}
 		// if(!fieldName)
 		// 	fieldName = 'time';
-		// if (Meteor.isClient)
-		// 	ErrorMsgs.throwError('Please enter a valid ' + fieldName + '.');
 		return false;
 	},
 
@@ -67,8 +56,6 @@ Validation = {
 	isURL: function(value) {
 		var filter = /^(https?:\/\/)?((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))(\:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/;
 	  if(!filter.test(value)) {
-	  	// if(Meteor.isClient)
-	   //  	ErrorMsgs.throwError("Please enter a valid URL.");
 	    return false;
 	  } else {
 	    return true;

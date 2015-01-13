@@ -40,10 +40,6 @@ Package.onUse(function (api) {
     'Validation',
     'isAdmin',
     'isAdminById'
-    // 'MediaLibrary',
-    // 'Sorting',
-    // 'pageChanged',
-    // 'hasPageChanged'
   ]);
 });
 
