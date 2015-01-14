@@ -1,5 +1,5 @@
 
-Template.tagsMediaList.helpers({
+Template.tagListFromMedia.helpers({
 	tags: function () {
 		// compile all common tags into an array
 		var tags = [];
@@ -21,7 +21,7 @@ Template.tagsMediaList.helpers({
 	}
 });
 
-Template.tagsMediaList.events({
+Template.tagListFromMedia.events({
   'click .remove-tag': function (e, t) {
       var tagId = $(e.currentTarget).attr('data-tagid');
 
