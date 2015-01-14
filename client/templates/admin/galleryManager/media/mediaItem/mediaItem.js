@@ -53,5 +53,9 @@ Template.mediaItem.events({
       $('.inputImgCredit').val(function() {
         return self.metadata.credit;
       });
+      $('#inputTag').val(function() {
+        return '';
+      });
+      Session.set('selected-images', [this._id]);
     }
 });

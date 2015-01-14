@@ -69,12 +69,6 @@ Template.selectionAction.events({
 
 		if (page === 'mediaManager') {
 			routeTo = 'albumEdit';
-			//createType = 'album'
-		}
-
-		if (page === 'albumManager') {
-			routeTo = 'albumEdit';
-			//createType = 'album';
 		}
 
 		if (!! routeTo)
@@ -85,5 +79,20 @@ Template.selectionAction.events({
 		    		Router.go( routeTo, {_id: id} );
 		    	}
 			});
+	 },
+	 'click #btnAddTag' : function (e, t) {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		var items   = [];
+		$.each($( "input:checked" ), function (index, item) {
+			var thumbURL = $(this).closest('div.thumb').find('img').attr('src');
+			items.push(item.defaultValue);
+		});
+
+		Session.set('selected-images', items);
+
+		$('#tagSearchModal').modal('show')
+		
 	 }
 });

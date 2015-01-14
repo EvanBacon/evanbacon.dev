@@ -1,11 +1,7 @@
 
 
 Template.mediaEdit.rendered = function () {
-	updateSaveButton('reset');
-	$('[data-toggle="popover"]').popover({
-	    trigger: 'hover',
-	        'placement': 'right'
-	});  
+	updateSaveButton('reset');  
 };
 
 Template.mediaEdit.helpers({

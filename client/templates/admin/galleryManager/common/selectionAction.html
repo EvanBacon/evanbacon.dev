@@ -11,6 +11,13 @@
 	  			</a></li>
 	  		<li role="presentation" class="divider"></li>
   		{{/if}}
+  		{{#if add}}
+	  		<li class="{{disabled}}">
+	  			<a href="#" id="btnAddTag" data-toggle="modal" data-target="#tagSearchModal"><span class="glyphicon glyphicon-tag"></span>
+	  				Add / Edit {{add}}
+	  			</a></li>
+	  		<li role="presentation" class="divider"></li>
+  		{{/if}}
 		    <li class="{{disabled}}"><a id="btndelete" href="#"><span class="glyphicon glyphicon-trash"></span>
 		    	Delete Selected
 		    </a></li>
@@ -21,5 +28,5 @@
 		</ul>
 	</div>
 		<br><br>
-
+	{{> tagSearchModal }}
 </template>
