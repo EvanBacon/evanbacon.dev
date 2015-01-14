@@ -100,6 +100,7 @@ hr.pills-border {
   padding: 4px 0 8px 0 !important;
 }
 
+
 .navbar-main a {
   font-size: 1.1em !important;
   font-weight: bold !important;
@@ -109,9 +110,9 @@ hr.pills-border {
   // color: @brand-info !important;
 }
 
-.navbar-main a:hover {
-  background-color: darken(@navbar-default-bg, 10%) !important;
-}
+// .navbar-main > li > a:hover {
+//   background-color: darken(@navbar-default-bg, 10%) !important;
+// }
 
 .bold {
   font-weight: bold;
@@ -129,11 +130,20 @@ hr.pills-border {
   background-color: darken(@gray-dark, 5%) !important;
   border: none !important;
   font-size: 0.85em;
+  .text-shadow();
 
 }
 
-.navbar-albums .navbar-nav > li > a {margin-top:5px;padding: 7px 6px !important;margin-right:2px; }
+.navbar-albums .navbar-brand {
+  border-right: 1px solid darken(@gray-dark, 10%) !important;
+}
 
+.navbar-albums .navbar-nav > li > a {
+  margin: 8px 0px !important;
+  padding: 7px !important; 
+  border-right: 1px solid darken(@gray-dark, 10%) !important;
+  border-left: 1px solid lighten(@gray-dark, 5%) !important;
+}
 
 .navbar-inverse .btn-link {
   margin: 0;
@@ -173,7 +183,10 @@ hr.pills-border {
    padding-bottom:5px !important;
    height: 28px !important;
 }
-.navbar-filters .navbar-nav > li > a {padding-top:5px !important; padding-bottom:5px !important;}
+.navbar-filters .navbar-nav > li > a {
+  padding:5px 6px !important;
+  font-weight: bold !important;
+}
 .navbar-filters .navbar {height:20px !important}
 
 .navbar-filters .btn-link {
@@ -201,6 +214,10 @@ h3.filters {
   margin:0 4px;
   color: @gray !important;
   font-size:1.1em;
+}
+
+h3.filters .glyphicon {
+  .rotation(180deg) !important;
 }
 
 .logo {
