@@ -20,8 +20,21 @@
         <div class="col-sm-5">
             <a href="#" data-toggle="modal" data-target="#sub-{{this._id}}">
               <p class="text-center"><img class="modal-img" src='{{this.url store="image_md"}}'></p>
-            </a><br>
+            </a>
             <br>
+            <h3>Albums</h3>
+            {{#if albums}}
+              {{#each albums}}
+                <p class="album-item-label">
+                  <a href="{{ pathFor route='albumEdit' _id=this._id }}">{{this.title}}</a>
+                </p>
+              {{/each}}
+            {{else}}
+              <p class="album-item-label">
+                  None
+                </p>
+            {{/if}}
+            <br class="clear">
             <h3>Details</h3>
             <ul class="list-group"> 
               <li class="list-group-item">
@@ -62,7 +75,7 @@
           {{> tagSearch }}
           {{> tagListFromMedia }}
           <br>
-      </div>
+        </div>
 
 
       </div>
