@@ -18,7 +18,8 @@ Package.onUse(function (api) {
     'lib/lib.js',
     'lib/medialibrary.js',
     'lib/validation.js',
-    'lib/users.js'
+    'lib/users.js',
+    'lib/base.js'
   ], ['client', 'server']);
 
   api.add_files([
@@ -39,7 +40,9 @@ Package.onUse(function (api) {
     'MediaLibrary',
     'Validation',
     'isAdmin',
-    'isAdminById'
+    'isAdminById',
+    'SettingsSchemaAddOns'
+
   ]);
 });
 

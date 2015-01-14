@@ -36,6 +36,7 @@ dandv:caret-position@2.1.0-3
 ddp@1.0.13
 deps@1.0.6
 ejson@1.0.5
+elmar-google-analytics@0.0.0
 elmar-isotope-packery@0.0.0
 elmar-lib@0.1.0
 elmar-save-loader@0.0.1
