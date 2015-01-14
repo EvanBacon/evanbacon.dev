@@ -91,10 +91,11 @@ Meteor.methods({
               Albums.update({ _id: album.id },  
                   { $set: dataObj}
               );
-              // _.each(album.content, function (c) {
-              //     c.id, search and update metadata.albums
-              //     Media.update({_id: c.id}, { $push: { "metadata.albums": album.id }}); 
-              // });
+              // update albums list in Media collection
+              Media.update({"metadata.albums._id": album.id}, { $pull: { "metadata.albums": { "_id": album.id }}}, {multi: 1});
+              _.each(album.content, function (item) {
+                  Media.update({_id: item.id}, { $push: { "metadata.albums": { _id: album.id, title: album.title }}}); 
+              });
         } catch (err) {
             mongoError (err);
         }
