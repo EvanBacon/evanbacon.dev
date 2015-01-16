@@ -4,6 +4,7 @@
 
 Template.albumFilters.helpers({
 	tags: function () {
+		
 		var tags = [];
 		_.each(Media.find().fetch(), function(m) {
 			_.each(m.metadata.tags, function (t) {
