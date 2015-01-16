@@ -8,10 +8,8 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <div class="text-center">
           <h3 class="modal-title" id="theModalLabel">{{original.name}}</h3>
-          <!-- <div class="form-group"> -->
             <strong>URL: </strong> 
             <input class="image-url" style="width:40%" value="{{this.url store='image_lg'}}" type="text">
-          <!-- </div> -->
           <button class="select-button btn btn-info btn-xs" title="Click to select text.">Select</button>
 
         </div>
@@ -38,18 +36,8 @@
             <h3>Details</h3>
             <ul class="list-group"> 
               <li class="list-group-item">
-                <strong>Date</strong>
-            
-                {{#if isModified}}
-                <span class="pull-right">{{formatDate this.copies.image_lg.updatedAt 'short'}}</span>
-                {{else}}
-                <span class="pull-right">{{formatDate this.copies.image_lg.createdAt 'short'}}</span>
-                {{/if}}
-                <div class="clear"></div>
-              </li>
-              <li class="list-group-item">
                 <strong>Size (large)</strong>
-                <span class="pull-right">{{this.copies.image_lg.size}}</span>
+                <span class="pull-right">{{this.copies.image_lg.size}} bytes</span>
                 <div class="clear"></div>
               </li>
               <li class="list-group-item">
@@ -58,13 +46,13 @@
                 <div class="clear"></div>
               </li>
               
-             {{#if isModified}}
+             <!-- {{#if isModified}} -->
               <li class="list-group-item">
                 <strong>Uploaded On</strong>
                 <span class="pull-right">{{formatDate uploadedAt 'short'}}</span>
                 <div class="clear"></div>
               </li>
-              {{/if}}
+              <!-- {{/if}} -->
             </ul>
         </div>
         <div class="col-sm-7">

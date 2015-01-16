@@ -43,30 +43,17 @@ Media.allow({
  });
 
 Meteor.methods({
-      uploadMedia: function(asset) {
-        Media.insert(asset, function (err, fileObj) { 
-          if(err) Meteor._debug(err); 
-          else Meteor._debug(fileObj._id);
-        });   
-      },
-      removeAssets: function(assets) {
-        if (!isAdmin()) 
-          throw new Meteor.Error(403, 'Permission denied'); 
-        Media.remove({_id: { $in: assets }});
-      },
-      updateMedia: function(options) {
-        if (!isAdmin()) 
-          throw new Meteor.Error(403, 'Permission denied');
-        gm(200, 400, "#ddff99f3").drawText(10, 50, "from scratch").write("/watermarks/newimg.jpg", function (err) {});
-
-
-        var fileObj = Media.findOne(options.id);
-
-        var readStream = fileObj.createReadStream('default');
-
-        var writeStream = fileObj.createWriteStream('image_md');
-        gm(readStream, fileObj.name({store: 'default'})).drawText(20, 20, 'Copyright', 'center').stream().pipe(writeStream);
-      },
+      // uploadMedia: function(asset) {
+      //   Media.insert(asset, function (err, fileObj) { 
+      //     if(err) Meteor._debug(err); 
+      //     else Meteor._debug(fileObj._id);
+      //   });   
+      // },
+      // removeAssets: function(assets) {
+      //   if (!isAdmin()) 
+      //     throw new Meteor.Error(403, 'Permission denied'); 
+      //   Media.remove({_id: { $in: assets }});
+      // },
       getSortedMedia: function(albumId, limit) {
           var album = Albums.findOne(albumId);
           var content = album.content,

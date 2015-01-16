@@ -19,7 +19,6 @@ elmar-save-loader
 elmar-lib
 useraccounts:bootstrap
 less
-micah:justified-gallery
 mrt:jquery-ui-sortable
 horka:swipebox
 nemo64:bootstrap
@@ -29,3 +28,7 @@ elmar-isotope-packery
 aldeed:autoform
 aldeed:collection2
 elmar-google-analytics
+
+
+npm-container
+meteorhacks:npm

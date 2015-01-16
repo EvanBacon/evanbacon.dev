@@ -67,7 +67,8 @@ localstorage@1.0.2
 logging@1.0.6
 meteor@1.1.4
 meteor-platform@1.2.1
-micah:justified-gallery@0.0.2
+meteorhacks:async@1.0.0
+meteorhacks:npm@1.2.2
 minifiers@1.1.3
 minimongo@1.0.6
 mizzao:autocomplete@0.4.10
@@ -81,6 +82,7 @@ mrt:moment@2.8.1
 nemo64:bootstrap@3.3.1_1
 nemo64:bootstrap-data@3.3.1_1
 npm-bcrypt@0.7.7
+npm-container@1.0.0
 observe-sequence@1.0.4
 ordered-dict@1.0.2
 raix:eventemitter@0.1.1

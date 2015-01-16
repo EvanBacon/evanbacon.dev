@@ -10,9 +10,9 @@ Package.onUse(function (api) {
     'underscore',
   ], ['client', 'server']);
 
-  api.add_files([
-
-  ], ['server']);
+  // api.add_files([
+  //   'lib/server/watermark.js'
+  // ], ['server']);
 
   api.add_files([
     'lib/lib.js',
@@ -41,7 +41,8 @@ Package.onUse(function (api) {
     'Validation',
     'isAdmin',
     'isAdminById',
-    'SettingsSchemaAddOns'
+    'SettingsSchemaAddOns',
+    'addWatermark'
 
   ]);
 });
