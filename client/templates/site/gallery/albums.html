@@ -1,12 +1,12 @@
 <template name="albums">
 	<h1 class="col-sm-12">Albums
 		<small>
-			{{ this.album.description }} 
 			{{#if isAdmin}}
 			<a href="{{ pathFor route='albumManager'}}">edit</a>
 			{{/if}}
 		</small>
 	</h1>
-
-	{{> albumList }}
+	<div class="col-sm-12 text-center">
+	{{> albumGroupList }}
+	</div>
 </template>

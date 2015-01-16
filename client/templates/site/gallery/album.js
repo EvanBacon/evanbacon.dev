@@ -3,18 +3,30 @@ var loadCount = 0;
 
 var initGrid = function () {
 	$('#album').addClass('hidden');
-	$('.item img').addClass('hidden');
+	$('.itemP img').addClass('hidden');
+	$('.itemP').hover(
+        function(){
+            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+        },
+        function(){
+            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+        }
+    );
 	Meteor.defer(function () {
-		if (typeof $container !== undefined && document.readyState === "complete" && loadCount > 0)  {
-			// console.log($container);
-			$container.isotope('destroy');
-			loadCount = 0;
+		if (typeof $container !== undefined && document.readyState === "complete") {
+		    // $container.isotope({ filter: "*" }); // reset tag link
+			if (loadCount > 0)  {
+				// console.log($container);
+				$container.isotope('destroy');
+				$container.isotope = false;
+				loadCount = 0;
+			}
 		}
 		// if (loadedCount = 0) {
 		$container = $('#album').imagesLoaded( function() {
 			$container.isotope({
-			   layoutMode: 'packery',
-			   itemSelector: '.item',
+			   layoutMode:  'packery',
+			   itemSelector: '.itemP',
 		  	   packery: {
 		  	   	gutter: '.gutter-sizer',
 		  	   columnWidth: '.grid-sizer',
@@ -24,7 +36,7 @@ var initGrid = function () {
 		loadCount++;
 		// console.log(loadCount)
 		// }
-		$('.item img').removeClass('hidden');
+		$('.itemP img').removeClass('hidden');
 		$('#album').fadeIn().removeClass('hidden');
 	});
 };
@@ -37,39 +49,18 @@ var initGrid = function () {
 //   }
 // });
 
-// var getItemElement = function(item) {
-//   var mdURL = item.url('image_md');
-//   var lgURL = item.url('image_lg');
-//   var elem = $('<a></a>')//document.createElement('a');
-//   var wRand = Math.random();
-//   var hRand = Math.random();
-//   var widthClass = wRand > 0.85 ? 'w4' : wRand > 0.7 ? 'w2' : '';
-//   var heightClass = hRand > 0.85 ? 'h4' : hRand > 0.7 ? 'h2' : '';
-
-//   elem.className = 'swipebox item'; // + widthClass + ' ' + heightClass;
-//   elem.attr('href', lgURL);
-//   elem.attr('title', item.metadata.title);
-
-//   var image = $('<img>'); //document.createElement('img');
-//   image.attr('src', mdURL);
-//   image.attr('alt', item.metadata.caption);
-//   elem.html(image);
-
-//   return elem;
-// }
-
 
 Template.album.rendered = function () {
-	$('#album').addClass('hidden');
-	$('.item img').addClass('hidden');
-	$('.item').hover(
-        function(){
-            $(this).find('.caption').slideDown(250); //.fadeIn(250)
-        },
-        function(){
-            $(this).find('.caption').slideUp(250); //.fadeOut(205)
-        }
-    );
+	// $('#album').addClass('hidden');
+	// $('.itemP img').addClass('hidden');
+	// $('.itemP').hover(
+ //        function(){
+ //            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+ //        },
+ //        function(){
+ //            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+ //        }
+ //    );
 
 	// initGrid();
 	// this.autorun(function(){
@@ -104,6 +95,7 @@ Template.album.rendered = function () {
 Template.album.helpers({
 	sortedItems: function () {
 		initGrid();
+
 		return this.items;
 		// var results = [];
 

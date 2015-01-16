@@ -38,6 +38,26 @@ Media.allow({
 
  });
 
+ // Meteor.publish("mediaSampler", function(options) { 
+ //      var media = Media.find({}, { 'metadata.albums'}, { sort: {'uploadedAt: 1'}});
+ //      if (!! album) {
+ //        var content = album.content,
+ //            images = [],
+ //            visible = !! album.isVisible;
+
+ //        if (visible || isAdminById(this.userId)) {
+ //          _.each(content, function (c) {
+ //              images.push(c.id);
+ //          });
+
+ //          return Media.find({ _id: { $in: images }}, options);
+ //        } else {
+ //          return null;
+ //        }
+ //      }
+
+ // });
+
  Meteor.publish("mediaTags", function(options) { 
       return Media.find({}, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1}});
  });

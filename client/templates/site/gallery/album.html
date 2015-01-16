@@ -21,7 +21,7 @@
 		  <div class="gutter-sizer"></div>
 	      <div class="grid-sizer"></div>
 		  {{#each sortedItems}}
-		   	<a class="swipebox item {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
+		   	<a class="swipebox itemP {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
 		   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
 		   		<div class="caption">
 	              {{#if this.metadata.title }}

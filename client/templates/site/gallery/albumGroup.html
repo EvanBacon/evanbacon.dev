@@ -1,0 +1,14 @@
+<template name="albumGroup">
+
+	<div class="itemP w2">
+		<a href="{{ pathFor route='album' slug=this.slug}}"><h3>{{this.title}} <br><small>{{this.description}}</small></h3></a>
+	</div>	
+		
+	{{#each samples}}
+	   	<div class="itemP" title="{{this.metadata.title}}">
+	   		<a href="{{ pathFor route='album' slug=../slug}}" class="album-link"><img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}"></a>
+	   		
+	    </div>
+	{{/each}}
+		
+</template>
