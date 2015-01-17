@@ -24,6 +24,13 @@ Template.albumEdit.helpers({
 		//if (!! this.album.isVisible)
 		return this.album.isVisible === 1;
 	},
+	isShuffled: function () {
+		// if (typeof this.album._id === undefined) {
+		// 	return true;
+		// }
+		if (!! this.album.isShuffled)
+			return this.album.isShuffled === 1;
+	},
 	isNew: function () {
 		// only show cancel button if this is a newly created album (never saved)
 		return isNewAlbum(this.album.slug);
@@ -84,7 +91,8 @@ Template.albumEdit.events({
 		g.slug = t.find('#inputSlug').value;
 		g.description  = t.find('#inputDesc').value;
 		
-		g.isVisible = $('#cb-visible').prop('checked') ? 1 : 0;
+		g.isVisible  = $('#cb-visible').prop('checked') ? 1 : 0;
+		g.isShuffled = $('#cb-shuffle').prop('checked') ? 1 : 0;
 
 		var featEl = $('li[data-feat="1"]');
 

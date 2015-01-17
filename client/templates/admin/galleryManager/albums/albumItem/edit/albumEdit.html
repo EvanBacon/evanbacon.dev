@@ -24,15 +24,37 @@
 			</div>
 		    <br>
 		    <br>
-			<div class="form-group text-center">
-				<input id="cb-visible" type="checkbox" checked="{{isVisible}}">
-				<label for="cb-visible">Make Album Visible</label>
+		    <div class="col-sm-12 no-gutter">
+			<div class="col-sm-2 no-gutter-right">
+				<div class="cb-sm checkbox">
+			        <label>
+			          <input id="cb-visible" type="checkbox" checked="{{isVisible}}">
+			          <span class="glyphicon glyphicon-ok"></span>
+			        </label> 	
+			    </div>
+  			</div>
+			<div class="col-sm-10 no-gutter-left">
+			    <h5>Make Album Visible</h5>
 			</div>
+			<div class="clear"></div>
+  			<div class="col-sm-2 no-gutter-right">
+				<div class="checkbox cb-sm">
+			        <label>
+			          <input id="cb-shuffle" type="checkbox" checked="{{isShuffled}}">
+			          <span class="glyphicon glyphicon-ok"></span>
+			        </label>
+			    </div>
+  			</div>
+	  		
+      		<div class="col-sm-10 no-gutter-left">
+		      <h5>Shuffle Images <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="This will shuffle the images on the album page so that they are not always in the same position."><span class="question glyphicon glyphicon-question-sign"></span></a> </h5>
+			 </div>
+			 </div>
+			 <div class="clear"></div>
 			<div class="form-group has-feedback">
 		        <label class="control-label" for="inputTitle">Title</label>
 		        <span class="required glyphicon glyphicon-star"></span>
 	            <input class="form-control input-md" id="inputTitle" type="text" maxlength="40" value="{{this.album.title}}" placeholder="Title">
-				<!-- <span class="glyphicon glyphicon-remove form-control-feedback hidden" id="glyphTitle" aria-hidden="true"></span> -->
 				<span id="helpTitle" class="help-block hidden">Title is required.</span>
 		    </div>
 
