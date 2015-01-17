@@ -1,0 +1,16 @@
+<template name="contactForm">
+  {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+
+    {{> afQuickField name="name"}}
+    {{> afQuickField name="email"}}
+    {{> afQuickField name="message" rows=10}}
+
+    <div class="submit-buttons">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-default btn-reset">Reset</button>
+    </div>
+  {{/autoForm}}
+
+  <div class="submit-success hidden alert-info"><h4>Message sent!</h4></div>
+  <div class="submit-error hidden alert-danger"><h4>Oops, cannot send message.</h4></div>
+</template>
