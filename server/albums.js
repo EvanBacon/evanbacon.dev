@@ -12,15 +12,7 @@ Albums.allow({
     });
 
 Meteor.publish("album", function (id) {
-    // var album = Albums.findOne({ _id: id }, { fields: {isVisible: 1}});
-    // var isVisible = true;
-   // if (!! album) isVisible = !! album.isVisible;
-
-   // if (!! isVisible || isAdminById(this.userId)) {
       return Albums.find({_id: id});
-    // } else {
-    //   return null;
-    // }
 });
 
 Meteor.publish("albumBySlug", function (slug) {
@@ -36,11 +28,15 @@ Meteor.publish("albumBySlug", function (slug) {
 });
 
 Meteor.publish("albums", function(options) { 
+  if ( isAdminById(this.userId)) {
     return Albums.find({}, options);
+  } else {
+    return Albums.find({'isVisible': 1}, options);
+  }
 });
 
-Meteor.publish("albumLinks", function() { 
-    return Albums.find({'isVisible': 1}, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1}});
+Meteor.publish("albumsLight", function() { 
+    return Albums.find({'isVisible': 1}, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
 });
 
 Meteor.methods({
@@ -58,6 +54,7 @@ Meteor.methods({
                         'content': [],
                         'title': '',
                         'isVisible': 1,
+                        'isShuffled': 0,
                         'lastModified': null
                         };
         if (!! content)
@@ -84,6 +81,7 @@ Meteor.methods({
                       'slug': slug,
                       'title': album.title,
                       'isVisible': album.isVisible,
+                      'isShuffled': album.isShuffled,
                       'lastModified': (new Date()).getTime()
                       };
 
@@ -93,8 +91,10 @@ Meteor.methods({
               );
               // update albums list in Media collection
               Media.update({"metadata.albums._id": album.id}, { $pull: { "metadata.albums": { "_id": album.id }}}, {multi: 1});
+              var wt = 0; // weight / order of image for sorting
               _.each(album.content, function (item) {
-                  Media.update({_id: item.id}, { $push: { "metadata.albums": { _id: album.id, title: album.title }}}); 
+                  Media.update({_id: item.id}, { $push: { "metadata.albums": { _id: album.id, title: album.title, weight: wt }}});
+                  wt++; 
               });
         } catch (err) {
             mongoError (err);
