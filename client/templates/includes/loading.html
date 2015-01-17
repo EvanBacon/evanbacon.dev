@@ -1,3 +1,8 @@
 <template name="loading">
   {{>spinner}}
+  {{#if getSetting 'loadingAddOnUrl' }}
+  <p class="bg-loader">
+  		<img src="{{ getSetting 'loadingAddOnUrl'}}" alt="Loading" >
+  </p>
+  {{/if}}
 </template>
