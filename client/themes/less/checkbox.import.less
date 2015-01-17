@@ -1,9 +1,13 @@
 
-
 .checkbox *{
   cursor: pointer;
   margin-top: -15px;
   margin-left: -5px;
+}
+
+.cb-sm *{
+  margin-top: 0px !important;
+  margin-left: 0px !important;
 }
 
 .checkbox label {
@@ -26,6 +30,11 @@
   .box-shadow(inset -1px 1px 2px 2px rgba(0,0,0,0.2));
 }
 
+.cb-sm span {
+  width: 20px !important;
+  height: 20px !important;
+}
+
 .checkbox:hover span{
   border-color: @brand-primary;
 }
@@ -40,6 +49,11 @@
   line-height: 22px;
   vertical-align: middle;
   color: @brand-primary;
+}
+
+.cb-sm span:before{
+  font-size: 17px !important;
+  line-height: 17px !important;
 }
 
 
