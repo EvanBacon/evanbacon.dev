@@ -2,119 +2,72 @@ var $container;
 var loadCount = 0;
 
 var initGrid = function () {
-	$('#album').addClass('hidden');
-	$('.itemP img').addClass('hidden');
+	$('.itemP').addClass('hidden');
 	$('.itemP').hover(
         function(){
-            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+            $(this).find('.caption').slideDown(300); //.fadeIn(250)
         },
         function(){
-            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+            $(this).find('.caption').slideUp(300); //.fadeOut(205)
         }
     );
 	Meteor.defer(function () {
 		if (typeof $container !== undefined && document.readyState === "complete") {
-		    // $container.isotope({ filter: "*" }); // reset tag link
-			if (loadCount > 0)  {
-				// console.log($container);
-				$container.isotope('destroy');
+			if (loadCount > 0 && $container.isotope)  {
+				$('#album').isotope().isotope('destroy');
 				$container.isotope = false;
 				loadCount = 0;
 			}
 		}
-		// if (loadedCount = 0) {
 		$container = $('#album').imagesLoaded( function() {
 			$container.isotope({
 			   layoutMode:  'packery',
 			   itemSelector: '.itemP',
+			   filter:       '*', 
 		  	   packery: {
 		  	   	gutter: '.gutter-sizer',
-		  	   columnWidth: '.grid-sizer',
+		  	    columnWidth: '.grid-sizer',
 		  	   }
 			});
 		});
 		loadCount++;
-		// console.log(loadCount)
-		// }
-		$('.itemP img').removeClass('hidden');
-		$('#album').fadeIn().removeClass('hidden');
+		if ($container.isotope) {
+			// $container.isotope('shuffle');
+			$container.fadeIn();
+		}
+		
+		$('.itemP').removeClass('hidden');
+
 	});
 };
 
-// $('#container').isotope({
-//   // options...
-//   itemSelector: '.item',
-//   masonry: {
-//     columnWidth: 200
-//   }
-// });
-
-
 Template.album.rendered = function () {
-	// $('#album').addClass('hidden');
-	// $('.itemP img').addClass('hidden');
-	// $('.itemP').hover(
- //        function(){
- //            $(this).find('.caption').slideDown(250); //.fadeIn(250)
- //        },
- //        function(){
- //            $(this).find('.caption').slideUp(250); //.fadeOut(205)
- //        }
- //    );
-
-	// initGrid();
-	// this.autorun(function(){
-	//     //initGrid();
-	//     Meteor.defer(function() {
-	//     	 console.log('reloading');
-	//     	 // if(!! $container) 
-	//     	//$container.packery('reloadItems');
-	//     	 initGrid();
-	    	
-	//     });
-	   
-	//  });
-
-
-
-	// $('#album').justifiedGallery({
-	//   // option: default,
-	//   rowHeight: 200,
-	//   maxRowHeight: 0,
-	//   lastRow: 'nojustify',
-	//   fixedHeight: false,
-	//   captions: true,
-	//   margins: 3,
-	// });
-
-	//initGrid();
-
-	
+	$('.itemP').addClass('hidden');
 };
 
 Template.album.helpers({
 	sortedItems: function () {
 		initGrid();
 
-		return this.items;
-		// var results = [];
-
-		// for(var i = 0; i < this.album.content.length; i++)
-		// 	results.push(null);
-
-		// var list = _.pluck(this.album.content, "id");
-		// _.each(Media.find().fetch(), function (m) {
-		// 	var index = list.indexOf(m._id);
-		// 	results[index] = m;
-		// });
-		// return results;
+        if (!! this.album.isShuffled ) {
+        	return _.shuffle(this.items.fetch());
+        } else {
+	        var self = this;
+		    return _.sortBy(this.items.fetch(), function(m) { 
+				var weight = 0;
+				_.each(m.metadata.albums, function (a) {
+					if(a._id === self.album._id)
+						weight = a.weight;
+				});
+				return weight; 
+			});
+		}
 	},
 	
 
 });
 
 Template.album.events({
-
 	'click .swipebox': function (e) {
 	  	e.preventDefault();
 		$.swipebox({
@@ -133,41 +86,8 @@ Template.album.events({
   		$container.isotope({ filter: filterValue });
    	},
    	'click .load-more': function (e) {
-   		//e.preventDefault();
-   		// $('#album').addClass('hidden');
-   		// $container.packery('destroy');
-   		//isActive = false;
-
-  //  		var elems = [];
-  //  		//var start = Router.current().params.limit || 0;
-  //  		var items = Media.find({}, {limit: Router.current().params.limit }).fetch();
-  //  		//console.log(items);
-  //  		_.each(items, function (i) {
-  //  			//console.log(i.metadata.title);
-  //  			var elem = getItemElement(i);
-  //  			elems.push( elem );
-  //  		});
-		// // // for ( var i = start; i < this.items.count(); i++ ) {
-		// // //     var elem = getItemElement();
-		// // //     elems.push( elem );
-		// // // }
-
-		// // append elements to container
-		// $container.append( elems );
-		// // add and lay out newly appended elements
-		// $container.packery( 'appended', elems );
-
+   		$('.filter-btn').removeClass('active');
+		$('.filter-btn[data-filter="*"]').addClass('active');
    	}
-//  'click .fancybox': function(e, t){
-	//     link = $(e.currentTarget);
-	//     $(this).fancybox({
-	//              'autoScale': true,
-	//              'type':'iframe',
-	//              'height': (typeof link.data('height') == 'undefined' ? link.data('height') : 340),
-	//              'width': (typeof link.data('width') == 'undefined' ? link.data('width') : 560),
-	//              'href': link.attr('href')
-	//         }).click();
-	//     return false;
- //  }
 });
 

@@ -1,10 +1,11 @@
-// Template.albumFilters.rendered = function () {
-// 	$('.filter-btn[data-filter="*"]').addClass('active');
-// };
+Template.albumFilters.rendered = function () {
+	$('.filter-btn').removeClass('active');
+	$('.filter-btn[data-filter="*"]').addClass('active');
+};
 
 Template.albumFilters.helpers({
 	tags: function () {
-		
+		// $('.filter-btn').removeClass('active');
 		var tags = [];
 		_.each(Media.find().fetch(), function(m) {
 			_.each(m.metadata.tags, function (t) {

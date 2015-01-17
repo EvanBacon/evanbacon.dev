@@ -1,7 +1,5 @@
 <template name="album">
-	<!-- <div class="col-sm-12"> -->
-		{{> albumLinks }}
-	<!-- </div> -->
+	{{> albumLinks }}
 	<div class="col-sm-12">
 		<h1>{{ this.album.title }} 
 			<small>
@@ -16,12 +14,14 @@
 		{{> albumFilters }}
 	</div>
 	<br class="clear">
+	
 	<div class="col-sm-12">
 		<div id="album">
 		  <div class="gutter-sizer"></div>
 	      <div class="grid-sizer"></div>
 		  {{#each sortedItems}}
 		   	<a class="swipebox itemP {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{this.metadata.title}}">
+
 		   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
 		   		<div class="caption">
 	              {{#if this.metadata.title }}
@@ -29,13 +29,11 @@
 	              {{else}}
 	                <p>{{this.original.name}}</p>
 	              {{/if}}
-	              <!-- {{#if this.metadata.caption }}
-	              	<p>{{this.metadata.caption}}</p>
-	              {{/if}} -->
 	              {{#if this.metadata.credit }}
 	              	<p>{{this.metadata.credit}}</p>
 	              {{/if}}
 	            </div>
+	           
 		    </a>
 		  {{/each}}
 		</div>
@@ -43,17 +41,14 @@
 		<div class="clear"></div>
 
 	  	<br>
-	  
+	  	
 		<div class="col-sm-6 col-sm-offset-3">
-		{{#unless ready}}        
-	      {{> spinner}}      
-	  	{{/unless}}
 	    {{#if nextPath}}   
 	       <a href="{{nextPath}}" class="load-more btn btn-default btn-lg btn-block">Load more</a>
 	    {{else}}
-	      <!-- {{#unless ready}}        
+	      {{#unless ready}}        
 	          {{> spinner}}      
-	      {{/unless}} -->
+	      {{/unless}}
 	    {{/if}}
 		</div>
 	</div>

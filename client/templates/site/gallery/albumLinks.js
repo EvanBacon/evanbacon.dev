@@ -15,6 +15,8 @@ Template.albumLinks.helpers({
 Template.albumLinks.events({
 	'click .album-btn': function (e) {
         e.preventDefault();
+        $('.filter-btn').removeClass('active'); // need to reset tag selection
+		$('.filter-btn[data-filter="*"]').addClass('active');
         Router.go( 'album', {slug: this.slug});
     },
 });
