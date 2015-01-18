@@ -25,4 +25,14 @@ Template.albumGroup.helpers({
 	}
 });
 
+Template.albumGroup.events({
+	'mouseover .album-link': function (e) {
+		$('#item-' + Template.parentData(0).slug ).addClass('selected');
+
+	},
+	'mouseout .album-link': function (e) {
+		$('#item-' + Template.parentData(0).slug ).removeClass('selected');
+	}
+});
+
 
