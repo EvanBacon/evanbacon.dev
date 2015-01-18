@@ -5,7 +5,6 @@ Template.albumFilters.rendered = function () {
 
 Template.albumFilters.helpers({
 	tags: function () {
-		// $('.filter-btn').removeClass('active');
 		var tags = [];
 		_.each(Media.find().fetch(), function(m) {
 			_.each(m.metadata.tags, function (t) {
