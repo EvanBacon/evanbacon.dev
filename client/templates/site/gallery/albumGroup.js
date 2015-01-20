@@ -22,7 +22,11 @@ Template.albumGroup.helpers({
 		if (typeof featured === undefined || ! featured)
 			featured = this.content[0];
 		return featured;
-	}
+	},
+	count: function () {
+	    if (!! this.content)
+	      return this.content.length;
+	},
 });
 
 Template.albumGroup.events({

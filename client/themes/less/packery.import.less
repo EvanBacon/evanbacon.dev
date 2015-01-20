@@ -16,11 +16,12 @@
   float: left;
   width: 18.4%;
   border: 4px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.2);
+  border-color: hsla(0, 0%, 0%, 0.2); 
 }
 
 .itemP.w2 { 
 	width: 18.4%; 
+	.rounded(20px);
 }
 
 .itemP.w2:hover {
@@ -34,6 +35,10 @@
 
 .itemP img { width: 100%;  }
 .itemP.w2 img { width: 100%; }
+
+.item-album {
+  .transition(all 0.3s ease-in-out); 
+}
 
 @media screen and (max-width: 768px) {
     .grid-sizer {

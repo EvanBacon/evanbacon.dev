@@ -3,13 +3,7 @@
   margin: 0;
   // font-family:'Roboto Condensed',Arial,sans-serif;
   font-family:'Karla',Arial,sans-serif;
-  // letter-spacing: 1px;
 }
-
-
-// label,.btn,input,textarea,p,nav {
-//   font-size: 1.1em;
-// }
 
 ul {
   list-style: none;
@@ -25,8 +19,7 @@ hr {
 }
 
 h1,h2,h3,.navbar-main a  {
-  font-family:'PT Sans',Arial,sans-serif;
-  // font-weight: bold;
+  font-family: 'PT Sans', Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
 
@@ -46,6 +39,19 @@ h3 {
 
 small a {
   color: @brand-info;
+}
+
+.navbar-main li.dropdown a {
+  font-weight: normal !important;
+  // text-transform: none !important;
+}
+
+.navbar-main li.dropdown a.dropdown-toggle {
+  color: darken(@brand-info, 10%) !important;
+  padding: 6px !important;
+  margin-top:6px !important;
+  border: 3px solid darken(@brand-info, 10%);
+  background-color: @gray-lighter;
 }
 
 .form-control {
@@ -77,11 +83,6 @@ hr.pills-border {
    .transition(all 0.3s ease-in-out);
    border: 4px solid @brand-primary !important;
    background-color: lighten(@brand-info, 20%) !important;
-}
-
-.selected:hover {
-  zoom: 1;
-  .opacity(.5);
 }
 
 .actions-bg {
@@ -243,6 +244,7 @@ h3.filters .glyphicon {
   // border: none;
   width: 100%;
   padding: 0px;
+  // .transition(all 0.3s ease); 
   // margin: 10px;
   //border: 4px solid #777;
 }
@@ -255,91 +257,6 @@ h3.filters .glyphicon {
   .opacity(.9);
 }
 
-// .caption {
-//   position:absolute;
-//   bottom:0px;
-//   left:0px;
-//   text-align: center;
-//   color:#FFF !important;
-//   z-index:10;
-//   background: #000;
-//   .opacity(.65);
-//   width: 100%;
-//   padding: 0;
-
-// }
-
-// .itemP .caption {
-//     position:absolute;
-//     top: 0;
-//     left: 0;
-//     bottom: 0;
-//     right: 0;
-//     // margin: auto;
-//    // overflow: hidden;
-//     text-align: center;
-//     color:#000 !important;
-//     z-index:10;
-//     background: #FFF;
-//     .opacity(.5);
-//     // max-width: 100%;
-//     // max-height: 100%;
-   
-//     //padding: 0;
-//     border: 10px solid @brand-primary;
-//     // content: '';
-//     display: block;
-//     //.vertical-align();
-//     //vertical-align: middle;
-//     //overflow:hidden;
-//     width: 100%;
-//     height: 100%;
-//    // padding-top: 50% !important;
-// }
-
-// .itemP .caption:before {
-
-//     content: '';
-//     display: inline-block;
-//     height: 100%;
-//     width: 100%;
-//     .vertical-align();
-//     border: 5px solid red;
-//   //   margin-top: 50%;
-//   //   -webkit-transform: translateY(-50%);
-//   // -ms-transform: translateY(-50%);
-//   // transform: translateY(-50%);
-//    // width: 100%;
-//   }
-
-// .itemP .caption .content {
-//   position: relative;
-//   // bottom: 0;
-//   top: 0;
-//   bottom: 0;
-//   margin-top: 50% !important;
-//   border: 4px solid blue;
-//  // margin-top: 50%;
-//   //transform: translateY(-50%);
-//   //.vertical-align();
-//   display: inline-block;
-//   vertical-align: bottom;
-//   height: 100%;
-//   width: 100%;
-//   //.translate(0, -50%);
-//   // margin: auto;
-//    //  position: relative;
-
-//    //  width: 100%;
-//    //  display: table-cell;
-//    //  vertical-align: middle;
-//    //  text-align: center;
-//    //  margin: auto;
-
-//    //  //width: 100%;
-//    // // margin: auto;
-//    //  padding: 0 3px;
-// }
 
 
 .caption {
@@ -382,43 +299,24 @@ h3.filters .glyphicon {
 } 
 
 .caption .badge {
-  color: #000;
+  color: #FFF;
   font-weight: bold;
-  background-color: #FFF;
+  background-color: #000;
 }
 
-// .itemP .caption {
-//   display: table;
-// }
-
-// .bg-loader {
-//     bottom: 0;
-//     left: 0;
-//     margin: auto;
-//     overflow: auto;
-//     position: absolute;
-//     right: 0;
-//     top: 0;
-//     max-width: 100%;
-//     max-height: 100%;
-//     text-align: center;
-// }
-
-// .bg-loader:before {
-//     content: '';
-//     display: inline-block;
-//     vertical-align: middle;
-//     height: 100%;
-//   }
-
-// .bg-loader img {
-//     display: inline-block;
-//     vertical-align: middle;
-//     margin: 60px auto auto;
-// }
-
-
-// 
+.thumb-container .caption {
+  display: block;
+  bottom: 0 !important;
+  right: 0;
+  top: auto;
+  margin-bottom: 0 !important;
+  height: auto;
+  // min-height: 15%;
+  // max-height: 25%;
+  border: none;
+  padding: 0 3px;
+  text-align: center;
+}
 
 .dropdown-options {
   cursor: pointer;
@@ -441,12 +339,7 @@ h3.filters .glyphicon {
 }
 
 #albums-border{
-
-
   border: 7px double #999;
-  // position: relative; 
-  // width: 100%;
-  // background: #444;
   margin: auto;
   padding: 0 10px;
 }
