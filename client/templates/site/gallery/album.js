@@ -1,42 +1,56 @@
-var $container;
-var loadCount = 0;
+var $container,
+	swipeboxInstance,
+	loadCount = 0;
+
+var createSwipebox = function () {
+	// if (!! swipeboxInstance) {
+	// 	swipeboxInstance.refresh();
+	// } else {
+		swipeboxInstance = $(".swipebox:not(.swipebox.isotope-hidden)").swipebox({
+				useCSS : false, // false will force the use of jQuery for animations
+				useSVG : false, // false to force the use of png for buttons
+				initialIndexOnArray : 0, // which image index to init when a array is passed
+				hideCloseButtonOnMobile : false, // true will hide the close button on mobile devices
+				hideBarsDelay : 3000, // delay before hiding bars on desktop
+				loopAtEnd: true // true will return to the first image after the last image i
+		});
+	//} 
+}
 
 var initGrid = function () {
+	$('#album').addClass('hidden');
 	$('.itemP').addClass('hidden');
 	$('.itemP').hover(
         function(){
-            $(this).find('.caption').slideDown(300); //.fadeIn(250)
+            $(this).find('.caption').fadeIn(300); 
         },
         function(){
-            $(this).find('.caption').slideUp(300); //.fadeOut(205)
+            $(this).find('.caption').fadeOut(300); 
         }
     );
 	Meteor.defer(function () {
-		if (typeof $container !== undefined && document.readyState === "complete") {
-			if (loadCount > 0 && $container.isotope)  {
-				$('#album').isotope().isotope('destroy');
-				$container.isotope = false;
-				loadCount = 0;
-			}
+		if (loadCount > 0 && $container.isotope)  {
+			$('#album').isotope().isotope('destroy');
+			$container.isotope = false;
+			loadCount = 0;
 		}
+
 		$container = $('#album').imagesLoaded( function() {
 			$container.isotope({
-			   layoutMode:  'packery',
-			   itemSelector: '.itemP',
-			   filter:       '*', 
-		  	   packery: {
-		  	   	gutter: '.gutter-sizer',
-		  	    columnWidth: '.grid-sizer',
+			    layoutMode:  'packery',
+			    itemSelector: '.itemP',
+			    filter:       '*', 
+		  	    packery: {
+		  	   	   gutter: '.gutter-sizer',
+		  	       columnWidth: '.grid-sizer',
 		  	   }
 			});
 		});
+
 		loadCount++;
-		if ($container.isotope) {
-			// $container.isotope('shuffle');
-			$container.fadeIn();
-		}
 		
 		$('.itemP').removeClass('hidden');
+		$('#album').removeClass('hidden').fadeIn();
 
 	});
 };
@@ -69,25 +83,19 @@ Template.album.helpers({
 
 Template.album.events({
 	'click .swipebox': function (e) {
-	  	e.preventDefault();
-		$.swipebox({
-			useCSS : true, // false will force the use of jQuery for animations
-			useSVG : true, // false to force the use of png for buttons
-			initialIndexOnArray : 0, // which image index to init when a array is passed
-			hideCloseButtonOnMobile : false, // true will hide the close button on mobile devices
-			hideBarsDelay : 0, // delay before hiding bars on desktop
-			afterOpen: null, // called after opening
-			loopAtEnd: false // true will return to the first image after the last image i
-		});
+	  	e.preventDefault();	
+		createSwipebox();
    	},
    	'click .filter-btn': function (e) {
    		e.preventDefault();
    		var filterValue = $(e.currentTarget).attr('data-filter');
   		$container.isotope({ filter: filterValue });
+  		createSwipebox();
    	},
    	'click .load-more': function (e) {
    		$('.filter-btn').removeClass('active');
 		$('.filter-btn[data-filter="*"]').addClass('active');
+		createSwipebox();
    	}
 });
 

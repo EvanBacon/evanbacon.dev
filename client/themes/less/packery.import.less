@@ -11,17 +11,28 @@
 }
 
 .itemP {
+  position: relative;
   text-align: center;
   float: left;
   width: 18.4%;
   border: 4px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.3);
+  border-color: hsla(0, 0%, 0%, 0.2);
 }
 
 .itemP.w2 { 
 	width: 18.4%; 
 }
-.itemP img { width: 100%; }
+
+.itemP.w2:hover {
+	border: 4px solid @brand-primary;
+	background: lighten(@brand-info, 20%)
+}
+
+.itemP.w2 a:hover {
+	text-decoration: none;
+}
+
+.itemP img { width: 100%;  }
 .itemP.w2 img { width: 100%; }
 
 @media screen and (max-width: 768px) {

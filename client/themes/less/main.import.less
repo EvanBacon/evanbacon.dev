@@ -40,6 +40,10 @@ h2 {
   font-size: (@font-size-h2*0.8)*1px;
 }
 
+h3 {
+  font-size: (@font-size-h3*0.9)*1px;
+}
+
 small a {
   color: @brand-info;
 }
@@ -67,6 +71,17 @@ hr.pills-border {
 
   margin: 0 1px 0px 1px !important;
   padding: 0 !important;
+}
+
+.selected {
+   .transition(all 0.3s ease-in-out);
+   border: 4px solid @brand-primary !important;
+   background-color: lighten(@brand-info, 20%) !important;
+}
+
+.selected:hover {
+  zoom: 1;
+  .opacity(.5);
 }
 
 .actions-bg {
@@ -240,19 +255,131 @@ h3.filters .glyphicon {
   .opacity(.9);
 }
 
-.caption {
-  position:absolute;
-  bottom:0px;
-  left:0px;
-  text-align: center;
-  color:#FFF !important;
-  z-index:10;
-  background: #000;
-  .opacity(.65);
-  width: 100%;
-  padding: 0;
+// .caption {
+//   position:absolute;
+//   bottom:0px;
+//   left:0px;
+//   text-align: center;
+//   color:#FFF !important;
+//   z-index:10;
+//   background: #000;
+//   .opacity(.65);
+//   width: 100%;
+//   padding: 0;
 
-}
+// }
+
+// .itemP .caption {
+//     position:absolute;
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     right: 0;
+//     // margin: auto;
+//    // overflow: hidden;
+//     text-align: center;
+//     color:#000 !important;
+//     z-index:10;
+//     background: #FFF;
+//     .opacity(.5);
+//     // max-width: 100%;
+//     // max-height: 100%;
+   
+//     //padding: 0;
+//     border: 10px solid @brand-primary;
+//     // content: '';
+//     display: block;
+//     //.vertical-align();
+//     //vertical-align: middle;
+//     //overflow:hidden;
+//     width: 100%;
+//     height: 100%;
+//    // padding-top: 50% !important;
+// }
+
+// .itemP .caption:before {
+
+//     content: '';
+//     display: inline-block;
+//     height: 100%;
+//     width: 100%;
+//     .vertical-align();
+//     border: 5px solid red;
+//   //   margin-top: 50%;
+//   //   -webkit-transform: translateY(-50%);
+//   // -ms-transform: translateY(-50%);
+//   // transform: translateY(-50%);
+//    // width: 100%;
+//   }
+
+// .itemP .caption .content {
+//   position: relative;
+//   // bottom: 0;
+//   top: 0;
+//   bottom: 0;
+//   margin-top: 50% !important;
+//   border: 4px solid blue;
+//  // margin-top: 50%;
+//   //transform: translateY(-50%);
+//   //.vertical-align();
+//   display: inline-block;
+//   vertical-align: bottom;
+//   height: 100%;
+//   width: 100%;
+//   //.translate(0, -50%);
+//   // margin: auto;
+//    //  position: relative;
+
+//    //  width: 100%;
+//    //  display: table-cell;
+//    //  vertical-align: middle;
+//    //  text-align: center;
+//    //  margin: auto;
+
+//    //  //width: 100%;
+//    // // margin: auto;
+//    //  padding: 0 3px;
+// }
+
+
+.caption {
+
+    position:absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    color:#000 !important;
+    z-index:10;
+    background: #FFF;
+    .opacity(.6);
+    border: 10px solid @brand-info;
+
+    .caption-wrapper {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        width: 100%;
+
+        .caption-container {
+          position: absolute;
+          top: 50%;
+          padding: 0 3px;
+          width: 100%;
+          vertical-align: middle;
+          .translate(0, -50%);
+          h4 {
+            padding: 0;
+            margin: 0;
+            text-transform: uppercase;
+          }
+        }
+  }
+} 
 
 .caption .badge {
   color: #000;
@@ -260,9 +387,38 @@ h3.filters .glyphicon {
   background-color: #FFF;
 }
 
-.itemP .caption {
-  display: none;
-}
+// .itemP .caption {
+//   display: table;
+// }
+
+// .bg-loader {
+//     bottom: 0;
+//     left: 0;
+//     margin: auto;
+//     overflow: auto;
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//     max-width: 100%;
+//     max-height: 100%;
+//     text-align: center;
+// }
+
+// .bg-loader:before {
+//     content: '';
+//     display: inline-block;
+//     vertical-align: middle;
+//     height: 100%;
+//   }
+
+// .bg-loader img {
+//     display: inline-block;
+//     vertical-align: middle;
+//     margin: 60px auto auto;
+// }
+
+
+// 
 
 .dropdown-options {
   cursor: pointer;
@@ -441,3 +597,21 @@ h3.filters .glyphicon {
 .no-gutter-top {
   padding-top: 0;
 }
+
+
+// swipebox 
+#swipebox-top-bar{
+  top:0px!important; 
+  .opacity(.6) !important;
+}
+#swipebox-bottom-bar{
+  bottom:0px !important;
+  background: transparent !important;
+}
+#swipebox-action.visible-bars{
+  -ms-transform:translateY(0) !important;
+  -webkit-transform:translateY(0) !important;
+  transform:translateY(0) !important;
+  .opacity(.5) !important;
+}
+
