@@ -8,6 +8,9 @@ Template.albumItem.helpers({
   },
   visibleIcon: function () {
     return this.isVisible === 1 ? 'glyphicon-eye-open' : 'glyphicon-eye-close';
+  },
+  visibleBtn: function () {
+    return this.isVisible === 1 ? 'btn-success' : 'btn-default';
   }
 });
 
