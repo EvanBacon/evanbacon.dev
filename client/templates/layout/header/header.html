@@ -9,7 +9,13 @@
             <span class="icon-bar"></span>
           </button>
           <span class="navbar-brand logo">
-            <a href="{{ pathFor route='home'}}"><img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" alt="{{ getSetting 'title'}}"><!--  <span>{{ getSetting 'title' }}</span> --></a>
+            <a href="{{ pathFor route='home'}}">
+              {{#if getSetting 'logoUrl' }}
+                <img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" width="{{ getSetting 'logoWidth' }}" alt="{{ getSetting 'title'}}">
+              {{else}}
+                <h3>{{ getSetting 'title' }}</h3>
+              {{/if}}
+            </a>
           </span>
         </div>
 
@@ -24,22 +30,17 @@
             
               {{#if isLoggedIn}}
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle dd-user" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="{{pathFor 'mediaManager'}}"><span class="glyphicon glyphicon-th"></span> Gallery Manager</a></li>
+                  <li><a href="{{pathFor route='mediaManager'}}"><span class="glyphicon glyphicon-th"></span> Gallery Manager</a></li>
                   <li role="presentation" class="divider"></li>
-                  <li><a href="{{pathFor 'atChangePwd'}}"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                  <li><a href="{{pathFor route='atChangePwd'}}"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
                   <li role="presentation" class="divider"></li>
                   <li><a href="{{pathFor route='signOut'}}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
                 </ul>
               </li>
               {{else}}
-               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sign In <span class="caret"></span></a>
-                <ul class="dropdown-menu adminbox" role="menu">
-                  <li>{{> atForm}}</li>                
-                </ul>
-              </li>
+               <li><a href="{{pathFor route='atSignIn'}}" class="sign-in">Sign In</a></li>
               {{/if}}
           </ul>
         </div>
