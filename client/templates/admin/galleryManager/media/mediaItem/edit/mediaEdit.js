@@ -51,18 +51,18 @@ Template.mediaEdit.events({
                              }
                      });
 
-	    updateSaveButton('wait');
+	    updateSaveButton('complete');
 	 //    try {
-		Meteor.call('updateMedia', { 'id': this._id, 'credit': credit } , function (err) { 
-		    	if (err) {
-		    		console.log(err.reason);
-		    		updateSaveButton('error');
-		    	} else {
-					updateSaveButton('complete');
-					// clearErrors();
-		    	}
+		// Meteor.call('updateMedia', { 'id': this._id, 'credit': credit } , function (err) { 
+		//     	if (err) {
+		//     		console.log(err.reason);
+		//     		updateSaveButton('error');
+		//     	} else {
+		// 			updateSaveButton('complete');
+		// 			// clearErrors();
+		//     	}
 		    	
-		    });
+		//     });
 		// } catch (err) {
 	 //      errorOnSave();
 	 //    }

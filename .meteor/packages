@@ -20,7 +20,6 @@ elmar-lib
 useraccounts:bootstrap
 less
 mrt:jquery-ui-sortable
-horka:swipebox
 nemo64:bootstrap
 mrt:jquery-imagesloaded
 mizzao:autocomplete
@@ -34,3 +33,4 @@ npm-container
 meteorhacks:npm
 email
 elmar-contact-form
+elmar-swipebox
