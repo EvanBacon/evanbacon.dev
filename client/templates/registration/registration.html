@@ -1,0 +1,17 @@
+<template name="registration">
+	<div class="col-md-6 col-md-offset-3">
+		<h3 class="text-center">Admin Register (one-time only)</h3>
+		{{#autoForm schema=registrationSchema id="regForm" type="method" meteormethod="createAdminUser"}}
+
+	    {{> afQuickField name="email"}}
+	    {{> afQuickField name="password" type="password"}}
+
+	    <br>
+	    <div class="submit-buttons">
+	      <button type="submit" class="btn btn-primary">Submit</button>
+	    </div>
+	    {{/autoForm}}
+	    <br>
+	    <div class="submit-error hidden alert-danger"><h4>{{ error }}</h4></div>
+	</div>
+</template>
