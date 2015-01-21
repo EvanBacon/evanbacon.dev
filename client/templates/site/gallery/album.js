@@ -1,20 +1,25 @@
 var $container,
-	swipeboxInstance,
+	magnificInstance,
 	loadCount = 0;
 
-var createSwipebox = function () {
-	// if (!! swipeboxInstance) {
-	// 	swipeboxInstance.refresh();
-	// } else {
-		swipeboxInstance = $(".swipebox:not(.swipebox.isotope-hidden)").swipebox({
-				useCSS : false, // false will force the use of jQuery for animations
-				useSVG : false, // false to force the use of png for buttons
-				initialIndexOnArray : 0, // which image index to init when a array is passed
-				hideCloseButtonOnMobile : false, // true will hide the close button on mobile devices
-				hideBarsDelay : 3000, // delay before hiding bars on desktop
-				loopAtEnd: true // true will return to the first image after the last image i
-		});
-	//} 
+var createMagnificPopup = function () {
+        magnificInstance = $('#album').magnificPopup({
+          delegate: 'a:not(.image-popup-vertical-fit.isotope-hidden)',
+          type: 'image',
+          tLoading: 'Loading image #%curr%...',
+          mainClass: 'mfp-img-mobile',
+          gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+          },
+          image: {
+            tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+            titleSrc: function(item) {
+              return item.el.attr('title');
+            }
+          }
+        });
 }
 
 var initGrid = function () {
@@ -57,6 +62,7 @@ var initGrid = function () {
 
 Template.album.rendered = function () {
 	$('.itemP').addClass('hidden');
+	createMagnificPopup();
 };
 
 Template.album.helpers({
@@ -82,20 +88,20 @@ Template.album.helpers({
 });
 
 Template.album.events({
-	'click .swipebox': function (e) {
+	'click .image-popup-vertical-fit': function (e) {
 	  	e.preventDefault();	
-		createSwipebox();
+		//createMagnificPopup();
    	},
    	'click .filter-btn': function (e) {
    		e.preventDefault();
    		var filterValue = $(e.currentTarget).attr('data-filter');
   		$container.isotope({ filter: filterValue });
-  		createSwipebox();
+  		createMagnificPopup();
    	},
    	'click .load-more': function (e) {
    		$('.filter-btn').removeClass('active');
 		$('.filter-btn[data-filter="*"]').addClass('active');
-		createSwipebox();
+		createMagnificPopup();
    	}
 });
 

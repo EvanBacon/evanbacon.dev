@@ -20,7 +20,7 @@
 		  <div class="gutter-sizer"></div>
 	      <div class="grid-sizer"></div>
 		  {{#each sortedItems}}
-		   	<a class="swipebox itemP {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{#if this.metadata.title }} {{ this.metadata.title }} {{#if this.metadata.caption}} ~ {{ this.metadata.caption }} {{/if}} {{else}}{{this.original.name}}{{/if}}{{#if this.metadata.credit}} ~ {{this.metadata.credit}} {{/if}}">
+		   	<a class="image-popup-vertical-fit itemP {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}" title="{{#if this.metadata.title }} {{ this.metadata.title }} {{#if this.metadata.caption}} ~ {{ this.metadata.caption }} {{/if}} {{else}}{{this.original.name}}{{/if}}{{#if this.metadata.credit}} ~ by {{this.metadata.credit}} {{/if}}">
 
 		   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
 		   		<div class="caption">
