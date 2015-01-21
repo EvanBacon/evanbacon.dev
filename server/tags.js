@@ -117,38 +117,3 @@ Meteor.methods({
         Tags.remove({_id: tagId});
     }
 });
-
-// Fixtures
-if (Tags.find().count() === 0) {
-
-  Tags._ensureIndex({name: 1}, {unique: 1});
-  
-  
-  Tags.insert( 
-    { 
-      name: 'storms',
-      slug: 'storms' 
-    }
-  );
-
-  Tags.insert( 
-    { 
-      name: '2014', 
-      slug: '2014'
-    }
-  );
-
-  Tags.insert( 
-    { 
-      name: '2013',
-      slug: '2013' 
-    }
-  );
-
-  Tags.insert( 
-    { 
-      name: 'kansas',
-      slug: 'kansas' 
-    }
-  );
-}

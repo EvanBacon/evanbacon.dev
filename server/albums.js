@@ -120,12 +120,3 @@ Meteor.methods({
         );
     }
 });
-
-// // Fixtures
-// if (Albums.find().count() === 0) {
-
-//   Albums._ensureIndex({slug: 1}, {unique: 1});
-//   
-  
-
-// }
