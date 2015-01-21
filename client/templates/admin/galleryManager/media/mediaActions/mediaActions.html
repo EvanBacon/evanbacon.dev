@@ -1,12 +1,12 @@
 <template name="mediaActions">
-	<div class="col-sm-2">
+	<div class="col-xs-4 col-sm-3">
 
 		{{> selectionAction name='images' create='Album' add='Tags'}}
 
 		{{> tagSearchModal }}
 
 	</div>
-	<div class="col-sm-7">
+	<div class="col-xs-8 col-sm-5">
 		Sort by: 
 		<select id="sortBy">
 			<option value="createdAt">Uploaded Date</option>
@@ -15,8 +15,8 @@
 		    <option value="size">Size</option>
 		</select>
 		<select id="sortDir">
-		    <option value="-1">Descending</option>
-		    <option value="1">Ascending</option>
+		    <option value="-1">Desc</option>
+		    <option value="1">Asc</option>
 		</select>
 
 		<div class="media-action-item">
@@ -24,7 +24,7 @@
 			<a href="#" class="list-style" id="thumbnail"><span class="glyphicon glyphicon-th"></span></a>
 		</div>
 	</div>
-	<div class="col-sm-3">
+	<div class="col-xs-12 col-sm-4">
 	   	{{> searchForm title='by image info, tag or album' }}
 	   	<!-- <span class="instructions">Enter image info, tags, or albums</span> -->
 	</div>
