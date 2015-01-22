@@ -7,6 +7,11 @@ Meteor.methods({
         	email: user.email,
         	password: user.password
     	});
+
+      // set the emailTo setting field
+      if (!! Settings) {
+        Settings.update({}, { $set: { "emailTo": user.email }});
+      }
     },
     hasAdmin: function () {
     	return ( Meteor.users.find().fetch().length > 0 );
