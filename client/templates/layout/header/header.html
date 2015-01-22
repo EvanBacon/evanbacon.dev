@@ -9,13 +9,23 @@
             <span class="icon-bar"></span>
           </button>
           <span class="navbar-brand logo">
-            <a href="{{ pathFor route='home'}}">
               {{#if getSetting 'logoUrl' }}
+              <a href="{{ pathFor route='home'}}">
                 <img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" width="{{ getSetting 'logoWidth' }}" alt="{{ getSetting 'title'}}">
+              </a>
               {{else}}
-                <h3>{{ getSetting 'title' }}</h3>
+                  {{#if getSetting 'title'}}
+                  <a href="{{ pathFor route='home'}}">
+                    <h3>{{ getSetting 'title' }}</h3>
+                  </a>
+                  {{ else }} 
+                    {{ #if isLoaded }}
+                    <a href="{{ pathFor route='settings'}}">
+                      <p class="set-link">Set Logo/Title</p>
+                    </a>
+                    {{/if}}
+                  {{/if}}
               {{/if}}
-            </a>
           </span>
         </div>
 
