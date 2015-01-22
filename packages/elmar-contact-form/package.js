@@ -8,9 +8,12 @@ Package.onUse(function (api) {
 
 
   api.use([
-    'templating',
-    // 'iron:router'
+    'templating'
   ], 'client');
+
+  api.use([
+    'elmar-lib'
+  ], ['client', 'server']);
 
   api.use([
     'aldeed:autoform',
@@ -28,7 +31,8 @@ Package.onUse(function (api) {
     ], ['server']);
 
   api.add_files([
-    'lib/contactSchema.js'
+    'lib/contactSchema.js',
+    'lib/settings.js'
     ], ['client', 'server']);
 
  

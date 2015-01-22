@@ -1,8 +1,4 @@
-Meteor.startup(function () {
-    // configure MAIL_URL here, or set it as an environmental variable
-    // process.env.MAIL_URL = 'smtp://username%40gmail.com:password@smtp.gmail.com:465/';
-    process.env.MAIL_URL='smtp://' + process.env.GMAILUSERNAME + '%40gmail.com:' + encodeURIComponent(process.env.GMAILPASSWORD) + '@smtp.gmail.com:465';
-});
+
 
 Meteor.methods({
   sendEmail: function(doc) {
@@ -11,16 +7,18 @@ Meteor.methods({
 
     // Build the e-mail text
     var text = "Name: " + doc.name + "\n\n"
-            + "Email: " + doc.email + "\n\n\n\n"
+            + "Email: " + doc.email + "\n\n\n"
             + doc.message;
 
     this.unblock();
 
+    var emailTo = getSetting("emailTo");
+    
     // Send the e-mail
     Email.send({
-        to: process.env.EMAIL_TO, // send-to e-mail address set as environmental variable 
+        to: emailTo, // send-to e-mail address set in settings 
         from: doc.email,
-        subject: "Website Contact Form - Message From " + doc.name,
+        subject: "Contact Form - Message From " + doc.name,
         text: text
     });
   }
