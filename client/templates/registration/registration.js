@@ -1,13 +1,7 @@
 AutoForm.hooks({
   regForm: {
     onSuccess: function(operation, result, template) {
-      var email = template.find('#inputEmail').value
-        , password = template.find('#inputPassword').value;
-
-      Meteor.loginWithPassword(email, password, function(err){
-        if (err)
-          console.log(err.reason);
-      });
+      Router.go('atSignIn');
     },
     onError: function(operation, error, template) {
       $('.submit-error').removeClass('hidden');
