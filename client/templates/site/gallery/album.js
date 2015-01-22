@@ -40,28 +40,31 @@ var initGrid = function () {
 			loadCount = 0;
 		}
 
-		$container = $('#album').imagesLoaded( function() {
-			$container.isotope({
-			    layoutMode:  'packery',
-			    itemSelector: '.itemP',
-			    filter:       '*', 
-		  	    packery: {
-		  	   	   gutter: '.gutter-sizer',
-		  	       columnWidth: '.grid-sizer',
-		  	   }
+		if (!! Isotope) {
+			$container = $('#album').imagesLoaded( function() {
+				$container.isotope({
+				    layoutMode:  'packery',
+				    itemSelector: '.itemP',
+				    filter:       '*', 
+			  	    packery: {
+			  	   	   gutter: '.gutter-sizer',
+			  	       columnWidth: '.grid-sizer',
+			  	   }
+				});
 			});
-		});
 
-		loadCount++;
-		
-		$('.itemP').removeClass('hidden');
-		$('#album').removeClass('hidden').fadeIn();
+			loadCount++;
+			
+			$('.itemP').removeClass('hidden');
+			$('#album').removeClass('hidden').fadeIn();
+		}
 
 	});
 };
 
 Template.album.rendered = function () {
 	$('.itemP').addClass('hidden');
+	initGrid();
 	createMagnificPopup();
 };
 
