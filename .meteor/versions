@@ -37,11 +37,11 @@ ddp@1.0.13
 deps@1.0.6
 ejson@1.0.5
 elmar-contact-form@0.1.0
-elmar-google-analytics@0.0.0
+elmar-google-analytics@0.1.0
 elmar-isotope-packery@0.0.0
 elmar-lib@0.1.0
-elmar-magnific-popup@0.0.0
-elmar-save-loader@0.0.1
+elmar-magnific-popup@0.1.0
+elmar-save-loader@0.1.0
 elmar-search@0.1.0
 email@1.0.5
 fastclick@1.0.2
