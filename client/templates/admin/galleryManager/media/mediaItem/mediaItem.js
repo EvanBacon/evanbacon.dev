@@ -28,7 +28,6 @@ Template.mediaItem.events({
         var thumbId = "#thumb-" + this._id;
         if(checked) {
           $(thumbId).addClass("selected");
-          $(thumbId).removeClass("editing");
           SelectionAction.setCheckedCount(++numChecked);
         } else {
 
