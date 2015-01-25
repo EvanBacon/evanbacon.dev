@@ -1,5 +1,7 @@
+// styles for packery/isotope instances
+
 #album {
-	margin: 0 auto;
+	margin: 0 auto 0 20px !important;
 }
 
 .gutter-sizer {
@@ -22,7 +24,8 @@
 
 .itemP.w2 { 
 	width: 18.4%; 
-	.rounded(20px);
+	.rounded(10px);
+	background-color: #FFF;
 }
 
 .itemP.w2:hover {
@@ -37,11 +40,7 @@
 .itemP img { width: 100%;  }
 .itemP.w2 img { width: 100%; }
 
-.item-album {
-  .transition(all 0.3s ease-in-out); 
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     .grid-sizer {
 	  width: 30%;
 	}
