@@ -1,6 +1,6 @@
 Package.describe({
   summary: "Elmar Save Loader package",
-  version: '0.0.1',
+  version: '0.1.0',
   name: "elmar-save-loader"
 });
 
@@ -12,6 +12,7 @@ Package.onUse(function (api) {
   ], ['client']);
 
   api.add_files([
+    'lib/client/saving_loader.css',
     'lib/client/saving_loader.html',
     'lib/client/saving_loader.js',
     'lib/client/track_changes.js'
