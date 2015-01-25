@@ -1,5 +1,6 @@
 Package.describe({
 	summary: "Google Analytics package",
+	version: '0.1.0',
 	name: "elmar-google-analytics"
 });
 

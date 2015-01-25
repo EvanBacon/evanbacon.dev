@@ -1,5 +1,6 @@
 Package.describe({
 	summary: "Magnific Popup Plugin",
+	version: '0.1.0',
 	name: "elmar-magnific-popup"
 });
 

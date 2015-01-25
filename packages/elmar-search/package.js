@@ -6,11 +6,7 @@ Package.describe({
 
 Package.onUse(function (api) {
 
-  // api.use(['elmar-lib', 'elmar-base'], ['client']);
-
   api.use([
-    // 'jquery',
-    // 'underscore',
     'templating'
   ], 'client');
 
