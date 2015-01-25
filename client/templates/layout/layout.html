@@ -1,18 +1,30 @@
-<template name="layout">  
-  <div class="container-fluid"> 
-    {{> yield region="header"}}
+<template name="layout"> 
+  <div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+                      
+            <!-- sidebar -->
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+               {{> yield region="header"}}
+            </div>
+            <!-- /sidebar -->
+          
+            <!-- main right col -->
+            <div class="column col-sm-10 col-xs-11" id="main">
+                
+              {{#if isAdmin}}
+                {{> adminHeader}}
+              {{/if}}
 
-    <div id="main" class="row-fluid">      
-      {{> yield}}    
-    </div> 
+              <div class="{{#if isAdmin }}padding-admin{{else}}padding{{/if}}">
+                  {{> yield}} 
+                  {{> yield region="footer"}} 
+              </div>
 
-    {{> yield region="footer"}} 
+            </div>
+            <!-- /main -->
+          
+        </div>
+    </div>
   </div>
-</template>
-
-
-<template name="layout_no_header">
-    <div id="main" class="row-fluid">      
-      {{> yield }}    
-    </div>  
 </template>

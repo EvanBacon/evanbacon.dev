@@ -1,0 +1,37 @@
+<template name="adminHeader">
+  <div class="navbar navbar-admin navbar-static-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">
+              <span class="glyphicon glyphicon-cog"></span>
+          </span>
+        </div>
+
+        <nav class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav">
+            <li class="{{ isActive 'mediaManager'}}"><a href="{{ pathFor route='mediaManager'}}">Images</a></li>
+            <li class="{{ isActive 'albumManager'}}"><a href="{{ pathFor route='albumManager'}}">Albums</a></li>
+            <li class="{{ isActive 'tagManager'}}"><a href="{{ pathFor route='tagManager'}}">Tags</a></li>
+            <li class="{{ isActive 'settings'}}"><a href="{{ pathFor route='settings'}}">Settings</a></li>
+          </ul>
+         
+          <ul class="nav navbar-nav navbar-right">
+            
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle dd-user" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{pathFor route='atChangePwd'}}"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                  <li role="presentation" class="divider"></li>
+                  <li><a href="{{pathFor route='signOut'}}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                </ul>
+              </li>
+          </ul>
+        </nav>
+  </div>
+</template>
+

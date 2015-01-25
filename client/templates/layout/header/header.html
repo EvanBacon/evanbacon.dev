@@ -1,60 +1,44 @@
 <template name="header">
-  <nav class="navbar navbar-default navbar-main" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <span class="navbar-brand logo">
-              {{#if getSetting 'logoUrl' }}
-              <a href="{{ pathFor route='home'}}">
-                <img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" width="{{ getSetting 'logoWidth' }}" alt="{{ getSetting 'title'}}">
-              </a>
-              {{else}}
-                  {{#if getSetting 'title'}}
-                  <a href="{{ pathFor route='home'}}">
-                    <h3>{{ getSetting 'title' }}</h3>
-                  </a>
-                  {{ else }} 
-                    {{ #if isLoaded }}
-                    <a href="{{ pathFor route='settings'}}">
-                      <p class="set-link">Set Logo/Title</p>
-                    </a>
-                    {{/if}}
-                  {{/if}}
-              {{/if}}
-          </span>
-        </div>
 
-        <div class="collapse navbar-collapse" id="navbar">
-          <ul class="nav navbar-nav">
-            <li><a href="{{ pathFor route='albums'}}">Albums</a></li>
-            <li><a href="{{ pathFor route='albums'}}">About</a></li>
-            <li><a href="{{ pathFor route='contact'}}">Contact</a></li>
-          </ul>
-         
-          <ul class="nav navbar-nav navbar-right">
-            
-              {{#if isLoggedIn}}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle dd-user" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{{pathFor route='mediaManager'}}"><span class="glyphicon glyphicon-th"></span> Gallery Manager</a></li>
-                  <li role="presentation" class="divider"></li>
-                  <li><a href="{{pathFor route='atChangePwd'}}"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
-                  <li role="presentation" class="divider"></li>
-                  <li><a href="{{pathFor route='signOut'}}"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
-                </ul>
-              </li>
-              {{else}}
-               <li><a href="{{pathFor route='atSignIn'}}" class="sign-in">Sign In</a></li>
-              {{/if}}
-          </ul>
-        </div>
-      </div>
-  </nav>
+  <ul class="nav navbar-main">
+    <li><a href="#" data-toggle="offcanvas" class="visible-xs text-left btn-toggle"><i class="glyphicon glyphicon-align-justify"></i></a></li>
+  </ul>
+
+  <div class="logo hidden-xs" id="logo">
+      {{#if getSetting 'logoUrl' }}
+      <a href="{{ pathFor route='home'}}">
+        <img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" width="{{ getSetting 'logoWidth' }}" alt="{{ getSetting 'title'}}">
+      </a>
+      {{else}}
+          {{#if getSetting 'title'}}
+          <a href="{{ pathFor route='home'}}">
+            <h3>{{ getSetting 'title' }}</h3>
+          </a>
+          {{ else }} 
+            {{ #if isLoaded }}
+            <a href="{{ pathFor route='settings'}}">
+              <p class="set-link">Set Logo/Title</p>
+            </a>
+            {{/if}}
+          {{/if}}
+      {{/if}}
+  </div>   
+  <ul class="nav hidden-xs" id="lg-menu">
+    <li><a href="{{ pathFor route='albums'}}">Albums</a></li>
+    <li><a href="{{ pathFor route='about'}}">About</a></li>
+    <li><a href="{{ pathFor route='contact'}}">Contact</a></li>
+  </ul>
+
+  <div class="visible-xs" id="title">
+    <h3>{{ getSetting 'title'}}</h3>
+  </div>
+    
+
+  {{#unless isAdmin}}
+    <div class="list-unstyled hidden-xs" id="sidebar-footer">
+        <a href="{{pathFor route='atSignIn'}}" class="btn btn-default sign-in">Sign In</a>
+    </div>
+  {{/unless}}
+
 </template>
 

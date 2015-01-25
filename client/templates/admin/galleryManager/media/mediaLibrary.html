@@ -1,15 +1,13 @@
 <template name="mediaLibrary">
-	<div class="main">
-		<div class="col-sm-12">
-			<br>
-	   		<div class="text-center">
-   			{{> mediaUploader }}
-			</div>
+	<div class="col-sm-12">
+		<br>
+   		<div class="text-center">
+			{{> mediaUploader }}
 		</div>
-	    <div class="clear"></div>
-	
-		{{> mediaActions}}
-	
-	    {{> mediaList }}
 	</div>
+    <div class="clear"></div>
+
+	{{> mediaActions}}
+
+    {{> mediaList }}
 </template>
