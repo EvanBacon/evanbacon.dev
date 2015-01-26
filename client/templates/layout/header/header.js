@@ -10,6 +10,7 @@ Template.header.rendered = function () {
     	$(this).find('i').toggleClass('glyphicon-align-justify glyphicon-chevron-left');
 	    $('.row-offcanvas').toggleClass('active');
 	    $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
+	    $('#album-list').toggleClass('hidden-xs').toggleClass('visible-xs');
 	    $('#xs-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
 	    $('#sidebar-footer').toggleClass('hidden-xs').toggleClass('visible-xs');
 	    $('#logo').toggleClass('hidden-xs').toggleClass('visible-xs');

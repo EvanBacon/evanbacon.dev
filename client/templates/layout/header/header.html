@@ -32,13 +32,18 @@
   <div class="visible-xs" id="title">
     <h3>{{ getSetting 'title'}}</h3>
   </div>
+
+   <br>
+  <div class="hidden-xs" id="album-list">
+    {{> albumTitles }}
+  </div>
     
 
-  {{#unless isAdmin}}
+  <!-- {{#unless isAdmin}}
     <div class="list-unstyled hidden-xs" id="sidebar-footer">
         <a href="{{pathFor route='atSignIn'}}" class="btn btn-default sign-in">Sign In</a>
     </div>
-  {{/unless}}
+  {{/unless}} -->
 
 </template>
 
