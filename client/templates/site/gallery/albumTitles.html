@@ -1,0 +1,9 @@
+<template name="albumTitles">
+    {{#if albums }} 
+	  {{#each albums}}
+	  	<p class="album-item-label"><a href="{{ pathFor route='album' slug=this.slug}}">{{this.title}}</a></p>
+	  {{/each}}
+	  <div class="clear"></div>
+  	{{/if}}
+
+</template>
