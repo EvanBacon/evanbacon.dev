@@ -76,10 +76,20 @@
 
 .album-item-label {
   float: left;
-  padding: 5px;
-  margin: 3px;
-  background-color:#DDD;
+  padding: 3px;
+  margin: 2px;
+  background-color: @brand-info;
+  color: #FFF !important;
+  font-weight: bold !important;
   .rounded(3px);
+}
+
+.album-item-label:hover {
+  background-color: darken(@brand-info, 20%);
+} 
+
+.album-item-label a:hover {
+  text-decoration: none !important;
 }
 
 // full screen dialog modal

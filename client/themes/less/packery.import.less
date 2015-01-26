@@ -5,7 +5,7 @@
 }
 
 .gutter-sizer {
-  width: 1%;
+  width: .5%;
 }
 
 .grid-sizer {
@@ -17,15 +17,19 @@
   text-align: center;
   float: left;
   width: 18.4%;
+  // border: 4px solid #333;
+  // border-color: hsla(0, 0%, 0%, 0.2); 
+  // .rounded(5px);
   border: 4px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.2); 
-  .rounded(3px);
+    border-color: hsla(0, 0%, 0%, 0.2); 
 }
 
 .itemP.w2 { 
 	width: 18.4%; 
-	.rounded(10px);
+	.rounded(5px);
 	background-color: #FFF;
+	border: 4px solid #333;
+    border-color: hsla(0, 0%, 0%, 0.2); 
 }
 
 .itemP.w2:hover {
@@ -37,7 +41,7 @@
 	text-decoration: none;
 }
 
-.itemP img { width: 100%;  }
+.itemP img { width: 100%; .rounded(3px);  }
 .itemP.w2 img { width: 100%; }
 
 @media screen and (max-width: 1024px) {

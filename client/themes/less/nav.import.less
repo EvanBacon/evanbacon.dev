@@ -16,6 +16,9 @@ nav li a {
 
 #sidebar {
     padding:0px;
+    // background-image:url('/img/bg.png') !important;
+    border-right: 2px dashed #CCC;
+    // .box-shadow(1px 1px 2px 0px rgba(0,0,0,0.3)) !important;
   // .transition(all 0.5s ease);
 }
 
@@ -69,10 +72,43 @@ nav li a {
   text-align: left !important;
 }
 
+#sidebar .album-item-label {
+  padding: 2px !important;
+  // float: right !important;
+  float: none !important;
+  display: inline-block !important;
+}
+
+#sidebar .album-item-label a {
+  font-size: 0.8em;
+  color: #FFF !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+#sidebar .album-item-label a:hover {
+  text-decoration: none !important;
+}
+
+#album-list {
+  width: 100% !important;
+  // height: 150px !important;
+  // min-height: 100% !important;
+  // overflow: scroll !important;
+  padding: 5px 3px !important;
+  // border-bottom: 1px solid #CCC;
+  // float: none !important;
+  // display: inline-block !important;
+  text-align: center !important;
+  // margin-left: 5px !important;
+  // background-color: #FFF !important;
+  // border: 3px solid #CCC !important;
+}
+
 
 #sidebar-footer {
   position:absolute;
-  bottom:200px;
+  bottom:150px;
   width: 100%;
   color: #AAA !important;
   font-size: .9em;
@@ -160,31 +196,40 @@ nav li a {
 
 .navbar-albums {
   .box-shadow(inset 0px 10px 5px 0px rgba(0,0,0,0.4));
-  background-color: darken(@gray-dark, 5%) !important;
+  background-color: #000 !important;
   border: none !important;
   font-size: 0.85em;
   .text-shadow();
   .border-radius(0, 5px, 5px, 0) !important;
-
+  .opacity(.6);
   .navbar-brand {
-      border-right: 1px solid darken(@gray-dark, 10%) !important;
+      // border-right: 1px solid darken(@gray-dark, 10%) !important;
   }
 
   .navbar-brand h3 {
-      color: lighten(@gray-dark, 20%) !important;
-      font-size: 1.1em;
-      margin: 0 4px;
+      color: lighten(@gray, 20%) !important;
+      font-size: 1.0em;
+      margin: 3px 3px 0 0;
+      // .rotation(-15deg);
+  }
+
+  .navbar-nav li {
+    margin: 2px !important;
+    // padding: 2px !important;
   }
 
   .navbar-nav > li > a {
     margin: 8px 0px !important;
     padding: 7px !important; 
-    border-right: 1px solid darken(@gray-dark, 10%) !important;
-    border-left: 1px solid lighten(@gray-dark, 5%) !important;
+    // border-right:  #000 !important; //1px solid darken(@gray, 10%) !important;
+    // border-left: 1px solid darken(@gray-dark, 10%) !important;
   }
 
+  // .navbar-nav > li > a:last-child {
+  //   border-right: 1px solid darken(@gray-dark, 10%) !important;
+  // }
+
   .btn-link {
-    margin: 0;
     color: @brand-info !important;
   }
 
@@ -194,7 +239,7 @@ nav li a {
 
   .btn-link.active {
     border: 2px solid @brand-info !important;
-    background: lighten(@gray-dark, 10%) !important;
+    background: #000 !important;
     text-decoration: none;
   }
 
@@ -240,10 +285,11 @@ nav li a {
     margin:0 4px;
     color: @gray !important;
     font-size:1.1em;
+    // .rotation(-15deg);
   }
 
   .navbar-brand .glyphicon {
-    .rotation(180deg) !important;
+    .rotation(-160deg) !important;
   }
 
   .navbar-nav {
