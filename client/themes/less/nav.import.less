@@ -17,7 +17,7 @@ nav li a {
 #sidebar {
     padding:0px;
     // background-image:url('/img/bg.png') !important;
-    border-right: 2px dashed #CCC;
+    // border-right: 4px dotted #CCC;
     // .box-shadow(1px 1px 2px 0px rgba(0,0,0,0.3)) !important;
   // .transition(all 0.5s ease);
 }
@@ -33,14 +33,13 @@ nav li a {
     text-align: center;
 }
 #sidebar .nav li>a:hover {
-    background-color:#DDD;
+    background-color:#ededed;
 }
 
 #sidebar .logo {
   position: relative;
   padding: 0 5px 0 0; 
-  // margin:0 20px 0 8px;
-  margin: 20px 5px !important;
+  margin: 10px 2px !important;
 
 
   img {
@@ -56,7 +55,7 @@ nav li a {
     letter-spacing: 0;
     padding: 5px 0;
     text-align: center;
-    .rounded(3px);
+    .rounded(2px);
   }
 }
 
@@ -107,8 +106,9 @@ nav li a {
 
 
 #sidebar-footer {
-  position:absolute;
-  bottom:150px;
+  // position:absolute;
+  // bottom:150px;
+  margin-top: 100px;
   width: 100%;
   color: #AAA !important;
   font-size: .9em;
@@ -146,6 +146,15 @@ nav li a {
 
 //----------------------------------------------------
 
+.home-links a {
+  display: inline-block;
+  margin: 5px;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: darken(@brand-info, 20%);
+}
 
 .navbar-admin {
     border-width: 0;
@@ -195,19 +204,19 @@ nav li a {
 
 
 .navbar-albums {
-  .box-shadow(inset 0px 10px 5px 0px rgba(0,0,0,0.4));
-  background-color: #000 !important;
+  // .box-shadow(inset 0px 10px 5px 0px rgba(0,0,0,0.4));
+   // background-color: #000 !important;
   border: none !important;
   font-size: 0.85em;
   .text-shadow();
   .border-radius(0, 5px, 5px, 0) !important;
-  .opacity(.6);
-  .navbar-brand {
-      // border-right: 1px solid darken(@gray-dark, 10%) !important;
-  }
+  // .opacity(.6);
+  // .navbar-brand {
+  //     // border-right: 1px solid darken(@gray-dark, 10%) !important;
+  // }
 
   .navbar-brand h3 {
-      color: lighten(@gray, 20%) !important;
+      color: @gray !important;
       font-size: 1.0em;
       margin: 3px 3px 0 0;
       // .rotation(-15deg);
