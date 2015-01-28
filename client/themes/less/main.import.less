@@ -34,7 +34,7 @@ fieldset {
   padding: 20px;
   margin-bottom: 30px;
   margin-left: 0;
-  background: #DDD;
+  background: transparent;
   .rounded(4px);
 }
 
@@ -75,9 +75,29 @@ input, select, textarea {
   border: 1px solid lighten(@gray-light, 15%) !important;
 }
 
+.btn-square {
+  .rounded(2px) !important;
+  border: 3px solid darken(@brand-info, 20%) !important;
+  background: none;
+  font-size: 1em;
+  text-transform: uppercase !important;
+  color: darken(@brand-info, 20%) !important;
+  font-weight: bold !important;
+  letter-spacing: 1px;
+}
+
+.btn-square:hover {
+  background: #DDD !important;
+  // color: #FFF;
+}
+
+.btn-square img {
+  height: 25px;
+}
+
 .selected {
    .transition(all 0.3s ease-in-out);
-   border: 4px solid @brand-primary !important;
+   border: 1px solid @brand-primary !important;
    background-color: lighten(@brand-info, 20%) !important;
 }
 
@@ -117,22 +137,21 @@ input, select, textarea {
 }
 
 .column .padding-admin {
-    padding: 50px 10px 0 0;
+    padding: 50px 10px 0;
 }
 
 .column .padding {
-    padding: 0 10px;
+    padding: 0 10px 0;
 }
 
 .box {
-    bottom: 0; /* increase for footer use */
+    bottom: 0; 
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
-    background-color:#EEE;
-
-    // background-image:url('/img/bg.png') !important;
+    background: #f2ede2; 
+    .gradient(#FFF, #f2ede2, #FFF);
 }
 
 #main {
@@ -143,7 +162,21 @@ input, select, textarea {
 }
 
 #footer {
-    margin-bottom:20px;
+    bottom: 0;
+    margin-top:50%;
+    border-top: 1px solid #CCC;
+    text-align: center;
+    padding-top: 10px;
+    height: 60px;
+    display: block;
+}
+
+#footer .copyright {
+  color: #999;
+  text-transform: uppercase;
+  display: inline-block;
+  float: right;
+  margin-right: 10px;
 }
 
 // adjust the contents on smaller devices 
@@ -309,3 +342,80 @@ input, select, textarea {
 .no-gutter-top {
   padding-top: 0;
 }
+
+
+//---------------------------
+// home page
+
+.home-circle {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+    // background-color: rgba(255,255,255,0.3);
+
+    .content {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 80px auto auto;
+        width: 400px;
+        height: 400px;
+        background: #EEE;
+        border: 1px solid hsla(0, 0%, 0%, .1);
+        // border-color: hsla(170, 5%, 95%, .5) !important; 
+        .rounded(50%);
+        pointer-events: auto;
+
+        // left: 30%;
+        // top: 10%;
+        // z-index: 100;
+        // .opacity(0.9);
+        // .box-shadow(1px,1px,10px,0, rgba(0,0,0,0.8));
+        .box-shadow(0px -10px 10px 0px rgba(0,0,0,0.3))
+    }
+
+    .logo {
+      margin-top: 40px;
+      height: 80px;
+    }
+
+    p {
+      padding: 15px;
+      text-align: center;
+      justify: justify;
+      font-size: 1.2em;
+      // font-style: italic;
+      margin: 10px;
+      font-family:'Nothing You Could Do',Arial,sans-serif;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 90%;
+      color: #999;
+    }
+
+    @media screen and (max-width: 768px) {
+      bottom: auto;
+      left: 0;
+      margin: 0 auto;
+      overflow: auto;
+      position: relative;
+      right: auto;
+      top: 0;
+      // max-width: 100%;
+      // max-height: 100%;
+      // text-align: center;
+      // z-index: 100;
+
+    }
+
+  }
