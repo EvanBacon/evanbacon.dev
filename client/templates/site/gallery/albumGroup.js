@@ -1,7 +1,6 @@
 
 Template.albumGroup.helpers({
 	samples: function () {
-
 		var featuredId = _.findWhere(this.content, { isFeatured: 1}).id;
 		if (typeof featuredId === undefined || ! featuredId)
 			featuredId = this.content[0].id;
@@ -10,8 +9,9 @@ Template.albumGroup.helpers({
 		var media = Media.find({'metadata.albums._id': this._id}).fetch();
 
 		var featured = _.findWhere(media, { _id: featuredId });
+		var count = !! Template.parentData(1).sampleCount ? parseInt(Template.parentData(1).sampleCount) : 2;
 
-		var samples = _.sample(_.without(media, featured), 2);
+		var samples = _.sample(_.without(media, featured), count );
 
 		return _.union(samples, featured);	
 
@@ -27,6 +27,9 @@ Template.albumGroup.helpers({
 	    if (!! this.content)
 	      return this.content.length;
 	},
+	showTitle: function () {
+		return typeof Template.parentData(1).showTitle === undefined ? true : Template.parentData(1).showTitle;
+	}
 });
 
 Template.albumGroup.events({

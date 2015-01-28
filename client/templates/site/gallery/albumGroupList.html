@@ -2,8 +2,13 @@
   	<div id="album" class="album-groups">
         <div class="gutter-sizer"></div>
         <div class="grid-sizer"></div>
-	    {{#each items}}
-	        {{> albumGroup }}
-	    {{/each}}
+        {{#if home}}
+        <div class="home-circle">
+        	{{> homeCenter }}
+        </div>
+        {{/if}}
+        {{#each items}}
+        	{{> albumGroup}}
+    	{{/each}}
   	</div>
 </template>

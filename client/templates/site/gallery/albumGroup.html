@@ -1,9 +1,11 @@
 <template name="albumGroup">
 
+	{{#if showTitle }}
 	<div id="item-{{this.slug}}" class="itemP w2 item-album">
 		<a href="{{ pathFor route='album' slug=this.slug}}"><h3>{{this.title}} <br><small>{{this.description}}<br>
 			<span class="badge">{{count}}</span></small></h3></a>
 	</div>	
+	{{/if}}
 		
 	{{#each samples}}
 	   	<div class="itemP item-album" title="{{this.metadata.title}}">
