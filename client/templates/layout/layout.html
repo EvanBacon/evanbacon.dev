@@ -10,7 +10,7 @@
             <!-- /sidebar -->
           
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11" id="main">
+            <div class="column col-sm-10 col-xs-11 no-gutter" id="main" style="{{#if getSetting 'aboutBackground'}} background: url({{getSetting 'aboutBackground'}}) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover; background-size: cover; {{/if}}">
                 
               {{#if isAdmin}}
                 {{> adminHeader}}
@@ -18,11 +18,29 @@
 
               <div class="{{#if isAdmin }}padding-admin{{else}}padding{{/if}}">
                   {{> yield}} 
-                  {{> yield region="footer"}} 
+                  <br>
               </div>
+              <div class="clear"></div>
+              {{> yield region="footer"}} 
 
             </div>
             <!-- /main -->
+          
+        </div>
+    </div>
+  </div>
+</template>
+
+<template name="layoutNoHeaders"> 
+  <div class="wrapper">
+    <div class="box">
+        <div class="row">
+                      
+            
+            <div class="column col-sm-12 col-xs-12 no-gutter"> 
+                {{> yield}} 
+                {{> yield region="footer"}} 
+            </div>
           
         </div>
     </div>
