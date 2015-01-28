@@ -5,23 +5,7 @@
   </ul>
 
   <div class="logo hidden-xs" id="logo">
-      {{#if getSetting 'logoUrl' }}
-      <a href="{{ pathFor route='home'}}">
-        <img src="{{ getSetting 'logoUrl' }}" height="{{ getSetting 'logoHeight'}}" width="{{ getSetting 'logoWidth' }}" alt="{{ getSetting 'title'}}">
-      </a>
-      {{else}}
-          {{#if getSetting 'title'}}
-          <a href="{{ pathFor route='home'}}">
-            <h3>{{ getSetting 'title' }}</h3>
-          </a>
-          {{ else }} 
-            {{ #if isLoaded }}
-            <a href="{{ pathFor route='settings'}}">
-              <p class="set-link">Set Logo/Title</p>
-            </a>
-            {{/if}}
-          {{/if}}
-      {{/if}}
+      {{> siteName }}
   </div>   
   <ul class="nav hidden-xs" id="lg-menu">
     <li><a href="{{ pathFor route='albums'}}">Albums</a></li>
@@ -39,11 +23,11 @@
   </div>
     
 
-  <!-- {{#unless isAdmin}}
+  {{#unless isAdmin}}
     <div class="list-unstyled hidden-xs" id="sidebar-footer">
-        <a href="{{pathFor route='atSignIn'}}" class="btn btn-default sign-in">Sign In</a>
+        <a href="{{pathFor route='atSignIn'}}" class="btn btn-default btn-xs sign-in">Sign In</a>
     </div>
-  {{/unless}} -->
+  {{/unless}}
 
 </template>
 
