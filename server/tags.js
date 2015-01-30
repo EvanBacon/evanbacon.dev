@@ -11,6 +11,7 @@ Tags.allow({
       fetch: []
     });
 
+// publish single tag
 Meteor.publish("tag", function (id, options) {
       if (!! options && !! id) 
           return Tags.find({ _id: id }, options);
@@ -18,6 +19,7 @@ Meteor.publish("tag", function (id, options) {
           return Tags.find({ _id: id });
 });
 
+// publish all tags
 Meteor.publish("tags", function(options) { 
   if(!! options)
     return Tags.find({}, options);
@@ -25,6 +27,7 @@ Meteor.publish("tags", function(options) {
     return Tags.find({});
 });
 
+// add a new tag to Tags collection
 var addNewTag = function (tagName) {
     if (! Validation.isNotEmpty(tagName))
             throw new Meteor.Error(413, 'Tag name cannot be empty.');
@@ -43,12 +46,15 @@ var addNewTag = function (tagName) {
 };
 
 Meteor.methods({
+    // add a new tag to Tags collection
     addNewTag: function (tagName) {
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
 
         return addNewTag(tagName);    
     },
+
+    // add a new or existing tag to a single media
     addTagToMediaId: function (tagName, mediaId) {
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
@@ -61,6 +67,8 @@ Meteor.methods({
         } 
 
     },
+
+    // add a new or existing tag to multiple media
     addTagToMediaList: function (tagName, mediaList) {
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
@@ -77,6 +85,8 @@ Meteor.methods({
         }
 
     },
+
+    // update a tag's name/slug for all media with that tag
     updateTag: function (tagId, tagName) {
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
@@ -97,11 +107,15 @@ Meteor.methods({
           throw new Meteor.Error(413, 'Tag name "' + tagName + '" already exists.');
         }
     },
+
+    // remove a tag from a single media
     removeTagFromMediaId: function (tagId, mediaId) { 
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied'); 
         Media.update({_id: mediaId}, { $pull: { 'metadata.tags': {'_id': tagId}}});
     },
+
+    // remove a tag from a list of media
     removeTagFromMediaList: function (tagId, mediaList) { 
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied');
@@ -110,6 +124,8 @@ Meteor.methods({
            Media.update({_id: mediaList[i]}, { $pull: { 'metadata.tags': {'_id': tagId}}});  
         } 
     },
+
+    // permanently remove every instance of a tag
     removeTag: function (tagId, mediaId) {
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied');

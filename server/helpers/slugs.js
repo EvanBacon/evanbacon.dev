@@ -1,3 +1,4 @@
+// functions to test and create unique slugs for tags and albums
 slugFuncs = {
 	isSlugUnique: function (itemId, slug, collection) {
 		var count = collection.find({$and: [{_id: { $ne: itemId }}, {'slug': slug} ] }).count();
