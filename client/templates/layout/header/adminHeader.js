@@ -1,3 +1,5 @@
+// display this header when admin logs in
+
 Template.adminHeader.helpers({
 	isActive: function (type) {
 		var name = Router.current().route.getName();

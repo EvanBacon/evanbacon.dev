@@ -1,5 +1,8 @@
+// This template fetches "album groups" for display
+// An album group is a sampling of an album
+// sampleCount = # random sample images from album
+// showTitle = true/false - show the album title box amidst samples
 var $container;
-
 var initGrid = function () {
 	Meteor.defer(function () {
 		$container = $('#album').imagesLoaded( function() {
