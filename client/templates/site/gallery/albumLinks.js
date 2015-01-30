@@ -10,7 +10,10 @@ Template.albumLinks.helpers({
 	},
 	isActive: function (type) {
 		var slug = Router.current().params.slug;
-		return (slug === type) ? 'active' : '';
+
+		// if this is an album (not a tag), then highlight active album link
+		if (Router.current().route.getName() === 'album') 
+			return (slug === type) ? 'active' : '';
 	}
 });	
 
