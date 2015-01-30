@@ -8,7 +8,9 @@
         </div>
         {{/if}}
         {{#each items}}
-        	{{> albumGroup}}
+            {{#if isVisible }}
+        	   {{> albumGroup}}
+            {{/if}}
     	{{/each}}
   	</div>
 </template>
