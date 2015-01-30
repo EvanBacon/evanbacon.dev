@@ -14,10 +14,13 @@ Media.allow({
       fetch: []
     });
 
+ // publish all media, omit unnecessary fields
  Meteor.publish("media", function(options) {
       return Media.find({}, options, { fields: {"copies.default": 0}});
  });
 
+
+ // publish only media in a specific album 
  Meteor.publish("albumMedia", function(albumSlug, options) { 
       var album = Albums.findOne({slug: albumSlug});
 
@@ -34,9 +37,14 @@ Media.allow({
       }
 
  });
+ 
+ // publish all media with a specific tag
+ Meteor.publish("tagMedia", function(tagSlug, options) { 
+    return Media.find({'metadata.tags.slug': tagSlug}, options, { fields: {'copies.default': 0}});
+ });
 
-
+ // condensed version of media for tags list
  Meteor.publish("mediaTags", function(options) { 
-      return Media.find({}, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1}});
+    return Media.find({}, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1}});
  });
 
