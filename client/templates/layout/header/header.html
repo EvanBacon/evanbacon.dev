@@ -8,9 +8,9 @@
       {{> siteName }}
   </div>   
   <ul class="nav hidden-xs" id="lg-menu">
-    <li><a href="{{ pathFor route='albums'}}">Albums</a></li>
-    <li><a href="{{ pathFor route='about'}}">About</a></li>
-    <li><a href="{{ pathFor route='contact'}}">Contact</a></li>
+    <li class="{{ isActive 'albums'}}"><a href="{{ pathFor route='albums'}}">Albums</a></li>
+    <li class="{{ isActive 'about'}}"><a href="{{ pathFor route='about'}}">About</a></li>
+    <li class="{{ isActive 'contact'}}"><a href="{{ pathFor route='contact'}}">Contact</a></li>
   </ul>
 
   <div class="visible-xs" id="title">

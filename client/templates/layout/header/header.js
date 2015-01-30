@@ -14,6 +14,14 @@ Template.header.rendered = function () {
     });
 };
 
+Template.header.helpers({
+	isActive: function (type) {
+		var name = Router.current().route.getName();
+		console.log(name, type);
+		return (name === type) ? 'active' : '';
+	}
+});
+
 Template.header.events ({
 	'click #lg-menu a': function (e) {
 		$('.row-offcanvas').removeClass('active');
