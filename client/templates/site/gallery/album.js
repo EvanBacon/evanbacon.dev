@@ -1,3 +1,5 @@
+// Display album images
+
 var $container,
 	magnificInstance,
 	loadCount = 0;
@@ -24,7 +26,6 @@ var createMagnificPopup = function () {
 
 var initGrid = function () {
 	$('#album').addClass('hidden');
-	$('.itemP').addClass('hidden');
 	$('.itemP').hover(
         function(){
             $(this).find('.caption').fadeIn(300); 
@@ -55,35 +56,44 @@ var initGrid = function () {
 
 			loadCount++;
 			
-			$('.itemP').removeClass('hidden');
-			$('#album').removeClass('hidden').fadeIn();
 		}
+		$('#album').removeClass('hidden');
 
 	});
 };
 
 Template.album.rendered = function () {
-	$('.itemP').addClass('hidden');
 	initGrid();
 	createMagnificPopup();
 };
 
 Template.album.helpers({
-	sortedItems: function () {
+	// test if this is supposed to be an album or tag
+	isAlbum: function () {
+		var curr = Router.current().route.getName();
+        return curr === 'album';
+	},
+	mediaItems: function () {
+		$('#album').addClass('hidden');
 		initGrid();
 
-        if (!! this.album.isShuffled ) {
-        	return _.shuffle(this.items.fetch());
-        } else {
-	        var self = this;
-		    return _.sortBy(this.items.fetch(), function(m) { 
-				var weight = 0;
-				_.each(m.metadata.albums, function (a) {
-					if(a._id === self.album._id)
-						weight = a.weight;
+		if (Router.current().route.getName() === 'album') {
+	        if (!! this.album.isShuffled ) {
+	        	return _.shuffle(this.items.fetch());
+	        } else {
+		        var self = this;
+			    return _.sortBy(this.items.fetch(), function(m) { 
+					var weight = 0;
+					_.each(m.metadata.albums, function (a) {
+						if(a._id === self.album._id)
+							weight = a.weight;
+					});
+					return weight; 
 				});
-				return weight; 
-			});
+			}
+		} else {
+			// it is a tag, so return associated images
+			return this.items; 
 		}
 	},
 	
@@ -93,7 +103,6 @@ Template.album.helpers({
 Template.album.events({
 	'click .image-popup-vertical-fit': function (e) {
 	  	e.preventDefault();	
-		//createMagnificPopup();
    	},
    	'click .filter-btn': function (e) {
    		e.preventDefault();
@@ -105,6 +114,7 @@ Template.album.events({
    		$('.filter-btn').removeClass('active');
 		$('.filter-btn[data-filter="*"]').addClass('active');
 		createMagnificPopup();
-   	}
+   	},
+
 });
 
