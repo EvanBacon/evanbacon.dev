@@ -19,7 +19,6 @@ elmar-save-loader
 elmar-lib
 useraccounts:bootstrap
 less
-mrt:jquery-ui-sortable
 nemo64:bootstrap
 mrt:jquery-imagesloaded
 mizzao:autocomplete
@@ -29,8 +28,8 @@ aldeed:collection2
 elmar-google-analytics
 
 
-npm-container
-meteorhacks:npm
 email
 elmar-contact-form
 elmar-magnific-popup
+manuelschoebel:wait-on-lib
+mizzao:jquery-ui
