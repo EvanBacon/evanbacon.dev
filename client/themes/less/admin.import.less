@@ -78,18 +78,19 @@
   float: left;
   padding: 3px;
   margin: 2px;
-  background-color: @brand-info;
-  color: #FFF !important;
+  background-color: lighten(@brand-info, 10%);
   font-weight: bold !important;
   .rounded(2px);
 }
 
 .album-item-label:hover {
-  background-color: darken(@brand-info, 20%);
+  background-color: lighten(@brand-info, 20%);
 } 
 
 .album-item-label a:hover {
   text-decoration: none !important;
+  text-align: center !important;
+  margin: auto !important;
 }
 
 // full screen dialog modal

@@ -1,5 +1,5 @@
 nav li.active a {
-  background-color: @brand-info;
+  background-color: @brand-info !important;
   color: #FFF;
 }
 
@@ -35,6 +35,12 @@ nav li a {
 #sidebar .nav li>a:hover {
     background-color:#ededed;
 }
+
+#sidebar .nav li.active>a {
+    background-color:darken(@brand-info, 5%);
+    color: #FFF !important;
+}
+
 
 #sidebar .logo {
   position: relative;
@@ -79,9 +85,9 @@ nav li a {
 
 #sidebar .album-item-label a {
   font-size: 0.8em;
-  color: #FFF !important;
   text-transform: none !important;
   letter-spacing: 0 !important;
+  font-weight: normal !important;
 }
 
 #sidebar .album-item-label a:hover {
@@ -96,7 +102,7 @@ nav li a {
 
 #tag-list h4 {
   font-size: 15px;
-  color: #BBB;
+  color: #AAA;
 }
 
 
