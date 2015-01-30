@@ -1,9 +1,10 @@
 * {
-  font-family:'Karla',Arial,sans-serif;
+  font-family:Geneva,Arial,sans-serif;
 }
 
 html, body {
    height: 100%;
+   padding: 0 !important;
 }
 
 ul {
@@ -19,12 +20,13 @@ hr {
   border-top: 1px solid #CCC;
 }
 
-h1,h2,h3,#sidebar  {
+h1,h2,h3,h4,#sidebar  {
   font-family: 'PT Sans', Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
-
 }
+
+
 
 small a {
   color: @brand-info;
@@ -57,13 +59,23 @@ fieldset {
   text-align: center;
 }
 
-input, select, textarea {
-  border: 1px solid lighten(@gray-light, 10%) !important;
-  padding: 3px;
+input[type="text"], textarea {
+  .rounded(2px) !important;
+  border: 1px solid @brand-info !important;
+  padding: 5px;
 }
 
+ul.list-square {
+  list-style-type: square !important;
+
+  li {
+    margin-bottom: 2px;
+  }
+}
+
+
 .form-control {
-  .box-shadow(inset 2px 2px 2px 0px rgba(0,0,0,0.2)) !important;
+  .box-shadow(inset 2px 2px 2px 0px rgba(0,0,0,0.1)) !important;
 }
 
 .well {
@@ -73,6 +85,7 @@ input, select, textarea {
 .btn-default {
   .box-shadow(inset 0px -8px 10px 0px rgba(0,0,0,0.1));
   border: 1px solid lighten(@gray-light, 15%) !important;
+
 }
 
 .btn-square {
@@ -84,6 +97,7 @@ input, select, textarea {
   color: darken(@brand-info, 20%) !important;
   font-weight: bold !important;
   letter-spacing: 1px;
+  margin-bottom: 3px;
 }
 
 .btn-square:hover {
@@ -97,7 +111,7 @@ input, select, textarea {
 
 .selected {
    .transition(all 0.3s ease-in-out);
-   border: 1px solid @brand-primary !important;
+   border: 3px solid @brand-primary !important;
    background-color: lighten(@brand-info, 20%) !important;
 }
 
@@ -150,6 +164,8 @@ input, select, textarea {
     position: absolute;
     right: 0;
     top: 0;
+    padding: 0 !important;
+    margin: 0 !important;
     background: #f2ede2; 
     .gradient(#FFF, #f2ede2, #FFF);
 }
@@ -157,35 +173,71 @@ input, select, textarea {
 #main {
     padding-left:0;
     padding-right:0;
-    // background-image:url('/img/bg.png') !important;
-    // .box-shadow(inset 2px 2px 3px 0px rgba(0,0,0,0.1)) !important;
 }
 
 #footer {
     bottom: 0;
     margin-top:50%;
     border-top: 1px solid #CCC;
-    text-align: center;
+    text-align: right;
     padding-top: 10px;
     height: 60px;
     display: block;
+
+    .copyright {
+      color: #999;
+      text-transform: uppercase;
+      float: right;
+      letter-spacing: 1px;
+      margin-right: 3px;
+    }
+
+    @media screen and (max-width: 768px) {
+      text-align: center;
+      a {
+        margin: 0 2px;
+        font-size: .8em;
+        margin: 5px;
+      }
+
+      .copyright {
+        font-size: .8em;
+        text-align: center;
+        float: none;
+      }
+    }
 }
 
-#footer .copyright {
-  color: #999;
-  text-transform: uppercase;
-  display: inline-block;
-  float: right;
-  margin-right: 10px;
+.home-links {
+  margin: 5px 15px;
+  a {
+    display: inline-block;
+    margin: 0 3px 3px;
+    font-size: 1.0em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: darken(@brand-info, 20%);
+  }
+  @media screen and (max-width: 768px) {
+    margin: 5px 0;
+  }
 }
 
 // adjust the contents on smaller devices 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
   .column .padding {
       padding: 7px;
   }
 
+}
+
+@media screen and (max-width: 450px) {
+  h2 {
+    font-size: 1.3em;
+    text-align: center;
+  }
 }
 
 //----------------------------------------------------
@@ -233,7 +285,6 @@ input, select, textarea {
           h4 {
             padding: 0;
             margin: 0;
-            text-transform: uppercase;
           }
         }
      }
@@ -278,6 +329,7 @@ input, select, textarea {
   margin:0;
   color: #999999;
 }
+
 
 // loading spinner 
 
@@ -360,7 +412,6 @@ input, select, textarea {
     text-align: center;
     z-index: 10;
     pointer-events: none;
-    // background-color: rgba(255,255,255,0.3);
 
     .content {
         display: inline-block;
@@ -370,15 +421,8 @@ input, select, textarea {
         height: 400px;
         background: #EEE;
         border: 1px solid hsla(0, 0%, 0%, .1);
-        // border-color: hsla(170, 5%, 95%, .5) !important; 
         .rounded(50%);
         pointer-events: auto;
-
-        // left: 30%;
-        // top: 10%;
-        // z-index: 100;
-        // .opacity(0.9);
-        // .box-shadow(1px,1px,10px,0, rgba(0,0,0,0.8));
         .box-shadow(0px -10px 10px 0px rgba(0,0,0,0.3))
     }
 
@@ -387,14 +431,20 @@ input, select, textarea {
       height: 80px;
     }
 
+    p, p>a {
+      font-family:'Nothing You Could Do',Geneva,sans-serif;
+    }
+
+    p>a {
+      font-weight: bold;
+    }
+
     p {
-      padding: 15px;
+      padding: 23px 23px 5px;
       text-align: center;
-      justify: justify;
-      font-size: 1.2em;
-      // font-style: italic;
-      margin: 10px;
-      font-family:'Nothing You Could Do',Arial,sans-serif;
+      text-align: justify;
+      font-size: 1.3em;
+      margin: 5px 10px ;
     }
 
     h3 {
@@ -411,10 +461,27 @@ input, select, textarea {
       position: relative;
       right: auto;
       top: 0;
-      // max-width: 100%;
-      // max-height: 100%;
-      // text-align: center;
-      // z-index: 100;
+
+    }
+
+    @media screen and (max-width: 450px) {
+
+      .content {
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        .rounded(0);
+      }
+
+      p {
+        padding: 20px;
+        margin: auto;
+        font-weight: bolder;
+        color: #555;
+      }
 
     }
 

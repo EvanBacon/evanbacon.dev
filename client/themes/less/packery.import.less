@@ -1,15 +1,12 @@
 // styles for packery/isotope instances
 
 #album {
-	margin: 0 auto 0 20px !important;
 	position: relative;
 	display: block;
 }
 
-#album:after {
-  content: '';
-  display: block;
-  clear: both;
+.album-groups {
+	margin: 10px auto 0 10px !important;
 }
 
 .gutter-sizer {
@@ -30,16 +27,12 @@
 }
 
 .itemP.w2 { 
-	width: 19.0%; 
-	.rounded(15px);
-	background-color: #FFF;
-	border: 1px solid hsla(0, 0%, 0%, 0.3) !important;
-	// border: 4px solid #333;
- //    border-color: hsla(0, 0%, 0%, 0.2); 
+	width: 18.7%; 
+	border: 3px solid darken(@brand-info, 20%);
 }
 
 .itemP.w2:hover {
-	border: 1px solid @brand-primary;
+	border: 3px solid @brand-primary;
 	background: lighten(@brand-info, 20%)
 }
 
@@ -52,15 +45,15 @@
 
 @media screen and (max-width: 1024px) {
     .grid-sizer {
-	  width: 30%;
+	  width: 31%;
 	}
 
 	.itemP {
-	  width: 30%;
+	  width: 31%;
 	}
 
 	.itemP.w2 { 
-		width: 30%; 
+		width: 31%; 
 	}
 }
 
@@ -76,9 +69,16 @@
 	.itemP.w2 { 
 		width: 100%; 
 	}
+
+	#albums {
+		margin: 0 !important;
+	}
+	.album-groups {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
 }
 
-.album-groups {
-	margin: 10px 0 !important;
-}
+
 
