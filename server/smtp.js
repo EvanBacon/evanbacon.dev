@@ -24,4 +24,8 @@ Meteor.startup(function () {
 
     }
 
+    // override email fields
+    Accounts.emailTemplates.siteName = getSetting('title');
+    Accounts.emailTemplates.from = getSetting('title') + " Admin <" + smtp.username+ ">";
+
 });
