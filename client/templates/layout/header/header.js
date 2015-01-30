@@ -1,8 +1,3 @@
-Template.header.helpers({
-	isLoaded: function () {
-		return Settings.find().fetch().length > 0;
-	}
-});
 
 Template.header.rendered = function () {
 	$('[data-toggle=offcanvas]').click(function() {
@@ -18,3 +13,9 @@ Template.header.rendered = function () {
 	    $('#btnShow').toggle();
     });
 };
+
+Template.header.events ({
+	'click #lg-menu a': function (e) {
+		$('.row-offcanvas').removeClass('active');
+	}
+});

@@ -18,14 +18,15 @@
   </div>
 
    <br>
-  <div class="hidden-xs" id="album-list">
-    {{> albumTitles }}
+  <div class="hidden-xs" id="tag-list">
+    <h4>Tags</h4>
+    {{> tagLinks }}
   </div>
     
 
   {{#unless isAdmin}}
     <div class="list-unstyled hidden-xs" id="sidebar-footer">
-        <a href="{{pathFor route='atSignIn'}}" class="btn btn-default btn-xs sign-in">Sign In</a>
+        <a href="{{pathFor route='atSignIn'}}" class="btn btn-square btn-xs sign-in">Sign In</a>
     </div>
   {{/unless}}
 
