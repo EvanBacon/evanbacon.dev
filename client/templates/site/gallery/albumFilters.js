@@ -1,3 +1,5 @@
+// displays tag links (to filter album images by tag)
+
 Template.albumFilters.rendered = function () {
 	$('.filter-btn').removeClass('active');
 	$('.filter-btn[data-filter="*"]').addClass('active');

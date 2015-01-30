@@ -1,3 +1,5 @@
+// one-time registration form for main user of application
+
 AutoForm.hooks({
   regForm: {
     onSuccess: function(operation, result, template) {

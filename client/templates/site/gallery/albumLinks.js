@@ -1,3 +1,5 @@
+// displays album links 
+
 Template.albumLinks.helpers({
 	albums: function () {
 		var albums = [];
