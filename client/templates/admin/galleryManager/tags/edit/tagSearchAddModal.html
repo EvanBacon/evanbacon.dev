@@ -1,0 +1,29 @@
+<template name="tagSearchAddModal">
+
+	<!-- Modal popup to search and add multiple tags to multiple images -->
+
+	<div class="modal fade" id="tagSearchAddModal" tabindex="-1" role="dialog" aria-labelledby="theModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-md">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <div class="text-center">
+	          <h3 class="modal-title" id="theModalLabel">Add Tags to Media Selection</h3>
+	        </div>
+	      </div>
+	      <div class="modal-body">
+	        <div class="col-sm-12">
+	        	<h5>Enter tags one at a time {{> tagPopoverInfo }}</h5> 
+	        	{{> tagSearchAdd }}
+	          <hr>
+	          {{> tagListForMedia }}
+	      	</div>
+	      </div>
+	      <div class="modal-footer" style="border:none">
+	        <button type="button" class="btn btn-md btn-default close-box" data-dismiss="modal">Close</button>
+	        <br>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</template>

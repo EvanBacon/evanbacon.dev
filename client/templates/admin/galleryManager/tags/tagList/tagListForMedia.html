@@ -1,0 +1,9 @@
+<template name="tagListForMedia">
+	{{#if tags }}
+	   <h5>Current Tags</h5>   
+	  {{#each tags}}
+	  	<p class="tag-name">{{this.name}} <button data-tagid="{{this._id}}" data-media="{{media}}" class="btn btn-xs btn-danger remove-tag" type="button"><span class="glyphicon glyphicon-remove"></span></button></p>
+	  {{/each}}
+	  <div class="clear"></div>
+  {{/if}}
+</template>
