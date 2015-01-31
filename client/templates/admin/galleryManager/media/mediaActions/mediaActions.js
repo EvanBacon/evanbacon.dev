@@ -2,7 +2,6 @@
 Template.mediaActions.rendered = function () {
 	$('#sortBy').prop('selectedIndex',0);
 	$('#sortDir').prop('selectedIndex',0);
-	// $('input[type=checkbox] .type-box').prop('checked', true);
 	SortAction.setSortBy( {"uploadedAt": -1});
 };
 

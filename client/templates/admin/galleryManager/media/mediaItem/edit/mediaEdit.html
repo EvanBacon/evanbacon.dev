@@ -57,11 +57,11 @@
         </div>
         <div class="col-sm-7">
 
-          {{> mediaDetailsForm this.metadata}}
+          {{> mediaDetailsForm metadata=this.metadata}}
          
           <label for="inputImgCaption" class="control-label">Tags</label> {{> tagPopoverInfo }}
-          {{> tagSearch }}
-          {{> tagListFromMedia }}
+          {{> tagSearchAdd mediaItems=this._id }}
+          {{> tagListForMedia mediaItems=this._id }}
           <br>
         </div>
 

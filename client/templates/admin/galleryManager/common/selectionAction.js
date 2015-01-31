@@ -92,7 +92,7 @@ Template.selectionAction.events({
 
 		Session.set('selected-images', items);
 
-		$('#tagSearchModal').modal('show')
+		$('#tagSearchAddModal').modal('show')
 		
 	 }
 });
