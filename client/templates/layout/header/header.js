@@ -17,7 +17,6 @@ Template.header.rendered = function () {
 Template.header.helpers({
 	isActive: function (type) {
 		var name = Router.current().route.getName();
-		console.log(name, type);
 		return (name === type) ? 'active' : '';
 	}
 });
