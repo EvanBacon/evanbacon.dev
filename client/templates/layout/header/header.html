@@ -1,34 +1,33 @@
 <template name="header">
 
-  <ul class="nav navbar-main">
-    <li><a href="#" data-toggle="offcanvas" class="visible-xs text-left btn-toggle"><i class="glyphicon glyphicon-align-justify"></i></a></li>
-  </ul>
+    <ul class="nav navbar-main">
+      <li><a href="#" data-toggle="offcanvas" class="visible-xs text-left btn-toggle"><i class="glyphicon glyph-menu"></i></a></li>
+    </ul>
 
-  <div class="logo hidden-xs" id="logo">
-      {{> siteName }}
-  </div>   
-  <ul class="nav hidden-xs" id="lg-menu">
-    <li class="{{ isActive 'albums'}}"><a href="{{ pathFor route='albums'}}">Albums</a></li>
-    <li class="{{ isActive 'about'}}"><a href="{{ pathFor route='about'}}">About</a></li>
-    <li class="{{ isActive 'contact'}}"><a href="{{ pathFor route='contact'}}">Contact</a></li>
-  </ul>
+    <div class="logo hidden-xs" id="logo">
+        {{> siteName }}
+    </div>   
+    <ul class="nav hidden-xs" id="lg-menu">
+      <li class="{{ isActive 'albums'}}"><a href="{{ pathFor route='albums'}}">Albums</a></li>
+      <li class="{{ isActive 'about'}}"><a href="{{ pathFor route='about'}}">About</a></li>
+      <li class="{{ isActive 'contact'}}"><a href="{{ pathFor route='contact'}}">Contact</a></li>
+    </ul>
 
-  <div class="visible-xs" id="title">
-    <h3>{{ getSetting 'title'}}</h3>
-  </div>
-
-   <br>
-  <div class="hidden-xs" id="tag-list">
-    <h4>Tags</h4>
-    {{> tagLinks }}
-  </div>
-    
-
-  {{#unless isAdmin}}
-    <div class="list-unstyled hidden-xs" id="sidebar-footer">
-        <a href="{{pathFor route='atSignIn'}}" class="btn btn-square btn-xs sign-in">Sign In</a>
+    <div class="visible-xs" id="title">
+      <h3>{{ getSetting 'title'}}</h3>
     </div>
-  {{/unless}}
+
+     <br>
+    <div class="hidden-xs" id="tag-list">
+      <h4>Tags</h4>
+      {{> tagLinks }}
+    </div>
+      
+    {{#unless isAdmin}}
+      <div class="list-unstyled hidden-xs" id="sidebar-footer">
+          <a href="{{pathFor route='atSignIn'}}" class="btn btn-square btn-xs sign-in">Sign In</a>
+      </div>
+    {{/unless}}
 
 </template>
 

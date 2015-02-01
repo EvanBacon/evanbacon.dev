@@ -16,12 +16,12 @@ nav li a {
 
 #sidebar {
     padding:0;
+    background-color: rgba(255, 255, 255, 0.3) !important; 
 }
 
 #sidebar, #sidebar a, #sidebar-footer a {
     color:#333;
     background-color:transparent;
-    padding-left:5px;
     text-transform: uppercase;
     font-size: 1.1em;
     letter-spacing: 1px;
@@ -120,6 +120,17 @@ nav li a {
   font-family: 'PT Sans', Arial, sans-serif !important;
 }
 
+.glyph-menu {
+  // background-image:url('/img/menu.svg') !important;
+  content: url("/img/menu.svg");
+  font-size: 1.5em;
+  color: #888;
+  border: 1px solid #AAA;
+  .rounded(2px);
+  .gradient(#FFF, #DDD, #FFF);
+
+}
+
 // off canvas sidebar
 //--------------------------------------------------
 
@@ -131,27 +142,32 @@ nav li a {
   }
 
   .row-offcanvas-left.active {
-    left: 31%;
+    left: 40%;
   }
 
   .row-offcanvas-left.active .sidebar-offcanvas {
-    left: -31%;
+    left: -40%;
     position: absolute;
     top: 0;
-    width: 31%;
+    width: 40%;
     margin-left: 5px;
     .transition(all 0.3s ease-in);
+  }
+
+  .btn-toggle {
+    margin:5px 2px 3px 8px !important;
+    padding: 0 !important;
+  }
+
+  .btn-toggle .glyphicon {
+    font-size: 1.2em;
   }
 }
 
 @media screen and (max-width: 450px) {
   .btn-toggle {
-    margin:3px 0 !important;
+    margin:5px 0 0 1px !important;
     padding: 0 !important;
-  }
-
-  .glyphicon {
-    font-size: 1.2em;
   }
 }
 
