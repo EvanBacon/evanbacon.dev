@@ -18,16 +18,9 @@ var getName = function () {
 
 Template.albumEdit.helpers({
 	isVisible: function () {
-		// if (typeof this.album._id === undefined) {
-		// 	return true;
-		// }
-		//if (!! this.album.isVisible)
 		return this.album.isVisible === 1;
 	},
 	isShuffled: function () {
-		// if (typeof this.album._id === undefined) {
-		// 	return true;
-		// }
 		if (!! this.album.isShuffled)
 			return this.album.isShuffled === 1;
 	},

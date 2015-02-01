@@ -16,16 +16,13 @@
 		<div class="col-xs-12 no-gutter">
 			<hr class="no-gutter">
 		</div>
-		<div id="submit-album" class="col-sm-4 col-md-3">
+		<div id="submit-album" class="col-sm-4">
 			<br>
-			<div class="btn-group btn-group-md col-xs-12 no-gutter" role="group">
-				<button class="btn btn-default return-list col-xs-5 col-sm-5" type="button"><span class="glyphicon glyphicon-circle-arrow-left"></span> Library</button>
-				<button class="btn btn-primary col-xs-7 col-sm-7" id="save-album" type="button">{{> savingLoader text=saveText}}</button>
-			</div>
+			<button class="btn btn-primary col-xs-12" id="save-album" type="button">{{> savingLoader text=saveText}}</button>
 		    <br>
 		    <br>
 		    <div class="col-xs-12 no-gutter">
-			<div class="col-xs-2 col-sm-2 no-gutter-right">
+			<div class="col-xs-1 col-sm-2 col-md-1 no-gutter-left no-gutter-right">
 				<div class="cb-sm checkbox">
 			        <label>
 			          <input id="cb-visible" type="checkbox" checked="{{isVisible}}">
@@ -33,11 +30,11 @@
 			        </label> 	
 			    </div>
   			</div>
-			<div class="col-xs-10 col-sm-10 no-gutter-left">
-			    <h5>Make Album Visible</h5>
+			<div class="col-xs-11 col-sm-10 col-md-11 no-gutter-right">
+			    <h5>Make Visible</h5>
 			</div>
 			<div class="clear"></div>
-  			<div class="col-xs-2 col-sm-2 no-gutter-right">
+  			<div class="col-xs-1 col-sm-2 col-md-1 no-gutter-left no-gutter-right">
 				<div class="checkbox cb-sm">
 			        <label>
 			          <input id="cb-shuffle" type="checkbox" checked="{{isShuffled}}">
@@ -46,7 +43,7 @@
 			    </div>
   			</div>
 	  		
-      		<div class="col-xs-10 col-sm-10 no-gutter-left">
+      		<div class="col-xs-11 col-sm-10 col-md-11 no-gutter-right">
 		      <h5>Shuffle Images <a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="This will shuffle the images on the album page so that they are not always in the same position."><span class="question glyphicon glyphicon-question-sign"></span></a> </h5>
 			 </div>
 			 </div>
@@ -79,7 +76,7 @@
 		    <br>
 		</div>
 
-		<div class="col-sm-8 col-md-9">
+		<div class="col-sm-8">
 			<br>
 			<div class="col-sm-4">
 				<a href="#" class="btn btn-md btn-info add-images modal-show" data-toggle="modal" data-target="#media-selection"><span class="glyphicon glyphicon-plus"></span> Add {{itemType true true}}</a>
