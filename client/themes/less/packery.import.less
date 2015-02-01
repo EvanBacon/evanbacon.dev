@@ -14,30 +14,33 @@
 }
 
 .grid-sizer {
-  width: 19.0%;
+  width: 18.9%;
 }
 
 .itemP {
   position: relative;
   text-align: center;
   float: left;
-  width: 19.0%;
+  width: 18.9%;
   .rounded(3px);
   .box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));
 }
 
 .itemP.w2 { 
 	width: 18.7%; 
-	border: 3px solid darken(@brand-info, 20%);
+	border: 10px solid #AAA;
 }
 
 .itemP.w2:hover {
-	border: 3px solid @brand-primary;
-	background: lighten(@brand-info, 20%)
+	border: 10px solid lighten(@brand-info, 10%); //#75bed3;
 }
 
 .itemP.w2 a:hover {
 	text-decoration: none;
+}
+
+.itemP.w2 h3 small {
+	font-size: .6em !important;
 }
 
 .itemP img { width: 100%; .rounded(3px);  }

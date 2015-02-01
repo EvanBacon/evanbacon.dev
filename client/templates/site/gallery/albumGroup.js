@@ -37,11 +37,11 @@ Template.albumGroup.helpers({
 
 Template.albumGroup.events({
 	'mouseover .album-link': function (e) {
-		$('#item-' + Template.parentData(0).slug ).addClass('selected');
+		$('#item-' + Template.parentData(0).slug ).addClass('album-selected');
 
 	},
 	'mouseout .album-link': function (e) {
-		$('#item-' + Template.parentData(0).slug ).removeClass('selected');
+		$('#item-' + Template.parentData(0).slug ).removeClass('album-selected');
 	}
 });
 

@@ -101,9 +101,6 @@ Template.album.helpers({
 });
 
 Template.album.events({
-	'click .image-popup-vertical-fit': function (e) {
-	  	e.preventDefault();	
-   	},
    	'click .filter-btn': function (e) {
    		e.preventDefault();
    		var filterValue = $(e.currentTarget).attr('data-filter');
