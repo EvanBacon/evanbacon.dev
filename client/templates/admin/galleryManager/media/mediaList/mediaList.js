@@ -5,6 +5,9 @@ Template.mediaList.rendered = function () {
 Template.mediaList.helpers({
     isList: function () {
         return getClientSetting('media-list-style') === 'list';
+    },
+    isGrid: function () {
+        return getClientSetting('media-list-style') === 'grid';
     }
 }); 
 

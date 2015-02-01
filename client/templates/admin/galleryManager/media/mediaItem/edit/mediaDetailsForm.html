@@ -1,16 +1,25 @@
 <template name="mediaDetailsForm">
 	<div class="form-group">
-	    <label for="inputImgTitle" class="control-label">Title</label>
-	    <input class="form-control inputImgTitle image-block-input" value="{{this.title}}" maxlength="60"  placeholder="Title" type="text">
+	    <label for="inputImgTitle" class="control-label {{#if showLabels}} sr-only {{/if}}">Title</label>
+      <div class="inner-addon right-addon">
+        <i class="glyphicon glyphicon-ok hidden"></i>
+  	    <input class="form-control inputImgTitle meta-data" data-id="{{id}}" value="{{metadata.title}}" maxlength="60"  placeholder="Title" type="text">
+      </div>
 	</div>
 
   <div class="form-group">
-    	<label for="inputImgCaption" class="control-label">Caption</label>
-    	<textarea class="form-control inputImgCaption image-block-input" value="{{this.caption}}" maxlength="300" placeholder="Caption" rows="2"></textarea>
+    	<label for="inputImgCaption" class="control-label {{#if showLabels}} sr-only {{/if}}">Caption</label>
+      <div class="inner-addon right-addon">
+        <i class="glyphicon glyphicon-ok hidden"></i>
+    	  <textarea class="form-control inputImgCaption meta-data" data-id="{{id}}" value="{{metadata.caption}}" maxlength="300" placeholder="Caption" rows="2"></textarea>
+      </div>
   </div>
 
   <div class="form-group">
-    	<label for="inputImgCredit" class="control-label">Photo Credit </label> 
-      	<input class="form-control inputImgCredit image-block-input" value="{{this.credit}}" maxlength="40" placeholder="Credit" type="text">
+    	<label for="inputImgCredit" class="control-label {{#if showLabels}} sr-only {{/if}}">Photo Credit </label> 
+      <div class="inner-addon right-addon">
+        <i class="glyphicon glyphicon-ok hidden"></i>
+      	<input class="form-control inputImgCredit meta-data" data-id="{{id}}" value="{{metadata.credit}}" maxlength="40" placeholder="Credit" type="text">
+      </div>
   </div>
 </template>
