@@ -1,16 +1,16 @@
 <template name="layout"> 
   <div class="wrapper">
-    <div class="box">
+    <div class="box" style="{{#if getSetting 'backgroundUrl'}} background: url({{getSetting 'backgroundUrl'}}) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover; background-size: cover; {{/if}}">
         <div class="row row-offcanvas row-offcanvas-left">
                       
             <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas no-gutter" id="sidebar">
                {{> yield region="header"}}
             </div>
             <!-- /sidebar -->
           
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11 no-gutter" id="main" style="{{#if getSetting 'backgroundUrl'}} background: url({{getSetting 'backgroundUrl'}}) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover; background-size: cover; {{/if}}">
+            <div class="column col-sm-10 col-xs-11 no-gutter" id="main">
                 
               {{#if isAdmin}}
                 {{> adminHeader}}
