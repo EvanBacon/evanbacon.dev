@@ -1,14 +1,7 @@
 <template name="footer">
 	<div id="footer">
-		<div class="home-links">
-			<a href="#">Github</a> /
-			<a href="{{ pathFor route='albums'}}">Albums</a> / 
-		    <a href="{{ pathFor route='about'}}">About</a> / 
-		    <a href="{{ pathFor route='contact'}}">Contact</a>
-		    <div class="copyright">@{{ year }} {{ getSetting 'title'}}</div>
-		</div>
-		
-		<div class="clear"></div>
+		{{{ getSetting 'footerCode' }}}
+		<div class="copyright">@{{ year }} {{ getSetting 'title'}}</div>
+		<div class="clear"></div> 
 	</div>
-
 </template>
