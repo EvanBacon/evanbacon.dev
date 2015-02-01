@@ -3,6 +3,11 @@ Template.mediaActions.rendered = function () {
 	$('#sortBy').prop('selectedIndex',0);
 	$('#sortDir').prop('selectedIndex',0);
 	SortAction.setSortBy( {"uploadedAt": -1});
+    if(getClientSetting('media-list-style')) {
+        $('#' + getClientSetting('media-list-style')).addClass('active');
+    } else {
+        $('#grid').addClass('active');
+    }
 };
 
 Template.mediaActions.events({
@@ -17,5 +22,7 @@ Template.mediaActions.events({
     },
     'click .list-style': function (e) {
         setClientSetting('media-list-style', e.currentTarget.id);
+        $('.list-style').removeClass('active');
+        $(e.currentTarget).addClass('active');
     }
 });
