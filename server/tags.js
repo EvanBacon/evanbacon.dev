@@ -119,7 +119,6 @@ Meteor.methods({
     removeTagFromMediaList: function (tagId, mediaList) { 
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied');
-
         for(var i = 0; i < mediaList.length; i++) {
            Media.update({_id: mediaList[i]}, { $pull: { 'metadata.tags': {'_id': tagId}}});  
         } 
