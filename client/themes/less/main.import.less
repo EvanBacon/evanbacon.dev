@@ -26,8 +26,6 @@ h1,h2,h3,h4,#sidebar  {
   letter-spacing: 1px;
 }
 
-
-
 small a {
   color: @brand-info;
 }
@@ -61,8 +59,14 @@ fieldset {
 
 input[type="text"], textarea {
   .rounded(2px) !important;
-  border: 1px solid @brand-info !important;
+  // border: 1px solid @brand-info !important;
   padding: 5px;
+  color: @brand-primary !important;
+  font-weight: bolder;
+}
+
+textarea {
+  padding-left: 4px !important;
 }
 
 ul.list-square {
@@ -75,7 +79,7 @@ ul.list-square {
 
 
 .form-control {
-  .box-shadow(inset 2px 2px 2px 0px rgba(0,0,0,0.1)) !important;
+  .box-shadow(inset 2px 2px 2px 0px rgba(0,0,0,0.2)) !important;
 }
 
 .well {
@@ -112,12 +116,18 @@ ul.list-square {
 .selected {
    .transition(all 0.3s ease-in-out);
    border: 3px solid @brand-primary !important;
-   background-color: lighten(@brand-info, 20%) !important;
+   .gradient(#FFF, #CCC, #FFF);
+}
+
+.album-selected {
+   .transition(all 0.3s ease-in-out);
+   border: 10px solid @brand-danger !important;
 }
 
 .bold {
   font-weight: bold !important;
 }
+
 
 //----------------------------------------------------
 // main wrapper styles
@@ -166,8 +176,6 @@ ul.list-square {
     top: 0;
     padding: 0 !important;
     margin: 0 !important;
-    background: #f2ede2; 
-    .gradient(#FFF, #f2ede2, #FFF);
 }
 
 #main {
@@ -178,7 +186,7 @@ ul.list-square {
 #footer {
     bottom: 0;
     margin-top:50%;
-    border-top: 1px solid #CCC;
+    // border-top: 1px solid #CCC;
     text-align: right;
     padding-top: 10px;
     height: 60px;
@@ -292,6 +300,12 @@ ul.list-square {
         color: #FFF;
         font-weight: bold;
         background-color: #000;
+     }
+
+     @media screen and (max-width: 768px) {
+        p {
+          font-size: 12px;
+        }
      }
 } 
 
@@ -486,3 +500,24 @@ ul.list-square {
     }
 
   }
+
+
+// input icons
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

@@ -1,11 +1,11 @@
 #dropzone {
-  border: 4px dashed #AAA;
+  border: 4px dashed lighten(#FF3333, 5%);
   margin: 5px 0;
-  padding: 10px;
+  padding: 10px 20px;
   text-align:center;
   font-size:18px;
   display: block;
-  background-color: #F1F1F1;
+  background-color: #DDD;
 }
 
 #dropzone.drag-in {
@@ -63,6 +63,29 @@
 .has-error input {
   background-color: #f2dede;
 };
+
+input.input-ok, textarea.input-ok {
+  background-color:rgba(0,255,0,0.1) !important;
+  border: 1px solid rgba(0,255,0,0.5) !important;
+  .transition(.5s, ease-in-out) !important;
+}
+
+
+table.images {
+  overflow-x:scroll;
+}
+
+table.images th {
+  // background-color: rgba(0,0,0,0.1) !important;
+  background-color: lighten(@gray, 20%) !important;
+  color: #FFF !important;
+  // border-bottom: 1px solid #999 !important;
+}
+
+table.images tr {
+  border-bottom: 2px solid #BBB !important;
+  padding: 10px !important;
+}
 
 .instructions {
   color: #888;
@@ -251,8 +274,29 @@
   background-color: #FFF;
 }
 
+.list-style {
+  padding: 3px;
+}
+
+.list-style .glyphicon {
+  font-size: 2em;
+  color: #777;
+}
+
+.list-style.active .glyphicon {
+  color: #FF3333;
+}
+
+
 // Tags
 
+.tag-name {
+  float: left;
+  margin: 2px;
+  padding: 2px;
+  border: 1px solid #AAA;
+  .rounded(3px);
+}
 .tag-item {
   float: left;
   margin: 7px 3px;
