@@ -3,7 +3,15 @@
  {{#if isList}}
 
      <tr>
-      <td><input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" /></td>
+      <td>
+        <div class="checkbox">
+        <label>
+          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+          <!-- override checkbox icon here -->
+          <span class="glyphicon glyphicon-ok"></span>
+        </label>
+      </div>
+      </td>
       <td >
         <div id="{{thumbId}}" class="thumb list">
       {{#if this.isUploaded}}
@@ -16,10 +24,11 @@
       {{/if}}
         </div>
       </td>
-      <td>{{this.original.name}}</td>
-      <td>{{this.metadata.title}}</td>
-      <td>{{this.metadata.caption}}</td>
-      <td>{{formatDate this.uploadedAt 'short'}}</td>
+      <td>{{> mediaDetailsForm metadata=this.metadata showLabels=true id=this._id}}</td>
+      <td>
+          {{> tagSearchAdd mediaItems=this._id }}
+          {{> tagListForMedia mediaItems=this._id }}
+      </td>
       <td><a href="#" class="trashcan destroy"><span class="glyphicon glyphicon-trash"></span></a></td>
     </tr>
     
@@ -30,12 +39,10 @@
       <div class="checkbox">
         <label>
           <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
-          <!-- override icon here -->
+          <!-- override checkbox icon here -->
           <span class="glyphicon glyphicon-ok"></span>
         </label>
       </div>
-     <!--  <div class="thumbnail"> -->
-      <!-- {{#if this.isUploaded}} -->
         <a href="#" class="modal-show" data-toggle="modal" data-target="{{modalTarget}}">
             <div class="caption">
               {{#if this.metadata.title }}
