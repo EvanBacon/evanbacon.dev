@@ -2,11 +2,7 @@
   	<div id="album" class="album-groups">
         <div class="gutter-sizer"></div>
         <div class="grid-sizer"></div>
-        {{#if home}}
-        <div class="home-circle">
-        	{{> homeCenter }}
-        </div>
-        {{/if}}
+        
         {{#each items}}
             {{#if isVisible }}
         	   {{> albumGroup}}

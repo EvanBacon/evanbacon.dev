@@ -6,7 +6,6 @@
 meteor-platform
 iron:router@1.0.0-pre4
 cfs:standard-packages
-cfs:filesystem
 cfs:graphicsmagick
 cfs:ui
 standard-app-packages
@@ -33,3 +32,4 @@ elmar-contact-form
 elmar-magnific-popup
 manuelschoebel:wait-on-lib
 mizzao:jquery-ui
+cfs:gridfs

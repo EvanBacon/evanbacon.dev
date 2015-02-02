@@ -1,38 +1,44 @@
-// AutoForm.hooks({
-//   updateSettingsForm: {
+AutoForm.hooks({
+  updateSettingsForm: {
 
-//     before: {
-//       update: function(docId, modifier, template) {
-//         template.$('button[type=submit]').addClass('loading');
-//         return modifier;
-//       }
-//     },
+    before: {
+      update: function(docId, modifier, template) {
+      	updateSaveButton('wait');
+        return modifier;
+      }
+    },
 
-//     onSuccess: function(operation, result, template) {
-//       template.$('button[type=submit]').removeClass('loading');
-//     },
+    onSuccess: function(operation, result, template) {
+        updateSaveButton('complete');
+    },
 
-//     onError: function(operation, result, template) {
-//       template.$('button[type=submit]').removeClass('loading');
-//     }
+    onError: function(operation, result, template) {
+    	updateSaveButton('error');
+    }
 
-//   },
-//   insertSettingsForm: {
+  },
+  insertSettingsForm: {
 
-//     before: {
-//       insert: function(doc, template) {
-//         template.$('button[type=submit]').addClass('loading');
-//         return doc;
-//       }
-//     },
+    before: {
+      insert: function(doc, template) {
+        updateSaveButton('wait');
+        return doc;
+      }
+    },
 
-//     onSuccess: function(operation, result, template) {
-//       template.$('button[type=submit]').removeClass('loading');
-//     },
+    onSuccess: function(operation, result, template) {
+		updateSaveButton('complete')	
+    },
 
-//     onError: function(operation, result, template) {
-//       template.$('button[type=submit]').removeClass('loading');
-//     }
+    onError: function(operation, result, template) {
+    	updateSaveButton('error');
+    }
 
-//   }
-// });
+  }
+});
+
+Template.settings.events({
+	'change :input, keyup :input': function () {
+		pageChanged(true);
+	}
+});

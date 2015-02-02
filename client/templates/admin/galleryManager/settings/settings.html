@@ -2,13 +2,15 @@
 	<div class="col-sm-12">
 		<h3>Site Settings</h3>
 	</div>
-    <div class="col-sm-7 settings">
+    <div class="col-sm-9 settings">
     {{#if this.hasSettings}}
       {{> quickForm collection="Settings" doc=this.settings id="updateSettingsForm" type="update" label-class="control-label" input-col-class="controls" template="settings"}}
     {{else}}
       {{> quickForm collection="Settings" doc=this.settings id="insertSettingsForm" type="insert" label-class="control-label" input-col-class="controls" template="settings"}}
     {{/if}}
-
+    <div style="margin: 0 5px">
+    {{> savingLoader }}
+    </div>
     </div>
     <div class="clear"></div>
 
