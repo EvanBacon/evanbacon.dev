@@ -27,16 +27,6 @@ UI.registerHelper("getFeaturedUrl", function(list) {
   }
 });
 
-
-// getGalleryType = function () {
-//   var page = Router.current().route.getName();
-//   if (page === 'mediaManager')
-//     return 'gallery';
-//   if (page === 'galleryManager')
-//     return 'albu'
-
-// };
-
 // function to update save loader status if package is available
 updateSaveButton = function (type) {
   if (! SaveLoader) return;
