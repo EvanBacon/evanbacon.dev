@@ -101,7 +101,7 @@ Meteor.methods({
            tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
            Tags.update({ _id: tagId }, { $set: {'name': tagName, 'slug': tagSlug }});
            Media.update({ 'metadata.tags._id': tagId}, {$set: {'metadata.tags.$.name' : tagName,
-                                                               'metadata.tags.$.slug' : tagSlug }});
+                                                               'metadata.tags.$.slug' : tagSlug }}, {multi:1});
 
         } else {
           throw new Meteor.Error(413, 'Tag name "' + tagName + '" already exists.');
