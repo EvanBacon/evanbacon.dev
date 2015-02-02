@@ -11,12 +11,10 @@ A responsive, easy-to-use image gallery manager and showcase platform built with
 * Creates various image sizes for load optimization
 * Responsive design
 
-And there's still room for improvement...
-
 
 ## Installation 
 
-- Install Meteor (<http://www.meteor.com>)
+- Install [Meteor](http://www.meteor.com)
 - Install [GraphicsMagick](http://www.graphicsmagick.org/) or [ImageMagick](http://www.imagemagick.org/script/index.php) on your development machine or the server that will host your app.
 - Clone this repo: `git clone https://github.com/nelfarna/meteor-image-gallery.git`.
 - Run the app
@@ -30,7 +28,7 @@ $ meteor
 ## How to Use
 
 - Set environmental variables for sending email (forgotten password, contact form, etc.):
-  - SMTP_EMAIL - eg: username@gmail.com'
+  - SMTP_EMAIL - eg: username@gmail.com
   - SMTP_PASSWORD
   - SMTP_SERVER - eg: smtp.gmail.com
   - SMTP_PORT - eg: 465
@@ -38,7 +36,7 @@ $ meteor
 - Click on Sign In link which will redirect you to the registration page (first time only for new admin)
 - After creating an admin account, sign in with the new credentials and configure site settings: logo url, image sizes, about page and footer code, contact email etc.
 - Upload images and edit meta data / tags (do this quickly by selecting the list icon on the Images page)
-- Create albums by either selecting images on Images page and selecting 'Create Album' from dropdown list, or from the Albums page click '+ New Album'
+- Create albums by either selecting images on Images page and selecting "Create Album" from dropdown list, or from the Albums page click "New Album"
 
 
 ## Notes
