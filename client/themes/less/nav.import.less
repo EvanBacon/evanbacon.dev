@@ -123,7 +123,8 @@ nav li a {
 .glyph-menu {
   // background-image:url('/img/menu.svg') !important;
   content: url("/img/menu.svg");
-  font-size: 1.5em;
+  font-size: 1.0em;
+  width: 30px;
   color: #888;
   border: 1px solid #AAA;
   .rounded(2px);
@@ -160,15 +161,20 @@ nav li a {
   }
 
   .btn-toggle .glyphicon {
-    font-size: 1.2em;
+    font-size: 1.3em !important;
   }
 }
 
 @media screen and (max-width: 450px) {
   .btn-toggle {
-    margin:5px 0 0 1px !important;
+    margin:5px 0 0 0 !important;
     padding: 0 !important;
+
+    // .glyph-menu {
+    //   font-size: 1.0em !important;
+    // }
   }
+
 }
 
 //----------------------------------------------------
