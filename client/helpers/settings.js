@@ -19,11 +19,15 @@ setClientSetting = function(name, value) {
 	}
 };
 
+// get value from Settings collection
 UI.registerHelper('getSetting', function(setting, defaultArgument){
-  var defaultArgument = (typeof defaultArgument !== 'undefined') ? defaultArgument : '';
-  var setting = getSetting(setting, defaultArgument);
-  if (typeof setting === "string" || typeof setting === "number" || typeof setting === "boolean")
-  	return setting;
-  else
-  	return '';
+  	var defaultArgument = (typeof defaultArgument !== 'undefined') ? defaultArgument : '';
+
+  	// check if Settings has loaded, otherwise return a blank string 
+    if (!! Settings && !! Settings.find().count() ) {
+	  var setting = getSetting(setting, defaultArgument);
+	  if (typeof setting === "string" || typeof setting === "number" || typeof setting === "boolean")
+	  	return setting;
+	} 
+	return '';
 });
