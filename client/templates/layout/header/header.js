@@ -1,4 +1,3 @@
-
 Template.header.helpers({
 	isActive: function (type) {
 		var name = Router.current().route.getName();
@@ -7,12 +6,12 @@ Template.header.helpers({
 });
 
 Template.header.events ({
-	'click [data-toggle=offcanvas], click .active a': function (e) {
+	'click [data-toggle=offcanvas], click .activated a': function (e) {
 		$('[data-toggle=offcanvas]').toggleClass('visible-xs text-left');
     	$('[data-toggle=offcanvas]').find('i').toggleClass('glyph-menu glyphicon-chevron-left');
-	    $('.row-offcanvas').toggleClass('active');
-	    $('#lg-menu').toggleClass('active');
-	    $('#tag-list').toggleClass('active');
+	    $('.row-offcanvas').toggleClass('activated');
+	    $('#lg-menu').toggleClass('activated');
+	    $('#tag-list').toggleClass('activated');
 	    $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
 	    $('#sidebar-footer').toggleClass('hidden-xs').toggleClass('visible-xs');
 	    $('#logo').toggleClass('hidden-xs').toggleClass('visible-xs');
