@@ -56,13 +56,21 @@ nav li a {
   .set-link {
     width: 150px !important;
     font-size: .8em;
-    margin-top: 5px;
+    margin: 5px auto;
     border: 1px solid @brand-primary;
     letter-spacing: 0;
     padding: 5px 0;
     text-align: center;
     .rounded(2px);
   }
+}
+
+#sidebar h2 {
+  // white-space: nowrap;
+  letter-spacing: 1px;
+  text-align: center !important;
+  font-size: 1.1em;
+  color: darken(@brand-info, 20%);
 }
 
 #sidebar h3 {
@@ -90,7 +98,7 @@ nav li a {
   font-weight: normal !important;
 }
 
-#sidebar .album-item-label a:hover {
+#sidebar a:hover {
   text-decoration: none !important;
 }
 

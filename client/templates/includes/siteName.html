@@ -1,19 +1,20 @@
 <template name="siteName">
-	{{#if getSetting 'logoUrl' }}
+	{{#if logoSet }}
       <a href="{{#if home}} {{ pathFor route='albums' }} {{else}} {{ pathFor route='home'}} {{/if}}">
         <img class="logo" src="{{ getSetting 'logoUrl' }}" alt="{{ getSetting 'title'}}">
       </a>
-      {{else}}
-          {{#if getSetting 'title'}}
-          <a href="{{ pathFor route='home'}}">
-            <h3>{{ getSetting 'title' }}</h3>
-          </a>
-          {{ else }} 
-            {{ #if isLoaded }}
-            <a href="{{ pathFor route='settings'}}">
-              <p class="set-link">Set Logo/Title</p>
-            </a>
-            {{/if}}
-          {{/if}}
+  {{else}}
+      {{#if titleSet }}
+      <a href="{{ pathFor route='home'}}">
+        <h2>{{ getSetting 'title' }}</h2>
+      </a>
+      {{ else }} 
+        <br>
+        <a href="{{ pathFor route='settings'}}">
+          <h4 class="set-link">Set Logo or Title</h4>
+        </a>
+        <br>
+        <br>
       {{/if}}
+  {{/if}}
 </template>

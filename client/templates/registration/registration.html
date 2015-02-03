@@ -1,6 +1,9 @@
 <template name="registration">
 	<div class="col-md-6 col-md-offset-3">
-		<h3 class="text-center">Admin Register (one-time only)</h3>
+		<h3>Get Started</h3> 
+		<p>Welcome to your new image gallery. To get started, register an admin account.</p>
+		<br>
+		<h4>Register</h4>
 		{{#autoForm schema=registrationSchema id="regForm" type="method" meteormethod="createAdminUser"}}
 
 	    {{> afQuickField name="email"}}
