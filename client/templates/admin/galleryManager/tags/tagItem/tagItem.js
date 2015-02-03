@@ -1,6 +1,3 @@
-var usedCount = function (id) {
-	return Media.find({'metadata.tags._id': id}).count();
-}
 
 Template.tagItem.rendered = function () {
 	$('[data-toggle="popover"]').popover({
@@ -68,7 +65,7 @@ Template.tagItem.events({
 		callUpdateTag(t, this._id, this.name );
 	},
 	'click .remove-tag': function (e, t) {
-		var count = usedCount(this._id),
+		var count = this.usedCount,
 			fnAction = function () {
 		  	  var tagId = $(e.currentTarget).attr('data-tagid');
 		      var mediaId = $(e.currentTarget).attr('data-mediaid');

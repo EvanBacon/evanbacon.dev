@@ -13,10 +13,10 @@ Tags.allow({
 
 // publish single tag
 Meteor.publish("tag", function (id, options) {
-      if (!! options && !! id) 
-          return Tags.find({ _id: id }, options);
-      if (!! id)
-          return Tags.find({ _id: id });
+    if (!! options && !! id) 
+        return Tags.find({ _id: id }, options);
+    if (!! id)
+        return Tags.find({ _id: id });
 });
 
 // publish all tags
@@ -27,8 +27,21 @@ Meteor.publish("tags", function(options) {
     return Tags.find({});
 });
 
-// add a new tag to Tags collection
-var addNewTag = function (tagName) {
+// visible tags (tags used by images)
+Meteor.publish("tagCloud", function() { 
+    var tags = Tags.find({}).fetch();
+    var usedTagIds = [];
+    
+    _.each(tags, function (t) {
+        if(Media.find({'metadata.tags._id': t._id}).count() > 0) 
+          usedTagIds.push(t._id);
+    });
+
+    return Tags.find({_id: { $in: usedTagIds }});
+});
+
+// add a new tag to Tags collection, 
+var addTag = function (tagName) {
     if (! Validation.isNotEmpty(tagName))
             throw new Meteor.Error(413, 'Tag name cannot be empty.');
     tagName = tagName.toLowerCase();
@@ -38,8 +51,8 @@ var addNewTag = function (tagName) {
         tagSlug = !! tag && tag.slug;
 
     if (! tagId) {
-       tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
-       tagId = Tags.insert({ 'name': tagName, 'slug': tagSlug });
+        tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
+        tagId = Tags.insert({ 'name': tagName, 'slug': tagSlug, 'usedCount': 0 });
     } 
 
     return { _id: tagId, name: tagName, slug: tagSlug }; 
@@ -51,7 +64,8 @@ Meteor.methods({
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
 
-        return addNewTag(tagName);    
+        // add new, set usedCount to 0 because not used by media yet  
+        return addTag(tagName);  
     },
 
     // add a new or existing tag to a single media
@@ -59,11 +73,12 @@ Meteor.methods({
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
 
-        var tag = addNewTag(tagName),
+        var tag = addTag(tagName),
             media = Media.findOne({ _id: mediaId });
 
         if(getIndexOf(media.metadata.tags, tag._id) < 0) {
            Media.update({_id: mediaId}, { $push: { 'metadata.tags': { '_id': tag._id, 'name': tag.name, 'slug': tag.slug }}});
+           Tags.update({_id: tag._id}, {$inc: {usedCount: 1}});
         } 
 
     },
@@ -73,14 +88,15 @@ Meteor.methods({
         if (! isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
 
-        var tag = addNewTag(tagName),
+        var tag = addTag(tagName),
             media;
 
         for(var i = 0; i < mediaList.length; i++) {
             media = Media.findOne({_id: mediaList[i]});
 
             if(getIndexOf(media.metadata.tags, tag._id) < 0) {
-             Media.update({_id: mediaList[i]}, { $push: { 'metadata.tags': { '_id': tag._id, 'name': tag.name, 'slug': tag.slug }}});
+               Media.update({_id: mediaList[i]}, { $push: { 'metadata.tags': { '_id': tag._id, 'name': tag.name, 'slug': tag.slug }}});
+               Tags.update({_id: tag._id}, {$inc: {usedCount: 1}});
             } 
         }
 
@@ -95,9 +111,10 @@ Meteor.methods({
             throw new Meteor.Error(413, 'Tag name cannot be empty.');
         tagName = tagName.toLowerCase();
 
-        var tagsCount = Tags.find({$and: [{_id: { $ne: tagId }}, {name: tagName}]}).count();
+        // check if tag name already exists
+        var tagsWithNameCount = Tags.find({$and: [{_id: { $ne: tagId }}, {name: tagName}]}).count();
 
-        if (tagsCount < 1) {
+        if (tagsWithNameCount < 1) {
            tagSlug = slugFuncs.getUniqueSlug(tagId, tagName, Tags);
            Tags.update({ _id: tagId }, { $set: {'name': tagName, 'slug': tagSlug }});
            Media.update({ 'metadata.tags._id': tagId}, {$set: {'metadata.tags.$.name' : tagName,
@@ -113,6 +130,7 @@ Meteor.methods({
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied'); 
         Media.update({_id: mediaId}, { $pull: { 'metadata.tags': {'_id': tagId}}});
+        Tags.update({_id: tagId}, {$inc: {usedCount: -1}});
     },
 
     // remove a tag from a list of media
@@ -120,7 +138,8 @@ Meteor.methods({
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied');
         for(var i = 0; i < mediaList.length; i++) {
-           Media.update({_id: mediaList[i]}, { $pull: { 'metadata.tags': {'_id': tagId}}});  
+           Media.update({_id: mediaList[i]}, { $pull: { 'metadata.tags': {'_id': tagId}}}); 
+           Tags.update({_id: tagId}, {$inc: {usedCount: -1}});
         } 
     },
 

@@ -2,7 +2,7 @@
 
 Template.tagLinks.helpers({
 	tags: function () {
-		return Tags.find({});
+		return Tags.find({ usedCount: { $gt: 0 }} );
 	}
 });
 
