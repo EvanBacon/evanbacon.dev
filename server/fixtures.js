@@ -1,4 +1,4 @@
-Meteor.startup( function() {
+Meteor.startup( function() { 
 
 	// Fixture for Albums
 	if (Albums.find().count() === 0) {
@@ -14,28 +14,24 @@ Meteor.startup( function() {
 	  Tags.insert( 
 	    { 
 	      name: 'landscapes',
-	      slug: 'landscapes' 
-	    }
-	  );
-
-	  Tags.insert( 
-	    { 
-	      name: 'nature', 
-	      slug: 'nature'
+	      slug: 'landscapes',
+	      usedCount: 0 
 	    }
 	  );
 
 	  Tags.insert( 
 	    { 
 	      name: 'architecture',
-	      slug: 'architecture' 
+	      slug: 'architecture',
+	      usedCount: 0 
 	    }
 	  );
 
 	  Tags.insert( 
 	    { 
 	      name: 'cultural',
-	      slug: 'cultural' 
+	      slug: 'cultural',
+	      usedCount: 0 
 	    }
 	  );
 	}

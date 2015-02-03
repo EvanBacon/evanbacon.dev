@@ -27,19 +27,6 @@ Meteor.publish("tags", function(options) {
     return Tags.find({});
 });
 
-// visible tags (tags used by images)
-Meteor.publish("tagCloud", function() { 
-    var tags = Tags.find({}).fetch();
-    var usedTagIds = [];
-    
-    _.each(tags, function (t) {
-        if(Media.find({'metadata.tags._id': t._id}).count() > 0) 
-          usedTagIds.push(t._id);
-    });
-
-    return Tags.find({_id: { $in: usedTagIds }});
-});
-
 // add a new tag to Tags collection, 
 var addTag = function (tagName) {
     if (! Validation.isNotEmpty(tagName))
@@ -147,7 +134,7 @@ Meteor.methods({
     removeTag: function (tagId, mediaId) {
         if (!isAdmin()) 
           throw new Meteor.Error(403, 'Permission denied');
-        Media.update({'metadata.tags._id': tagId}, { $pull: { 'metadata.tags': {'_id': tagId} }});
+        Media.update({'metadata.tags._id': tagId}, { $pull: { 'metadata.tags': {'_id': tagId} }}, {multi:1});
         Tags.remove({_id: tagId});
     }
 });
