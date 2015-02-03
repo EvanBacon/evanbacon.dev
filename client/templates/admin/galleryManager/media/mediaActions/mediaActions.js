@@ -6,7 +6,9 @@ Template.mediaActions.rendered = function () {
     if(getClientSetting('media-list-style')) {
         $('#' + getClientSetting('media-list-style')).addClass('active');
     } else {
-        $('#grid').addClass('active');
+
+        setClientSetting('media-list-style', 'list')
+        $('#list').addClass('active');
     }
 };
 
