@@ -66,15 +66,18 @@ Template.mediaItem.events({
         var title = t.find(e.currentTarget).value;
         if (title !== this.metadata.title) {
           var id = $(e.currentTarget).attr('data-id');
-          Media.update({_id: id}, { $set: {
-                               "metadata.title": title, 
-                               "original.updatedAt": (new Date()).getTime()
-                               }
-                       });
-          $('.meta-data').removeClass('input-ok');
-          $('.inner-addon .glyphicon').addClass('hidden');
-          $(e.currentTarget).closest('.inner-addon').find('i').removeClass('hidden');
-          $(e.currentTarget).addClass('input-ok');
+          console.log(id);
+          if (!! id) {
+            Media.update({_id: id}, { $set: {
+                                 "metadata.title": title, 
+                                 "original.updatedAt": (new Date()).getTime()
+                                 }
+                         });
+            $('.meta-data').removeClass('input-ok');
+            $('.inner-addon .glyphicon').addClass('hidden');
+            $(e.currentTarget).closest('.inner-addon').find('i').removeClass('hidden');
+            $(e.currentTarget).addClass('input-ok');
+          }
         } 
         
     },
@@ -83,15 +86,17 @@ Template.mediaItem.events({
         var caption = t.find(e.currentTarget).value;
         if (caption !== this.metadata.caption) {
           var id = $(e.currentTarget).attr('data-id');
-          Media.update({_id: id}, { $set: {
-                               "metadata.caption": caption, 
-                               "original.updatedAt": (new Date()).getTime()
-                               }
-                       });
-          $('.meta-data').removeClass('input-ok');
-          $('.inner-addon .glyphicon').addClass('hidden');
-          $(e.currentTarget).closest('.inner-addon').find('i').removeClass('hidden');
-          $(e.currentTarget).addClass('input-ok');
+          if (!! id) {
+            Media.update({_id: id}, { $set: {
+                                 "metadata.caption": caption, 
+                                 "original.updatedAt": (new Date()).getTime()
+                                 }
+                         });
+            $('.meta-data').removeClass('input-ok');
+            $('.inner-addon .glyphicon').addClass('hidden');
+            $(e.currentTarget).closest('.inner-addon').find('i').removeClass('hidden');
+            $(e.currentTarget).addClass('input-ok');
+          }
 
         } 
 
@@ -100,27 +105,31 @@ Template.mediaItem.events({
         var credit = t.find(e.currentTarget).value;
         if (credit !== this.metadata.credit) {
           var id = $(e.currentTarget).attr('data-id');
-          Media.update({_id: id}, { $set: {
-                               "metadata.credit": credit, 
-                               "original.updatedAt": (new Date()).getTime()
-                               }
-                       });
-          $('.meta-data').removeClass('input-ok');
-          $('.inner-addon .glyphicon').addClass('hidden');
-          $(e.currentTarget).closest('.inner-addon').find('i').removeClass('hidden');
-          $(e.currentTarget).addClass('input-ok');
+          if (!! id) {
+            Media.update({_id: id}, { $set: {
+                                 "metadata.credit": credit, 
+                                 "original.updatedAt": (new Date()).getTime()
+                                 }
+                         });
+            $('.meta-data').removeClass('input-ok');
+            $('.inner-addon .glyphicon').addClass('hidden');
+            $(e.currentTarget).closest('.inner-addon').find('i').removeClass('hidden');
+            $(e.currentTarget).addClass('input-ok');
+          }
         } 
 
     },
     'keyup input.meta-data, change .meta-data': function (e, t) {
         e.preventDefault();
-
-        if (e.which === 13) {
-          $(e.currentTarget).blur();
-        } else {
-          $(e.currentTarget).removeClass('input-ok');
-          $(e.currentTarget).closest('.inner-addon').find('i').addClass('hidden');
-        }      
+        var id = $(e.currentTarget).attr('data-id');
+        if (!! id) {
+          if (e.which === 13) {
+            $(e.currentTarget).blur();
+          } else {
+            $(e.currentTarget).removeClass('input-ok');
+            $(e.currentTarget).closest('.inner-addon').find('i').addClass('hidden');
+          }     
+        } 
     },
     
 });

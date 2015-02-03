@@ -9,6 +9,8 @@ Template.siteName.helpers({
 	},
 	titleSet: function () {
 		var title = getSetting('title');
-		return !! title;
+		if (!! Settings && !! Settings.find().count() ) 
+			return !! title;
+		return true;
 	}
 });
