@@ -7,7 +7,12 @@
 	   		</span>
     	</div>
 		Tagged: 
-		<a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-content="{{mediaList}}">
+		<!-- <div id="popover-content-{{this._id}}" class="tag-count-content hide">
+	    	{{#each mediaList}}
+	    		<img src="{{this.url store='thumb'}}">
+	    	{{/each}}  	
+	    </div> -->
+		<a href="#" tabindex="-1" id="pop" data-container="body" data-toggle="popover" data-trigger="hover" data-content="{{mediaList}}" >
             <span class="badge">{{this.usedCount}}</span>
           </a>
 		<button data-tagid="{{this._id}}" data-mediaid="{{ ../_id}}" class="btn btn-xs btn-primary remove-tag" type="button" title="Delete Tag"><span class="glyphicon glyphicon-trash"></span>
