@@ -19,11 +19,12 @@ Package.onUse(function (api) {
     'lib/medialibrary.js',
     'lib/validation.js',
     'lib/users.js',
-    'lib/base.js'
+    'lib/base.js',
   ], ['client', 'server']);
 
   api.add_files([
     'lib/client/sortAction.js',
+    'lib/client/shuffle.js'
     ], ['client']);
   
   api.export([
@@ -42,7 +43,7 @@ Package.onUse(function (api) {
     'isAdmin',
     'isAdminById',
     'SettingsSchemaAddOns',
-    'addWatermark'
+    'RandomShuffle'
 
   ]);
 });
