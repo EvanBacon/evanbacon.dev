@@ -1,5 +1,4 @@
 
-
 Meteor.methods({
   sendEmail: function(doc) {
     // Important server-side check for security and data integrity
@@ -18,7 +17,7 @@ Meteor.methods({
     Email.send({
         to: emailTo, // send-to e-mail address set in settings 
         from: doc.email,
-        subject: "Contact Form - Message From " + doc.name,
+        subject: "Elmar Creative Contact Form - From " + doc.name,
         text: text
     });
   }
