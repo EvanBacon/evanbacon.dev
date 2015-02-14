@@ -1,16 +1,30 @@
 <template name="albumGroup">
 
-	{{#if showTitle }}
-	<div id="item-{{this.slug}}" class="itemP w2 item-album">
-		<a href="{{ pathFor route='album' slug=this.slug}}"><h3>{{this.title}} <br><small>{{this.description}}<br>
-			<span class="badge">{{count}}</span></small></h3></a>
-	</div>	
+	{{#if hasCount samples}}
+		{{#if showTitle }}
+		<div id="item-{{this.slug}}" class="itemP w2 item-album">
+			{{#with featured}}
+				<img class="item-featured" src="{{this.url store='image_md'}}">
+			{{/with}}
+			<a href="#" class="album-title"><h3>{{this.title}} <br><small>{{this.description}}<br>
+				<span class="badge">{{count}}</span></small></h3></a>
+		</div>	
+		{{/if}}
+
+		{{#each samples}}
+		   	<div class="itemP item-album item-sample" title="{{this.metadata.title}}">
+		   		<a href="#" class="album-link"><img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}">
+		   			<div class="caption">
+			   			<div class="caption-wrapper">
+			   				<div class="caption-container">
+			   					<p>Album</p>
+				                <h4> {{../title}}</h4>
+			              	</div>
+	              	    </div>
+		            </div>
+		   		</a>
+		    </div>
+		{{/each}}
 	{{/if}}
-		
-	{{#each samples}}
-	   	<div class="itemP item-album" title="{{this.metadata.title}}">
-	   		<a href="{{ pathFor route='album' slug=../slug}}" class="album-link"><img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}"></a>
-	    </div>
-	{{/each}}
 		
 </template>
