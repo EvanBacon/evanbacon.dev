@@ -1,7 +1,9 @@
 <template name="footer">
 	<div id="footer">
 		{{{ getSetting 'footerCode' 'Add footer code in settings.' }}}
+		{{#if settingsAvailable}}
 		<div class="copyright">&copy;{{ year }} {{ getSetting 'title'}}</div>
 		<div class="clear"></div> 
+		{{/if}}
 	</div>
 </template>
