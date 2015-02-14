@@ -2,7 +2,8 @@
 
 Template.tagLinks.helpers({
 	tags: function () {
-		return Tags.find({ usedCount: { $gt: 0 }} );
+		// return sorted list (by name)
+		return Tags.find({ usedCount: { $gt: 0 }}, { sort: {name: 1}} );;
 	}
 });
 

@@ -1,5 +1,6 @@
 <template name="tagLinks">
-  	{{#if tags }} 
+  	{{#if hasCount tags }} 
+  	  <h4>Tags A-Z</h4>
 	  {{#each tags}}
 	  	<p class="album-item-label"><a class="tag-link" href="#">{{this.name}}</a></p>
 	  {{/each}}
