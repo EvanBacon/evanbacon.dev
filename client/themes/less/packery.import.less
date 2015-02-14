@@ -14,20 +14,24 @@
 }
 
 .grid-sizer {
-  width: 18.9%;
+  width: 24%;
 }
 
-.itemP {
+.grid-sizerpl {
+  width: 24% !important;
+}
+
+.itemP, .itemPL {
   position: relative;
   text-align: center;
+  width: 24%;
   float: left;
-  width: 18.9%;
   .rounded(3px);
   .box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));
 }
 
 .itemP.w2 { 
-	width: 18.7%; 
+	width: 24%; 
 	border: 10px solid #AAA;
 }
 
@@ -37,21 +41,33 @@
 
 .itemP.w2 a:hover {
 	text-decoration: none;
+		.transition(all 0.1s ease-in-out);
+
 }
 
 .itemP.w2 h3 small {
 	font-size: .6em !important;
 }
 
-.itemP img { width: 100%; .rounded(3px);  }
+.itemP.w2 h3 { 
+		font-size: 1.4em; 
+	}
+
+.itemP img, .itemPL img { width: 100%; .rounded(3px);  }
+// .itemPL img { width: 100%; .rounded(3px);  }
+
 .itemP.w2 img { width: 100%; }
+
+.itemP .item-featured {
+	display: none !important;
+}
 
 @media screen and (max-width: 1024px) {
     .grid-sizer {
 	  width: 31%;
 	}
 
-	.itemP {
+	.itemP,.itemPL {
 	  width: 31%;
 	}
 
@@ -60,17 +76,56 @@
 	}
 }
 
+@media screen and (max-width: 768px) {
+    .grid-sizer {
+	  width: 48%;
+	}
+
+	.grid-sizer-albums {
+	  width: 48%;
+	}
+
+	.itemP, .itemPL {
+	  width: 48%;
+	}
+
+	.itemP.w2 { 
+		width: 48%; 
+	}
+    .itemP.w2 h3 {
+    	font-size: 1.0em;
+    }
+
+
+	.itemP .item-featured {
+		display: block !important;
+	}
+
+	.itemP.item-sample {
+		display: none !important;
+	}
+ }
+
 @media screen and (max-width: 450px) {
     .grid-sizer {
 	  width: 100%;
 	}
 
-	.itemP {
+	.itemPL {
 	  width: 100%;
+	}
+	
+	.itemP.item-sample {
+		display: none;
 	}
 
 	.itemP.w2 { 
-		width: 100%; 
+		width: 100%;
+		margin: 3px;
+	}
+
+	.itemP.w2 h3 { 
+		font-size: 1.1em; 
 	}
 
 	#albums {

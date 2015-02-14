@@ -150,11 +150,11 @@ nav li a {
     font-size: 1.1em;
   }
 
-  .row-offcanvas-left.active {
+  .row-offcanvas-left.activated {
     left: 40%;
   }
 
-  .row-offcanvas-left.active .sidebar-offcanvas {
+  .row-offcanvas-left.activated .sidebar-offcanvas {
     left: -40%;
     position: absolute;
     top: 0;
@@ -224,6 +224,10 @@ nav li a {
       right: 0;
       width:100%;
       padding: 0 !important;
+
+      .dropdown-menu li a {
+        color: #FFF;
+      }
     }
 }
 
