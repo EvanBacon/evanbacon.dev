@@ -118,7 +118,7 @@ Meteor.methods({
     removeFromAlbums: function (itemId) {
         if (!isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied');
-        Albums.update({'content.id': itemId}, { $pull: { 'content': {'id': itemId} }});
+        Albums.update({'content.id': itemId}, { $pull: { 'content': {'id': itemId} }}, {multi: 1});
     },
 
     // remove any albums that were created but abandoned
