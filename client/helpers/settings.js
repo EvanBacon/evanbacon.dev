@@ -31,3 +31,7 @@ UI.registerHelper('getSetting', function(setting, defaultArgument){
 	} 
 	return '';
 });
+
+UI.registerHelper('settingsAvailable', function () {
+	return !! Settings && !! Settings.find().count();
+});

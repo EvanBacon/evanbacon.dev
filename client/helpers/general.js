@@ -32,3 +32,15 @@ updateSaveButton = function (type) {
   if (! SaveLoader) return;
   SaveLoader.saveAction(type); // requires save-loader package
 };
+
+// return true if count of a cursor is greater than 0
+UI.registerHelper("hasCount", function(cursor) {
+  if (!! cursor) {
+    if(_.isArray(cursor)) 
+      return cursor.length > 0;
+    else
+      return cursor.count() > 0;
+  }
+  return false;
+    
+});
