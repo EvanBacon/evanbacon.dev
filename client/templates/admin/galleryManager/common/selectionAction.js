@@ -33,10 +33,22 @@ Template.selectionAction.events({
 				
 			    _.each(selected, function (item) {
 			    	if (page === 'mediaManager') {
+			    		var media = Media.findOne({_id: item.defaultValue});
+			    		var tags = [];
+
+			    		if (!! media.metadata.tags) {
+			    			tags =_.pluck(media.metadata.tags, '_id');
+			    		}
+				    		
 			    		Media.remove({ _id: item.defaultValue });
 			    		Meteor.call('removeFromAlbums', item.defaultValue, function(err) {
 				            if(err) console.log(err.reason);
 				        });
+				        if (!! tags) {
+					        Meteor.call('decrementTags', tags, function(err) {
+					            if(err) console.log(err.reason);
+					        });
+					    }
 			    	}
 			    	if (page === 'albumManager') {
 			    		Albums.remove({ _id: item.defaultValue });
