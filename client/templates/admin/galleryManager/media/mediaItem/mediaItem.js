@@ -32,33 +32,48 @@ Template.mediaItem.events({
         }
     },
     'click .modal-show': function (e, t) {
-        // reset form when open modal
         e.preventDefault();
-
-        var self = this;
-        $('.inputImgTitle').val(function() {
-            return self.metadata.title;
-        });
-        $('.inputImgCaption').val(function() {
-          return self.metadata.caption;
-        });
-        $('.inputImgCredit').val(function() {
-          return self.metadata.credit;
-        });
-        $('#inputTag').val(function() {
-          return '';
-        });
         Session.set('selected-images', [this._id]);
     },
     'click .destroy' : function (e) {
         e.preventDefault();
 
         if(confirm("Delete image? ")) {
+          // first test if image checkbox is selected
+          var selected = $("#thumb-" + this._id);
 
+          if (selected.hasClass("selected")) {
+            var checkmark = $( "#" + this._id );
+            checkmark.removeAttr("checked");
+          
+            var countSelect = SelectionAction.getCheckedCount();
+            if (countSelect > 0) {
+              // reset session that keeps track of checkboxes checked
+              SelectionAction.setCheckedCount(--countSelect); 
+            }
+            // remove selected class from thumbnail
+            selected.removeClass("selected"); 
+          }   
+
+
+          var media = Media.findOne({_id: this._id});
+          var tags = [];
+          if (!! media.metadata.tags) {
+            tags =_.pluck(media.metadata.tags, '_id');
+          }
+          
           Media.remove({ _id: this._id });
           Meteor.call('removeFromAlbums', this._id, function(err) {
-                if(err) console.log(err.reason);
+              if(err) console.log(err.reason);
           });
+          // decrement use count of any tags used by this media item
+          if (!! tags) {
+              Meteor.call('decrementTags', tags, function(err) {
+                  if(err) console.log(err.reason);
+              });
+          }
+
+
         }
     },
     'focusout input.inputImgTitle': function (e, t) {
@@ -102,6 +117,7 @@ Template.mediaItem.events({
 
     },
     'focusout input.inputImgCredit': function (e, t) {
+      
         var credit = t.find(e.currentTarget).value;
         if (credit !== this.metadata.credit) {
           var id = $(e.currentTarget).attr('data-id');

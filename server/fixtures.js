@@ -34,6 +34,17 @@ Meteor.startup( function() {
 	      usedCount: 0 
 	    }
 	  );
+	} else {
+		// make sure tag usedCount matches actual number of images that use the tag
+		var tags = Tags.find({}).fetch();
+		_.each(tags, function (t) {
+			var used = Media.find({'metadata.tags._id': t._id}).count();
+			var counted = t.usedCount;
+			if (used !== counted) {
+				Tags.update({_id: t._id}, { $set: { usedCount: used }});
+				console.log('Deleted ' + t.name + ' tag');
+			}
+		});
 	}
 
 	if (Settings.find().count() === 0) {
@@ -47,6 +58,7 @@ Meteor.startup( function() {
 			"imageWidthLarge" : 800,
 			"imageWidthMedium" : 450,
 			"imageWidthThumb" : 250,
+			"numberSamplesFromAlbum" : 3, 
 			"mediaPerPage" : 30,
 			"siteDescription" : "An image gallery manager built with Meteor.js"
 		});
