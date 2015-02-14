@@ -130,6 +130,12 @@ Meteor.methods({
         } 
     },
 
+    // decrement use count when media item is deleted 
+    decrementTags: function (tags) {
+      for(var i = 0; i < tags.length; i++) {
+          Tags.update({_id: tags[i]}, {$inc: { usedCount: -1 }});
+      }
+    },
     // permanently remove every instance of a tag
     removeTag: function (tagId, mediaId) {
         if (!isAdmin()) 
