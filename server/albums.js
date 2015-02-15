@@ -43,7 +43,7 @@ Meteor.publish("albums", function(options) {
 
 // lightweight publication for albums
 Meteor.publish("albumsLight", function() { 
-    return Albums.find({'isVisible': 1}, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
+    return Albums.find({'isVisible': 1}, { sort: { order: 1} }, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
 });
 
 Meteor.methods({
@@ -58,6 +58,9 @@ Meteor.methods({
     createAlbum: function (content) {
         if (!isAdmin()) 
             throw new Meteor.Error(403, 'Permission denied'); 
+
+        var album = Albums.find({}, { sort: {order: -1}}, { limit: 1 }).fetch();
+        var newOrderNum = album[0].order++;
         var dataObj = { 
                         'description': '',
                         'slug': '',
@@ -65,7 +68,8 @@ Meteor.methods({
                         'title': '',
                         'isVisible': 1,
                         'isShuffled': 0,
-                        'lastModified': null
+                        'lastModified': null,
+                        'order': newOrderNum
                         };
         if (!! content)
             dataObj.content = content;
@@ -112,6 +116,23 @@ Meteor.methods({
             mongoError (err);
         }
 
+    },
+
+    // update order of albums as they will appear on the site
+    updateAlbumOrder: function (albumIdList) {
+        if (!isAdmin()) 
+            throw new Meteor.Error(403, 'Permission denied');
+        try {
+            var orderNum = 0;
+            _.each(albumIdList, function (id) {
+                Albums.update({ _id: id },  
+                  { $set: { order: orderNum }}
+                );
+                orderNum++;
+            });
+        } catch (err) {
+            mongoError (err);
+        }
     },
 
     // remove an item/media from all albums in which it's included

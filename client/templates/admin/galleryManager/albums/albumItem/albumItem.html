@@ -1,24 +1,30 @@
 <template name="albumItem">
     
- 	<div id="{{thumbId}}" class="thumb thumb-container"> 
- 		{{#if isAdminAlbum}}
- 		<div class="checkbox">
-        <label>
-          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
-          <span class="glyphicon glyphicon-ok"></span>
-        </label>
+    <li class="ui-state-default thumb thumb-container">
+  		<div class="checkbox cb-sm">
+	        <label>
+	          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+	          <span class="glyphicon glyphicon-ok"></span>
+	        </label>
+	    </div>	
+	   
+        <header>
+        	<div class="btn-toolbar">
+	          <button title="Toggle Visibility" class="btn btn-sm {{ visibleBtn }} toggle-display" type="button">
+	         	<span class="glyphicon {{ visibleIcon }}"></span>
+	          </button>
+	          <button type="button" title="Edit" class="btn btn-sm btn-default album-link">
+	           <span class="glyphicon glyphicon-pencil"></span>
+	          </button>
+         	</div>
+     	</header>
+
+        <div class="block-content" >
+			<img src="{{getFeaturedUrl this.content}}">
+			<div class="caption"><h5>{{this.title}} <span class="badge">{{count}}</span></h5></div>
 	    </div>
-	    <div class="show-album">
-	    	<button title="Toggle Visibility" class="btn btn-sm {{ visibleBtn }} toggle-display" type="button"><span class="glyphicon {{ visibleIcon }}"></span></button>
-	    </div>
-	    {{/if}}
-		<a href="#" class="album-link" title="{{this.title}}">
-	 		<img alt="{{this.description}}" src="{{getFeaturedUrl this.content}}" />
-	        <div class="caption"><h5>{{this.title}} <span class="badge">{{count}}</span></h5>
-	        </div>
-	    </a>
-	</div>
-    
+    </li>
+
 </template>
 
 

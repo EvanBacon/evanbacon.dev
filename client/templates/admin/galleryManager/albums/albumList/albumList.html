@@ -1,32 +1,16 @@
 <template name="albumList">
-  
   {{> searchResults }}
 
-  {{#each items}}
-    {{#if isVisible }}
-      <div class="col-lg-2 col-md-3 col-sm-4">
-      {{> albumItem }}
-      </div>
-    {{else}}
-      {{#if isAdminAlbum}}
-        <div class="col-lg-2 col-md-3 col-sm-4">
-        {{> albumItem }}
-        </div>
-      {{/if}}
-    {{/if}}
-  {{/each}}
-   <br>
-   <br>
-  {{#if nextPath}}   
-     <a href="{{nextPath}}" class="col-sm-6 col-sm-offset-3 load-more btn btn-info btn-md btn-block">Load more</a>
-  {{else}}
-    {{#unless ready}}        
-        {{> spinner}}      
-    {{/unless}}
-  {{/if}}
-  
+  <div class="col-sm-12">
+        <span class="instructions"><strong>Drag album</strong> to rearrange order. <strong>Click eye</strong> to toggle album visibility.</span>
+  </div>
+
+  <div id="grid-blocks" class="col-sm-12">
+      <ul id="gridsort">
+      {{#each items}}
+          {{> albumItem}}
+      {{/each}}
+      </ul>
+ </div>
+ 
 </template>
-
-
-
-

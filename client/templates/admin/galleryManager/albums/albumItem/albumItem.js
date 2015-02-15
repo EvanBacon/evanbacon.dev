@@ -3,9 +3,6 @@ Template.albumItem.helpers({
     if (!! this.content)
       return this.content.length;
   },
-  thumbId: function() {
-    return "thumb-" + this._id;
-  },
   visibleIcon: function () {
     return this.isVisible === 1 ? 'glyphicon-eye-open' : 'glyphicon-eye-close';
   },
@@ -20,20 +17,18 @@ Template.albumItem.events({
       var numChecked = SelectionAction.getCheckedCount();
       if(!numChecked) numChecked = 0;
         var checked = $('#' + this._id).prop('checked');
-        var thumbId = "#thumb-" + this._id;
-        if(checked) {
-          $(thumbId).addClass("selected");
-          SelectionAction.setCheckedCount(++numChecked);
-        } else {
 
-          $(thumbId).removeClass("selected");
-          if (numChecked > 0) 
-            SelectionAction.setCheckedCount(--numChecked);
-          else
-            SelectionAction.setCheckedCount(0);
-        }
+      if(checked) {
+        SelectionAction.setCheckedCount(++numChecked);
+      } else {
+
+      if (numChecked > 0) 
+          SelectionAction.setCheckedCount(--numChecked);
+      else
+          SelectionAction.setCheckedCount(0);
+      }
     },
-    'click .album-link': function (e) {
+    'dblclick .block-content, click .album-link': function (e) {
         e.preventDefault();
         var curr = Router.current().route.getName(),
             routeTo = 'album';
