@@ -14,14 +14,23 @@
 }
 
 .grid-sizer {
-  width: 24%;
+  width: 18.4%;
 }
 
 .grid-sizerpl {
   width: 24% !important;
 }
 
-.itemP, .itemPL {
+.itemP {
+  position: relative;
+  text-align: center;
+  width: 18.4%;
+  float: left;
+  .rounded(3px);
+  .box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));
+}
+
+.itemPL {
   position: relative;
   text-align: center;
   width: 24%;
@@ -31,32 +40,25 @@
 }
 
 .itemP.w2 { 
-	width: 24%; 
+	width: 18.5%; 
 	border: 10px solid #AAA;
-}
-
-.itemP.w2:hover {
-	border: 10px solid lighten(@brand-info, 10%); //#75bed3;
-}
-
-.itemP.w2 a:hover {
-	text-decoration: none;
+	&:hover {
+		border: 10px solid lighten(@brand-info, 10%); //#75bed3;
+	}
+	a:hover {
+		text-decoration: none;
 		.transition(all 0.1s ease-in-out);
-
-}
-
-.itemP.w2 h3 small {
-	font-size: .6em !important;
-}
-
-.itemP.w2 h3 { 
+	}
+	h3 small {
+		font-size: .6em !important;
+	}
+	h3 { 
 		font-size: 1.4em; 
 	}
+	img { width: 100%; }
+}
 
 .itemP img, .itemPL img { width: 100%; .rounded(3px);  }
-// .itemPL img { width: 100%; .rounded(3px);  }
-
-.itemP.w2 img { width: 100%; }
 
 .itemP .item-featured {
 	display: none !important;
@@ -95,7 +97,6 @@
     .itemP.w2 h3 {
     	font-size: 1.0em;
     }
-
 
 	.itemP .item-featured {
 		display: block !important;

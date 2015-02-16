@@ -223,21 +223,6 @@ ul.list-square {
     }
 }
 
-.home-links {
-  margin: 5px 15px;
-  a {
-    display: inline-block;
-    margin: 0 3px 3px;
-    font-size: 1.0em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-    color: darken(@brand-info, 20%);
-  }
-  @media screen and (max-width: 768px) {
-    margin: 5px 0;
-  }
-}
 
 // adjust the contents on smaller devices 
 @media screen and (max-width: 768px) {
@@ -278,11 +263,10 @@ ul.list-square {
     height: 100%;
     width: 100%;
     color:#000 !important;
-    z-index:20;
+    z-index:10;
     background: #FFF;
     .opacity(.6);
     border: 10px solid @brand-info;
-    // .transition(all 0.2s ease-in-out);
 
     .caption-wrapper {
         position: relative;
@@ -459,8 +443,9 @@ ul.list-square {
     max-width: 100%;
     max-height: 100%;
     text-align: center;
-    z-index: 10;
+    z-index: 20;
     pointer-events: none;
+    .opacity(.95);
 
     .content {
         display: inline-block;
@@ -542,6 +527,29 @@ ul.list-square {
     }
 
   }
+
+.home-links {
+  margin: 5px 15px;
+  // z-index: 1000;
+  // background-color: #EEE;
+  // padding: 3px;
+  // .box-shadow(0 -1px 4px #999);
+  // .rounded(4px);
+  
+  a {
+    display: inline-block;
+    margin: 0 3px 3px;
+    font-size: 1.0em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: darken(@brand-info, 20%);
+  }
+  @media screen and (max-width: 768px) {
+    margin: 5px 0;
+  }
+}
+
 
 // input icons
 .inner-addon { 
