@@ -80,3 +80,13 @@
       }
       return -1;
     };
+
+    isTouchDevice = function() {
+      if (('ontouchstart' in window) ||
+          (navigator.maxTouchPoints > 0) ||
+          (navigator.msMaxTouchPoints > 0)) {
+        return true;
+      } else {
+        return false;
+      }
+    };

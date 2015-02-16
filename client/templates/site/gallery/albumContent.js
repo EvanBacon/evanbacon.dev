@@ -102,8 +102,6 @@ var createAlbumGrid = function () {
 			});
 			
 		});
-
-		// loadCount++;
 	}
 
 };
@@ -116,8 +114,6 @@ resetAlbumGrid = function () {
 			$container.isotope(); 
 			$container.isotope('destroy');
 		    $container.isotope = false;
-
-		    // loadCount = 0;
 
 			oldItems = [];
 	  		seed.clear();	
@@ -139,14 +135,16 @@ var initAlbumGrid = function () {
 	 	if (!loadMore || refresh) {
 			resetAlbumGrid();
 	    }
-		$('.itemPL').hover(
-	        function(){
-	            $(this).find('.caption').fadeIn(300); 
-	        },
-	        function(){
-	            $(this).find('.caption').fadeOut(300); 
-	        }
-	    );
+	    if (!isTouchDevice()) {
+			$('.itemPL').hover(
+		        function(){
+		            $(this).find('.caption').fadeIn(300); 
+		        },
+		        function(){
+		            $(this).find('.caption').fadeOut(300); 
+		        }
+		    );
+		}
     
 		createAlbumGrid(); 
 	});

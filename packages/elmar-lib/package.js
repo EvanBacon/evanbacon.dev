@@ -43,7 +43,8 @@ Package.onUse(function (api) {
     'isAdmin',
     'isAdminById',
     'SettingsSchemaAddOns',
-    'RandomShuffle'
+    'RandomShuffle',
+    'isTouchDevice'
 
   ]);
 });
