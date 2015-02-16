@@ -3,14 +3,16 @@
 // showTitle = true/false - show the album title box amidst samples
 
 Template.albumGroup.rendered = function() {
-	$('.itemP').hover(
-        function(){
-            $(this).find('.caption').fadeIn(300); 
-        },
-        function(){
-            $(this).find('.caption').fadeOut(300); 
-        }
-    );
+	if (!isTouchDevice()) {
+		$('.itemP').hover(
+	        function(){
+	            $(this).find('.caption').fadeIn(300); 
+	        },
+	        function(){
+	            $(this).find('.caption').fadeOut(300); 
+	        }
+	    );
+	}
 };
 
 Template.albumGroup.helpers({
@@ -29,6 +31,9 @@ Template.albumGroup.helpers({
 	},
 	showTitle: function () {
 		return typeof Template.parentData(1).showTitles === undefined ? true : Template.parentData(1).showTitles;
+	},
+	isAlbumsPage: function () {
+		return typeof Template.parentData(2).showTitles === undefined ? true : Template.parentData(2).showTitles;
 	}
 });
 
@@ -40,10 +45,8 @@ Template.albumGroup.events({
 	'mouseout .item-album': function (e) {
 		$('#item-' + Template.parentData(0).slug ).removeClass('album-selected');
 	},
-	'click .album-link, click .album-title': function (e) {
+	'click .album-link': function (e) {
         e.preventDefault();
-        // resetAlbumGrid();
-        // initAlbumGrid();
         Router.go( 'album', {slug: Template.parentData(0).slug});
     },
 });

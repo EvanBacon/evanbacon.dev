@@ -13,7 +13,6 @@ var createMagnificPopup = function () {
       delegate: 'a:not(.image-popup-vertical-fit.isotope-hidden)',
       type: 'image',
       tLoading: 'Loading image #%curr%...',
-      mainClass: 'mfp-img-mobile',
       gallery: {
         enabled: true,
         navigateByImgClick: true,

@@ -306,11 +306,11 @@ ul.list-square {
 
      @media screen and (max-width: 450px) {
         p {
-          font-size: 10px;
+          font-size: 14px;
         }
 
         h4 {
-          font-size: .8em;
+          font-size: 1.0em;
         }
      }
 } 
@@ -433,15 +433,15 @@ ul.list-square {
 // home page
 
 .home-circle {
-    bottom: 0;
+    // bottom: 0;
     left: 0;
     margin: auto;
-    overflow: auto;
+    // overflow: auto;
     position: absolute;
     right: 0;
     top: 0;
     max-width: 100%;
-    max-height: 100%;
+    // max-height: 100%;
     text-align: center;
     z-index: 20;
     pointer-events: none;
@@ -494,18 +494,14 @@ ul.list-square {
       text-align: center;
     }
 
-    @media screen and (max-width: 768px) {
-      bottom: auto;
+    @media screen and (max-width: 450px) {
+      // bottom: auto;
       left: 0;
       margin: 0 auto;
-      overflow: auto;
+      // overflow: auto;
       position: relative;
       right: auto;
       top: 0;
-
-    }
-
-    @media screen and (max-width: 450px) {
 
       .content {
         display: inline-block;
@@ -530,11 +526,6 @@ ul.list-square {
 
 .home-links {
   margin: 5px 15px;
-  // z-index: 1000;
-  // background-color: #EEE;
-  // padding: 3px;
-  // .box-shadow(0 -1px 4px #999);
-  // .rounded(4px);
   
   a {
     display: inline-block;
@@ -575,6 +566,7 @@ ul.list-square {
 // magnific popup styling
 .mfp-container {
   padding-top: 20px;
+  background-color: transparent;
 }
 
 .mfp-header {
@@ -611,5 +603,5 @@ img.mfp-img {
   line-height: 13px !important;
 
   overflow: hidden;
-  color: #FFF;
+  color: #CCC;
 }
