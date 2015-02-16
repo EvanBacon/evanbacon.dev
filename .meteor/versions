@@ -36,6 +36,7 @@ coffeescript@1.0.5
 dandv:caret-position@2.1.0-3
 ddp@1.0.13
 deps@1.0.6
+dfischer:phantomjs@1.0.4
 ejson@1.0.5
 elmar-contact-form@0.1.0
 elmar-google-analytics@0.1.0
@@ -47,7 +48,6 @@ elmar-search@0.1.0
 email@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
-gadicohen:phantomjs@0.0.2
 geojson-utils@1.0.2
 html-tools@1.0.3
 htmljs@1.0.3

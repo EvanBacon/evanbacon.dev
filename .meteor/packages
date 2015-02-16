@@ -34,5 +34,5 @@ mizzao:jquery-ui
 cfs:gridfs
 meteorhacks:fast-render
 spiderable
-gadicohen:phantomjs
 numeral:numeral
+dfischer:phantomjs
