@@ -47,6 +47,7 @@ elmar-search@0.1.0
 email@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
+gadicohen:phantomjs@0.0.2
 geojson-utils@1.0.2
 html-tools@1.0.3
 htmljs@1.0.3
@@ -103,6 +104,7 @@ sha@1.0.2
 softwarerero:accounts-t9n@1.0.4
 spacebars@1.0.4
 spacebars-compiler@1.0.4
+spiderable@1.0.6
 srp@1.0.2
 standard-app-packages@1.0.4
 templating@1.0.10

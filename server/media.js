@@ -76,10 +76,9 @@ Media.allow({
             }
             return Media.find({ _id:{ $in: mediaIds }}, { fields: {'copies.default': 0, 'copies.thumb': 0 }});
 
-        } else {
-          return null;
-        }
+        } 
       }
+      return this.ready();
 
  });
 
@@ -120,7 +119,7 @@ Media.allow({
         mediaIds = _.pluck(mediaIds, '_id'); // reduce to an array of ids
         return Media.find({ _id:{ $in: mediaIds }}, { fields: {'copies.image_md': 1, 'metadata': 1, 'uploadedAt': 1}});
       }
-      return [ ];
+      return this.ready();
  });
  
  // publish all media with a specific tag

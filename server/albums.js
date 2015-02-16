@@ -13,7 +13,7 @@ Albums.allow({
 
 // publish one album by id
 Meteor.publish("album", function (id) {
-      return Albums.find({_id: id});
+    return Albums.find({_id: id});
 });
 
 // publish one album by slug
@@ -27,18 +27,17 @@ Meteor.publish("albumBySlug", function (slug) {
 
     if (!! isVisible || isAdminById(this.userId)) {
       return Albums.find({ 'slug': slug });
-    } else {
-      return null;
-    }
+    } 
+    return this.ready()
 });
 
 // publish all albums if admin, publish all visible albums if non-admin
 Meteor.publish("albums", function(options) { 
   if ( isAdminById(this.userId)) {
     return Albums.find({}, options);
-  } else {
-    return Albums.find({'isVisible': 1}, options);
-  }
+  } 
+  return Albums.find({'isVisible': 1}, options);
+
 });
 
 // lightweight publication for albums

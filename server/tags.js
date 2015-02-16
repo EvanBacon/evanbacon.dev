@@ -17,14 +17,14 @@ Meteor.publish("tag", function (id, options) {
         return Tags.find({ _id: id }, options);
     if (!! id)
         return Tags.find({ _id: id });
+    return this.ready();
 });
 
 // publish all tags
 Meteor.publish("tags", function(options) { 
   if(!! options)
     return Tags.find({}, options);
-  else
-    return Tags.find({});
+  return Tags.find({});
 });
 
 // add a new tag to Tags collection, 
