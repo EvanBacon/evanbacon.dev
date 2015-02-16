@@ -13,7 +13,6 @@ sacha:spin
 elmar-search
 accounts-password
 mrt:moment
-vsivsi:numeral
 elmar-save-loader
 elmar-lib
 useraccounts:bootstrap
@@ -36,3 +35,4 @@ cfs:gridfs
 meteorhacks:fast-render
 spiderable
 gadicohen:phantomjs
+numeral:numeral
