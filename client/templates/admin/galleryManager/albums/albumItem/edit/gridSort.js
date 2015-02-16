@@ -57,6 +57,9 @@ setFeatured = function (obj) {
 Template.gridSort.rendered = function () {
 	$('#gridsort').sortable({
 		placeholder: "highlight",
+		stop: function( ) {
+			pageChanged(true);
+		}
 	});
 	$('#gridsort').disableSelection();
 
@@ -65,7 +68,7 @@ Template.gridSort.rendered = function () {
 	}
 
 	$('#gridsort').on( 'remove', 'li', updatePosition );
- 
+ 	
 };
 
 Template.gridSort.events({

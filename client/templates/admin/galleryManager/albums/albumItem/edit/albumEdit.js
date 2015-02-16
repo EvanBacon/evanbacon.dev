@@ -45,6 +45,10 @@ Template.albumEdit.events({
 			Router.go('albumManager');
 		}
 	},
+	'click .album-link': function (e) {
+		e.preventDefault();
+		Router.go('album', {slug: this.album.slug} );
+	},
 	'change :input, keyup :input': function (e) {
 		pageChanged(true);
 	},
@@ -59,20 +63,6 @@ Template.albumEdit.events({
 	},
 	'click .add-images': function (e) {
 		Session.set('selected-images', getContentIds());
-	},
-	'click .return-list': function (e) {
-		e.preventDefault();
-		if( hasPageChanged() || isNewAlbum(this.album.slug) ) {
-			if(confirm("Changes will be lost. Would you like to leave this page?")) {
-				if (isNewAlbum(this.album.slug)) { 
-					Albums.remove({ _id: this.album._id });
-				}
-				Router.go(getName() + 'Manager');
-			}
-		} else {
-			Router.go(getName() + 'Manager');
-		}
-		
 	},
 	'click #save-album': function (e, t) {
 		if (!isAdmin()) 
