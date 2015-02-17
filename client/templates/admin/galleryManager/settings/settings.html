@@ -4,9 +4,9 @@
 	</div>
     <div class="col-sm-9 settings">
     {{#if this.hasSettings}}
-      {{> quickForm collection="Settings" doc=this.settings id="updateSettingsForm" type="update" label-class="control-label" input-col-class="controls"}}
+      {{> quickForm collection="Settings" doc=this.settings resetOnSuccess=false id="updateSettingsForm" type="update" label-class="control-label" input-col-class="controls"}}
     {{else}}
-      {{> quickForm collection="Settings" doc=this.settings id="insertSettingsForm" type="insert" label-class="control-label" input-col-class="controls"}}
+      {{> quickForm collection="Settings" doc=this.settings resetOnSuccess=false id="insertSettingsForm" type="insert" label-class="control-label" input-col-class="controls"}}
     {{/if}}
     <div style="margin: 0 5px">
     {{> savingLoader }}
