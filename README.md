@@ -44,4 +44,5 @@ $ meteor
 
 ## Notes
 
+- This application uses the spiderable package, which uses PhantomJS to generate html versions of the code that are crawlable by web spiders. Learn how to test and troubleshoot spiderable [here](http://www.meteorpedia.com/read/spiderable/).
 - Although this application reduces image size and quality on upload, faster load times can be achieved by optimizing images before uploading.
