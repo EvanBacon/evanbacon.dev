@@ -35,10 +35,10 @@ $ meteor
   - SMTP_SERVER - eg: smtp.gmail.com
   - SMTP_PORT - eg: 465 
 - The admin manager is accessible through the gray admin toolbar at the top of the page.
--- IMAGES: Upload, edit, delete images. Edit meta data / tags.
--- ALBUMS: Create, edit, delete albums
--- TAGS: Create, edit, delete tags
--- SETTINGS: Edit site settings
+  - IMAGES: Upload, edit, delete images. Edit meta data / tags.
+  - ALBUMS: Create, edit, delete albums
+  - TAGS: Create, edit, delete tags
+  - SETTINGS: Edit site settings
 - Create albums by either selecting images on the Images page and selecting "Create Album" from Selection dropdown list, or from the Albums page click "New Album"
 
 
