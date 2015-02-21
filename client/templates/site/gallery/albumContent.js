@@ -10,7 +10,7 @@ var $container,
 // Initialize magnific popup for images on this page
 var createMagnificPopup = function () {
     magnificInstance = $('#album').magnificPopup({
-      delegate: 'a:not(.image-popup-vertical-fit.isotope-hidden)',
+      delegate: 'a:not(.isotope-hidden .image-popup-vertical-fit)',
       type: 'image',
       tLoading: 'Loading image #%curr%...',
       gallery: {
@@ -239,8 +239,6 @@ Template.albumContent.events({
    	},
    	// load more photos event
    	'click .load-more': function (e) {
-   		$('.filter-btn').removeClass('active');
-		$('.filter-btn[data-filter="*"]').addClass('active');
 		createMagnificPopup();
 		loadMore = true;
    	},
