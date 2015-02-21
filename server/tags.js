@@ -13,6 +13,8 @@ Tags.allow({
 
 // publish single tag
 Meteor.publish("tag", function (id, options) {
+    this.unblock(); // don't wait for this publication to finish to proceed
+
     if (!! options && !! id) 
         return Tags.find({ _id: id }, options);
     if (!! id)
@@ -22,6 +24,8 @@ Meteor.publish("tag", function (id, options) {
 
 // publish all tags
 Meteor.publish("tags", function(options) { 
+  this.unblock(); // don't wait for this publication to finish to proceed
+
   if(!! options)
     return Tags.find({}, options);
   return Tags.find({});

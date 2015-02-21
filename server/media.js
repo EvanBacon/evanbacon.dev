@@ -20,6 +20,8 @@ Media.allow({
     if ( ! isAdminById(this.userId)) 
           throw new Meteor.Error(403, 'Permission denied'); 
     
+    this.unblock(); // don't wait for this publication to finish to proceed
+
     check(terms, {
       sort: Object,
       limit: Number,
@@ -43,7 +45,7 @@ Media.allow({
  Meteor.publish("mediaThumbnails", function(options) {
     if ( ! isAdminById(this.userId)) 
         throw new Meteor.Error(403, 'Permission denied'); 
-    
+    this.unblock(); // don't wait for this publication to finish to proceed
     check(options, {
       sort: Object,
     });
@@ -62,6 +64,8 @@ Media.allow({
         limit: Number,
         slug: String
       });
+      this.unblock(); // don't wait for this publication to finish to proceed
+
       var album = Albums.findOne({slug: options.slug});
 
       if (!! album) {
@@ -85,6 +89,8 @@ Media.allow({
 
  // publish only samples of media from every album
  Meteor.publish("albumListMedia", function() { 
+      this.unblock(); // don't wait for this publication to finish to proceed
+
       var albums = Albums.find({ isVisible: 1 }, {fields: {'content': 1}}).fetch();
 
       if (!! albums) {
@@ -124,11 +130,13 @@ Media.allow({
  
  // publish all media with a specific tag
  Meteor.publish("tagMedia", function(tagSlug, options) { 
+    this.unblock(); // don't wait for this publication to finish to proceed
     return Media.find({'metadata.tags.slug': tagSlug}, options, { fields: {'copies.default': 0}});
  });
 
  // condensed version of media for tags list
  Meteor.publish("mediaTags", function(options) { 
+    this.unblock(); // don't wait for this publication to finish to proceed
     return Media.find({}, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1, "copies.thumb": 1}});
  });
 

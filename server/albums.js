@@ -42,6 +42,7 @@ Meteor.publish("albums", function(options) {
 
 // lightweight publication for albums
 Meteor.publish("albumsLight", function() { 
+    this.unblock(); // don't wait for this publication to finish to proceed
     return Albums.find({'isVisible': 1}, { sort: { order: 1} }, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
 });
 
