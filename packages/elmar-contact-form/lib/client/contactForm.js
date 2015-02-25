@@ -16,10 +16,3 @@ Template.contactForm.helpers({
     return Schema.contact;
   }
 });
-
-Template.contactForm.events({
-  'click .btn-reset': function (e) {
-     $('.submit-error').addClass('hidden');
-     $('.submit-success').addClass('hidden');
-  }
-});
