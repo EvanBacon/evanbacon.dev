@@ -28,7 +28,6 @@ elmar-google-analytics
 
 email
 elmar-contact-form
-elmar-magnific-popup
 manuelschoebel:wait-on-lib
 mizzao:jquery-ui
 cfs:gridfs
@@ -36,3 +35,4 @@ spiderable
 numeral:numeral
 dfischer:phantomjs
 meteorhacks:unblock
+elmar-photoswipe
