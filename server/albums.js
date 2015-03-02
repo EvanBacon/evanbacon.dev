@@ -26,13 +26,15 @@ Meteor.publish("albumBySlug", function (slug) {
     if (!! album) isVisible = !! album.isVisible;
 
     if (!! isVisible || isAdminById(this.userId)) {
-      return Albums.find({ 'slug': slug });
+      return Albums.find({ 'slug': slug }, {reactive: false});
     } 
     return this.ready()
 });
 
 // publish all albums if admin, publish all visible albums if non-admin
 Meteor.publish("albums", function(options) { 
+  options = !! options ? options : {};
+  options['sort'] = { order: 1};
   if ( isAdminById(this.userId)) {
     return Albums.find({}, options);
   } 
@@ -42,8 +44,8 @@ Meteor.publish("albums", function(options) {
 
 // lightweight publication for albums
 Meteor.publish("albumsLight", function() { 
-    this.unblock(); // don't wait for this publication to finish to proceed
-    return Albums.find({'isVisible': 1}, { sort: { order: 1} }, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
+    //this.unblock(); // don't wait for this publication to finish to proceed
+    return Albums.find({'isVisible': 1}, { sort: { order: 1}, reactive: false }, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
 });
 
 Meteor.methods({

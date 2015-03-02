@@ -50,6 +50,7 @@ Media.allow({
       sort: Object,
     });
 
+    options['reactive'] = false;
     var results = Media.find({}, options, { fields: { "original.name": 1, 
                                                       "metadata": 1, 
                                                       "copies.thumb": 1 }} );
@@ -64,7 +65,7 @@ Media.allow({
         limit: Number,
         slug: String
       });
-      this.unblock(); // don't wait for this publication to finish to proceed
+      // this.unblock(); // don't wait for this publication to finish to proceed
 
       var album = Albums.findOne({slug: options.slug});
 
@@ -78,7 +79,7 @@ Media.allow({
                   break;
                 mediaIds.push(album.content[i].id);
             }
-            return Media.find({ _id:{ $in: mediaIds }}, { fields: {'copies.default': 0, 'copies.thumb': 0 }});
+            return Media.find({ _id:{ $in: mediaIds }}, {reactive: false}, { fields: {'copies.default': 0, 'copies.thumb': 0 }});
 
         } 
       }
@@ -123,20 +124,24 @@ Media.allow({
             }
         });
         mediaIds = _.pluck(mediaIds, '_id'); // reduce to an array of ids
-        return Media.find({ _id:{ $in: mediaIds }}, { fields: {'copies.image_md': 1, 'metadata': 1, 'uploadedAt': 1}});
+        return Media.find({ _id:{ $in: mediaIds }}, {reactive: false}, { fields: {'copies.image_md': 1, 'metadata': 1, 'uploadedAt': 1}});
       }
       return this.ready();
  });
  
  // publish all media with a specific tag
  Meteor.publish("tagMedia", function(tagSlug, options) { 
-    this.unblock(); // don't wait for this publication to finish to proceed
+    // this.unblock(); // don't wait for this publication to finish to proceed
+    options = !! options ? options : {};
+    options['reactive'] = false;
     return Media.find({'metadata.tags.slug': tagSlug}, options, { fields: {'copies.default': 0}});
  });
 
  // condensed version of media for tags list
  Meteor.publish("mediaTags", function(options) { 
     this.unblock(); // don't wait for this publication to finish to proceed
-    return Media.find({}, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1, "copies.thumb": 1}});
+    options = !! options ? options : {};
+    options['reactive'] = false;
+    return Media.find({}, options, { fields: {"metadata.tags": 1, 'metadata.title': 1, 'original.name': 1, "copies.thumb": 1}});
  });
 
