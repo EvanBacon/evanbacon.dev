@@ -1,9 +1,9 @@
-# A Meteor Image Gallery Application
+# A Meteor Image Management & Gallery Application
 
-A responsive, easy-to-use image gallery manager and showcase platform built with MeteorJS. 
+A responsive, easy-to-use image management and gallery built with MeteorJS. See example [here](http://elmarcreative.com). 
 
 ## Features
-* Admin Gallery Dashboard
+* Gallery Management Dashboard
 * Fluid and filterable layouts with Isotope/Packery
 * Option to shuffle or specify the order of album images using jQuery's Sortable
 * Drag and drop re-ordering
@@ -11,6 +11,7 @@ A responsive, easy-to-use image gallery manager and showcase platform built with
 * Creates various image sizes for load optimization
 * Organize images by tags and/or albums
 * Responsive design
+
 
 
 ## Installation 
@@ -23,7 +24,7 @@ A responsive, easy-to-use image gallery manager and showcase platform built with
 ```sh
 $ meteor
 ```
-- Go to http://localhost:3000/ and register an admin account.
+- Go to http://localhost:3000/sign-in and register an admin account.
 - Login and start setting up the gallery.
 
 
