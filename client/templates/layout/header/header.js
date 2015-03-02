@@ -1,21 +1,13 @@
 Template.header.helpers({
-	isActive: function (type) {
+	isActive: function () {
 		var name = Router.current().route.getName();
-		return (name === type) ? 'active' : '';
+		arguments = _.toArray(arguments);
+		return (arguments.indexOf(name) > -1) ? 'active' : '';
 	}
 });
 
 Template.header.events ({
-	'click [data-toggle=offcanvas], click .activated a': function (e) {
-		$('[data-toggle=offcanvas]').toggleClass('visible-xs text-left');
-    	$('[data-toggle=offcanvas]').find('i').toggleClass('glyph-menu glyphicon-chevron-left');
-	    $('.row-offcanvas').toggleClass('activated');
-	    $('#lg-menu').toggleClass('activated');
-	    $('#tag-list').toggleClass('activated');
-	    $('#lg-menu').toggleClass('hidden-xs').toggleClass('visible-xs');
-	    $('#sidebar-footer').toggleClass('hidden-xs').toggleClass('visible-xs');
-	    $('#logo').toggleClass('hidden-xs').toggleClass('visible-xs');
-	    $('#tag-list').toggleClass('hidden-xs').toggleClass('visible-xs');
-	    $('#title').toggleClass('visible-xs').toggleClass('hidden-xs');
+	'click #navbar li a': function (e) {
+		$('#navbar').collapse('hide');
 	}
 });

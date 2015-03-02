@@ -1,9 +1,21 @@
 <template name="footer">
-	<div id="footer">
+	<div class="custom-footer">
 		{{{ getSetting 'footerCode' 'Add footer code in settings.' }}}
-		{{#if settingsAvailable}}
-		<div class="copyright">&copy;{{ year }} {{ getSetting 'title'}}</div>
-		<div class="clear"></div> 
-		{{/if}}
 	</div>
+
+	<footer id="footer">
+	    <div class="container">
+	    	<div class="col-xs-12">
+	    	{{#if isAlbum}}
+	       		{{> albumFilters }}
+	        {{else}}
+	         	{{> tagLinks }}
+	        {{/if}}
+		    </div>
+		    <div class="copyright">&copy;{{ year }} {{ getSetting 'title'}} 
+		    	{{#unless isAdmin}} | <a href="{{pathFor route='atSignIn'}}">Sign In</a>{{/unless}} 
+		    </div>
+	    </div>
+	</footer>
+
 </template>

@@ -22,12 +22,10 @@
             <h3>Albums</h3>
             {{#if albums}}
               {{#each albums}}
-                <p class="album-item-label">
-                  <a href="{{ pathFor route='albumEdit' _id=this._id }}">{{this.title}}</a>
-                </p>
+                  <a href="{{ pathFor route='albumEdit' _id=this._id }}" class="tag-item-label">{{this.title}}</a>
               {{/each}}
             {{else}}
-              <p class="album-item-label">
+              <p class="tag-item-label">
                   None
                 </p>
             {{/if}}
@@ -45,13 +43,12 @@
                 <div class="clear"></div>
               </li>
               
-             <!-- {{#if isModified}} -->
               <li class="list-group-item">
                 <strong>Uploaded On</strong>
                 <span class="pull-right">{{formatDate uploadedAt 'short'}}</span>
                 <div class="clear"></div>
               </li>
-              <!-- {{/if}} -->
+
             </ul>
         </div>
         <div class="col-sm-7">

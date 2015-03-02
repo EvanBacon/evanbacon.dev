@@ -1,32 +1,23 @@
 <template name="header">
-  <div class="header-main">
-    <ul class="nav navbar-main">
-      <li><a href="#" data-toggle="offcanvas" class="visible-xs text-left btn-toggle"><i class="glyphicon glyph-menu"></i></a></li>
-    </ul>
-
-    <div class="logo hidden-xs" id="logo">
-        {{> siteName }}
-    </div>   
-    <ul class="nav hidden-xs" id="lg-menu">
-      <li class="{{ isActive 'albums'}}"><a href="{{ pathFor route='albums'}}">Albums</a></li>
-      <li class="{{ isActive 'about'}}"><a href="{{ pathFor route='about'}}">About</a></li>
-      <li class="{{ isActive 'contact'}}"><a href="{{ pathFor route='contact'}}">Contact</a></li>
-    </ul>
-
-    <div class="visible-xs" id="title">
-      <h3>{{ getSetting 'title'}}</h3>
-    </div>
-
-     <br>
-    <div class="hidden-xs" id="tag-list">
-      {{> tagLinks }}
-    </div>
-      
-    {{#unless isAdmin}}
-      <div class="list-unstyled hidden-xs" id="sidebar-footer">
-          <a href="{{pathFor route='atSignIn'}}" class="btn btn-square btn-xs sign-in">Sign In</a>
+    <nav class="navbar navbar-main navbar-fixed-top {{#if isAdmin}}top-admin{{/if}}">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">{{> siteName }}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="{{ isActive 'albums' 'home' 'album'}}"><a href="{{ pathFor route='albums'}}">Albums</a></li>
+            <li class="{{ isActive 'about'}}"><a href="{{ pathFor route='about'}}">About</a></li>
+            <li class="{{ isActive 'contact'}}"><a href="{{ pathFor route='contact'}}">Contact</a></li>
+          </ul>
+        </div>
       </div>
-    {{/unless}}
-  </div>
-</template>
+    </nav>
 
+</template>

@@ -1,9 +1,25 @@
 <template name="tagLinks">
-  	{{#if hasCount tags }} 
-  	  <h4>Tags A-Z</h4>
-	  {{#each tags}}
-	  	<p class="album-item-label"><a class="tag-link" href="#">{{this.name}}</a></p>
-	  {{/each}}
-	  <div class="clear"></div>
-  	{{/if}}
+  {{#if hasCount tags}}
+  <nav class="navbar navbar-default navbar-filters" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="btn-square navbar-toggle" data-toggle="collapse" data-target="#navbarFilters">
+            <span class="sr-only">Toggle navigation</span>
+            <h3>Tags <span class="glyphicon glyphicon-chevron-down"></span></h3>
+          </button>
+          <span class="navbar-brand">
+            <h3><span class="glyphicon glyphicon-tags"></span></h3>
+          </span>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarFilters">
+          <ul class="nav navbar-nav">
+            {{#each tags}}
+			  	<a class="tag-item-label tag-link" href="#">{{this.name}}</a>
+			{{/each}}
+          </ul>
+        </div>
+      </div>
+  </nav>
+  {{/if}}
 </template>

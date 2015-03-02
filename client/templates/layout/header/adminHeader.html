@@ -1,18 +1,15 @@
 <template name="adminHeader">
   <div class="navbar navbar-admin navbar-static-top" role="navigation">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-admin">
+            <span class="glyphicon glyphicon-cog"></span> ADMIN <span class="caret"></span>
           </button>
           <span class="navbar-brand">
-              <span class="glyphicon glyphicon-cog"></span>
+              <span class="glyphicon glyphicon-cog"></span> ADMIN
           </span>
         </div>
 
-        <nav class="collapse navbar-collapse" id="navbar">
+        <nav class="collapse navbar-collapse" id="navbar-admin">
           <ul class="nav navbar-nav">
             <li class="{{ isActive 'mediaManager'}}"><a href="{{ pathFor route='mediaManager'}}">Images</a></li>
             <li class="{{ isActive 'albumManager'}}"><a href="{{ pathFor route='albumManager'}}">Albums</a></li>
@@ -23,7 +20,7 @@
           <ul class="nav navbar-nav navbar-right">
             
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle dd-user" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+                <div class="dropdown-toggle dd-user" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></div>
                 <ul class="dropdown-menu">
                   <li><a href="{{pathFor route='atChangePwd'}}"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
                   <li role="presentation" class="divider"></li>

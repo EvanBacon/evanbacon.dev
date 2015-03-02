@@ -1,203 +1,74 @@
 nav li.active a {
   background-color: @brand-info !important;
-  color: #FFF;
+  color: #FFF !important;
 }
 
-nav li a {
-  background-color: transparent;;
-  color: inherit;
-}
+.navbar-main {
+  background: #FFF !important;
+  height: 75px !important;
+  .box-shadow(0px 2px 2px 0px rgba(0,0,0,0.1));
+  padding: 10px !important;
+  position: fixed;
+  margin-bottom: 0;
+  width: 100%;
+  right: 0;
+  left: 0;
+  z-index: 800;
 
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #EEE;
-    height: 3px;
-    .rounded(2px);
-}
+  &.top-admin {
+    top: 50px !important;
+  }
 
-#sidebar {
-    padding:0;
-    background-color: rgba(255, 255, 255, 0.3) !important; 
-}
+  .navbar-toggle .icon-bar {
+      border: 2px solid @gray !important;
+  }
 
-#sidebar, #sidebar a, #sidebar-footer a {
+  .navbar-collapse {
+      background: #FFF;
+      // margin-top: 8px;
+  }
+
+  .navbar-brand {
+    padding: 0;
+    img {
+      height: 60px !important;
+      margin: 0 0 0 10px !important;
+      padding: 0;
+    }
+  }
+
+  a {
     color:#333;
-    background-color:transparent;
     text-transform: uppercase;
     font-size: 1.1em;
     letter-spacing: 1px;
     text-align: center;
-}
-
-#sidebar .nav li>a {
-  font-family: 'PT Sans', Arial, sans-serif;
-}
-
-#sidebar .nav li>a:hover {
-    background-color:#ededed;
-}
-
-#sidebar .nav li.active>a {
-    background-color:darken(@brand-info, 5%);
-    color: #FFF !important;
-}
-
-
-#sidebar .logo {
-  position: relative;
-  padding: 0 5px 0 0; 
-  margin: 10px 2px !important;
-
-
-  img {
-    width: 95% !important;
-    height: auto !important;
   }
-
-  .set-link {
-    width: 150px !important;
-    font-size: .8em;
-    margin: 5px auto;
-    border: 1px solid @brand-primary;
-    letter-spacing: 0;
-    padding: 5px 0;
-    text-align: center;
-    .rounded(2px);
+  @media screen and (max-width: 768px) {
+    top: auto;
+    &.navbar-fixed-top {
+      position: relative;
+    }
+    &.top-admin {
+      top: auto !important;
+    }
   }
 }
 
-#sidebar h2 {
-  // white-space: nowrap;
-  letter-spacing: 1px;
-  text-align: center !important;
-  font-size: 1.1em;
-  color: darken(@brand-info, 20%);
-}
-
-#sidebar h3 {
-  .rotation(-90deg);
-  white-space: nowrap;
-  margin-top: 250px;
-  letter-spacing: 4px;
-  text-align: left !important;
-}
-
-#sidebar a.btn-toggle {
-  text-align: left !important;
-}
-
-#sidebar .album-item-label {
-  padding: 2px !important;
-  float: none !important;
-  display: inline-block !important;
-}
-
-#sidebar .album-item-label a {
-  font-size: 0.8em;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-  font-weight: normal !important;
-}
-
-#sidebar a:hover {
-  text-decoration: none !important;
-}
-
-#tag-list {
-  width: 100% !important;
-  padding: 5px 3px !important;
-  text-align: center !important;
-}
-
-#tag-list h4 {
-  font-size: 15px;
-  color: #AAA;
-}
-
-
-#sidebar-footer {
-  margin-top: 100px;
-  width: 100%;
-  color: #AAA !important;
-  font-size: .9em;
-
-}
-
-#sidebar-footer a {
-  text-align: center;
-  margin: 0 auto;
-  font-family: 'PT Sans', Arial, sans-serif !important;
-}
-
-.glyph-menu {
-  // background-image:url('/img/menu.svg') !important;
-  content: url("/img/menu.svg");
-  font-size: 1.0em;
-  width: 30px;
-  color: #888;
-  border: 1px solid #AAA;
-  .rounded(2px);
-  .gradient(#FFF, #DDD, #FFF);
-
-}
-
-// off canvas sidebar
-//--------------------------------------------------
-
-@media screen and (max-width: 768px) {
-  .row-offcanvas {
-    position: relative;
-    .transition(all 0.3s ease-out);
-    font-size: 1.1em;
-  }
-
-  .row-offcanvas-left.activated {
-    left: 40%;
-  }
-
-  .row-offcanvas-left.activated .sidebar-offcanvas {
-    left: -40%;
-    position: absolute;
-    top: 0;
-    width: 40%;
-    margin-left: 5px;
-    .transition(all 0.3s ease-in);
-  }
-
-  .btn-toggle {
-    margin:5px 2px 3px 8px !important;
-    padding: 0 !important;
-  }
-
-  .btn-toggle .glyphicon {
-    font-size: 1.3em !important;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .btn-toggle {
-    margin:5px 0 0 0 !important;
-    padding: 0 !important;
-
-    // .glyph-menu {
-    //   font-size: 1.0em !important;
-    // }
-  }
-
-}
-
-//----------------------------------------------------
-
+//---------------------------------
 
 .navbar-admin {
     border-width: 0;
-    background-color: #777;
+    background: @gray-light;
     color: #ffffff;
     top: 0;
     position: fixed;
-    padding-right: 20px;
+    height: 30px !important;
+    padding: 0 20px 0 !important;
     text-transform: uppercase;
-    z-index: 100;
-    width: inherit !important;
+    z-index: 900;
+    width: 100% !important;
+    font-size: .9em;
 
     li > a  {
        color:#efefef;
@@ -206,29 +77,66 @@ nav li a {
     .dropdown-menu li a {
       color: @gray;
     }
-    .dropdown-menu li > a {
-      padding-left:30px;
-    }
-
+    
     li>a:hover, li>a:focus, .open, .open>a, .open>a:hover, .open>a:focus {
-       background-color:#555;
+       background-color:@gray-light;
        color:#fff;
     }
 
-    .navbar-toggle .icon-bar {
-      border: 2px solid white !important;
-    }
+    .navbar-nav .dropdown-toggle {
+        padding: 12px;
+        cursor: pointer;
+        font-size: 15px;
+      }
 
     @media screen and (max-width: 768px) {
       top:0;
       right: 0;
       width:100%;
       padding: 0 !important;
+      font-size: 1.1em;
+      text-align: center;
+      background: @gray-light !important;
 
-      .dropdown-menu li a {
-        color: #FFF;
+      .navbar-brand {
+        display: none;
       }
-    }
+
+      .navbar-collapse {
+        background: #FFF;
+        a {
+          color: @gray;
+        }
+      }
+      .dropdown-menu{
+          display: block;
+          position: static;
+          background-color:transparent;
+          border:0 none;
+          box-shadow:none;
+          margin-top:0;
+          position:static;
+          width:100%;
+          text-align: center;
+          font-size: 1.0em;
+      }
+      .navbar-nav .dropdown-menu > li > a, 
+      .navbar-nav .dropdown-menu .dropdown-header {
+          padding:7px;
+          margin: 0;
+          color: @gray;
+      }
+
+      .navbar-nav .dropdown-menu > li > a:hover {
+          color: #FFF;
+      }
+
+      .navbar-nav .dropdown-toggle {
+        background: transparent;
+        cursor: default;
+      }
+
+  }
 }
 
 
@@ -236,11 +144,21 @@ nav li a {
   border: none !important;
   font-size: 0.85em;
   .text-shadow();
-  .border-radius(0, 5px, 5px, 0) !important;
+  .border-radius(0) !important;
+  position: fixed;
+  top: 75px;
+  left: 0;
+  padding-top: 4px;
+  width: 100%;
+  z-index: 20;
+
+  &.top-admin {
+    top: 120px !important;
+  }
 
   .navbar-brand h3 {
       color: @gray-lighter !important;
-      font-size: 1.0em;
+      font-size: .9em;
       margin: 0 3px 0 0;
   }
 
@@ -280,9 +198,10 @@ nav li a {
   }
 
   @media screen and (max-width: 768px) {
-
-    .box-shadow(none);
-    border: none !important;
+    position: relative;
+    margin-top: 0;
+    top: auto;
+    padding: 0;
 
     .navbar-brand {
       display: none !important;
@@ -297,10 +216,17 @@ nav li a {
       text-align: center !important;
     }
 
+    &.top-admin {
+      top: auto !important;
+    }
+    h3 {
+      font-size: 1.3em;
+    }
+
 
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 480px) {
     h3 {
       font-size: 1.2em;
     }
@@ -313,6 +239,7 @@ nav li a {
   background: transparent;
   font-size: 0.85em;
   border: none !important;
+  margin-bottom: 0;
 
   .navbar-brand {
     padding: 5px !important;
@@ -320,7 +247,6 @@ nav li a {
 
   .navbar-brand h3 {
     margin:0 4px;
-    color: @gray !important;
     font-size:1.1em;
   }
 
@@ -338,19 +264,24 @@ nav li a {
   }
 
   .navbar-nav > li > a {
-    padding:5px 6px !important;
-    font-weight: bold !important;
+    padding:1px 3px 0 !important;
+    font-weight: normal !important;
   }
 
   .btn-link {
-    margin: 0;
+    margin: 2px;
     color: darken(@brand-info, 20%) !important;
-    text-decoration: underline;
+    text-decoration: none;
     border: 2px solid transparent;
   }
 
+  .btn-link:hover {
+    border-color: darken(@brand-info, 20%) !important;
+    background: @gray-lighter !important;
+  }
+
   .btn-link.active {
-    border: 2px solid darken(@brand-info, 20%) !important;
+    border-color: darken(@brand-info, 20%) !important;
     background: @gray-lighter !important;
     text-decoration: none;
   }
@@ -360,7 +291,7 @@ nav li a {
     }
     h3 {
       margin-top: 7px !important;
-      color: @gray !important;
+      font-size: 1.3em;
     }
     .navbar-toggle {
       width: 100%;
@@ -373,9 +304,13 @@ nav li a {
     }
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 480px) {
     h3 {
       font-size: 1.2em;
+    }
+    a {
+      font-size: .85em;
+      margin: 2px;
     }
   }
 }

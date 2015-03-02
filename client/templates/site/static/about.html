@@ -1,8 +1,9 @@
 <template name="about">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<h1 class="text-center">About</h1>
-		</div>
+		{{#if isAdmin}}
+		<h5 class="col-sm-12 text-right"><a href="{{ pathFor route='settings'}}"><span class="glyphicon glyphicon-cog"></span> edit about</a>
+		</h5>
+		{{/if}}
 	</div>
 	
 	<div class="row">

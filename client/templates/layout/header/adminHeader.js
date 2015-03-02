@@ -6,3 +6,9 @@ Template.adminHeader.helpers({
 		return (name === type) ? 'active' : '';
 	}
 });
+
+Template.adminHeader.events({
+	'click #navbar-admin li a:not(".dropdown-toggle")': function (e) {
+		$('#navbar-admin').collapse('hide');
+	}
+});

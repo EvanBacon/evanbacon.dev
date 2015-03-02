@@ -1,31 +1,23 @@
 <template name="layout"> 
   <div class="wrapper">
     <div class="box" style="{{#if getSetting 'backgroundUrl'}} background: url({{getSetting 'backgroundUrl'}}) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover; background-size: cover; {{/if}}">
-        <div class="row row-offcanvas row-offcanvas-left">
-                      
-            <!-- sidebar -->
-            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas no-gutter" id="sidebar">
-               {{> yield region="header"}}
-            </div>
-            <!-- /sidebar -->
-          
-            <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11 no-gutter" id="main">
-                
-              {{#if isAdmin}}
+        <div class="row no-gutter">
+            {{#if isAdmin}}
                 {{> adminHeader}}
-              {{/if}}
+            {{/if}}
+      
+            <div class="column col-sm-12 no-gutter" id="main">
+              <div class="{{#if isAdmin}}padding-admin{{else}}padding{{/if}}">
+                {{> yield region="header"}}
 
-              <div class="{{#if isAdmin }}padding-admin{{else}}padding{{/if}}">
-                  {{> yield}} 
-                  <br>
+                <div>
+                    {{> yield}} 
+                    <br>
+                </div>
+                <div class="clear"></div>
+                {{> yield region="footer"}} 
               </div>
-              <div class="clear"></div>
-              {{> yield region="footer"}} 
-
             </div>
-            <!-- /main -->
-          
         </div>
     </div>
   </div>
@@ -34,8 +26,8 @@
 <template name="layoutNoHeaders"> 
   <div class="wrapper">
     <div class="box">
-                {{> yield}} 
-                {{> yield region="footer"}} 
+        {{> yield}} 
+        {{> yield region="footer"}} 
     </div>
   </div>
 </template>
