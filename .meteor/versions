@@ -39,7 +39,7 @@ dfischer:phantomjs@1.0.4
 ejson@1.0.5
 elmar-contact-form@0.1.0
 elmar-google-analytics@0.1.0
-elmar-isotope-packery@0.0.0
+elmar-isotope@0.0.0
 elmar-lib@0.1.0
 elmar-photoswipe@0.1.0
 elmar-save-loader@0.1.0
@@ -70,7 +70,7 @@ logging@1.0.6
 manuelschoebel:wait-on-lib@0.2.0
 meteor@1.1.4
 meteor-platform@1.2.1
-meteorhacks:meteorx@1.3.1
+meteorhacks:meteorx@1.0.2
 meteorhacks:unblock@1.1.0
 minifiers@1.1.3
 minimongo@1.0.6

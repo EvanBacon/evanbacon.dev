@@ -1,17 +1,18 @@
-// styles for packery/isotope instances
+// styles for masonry/isotope instances
 
-#album {
-	position: relative;
-	display: block;
-	padding-top: 5px !important;
-}
+// #album {
+// 	position: relative;
+// 	display: block;
+// 	padding-top: 5px !important;
+// 	.transition(all 0.5s ease-in-out);
+// }
 
 .album-groups {
 	margin: 10px auto 0 10px !important;
 }
 
 .gutter-sizer {
-  width: 2%;
+  width: 1.75%;
 }
 
 .grid-sizer {
@@ -23,19 +24,31 @@
 }
 
 .itemP {
-  position: relative;
+  // position: relative;
   text-align: center;
   width: 23%;
-  float: left;
+  // float: left;
+  margin-bottom: 15px;
+display: inline-block;
   .box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));
 }
 
 .itemPL {
-  position: relative;
+  // position: relative;
   text-align: center;
   width: 23%;
-  float: left;
+  // float: left;
+  display: inline-block;
   .box-shadow(0px 1px 2px 0px rgba(0,0,0,0.3));
+  margin-bottom: 15px;
+}
+
+.hidePL img{
+    position: absolute;
+    left: -9999px;
+    text-indent: -9999px;
+
+    // .transition(all 0.1s ease-in-out);
 }
 
 .itemP.w2 { 
@@ -111,11 +124,11 @@
 
 @media screen and (max-width: 480px) {
     .grid-sizer {
-	  width: 100%;
+	  width: 97%;
 	}
 
 	.itemP, .itemPL {
-	  width: 100%;
+	  width: 97%;
 	}
 	
 	.itemP.item-sample {
@@ -123,7 +136,7 @@
 	}
 
 	.itemP.w2 { 
-		width: 100%;
+		width: 97%;
 		margin: 3px;
 	}
 
@@ -131,9 +144,9 @@
 		font-size: 1.1em; 
 	}
 
-	#albums {
-		margin: 0 !important;
-	}
+	// #albums {
+	// 	margin: 0 !important;
+	// }
 	.album-groups {
 		margin: 0 !important;
 		padding: 0 !important;

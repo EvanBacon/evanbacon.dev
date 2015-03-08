@@ -20,7 +20,6 @@ less
 nemo64:bootstrap
 mrt:jquery-imagesloaded
 mizzao:autocomplete
-elmar-isotope-packery
 aldeed:autoform
 aldeed:collection2
 elmar-google-analytics
@@ -34,5 +33,6 @@ cfs:gridfs
 spiderable
 numeral:numeral
 dfischer:phantomjs
-meteorhacks:unblock
 elmar-photoswipe
+elmar-isotope
+meteorhacks:unblock
