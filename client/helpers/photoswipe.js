@@ -219,7 +219,7 @@ initPhotoSwipeFromDOM = function(gallerySelector) {
 		    realViewportWidth = gallery.viewportSize.x * dpiRatio;
 
 
-		    if(realViewportWidth >= 1200 || (!gallery.likelyTouchDevice && realViewportWidth > 800) || screen.width > 1200 ) {
+		    if(realViewportWidth >= 750 || (!gallery.likelyTouchDevice && realViewportWidth > 480) || screen.width > 750 ) {
 		    	if(!useLargeImages) {
 		    		useLargeImages = true;
 		        	imageSrcWillChange = true;
