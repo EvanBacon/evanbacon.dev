@@ -1,9 +1,9 @@
 <template name="albumEdit">
 
 		<div class="col-sm-10">
-			<h1>Edit Album 
+			<h1>Edit Album
 				<small>
-					<a href="#" class="album-link">{{ this.album.title }}
+					<a href="{{pathFor route='album' slug=this.album.slug}}" class="album-link">{{ this.album.title }}
 						<span class="glyphicon glyphicon-circle-arrow-right font-smaller"></span>
 					</a> 
 				</small>

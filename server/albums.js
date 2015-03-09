@@ -45,7 +45,7 @@ Meteor.publish("albums", function(options) {
 // lightweight publication for albums
 Meteor.publish("albumsLight", function() { 
     //this.unblock(); // don't wait for this publication to finish to proceed
-    return Albums.find({'isVisible': 1}, { sort: { order: 1}, reactive: false }, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
+    return Albums.find({'isVisible': 1}, { sort: { order: 1}}, {fields: {'title': 1, 'slug': 1, 'description':1, 'isVisible': 1, 'isShuffled': 1}});
 });
 
 Meteor.methods({
@@ -100,7 +100,8 @@ Meteor.methods({
                       'title': album.title,
                       'isVisible': album.isVisible,
                       'isShuffled': album.isShuffled,
-                      'lastModified': (new Date()).getTime()
+                      'lastModified': (new Date()).getTime(),
+                      'order': album.order
                       };
 
         try {

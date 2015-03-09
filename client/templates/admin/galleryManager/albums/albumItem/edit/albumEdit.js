@@ -45,10 +45,6 @@ Template.albumEdit.events({
 			Router.go('albumManager');
 		}
 	},
-	'click .album-link': function (e) {
-		e.preventDefault();
-		Router.go('album', {slug: this.album.slug} );
-	},
 	'change :input, keyup :input': function (e) {
 		pageChanged(true);
 	},
@@ -70,6 +66,7 @@ Template.albumEdit.events({
 		var g = {};
 	    g.id = this.album._id;
 		g.title = Validation.trimInput(t.find('#inputTitle').value);
+		g.order = this.album.order;
 
 		g.slug = t.find('#inputSlug').value;
 		g.description  = t.find('#inputDesc').value;
