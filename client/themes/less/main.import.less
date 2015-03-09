@@ -27,7 +27,7 @@ hr {
   border-top: 1px solid #CCC;
 }
 
-h1,h2,h3,h4,#sidebar  {
+h1,h2,h3  {
   font-family: 'PT Sans',Geneva,Arial,sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -120,6 +120,7 @@ ul.list-square {
 
 .load-more {
   width: 100% !important;
+  border: none;
 }
 
 .selected {
@@ -134,6 +135,11 @@ ul.list-square {
 
 .album-link, .album-title {
   .transition(all 0.1s ease-in-out);
+}
+
+.spinner-container {
+  .transition(all .5s ease-in-out) !important;
+  background-color: rgba(255, 255, 255, .2) !important;
 }
 
 .bold {
@@ -160,15 +166,6 @@ ul.list-square {
     background-color: lighten(@brand-info, 30%);//@gray-lighter;
   } 
 
-  // a:focus {
-  //   text-decoration: none;
-  // }
-
-  // a:hover {
-  //   text-decoration: none !important;
-  //   text-align: center !important;
-  //   margin: auto !important;
-  // }
 }
 
 
@@ -378,15 +375,26 @@ ul.list-square {
 } 
 
 .refresh-album {
-  font-size: 25px;
   color: #AAA;
+
+  .refresh-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
   .glyphicon {
     margin-top: 20px;
+    font-size: 19px;
   }
 
-  @media screen and (max-width: 450px) {
-      font-size: 18px;
+  @media screen and (max-width: 780px) {
+      .refresh-text {
+         display: none;
+      }
+      .glyphicon {
+        font-size: 24px;
+      }
   }
 }
 

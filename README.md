@@ -4,7 +4,7 @@ A responsive, easy-to-use image management and gallery built with MeteorJS. See 
 
 ## Features
 * Gallery Management Dashboard
-* Fluid and filterable layouts with Isotope/Packery
+* Fluid and filterable layouts with Isotope/Masonry
 * Option to shuffle or specify the order of album images using jQuery's Sortable
 * Drag and drop re-ordering
 * Edit individual image meta data and image tags.

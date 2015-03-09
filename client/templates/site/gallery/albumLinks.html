@@ -17,7 +17,7 @@
           <ul class="nav navbar-nav">
             {{#each albums}}
             <li>
-                <a href="#" class="btn btn-link album-btn {{isActive this.slug}}">{{this.title}}</a>
+                <a href="{{ pathFor route='album' slug=this.slug}}" class="btn btn-link album-btn {{isActive this.slug}}">{{this.title}}</a>
             </li>
             {{/each}}
           </ul>

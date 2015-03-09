@@ -26,38 +26,35 @@
 
 		<div class="col-xs-12">
 			<div id="album" class="album">
-				  <div class="gutter-sizer"></div>
-			      <div class="grid-sizer"></div>
-			      {{#each mediaItems}}
-					{{> isoItem }}
-			 	  {{/each}}
-				</div>
-
-				<div class="clear"></div>
-
-			  	<br>
-			  	
-				<div class="col-sm-6 col-sm-offset-3">
+			  <div class="gutter-sizer"></div>
+		      <div class="grid-sizer"></div>
+		      {{#each mediaItems}}
+				{{> isoItem }}
+		 	  {{/each}}
+		 	  
+			</div>
+			<div class="clear"></div>
+			<br>
+		</div>
+		<div class="col-sm-6 col-sm-offset-3">
 			    {{#if nextPath}}   
-			       <a href="{{nextPath}}" class="load-more btn btn-default btn-lg btn-square">Load more</a>
+			       <a href="{{nextPath}}" class="load-more btn btn-sm btn-square">Load more</a>
 			    {{else}}
 			      {{#unless ready}}        
 			          {{> spinner}}      
 			      {{/unless}}
 			    {{/if}}
 			</div>
-		</div>
 	</div>
 	{{> photoswipe }}
 </template>
 
 <template name="isoItem">
-	   	<a class="itemPL {{#each this.metadata.tags}} {{ this.slug }} {{/each}}" href="{{this.url store='image_lg'}}"
-	   		data-size="{{this.metadata.widthLg}}x{{this.metadata.heightLg}}"
-	   		data-med="{{this.url store='image_md'}}" 
-	   		data-med-size="{{this.metadata.widthMd}}x{{this.metadata.heightMd}}"
-	   		data-author="{{this.metadata.credit}}">
-	   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" />
+	   	<a class="itemPL {{#each this.metadata.tags}} {{ this.slug }} {{/each}} hidePL" href="{{this.url store='image_lg'}}" data-size="{{this.metadata.widthLg}}x{{this.metadata.heightLg}}"
+	      data-med="{{this.url store='image_md'}}" 
+	      data-med-size="{{this.metadata.widthMd}}x{{this.metadata.heightMd}}"
+	   	  data-author="{{this.metadata.credit}}">
+	   		<img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}" width="{{this.metadata.widthMd}}" />
 	   		<figure class="hidden">
 	        	{{#if this.metadata.title }}
 		         <h4>{{this.metadata.title}}</h4>

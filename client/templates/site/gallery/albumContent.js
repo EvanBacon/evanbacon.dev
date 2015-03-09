@@ -4,106 +4,129 @@ var $container,
 	seed,
 	oldItems = [],
 	loadMore = false,
-	refresh = false,
-	currentFilter = '*';
-
+	loadCount = 0,
+	currentFilter = '*',
+	isoOptions = { 
+					itemSelector: '.itemPL',
+			    	filter:       '*', 
+		  	    	masonry: {
+						gutter: '.gutter-sizer',
+		  	   			columnWidth: '.grid-sizer'
+					}
+				 };
 
 var appendItems = function () {
 
-	if (!! Isotope && !! $container.isotope) {
-		var elems = [];
-		var isoLength = 0,
-		    ind = 0;
-		
-    	isoLength = $container.isotope('getItemElements').length;
+	if ( loadCount > 0 ) {
+		Meteor.defer(function () {
+			var elems = [],
+				currElems = [];
+			var isoLength = 0,
+			    ind = 0;
 
-		_.each($('.itemPL'), function(item) {
-	  	 	if (ind >= isoLength) {
-				elems.push(item);
-			}
-			ind++;  
-		});
-		 
-		// Load images
-		$container.imagesLoaded( function() {
-		    // Append on isotope      
-		    $container.isotope('appended', elems); 
-		
-		});
-		 if (elems.length > 0) {
-		 	loadMore = false; 
-		 	if (currentFilter !== '*') {
-			 	$container.isotope({ filter: currentFilter });
-		  		initPhotoSwipeFromDOM('.album');
-		  	}
-		 }
+			$container.imagesLoaded(function () {
+				$('.itemPL').removeClass('hidePL');
+			    isoLength = $container.isotope('getItemElements').length;
+			    
+				_.each($('.itemPL'), function(item) {
+			  	 	if (ind >= isoLength) {
+						elems.push(item);
+					} 
+					ind++; 
+				});
+				 
 				
+				$container.isotope('appended', elems); 
+				$container.isotope('layout');
+				    
+				if (elems.length > 0) { 
+					loadMore = false;
+					enableCaptions();
+				 	if ( currentFilter !== '*' && isAlbum() ) {
+					 	$container.isotope({ filter: currentFilter });
+				  		initPhotoSwipeFromDOM('.album');
+				  	}
+				}	
+			});
+		});
 	} 
-
-}
+};
 
 var createAlbumGrid = function () {
-	if (!! Isotope ) {
+	if (typeof Isotope !== 'undefined' && loadCount === 0 ) {
 
-		$container = $('#album').imagesLoaded( function() {
-			$container.isotope({
-			    layoutMode:  'packery',
-			    itemSelector: '.itemPL',
-			    filter:       '*', 
-		  	    packery: {
-		  	   	   gutter: '.gutter-sizer',
-		  	    }
-			});
+		$container = $('#album'); //.isotope( isoOptions );
+		loadCount++;
+		Meteor.setTimeout(function () {
+		$container.imagesLoaded( function() {
+			$('.itemPL').removeClass('hidePL');
+		
+			
+				$container.isotope( isoOptions );
+				console.log('init starting');
+				// $('.itemPL').removeClass('hidden');
+				$container.isotope('layout');
+				if ($('.itemPL').length !== $container.isotope('getItemElements').length) {
+					// If this is the case, images were not loaded properly and must reload.
+					// Seems to be caused by timing issues / race conditions (find better solution for this in future)
+					refreshAlbumGrid();
+				}
+				// immediately load a few more
+				$('.load-more').click();
 			
 		});
+		}, 100);
+	} else {
+		refreshAlbumGrid();
 	}
 
+};
+
+var refreshAlbumGrid = function () {
+	if (loadCount > 0) {
+		$container.isotope('destroy');
+		$container = $('#album').isotope( isoOptions );
+	}
 };
  
  // Destroy isotope grid (used when moving to a new album/tag page)
 var resetAlbumGrid = function () {
-	try {
-		if (!! Isotope && !! $container.isotope)  {
+
+	    if ( loadCount > 0 ) { 
 			// superficially create instance in case it doesn't exist
-			$container.isotope(); 
+		    $container.isotope(); 
 			$container.isotope('destroy');
-		    $container.isotope = false;
+			$container.isotope = false;
 
 			oldItems = [];
 	  		seed.clear();	
 
-	  		refresh = false;
-
+	  		loadMore = false;
+	  		loadCount = 0;
 	  	}
-	  	
-	} catch(e) {
-
-	} 
 };
 
 // Initialize the isotope grid (first destroy if on a new album page)
 var initAlbumGrid = function () {
-
 	Meteor.defer(function () {
 		
-	 	if (!loadMore || refresh) {
-			resetAlbumGrid();
-	    }
-	    if (!isTouchDevice()) {
-			$('.itemPL').hover(
-		        function(){
-		            $(this).find('.caption').fadeIn(300); 
-		        },
-		        function(){
-		            $(this).find('.caption').fadeOut(300); 
-		        }
-		    );
-		}
-    
+	    enableCaptions();
 		createAlbumGrid(); 
+
 	});
-		
-	
+};
+
+var enableCaptions = function () {
+	if (!isTouchDevice()) {
+		$('.itemPL').hover(
+	        function(){
+	            $(this).find('.caption').fadeIn(300); 
+	        },
+	        function(){
+	            $(this).find('.caption').fadeOut(300); 
+	        }
+	    );
+	}
 };
 
 var registerFilterEvents = function () {
@@ -120,81 +143,81 @@ var registerFilterEvents = function () {
 	});
 };
 
-// Tracker for loading more items
-Meteor.startup (function () {
-	Tracker.autorun(function () {
-	  if (Session.get('append-items')) { 
-	    Meteor.defer(function() {
-	    	appendItems();
-			Session.set('append-items', false);
-		 });
-	  }
-	});
-});
-
-// function to sort the items by 'weight' 
-var orderMedia = function(items, albumId) {
-    return _.sortBy(items, function(m) { 
-		var weight = 0;
-		_.each(m.metadata.albums, function (a) {
-			if(a._id === albumId)
-				weight = a.weight;
-		});
-		return weight; 
-	});
-}
+var isAlbum = function () {
+	var curr = Router.current().route.getName();
+    return curr === 'album';
+};
 
 Template.albumContent.created = function () {
 	if (RandomShuffle)
 		seed = RandomShuffle.seeder();
-	 Session.set('append-items', false);
 };
 
 Template.albumContent.rendered = function () {
-	initPhotoSwipeFromDOM('.album');
+	Session.set('album-changed', false);
+	initPhotoSwipeFromDOM('.album'); // initialize photoswipe
+
+	// automatically load more on scroll event
+	$(window).scroll(function() {
+		if($(window).scrollTop() == $(document).height() - $(window).height()) {
+	        $('.load-more').click();
+	    }
+	});
+
 };
 
 Template.albumContent.helpers({
 	// test if this is supposed to be an album or tag
 	isAlbum: function () {
-		var curr = Router.current().route.getName();
-        return curr === 'album';
+		return isAlbum();
 	},
 	mediaItems: function () {
 		var items = [];
 
-		// test if we're on an album page or tag page
-		if (Router.current().route.getName() === 'album' && !! this.album) {
-			// order the items fetched from the db
-			items = orderMedia(this.items.fetch(), this.album._id);
+		if (Session.get('album-changed')) {
+	  		resetAlbumGrid();
+	  		$('#album').remove('.itemPL'); // remove all previous images from DOM
+	  		Session.set('album-changed', false);
+	    }
 
-			// if isShuffled is set, then shuffle images
-			// TODO: fix the shuffling - currently done on client side
-			// Maybe shuffle on server, and shuffle entire list, not just one load at a time
-    		if (!! this.album.isShuffled && RandomShuffle ) {
-        		seed.set(oldItems.length, this.items.count());
-        		if (seed.get().length === items.length)
-    		 		items = RandomShuffle.shuffle(items, seed.get()); 
-		 	}  	
-		} else {
-			// it is a tag (not an album), so return associated images
-			items = this.items.fetch(); 
-		}
+	    // Determine if we're receiving images from current album subscription by checking if titles are the same
+	    // If titles are different, then don't return items (wait for subscription to catch up)
+	    var title = ''; 
+	    if ( isAlbum() ) title = !! this.album && this.album.title;
+	    else title = !! this.tag && this.tag.name;
 
-		// test if all items have loaded 
-		if (items.length === this.count) {	
-			// if moving to a new page (reusing template), reinitialize isotope grid
-			// else, staying with same album/tag, but loading more items
-			if (!loadMore) {
-				initAlbumGrid();
-			} else {
-				Session.set('append-items', true);
+	    if ( title === Session.get('album-title') ) {
+	    	items = this.items.fetch(); 
+
+			// test if we're on an album page or tag page
+			if ( isAlbum() && !! this.album) {
+
+				// if isShuffled is set, then shuffle images
+				// TODO: fix the shuffling - currently done on client side
+				// Maybe shuffle on server, and shuffle entire list, not just one load at a time
+	    		if (!! this.album.isShuffled && RandomShuffle ) {
+	        		seed.set(oldItems.length, this.items.count());
+	        		if (seed.get().length === items.length)
+	    		 		items = RandomShuffle.shuffle(items, seed.get()); 
+			 	}  	
+			} 
+
+			// test if all items have loaded 
+			if (items.length == this.count && this.ready) {
+
+				// if moving to a new page (reusing template), reinitialize isotope grid
+				// else, staying with same album/tag, but loading more items
+				if (!loadMore) {
+					initAlbumGrid();
+				} else {
+				    appendItems();
+				}
+
+				registerFilterEvents(); // ensure click event for new filter/tag items are registered
+				oldItems = items;
 			}
-			registerFilterEvents(); // ensure click event for new filter/tag items are registered
-			oldItems = items;
+		    return items;
 		}
-	 	
-	    return items;
 	},
 });
 
@@ -202,14 +225,13 @@ Template.albumContent.helpers({
 Template.albumContent.events({
    	// load more photos event
    	'click .load-more': function (e) {
-		initPhotoSwipeFromDOM('.album');
 		loadMore = true;
+
    	},
    	// click refresh event - refreshes grid in case it fails to align correctly
    	'click .refresh-album': function (e) {
-   		refresh = true;
-   		initAlbumGrid();
-   	},
+   		refreshAlbumGrid();
+   	}
 
 });
 
