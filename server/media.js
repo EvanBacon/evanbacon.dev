@@ -19,8 +19,6 @@ Media.allow({
  Meteor.publish("mediaList", function(terms) {
     if ( ! isAdminById(this.userId)) 
           throw new Meteor.Error(403, 'Permission denied'); 
-    
-    this.unblock(); // don't wait for this publication to finish to proceed
 
     check(terms, {
       sort: Object,
@@ -59,28 +57,19 @@ Media.allow({
 
 
 
- // publish only media in a specific album 
- Meteor.publish("albumMedia", function(options) { 
-      check (options, {
-        limit: Number,
-        slug: String
-      });
-      // this.unblock(); // don't wait for this publication to finish to proceed
-
-      var album = Albums.findOne({slug: options.slug});
+ // publish only media in a specific album, sort by 'weight' 
+ Meteor.publish("albumMedia", function(albumSlug, options) { 
+    
+      var album = Albums.findOne({slug: albumSlug});
 
       if (!! album) {
         var visible = !! album.isVisible;
-
         if (visible || isAdminById(this.userId)) {
-          var mediaIds = [ ];
-            for (var i = 0; i < album.content.length; i++) {
-                if (i >= options.limit) 
-                  break;
-                mediaIds.push(album.content[i].id);
-            }
-            return Media.find({ _id:{ $in: mediaIds }}, {reactive: false}, { fields: {'copies.default': 0, 'copies.thumb': 0 }});
-
+            var albumId = album._id;
+            options = !! options ? options : {};
+            options['reactive'] = false;
+            options.sort = { 'metadata.albums.weight': 1 };
+            return Media.find({ 'metadata.albums._id': albumId}, options, { fields: {'copies.default': 0, 'copies.thumb': 0 }});
         } 
       }
       return this.ready();
@@ -90,7 +79,6 @@ Media.allow({
 
  // publish only samples of media from every album
  Meteor.publish("albumListMedia", function() { 
-      this.unblock(); // don't wait for this publication to finish to proceed
 
       var albums = Albums.find({ isVisible: 1 }, {fields: {'content': 1}}).fetch();
 
@@ -131,7 +119,6 @@ Media.allow({
  
  // publish all media with a specific tag
  Meteor.publish("tagMedia", function(tagSlug, options) { 
-    // this.unblock(); // don't wait for this publication to finish to proceed
     options = !! options ? options : {};
     options['reactive'] = false;
     return Media.find({'metadata.tags.slug': tagSlug}, options, { fields: {'copies.default': 0}});
