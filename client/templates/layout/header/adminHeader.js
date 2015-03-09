@@ -9,6 +9,8 @@ Template.adminHeader.helpers({
 
 Template.adminHeader.events({
 	'click #navbar-admin li a:not(".dropdown-toggle")': function (e) {
-		$('#navbar-admin').collapse('hide');
+		if( $('#navbar-admin').hasClass('in') ) {
+			$(".navbar-admin .navbar-toggle").click();
+		}
 	}
 });

@@ -6,8 +6,10 @@ Template.header.helpers({
 	}
 });
 
-Template.header.events ({
-	'click #navbar li a': function (e) {
-		$('#navbar').collapse('hide');
+Template.header.events({
+	'click #navbar-main li a': function (e) {
+		if( $('#navbar-main').hasClass('in') ) {
+			$(".navbar-main .navbar-toggle").click();
+		}
 	}
 });
