@@ -43,7 +43,7 @@ var appendItems = function () {
 					loadMore = false;
 					enableCaptions();
 				 	if ( currentFilter !== '*' && isAlbum() ) {
-					 	$container.isotope({ filter: currentFilter });
+				 		$container.isotope({ filter: currentFilter });
 				  		initPhotoSwipeFromDOM('.album');
 				  	}
 				}	
@@ -61,18 +61,15 @@ var createAlbumGrid = function () {
 		$container.imagesLoaded( function() {
 			$('.itemPL').removeClass('hidePL');
 		
-			
-				$container.isotope( isoOptions );
-				console.log('init starting');
-				// $('.itemPL').removeClass('hidden');
-				$container.isotope('layout');
-				if ($('.itemPL').length !== $container.isotope('getItemElements').length) {
-					// If this is the case, images were not loaded properly and must reload.
-					// Seems to be caused by timing issues / race conditions (find better solution for this in future)
-					refreshAlbumGrid();
-				}
-				// immediately load a few more
-				$('.load-more').click();
+			$container.isotope( isoOptions );
+			$container.isotope('layout');
+			if ($('.itemPL').length !== $container.isotope('getItemElements').length) {
+				// If this is the case, images were not loaded properly and must reload.
+				// Seems to be caused by timing issues / race conditions (find better solution for this in future)
+				refreshAlbumGrid();
+			}
+			// immediately load a few more
+			$('.load-more').click();
 			
 		});
 		}, 100);
@@ -178,6 +175,7 @@ Template.albumContent.helpers({
 	  		resetAlbumGrid();
 	  		$('#album').remove('.itemPL'); // remove all previous images from DOM
 	  		Session.set('album-changed', false);
+	  		currentFilter = '*';
 	    }
 
 	    // Determine if we're receiving images from current album subscription by checking if titles are the same
