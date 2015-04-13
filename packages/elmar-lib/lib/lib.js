@@ -13,13 +13,6 @@
       return defaultValue;
     };
 
-    trimWords = function(s, numWords) {
-      expString = s.split(/\s+/,numWords);
-      if(expString.length >= numWords)
-        return expString.join(" ")+"…";
-      return s;
-    };
-
     capitalizeFirst = function(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     };

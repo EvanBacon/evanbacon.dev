@@ -20,37 +20,13 @@ Validation = {
 		return false;
 	},
 
-	isEmail: function(value, fieldName) {
+	isEmail: function(value) {
 		var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		if (filter.test(value)) {
 			return true;
 		}
-		if (!fieldName)
-			fieldName = 'email';
 		return false;
 	},
-
-	isDate: function(value, fieldName) {
-		// var filter = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-		var filter = /^[01]?[0-9]\/[0-3]?[0-9]\/[12][90][0-9][0-9]$/; 
-		if (filter.test(value)) {
-			return true;
-		}
-		if(!fieldName)
-			fieldName = 'date';
-		return false;
-	},
-
-	isShortTime: function(value, fieldName) {
-		var filter = /^[0-1][0-2]\:[0-5][0-9]$/; 
-		if (filter.test(value)) {
-			return true;
-		}
-		// if(!fieldName)
-		// 	fieldName = 'time';
-		return false;
-	},
-
 	
 
 	isURL: function(value) {
