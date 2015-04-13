@@ -62,7 +62,7 @@ Meteor.methods({
             throw new Meteor.Error(403, 'Permission denied'); 
 
         var album = Albums.find({}, { sort: {order: -1}}, { limit: 1 }).fetch();
-        var newOrderNum = album[0].order++;
+        var newOrderNum = !! album ? album[0].order++ : 0;
         var dataObj = { 
                         'description': '',
                         'slug': '',
