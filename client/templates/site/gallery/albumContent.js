@@ -20,24 +20,19 @@ var appendItems = function () {
 	if ( loadCount > 0 ) {
 		Meteor.defer(function () {
 			var elems = [],
-				currElems = [];
-			var isoLength = 0,
-			    ind = 0;
+				numItemsInIsotope = 0;
 
 			$container.imagesLoaded(function () {
 				$('.itemPL').removeClass('hidePL');
-			    isoLength = $container.isotope('getItemElements').length;
+			    numItemsInIsotope = $container.isotope('getItemElements').length;
 			    
-				_.each($('.itemPL'), function(item) {
-			  	 	if (ind >= isoLength) {
-						elems.push(item);
+				$('.itemPL').each(function(index) {
+			  	 	if (index >= numItemsInIsotope) {
+						elems.push(this);
 					} 
-					ind++; 
 				});
-				 
 				
-				$container.isotope('appended', elems); 
-				$container.isotope('layout');
+				$container.isotope('appended', elems).isotope('layout');
 				    
 				if (elems.length > 0) { 
 					loadMore = false;
