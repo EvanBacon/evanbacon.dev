@@ -1,6 +1,6 @@
-Template.mediaList.rendered = function () {
+Template.mediaList.onRendered(function () {
     SortAction.setSortBy( { "uploadedAt": -1 } );    
-};
+});
 
 Template.mediaList.helpers({
     isList: function () {

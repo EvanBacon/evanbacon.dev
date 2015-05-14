@@ -6,7 +6,7 @@ var updatePosition = function (){
     });
 };
 
-Template.albumList.rendered = function () {
+Template.albumList.onRendered(function () {
 	$( "#gridsort" ).sortable({
 		placeholder: "highlight",
         stop: function( ) {
@@ -24,4 +24,4 @@ Template.albumList.rendered = function () {
     $('#gridsort').disableSelection();
 
 	$('#gridsort').on( 'remove', 'li', updatePosition );
-};
+});

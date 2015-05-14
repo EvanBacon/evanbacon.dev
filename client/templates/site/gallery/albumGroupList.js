@@ -21,18 +21,18 @@ var initGrid = function () {
 			loadCount = 0;
 		}
 
-		$isocontainer = $('#albums').isotope( isoOptions );
+		//$isocontainer = $('#albums');
 		loadCount++;
-		$isocontainer.imagesLoaded( function() {
-			$('.itemP').removeClass('hidden');
-			$isocontainer.isotope('layout');
+		$isocontainer = $('#albums').imagesLoaded( function() {
+			$('.itemP').removeClass('hidePL');
+			$isocontainer.isotope( isoOptions ).isotope('layout');
 			if ($('.itemP').length !== $isocontainer.isotope('getItemElements').length) {
 				// If this is the case, items/images were not loaded properly and must reload.
 				// Seems to be caused by timing issues / race conditions (find better solution for this in future)
 				refreshGrid();
 			}
 		});
-	
+		
 	});
 };
 
@@ -41,9 +41,13 @@ var refreshGrid = function () {
 	$isocontainer = $('#albums').isotope( isoOptions );
 };
 
+Template.albumGroupList.onRendered(function() {
+	initGrid();
+});
+
 Template.albumGroupList.helpers({
 	items: function () {
-		initGrid();
+		//initGrid();
 		return Albums.find({});
 	}
 });

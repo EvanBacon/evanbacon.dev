@@ -1,8 +1,6 @@
-
-
-Template.mediaEdit.rendered = function () {
+Template.mediaEdit.onRendered(function () {
 	updateSaveButton('reset');  
-};
+});
 
 Template.mediaEdit.helpers({
 

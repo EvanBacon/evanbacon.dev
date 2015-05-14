@@ -1,6 +1,6 @@
-Template.mediaUploader.rendered = function () {
+Template.mediaUploader.onRendered(function () {
   Validation.clear();
-};
+});
 
 Template.mediaUploader.helpers({
   error: function () {

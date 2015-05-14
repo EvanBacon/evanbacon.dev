@@ -7,7 +7,7 @@ SelectionAction = {
 	}
 }
 
-Template.selectionAction.rendered = function () {
+Template.selectionAction.onRendered = function () {
 	SelectionAction.setCheckedCount(0);
 };
 
@@ -75,7 +75,7 @@ Template.selectionAction.events({
 			//createType,
 			items   = [];
 		$.each($( "input:checked" ), function (index, item) {
-			var thumbURL = $(this).closest('div.thumb').find('img').attr('src');
+			var thumbURL = $('#thumb-'+item.defaultValue).find('img').attr('src');
 			items.push( { id: item.defaultValue, thumb: thumbURL, isFeatured: 0 } );
 		});
 
@@ -98,7 +98,7 @@ Template.selectionAction.events({
 		
 		var items   = [];
 		$.each($( "input:checked" ), function (index, item) {
-			var thumbURL = $(this).closest('div.thumb').find('img').attr('src');
+			var thumbURL = $('#thumb-'+item.defaultValue).find('img').attr('src');
 			items.push(item.defaultValue);
 		});
 

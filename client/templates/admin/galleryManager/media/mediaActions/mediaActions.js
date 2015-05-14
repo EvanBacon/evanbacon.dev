@@ -1,5 +1,4 @@
-
-Template.mediaActions.rendered = function () {
+Template.mediaActions.onRendered(function () {
 	$('#sortBy').prop('selectedIndex',0);
 	$('#sortDir').prop('selectedIndex',0);
 	SortAction.setSortBy( {"uploadedAt": -1});
@@ -10,7 +9,7 @@ Template.mediaActions.rendered = function () {
         setClientSetting('media-list-style', 'list')
         $('#list').addClass('active');
     }
-};
+});
 
 Template.mediaActions.events({
     'change select': function (e, t) {

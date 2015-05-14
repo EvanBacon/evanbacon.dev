@@ -50,14 +50,13 @@ var appendItems = function () {
 var createAlbumGrid = function () {
 	if (typeof Isotope !== 'undefined' && loadCount === 0 ) {
 
-		$container = $('#album'); //.isotope( isoOptions );
+		$container = $('#album'); 
 		loadCount++;
 		Meteor.setTimeout(function () {
 		$container.imagesLoaded( function() {
 			$('.itemPL').removeClass('hidePL');
 		
-			$container.isotope( isoOptions );
-			$container.isotope('layout');
+			$container.isotope( isoOptions ).isotope('layout');
 			if ($('.itemPL').length !== $container.isotope('getItemElements').length) {
 				// If this is the case, images were not loaded properly and must reload.
 				// Seems to be caused by timing issues / race conditions (find better solution for this in future)
@@ -91,7 +90,7 @@ var resetAlbumGrid = function () {
 			$container.isotope = false;
 
 			oldItems = [];
-	  		seed.clear();	
+	  		if(!!seed) seed.clear();	
 
 	  		loadMore = false;
 	  		loadCount = 0;
@@ -140,12 +139,12 @@ var isAlbum = function () {
     return curr === 'album';
 };
 
-Template.albumContent.created = function () {
+Template.albumContent.onCreated(function () {
 	if (RandomShuffle)
 		seed = RandomShuffle.seeder();
-};
+});
 
-Template.albumContent.rendered = function () {
+Template.albumContent.onRendered(function () {
 	Session.set('album-changed', false);
 	initPhotoSwipeFromDOM('.album'); // initialize photoswipe
 
@@ -156,7 +155,7 @@ Template.albumContent.rendered = function () {
 	    }
 	});
 
-};
+});
 
 Template.albumContent.helpers({
 	// test if this is supposed to be an album or tag

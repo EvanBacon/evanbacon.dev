@@ -54,7 +54,7 @@ setFeatured = function (obj) {
 	obj.attr('data-feat', '1');
 };
 
-Template.gridSort.rendered = function () {
+Template.gridSort.onRendered(function () {
 	$('#gridsort').sortable({
 		placeholder: "highlight",
 		stop: function( ) {
@@ -69,7 +69,7 @@ Template.gridSort.rendered = function () {
 
 	$('#gridsort').on( 'remove', 'li', updatePosition );
  	
-};
+});
 
 Template.gridSort.events({
 	'click .set-featured': function (e) {

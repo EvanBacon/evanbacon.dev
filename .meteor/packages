@@ -4,7 +4,7 @@
 # but you can also edit it by hand.
 
 meteor-platform
-iron:router@1.0.0-pre4
+iron:router
 cfs:standard-packages
 cfs:graphicsmagick
 cfs:ui
@@ -22,7 +22,6 @@ mrt:jquery-imagesloaded
 mizzao:autocomplete
 aldeed:autoform
 aldeed:collection2
-elmar-google-analytics
 
 
 email
@@ -36,3 +35,4 @@ dfischer:phantomjs
 elmar-photoswipe
 elmar-isotope
 meteorhacks:unblock
+datariot:ganalytics

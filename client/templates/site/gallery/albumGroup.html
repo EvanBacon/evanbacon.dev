@@ -2,7 +2,7 @@
 
 	{{#if hasCount samples}}
 		{{#if showTitle }}
-		<div id="item-{{this.slug}}" class="itemP w2 item-album hidden">
+		<div id="item-{{this.slug}}" class="itemP w2 item-album hidePL">
 			<a href="{{ pathFor route='album' slug=this.slug}}" class="album-title">
 				{{#with featured}}
 					<img class="item-featured" src="{{this.url store='image_md'}}">
@@ -15,7 +15,7 @@
 		{{/if}}
 
 		{{#each samples}}
-		   	<div class="itemP item-album {{#if isAlbumsPage }} itemP-border item-sample {{/if}} hidden" title="{{this.metadata.title}}">
+		   	<div class="itemP item-album {{#if isAlbumsPage }} itemP-border item-sample {{/if}} hidePL" title="{{this.metadata.title}}">
 		   		<a href="#" class="album-link"><img alt="{{this.metadata.caption}}" src="{{this.url store='image_md'}}">
 		   			<div class="caption">
 			   			<div class="caption-wrapper">

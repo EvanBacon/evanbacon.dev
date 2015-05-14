@@ -2,7 +2,7 @@
 // sampleCount = # random sample images from album
 // showTitle = true/false - show the album title box amidst samples
 
-Template.albumGroup.rendered = function() {
+Template.albumGroup.onRendered(function() {
 	if (!isTouchDevice()) {
 		$('.itemP').hover(
 	        function(){
@@ -13,7 +13,7 @@ Template.albumGroup.rendered = function() {
 	        }
 	    );
 	}
-};
+});
 
 Template.albumGroup.helpers({
 	samples: function () {

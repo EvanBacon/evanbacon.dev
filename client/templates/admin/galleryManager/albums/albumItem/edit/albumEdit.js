@@ -112,10 +112,10 @@ Template.albumEdit.events({
 	}
 });
 
-Template.albumEdit.rendered = function () {
+Template.albumEdit.onRendered(function () {
 	$('[data-toggle="popover"]').popover({
 	    trigger: 'hover',
 	        'placement': 'right'
-	});          
-};
+	});         
+});
 

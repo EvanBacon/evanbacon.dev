@@ -1,45 +1,19 @@
-
-Template.tagItem.rendered = function () {
-		$popover = $('[data-toggle="popover"]').popover({
-		        trigger: 'hover',
-		        placement: 'bottom',
-		        html: 'true',
-		        // content: 'hello'
-		        // content: function() {
-	         //      return $("#popover-content-" + this._id).html();
-	         //   	} 
-		});  
-		// Meteor.defer(function () {
-		// 	$popover.content(function() {
-	 //              return $("#popover-content-" + this._id).html();
-	 //           	}); 
-		// });
-};
+Template.tagItem.onRendered(function () {
+	$popover = $('[data-toggle="popover"]').popover({
+	        trigger: 'hover',
+	        placement: 'bottom',
+	        html: 'true',
+	});  
+});
 
 Template.tagItem.helpers({
 	mediaList: function() {
-		// $popover.content(function() {
-	 //              return $("#popover-content-" + this._id).html();
-	 //           	}); 
-        // $popover.setContent();
-     //    Meteor.defer(function () {
-     //    	$popover('setContent',function() {
-	    //           return $("#popover-content-" + this._id).html();
-	    //        	});
-	    // });
-        // $popover.options.content(function() {
-	       //        return $("#popover-content-" + this._id).html();
-	       //     	});
 		var media = Media.find({'metadata.tags._id': this._id}).fetch();
 
 	    var str = '<div class="tag-count-content">';
 		if(media.length > 0) {
-			// str += '<img src="' + media[0].url({ store: 'thumb'}) + '" >'
-			// str = !! media[0].metadata.title ? media[0].metadata.title : media[0].original.name;
 			for(var i=0; i < media.length; i++) {
-				// str += ', ';
 				str += '<img src="' + media[i].url({ store: 'thumb'}) + '">'
-				// str += !! media[i].metadata.title ? media[i].metadata.title : media[i].original.name;;
 			};
 		}
 		str += '</div>';

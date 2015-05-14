@@ -37,14 +37,13 @@
 			<br>
 		</div>
 		<div class="col-sm-6 col-sm-offset-3">
-			    {{#if nextPath}}   
-			       <a href="{{nextPath}}" class="load-more btn btn-sm btn-square">Load more</a>
-			    {{else}}
-			      {{#unless ready}}        
-			          {{> spinner}}      
-			      {{/unless}}
-			    {{/if}}
-			</div>
+		    {{#if nextPath}}   
+		       <a href="{{nextPath}}" class="load-more btn btn-sm btn-square">Load more</a>
+		    {{/if}}
+		</div>
+		{{#unless ready}}        
+	        {{> spinner}}
+	    {{/unless}}
 	</div>
 	{{> photoswipe }}
 </template>
