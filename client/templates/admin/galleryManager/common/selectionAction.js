@@ -7,9 +7,9 @@ SelectionAction = {
 	}
 }
 
-Template.selectionAction.onRendered = function () {
+Template.selectionAction.onRendered(function () {
 	SelectionAction.setCheckedCount(0);
-};
+});
 
 Template.selectionAction.helpers({
    disabled: function () {
