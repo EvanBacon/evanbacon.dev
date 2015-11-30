@@ -11,7 +11,7 @@ Package.onUse(function (api) {
     'templating'
   ], ['client']);
 
-  api.add_files([
+  api.addFiles([
     'lib/client/saving_loader.css',
     'lib/client/saving_loader.html',
     'lib/client/saving_loader.js',

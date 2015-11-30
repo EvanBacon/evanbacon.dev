@@ -48,6 +48,7 @@ Template.albumGroupList.onRendered(function() {
 Template.albumGroupList.helpers({
 	items: function () {
 		//initGrid();
+		console.log(this.ready);
 		return Albums.find({});
 	}
 });

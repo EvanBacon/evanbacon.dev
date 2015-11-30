@@ -14,7 +14,7 @@ Package.onUse(function (api) {
   //   'lib/server/watermark.js'
   // ], ['server']);
 
-  api.add_files([
+  api.addFiles([
     'lib/lib.js',
     'lib/medialibrary.js',
     'lib/validation.js',
@@ -22,7 +22,7 @@ Package.onUse(function (api) {
     'lib/base.js',
   ], ['client', 'server']);
 
-  api.add_files([
+  api.addFiles([
     'lib/client/sortAction.js',
     'lib/client/shuffle.js'
     ], ['client']);

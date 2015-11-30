@@ -5,20 +5,24 @@ Package.describe({
 });
 
 
-Package.on_use(function (api) {
+Package.onUse(function (api) {
+	api.versionsFrom("METEOR@1.0");
+	
 	api.use([
     'templating'
   	], 'client');
 
-	api.add_files([
+	api.addFiles([
 		'photoswipe.css',
 		'default-skin/default-skin.css',
 		'photoswipe.min.js',
 		'photoswipe-ui-default.min.js',
 		'photoswipe.html',
+	], 'client');
+
+	api.addAssets([
 		'default-skin/default-skin.png',
 		'default-skin/default-skin.svg',
 		'default-skin/preloader.gif'
 	], 'client');
-
 });

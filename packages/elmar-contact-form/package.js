@@ -20,17 +20,17 @@ Package.onUse(function (api) {
   ], ['client', 'server']);
 
 
-  api.add_files([
+  api.addFiles([
     'lib/client/contactForm.html',
     'lib/client/contactForm.js',
     'lib/client/contactForm.css'
     ], ['client']);
 
-  api.add_files([
+  api.addFiles([
     'lib/server/contactForm.js'
     ], ['server']);
 
-  api.add_files([
+  api.addFiles([
     'lib/contactSchema.js',
     'lib/settings.js'
     ], ['client', 'server']);

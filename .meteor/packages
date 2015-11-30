@@ -16,6 +16,7 @@ mrt:moment
 elmar-save-loader
 elmar-lib
 useraccounts:bootstrap
+useraccounts:iron-routing
 less
 nemo64:bootstrap
 mrt:jquery-imagesloaded

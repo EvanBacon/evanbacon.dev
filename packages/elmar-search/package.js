@@ -11,7 +11,7 @@ Package.onUse(function (api) {
   ], 'client');
 
 
-  api.add_files([
+  api.addFiles([
     'lib/client/searchForm.html',
     'lib/client/searchForm.js',
     'lib/client/searchForm.css'
