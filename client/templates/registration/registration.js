@@ -2,10 +2,10 @@
 
 AutoForm.hooks({
   regForm: {
-    onSuccess: function(operation, result, template) {
+    onSuccess: function(operation, result) {
       Router.go('atSignIn');
     },
-    onError: function(operation, error, template) {
+    onError: function(operation, error) {
       $('.submit-error').removeClass('hidden');
       $('.submit-error h4').html(error);
     }

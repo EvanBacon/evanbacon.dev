@@ -1,39 +1,39 @@
 AutoForm.hooks({
+
   updateSettingsForm: {
 
     before: {
-      update: function(docId, modifier, template) {
+      update: function(modifier) {
       	updateSaveButton('wait');
         return modifier;
       }
     },
 
-    onSuccess: function(operation, result, template) {
-        updateSaveButton('complete');
+    onSuccess: function(operation, result) {
+      updateSaveButton('complete');
     },
 
-    onError: function(operation, result, template) {
+    onError: function(operation, result) {
     	updateSaveButton('error');
     }
-
   },
+  
   insertSettingsForm: {
 
     before: {
-      insert: function(doc, template) {
+      insert: function(doc) {
         updateSaveButton('wait');
         return doc;
       }
     },
 
-    onSuccess: function(operation, result, template) {
-		updateSaveButton('complete')	
+    onSuccess: function(operation, result) {
+		  updateSaveButton('complete')	
     },
 
-    onError: function(operation, result, template) {
+    onError: function(operation, result) {
     	updateSaveButton('error');
     }
-
   }
 });
 
