@@ -1,21 +1,20 @@
 <template name="albumItem">
     
-    <li class="ui-state-default thumb thumb-container">
-  		<div class="checkbox cb-sm">
-	        <label>
-	          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
-	          <span class="glyphicon glyphicon-ok"></span>
-	        </label>
-	    </div>	
-	   
+    <li class="thumb thumb-container">
         <header>
-        	<div class="btn-toolbar">
-	          <button title="Toggle Visibility" class="btn btn-sm {{ visibleBtn }} toggle-display" type="button">
-	         	<span class="glyphicon {{ visibleIcon }}"></span>
-	          </button>
-	          <button type="button" title="Edit" class="btn btn-sm btn-default album-link">
-	           <span class="glyphicon glyphicon-pencil"></span>
-	          </button>
+        	<div class="checkbox cb-sm">
+		        <label>
+		          <input id="{{_id}}" type="checkbox" class="cb" value="{{_id}}" name="check" />
+		          <span class="glyphicon glyphicon-ok"></span>
+		        </label>
+		    </div>	
+        	<div class="btn-toolbar" role="toolbar">
+				<button title="Toggle Visibility" class="btn btn-sm {{ visibleBtn }} toggle-display" type="button">
+					<span class="glyphicon {{ visibleIcon }}"></span>
+				</button>
+				<button type="button" title="Edit" class="btn btn-sm btn-default album-link">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
          	</div>
      	</header>
 
@@ -26,5 +25,3 @@
     </li>
 
 </template>
-
-

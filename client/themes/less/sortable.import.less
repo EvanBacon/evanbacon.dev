@@ -15,6 +15,7 @@
         height: 150px;
         min-height: 150px;
         float: left;
+        position: relative;
     }
 
     li header {
@@ -27,14 +28,20 @@
         text-align: right;
         opacity: .8;
         z-index: 10;
-    }
-    li .block-content {
-        margin-top: -40px;
-        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
     li .checkbox {
         margin-left: 5px !important;
+        float: left !important;
     }
+
+    li .block-content {
+        margin-top: 0px;
+        width: 100%;
+    }
+
     li .caption {
         width: 150px !important;
         padding: 0;
