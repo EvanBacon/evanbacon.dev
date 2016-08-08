@@ -3,7 +3,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 iron:router
 cfs:standard-packages
 cfs:graphicsmagick
@@ -11,29 +10,44 @@ cfs:ui
 standard-app-packages
 sacha:spin
 elmar-search
-accounts-password
+accounts-password@1.2.12
 mrt:moment
 elmar-save-loader
 elmar-lib
 useraccounts:bootstrap
 useraccounts:iron-routing
 less
-nemo64:bootstrap
 mrt:jquery-imagesloaded
 mizzao:autocomplete
 aldeed:autoform
 aldeed:collection2
 
 
-email
+email@1.1.16
 elmar-contact-form
 manuelschoebel:wait-on-lib
 mizzao:jquery-ui
 cfs:gridfs
-spiderable
+spiderable@1.0.13
 numeral:numeral
 dfischer:phantomjs
 elmar-photoswipe
 elmar-isotope
 meteorhacks:unblock
 datariot:ganalytics
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+standard-minifier-css
+standard-minifier-js
+twbs:bootstrap
