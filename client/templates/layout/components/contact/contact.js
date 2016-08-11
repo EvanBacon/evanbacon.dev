@@ -59,6 +59,8 @@ Template.contactWrapper.rendered = function() {
         $(form).trigger("reset");
       }, 1000);
     }
+
+
     return false;
   });
 

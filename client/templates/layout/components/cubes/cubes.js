@@ -20,8 +20,8 @@ var obeliskAPI = function() {
       init: function() {
         this.cubeSize = 24;
         this.mapSize = 80;
-        this.timeshift = false;
-        this.timeshiftSpeed = 0.001;
+        this.timeshift = true;
+        this.timeshiftSpeed = 0.0005;
         this.zAmplify = 0.5;
         this.noiseScale = 20;
 

@@ -48,7 +48,7 @@ padding: 50px;
   position: relative;
   text-align: center;
   line-height: 90px;
-  letter-spacing: -8px;
+  /*letter-spacing: -8px;*/
 
   /*text-shadow: 2px 2px #ff0000; */
 }
