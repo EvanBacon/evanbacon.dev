@@ -19,9 +19,9 @@
               <p class="text-center"><img class="modal-img" src='{{this.url store="image_md"}}'></p>
             </a>
             <br>
-            <h3>Albums</h3>
-            {{#if albums}}
-              {{#each albums}}
+            <h3>Works</h3>
+            {{#if works}}
+              {{#each works}}
                   <a href="{{ pathFor route='albumEdit' _id=this._id }}" class="tag-item-label">{{this.title}}</a>
               {{/each}}
             {{else}}

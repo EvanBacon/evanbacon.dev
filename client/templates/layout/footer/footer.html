@@ -5,17 +5,60 @@
 
 	<footer id="footer">
 	    <div class="container">
-	    	<div class="col-xs-12">
+
+
+				<div class="row">
+
+	    	<div class="col-xs-12 col-md-4">
 	    	{{#if isAlbum}}
 	       		{{> albumFilters }}
 	        {{else}}
 	         	{{> tagLinks }}
 	        {{/if}}
 		    </div>
-		    <div class="copyright">&copy;{{ year }} {{ getSetting 'title'}} 
-		    	{{#unless isAdmin}} | <a href="{{pathFor route='atSignIn'}}">Sign In</a>{{/unless}} 
+
+
+
+
+				<div class="col-xs-12 col-md-4">
+					{{> social}}
 		    </div>
+
+				<div class="col-xs-12 col-md-4" style="height: 40px;">
+					<div class="copyright" style="margin-top: 20px;">&copy;{{ year }} {{ getSetting 'title'}}
+						{{#unless isAdmin}} | <a href="{{pathFor route='atSignIn'}}">Sign In</a>{{/unless}}
+					</div>
+				</div>
+
+			</div>
+
+
 	    </div>
 	</footer>
+
+</template>
+
+<template name="social">
+	<nav class="navbar navbar-default navbar-filters" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="btn-square navbar-toggle" data-toggle="collapse" data-target="#navbarSocial">
+						<span class="sr-only">Toggle navigation</span>
+						<h3>Connect <span class="glyphicon glyphicon-chevron-down"></span></h3>
+					</button>
+				</div>
+
+				<div class="collapse navbar-collapse" id="navbarSocial">
+					<ul class="nav navbar-nav align-center" style="text-align:center;">
+
+						<a target="_blank" class="facebook-icon social" href={{ getSetting 'facebookUrl' '' }}><i class="fa fa-facebook" aria-hidden="true"></i></a>
+						<a target="_blank" class="instagram-icon social" href={{ getSetting 'instagramUrl' '' }}><i class="fa fa-instagram" aria-hidden="true"></i></a>
+						<a target="_blank" class="twitter-icon social" href={{ getSetting 'twitterUrl' '' }}><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+
+					</ul>
+				</div>
+			</div>
+	</nav>
 
 </template>

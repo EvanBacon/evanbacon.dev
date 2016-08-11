@@ -21,9 +21,9 @@ var initGrid = function () {
 			loadCount = 0;
 		}
 
-		//$isocontainer = $('#albums');
+		//$isocontainer = $('#works');
 		loadCount++;
-		$isocontainer = $('#albums').imagesLoaded( function() {
+		$isocontainer = $('#works').imagesLoaded( function() {
 			$('.itemP').removeClass('hidePL');
 			$isocontainer.isotope( isoOptions ).isotope('layout');
 			if ($('.itemP').length !== $isocontainer.isotope('getItemElements').length) {
@@ -38,7 +38,7 @@ var initGrid = function () {
 
 var refreshGrid = function () {
 	$isocontainer.isotope('destroy');
-	$isocontainer = $('#albums').isotope( isoOptions );
+	$isocontainer = $('#works').isotope( isoOptions );
 };
 
 Template.albumGroupList.onRendered(function() {
@@ -49,6 +49,6 @@ Template.albumGroupList.helpers({
 	items: function () {
 		//initGrid();
 		console.log(this.ready);
-		return Albums.find({});
+		return Works.find({});
 	}
 });

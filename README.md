@@ -9,7 +9,7 @@ A responsive, easy-to-use image management and gallery built with MeteorJS. See 
 * Drag and drop re-ordering
 * Edit individual image meta data and image tags.
 * Creates various image sizes for load optimization
-* Organize images by tags and/or albums
+* Organize images by tags and/or works
 * Responsive design
 
 
@@ -37,10 +37,10 @@ $ meteor
   - SMTP_PORT - eg: 465 
 - The admin manager is accessible through the gray admin toolbar at the top of the page.
   - IMAGES: Upload, edit, delete images. Edit meta data / tags.
-  - ALBUMS: Create, edit, delete albums
+  - ALBUMS: Create, edit, delete works
   - TAGS: Create, edit, delete tags
   - SETTINGS: Edit site settings
-- Create albums by either selecting images on the Images page and selecting "Create Album" from Selection dropdown list, or from the Albums page click "New Album"
+- Create works by either selecting images on the Images page and selecting "Create Album" from Selection dropdown list, or from the Works page click "New Album"
 
 
 ## Notes

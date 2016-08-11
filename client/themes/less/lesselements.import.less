@@ -160,9 +160,22 @@
 .spinner(@xCenter: 50%, @yCenter: 50%, @duration: 2s ) {
  -webkit-transform-origin: @xCenter, @yCenter;
  transform-origin:@xCenter, @yCenter;
- -ms-transform-origin:@xCenter, @yCenter; 
+ -ms-transform-origin:@xCenter, @yCenter;
  -webkit-animation: spin @duration infinite linear;
  -moz-animation: spin @duration infinite linear;
  -o-animation: spin @duration infinite linear;
  animation: spin @duration infinite linear;
+}
+
+.social {
+  margin-left: 20px;
+  font-size: 3rem;
+  color: @brand-info;
+}
+
+::selection {
+  background: @brand-info; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: @brand-info; /* Gecko Browsers */
 }

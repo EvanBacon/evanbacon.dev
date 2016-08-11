@@ -12,12 +12,22 @@
         </div>
         <div id="navbar-main" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="{{ isActive 'albums' 'home' 'album'}}"><a href="{{ pathFor route='albums'}}">Albums</a></li>
+            <li class="{{ isActive 'works' 'home' 'album'}}"><a href="{{ pathFor route='works'}}">Works</a></li>
             <li class="{{ isActive 'about'}}"><a href="{{ pathFor route='about'}}">About</a></li>
+
+            <li class="{{ isActive 'atelier'}}"><a href="{{ pathFor route='atelier'}}">Atelier</a></li>
+            <li class="{{ isActive 'philosophy'}}"><a href="{{ pathFor route='philosophy'}}">Philosophy</a></li>
+
             <li class="{{ isActive 'contact'}}"><a href="{{ pathFor route='contact'}}">Contact</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
+</template>
+
+<template name="titleHeader">
+<div class="row">
+  <h1 class="center header-text">{{text}}</h1>
+</div>
 </template>

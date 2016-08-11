@@ -1,12 +1,15 @@
 <template name="albumGroupList">
-  	<div id="albums" class="album-groups">
+  	<div id="works" class="album-groups">
         <div class="gutter-sizer"></div>
         <div class="grid-sizer"></div>
-        
+
         {{#each items}}
+        {{#unless isPerson }}
+
             {{#if isVisible }}
         	   {{> albumGroup}}
             {{/if}}
+            {{/unless}}
     	{{/each}}
 
   	</div>

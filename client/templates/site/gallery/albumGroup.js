@@ -17,7 +17,7 @@ Template.albumGroup.onRendered(function() {
 
 Template.albumGroup.helpers({
 	samples: function () {
-		return Media.find({'metadata.albums._id': this._id}, { limit: getSetting('numberSamplesFromAlbum', 2)}).fetch();
+		return Media.find({'metadata.works._id': this._id}, { limit: getSetting('numberSamplesFromAlbum', 2)}).fetch();
 	},
 	featured: function () {
 		var featured = _.findWhere(this.content, { isFeatured: 1});
@@ -32,7 +32,7 @@ Template.albumGroup.helpers({
 	showTitle: function () {
 		return typeof Template.parentData(1).showTitles === undefined ? true : Template.parentData(1).showTitles;
 	},
-	isAlbumsPage: function () {
+	isWorksPage: function () {
 		return typeof Template.parentData(2).showTitles === undefined ? true : Template.parentData(2).showTitles;
 	}
 });

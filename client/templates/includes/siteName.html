@@ -1,6 +1,6 @@
 <template name="siteName">
 	{{#if logoSet }}
-      <a href="{{#if home}} {{ pathFor route='albums' }} {{else}} {{ pathFor route='home'}} {{/if}}">
+      <a href="{{#if home}} {{ pathFor route='works' }} {{else}} {{ pathFor route='home'}} {{/if}}">
         <img class="logo" src="{{ getSetting 'logoUrl' }}" alt="{{ getSetting 'title'}}">
       </a>
   {{else}}

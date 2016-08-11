@@ -1,0 +1,36 @@
+<template name="carousel">
+  <div id="owl-demo" class="owl-carousel owl-theme">
+
+{{#each slides}}
+{{> carouselSlide title=title subtitle=description image=(image this) slug=slug}}
+{{/each}}
+    <!-- <div class="item"><img src="img/placeholder.png" alt="The Last of us"></div>
+    <div class="item"><img src="img/placeholder.png" alt="GTA V"></div>
+    <div class="item"><img src="img/placeholder.png" alt="Mirror Edge"></div>
+    <div class="item"><img src="img/placeholder.png" alt="Mirror Edge"></div>
+    <div class="item"><img src="img/placeholder.png" alt="Mirror Edge"></div>
+    <div class="item"><img src="img/placeholder.png" alt="Mirror Edge"></div> -->
+
+  </div>
+
+</template>
+
+
+
+<template name="carouselSlide">
+  <div class="item">
+    <div class="hero">
+      <hgroup class="text-holder container">
+        <div class="col-sx-12 col-md-6 col-md-offset-1">
+
+
+          <h1>{{title}}</h1>
+          <h3>{{subtitle}}</h3>
+          <a class="btn btn-theme" href="{{pathFor route='album' slug=slug}}" role="button">Check it out</a>
+          </div>
+      </hgroup>
+      <img src={{image}} alt="The Last of us">
+      <!-- <button class="btn btn-hero btn-lg" role="button">Get Started</button> -->
+    </div>
+  </div>
+</template>

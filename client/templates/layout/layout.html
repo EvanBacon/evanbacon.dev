@@ -1,33 +1,39 @@
-<template name="layout"> 
+<template name="layout">
   <div class="wrapper">
     <div class="box" style="{{#if getSetting 'backgroundUrl'}} background: url({{getSetting 'backgroundUrl'}}) no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover; background-size: cover; {{/if}}">
         <div class="row no-gutter">
             {{#if isAdmin}}
                 {{> adminHeader}}
             {{/if}}
-      
+
             <div class="column col-sm-12 no-gutter" id="main">
               <div class="{{#if isAdmin}}padding-admin{{else}}padding{{/if}}">
                 {{> yield region="header"}}
 
                 <div>
-                    {{> yield}} 
+                  <!-- {{#transition in="fadeIn:300" out="fadeOut:300"}} -->
+
+                    {{> yield}}
+                    <!-- {{/transition}} -->
+
                     <br>
                 </div>
+
                 <div class="clear"></div>
-                {{> yield region="footer"}} 
+                {{> yield region="footer"}}
               </div>
             </div>
+
         </div>
     </div>
   </div>
 </template>
 
-<template name="layoutNoHeaders"> 
+<template name="layoutNoHeaders">
   <div class="wrapper">
     <div class="box">
-        {{> yield}} 
-        {{> yield region="footer"}} 
+        {{> yield}}
+        {{> yield region="footer"}}
     </div>
   </div>
 </template>

@@ -1,0 +1,30 @@
+<template name="philosophy">
+	<div class="row">
+		{{#if isAdmin}}
+		<h5 class="col-sm-12 text-right"><a href="{{ pathFor route='settings'}}"><span class="glyphicon glyphicon-cog"></span> edit philosophy</a>
+		</h5>
+		{{/if}}
+	</div>
+
+
+
+  <br><br>
+  	<div class="row">
+
+  		  <div class="col-sm-12 col-md-10 col-md-offset-1">
+  <div class="row">
+
+  			<div class="col-sm-12 col-md-4"  style='min-height:300px; background: url("{{ getSetting 'philosophyImageURL' 'img/placeholder.png' }}") no-repeat center center ; background-size: cover;'>
+  			</div>
+  			<div class="col-sm-12 col-md-8">
+  				{{{ getSetting 'philosophyCode' 'Add philosophy code in settings.' }}}
+  			</div>
+
+
+  			</div>
+  			</div>
+
+
+  	</div>
+
+</template>

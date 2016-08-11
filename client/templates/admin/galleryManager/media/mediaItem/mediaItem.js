@@ -63,7 +63,7 @@ Template.mediaItem.events({
           }
           
           Media.remove({ _id: this._id });
-          Meteor.call('removeFromAlbums', this._id, function(err) {
+          Meteor.call('removeFromWorks', this._id, function(err) {
               if(err) console.log(err.reason);
           });
           // decrement use count of any tags used by this media item

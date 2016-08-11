@@ -13,8 +13,8 @@ Template.mediaEdit.helpers({
 	saveLoader: function () {
 		return !! SaveLoader;
 	},
-	albums: function () {
-		return this.metadata.albums;
+	works: function () {
+		return this.metadata.works;
 	}
 
 });

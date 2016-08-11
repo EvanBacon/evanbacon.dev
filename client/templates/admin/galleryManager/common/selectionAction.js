@@ -41,7 +41,7 @@ Template.selectionAction.events({
 			    		}
 				    		
 			    		Media.remove({ _id: item.defaultValue });
-			    		Meteor.call('removeFromAlbums', item.defaultValue, function(err) {
+			    		Meteor.call('removeFromWorks', item.defaultValue, function(err) {
 				            if(err) console.log(err.reason);
 				        });
 				        if (!! tags) {
@@ -51,7 +51,7 @@ Template.selectionAction.events({
 					    }
 			    	}
 			    	if (page === 'albumManager') {
-			    		Albums.remove({ _id: item.defaultValue });
+			    		Works.remove({ _id: item.defaultValue });
 			    	}
 			    });
 
