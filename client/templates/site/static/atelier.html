@@ -23,7 +23,7 @@
 	    {{#each items}}
 	      {{#if isPerson }}
 	        {{#if isVisible }}
-	          {{> atelierCard name=title title=job description=description imageData=content facebook=social.facebook twitter=social.twitter linkedin=social.linkedin website=social.website }}
+	          {{> atelierCard index=@index name=title title=job description=description imageData=content facebook=social.facebook twitter=social.twitter linkedin=social.linkedin website=social.website }}
 
 	        {{/if}}
 	      {{/if}}

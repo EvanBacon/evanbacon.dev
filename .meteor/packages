@@ -12,6 +12,8 @@ sacha:spin
 elmar-search
 accounts-password@1.2.12
 mrt:moment
+mrt:external-file-loader
+
 elmar-save-loader
 elmar-lib
 useraccounts:bootstrap

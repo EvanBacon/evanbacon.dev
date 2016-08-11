@@ -119,6 +119,7 @@ momentjs:moment@2.10.6
 mongo@1.1.10
 mongo-id@1.0.5
 mongo-livedata@1.0.12
+mrt:external-file-loader@0.1.4
 mrt:jquery-imagesloaded@0.0.2
 mrt:moment@2.8.1
 msavin:jetsetter@2.0.0

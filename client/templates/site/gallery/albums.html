@@ -4,8 +4,18 @@
 		<a href="{{ pathFor route='albumManager'}}"><span class="glyphicon glyphicon-cog"></span> edit works</a>
 	</h5>
 	{{/if}}
-	{{>carousel slides=items}}
+	<!-- {{>carousel slides=items}} -->
+	{{> title text="Hello"}}
+	<!-- {{> liquidSection  message="About"}} -->
+	<!-- {{> openingSection}} -->
+
+
 	<div class="col-sm-12 text-center">
 	 	{{> albumGroupList showTitles=true }}
+	</div>
+
+<div class="page-spacer"></div>
+	<div class="col-sm-12 text-center">
+	{{> flickr}}
 	</div>
 </template>

@@ -1,0 +1,61 @@
+
+.main-container {
+  /*position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;*/
+
+padding: 50px;
+  width: 100%;
+
+}
+
+@keyframes background {
+  from {
+    background-position: 0 0%;
+  }
+  to {
+    background-position: 0 -300px;
+  }
+}
+/*h1 {
+  text-align: center;
+  font-size: 200px;
+  font-family: 'Rajdhani', sans-serif;
+  background: url(http://html5book.ru/wp-content/uploads/2016/08/bubbles.png) repeat #011F42;
+  background-size: 300px auto;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: background 12s infinite linear;
+}*/
+
+.main-title {
+  font-weight: 800;
+  color: transparent;
+  font-size: 7rem;
+  background: url("img/dots.jpg") repeat #011F42;
+  background-position: 40% 50%;
+  background-size: 300px auto;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: background 12s infinite linear;
+  position: relative;
+  text-align: center;
+  line-height: 90px;
+  letter-spacing: -8px;
+
+  /*text-shadow: 2px 2px #ff0000; */
+}
+
+.main-subtitle {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 10px;
+}
