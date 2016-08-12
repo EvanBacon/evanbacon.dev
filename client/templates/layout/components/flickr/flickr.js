@@ -5,7 +5,7 @@ Template.flickr.rendered = function() {
     var limit ='20';
 
     // Flickr Photostream feed link.
-    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?id=" + id + "&lang=en-us&format=json&jsoncallback=?",
+    $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?id=" + id + "&lang=en-us&format=json&jsoncallback=?",
 
     function(data){$.each(data.items,
 
