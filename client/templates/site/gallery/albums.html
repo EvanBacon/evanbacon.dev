@@ -1,4 +1,6 @@
 <template name="works">
+	{{>cubes name="first" colors="0x696969,0x808080,0x9E9E9E,0xB5B5B5,0xCCCCCC,0xDBDBDB,0xFFFFFF,0xFFFFFF"}}
+
 	{{#if isAdmin}}
 	<h5 class="col-sm-12 text-right">
 		<a href="{{ pathFor route='albumManager'}}"><span class="glyphicon glyphicon-cog"></span> edit works</a>
