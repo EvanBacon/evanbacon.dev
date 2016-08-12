@@ -6,7 +6,7 @@ Template.albumLinks.helpers({
 		_.each(Works.find({isPerson: {$in: [null, 0]}}).fetch(), function(a) {
 			works.push({'title': a.title, 'slug': a.slug, '_id': a._id});
 		});
-		return works;
+		return works.slice(0,4);
 	},
 	isActive: function (type) {
 		var slug = Router.current().params.slug;
