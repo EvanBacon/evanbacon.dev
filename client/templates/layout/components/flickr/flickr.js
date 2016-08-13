@@ -2,7 +2,7 @@ Template.flickr.rendered = function() {
   $(function(){
 
     var id='65018117@N02';
-    var limit ='20';
+    var limit ='30';
 
     // Flickr Photostream feed link.
     $.getJSON("https://api.flickr.com/services/feeds/photos_public.gne?id=" + id + "&lang=en-us&format=json&jsoncallback=?",
