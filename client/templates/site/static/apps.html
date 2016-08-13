@@ -1,43 +1,27 @@
 <template name="apps">
+	{{#if isAdmin}}
 	<div class="row">
-		{{#if isAdmin}}
 		<h5 class="col-sm-12 text-right">
 			<a href="{{ pathFor route='settings'}}">
 				<span class="glyphicon glyphicon-cog"></span>
 				edit about
 			</a>
 		</h5>
-		{{/if}}
 	</div>
+	{{/if}}
 	<br><br>
-	<div class="row">
-		<div class="col-sm-12 col-md-10 col-md-offset-1">
-			<!-- <div class="row">
-				<div class="col-sm-12 col-md-4"  style='min-height:300px; background: url("{{ getSetting 'aboutImageURL' 'img/placeholder.png' }}") no-repeat center center ; background-size: cover;'>
-				</div>
-				<div class="col-sm-12 col-md-8">
-					{{{ getSetting 'appsCode' 'Add apps code in settings.' }}}
-
-
-				</div>
-			</div> -->
-
-      <div class="row">
+  <div class="row">
         {{> apptize key="uqzrzwracvhwq0pg9feubqpkj0"}}
         {{> apptize key="n83pban65j55rtk686xfb7aep8"}}
 
         {{> apptize key="yuh7ttbwr0rt9t0mamfzq1j9xg"}}
         {{> apptize key="pcc4z0j806ttmv1863qmc344hm"}}
-
-
-      </div>
-		</div>
 	</div>
 </template>
 
 <template name="apptize">
-  <div class="col-sm-12 col-md-4 col-xl-3">
+  <div class="col-sm-12 col-md-4 col-xl-3 text-center">
 
-	<iframe src="https://appetize.io/embed/{{key}}?device=iphone6plus&scale=50&autoplay=false&orientation=portrait&deviceColor=white" width="690px" height="1420px" frameborder="0" scrolling="no"></iframe>
+	<iframe src="https://appetize.io/embed/{{key}}?device=iphone6plus&scale=50&autoplay=false&orientation=portrait&deviceColor=silver" width="346px" height="800px" frameborder="0" scrolling="no"></iframe>
 </div>
 </template>

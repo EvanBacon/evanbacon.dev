@@ -4,10 +4,7 @@
 	</div>
 	<footer id="footer">
 	    <div class="container">
-
-
 				<div class="row" id='center-algin'>
-
 	    	<div class="hidden-xs col-xs-12 col-sm-4" id="tag-wrapper">
 	    	{{#if isAlbum}}
 	       		{{> albumFilters }}
@@ -15,20 +12,9 @@
 	         	{{> tagLinks }}
 	        {{/if}}
 		    </div>
-
-
-
-
 				<div class="col-xs-12 col-sm-4">
-					<!-- <div class="hidden-xs">
-					{{>contactWrapper}}
-					</div>
-					<div class="visible-xs-block"> -->
 					{{> social}}
-					<!-- </div> -->
-
 		    </div>
-
 				<div class="col-xs-12 col-sm-4">
 					<div class="copyright">&copy;{{ year }} {{ getSetting 'title'}}
 						{{#unless isAdmin}} | <a href="{{pathFor route='atSignIn'}}">Sign In</a>{{/unless}}
