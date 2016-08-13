@@ -267,8 +267,13 @@ ul.list-square {
       }
 }
 
-
+#center-algin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 #footer {
+
   position: fixed;
   bottom: 0;
   left: 0;
@@ -281,6 +286,11 @@ ul.list-square {
   border-top: 6px solid darken(@gray-lighter, 10%);
 
 
+  //simple max-width query
+  @media screen and ( max-height: 736px ){
+    position: static;
+  }
+
   .copyright {
       color: @gray-light;
       font-size: .7em;
@@ -289,7 +299,6 @@ ul.list-square {
       margin: 0;
       text-align: center;
   }
-
 }
 
 
@@ -297,6 +306,7 @@ ul.list-square {
   h2 {
     font-size: 1.5em;
   }
+
 }
 
 //----------------------------------------------------
@@ -799,4 +809,9 @@ img.mfp-img {
 
   overflow: hidden;
   color: #CCC;
+}
+
+
+#tag-wrapper, .tag-wrapper-header {
+  display: inline-block;
 }

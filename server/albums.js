@@ -76,7 +76,7 @@ Meteor.methods({
                         'social': {
                           'facebook': '',
                           'twitter': '',
-                          'instagram': '',
+                          'linkedIn': '',
                           'website': '',
                         },
                         'order': newOrderNum
@@ -112,7 +112,7 @@ Meteor.methods({
                       'social': {
                         'facebook': album.social.facebook,
                         'twitter': album.social.twitter,
-                        'instagram': album.social.instagram,
+                        'linkedIn': album.social.linkedIn,
                         'website': album.social.website,
                       },
                       'isShuffled': album.isShuffled,
