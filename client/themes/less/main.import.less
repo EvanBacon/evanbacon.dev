@@ -1,5 +1,11 @@
+@smartphones: ~"only screen and (max-width: 479px)";
+@tablets: ~"only screen and (min-width: 768px) and (max-width: 959px)";
+
+
 * {
-  font-family:Roboto,Arial,sans-serif;
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+
+
 }
 
 html, body {
@@ -272,25 +278,28 @@ ul.list-square {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-#footer {
+  flex-direction: row;
 
+  //simple max-width query
+  @media @smartphones, @tablets {
+    flex-direction: column;
+  }
+
+}
+
+#footer {
   position: fixed;
   bottom: 0;
   left: 0;
   padding: 5px;
   width: 100%;
   min-height: 60px;
-  background-color: #f5f5f5;
+  background-color: #fff;
   z-index: 20;
   // .box-shadow(0px -2px 2px 0px rgba(0,0,0,0.2));
   border-top: 6px solid darken(@gray-lighter, 10%);
 
 
-  //simple max-width query
-  @media screen and ( max-height: 736px ){
-    position: static;
-  }
 
   .copyright {
       color: @gray-light;
@@ -300,6 +309,13 @@ ul.list-square {
       margin: 0;
       text-align: center;
   }
+
+  //simple max-width query
+  @media @smartphones, @tablets {
+    position: relative;
+  }
+
+
 }
 
 
@@ -815,4 +831,62 @@ img.mfp-img {
 
 #tag-wrapper, .tag-wrapper-header {
   display: inline-block;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+
+.btn{
+
+}
+
+//See More Button
+#seeMore {
+  text-decoration:none;
+  color:  @brand-info;
+  font-weight:bold;
+  padding:15px;
+  line-height:32px;
+  height: auto;
+  display:inline-block;
+  text-align:center;
+  background-color: transparent;
+
+  transition: 0.3s;
+
+  font-size:3rem;
+
+  -webkit-border-radius: 20%/50%;
+  -moz-border-radius: 20%/50%;
+  border-radius: 20%/50%;
+
+  box-shadow: 0 0 0 3px @brand-info;
+
+  &:hover {
+    color: white;
+    background-color: @brand-info;
+    box-shadow: 0 0 0 2px @brand-info, inset 0 0 0 2px white;
+  }
+
+}
+
+
+.card-white {
+  background-color: white;
+  padding: 10px;
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+  }
+}
+
+.owl-carousel .item {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#quote-right {
+  float: right;
 }

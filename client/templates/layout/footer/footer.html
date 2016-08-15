@@ -2,52 +2,52 @@
 	<div class="custom-footer">
 		{{{ getSetting 'footerCode' 'Add footer code in settings.' }}}
 	</div>
+
 	<footer id="footer">
-	    <div class="container">
-				<div class="row" id='center-algin'>
-	    	<div class="hidden-xs col-xs-12 col-sm-4" id="tag-wrapper">
-	    	{{#if isAlbum}}
-	       		{{> albumFilters }}
-	        {{else}}
-	         	{{> tagLinks }}
-	        {{/if}}
-		    </div>
+		<div class="container">
+			<div class="row" id='center-algin'>
+				<div class="col-xs-12 col-sm-4" id="tag-wrapper">
+					{{#if isAlbum}}
+					{{> albumFilters }}
+					{{else}}
+					{{> tagLinks }}
+					{{/if}}
+				</div>
 				<div class="col-xs-12 col-sm-4">
 					{{> social}}
-		    </div>
+				</div>
 				<div class="col-xs-12 col-sm-4">
 					<div class="copyright">&copy;{{ year }} {{ getSetting 'title'}}
 						{{#unless isAdmin}} | <a href="{{pathFor route='atSignIn'}}">Sign In</a>{{/unless}}
 					</div>
 				</div>
 			</div>
-
-	    </div>
+		</div>
 	</footer>
-
 </template>
 
 <template name="social">
 	<nav class="navbar navbar-default navbar-filters" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="btn-square navbar-toggle" data-toggle="collapse" data-target="#navbarSocial">
-						<span class="sr-only">Toggle navigation</span>
-						<h3>Connect <span class="glyphicon glyphicon-chevron-down"></span></h3>
-					</button>
-				</div>
-
-				<div class="collapse navbar-collapse" id="navbarSocial">
-					<ul class="nav navbar-nav align-center" style="text-align:center;">
-
-						<a target="_blank" class="facebook-icon social" href={{ getSetting 'facebookUrl' '' }}><i class="fa fa-facebook" aria-hidden="true"></i></a>
-						<a target="_blank" class="linkedIn-icon social" href={{ getSetting 'linkedInUrl' '' }}><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-						<a target="_blank" class="twitter-icon social" href={{ getSetting 'twitterUrl' '' }}><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
-
-					</ul>
-				</div>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="btn-square navbar-toggle" data-toggle="collapse" data-target="#navbarSocial">
+					<span class="sr-only">Toggle navigation</span>
+					<h3>Connect <span class="glyphicon glyphicon-chevron-down"></span></h3>
+				</button>
 			</div>
-	</nav>
 
+			<div class="collapse navbar-collapse" id="navbarSocial">
+				<ul class="nav navbar-nav align-center" style="text-align:center;">
+
+					<a target="_blank" class="facebook-icon social" href={{ getSetting 'facebookUrl' '' }}><i class="fa fa-facebook" aria-hidden="true"></i></a>
+					<a target="_blank" class="linkedIn-icon social" href={{ getSetting 'linkedInUrl' '' }}><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+					<a target="_blank" class="codePen-icon social" href={{ getSetting 'codePenUrl' '' }}><i class="fa fa-codepen" aria-hidden="true"></i></a>
+
+					<a target="_blank" class="twitter-icon social" href={{ getSetting 'twitterUrl' '' }}><i class="fa fa-twitter" aria-hidden="true"></i></a>
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
 </template>

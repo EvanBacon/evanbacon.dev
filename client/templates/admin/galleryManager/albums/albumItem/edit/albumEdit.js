@@ -100,6 +100,8 @@ if (t.find('#inputJob') != undefined) {
 		g.social.facebook  = t.find('#inputFacebook').value;
 		g.social.twitter  = t.find('#inputTwitter').value;
 		g.social.linkedIn  = t.find('#inputLinkedIn').value;
+		g.social.codePen  = t.find('#inputCodePen').value;
+
 		g.social.website  = t.find('#inputWebsite').value;
 }
 

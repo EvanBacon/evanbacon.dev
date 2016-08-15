@@ -7,7 +7,6 @@
 	</div>
 
 
-    <!-- {{> atelierCard name="" title=title description=description image=image facebook=facebook twitter=twitter linkedin=linkedin website=website }} -->
     <div class="row">
 
 		<div class="col-sm-12 col-md-8 col-md-offset-2 text-center">
@@ -23,17 +22,11 @@
 	    {{#each items}}
 	      {{#if isPerson }}
 	        {{#if isVisible }}
-	          {{> atelierCard index=@index name=title title=job description=description imageData=content facebook=social.facebook twitter=social.twitter linkedin=social.linkedin website=social.website }}
+	          {{> atelierCard index=@index name=title title=job description=description imageData=content facebook=social.facebook twitter=social.twitter codePen=social.codePen linkedin=social.linkedin website=social.website }}
 
 	        {{/if}}
 	      {{/if}}
 	  {{/each}}
-
-	<!-- {{> atelierCard name="name" title="title" description="description" image="" facebook="facebook" twitter="twitter" linkedin="linkedin" website="" }}
-
-	{{> atelierCard name="name" title="title" description="description" image="" facebook="facebook" twitter="twitter" linkedin="linkedin" website="" }}
-	{{> atelierCard name="name" title="title" description="description" image="" facebook="facebook" twitter="twitter" linkedin="linkedin" website="" }} -->
-
 	    	</div>
 	</div>
 

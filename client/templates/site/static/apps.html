@@ -9,19 +9,23 @@
 		</h5>
 	</div>
 	{{/if}}
-	<br><br>
-  <div class="row">
-        {{> apptize key="uqzrzwracvhwq0pg9feubqpkj0"}}
-        {{> apptize key="n83pban65j55rtk686xfb7aep8"}}
 
-        {{> apptize key="yuh7ttbwr0rt9t0mamfzq1j9xg"}}
-        {{> apptize key="pcc4z0j806ttmv1863qmc344hm"}}
-	</div>
+
+		<div class="section">
+			<div class="row">
+				{{> apptize key="uqzrzwracvhwq0pg9feubqpkj0"}}
+				{{> apptize key="n83pban65j55rtk686xfb7aep8"}}
+
+				{{> apptize key="yuh7ttbwr0rt9t0mamfzq1j9xg"}}
+				{{> apptize key="pcc4z0j806ttmv1863qmc344hm"}}
+			</div>
+		</div>
+		
 </template>
 
 <template name="apptize">
-  <div class="col-sm-12 col-md-4 col-xl-3 text-center">
+	<div class="col-sm-12 col-md-4 col-xl-3 text-center">
 
-	<iframe src="https://appetize.io/embed/{{key}}?device=iphone6plus&scale=50&autoplay=false&orientation=portrait&deviceColor=silver" width="346px" height="800px" frameborder="0" scrolling="no"></iframe>
-</div>
+		<iframe src="https://appetize.io/embed/{{key}}?device=iphone6plus&scale=50&autoplay=false&orientation=portrait&deviceColor=white" width="346px" height="800px" frameborder="0" scrolling="no"></iframe>
+	</div>
 </template>

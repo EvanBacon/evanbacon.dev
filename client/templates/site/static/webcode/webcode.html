@@ -1,0 +1,64 @@
+
+<template name="webcode">
+	<div class="row">
+		{{#if isAdmin}}
+		<h5 class="col-sm-12 text-right">
+			<a href="{{ pathFor route='settings'}}">
+				<span class="glyphicon glyphicon-cog"></span>
+				edit about
+			</a>
+		</h5>
+		{{/if}}
+	</div>
+	<br><br>
+	<div class="row">
+		<div class="col-sm-12 col-md-10 col-md-offset-1">
+			<div class="row">
+				<div class="col-sm-12 col-md-4"  style='min-height:300px; background: url("{{ getSetting 'aboutImageURL' 'img/placeholder.png' }}") no-repeat center center ; background-size: cover;'>
+				</div>
+				<div class="col-sm-12 col-md-8">
+					{{{ getSetting 'aboutCode' 'Add about code in settings.' }}}
+				</div>
+			</div>
+			<div class="row">
+				{{> codepenWorld}}
+				{{> codepenLiquidGlobe}}
+				{{> codepenDatamap}}
+				{{> codepenLego}}
+			</div>
+			{{> seeMoreWebCode link="http://codepen.io/EvanBacon/"}}
+		</div>
+	</div>
+</template>
+
+<template name="seeMoreWebCode">
+	<br>
+	<hr>
+	<div class="row">
+		<div class="col-xs-12 text-align-center">
+			{{> seeMore link=link icon="fa fa-codepen"}}
+		</div>
+	</div>
+</template>
+
+<template name="codepenWorld">
+	<p data-height="400" data-theme-id="light" data-slug-hash="mEWOXy" data-default-tab="js,result" data-user="EvanBacon" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/EvanBacon/pen/mEWOXy/">Cartography</a> by Evan Bacon (<a href="http://codepen.io/EvanBacon">@EvanBacon</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+	<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</template>
+
+<template name="codepenLiquidGlobe">
+
+	<p data-height="400" data-theme-id="light" data-slug-hash="yJQwbZ" data-default-tab="html,result" data-user="EvanBacon" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/EvanBacon/pen/yJQwbZ/">Liquid Planet</a> by Evan Bacon (<a href="http://codepen.io/EvanBacon">@EvanBacon</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+	<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</template>
+
+<template name="codepenLego">
+
+	<p data-height="400" data-theme-id="light" data-slug-hash="pbQyXv" data-default-tab="css,result" data-user="EvanBacon" data-embed-version="2" class="codepen">See the Pen <a href="https://codepen.io/EvanBacon/pen/pbQyXv/">Legos</a> by Evan Bacon (<a href="http://codepen.io/EvanBacon">@EvanBacon</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+	<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</template>
+
+<template name="codepenDatamap">
+	<p data-height="400" data-theme-id="light" data-slug-hash="MyRmwg" data-default-tab="js,result" data-user="EvanBacon" data-embed-version="2" data-preview="true" class="codepen">See the Pen <a href="http://codepen.io/EvanBacon/pen/MyRmwg/">Colleges - Leaflet</a> by Evan Bacon (<a href="http://codepen.io/EvanBacon">@EvanBacon</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+	<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</template>
