@@ -1,5 +1,4 @@
-
-#hexagon-categories{
+#hexagon-categories {
   overflow:hidden;
   width:100%;
   margin:0 0;
@@ -38,7 +37,7 @@
   transform: translateX(50%) rotate(-60deg) skewY(30deg);
 }
 #hexagon-categories li:nth-child(6n+4):last-child, #hexagon-categories li:nth-child(6n+5):last-child, #hexagon-categories li:nth-child(6n+6):last-child{
-  margin-bottom:0%;
+  margin-bottom:0;
 }
 #hexagon-categories li *{
   position:absolute;

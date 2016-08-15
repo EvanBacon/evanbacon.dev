@@ -1,3 +1,4 @@
+
 var perlinAPI = function() {
 };
 
@@ -14,7 +15,6 @@ Meteor.startup(function() { // dom is ready
 
 
 Template.works.rendered = function() {
-
   $(function() {
     (function() {
       console.log("In cubes");
