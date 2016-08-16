@@ -846,7 +846,6 @@ img.mfp-img {
 #seeMore {
   text-decoration:none;
   color:  @brand-info;
-  font-weight:bold;
   padding:15px;
   line-height:32px;
   height: auto;
@@ -854,20 +853,14 @@ img.mfp-img {
   text-align:center;
   background-color: transparent;
 
+text-transform: uppercase;
   transition: 0.3s;
-
+  border-radius: 0;
   font-size:3rem;
-
-  -webkit-border-radius: 20%/50%;
-  -moz-border-radius: 20%/50%;
-  border-radius: 20%/50%;
-
-  box-shadow: 0 0 0 3px @brand-info;
 
   &:hover {
     color: white;
     background-color: @brand-info;
-    box-shadow: 0 0 0 2px @brand-info, inset 0 0 0 2px white;
   }
 
 }
@@ -889,4 +882,17 @@ img.mfp-img {
 
 #quote-right {
   float: right;
+}
+
+
+.anim  {
+  overflow-y: hidden;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.closed {
+  height: 80px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }

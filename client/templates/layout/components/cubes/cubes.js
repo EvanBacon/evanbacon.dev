@@ -51,7 +51,7 @@ Template.works.rendered = function() {
           this.cubeSize = 24;
           this.mapSize = 80;
           this.timeshift = true;
-          this.timeshiftSpeed = 0.0005;
+          this.timeshiftSpeed = 0.0001;
           this.zAmplify = 0.5;
           this.noiseScale = 20;
           console.log('#perlin-' + $('.cubes').data( "name" ));
