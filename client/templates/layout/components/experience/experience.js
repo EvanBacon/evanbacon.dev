@@ -15,9 +15,9 @@ Template.experience.rendered = function() {
       var numberOfMonths = ((year2 - year1) * 12 + (month2 - month1) + 1);
       return numberOfMonths;
     };
-    
-    class Drawing {
-      constructor() {
+
+    function Drawing() {
+
         var date1=new Date(2013,5,21);//Remember, months are 0 based in JS
         var now=new Date();
         var months = dif(date1, now);
@@ -44,12 +44,7 @@ Template.experience.rendered = function() {
           { title: "Design",        value: dif(frog, now),   color: colors[7] },
           { title: "iOS",           value: dif(vyvanse, now),color: colors[8] },
         ]);
-      }
-
-
-
     }
-
 
     jQuery.fn.drawDoughnutChart = jQuery.fn.drawDoughnutChart || function(data, options) {
       var $this = this,
