@@ -1,10 +1,13 @@
+
+// On Render of experience card
 Template.experience.rendered = function() {
+// Jquery
   $(document).ready(function($){
-    var dif = function(date1, date2) {
-      var year1=date1.getFullYear();
-      var year2=date2.getFullYear();
-      var month1=date1.getMonth();
-      var month2=date2.getMonth();
+    function dif(dateA, dateB) {
+      var year1=dateA.getFullYear();
+      var year2=dateB.getFullYear();
+      var month1=dateA.getMonth();
+      var month2=dateB.getMonth();
       if(month1 === 0){ //Have to take into account
         month1++;
         month2++;
@@ -12,34 +15,43 @@ Template.experience.rendered = function() {
       var numberOfMonths = ((year2 - year1) * 12 + (month2 - month1) + 1);
       return numberOfMonths;
     };
+    
+    class Drawing {
+      constructor() {
+        var date1=new Date(2013,5,21);//Remember, months are 0 based in JS
+        var now=new Date();
+        var months = dif(date1, now);
+        var frog = new Date(2015,4,12);
+        var bakery = new Date(2013,0,0);
+        var vyvanse = new Date(2014,0,8);
+        var lego = new Date(2012,7,4);
+        var web = new Date(2016,0,0);
+        var colors = ["#64d9ee", "#52678f", "#0a4e63", "#073350", "#0e82b1", "#87b0e6", "#6b86bd", "#2aa1b7", "#416389"];
 
-    var date1=new Date(2013,5,21);//Remember, months are 0 based in JS
-    var date2=new Date();
-    var months = dif(date1, date2);
-    var frog = new Date(2015,4,12);
-    var bakery = new Date(2013,0,0);
-    var vyvanse = new Date(2014,0,8);
+        let width = $(document).width();
+        let chartWidth = Math.min(450, width);
+        $('#doughnutChart').width(chartWidth);
+        $('#doughnutChart').height(chartWidth);
 
-    var colors = ["#64d9ee", "#52678f", "#0a4e63", "#073350", "#0e82b1", "#87b0e6", "#6b86bd", "#2aa1b7", "#416389"];
-    var drawIt = function(animate = true) {
-      let width = $(document).width();
-      let chartWidth = Math.min(450, width);
-      $('#doughnutChart').width(chartWidth);
-      $('#doughnutChart').height(chartWidth);
+        $("#doughnutChart").drawDoughnutChart([
+          { title: "Lego Artist",   value: dif(lego, now),   color: colors[0] },
+          { title: "Beta Tester", 	value: 5,                color: colors[1] },
+          { title: "Game Developer",value: dif(vyvanse, now),color: colors[2] },
+          { title: "Chef",          value: dif(bakery, frog),color: colors[3] },
+          { title: "Frog Design",   value: dif(frog, now),   color: colors[4] },
+          { title: "Web Developer", value: dif(web, now),    color: colors[5] },
+          { title: "Android",       value: dif(frog, now),   color: colors[6] },
+          { title: "Design",        value: dif(frog, now),   color: colors[7] },
+          { title: "iOS",           value: dif(vyvanse, now),color: colors[8] },
+        ]);
+      }
 
-      $("#doughnutChart").drawDoughnutChart([
-        { title: "Lego Artist",         	value : 	dif(new Date(2012,7,4), date2),  color: colors[0] },
-        { title: "Beta Tester", 	value:  5,   color:  colors[1] },
-        { title: "Game Developer",      value:  dif(vyvanse, date2),   color:  colors[2] },
-        { title: "Chef",        value : dif(bakery, frog),   color:  colors[3] },
-        { title: "Frog Design",        value : dif(frog, date2),   color:  colors[4] },
-        { title: "Web Developer",        value : dif(new Date(2016,0,0), date2),   color:  colors[5] },
-        { title: "Android",        value : dif(frog, new Date(2016,0,4)),   color:  colors[6] },
-        { title: "Design", value: dif(frog, date2), color: colors[7] },
-        { title: "iOS", value: dif(vyvanse, date2), color: colors[8] },
-      ]);
-    };
-    jQuery.fn.drawDoughnutChart = function(data, options) {
+
+
+    }
+
+
+    jQuery.fn.drawDoughnutChart = jQuery.fn.drawDoughnutChart || function(data, options) {
       var $this = this,
       W = $this.width(),
       H = $this.height(),
@@ -130,6 +142,7 @@ Template.experience.rendered = function() {
         "margin-left": -(summarySize / 2) + "px",
         "margin-top": -(summarySize / 2) + "px"
       });
+
       var $summaryTitle = $('<p class="' + settings.summaryTitleClass + '">' + settings.summaryTitle + '</p>').appendTo($summary);
       var $summaryNumber = $('<p class="' + settings.summaryNumberClass + '"></p>').appendTo($summary).css({opacity: 0});
 
@@ -193,7 +206,6 @@ Template.experience.rendered = function() {
         $('#doughnutWrapper').css({'background-color': '#FFFFFF'});
         $('.' + settings.summaryTitleClass).text( "MONTHS");
         $('.' + settings.summaryNumberClass).text(segmentTotal);
-
       }
       function pathMouseMove(e) {
         $tip.css({
@@ -278,6 +290,6 @@ Template.experience.rendered = function() {
       }
       return $this;
     };
-    drawIt();
+    let drawing = new Drawing();
   });
 };
