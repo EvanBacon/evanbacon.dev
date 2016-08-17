@@ -5,20 +5,15 @@
             {{#if isAdmin}}
                 {{> adminHeader}}
             {{/if}}
-
             <div class="column col-sm-12 no-gutter" id="main">
               <div class="{{#if isAdmin}}padding-admin{{else}}padding{{/if}}">
                 {{> yield region="header"}}
-
                   <!-- {{#transition in="fadeIn:300" out="fadeOut:300"}} -->
-
                     {{> yield}}
-                    <!-- {{/transition}} -->
-
+                  <!-- {{/transition}} -->
                 {{> yield region="footer"}}
               </div>
             </div>
-
         </div>
     </div>
   </div>
