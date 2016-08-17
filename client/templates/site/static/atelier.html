@@ -6,30 +6,21 @@
 		</h5>
 		{{/if}}
 	</div>
-
-
-    <div class="row">
-
+	<div class="row">
 		<div class="col-sm-12 col-md-8 col-md-offset-2 text-center">
 			{{{ getSetting 'atelierCode' 'Add atelier code in settings.' }}}
 		</div>
-
 	</div>
-<br><br>
+	<br><br>
 	<div class="container">
-
-
 		<div class="row">
-	    {{#each items}}
-	      {{#if isPerson }}
-	        {{#if isVisible }}
-	          {{> atelierCard index=@index name=title title=job description=description imageData=content facebook=social.facebook twitter=social.twitter codePen=social.codePen linkedin=social.linkedin website=social.website }}
-
-	        {{/if}}
-	      {{/if}}
-	  {{/each}}
-	    	</div>
+			{{#each items}}
+			{{#if isPerson }}
+			{{#if isVisible }}
+			{{> atelierCard index=@index name=title title=job description=description imageData=content facebook=social.facebook twitter=social.twitter codePen=social.codePen linkedin=social.linkedin website=social.website }}
+			{{/if}}
+			{{/if}}
+			{{/each}}
+		</div>
 	</div>
-
-
 </template>
