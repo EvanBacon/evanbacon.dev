@@ -844,6 +844,7 @@ img.mfp-img {
 
 //See More Button
 #seeMore {
+
   text-decoration:none;
   color:  @brand-info;
   padding:15px;
@@ -879,6 +880,11 @@ text-transform: uppercase;
     width: 100%;
     height: auto;
 }
+.timeline-carousel .item {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
 #quote-right {
   float: right;
@@ -895,4 +901,25 @@ text-transform: uppercase;
   height: 80px;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+
+
+.experience-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+align-items: center;
+  height: 200px;
+h3 {
+  align-self: flex-start;
+  margin-right: 10px;
+}
+
+p {
+  align-self: flex-end;
+  margin-left: 10px;
+}
 }
