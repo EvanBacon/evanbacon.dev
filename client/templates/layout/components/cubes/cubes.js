@@ -13,11 +13,9 @@ Meteor.startup(function() { // dom is ready
 
 });
 
-
 Template.works.rendered = function() {
   $(function() {
     (function() {
-      console.log("In cubes");
       $(".owl-carousel").owlCarousel({
         navigation : true, // Show next and prev buttons
         slideSpeed : 300,
@@ -70,7 +68,7 @@ Template.works.rendered = function() {
           this.timeshiftSpeed = 0.0001;
           this.zAmplify = 0.5;
           this.noiseScale = 20;
-          console.log('#perlin-' + $('.cubes').data( "name" ));
+          // console.log('#perlin-' + $('.cubes').data( "name" ));
           this.canvas = $('#perlin-' + $('.cubes').data( "name" ));
           this.context = this.canvas[0].getContext('2d');
           this.setContextSize();
@@ -151,7 +149,6 @@ Template.works.rendered = function() {
         generateCubes: function() {
           var color, i, len,rawColors, results;
           rawColors = $( ".cubes" ).data( "colors" ).split(",");
-          console.log("colors", rawColors);
           // rawColors = [0x003399, 0x003399, 0x3366CC, 0x3366CC, 0x6699FF, 0x6699FF, 0xFFFFFF, 0xFFFFFF];
           // rawColors = [0xffffff, 0x4285f4, 0x34a853, 0xfbbc05, 0xea4335, 0xffffff, 0x4285f4, 0x34a853];
           this.dimension = new obelisk.CubeDimension(this.cubeSize, this.cubeSize, this.cubeSize * 3);
