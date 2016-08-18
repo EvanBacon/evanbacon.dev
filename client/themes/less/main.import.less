@@ -281,7 +281,7 @@ ul.list-square {
   flex-direction: row;
 
   //simple max-width query
-  @media @smartphones, @tablets {
+  @media @smartphones {
     flex-direction: column;
   }
 
@@ -311,7 +311,7 @@ ul.list-square {
   }
 
   //simple max-width query
-  @media @smartphones, @tablets {
+  @media @smartphones {
     position: relative;
   }
 
@@ -470,6 +470,21 @@ ul.list-square {
   text-align:center;
   background-image:url('/img/loading.gif');
   background-repeat: no-repeat;
+}
+
+.loading-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+background: #fbdc32; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loading-bacon {
+
 }
 
 .bg-loader {
