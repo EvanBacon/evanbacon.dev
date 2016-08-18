@@ -1,6 +1,7 @@
 
 // On Render of experience card
 Template.experience.rendered = function() {
+  'use strict';
 // Jquery
   $(document).ready(function($){
     function dif(dateA, dateB) {
@@ -16,7 +17,7 @@ Template.experience.rendered = function() {
       return numberOfMonths;
     };
 
-    function Drawing() {
+    function drawing() {
 
         var date1=new Date(2013,5,21);//Remember, months are 0 based in JS
         var now=new Date();
@@ -285,6 +286,6 @@ Template.experience.rendered = function() {
       }
       return $this;
     };
-    let drawing = new Drawing();
+    drawing();
   });
 };

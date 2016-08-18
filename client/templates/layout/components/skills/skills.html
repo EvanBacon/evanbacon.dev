@@ -7,10 +7,12 @@
     <div class="container card-white">
 
 <div id="action-container" class="row closed anim">
+  {{#transition in="zoomIn" out="bounceOut"}}
+
   {{#each skills}}
   {{> languageSkill text=this}}
   {{/each}}
-
+{{/transition}}
 </div>
 
 <div class="row text-center">
