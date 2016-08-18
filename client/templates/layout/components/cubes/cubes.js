@@ -14,6 +14,12 @@ Meteor.startup(function() { // dom is ready
 });
 
 Template.works.rendered = function() {
+  'use strict';
+  $(document).ready(function(){
+  sr.reveal('.fadein');
+  // $('.scrollspy').scrollSpy();
+});
+
   $(function() {
     (function() {
       $(".owl-carousel").owlCarousel({

@@ -1,10 +1,11 @@
 <template name="skills">
   <div class="page-spacer"></div>
 
+<div class="fadein">
   {{> title text="Skills"}}
-
+</div>
   <div class="col-sm-12">
-    <div class="container card-white">
+    <div class="fadein container card-white">
 
 <div id="action-container" class="row closed anim">
   {{#transition in="zoomIn" out="bounceOut"}}
@@ -28,7 +29,7 @@
 </template>
 
 <template name="languageSkill">
-  <div class="col-sx-12 col-sm-6 col-md-4 col-lg-3 text-center">
+  <div class="fadein col-sx-12 col-sm-6 col-md-4 col-lg-3 text-center">
     <h1 class="black-text">{{text}}</h1>
   </div>
 </template>

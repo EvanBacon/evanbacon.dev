@@ -1,6 +1,5 @@
 Template.skills.helpers({
   skills: function() {
-    console.log("eh", this.querySelector('.button-open'));
     return [ "Prototyping",
     "Swift",
     "Objective-C",
