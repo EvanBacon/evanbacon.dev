@@ -39,7 +39,7 @@ Template.albumEdit.helpers({
 		return capitalized ? capitalizeFirst(text) : text;
 	},
 	saveText: function () {
-		return 'Save ' + capitalizeFirst(getName());;
+		return 'Save ' + capitalizeFirst(getName());
 	}
 });
 
