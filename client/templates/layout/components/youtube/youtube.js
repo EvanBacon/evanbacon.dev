@@ -5,9 +5,10 @@ Template.videos.rendered = function() {
 
     // YouTube API will call onYouTubeIframeAPIReady() when API ready.
     // Make sure it's a global variable.
-    onYouTubeIframeAPIReady = function() {
+    onYouTubeIframeAPIReady = () => {
       //Vader ->  HMHieEjBjws
 
+'use strict';
       ///Initialize Youtube videos
       let videoElements = this.querySelectorAll(".video");
       function initPlayer(video, id) {
