@@ -2,15 +2,14 @@
 Template.videos.rendered = function() {
   $(function(){
 
-    ///Initialize Youtube videos
-    let videoElements = this.querySelectorAll(".video");
-    console.log(videoElements);
 
     // YouTube API will call onYouTubeIframeAPIReady() when API ready.
     // Make sure it's a global variable.
     onYouTubeIframeAPIReady = () => {
       //Vader ->  HMHieEjBjws
 
+      ///Initialize Youtube videos
+      let videoElements = this.querySelectorAll(".video");
       function initPlayer(video, id) {
         // New Video Player, the first argument is the id of the div.
         // Make sure it's a global variable.
@@ -32,9 +31,8 @@ Template.videos.rendered = function() {
         });
       }
 
-      for (let index in this.videoElements) {
-        let video = this.videoElements[index];
-        console.log(video);
+      for (let index in videoElements) {
+        let video = videoElements[index];
         initPlayer(video.id, video.id);
       }
 
