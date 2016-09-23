@@ -1,5 +1,5 @@
 
-Template.videos.rendered = function() {
+Template.videos.rendered = () => {
   $(function(){
 
 
@@ -8,7 +8,6 @@ Template.videos.rendered = function() {
     onYouTubeIframeAPIReady = () => {
       //Vader ->  HMHieEjBjws
 
-'use strict';
       ///Initialize Youtube videos
       let videoElements = this.querySelectorAll(".video");
       function initPlayer(video, id) {
