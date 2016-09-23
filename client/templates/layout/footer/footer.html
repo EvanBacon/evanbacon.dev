@@ -21,8 +21,6 @@
 				<div class="col-xs-12 col-sm-6 col-md-4 ">
 					<div class="copyright">&copy;{{ year }} {{ getSetting 'title'}}
 						{{#unless isAdmin}} | <a href="{{pathFor route='atSignIn'}}">Sign In</a>{{/unless}}
-						<br>
-						Written with ♥️ in Meteor.
 					</div>
 				</div>
 
@@ -48,15 +46,21 @@
 			<div class="collapse navbar-collapse" id="navbarSocial">
 				<ul class="nav navbar-nav align-center" style="text-align:center;">
 
-					<a target="_blank" class="facebook-icon social" href={{ getSetting 'facebookUrl' '' }}><i class="fa fa-facebook" aria-hidden="true"></i></a>
-					<a target="_blank" class="linkedIn-icon social" href={{ getSetting 'linkedInUrl' '' }}><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-					<a target="_blank" class="codePen-icon social" href={{ getSetting 'codePenUrl' '' }}><i class="fa fa-codepen" aria-hidden="true"></i></a>
-
-					<a target="_blank" class="twitter-icon social" href={{ getSetting 'twitterUrl' '' }}><i class="fa fa-twitter" aria-hidden="true"></i></a>
-
+					{{> socialIcon link=(getSetting 'githubUrl' '') class="github" icon="github" }}
+					{{> socialIcon link=(getSetting 'codePenUrl' '') class="codePen" icon="codepen" }}
+					{{> socialIcon link=(getSetting 'linkedInUrl' '') class="linkedIn" icon="linkedin-square" }}
+					{{> socialIcon link=(getSetting 'twitterUrl' '') class="twitter" icon="twitter" }}
+					{{> socialIcon link=(getSetting 'facebookUrl' '') class="facebook" icon="facebook" }}
 
 				</ul>
 			</div>
 		</div>
 	</nav>
+</template>
+
+<!--  link: Link, class: Class, icon: Icon-->
+<template name="socialIcon">
+	{{#if link}}
+		<a target="_blank" class="{{class}}-icon social" href={{link}}><i class="fa fa-{{icon}}" aria-hidden="true"></i></a>
+	{{/if}}
 </template>

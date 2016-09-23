@@ -76,6 +76,8 @@ Meteor.methods({
                         'social': {
                           'facebook': '',
                           'twitter': '',
+                          'github': '',
+
                           'linkedIn': '',
                           'codePen': '',
 
@@ -114,6 +116,8 @@ Meteor.methods({
                       'social': {
                         'facebook': album.social.facebook,
                         'twitter': album.social.twitter,
+                        'github': album.social.github,
+
                         'linkedIn': album.social.linkedIn,
                         'codePen': album.social.codePen,
 
