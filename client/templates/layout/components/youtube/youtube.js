@@ -32,8 +32,8 @@ Template.videos.rendered = function() {
         });
       }
 
-      for (let index in videoElements) {
-        let video = videoElements[index];
+      for (let index in this.videoElements) {
+        let video = this.videoElements[index];
         console.log(video);
         initPlayer(video.id, video.id);
       }
