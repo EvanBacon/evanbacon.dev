@@ -7,27 +7,22 @@ import Layout from '../components/layout';
 import ListItem, { H2, H4, P } from '../components/ListItem';
 import SEO from '../components/seo';
 import useDarkMode from '../hooks/useDarkMode';
-import { Talks } from '../Data';
-
-const IMAGES = [
-    { uri: 'https://avatars.io/twitter/baconbrix', title: 'Twitter' },
-    { uri: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
-]
+import { Talks, Images } from '../Data';
 
 function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }) {
     const isDarkMode = useDarkMode()
-    
+
     const link = React.useRef(null);
     const { isHovered } = useHover(link);
 
     return (
         <View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text 
+                <Text
                     ref={link}
-                    target="_blank" 
-                    accessibilityRole="link" 
-                    href={href} 
+                    target="_blank"
+                    accessibilityRole="link"
+                    href={href}
                     style={[{ color: 'blue', marginBottom: 10, fontSize: 18, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'transparent' }, isHovered && { borderBottomColor: 'blue' }]}>{title}</Text>
                 {date && <Text style={{ color: isDarkMode ? '#ffffff' : '#222426', fontSize: 18 }}>{date}</Text>}
             </View>
@@ -74,11 +69,31 @@ function TalkCard({ title, thumbnail, description, presentedData = [], resources
 
 
 const IndexPage = () => {
+    const isDarkMode = useDarkMode()
+
     return (
         <Layout>
             <SEO title="Brand" />
-            <H2>About</H2>
-            {Talks.map(talk => <TalkCard {...talk} />)}
+            <H2>Brand</H2>
+            <View style={{ maxWidth: 720, flex: 1, marginBottom: 20, padding: 40, backgroundColor: isDarkMode ? 'black' : 'white' }}>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <H2 style={{ fontSize: useREM(1.51572) }}>Photo</H2>
+                </View>
+
+
+                {Images.map(({ title, url }) => <View style={{marginBottom: useREM(1.55)}}><AspectImage style={{ maxWidth: 240, marginBottom: 24 }} key={title} source={{uri: url}}/><P>{title}</P></View>)}
+                
+
+                <Divider />
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <H2 style={{ fontSize: useREM(1.51572) }}>Bio</H2>
+                </View>
+
+                <P style={{ marginBottom: useREM(1.55) }}>Bacon is a full-time open source developer working on Expo to make hyper-performant universal apps that run everywhere, and are used by incredible companies like Flexport, Pizza Hut, and Brex. He's built over 100 NPM packages, was the all-time youngest designer at the prestigious design firm Frog Design, and is a world renowned, award-winning Lego Master Builder. Besides programming Expo non-stop, Bacon enjoys making YouTube videos about Expo,  tweeting about Expo, and drinking Soylent while thinking about Expo.</P>
+                <Divider />
+            </View>
         </Layout>
     )
 }

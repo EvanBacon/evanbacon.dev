@@ -1,11 +1,14 @@
+import { useActionSheet } from '@expo/react-native-action-sheet';
+import { Link } from 'expo-next-react-navigation';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, StyleSheet, View, Linking } from 'react-native';
-import { useREM, useDimensions } from 'react-native-web-hooks';
+import { Linking, StyleSheet, Platform, Text, View } from 'react-native';
+import * as SVG from 'react-native-svg';
+import { useHover, useDimensions, useREM, useActive } from 'react-native-web-hooks';
 
-import { Link } from 'expo-next-react-navigation'
 import AspectImage from '../components/AspectImage';
-import { useActionSheet } from '@expo/react-native-action-sheet'
+
+import UniversalLink from './UniversalLink';
 
 
 const TABS = [
@@ -29,11 +32,13 @@ const TABS = [
     title: 'Brand',
     url: 'brand'
   },
+  {
+    title: 'Source',
+    url: 'https://github.com/EvanBacon/Portfolio'
+  },
 ]
 
 const SIZE = 48;
-
-import * as SVG from 'react-native-svg';
 
 function MenuButton({ onPress, isActive }) {
 
@@ -75,6 +80,15 @@ function MenuButton({ onPress, isActive }) {
   )
 }
 
+const StyledLink = React.forwardRef(({ children, style, ...props }, ref) => {
+
+  const { isHovered } = useHover(ref);
+  const { isActive } = useActive(ref);
+
+  const responsiveStyle = StyleSheet.flatten([style, isHovered && { opacity: 0.6 }, isActive && { color: 'black' } ])
+  return <UniversalLink {...props} style={{ textDecoration: 'none'}}><Text ref={ref} style={responsiveStyle}>{children}</Text></UniversalLink>
+}); 
+
 const Header = ({ siteTitle }) => {
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();
@@ -97,6 +111,7 @@ const Header = ({ siteTitle }) => {
 
         if (buttonIndex !== cancelButtonIndex) {
           Linking.openURL(TABS[buttonIndex].url)
+          
         }
         // Do something here depending on the button index selected
       },
@@ -121,13 +136,13 @@ const Header = ({ siteTitle }) => {
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             {!isXSmall && <AspectImage source={{ uri: 'https://avatars.io/twitter/baconbrix' }} loading="lazy" style={styles.image} />}
             <Text accessibilityRole="header" style={{ position: 'sticky', fontWeight: 'bold', fontSize: useREM(2.25) }}>
-              <Link
+              <UniversalLink
                 routeName=""
                 style={{ textDecoration: 'none' }}
               ><Text style={styles.link}>
                   {siteTitle}
                 </Text>
-              </Link>
+              </UniversalLink>
             </Text>
           </View>
         </View>
@@ -137,11 +152,11 @@ const Header = ({ siteTitle }) => {
         <View style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex', }]}>
 
           {TABS.map((info) => (
-            <Text style={{ fontWeight: 'bold', fontSize: useREM(1), marginTop: isSmall ? 12 : 0, marginLeft: isXSmall ? 0 : 12 }}>
-              <Link
+            <Text key={info.title} style={{ fontWeight: 'bold', fontSize: useREM(1), marginTop: isSmall ? 12 : 0, marginLeft: isXSmall ? 0 : 12 }}>
+              <StyledLink
                 routeName={info.url}
-                style={{ textDecoration: 'none' }}
-              ><Text style={styles.link}>{info.title}</Text></Link>
+                style={styles.link}
+              >{info.title}</StyledLink>
             </Text>
           ))}
         </View>
@@ -159,10 +174,19 @@ const styles = StyleSheet.create({
     marginBottom: useREM(1.45),
     alignItems: 'center'
   },
-  link: {
-    color: `white`,
-    textDecoration: `none`,
-  },
+  link: Platform.select({
+    web: {
+      color: 'white',
+      cursor: 'pointer',
+      // outlineStyle: 'none',
+      borderBottomWidth: 1,
+      borderBottomColor: 'transparent',
+      transitionDuration: '200ms',
+    },
+    default: {
+      color: 'white',
+    },
+  }),
   innerContainer: {
     maxWidth: 720,
     flexDirection: 'row',

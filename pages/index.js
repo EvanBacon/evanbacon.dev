@@ -1,18 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useREM, useHover } from 'react-native-web-hooks';
+import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import Layout from '../components/layout';
 import ListItem, { H2, H4, P } from '../components/ListItem';
 import SEO from '../components/seo';
-import useDarkMode from '../hooks/useDarkMode';
 import { Talks } from '../Data';
-
-const IMAGES = [
-    { uri: 'https://avatars.io/twitter/baconbrix', title: 'Twitter' },
-    { uri: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
-]
+import useDarkMode from '../hooks/useDarkMode';
 
 function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }) {
     const isDarkMode = useDarkMode()
@@ -67,7 +62,7 @@ function TalkCard({ title, thumbnail, description, presentedData = [], resources
             <Divider />
             {!!presentedData.length && <H4 style={{ opacity: 0.6, marginBottom: 24 }}>PRESENTED AT</H4>}
 
-            {presentedData.map(presentation => <TalkCardPresentationRow title={presentation.title} href={presentation.href} date={presentation.date} resources={presentation.resources} />)}
+            {presentedData.map(presentation => <TalkCardPresentationRow key={presentation.title} title={presentation.title} href={presentation.href} date={presentation.date} resources={presentation.resources} />)}
         </View>
     )
 }
@@ -78,7 +73,7 @@ const IndexPage = () => {
         <Layout>
             <SEO title="Talks" />
             <H2>Talks</H2>
-            {Talks.map(talk => <TalkCard {...talk} />)}
+            {Talks.map(talk => <TalkCard key={talk.title} {...talk} />)}
         </Layout>
     )
 }

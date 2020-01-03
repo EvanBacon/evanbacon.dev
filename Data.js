@@ -1,7 +1,7 @@
 
-export const IMAGES = [
+export const Images = [
     { url: 'https://avatars.io/twitter/baconbrix', title: 'Twitter' },
-    { url: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
+    // { url: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
 ]
 
 export const Podcasts = [
