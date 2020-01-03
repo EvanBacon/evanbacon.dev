@@ -1,0 +1,37 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@egjs/hammerjs": "^2.0.17",
+    "@expo/next-adapter": "^2.0.0-beta.10",
+    "@expo/react-native-action-sheet": "^3.4.1",
+    "expo": "~36.0.0",
+    "expo-blur": "^8.0.0",
+    "expo-next-react-navigation": "^0.0.19",
+    "next": "^9.1.6",
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-helmet": "^5.2.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-appearance": "^0.3.2",
+    "react-native-reanimated": "^1.4.0",
+    "react-native-safe-area-context": "^0.6.2",
+    "react-native-svg": "^9.13.6",
+    "react-native-typography": "^1.4.1",
+    "react-native-web": "~0.11.7",
+    "react-native-web-hooks": "^1.0.3",
+    "styled-components": "^4.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "babel-preset-expo": "~8.0.0"
+  },
+  "private": true
+}
