@@ -1,7 +1,0 @@
-{
-    // Adding new filename extensions to an already supported icon.
-// note: the format must match the existing one. If not, it will use the extension you provide.
-"vsicons.associations.files": [
-    { "icon": "expo.svg",  "extensions": ["app.json", "app.config.js", "app.config.json", "app.config.json5"], "filename": true, "format": "svg" }
-  ]
-}
