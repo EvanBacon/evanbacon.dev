@@ -6,7 +6,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "build": "next build"
+    "build": "next build",
+    "predeploy:web": "next build && next export",
+    "deploy:web": "netlify deploy --dir out --prod"
   },
   "dependencies": {
     "@egjs/hammerjs": "^2.0.17",

@@ -15,7 +15,7 @@ const TABS = [
   // },
   {
     title: 'Home',
-    url: '/'
+    url: ''
   },
   // {
   //   title: 'Projects',
