@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Image, Text, View } from 'react-native';
 import { useREM, useHover } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
@@ -74,7 +74,8 @@ const IndexPage = () => {
     return (
         <Layout>
             <SEO title="Brand" />
-            <H2>Brand</H2>
+            <AspectImage source={require('../assets/shoes.jpeg')} resizeMode="cover" style={{ flex: 1, aspectRatio: 9 / 16 }} />
+            <H2>About</H2>
             <View style={{ maxWidth: 720, flex: 1, marginBottom: 20, padding: 40, backgroundColor: isDarkMode ? 'black' : 'white' }}>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
