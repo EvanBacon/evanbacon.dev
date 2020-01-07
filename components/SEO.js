@@ -34,7 +34,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: `app`,
         },
         {
           name: `twitter:card`,

@@ -1,18 +1,29 @@
 import { Link } from 'expo-next-react-navigation';
 import React from 'react';
-import { Linking, Text } from 'react-native';
+import { Linking, StyleSheet, Text, Platform } from 'react-native';
+import { useHover, useDimensions, useREM, useActive, useFocus } from 'react-native-web-hooks';
 
+export default function UniversalLink({ routeName, style, ...props }) {
 
-export default function UniversalLink({ routeName, ...props }) {
+  const ref = React.useRef(null)
+  const { isFocused } = useFocus(ref);
+  const { isHovered } = useHover(ref);
 
-    
-    // Handle External links
-    if (routeName.startsWith('http://') || routeName.startsWith('https://')) {
+  const responsiveStyle = StyleSheet.flatten([
+    style,
+    { color: 'white', borderBottomWidth: 1, borderBottomColor: 'transparent', outlineStyle: 'none' },
+    isHovered && { opacity: 0.6 },
+    isFocused && { borderBottomColor: 'white' },
+  ])
+
+  // Handle External links
+  if (routeName.startsWith('http://') || routeName.startsWith('https://')) {
     function onPress() {
+      if (Platform.OS !== 'web')
         Linking.openURL(routeName);
     }
-    return (<Text {...props} href={routeName} accessibilityRole="link" onPress={onPress} />)
+    return (<Text {...props} ref={ref} style={responsiveStyle} href={routeName} accessibilityRole="link" onPress={onPress} />)
   }
 
-  return <Link routeName={routeName} {...props}/>
+  return <Link ref={ref} routeName={routeName} {...props} style={responsiveStyle} />
 }

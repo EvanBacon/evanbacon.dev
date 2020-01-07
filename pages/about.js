@@ -4,7 +4,7 @@ import { useREM, useHover } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import Layout from '../components/layout';
-import ListItem, { H2, H4, P } from '../components/ListItem';
+import { ListItem, H2, H4, P } from '../components/Elements';
 import SEO from '../components/seo';
 import useDarkMode from '../hooks/useDarkMode';
 import { Talks, Images } from '../Data';
@@ -82,8 +82,8 @@ const IndexPage = () => {
                 </View>
 
 
-                {Images.map(({ title, url }) => <View style={{marginBottom: useREM(1.55)}}><AspectImage style={{ maxWidth: 240, marginBottom: 24 }} key={title} source={{uri: url}}/><P>{title}</P></View>)}
-                
+                {Images.map(({ title, url }) => <View style={{ marginBottom: useREM(1.55) }}><AspectImage style={{ maxWidth: 240, marginBottom: 24 }} key={title} source={{ uri: url }} /><P>{title}</P></View>)}
+
 
                 <Divider />
 

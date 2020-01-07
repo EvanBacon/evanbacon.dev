@@ -6,6 +6,8 @@ import Header from './header';
 import { useREM } from 'react-native-web-hooks';
 
 import useDarkMode from '../hooks/useDarkMode';
+import UniversalLink from './UniversalLink';
+import SocialIcon from './SocialIcon';
 
 const Anchor = (props) => {
     return <Text accessibilityRole="link" {...props} />
@@ -16,8 +18,8 @@ export default function Layout({ children }) {
     const isDark = useDarkMode();
 
     return (
-       
-        <View style={[StyleSheet.absoluteFill, { overflow: 'scroll', backgroundColor: isDark ? '#02010a' : 'rgb(250, 250, 250)'}]}>
+
+        <View style={[StyleSheet.absoluteFill, { overflow: 'scroll', backgroundColor: isDark ? '#02010a' : 'rgb(250, 250, 250)' }]}>
             <Header siteTitle={"Evan Bacon"} />
 
             <View
@@ -33,20 +35,68 @@ export default function Layout({ children }) {
             </View>
 
             {/* footer */}
-            <View style={{
-                backgroundColor: '#4630eb', 
-                paddingVertical: `1.0875rem`,
-                paddingHorizontal: `1.45rem`,
-            }}>
-                <View style={{ flex: 1, maxWidth: 960, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: useREM('1.2')}}>
-                        <Anchor href="https://www.expo.io">Built with Expo</Anchor>
-                    </Text>
-                </View>
-            </View>
+            <Footer />
 
         </View>
-        
+
+    )
+}
+
+
+function Footer() {
+
+    const socials = [
+        {
+            name: 'twitter',
+            url: 'https://twitter.com/baconbrix'
+        },
+        {
+            name: 'github',
+            url: 'https://github.com/evanbacon'
+        },
+        {
+            name: 'instagram',
+            url: 'https://www.instagram.com/baconbrix/'
+        },
+        {
+            name: 'medium',
+            url: 'http://medium.com/@baconbrix'
+        },
+        {
+            name: 'twitch',
+            url: 'https://www.twitch.tv/baconbrix'
+        },
+        {
+            name: 'linkedin',
+            url: 'https://www.linkedin.com/in/evanbacon'
+        },
+        // dev icon not supported in current version of FontAwesome (@expo/vector-icons)
+        // {
+        //     name: 'dev',
+        //     url: 'https://dev.to/evanbacon'
+        // },
+    ]
+    return (
+        <View style={{
+            backgroundColor: '#4630eb',
+            paddingVertical: `1.0875rem`,
+            paddingHorizontal: `1.45rem`,
+        }}>
+            <View style={{ flex: 1, maxWidth: 960, justifyContent: 'center', alignItems: 'center' }}>
+                <UniversalLink routeName="https://www.expo.io" style={{ color: 'white', fontWeight: 'bold', fontSize: useREM('1.2') }}>Built with Expo</UniversalLink>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: useREM(2.2) }}>
+                {
+                    socials.map((social) => (<UniversalLink
+                        style={{ marginRight: 8 }}
+                        target="_blank"
+                        key={social.name}
+                        routeName={social.url}>
+                        <SocialIcon name={social.name} color={'white'} size={useREM(2.2)} />
+                    </UniversalLink>))
+                }
+            </View>
+        </View>
     )
 }
 

@@ -4,25 +4,25 @@ import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import Layout from '../components/layout';
-import ListItem, { H2, H4, P } from '../components/ListItem';
+import { ListItem, H2, H4, P } from '../components/Elements';
 import SEO from '../components/seo';
 import { Talks } from '../Data';
 import useDarkMode from '../hooks/useDarkMode';
 
 function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }) {
     const isDarkMode = useDarkMode()
-    
+
     const link = React.useRef(null);
     const { isHovered } = useHover(link);
 
     return (
         <View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text 
+                <Text
                     ref={link}
-                    target="_blank" 
-                    accessibilityRole="link" 
-                    href={href} 
+                    target="_blank"
+                    accessibilityRole="link"
+                    href={href}
                     style={[{ color: 'blue', marginBottom: 10, fontSize: 18, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: 'transparent' }, isHovered && { borderBottomColor: 'blue' }]}>{title}</Text>
                 {date && <Text style={{ color: isDarkMode ? '#ffffff' : '#222426', fontSize: 18 }}>{date}</Text>}
             </View>
