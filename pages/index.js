@@ -4,8 +4,8 @@ import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import { H2, H4, P } from '../components/Elements';
-import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
 

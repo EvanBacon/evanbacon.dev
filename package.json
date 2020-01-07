@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/next-adapter": "^2.0.0-beta.10",
     "@expo/react-native-action-sheet": "^3.4.1",
+    "@react-native-community/masked-view": "^0.1.5",
     "expo": "~36.0.0",
     "expo-blur": "^8.0.0",
     "expo-next-react-navigation": "^0.0.23",
@@ -26,12 +27,16 @@
     "react-helmet": "^5.2.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-appearance": "^0.3.2",
+    "react-native-extended-stylesheet": "^0.12.0",
+    "react-native-gesture-handler": "^1.5.3",
     "react-native-reanimated": "^1.4.0",
     "react-native-safe-area-context": "^0.6.2",
     "react-native-svg": "^9.13.6",
     "react-native-typography": "^1.4.1",
     "react-native-web": "~0.11.7",
-    "react-native-web-hooks": "^2.0.1"
+    "react-native-web-hooks": "^2.0.2",
+    "react-navigation": "^4.0.10",
+    "react-navigation-stack": "^2.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

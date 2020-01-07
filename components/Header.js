@@ -1,14 +1,17 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Linking, Platform, StyleSheet, Text, View, Switch } from 'react-native';
+import { Linking, Platform, Text, View, Switch } from 'react-native';
 import { useDimensions, useREM } from 'react-native-web-hooks';
+import StyleSheet from 'react-native-extended-stylesheet';
 
 import AspectImage from '../components/AspectImage';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
 import { Appearance } from 'react-native-appearance';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import { useSafeArea } from 'react-native-safe-area-context';
+import { useRouting } from 'expo-next-react-navigation';
 
 const TABS = [
   // {
@@ -42,7 +45,7 @@ const SIZE = 48;
 const Header = ({ siteTitle }) => {
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();
-
+  const { navigate } = useRouting()
   function onPressMenu() {
 
     // Same interface as https://facebook.github.io/react-native/docs/actionsheetios.html
@@ -60,7 +63,17 @@ const Header = ({ siteTitle }) => {
         setActive(false)
 
         if (buttonIndex !== cancelButtonIndex) {
-          Linking.openURL(TABS[buttonIndex].url)
+          const { url } = TABS[buttonIndex]
+          // if (Platform.OS !== 'web' && url === '') {
+          //   navigate({ routeName: '/' })
+          // } else {
+          if (url.startsWith('http://') || url.startsWith('https://')) {
+            Linking.openURL(url)
+          } else {
+            navigate({ routeName: url || '/' })
+          }
+          // }
+          // Linking.openURL(TABS[buttonIndex].url)
 
         }
         // Do something here depending on the button index selected
@@ -73,11 +86,11 @@ const Header = ({ siteTitle }) => {
   const isSmall = width < 720;
   const isXSmall = width < 360;
   const accessibilityRole = 'banner';
-
+  const { top } = useSafeArea()
   return (
     <View
       accessibilityRole={accessibilityRole}
-      style={styles.container}
+      style={[styles.container, { paddingTop: top }]}
     >
       <View
         style={[styles.innerContainer, isSmall && { paddingHorizontal: useREM(1.0875) }]}
@@ -85,7 +98,7 @@ const Header = ({ siteTitle }) => {
         <View style={styles.leftHeader}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             {!isXSmall && <AspectImage source={{ uri: 'https://avatars.io/twitter/baconbrix' }} loading="lazy" style={styles.image} />}
-            <Text accessibilityRole="header" style={{ position: 'sticky', fontWeight: 'bold', fontSize: useREM(2.25) }}>
+            <Text accessibilityRole="header" style={{ fontWeight: 'bold', fontSize: useREM(2.25) }}>
               <UniversalLink
                 routeName=""
               ><Text style={styles.link}>
@@ -157,8 +170,13 @@ const styles = StyleSheet.create({
   leftHeader: { flexDirection: 'row', zIndex: 1, backgroundColor: `#4630eb`, alignItems: 'center', justifyContent: 'space-between', },
   rightHeader: {
     backgroundColor: `#4630eb`,
-    transitionProperty: 'all',
-    transitionDuration: '0.5s',
+    ...Platform.select({
+      web: {
+        transitionProperty: 'all',
+        transitionDuration: '0.5s',
+      }, default: {}
+    }),
+
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',

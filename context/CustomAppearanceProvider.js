@@ -17,7 +17,9 @@ async function rehydrateModules() {
         return defaultState;
     }
     try {
-        return JSON.parse(await AsyncStorage.getItem(activeTestsStorageKey));
+        const item = await AsyncStorage.getItem(activeTestsStorageKey);
+        const data = JSON.parse(item);
+        return data;
     } catch (ignored) {
         return defaultState
     }
@@ -31,8 +33,10 @@ export default function ModulesProvider({ children }) {
 
     React.useEffect(() => {
         const parseModulesAsync = async () => {
-            const { isDark } = await rehydrateModules();
-            setIsDark(isDark);
+            try {
+                const { isDark } = await rehydrateModules();
+                setIsDark(isDark);
+            } catch (ignored) { }
             setLoaded(true);
         };
 

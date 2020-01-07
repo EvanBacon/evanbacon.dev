@@ -1,7 +1,8 @@
 import { Link } from 'expo-next-react-navigation';
 import React from 'react';
-import { Linking, StyleSheet, Text, Platform } from 'react-native';
+import { Linking, Text, Platform } from 'react-native';
 import { useHover, useDimensions, useREM, useActive, useFocus } from 'react-native-web-hooks';
+import StyleSheet from 'react-native-extended-stylesheet';
 
 export default function UniversalLink({ routeName, style, ...props }) {
 

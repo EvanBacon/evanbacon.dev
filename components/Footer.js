@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
+import StyleSheet from 'react-native-extended-stylesheet';
 
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
+import { useSafeArea } from 'react-native-safe-area-context';
 
 
 const socials = [
@@ -38,21 +40,24 @@ const socials = [
     // },
 ]
 export default function Footer() {
+    const { bottom, left, right } = useSafeArea();
     return (
         <View style={styles.container}>
-            <View style={styles.linkContainer}>
-                <UniversalLink routeName="https://www.expo.io" style={styles.link}>Built with Expo</UniversalLink>
-            </View>
-            <View style={styles.socialWrapper}>
-                {
-                    socials.map((social) => (<UniversalLink
-                        style={{ marginRight: 8 }}
-                        target="_blank"
-                        key={social.name}
-                        routeName={social.url}>
-                        <SocialIcon name={social.name} color={'white'} size={useREM(2.2)} />
-                    </UniversalLink>))
-                }
+            <View style={{ flex: 1, paddingBottom: bottom, paddingLeft: left, paddingRight: right }}>
+                <View style={styles.linkContainer}>
+                    <UniversalLink routeName="https://www.expo.io" style={styles.link}>Built with Expo</UniversalLink>
+                </View>
+                <View style={styles.socialWrapper}>
+                    {
+                        socials.map((social) => (<UniversalLink
+                            style={{ marginRight: 8 }}
+                            target="_blank"
+                            key={social.name}
+                            routeName={social.url}>
+                            <SocialIcon name={social.name} color={'white'} size={useREM(2.2)} />
+                        </UniversalLink>))
+                    }
+                </View>
             </View>
         </View>
     )

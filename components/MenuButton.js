@@ -1,16 +1,20 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, Platform } from 'react-native';
 import * as SVG from 'react-native-svg';
+import StyleSheet from 'react-native-extended-stylesheet';
 
 const SIZE = 48;
 
 export default function MenuButton({ onPress, isActive }) {
 
-    const transitionStyle = {
-        transitionProperty: 'all',
-        transitionDuration: '0.5s',
-        transitionTimingFunction: 'cubic-bezier(.645, .045, .355, 1)',
-    }
+    const transitionStyle = Platform.select({
+        web: {
+            transitionProperty: 'all',
+            transitionDuration: '0.5s',
+            transitionTimingFunction: 'cubic-bezier(.645, .045, .355, 1)',
+
+        }, default: {}
+    })
     const stylePath = {
         fill: 'none',
         stroke: '#ffffff',
