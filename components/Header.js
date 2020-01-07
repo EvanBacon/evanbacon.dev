@@ -19,18 +19,18 @@ const TABS = [
     title: 'Home',
     url: ''
   },
-  // {
-  //   title: 'Projects',
-  //   url: 'projects'
-  // },
+  {
+    title: 'Projects',
+    url: 'projects'
+  },
   // {
   //   title: 'Watch',
   //   url: 'watch'
   // },
-  {
-    title: 'About',
-    url: 'about'
-  },
+  // {
+  //   title: 'About',
+  //   url: 'about'
+  // },
   {
     title: 'Source',
     url: 'https://github.com/EvanBacon/Portfolio'

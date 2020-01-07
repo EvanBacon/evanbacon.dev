@@ -1,35 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useREM } from 'react-native-web-hooks';
+import { StyleSheet, View } from 'react-native';
+import { useLayout, useREM } from 'react-native-web-hooks';
 
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Header from './header';
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
 
-const Anchor = (props) => {
-    return <Text accessibilityRole="link" {...props} />
-}
+const MAX_WIDTH = 720;
 
 export default function Layout({ children }) {
 
     const { isDark } = React.useContext(CustomAppearanceContext);
 
-    return (
+    const { onLayout, width } = useLayout();
 
-        <View style={[StyleSheet.absoluteFill, { overflow: 'scroll', backgroundColor: isDark ? '#02010a' : 'rgb(250, 250, 250)' }]}>
+    const mainStyle = width > MAX_WIDTH + 40 ? styles.mainLarge : styles.mainSmall
+
+    return (
+        <View onLayout={onLayout} style={[StyleSheet.absoluteFill, { overflow: 'scroll', backgroundColor: isDark ? '#02010a' : 'rgb(250, 250, 250)' }]}>
             <Header siteTitle={"Evan Bacon"} />
 
-            <View
-                style={{
-                    marginHorizontal: `auto`,
-                    maxWidth: 960,
-                    paddingBottom: `1.0875rem`,
-                    paddingHorizontal: `1.45rem`,
-                    paddingTop: 0,
-                }}
-            >
+            <View style={mainStyle}>
                 <View accessibilityRole="summary">{children}</View>
             </View>
 
@@ -40,6 +33,22 @@ export default function Layout({ children }) {
 
     )
 }
+
+
+
+const styles = StyleSheet.create({
+    mainLarge: {
+        marginHorizontal: `auto`,
+        width: MAX_WIDTH,
+        paddingBottom: useREM(1.0875),
+        paddingTop: 0,
+    },
+    mainSmall: {
+        paddingHorizontal: useREM(1.45),
+        paddingBottom: useREM(1.0875),
+        paddingTop: 0,
+    }
+})
 
 
 function Footer() {

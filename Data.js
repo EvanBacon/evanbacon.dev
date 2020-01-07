@@ -27,8 +27,48 @@ export const Projects = [
     {
         url: "https://crossyroad.netlify.com/",
         source: 'https://github.com/evanbacon/expo-crossy-road',
+        preview: require('./assets/projects/crossy-road/preview.jpg'),
+        icon: require('./assets/projects/crossy-road/app-icon.png'),
         title: 'Crossy Road',
-        year: 2018
+        description: `The endless arcade hopper you'll never want to put down`,
+        year: 2017,
+        color: '#6dceea',
+    },
+    {
+        url: "https://supermario.netlify.com/",
+        source: 'https://github.com/evanbacon/expo-super-mario',
+        preview: require('./assets/projects/super-mario/preview.jpeg'),
+        icon: require('./assets/projects/super-mario/app-icon.png'),
+        title: 'Super Mario',
+        year: 2018,
+        color: '#b80300',
+    },
+    {
+        url: "https://doodlejump.netlify.com/",
+        source: 'https://github.com/evanbacon/expo-doodle-jump',
+        preview: require('./assets/projects/doodle-jump/preview.jpeg'),
+        icon: require('./assets/projects/doodle-jump/app-icon.png'),
+        title: 'Doodle Jump',
+        year: 2018,
+        color: '#cbc816'
+    },
+    {
+        url: "https://flappybacon.netlify.com/",
+        source: 'https://github.com/evanbacon/expo-flappy-bird',
+        preview: require('./assets/projects/flappy-bird/preview.jpeg'),
+        icon: require('./assets/projects/flappy-bird/app-icon.png'),
+        title: 'Flappy Bird',
+        year: 2018,
+        color: '#7adf8f',
+    },
+    {
+        url: "https://snake.netlify.com/",
+        source: 'https://github.com/evanbacon/expo-snake',
+        preview: require('./assets/projects/snake/preview.jpeg'),
+        icon: require('./assets/projects/snake/app-icon.png'),
+        title: 'Snake',
+        year: 2019,
+        color: '#f5f5f5'
     },
 ]
 

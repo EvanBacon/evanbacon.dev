@@ -31,7 +31,7 @@
     "react-native-svg": "^9.13.6",
     "react-native-typography": "^1.4.1",
     "react-native-web": "~0.11.7",
-    "react-native-web-hooks": "^1.0.3"
+    "react-native-web-hooks": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

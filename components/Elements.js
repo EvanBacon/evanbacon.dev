@@ -1,12 +1,13 @@
 import React from 'react';
 import { createElement, StyleSheet, Text } from 'react-native';
-import { material } from 'react-native-typography';
+import { material, materialColors } from 'react-native-typography';
 
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import { useREM } from 'react-native-web-hooks';
 
 const getTextStyle = (name) => {
     const { isDark } = React.useContext(CustomAppearanceContext);
-    return material[`${name}${isDark ? 'White' : ''}`]
+    return { ...material[`${name}${isDark ? 'White' : ''}`], color: materialColors[`${isDark ? 'white' : 'black'}Primary`] }
 }
 
 const Header = (level) => React.forwardRef((props, ref) => <Text aria-level={`${level}`} accessibilityRole="header" {...props} ref={ref} />)
@@ -37,13 +38,15 @@ export const ListItem = React.forwardRef((props, ref) => createElement('li', { .
 const styles = StyleSheet.create({
     header: {
         fontWeight: 'bold',
+        fontSize: useREM(3),
+
         marginBottom: 24,
     },
     h2: {
 
     },
     h4: {
-        marginVertical: 10
+        marginVertical: 10,
     },
     li: {
         fontSize: 16
