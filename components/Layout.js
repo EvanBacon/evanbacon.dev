@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Text, StyleSheet, View } from 'react-native';
-
-import Header from './header';
+import { StyleSheet, Text, View } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-import useDarkMode from '../hooks/useDarkMode';
-import UniversalLink from './UniversalLink';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import Header from './header';
 import SocialIcon from './SocialIcon';
+import UniversalLink from './UniversalLink';
 
 const Anchor = (props) => {
     return <Text accessibilityRole="link" {...props} />
@@ -15,7 +14,7 @@ const Anchor = (props) => {
 
 export default function Layout({ children }) {
 
-    const isDark = useDarkMode();
+    const { isDark } = React.useContext(CustomAppearanceContext);
 
     return (
 

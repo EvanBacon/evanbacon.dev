@@ -2,14 +2,17 @@ import React from 'react';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import { AppearanceProvider } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import CustomAppearanceProvider from '../context/CustomAppearanceProvider';
 
 export default ({ Component, pageProps }) => {
-    return (  
+    return (
         <SafeAreaProvider>
             <AppearanceProvider>
-                <ActionSheetProvider>
-                    <Component {...pageProps} />
-                </ActionSheetProvider>
+                <CustomAppearanceProvider>
+                    <ActionSheetProvider>
+                        <Component {...pageProps} />
+                    </ActionSheetProvider>
+                </CustomAppearanceProvider>
             </AppearanceProvider>
         </SafeAreaProvider>
     )

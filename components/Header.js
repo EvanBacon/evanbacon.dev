@@ -1,12 +1,14 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Linking, Platform, StyleSheet, Text, View } from 'react-native';
+import { Linking, Platform, StyleSheet, Text, View, Switch } from 'react-native';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
+import { Appearance } from 'react-native-appearance';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
 
 const TABS = [
   // {
@@ -106,11 +108,20 @@ const Header = ({ siteTitle }) => {
               >{info.title}</UniversalLink>
             </Text>
           ))}
+
+          <AppearanceSwitch />
         </View>
       </View>
     </View>
   )
 };
+
+function AppearanceSwitch() {
+  const { isDark, setIsDark } = React.useContext(CustomAppearanceContext);
+
+  return <Switch style={{ marginLeft: 12 }} value={isDark} onValueChange={(value) => setIsDark(value)} />
+}
+
 
 const styles = StyleSheet.create({
   image: {

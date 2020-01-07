@@ -2,10 +2,10 @@ import React from 'react';
 import { createElement, StyleSheet, Text } from 'react-native';
 import { material } from 'react-native-typography';
 
-import useDarkMode from '../hooks/useDarkMode';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
 
 const getTextStyle = (name) => {
-    const isDark = useDarkMode()
+    const { isDark } = React.useContext(CustomAppearanceContext);
     return material[`${name}${isDark ? 'White' : ''}`]
 }
 
