@@ -97,15 +97,12 @@ const Header = ({ siteTitle }) => {
       >
         <View style={styles.leftHeader}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {!isXSmall && <AspectImage source={{ uri: 'https://avatars.io/twitter/baconbrix' }} loading="lazy" style={styles.image} />}
-            <Text accessibilityRole="header" style={{ fontWeight: 'bold', fontSize: useREM(2.25) }}>
-              <UniversalLink
-                routeName=""
-              ><Text style={styles.link}>
-                  {siteTitle}
-                </Text>
-              </UniversalLink>
-            </Text>
+            {!isXSmall && (<AspectImage source={{ uri: 'https://avatars.io/twitter/baconbrix' }} loading="lazy" style={styles.image} />)}
+            <UniversalLink
+              routeName={Platform.select({ web: "", default: "/" })}
+              style={[styles.link, { fontWeight: 'bold', fontSize: useREM(2.25) }]}
+            >{siteTitle}
+            </UniversalLink>
           </View>
         </View>
 
@@ -114,12 +111,16 @@ const Header = ({ siteTitle }) => {
         <View style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex', }]}>
 
           {TABS.map((info) => (
-            <Text key={info.title} style={{ fontWeight: 'bold', fontSize: useREM(1), marginTop: isSmall ? 12 : 0, marginLeft: isXSmall ? 0 : 12 }}>
-              <UniversalLink
-                routeName={info.url}
-                style={styles.link}
-              >{info.title}</UniversalLink>
-            </Text>
+            <UniversalLink
+              key={info.title}
+              style={[styles.link, {
+                fontWeight: 'bold',
+                fontSize: useREM(1),
+                marginTop: isSmall ? 12 : 0,
+                marginLeft: isXSmall ? 0 : 12
+              }]}
+              routeName={info.url}
+            >{info.title}</UniversalLink>
           ))}
 
           <AppearanceSwitch />

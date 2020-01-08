@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View } from 'react-native';
+import { StyleSheet, Text, Image, View, ImageBackground } from 'react-native';
 import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
@@ -10,6 +10,8 @@ import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks, Projects } from '../Data';
 import UniversalLink from '../components/UniversalLink';
 import SocialIcon from '../components/SocialIcon';
+
+import { LinearGradient } from 'expo-linear-gradient';
 
 function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }) {
     const { isDark } = React.useContext(CustomAppearanceContext);
@@ -66,17 +68,31 @@ function ProjectCard({ title, icon, color, preview, url, source, thumbnail, desc
         }
     ]
 
+    const themeColor = color || (isDark ? 'black' : 'white');
     const ICON_SIZE = 96;
     return (
-        <View style={{ maxWidth: 720, flex: 1, marginBottom: 20, backgroundColor: color || (isDark ? 'black' : 'white') }}>
-            <View style={{ flex: 1, minHeight: 256, justifyContent: 'center', alignItems: 'center' }}>
-                <Image source={preview} style={[StyleSheet.absoluteFill, { opacity: 0.6 }]} resizeMode="cover" />
+        <View style={{ maxWidth: 720, flex: 1, marginBottom: 20, backgroundColor: themeColor }}>
+
+            <ImageBackground
+                source={preview}
+                style={[
+
+
+                    {
+                        flex: 1,
+                        paddingHorizontal: 8,
+                        minHeight: 256, justifyContent: 'center', alignItems: 'center'
+                    }
+                ]}
+                resizeMode="cover"
+            >
+                <LinearGradient style={StyleSheet.absoluteFill} colors={['rgba(0,0,0,0.5)', themeColor]} />
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={icon} style={{ width: ICON_SIZE, height: ICON_SIZE, borderRadius: 8 }} resizeMode="cover" />
                     {title && <H2 style={{ textAlign: 'center', marginBottom: 0, fontSize: useREM(1.51572) }}>{title}</H2>}
                     {description && <P>{description}</P>}
                 </View>
-            </View>
+            </ImageBackground>
             <View style={{ flex: 1, paddingHorizontal: 40, }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: useREM(2.2) }}>
                     {
@@ -100,9 +116,7 @@ const IndexPage = () => {
         <Layout>
             <SEO title="Projects" />
             <H2>Projects</H2>
-            <View style={{ flex: 1 }}>
-                {Projects.map(project => <ProjectCard key={project.title} {...project} />)}
-            </View>
+            {Projects.map(project => <ProjectCard key={project.title} {...project} />)}
         </Layout>
     )
 }

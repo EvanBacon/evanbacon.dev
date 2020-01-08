@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Platform } from 'react-native';
+import { Text, Platform, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import * as SVG from 'react-native-svg';
 import StyleSheet from 'react-native-extended-stylesheet';
 
@@ -34,16 +34,16 @@ export default function MenuButton({ onPress, isActive }) {
     }, isActive && { strokeDasharray: [0, 70], strokeDashoffset: -50 }]
 
     return (
-        <Text style={[{ backgroundColor: 'transparent', width: 50, height: 50, transform: [{ scale: 1.2 }] }, transitionStyle]} onPress={() => {
+        <TouchableOpacity style={[{ width: 50, height: 50, transform: [{ scale: 1.2 }] }, transitionStyle]} onPress={() => {
             onPress()
         }}>
-            <SVG.Svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <SVG.Svg style={{ flex: 1 }} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <SVG.Circle style={{ fill: 'transparent' }} cx={50} cy={50} r={32} />
                 <SVG.Path style={styleA} d="M0 40h62c13 0 6 28-4 18L35 35" />
                 <SVG.Path style={styleB} d="M0 50h70" />
                 <SVG.Path style={styleA} d="M0 60h62c13 0 6-28-4-18L35 65" />
             </SVG.Svg>
-        </Text>
+        </TouchableOpacity>
 
     )
 }

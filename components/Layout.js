@@ -18,8 +18,9 @@ export default function Layout({ children }) {
 
     const mainStyle = width > MAX_WIDTH + 40 ? styles.mainLarge : styles.mainSmall
 
+    const backgroundColor = isDark ? '#02010a' : 'rgb(250, 250, 250)';
     const style = Platform.select({
-        web: [StyleSheet.absoluteFill, { overflow: 'scroll', backgroundColor: isDark ? '#02010a' : 'rgb(250, 250, 250)' }],
+        web: [StyleSheet.absoluteFill, { overflow: 'scroll', backgroundColor }],
         native: { flex: 1, backgroundColor: 'green' }
     })
 
@@ -38,7 +39,7 @@ export default function Layout({ children }) {
 
     // )
     return (
-        <ScrollView onLayout={onLayout} style={style}>
+        <ScrollView onLayout={onLayout} contentContainerStyle={{ backgroundColor }} style={style}>
             <Header siteTitle={"Evan Bacon"} />
             <View style={mainStyle}>
                 <View accessibilityRole="summary">{children}</View>

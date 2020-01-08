@@ -13,7 +13,7 @@ export default createAppContainer(createSwitchNavigator({
     path: ''
   },
   projects: () => getApp({ Component: () => <Projects />, pageProps: {} })
-}, { initialRouteName: 'projects' }));
+}));
 
 // export default function App() {
 //   return (

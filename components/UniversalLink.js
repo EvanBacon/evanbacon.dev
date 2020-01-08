@@ -12,7 +12,12 @@ export default function UniversalLink({ routeName, style, ...props }) {
 
   const responsiveStyle = StyleSheet.flatten([
     style,
-    { color: 'white', borderBottomWidth: 1, borderBottomColor: 'transparent', outlineStyle: 'none' },
+    {
+      color: 'white',
+      borderBottomWidth: 1,
+      borderBottomColor: 'transparent',
+      ...Platform.select({ web: { outlineStyle: 'none' }, default: {} })
+    },
     isHovered && { opacity: 0.6 },
     isFocused && { borderBottomColor: 'white' },
   ])
@@ -26,5 +31,8 @@ export default function UniversalLink({ routeName, style, ...props }) {
     return (<Text {...props} ref={ref} style={responsiveStyle} href={routeName} accessibilityRole="link" onPress={onPress} />)
   }
 
-  return <Link ref={ref} routeName={routeName} {...props} style={responsiveStyle} />
+  let outputRouteName = routeName;
+  if (Platform.OS !== 'web' && routeName === '') outputRouteName = '/'
+
+  return <Link ref={ref} routeName={outputRouteName} {...props} style={responsiveStyle} />
 }
