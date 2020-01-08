@@ -41,7 +41,7 @@ export default function Layout({ children }) {
     return (
         <ScrollView onLayout={onLayout} contentContainerStyle={{ backgroundColor }} style={style}>
             <Header siteTitle={"Evan Bacon"} />
-            <View style={mainStyle}>
+            <View style={[mainStyle, { opacity: width === 0 ? 0 : 1 }]}>
                 <View accessibilityRole="summary">{children}</View>
             </View>
 

@@ -54,7 +54,7 @@ export const Projects = [
     },
     {
         url: "https://flappybacon.netlify.com/",
-        source: 'https://github.com/evanbacon/expo-flappy-bird',
+        source: 'https://github.com/evanbacon/react-native-flappy-bird',
         preview: require('./assets/projects/flappy-bird/preview.jpeg'),
         icon: require('./assets/projects/flappy-bird/app-icon.png'),
         title: 'Flappy Bird',
@@ -62,8 +62,8 @@ export const Projects = [
         color: '#7adf8f',
     },
     {
-        url: "https://snake.netlify.com/",
-        source: 'https://github.com/evanbacon/expo-snake',
+        url: "https://snack.expo.io/@git/github.com/EvanBacon/pixi-snake",
+        source: 'https://github.com/evanbacon/pixi-snake',
         preview: require('./assets/projects/snake/preview.jpeg'),
         icon: require('./assets/projects/snake/app-icon.png'),
         title: 'Snake',

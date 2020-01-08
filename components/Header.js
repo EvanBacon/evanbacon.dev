@@ -30,12 +30,14 @@ const TABS = [
   //   title: 'Watch',
   //   url: 'watch'
   // },
-  // {
-  //   title: 'About',
-  //   url: 'about'
-  // },
+  {
+    title: 'About',
+    target: '_blank',
+    url: 'https://en.wikipedia.org/wiki/Evan_Bacon'
+  },
   {
     title: 'Source',
+    target: '_blank',
     url: 'https://github.com/EvanBacon/Portfolio'
   },
 ]
@@ -113,6 +115,7 @@ const Header = ({ siteTitle }) => {
           {TABS.map((info) => (
             <UniversalLink
               key={info.title}
+              target={info.target}
               style={[styles.link, {
                 fontWeight: 'bold',
                 fontSize: useREM(1),

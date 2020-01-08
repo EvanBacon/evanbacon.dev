@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         paddingVertical: `1.0875rem`,
         paddingHorizontal: `1.45rem`,
     },
-    linkContainer: { flex: 1, maxWidth: 720, justifyContent: 'center', alignItems: 'center' },
+    linkContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
     link: { color: 'white', fontWeight: 'bold', fontSize: useREM('1.2') },
     socialWrapper: { flexDirection: 'row', justifyContent: 'space-around', marginTop: useREM(2.2) },
 })
