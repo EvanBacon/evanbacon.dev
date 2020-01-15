@@ -1,8 +1,8 @@
 import { Link } from 'expo-next-react-navigation';
 import React from 'react';
-import { Linking, Text, Platform } from 'react-native';
-import { useHover, useDimensions, useREM, useActive, useFocus } from 'react-native-web-hooks';
+import { Linking, Platform, Text } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
+import { useFocus, useHover } from 'react-native-web-hooks';
 
 export default function UniversalLink({ routeName, style, ...props }) {
 
@@ -24,15 +24,16 @@ export default function UniversalLink({ routeName, style, ...props }) {
 
   // Handle External links
   if (routeName.startsWith('http://') || routeName.startsWith('https://')) {
-    function onPress() {
-      if (Platform.OS !== 'web')
-        Linking.openURL(routeName);
-    }
+    const onPress = React.useCallback(() => {
+      if (Platform.OS !== 'web') Linking.openURL(routeName);
+    }, [routeName]);
+    // @ts-ignore
     return (<Text {...props} ref={ref} style={responsiveStyle} href={routeName} accessibilityRole="link" onPress={onPress} />)
   }
 
   let outputRouteName = routeName;
   if (Platform.OS !== 'web' && routeName === '') outputRouteName = '/'
 
+  // @ts-ignore
   return <Link ref={ref} routeName={outputRouteName} {...props} style={responsiveStyle} />
 }

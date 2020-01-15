@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: `1.45rem`,
     },
     linkContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-    link: { color: 'white', fontWeight: 'bold', fontSize: useREM('1.2') },
+    link: { color: 'white', fontWeight: 'bold', fontSize: useREM(1.2) },
     socialWrapper: { flexDirection: 'row', justifyContent: 'space-around', marginTop: useREM(2.2) },
 })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text as RNText, View } from 'react-native';
 import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
@@ -9,7 +9,8 @@ import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
 
-function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }) {
+const Text = RNText as any
+function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }: { href: string; thumbnail?: string; date?: string; title: string; resources?: any[]}) {
     const { isDark } = React.useContext(CustomAppearanceContext);
 
     const link = React.useRef(null);
@@ -38,7 +39,7 @@ function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] 
 
             {!!resources.length && <View style={{ marginLeft: 24 }}>
                 <H4 style={{ opacity: 0.6 }}>RESOURCES</H4>
-                {resources.map((resource, index) => <TalkCardPresentationRow key={resource.title} title={resource.title} href={resource.href} />)}
+                {resources.map((resource: any) => <TalkCardPresentationRow key={resource.title} title={resource.title} href={resource.href} />)}
                 <Divider />
             </View>}
         </View>
@@ -62,25 +63,24 @@ function TalkCard({ title, thumbnail, description, presentedData = [], resources
             <Divider />
             {!!presentedData.length && <H4 style={{ opacity: 0.6, marginBottom: 24 }}>PRESENTED AT</H4>}
 
-            {presentedData.map(presentation => <TalkCardPresentationRow key={presentation.title} title={presentation.title} href={presentation.href} date={presentation.date} resources={presentation.resources} />)}
+            {presentedData.map((presentation: any) => (
+                <TalkCardPresentationRow
+                    key={presentation.title}
+                    title={presentation.title}
+                    href={presentation.href}
+                    date={presentation.date}
+                    resources={presentation.resources}
+                />))}
         </View>
     )
 }
 
-
-const IndexPage = () => {
+export default function () {
     return (
         <Layout>
             <SEO title="Talks" />
             <H2>Talks</H2>
-            {Talks.map(talk => <TalkCard key={talk.title} {...talk} />)}
+            {Talks.map((talk: any) => <TalkCard key={talk.title} {...talk} />)}
         </Layout>
-    )
-}
-
-const styles = StyleSheet.create({
-
-
-})
-
-export default IndexPage
+    );
+} 

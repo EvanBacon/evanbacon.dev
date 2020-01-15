@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { AsyncStorage, View } from 'react-native';
-// import { useColorScheme } from 'react-native-appearance';
+
 import CustomAppearanceContext from './CustomAppearanceContext';
+
+// import { useColorScheme } from 'react-native-appearance';
 // import AsyncStorage from '@react-native-community/async-storage';
 
 const activeTestsStorageKey = '@Portfolio:CustomAppearanceContext';
@@ -42,8 +44,6 @@ export default function ModulesProvider({ children }) {
 
         parseModulesAsync();
     }, []);
-
-
 
     if (!isLoaded) {
         return <View />;

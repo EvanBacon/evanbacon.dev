@@ -39,11 +39,15 @@
     "react-navigation-stack": "^2.0.12"
   },
   "devDependencies": {
-    "@expo/next-adapter": "^2.0.0-beta.10",
     "@babel/core": "^7.0.0",
     "@expo/config": "^2.5.4",
+    "@expo/next-adapter": "^2.0.0-beta.10",
     "@pwa/manifest": "^1.1.0",
-    "babel-preset-expo": "~8.0.0"
+    "@types/react": "~16.9.0",
+    "@types/react-native": "~0.60.23",
+    "babel-preset-expo": "~8.0.0",
+    "expo-module-scripts": "^1.1.1",
+    "typescript": "~3.6.3"
   },
   "private": true
 }

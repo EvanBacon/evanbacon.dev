@@ -1,10 +1,9 @@
 import React from 'react';
-import { Text, Platform, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 import * as SVG from 'react-native-svg';
-import StyleSheet from 'react-native-extended-stylesheet';
 
-const SIZE = 48;
-
+const Path = SVG.Path as any;
+const Svg = SVG.Svg as any;
 export default function MenuButton({ onPress, isActive }) {
 
     const transitionStyle = Platform.select({
@@ -33,16 +32,15 @@ export default function MenuButton({ onPress, isActive }) {
         strokeDasharray: [24, 70],
     }, isActive && { strokeDasharray: [0, 70], strokeDashoffset: -50 }]
 
+    const touchableStyle = [{ width: 50, height: 50, transform: [{ scale: 1.2 }] }, transitionStyle] as any;
     return (
-        <TouchableOpacity style={[{ width: 50, height: 50, transform: [{ scale: 1.2 }] }, transitionStyle]} onPress={() => {
-            onPress()
-        }}>
-            <SVG.Svg style={{ flex: 1 }} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <SVG.Circle style={{ fill: 'transparent' }} cx={50} cy={50} r={32} />
-                <SVG.Path style={styleA} d="M0 40h62c13 0 6 28-4 18L35 35" />
-                <SVG.Path style={styleB} d="M0 50h70" />
-                <SVG.Path style={styleA} d="M0 60h62c13 0 6-28-4-18L35 65" />
-            </SVG.Svg>
+        <TouchableOpacity style={touchableStyle} onPress={onPress}>
+            <Svg style={{ flex: 1 }} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <SVG.Circle fill="transparent" cx={50} cy={50} r={32} />
+                <Path style={styleA} d="M0 40h62c13 0 6 28-4 18L35 35" />
+                <Path style={styleB} d="M0 50h70" />
+                <Path style={styleA} d="M0 60h62c13 0 6-28-4-18L35 65" />
+            </Svg>
         </TouchableOpacity>
 
     )

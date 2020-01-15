@@ -1,17 +1,16 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useRouting } from 'expo-next-react-navigation';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Linking, Platform, Animated, Text, View, Switch } from 'react-native';
-import { useDimensions, useREM } from 'react-native-web-hooks';
+import { Linking, Platform, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
+import { useSafeArea } from 'react-native-safe-area-context';
+import { useDimensions, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
+import AppearanceSwitch from './AppearanceSwitch';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
-import { Appearance } from 'react-native-appearance';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { useSafeArea } from 'react-native-safe-area-context';
-import { useRouting } from 'expo-next-react-navigation';
 
 const TABS = [
   // {
@@ -91,7 +90,7 @@ const Header = ({ siteTitle }) => {
   const { window: { width } } = useDimensions();
   const isSmall = width < 720;
   const isXSmall = width < 360;
-  const accessibilityRole = 'banner';
+  const accessibilityRole: any = 'banner';
   const { top } = useSafeArea()
   return (
     <View
@@ -136,45 +135,6 @@ const Header = ({ siteTitle }) => {
     </View>
   )
 };
-
-function AppearanceSwitch() {
-  const { isDark, setIsDark } = React.useContext(CustomAppearanceContext);
-  const value = React.useMemo(() => new Animated.Value(isDark ? 1 : 0), []);
-
-  React.useEffect(() => {
-    Animated.timing(value).stop();
-    Animated.timing(value, {
-      duration: 150,
-      toValue: isDark ? 1 : 0
-    }).start();
-  }, [isDark]);
-
-  const tstyle = {
-    fontSize: 16,
-    textAlign: 'center',
-    marginHorizontal: 4,
-  };
-  return (
-    <View style={{ marginLeft: 12, alignItems: 'center', flexDirection: 'row' }}>
-      <Animated.Text style={[tstyle, { opacity: value.interpolate({ inputRange: [0, 1], outputRange: [1, 0] }), transform: [{translateX: value.interpolate({ inputRange: [0, 1], outputRange: [0, 20] }) }]  }]}>☀️</Animated.Text>
-      <Switch
-        tintColor="#4d4d4d"
-        onTintColor="#4d4d4d"
-        trackColor={{
-          false: '#4d4d4d',
-          true: '#4d4d4d'
-        }}
-        thumbTintColor="white"
-        thumbColor="white"
-        value={isDark}
-        onValueChange={(value) => {
-          setIsDark(value);
-        }} />
-      <Animated.Text style={[tstyle, { opacity: value.interpolate({ inputRange: [0, 1], outputRange: [0, 1] }), transform: [{translateX: value.interpolate({ inputRange: [0, 1], outputRange: [-20, 0] }) }] }]}>🌙</Animated.Text>
-
-    </View>
-  );
-}
 
 
 const styles = StyleSheet.create({

@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { FontAwesome } from '@expo/vector-icons';
+import React from 'react';
 
 export const colors = {
     link: '#517fa4',
@@ -28,17 +27,12 @@ export const colors = {
     codepen: '#000000',
 }
 
-export default class SocialIcon extends React.Component {
-
-    render() {
-        const { name, color, ...props } = this.props;
-
-        return (
-            <FontAwesome
-                {...props}
-                color={color || colors[name]}
-                name={name}
-            />
-        );
-    }
+export default function SocialIcon({ name, color, ...props }) {
+    return (
+        <FontAwesome
+            {...props}
+            color={color || colors[name]}
+            name={name}
+        />
+    );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ClassAttributes } from 'react';
 import { createElement, StyleSheet, Text } from 'react-native';
 import { material, materialColors } from 'react-native-typography';
 
@@ -10,25 +10,25 @@ const getTextStyle = (name) => {
     return { ...material[`${name}${isDark ? 'White' : ''}`], color: materialColors[`${isDark ? 'white' : 'black'}Primary`] }
 }
 
-const Header = (level) => React.forwardRef((props, ref) => <Text aria-level={`${level}`} accessibilityRole="header" {...props} ref={ref} />)
+const Header = (level) => React.forwardRef((props, ref: ClassAttributes<Text>['ref']) => <Text aria-level={`${level}`} accessibilityRole="header" {...props} ref={ref} />)
 
 const Header2 = Header(2);
 
 const Header4 = Header(4);
 
-export const H2 = ({ style, ...props }) => {
+export const H2 = ({ style, ...props }: any) => {
     return <Header2 style={[getTextStyle('display2'), styles.header, style]} {...props} />
 }
 
-export const H4 = ({ style, ...props }) => {
+export const H4 = ({ style, ...props }: any) => {
     return <Header4 style={[getTextStyle('title'), styles.h4, style]} {...props} />
 }
 
-export const P = ({ style, ...props }) => {
+export const P = ({ style, ...props }: any) => {
     return <Text style={[styles.paragraph, getTextStyle('body1'), style]} {...props} />
 }
 
-export const B = ({ style, ...props }) => <Text style={[styles.paragraph, getTextStyle('body1'), { fontWeight: 'bold' }, style]} {...props} />
+export const B = ({ style, ...props }: any) => <Text style={[styles.paragraph, getTextStyle('body1'), { fontWeight: 'bold' }, style]} {...props} />
 
 export const UnorderedList: any = React.forwardRef((props, ref) => createElement('ul', { ...props, ref }));
 
