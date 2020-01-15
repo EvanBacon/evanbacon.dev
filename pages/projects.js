@@ -101,7 +101,7 @@ function ProjectCard({ title, icon, color, preview, url, source, thumbnail, desc
                             target="_blank"
                             key={social.name}
                             routeName={social.url}>
-                            <SocialIcon name={social.name} color={isDark ? 'white' : 'black'} size={useREM(2.2)} />
+                            <SocialIcon name={social.name} color={isDark ? 'white' : 'black'} size={16 * (2.2)} />
                         </UniversalLink><P style={{ marginTop: useREM(1.55) }}>{social.name}</P></View>))
                     }
                 </View>
