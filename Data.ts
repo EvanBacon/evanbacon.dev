@@ -1,7 +1,7 @@
 export const Images = [
   { url: 'https://avatars.io/twitter/baconbrix', title: 'Twitter' },
   // { url: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
-];
+]
 
 export const Podcasts = [
   {
@@ -17,7 +17,7 @@ export const Podcasts = [
     url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
     title: 'Behind the brick with Evan Bacon (2012)',
   },
-];
+]
 
 export const Stories = [
   {
@@ -42,7 +42,7 @@ export const Stories = [
     url: 'https://madewithreactnative.com/pillar-valley/',
     title: 'Blog: How I started programming',
   },
-];
+]
 
 export const Work = [
   {
@@ -80,7 +80,7 @@ export const Work = [
     title: 'New Matter MOD-t 3D Printer Studio',
     website: 'http://www.newmatter.co/',
   },
-];
+]
 
 export const Projects = [
   {
@@ -129,7 +129,7 @@ export const Projects = [
     year: 2019,
     color: '#f5f5f5',
   },
-];
+]
 
 export const Social = [
   {
@@ -164,7 +164,7 @@ export const Social = [
     title: 'youtube',
     url: 'https://www.youtube.com/c/exposition',
   },
-];
+]
 
 export const Workshops = [
   {
@@ -191,7 +191,7 @@ export const Workshops = [
     type: 'Workshop',
     year: 2020,
   },
-];
+]
 
 export const Lego = [
   {
@@ -266,7 +266,7 @@ export const Lego = [
     preview: require('./assets/lego/minion/minion.jpg'),
     year: '2013',
   },
-];
+]
 
 export const Talks = [
   {
@@ -394,4 +394,4 @@ export const Talks = [
       },
     ],
   },
-];
+]

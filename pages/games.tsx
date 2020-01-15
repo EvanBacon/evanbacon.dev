@@ -65,7 +65,7 @@ function ProjectCard({ title, icon, color, preview, url, source, description }) 
     )
 }
 
-export default function() {
+export default function () {
     return (
         <Layout>
             <SEO title="Games" />

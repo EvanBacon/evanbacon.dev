@@ -10,7 +10,7 @@ import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
 
 const Text = RNText as any
-function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }: { href: string; thumbnail?: string; date?: string; title: string; resources?: any[]}) {
+function TalkCardPresentationRow({ href, thumbnail, date, title, resources = [] }: { href: string; thumbnail?: string; date?: string; title: string; resources?: any[] }) {
     const { isDark } = React.useContext(CustomAppearanceContext);
 
     const link = React.useRef(null);
