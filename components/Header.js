@@ -23,8 +23,12 @@ const TABS = [
     url: ''
   },
   {
-    title: 'Projects',
-    url: 'projects'
+    title: 'Games',
+    url: 'games'
+  },
+  {
+    title: 'Lego',
+    url: 'lego'
   },
   // {
   //   title: 'Watch',
