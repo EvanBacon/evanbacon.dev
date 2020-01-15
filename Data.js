@@ -20,7 +20,43 @@ export const Stories = [
     { url: "http://www.mtv.com/news/2626251/life-size-lego-iron-man/", title: 'MTV at age 14' },
     { url: "https://www.huffpost.com/entry/evan-bacon-15-year-old-bu_n_2876505", title: 'Huffington Post at age 15' },
     { url: "https://madewithreactnative.com/pillar-valley/", title: 'Blog: How I started programming' },
+]
 
+export const Work = [
+    {
+        title: 'Sirius XM 360L'
+        company: 'Frog Design',
+        website: 'https://www.siriusxm.com/',
+        stack: ['Java', 'Android SDK'],
+        description: 'I worked for ~2 years redesigning the radio for everyone. I worked on the project as a Design Technologist 2. My stack consisted of mostly of Java and the Android SDK, we also needed to use Objective-C, and Node.'
+        video: 'https://www.youtube.com/watch?v=mi389M2gixA',
+        links: [
+            'https://www.siriusxm.ca/newsroom/siriusxm-with-360l-experience-available-in-all-new-cadillac-xt6/',
+            'https://www.prnewswire.com/news-releases/general-motors-offers-siriusxm-with-360l-on-nearly-1-million-vehicles-300976098.html'
+        ],
+    },
+    // {
+    //     title: 'GM Radio',
+    // },
+    {
+        title: 'Vixxo App',
+        website: 'https://www.vixxo.com/',
+        stack: ['Xamarin'],
+    },
+    {
+        title: 'FIS Global Dashboard',
+        website: 'https://www.fisglobal.com/',
+        stack: ['Angular'],
+
+    },
+    {
+        title: 'Howard Stern Video App',
+        website: 'https://www.siriusxm.com/streaming?hpid=HP_NEW_ListenOnlineOntheApp',
+    },
+    {
+        title: 'New Matter MOD-t 3D Printer Studio',
+        website: 'http://www.newmatter.co/',
+    },
 ]
 
 export const Projects = [
