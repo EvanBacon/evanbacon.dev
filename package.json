@@ -40,13 +40,18 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@expo/config": "^2.5.4",
     "@expo/next-adapter": "^2.0.0-beta.10",
     "@pwa/manifest": "^1.1.0",
     "@types/react": "~16.9.0",
     "@types/react-native": "~0.60.23",
     "babel-preset-expo": "~8.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-universe": "^2.1.0",
     "expo-module-scripts": "^1.1.1",
+    "prettier": "^1.19.1",
     "typescript": "~3.6.3"
   },
   "private": true

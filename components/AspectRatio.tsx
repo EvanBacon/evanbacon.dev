@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export default function AspectView({ Component = View, ...props }) {
   const [layout, setLayout] = React.useState(null);

@@ -1,12 +1,14 @@
-import { Link } from 'expo-next-react-navigation';
+import { Link as EXLink } from 'expo-next-react-navigation';
 import React from 'react';
-import { Linking, Platform, Text } from 'react-native';
+import { Linking, Platform, Text as RNText } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useFocus, useHover } from 'react-native-web-hooks';
 
-export default function UniversalLink({ routeName, style, ...props }) {
+const Text = RNText as any;
+const Link = EXLink as any;
 
-  const ref = React.useRef(null)
+export default function UniversalLink({ routeName, style, ...props }) {
+  const ref = React.useRef(null);
   const { isFocused } = useFocus(ref);
   const { isHovered } = useHover(ref);
 
@@ -16,24 +18,38 @@ export default function UniversalLink({ routeName, style, ...props }) {
       color: 'white',
       borderBottomWidth: 1,
       borderBottomColor: 'transparent',
-      ...Platform.select({ web: { outlineStyle: 'none' }, default: {} })
+      ...Platform.select({ web: { outlineStyle: 'none' }, default: {} }),
     },
     isHovered && { opacity: 0.6 },
     isFocused && { borderBottomColor: 'white' },
-  ])
+  ]);
 
   // Handle External links
   if (routeName.startsWith('http://') || routeName.startsWith('https://')) {
     const onPress = React.useCallback(() => {
       if (Platform.OS !== 'web') Linking.openURL(routeName);
     }, [routeName]);
-    // @ts-ignore
-    return (<Text {...props} ref={ref} style={responsiveStyle} href={routeName} accessibilityRole="link" onPress={onPress} />)
+    return (
+      <Text
+        {...props}
+        ref={ref}
+        style={responsiveStyle}
+        href={routeName}
+        accessibilityRole="link"
+        onPress={onPress}
+      />
+    );
   }
 
   let outputRouteName = routeName;
-  if (Platform.OS !== 'web' && routeName === '') outputRouteName = '/'
+  if (Platform.OS !== 'web' && routeName === '') outputRouteName = '/';
 
-  // @ts-ignore
-  return <Link ref={ref} routeName={outputRouteName} {...props} style={responsiveStyle} />
+  return (
+    <Link
+      ref={ref}
+      routeName={outputRouteName}
+      {...props}
+      style={responsiveStyle}
+    />
+  );
 }

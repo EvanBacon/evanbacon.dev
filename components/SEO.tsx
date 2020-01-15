@@ -7,10 +7,10 @@ function SEO({ description, lang, meta, title }) {
     siteMetadata: {
       title: 'Evan Bacon',
       author: 'Evan Bacon',
-      description: 'Built with Expo web and Next.js'
-    }
-  }
-  const metaDescription = description || site.siteMetadata.description
+      description: 'Built with Expo web and Next.js',
+    },
+  };
+  const metaDescription = description || site.siteMetadata.description;
 
   return (
     <Helmet
@@ -54,20 +54,20 @@ function SEO({ description, lang, meta, title }) {
         },
       ].concat(meta)}
     />
-  )
+  );
 }
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
+};
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
-}
+};
 
-export default SEO
+export default SEO;

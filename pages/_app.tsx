@@ -10,17 +10,17 @@ import CustomAppearanceProvider from '../context/CustomAppearanceProvider';
 EStyleSheet.build({}); // always call EStyleSheet.build() even if you don't use global variables!
 
 export default ({ Component, pageProps }) => {
-    return (
-        <SafeAreaProvider>
-            <AppearanceProvider>
-                <CustomAppearanceProvider>
-                    <ActionSheetProvider>
-                        <Layout>
-                            <Component {...pageProps} />
-                        </Layout>
-                    </ActionSheetProvider>
-                </CustomAppearanceProvider>
-            </AppearanceProvider>
-        </SafeAreaProvider>
-    )
-}
+  return (
+    <SafeAreaProvider>
+      <AppearanceProvider>
+        <CustomAppearanceProvider>
+          <ActionSheetProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ActionSheetProvider>
+        </CustomAppearanceProvider>
+      </AppearanceProvider>
+    </SafeAreaProvider>
+  );
+};
