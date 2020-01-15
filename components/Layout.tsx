@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Platform, ScrollView } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useLayout } from 'react-native-web-hooks';
 
@@ -44,8 +44,6 @@ export default function Layout({ children }) {
             <View style={[mainStyle, { opacity: width === 0 ? 0 : 1 }]}>
                 <View accessibilityRole="summary">{children}</View>
             </View>
-
-            {/* footer */}
             <Footer />
         </ScrollView>
 
