@@ -96,10 +96,10 @@ function ProjectCard({ title, icon, color, preview, url, source, thumbnail, desc
             <View style={{ flex: 1, paddingHorizontal: 40, }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: useREM(2.2) }}>
                     {
-                        socials.map((social) => (<View><UniversalLink
+                        socials.map((social) => (<View key={social.name}><UniversalLink
                             style={{ marginRight: 8 }}
                             target="_blank"
-                            key={social.name}
+                            
                             routeName={social.url}>
                             <SocialIcon name={social.name} color={isDark ? 'white' : 'black'} size={16 * (2.2)} />
                         </UniversalLink><P style={{ marginTop: useREM(1.55) }}>{social.name}</P></View>))
