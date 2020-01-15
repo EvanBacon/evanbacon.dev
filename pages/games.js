@@ -76,8 +76,6 @@ function ProjectCard({ title, icon, color, preview, url, source, thumbnail, desc
             <ImageBackground
                 source={preview}
                 style={[
-
-
                     {
                         flex: 1,
                         paddingHorizontal: 8,
@@ -114,8 +112,8 @@ function ProjectCard({ title, icon, color, preview, url, source, thumbnail, desc
 const IndexPage = () => {
     return (
         <Layout>
-            <SEO title="Projects" />
-            <H2>Projects</H2>
+            <SEO title="Games" />
+            <H2>Games</H2>
             {Projects.map(project => <ProjectCard key={project.title} {...project} />)}
         </Layout>
     )
