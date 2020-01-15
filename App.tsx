@@ -1,33 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
+import Home from './pages';
 import getApp from './pages/_app';
-import Home from './pages/index';
-import Projects from './pages/projects';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack'
+import Games from './pages/games';
+import Lego from './pages/lego';
 
 export default createAppContainer(createSwitchNavigator({
   '/': {
     screen: () => getApp({ Component: () => <Home />, pageProps: {} }),
     path: ''
   },
-  projects: () => getApp({ Component: () => <Projects />, pageProps: {} })
+  games: () => getApp({ Component: () => <Games />, pageProps: {} }),
+  lego: () => getApp({ Component: () => <Lego />, pageProps: {} }),
 }));
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//     </View>
-//   );
-// }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
