@@ -4,7 +4,6 @@ import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
 import { H2, P } from '../components/Elements';
-import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
@@ -67,10 +66,10 @@ function ProjectCard({ title, icon, color, preview, url, source, description }) 
 
 export default function () {
     return (
-        <Layout>
+        <>
             <SEO title="Games" />
             <H2>Games</H2>
             {Projects.map((project: any) => <ProjectCard key={project.title} {...project} />)}
-        </Layout>
+        </>
     )
 }

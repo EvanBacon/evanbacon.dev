@@ -4,7 +4,6 @@ import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import { H2, H4, P } from '../components/Elements';
-import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
@@ -77,10 +76,10 @@ function TalkCard({ title, thumbnail, description, presentedData = [], resources
 
 export default function () {
     return (
-        <Layout>
+        <>
             <SEO title="Talks" />
             <H2>Talks</H2>
             {Talks.map((talk: any) => <TalkCard key={talk.title} {...talk} />)}
-        </Layout>
+        </>
     );
 } 
