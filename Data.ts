@@ -1,7 +1,7 @@
 export const Images = [
   { url: 'https://avatars.io/twitter/baconbrix', title: 'Twitter' },
   // { url: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
-]
+];
 
 export const Podcasts = [
   {
@@ -17,7 +17,7 @@ export const Podcasts = [
     url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
     title: 'Behind the brick with Evan Bacon (2012)',
   },
-]
+];
 
 export const Stories = [
   {
@@ -42,7 +42,7 @@ export const Stories = [
     url: 'https://madewithreactnative.com/pillar-valley/',
     title: 'Blog: How I started programming',
   },
-]
+];
 
 export const Work = [
   {
@@ -80,7 +80,7 @@ export const Work = [
     title: 'New Matter MOD-t 3D Printer Studio',
     website: 'http://www.newmatter.co/',
   },
-]
+];
 
 export const Projects = [
   {
@@ -129,7 +129,7 @@ export const Projects = [
     year: 2019,
     color: '#f5f5f5',
   },
-]
+];
 
 export const Social = [
   {
@@ -164,7 +164,7 @@ export const Social = [
     title: 'youtube',
     url: 'https://www.youtube.com/c/exposition',
   },
-]
+];
 
 export const Workshops = [
   {
@@ -191,7 +191,7 @@ export const Workshops = [
     type: 'Workshop',
     year: 2020,
   },
-]
+];
 
 export const Lego = [
   {
@@ -204,6 +204,7 @@ export const Lego = [
     gallery: 'https://photos.app.goo.gl/uw8kZjuFzABwMzYu6',
     preview: require('./assets/lego/batman/batman.jpg'),
     title: 'Batman',
+    group: 'DC Comics',
     year: '2011',
     color: '#fde219',
     bricks: '15,000 - 20,000',
@@ -212,12 +213,14 @@ export const Lego = [
   },
   {
     title: 'Thor',
+    group: 'Marvel',
     gallery: 'https://photos.app.goo.gl/rUdXMnyGkmXiZij4A',
     preview: require('./assets/lego/thor/thor.jpg'),
     year: '2016',
   },
   {
     title: 'Iron Man',
+    group: 'Marvel',
     gallery: 'https://photos.app.goo.gl/TyfRHGfWMhCz4uRq5',
     preview: require('./assets/lego/ironman/ironman.jpg'),
     year: '2012',
@@ -226,29 +229,34 @@ export const Lego = [
   {
     title: 'Superman',
     bricks: '18,000',
+    group: 'DC Comics',
     gallery: 'https://photos.app.goo.gl/GiQrFAoLhVDfmumS6',
     preview: require('./assets/lego/superman/superman.png'),
     year: '2012',
   },
   {
     title: 'Captain Kirk',
+    group: 'Star Trek',
     gallery: 'https://photos.app.goo.gl/7zfDKW9Pf9ssiLv56',
     preview: require('./assets/lego/captainkirk/captainkirk.jpg'),
     year: '2013',
   },
   {
     title: 'Darth Vader',
+    group: 'Star Wars',
     gallery: 'https://photos.app.goo.gl/ukFadzsRyMgA9p338',
     preview: require('./assets/lego/darthvader/darthvader.jpg'),
     year: '2016',
   },
   {
-    title: 'Sarge (Red Vs. Blue)',
+    title: 'Sarge',
+    group: 'Red Vs. Blue',
     gallery: 'https://photos.app.goo.gl/C3dGAKruSsh1xLEi7',
     preview: require('./assets/lego/sarge/sarge.png'),
   },
   {
     title: 'Wonder Woman',
+    group: 'DC Comics',
     gallery: 'https://photos.app.goo.gl/PjsnkENMKfZjfSTj9',
     preview: require('./assets/lego/wonderwoman/wonderwoman.jpg'),
     year: '2015',
@@ -256,17 +264,19 @@ export const Lego = [
 
   {
     title: 'Captain America',
+    group: 'Marvel',
     gallery: 'https://photos.app.goo.gl/ejuBH4RWnPTDUgdf6',
     preview: require('./assets/lego/captainamerica/captainamerica.jpg'),
     year: '2016',
   },
   {
-    title: 'Minion (Despicable Me)',
+    title: 'Minion',
+    group: 'Despicable Me',
     gallery: 'https://photos.app.goo.gl/CttdaRbsHKLcq1Tq9',
     preview: require('./assets/lego/minion/minion.jpg'),
     year: '2013',
   },
-]
+];
 
 export const Talks = [
   {
@@ -394,4 +404,4 @@ export const Talks = [
       },
     ],
   },
-]
+];
