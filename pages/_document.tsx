@@ -33,7 +33,7 @@ class CustomDocument extends Document {
   render() {
     // @ts-ignore
     const { isProduction } = this.props;
-
+    const themeColor = '#4630eb';
     return (
       <html>
         <Head>
@@ -45,6 +45,31 @@ class CustomDocument extends Document {
               <script dangerouslySetInnerHTML={this.setFirebase()} />
             </>
           )}
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest" />
+          <link
+            rel="mask-icon"
+            href="/safari-pinned-tab.svg"
+            color={themeColor}
+          />
+          <meta name="msapplication-TileColor" content={themeColor} />
+          <meta name="theme-color" content={themeColor} />
         </Head>
         <body>
           <Main />
