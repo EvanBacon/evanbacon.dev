@@ -7,6 +7,7 @@ import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
+import { useRouter } from 'next/router';
 import AspectImage from '../components/AspectImage';
 import AppearanceSwitch from './AppearanceSwitch';
 import MenuButton from './MenuButton';
@@ -92,6 +93,7 @@ const Header = ({ siteTitle }) => {
   const isXSmall = width < 360;
   const accessibilityRole: any = 'banner';
   const { top } = useSafeArea();
+
   return (
     <View
       accessibilityRole={accessibilityRole}
@@ -130,22 +132,16 @@ const Header = ({ siteTitle }) => {
           style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex' }]}
         >
           {TABS.map(info => (
-            <UniversalLink
+            <HeaderLink
+              title={info.title}
               key={info.title}
               target={info.target}
-              style={[
-                styles.link,
-                {
-                  fontWeight: 'bold',
-                  fontSize: useREM(1),
-                  marginTop: isSmall ? 12 : 0,
-                  marginLeft: isXSmall ? 0 : 12,
-                },
-              ]}
+              style={{
+                marginTop: isSmall ? 12 : 0,
+                marginLeft: isXSmall ? 0 : 12,
+              }}
               routeName={info.url}
-            >
-              {info.title}
-            </UniversalLink>
+            />
           ))}
 
           <AppearanceSwitch />
@@ -154,6 +150,27 @@ const Header = ({ siteTitle }) => {
     </View>
   );
 };
+
+function HeaderLink({ title, target, style, routeName }) {
+  const router = useRouter();
+
+  const isActive = router.pathname === `/${routeName}`;
+
+  return (
+    <UniversalLink
+      target={target}
+      style={[
+        styles.link,
+        styles.headerLink,
+        style,
+        isActive && { borderBottomColor: 'white' },
+      ]}
+      routeName={routeName}
+    >
+      {title}
+    </UniversalLink>
+  );
+}
 
 const styles = StyleSheet.create({
   image: {
@@ -181,6 +198,10 @@ const styles = StyleSheet.create({
       color: 'white',
     },
   }),
+  headerLink: {
+    fontWeight: 'bold',
+    fontSize: useREM(1),
+  },
   innerContainer: {
     maxWidth: 720,
     flexDirection: 'row',

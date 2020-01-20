@@ -13,13 +13,13 @@ export default function UniversalLink({ routeName, style, ...props }) {
   const { isHovered } = useHover(ref);
 
   const responsiveStyle = StyleSheet.flatten([
-    style,
     {
       color: 'white',
       borderBottomWidth: 1,
       borderBottomColor: 'transparent',
       ...Platform.select({ web: { outlineStyle: 'none' }, default: {} }),
     },
+    style,
     isHovered && { opacity: 0.6 },
     isFocused && { borderBottomColor: 'white' },
   ]);
