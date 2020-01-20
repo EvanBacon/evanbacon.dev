@@ -6,8 +6,9 @@ function SEO({ description, lang, meta, title }) {
   const site = {
     siteMetadata: {
       title: 'Evan Bacon',
-      author: 'Evan Bacon',
-      description: 'Built with Expo web and Next.js',
+      author: 'baconbrix',
+      description:
+        'Learn more about Evan Bacon the Open Source Programmer and Master Lego Artist',
     },
   };
   const metaDescription = description || site.siteMetadata.description;

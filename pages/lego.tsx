@@ -141,7 +141,10 @@ function ProjectCard({
 const IndexPage = () => {
   return (
     <>
-      <SEO title="Lego" />
+      <SEO
+        title="Lego"
+        description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
+      />
       <H2>Lego</H2>
       {Lego.map((project: any) => (
         <ProjectCard key={project.title} {...project} />

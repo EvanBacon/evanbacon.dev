@@ -113,7 +113,10 @@ function ProjectCard({
 export default function() {
   return (
     <>
-      <SEO title="Games" />
+      <SEO
+        title="Games"
+        description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"
+      />
       <H2>Games</H2>
       {Projects.map((project: any) => (
         <ProjectCard key={project.title} {...project} />

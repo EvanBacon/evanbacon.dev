@@ -149,13 +149,10 @@ export default function() {
   return (
     <>
       <SEO
-        title="Talks"
-        description="Live talks and presentations given by Evan Bacon about exciting new software he created"
+        title="Brand"
+        description="Branding resources for events representing Evan Bacon"
       />
-      <H2>Talks</H2>
-      {Talks.map((talk: any) => (
-        <TalkCard key={talk.title} {...talk} />
-      ))}
+      <H2>Brand</H2>
     </>
   );
 }
