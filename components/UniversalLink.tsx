@@ -12,7 +12,7 @@ import { useFocus, useHover } from 'react-native-web-hooks';
 const Text = RNText as any;
 const Link = EXLink as any;
 
-export default function UniversalLink({ routeName, style, ...props }) {
+export default function UniversalLink({ routeName, style, ...props }: any) {
   // if (Platform.OS !== 'web' && typeof props.children !== 'string') {
   //   throw new Error(
   //     `Adding anything besides text to a <Text /> renders wrong on native. Please check children of link with routeName: ${routeName} `
