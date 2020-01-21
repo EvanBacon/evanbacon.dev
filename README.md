@@ -32,7 +32,7 @@
 
 <img alt="Product: demo" src="assets/shoes.jpeg" />
 
-> Learn about all the stuff I do!
+<p align="center">Learn about all the stuff I do!</p>
 
 ### 🏠 [**Try it now!**](https://evanbacon.dev)
 
