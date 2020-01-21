@@ -32,11 +32,12 @@ export default function Layout({ children, navigation }) {
       default: {
         flex: 1,
         backgroundColor,
-        // TODO: Account for tab bar changing height
-        marginBottom: bottom + 24,
       },
     })
   );
+
+  // TODO: Account for tab bar changing height
+  const paddingBottom = Platform.select({ web: 0, default: bottom + 24 });
 
   return (
     <ScrollView
@@ -44,6 +45,7 @@ export default function Layout({ children, navigation }) {
       contentContainerStyle={{
         backgroundColor,
       }}
+      contentInset={{ top: 0, bottom: paddingBottom }}
       style={style}
     >
       <Header siteTitle="Evan Bacon" navigation={navigation} />

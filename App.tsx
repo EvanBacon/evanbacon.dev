@@ -1,6 +1,6 @@
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -8,12 +8,11 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import CustomAppearanceProvider from './context/CustomAppearanceProvider';
 import Drawer from './components/Drawer';
 import TabBar from './components/TabBar';
 import TabBarIcon from './components/TabBarIcon';
+import CustomAppearanceProvider from './context/CustomAppearanceProvider';
 import Home from './pages';
-import getApp from './pages/_app';
 import Games from './pages/games';
 import Lego from './pages/lego';
 
@@ -71,7 +70,7 @@ const DrawerApp = createDrawerNavigator(
 
 const AppContainer = createAppContainer(
   createSwitchNavigator({
-    App: { screen: DrawerApp, path: '' },
+    Drawer: { screen: DrawerApp, path: '' },
   })
 );
 
