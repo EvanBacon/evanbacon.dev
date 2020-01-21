@@ -7,6 +7,7 @@ import { H2, H4, P } from '../components/Elements';
 import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
+import Layout from '../components/Layout';
 
 const Text = RNText as any;
 function TalkCardPresentationRow({
@@ -147,7 +148,7 @@ function TalkCard({
 
 export default function() {
   return (
-    <>
+    <Layout>
       <SEO
         title="Talks"
         description="Live talks and presentations given by Evan Bacon about exciting new software he created"
@@ -156,6 +157,6 @@ export default function() {
       {Talks.map((talk: any) => (
         <TalkCard key={talk.title} {...talk} />
       ))}
-    </>
+    </Layout>
   );
 }

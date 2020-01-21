@@ -8,10 +8,10 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
 import { useRouter } from 'next/router';
-import AspectImage from '../components/AspectImage';
 import AppearanceSwitch from './AppearanceSwitch';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
+import HeaderPhoto from './HeaderPhoto';
 
 const TABS = [
   // {
@@ -107,13 +107,7 @@ const Header = ({ siteTitle }) => {
       >
         <View style={styles.leftHeader}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {!isXSmall && (
-              <AspectImage
-                source={{ uri: 'https://avatars.io/twitter/baconbrix' }}
-                loading="lazy"
-                style={styles.image}
-              />
-            )}
+            {!isXSmall && <HeaderPhoto />}
             <UniversalLink
               routeName={Platform.select({ web: '', default: '/' })}
               style={[
@@ -173,13 +167,6 @@ function HeaderLink({ title, target, style, routeName }) {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    aspectRatio: 1,
-    width: SIZE,
-    height: SIZE,
-    borderRadius: SIZE / 2,
-    marginRight: 12,
-  },
   container: {
     backgroundColor: `#4630eb`,
     marginBottom: useREM(1.45),

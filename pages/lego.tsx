@@ -9,6 +9,7 @@ import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Lego } from '../Data';
+import Layout from '../components/Layout';
 
 function ProjectCard({ title, group, color, gallery, preview }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
@@ -141,7 +142,7 @@ function ProjectCard({ title, group, color, gallery, preview }) {
 
 const IndexPage = () => {
   return (
-    <>
+    <Layout>
       <SEO
         title="Lego"
         description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
@@ -150,7 +151,7 @@ const IndexPage = () => {
       {Lego.map((project: any) => (
         <ProjectCard key={project.title} {...project} />
       ))}
-    </>
+    </Layout>
   );
 };
 

@@ -6,7 +6,7 @@ import AspectImage from '../components/AspectImage';
 import { H2, H4, P } from '../components/Elements';
 import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Talks } from '../Data';
+import Layout from '../components/Layout';
 
 const Text = RNText as any;
 function TalkCardPresentationRow({
@@ -147,12 +147,12 @@ function TalkCard({
 
 export default function() {
   return (
-    <>
+    <Layout>
       <SEO
         title="Brand"
         description="Branding resources for events representing Evan Bacon"
       />
       <H2>Brand</H2>
-    </>
+    </Layout>
   );
 }

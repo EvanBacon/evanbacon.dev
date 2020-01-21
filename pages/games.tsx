@@ -9,6 +9,7 @@ import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Projects } from '../Data';
+import Layout from '../components/Layout';
 
 function ProjectCard({
   title,
@@ -112,7 +113,7 @@ function ProjectCard({
 
 export default function() {
   return (
-    <>
+    <Layout>
       <SEO
         title="Games"
         description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"
@@ -121,6 +122,6 @@ export default function() {
       {Projects.map((project: any) => (
         <ProjectCard key={project.title} {...project} />
       ))}
-    </>
+    </Layout>
   );
 }
