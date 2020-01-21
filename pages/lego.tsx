@@ -1,28 +1,16 @@
+import { BlurView } from 'expo-blur';
 import React from 'react';
-import { ImageBackground, View } from 'react-native';
+import { ImageBackground, View, Platform } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-import { BlurView } from 'expo-blur';
 import { H2, P } from '../components/Elements';
 import SEO from '../components/SEO';
 import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Lego } from '../Data';
-function ProjectCard({
-  title,
-  group,
-  icon,
-  color,
-  gallery,
-  preview,
-  url,
-  source,
-  thumbnail,
-  description,
-  presentedData = [],
-  resourcesData = [],
-}) {
+
+function ProjectCard({ title, group, color, gallery, preview }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const socials = [
@@ -60,13 +48,18 @@ function ProjectCard({
             minHeight: 360,
             justifyContent: 'center',
             alignItems: 'center',
+            overflow: 'hidden',
           },
         ]}
         resizeMode="cover"
       >
         <BlurView
           tint="dark"
-          accessibilityRole="footer"
+          intensity={100}
+          accessibilityRole={Platform.select({
+            web: 'footer',
+            default: undefined,
+          })}
           style={{
             position: 'absolute',
             bottom: 0,
@@ -98,6 +91,7 @@ function ProjectCard({
               </P>
             )}
           </View>
+
           {socials.map(social => (
             <UniversalLink
               style={{ marginRight: 8 }}
