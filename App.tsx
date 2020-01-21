@@ -6,6 +6,7 @@ import Home from './pages';
 import getApp from './pages/_app';
 import Games from './pages/games';
 import Lego from './pages/lego';
+import TabBar from './components/TabBar';
 
 const App = createBottomTabNavigator(
   {
@@ -17,6 +18,7 @@ const App = createBottomTabNavigator(
     lego: () => getApp({ Component: () => <Lego />, pageProps: {} }),
   },
   {
+    tabBarComponent: TabBar,
     initialRouteName: 'lego',
   }
 );

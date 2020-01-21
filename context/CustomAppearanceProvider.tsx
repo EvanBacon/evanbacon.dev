@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { AsyncStorage, View } from 'react-native';
+import { AsyncStorage, View, Platform } from 'react-native';
 
+import { useColorScheme } from 'react-native-appearance';
 import CustomAppearanceContext from './CustomAppearanceContext';
 
-// import { useColorScheme } from 'react-native-appearance';
 // import AsyncStorage from '@react-native-community/async-storage';
 
 const activeTestsStorageKey = '@Portfolio:CustomAppearanceContext';
@@ -28,9 +28,11 @@ async function rehydrateModules() {
 }
 
 export default function ModulesProvider({ children }) {
-  // const colorScheme = useColorScheme();
-  // const [isDark, setIsDark] = React.useState(colorScheme === 'dark')
-  const [isDark, setIsDark] = React.useState(false);
+  const colorScheme = useColorScheme();
+  const [isDark, setIsDark] = React.useState(
+    Platform.OS === 'web' ? false : colorScheme === 'dark'
+  );
+  // const [isDark, setIsDark] = React.useState(false);
   const [isLoaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
