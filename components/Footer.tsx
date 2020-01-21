@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
-import { useREM } from 'react-native-web-hooks';
+import { View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
-
 import { useSafeArea } from 'react-native-safe-area-context';
+import { useREM } from 'react-native-web-hooks';
+
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
 

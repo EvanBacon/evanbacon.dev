@@ -46,8 +46,6 @@ const TABS = [
   },
 ];
 
-const SIZE = 48;
-
 const Header = ({ siteTitle, navigation }) => {
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();

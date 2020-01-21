@@ -19,7 +19,7 @@ import AppearanceSwitch from './AppearanceSwitch';
 import { B, H4 } from './Elements';
 import HeaderPhoto from './HeaderPhoto';
 
-function DrawerItem({ title, url, style }) {
+function DrawerItem({ title, url, style, target }) {
   const { navigate } = useRouting();
 
   return (

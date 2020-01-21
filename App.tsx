@@ -64,6 +64,7 @@ const DrawerApp = createDrawerNavigator(
     App,
   },
   {
+    // @ts-ignore: :shrug:
     contentComponent: Drawer,
   }
 );
