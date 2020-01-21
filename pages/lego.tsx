@@ -140,9 +140,9 @@ function ProjectCard({ title, group, color, gallery, preview }) {
   );
 }
 
-const IndexPage = () => {
+export default function({ navigation }) {
   return (
-    <Layout>
+    <Layout navigation={navigation}>
       <SEO
         title="Lego"
         description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
@@ -153,6 +153,4 @@ const IndexPage = () => {
       ))}
     </Layout>
   );
-};
-
-export default IndexPage;
+}

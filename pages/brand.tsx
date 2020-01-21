@@ -145,9 +145,9 @@ function TalkCard({
   );
 }
 
-export default function() {
+export default function({ navigation }) {
   return (
-    <Layout>
+    <Layout navigation={navigation}>
       <SEO
         title="Brand"
         description="Branding resources for events representing Evan Bacon"

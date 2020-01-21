@@ -1,5 +1,6 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useRouting } from 'expo-next-react-navigation';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Linking, Platform, View } from 'react-native';
@@ -7,11 +8,10 @@ import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
-import { useRouter } from 'next/router';
 import AppearanceSwitch from './AppearanceSwitch';
+import HeaderPhoto from './HeaderPhoto';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
-import HeaderPhoto from './HeaderPhoto';
 
 const TABS = [
   // {
@@ -48,11 +48,16 @@ const TABS = [
 
 const SIZE = 48;
 
-const Header = ({ siteTitle }) => {
+const Header = ({ siteTitle, navigation }) => {
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();
   const { navigate } = useRouting();
+
   function onPressMenu() {
+    if (Platform.OS !== 'web') {
+      navigation.openDrawer();
+      return;
+    }
     // Same interface as https://facebook.github.io/react-native/docs/actionsheetios.html
     const options = [...TABS.map(({ title }) => title), 'Cancel'];
     const destructiveButtonIndex = options.length - 1;

@@ -146,9 +146,9 @@ function TalkCard({
   );
 }
 
-export default function() {
+export default function({ navigation }) {
   return (
-    <Layout>
+    <Layout navigation={navigation}>
       <SEO
         title="Talks"
         description="Live talks and presentations given by Evan Bacon about exciting new software he created"

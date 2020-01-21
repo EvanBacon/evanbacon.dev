@@ -11,7 +11,7 @@ import Header from './Header';
 
 const MAX_WIDTH = 720;
 
-export default function Layout({ children }) {
+export default function Layout({ children, navigation }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const { onLayout, width } = useLayout();
@@ -46,7 +46,7 @@ export default function Layout({ children }) {
       }}
       style={style}
     >
-      <Header siteTitle="Evan Bacon" />
+      <Header siteTitle="Evan Bacon" navigation={navigation} />
       <View
         style={[
           mainStyle,

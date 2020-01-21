@@ -111,9 +111,9 @@ function ProjectCard({
   );
 }
 
-export default function() {
+export default function({ navigation }) {
   return (
-    <Layout>
+    <Layout navigation={navigation}>
       <SEO
         title="Games"
         description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"

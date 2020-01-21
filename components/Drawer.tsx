@@ -1,15 +1,45 @@
+import { useRouting } from 'expo-next-react-navigation';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Linking,
+  ScrollView,
+  StyleSheet,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
+import { useREM } from 'react-native-web-hooks';
 import { NavigationActions } from 'react-navigation';
 
-import AppearanceSwitch from './AppearanceSwitch';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Colors from '../constants/Colors';
+import Routes from '../constants/Routes';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import AppearanceSwitch from './AppearanceSwitch';
+import { B, H4 } from './Elements';
 import HeaderPhoto from './HeaderPhoto';
-import { H4 } from './Elements';
 
+function DrawerItem({ title, url, style }) {
+  const { navigate } = useRouting();
+
+  return (
+    <TouchableHighlight
+      underlayColor="#ccc"
+      style={style}
+      onPress={() => {
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+          Linking.openURL(url);
+        } else {
+          navigate({ routeName: url || '/' });
+        }
+      }}
+    >
+      <B style={{ fontSize: useREM(1), marginBottom: 0, paddingVertical: 16 }}>
+        {title}
+      </B>
+    </TouchableHighlight>
+  );
+}
 function Drawer(props) {
   const navigateToScreen = route => () => {
     const navigateAction = NavigationActions.navigate({
@@ -22,6 +52,9 @@ function Drawer(props) {
 
   const { top, left, right, bottom } = useSafeArea();
 
+  const sidePadding = left || 24;
+  const drawerItemStyle = { paddingLeft: sidePadding };
+
   return (
     <View
       style={[
@@ -30,47 +63,48 @@ function Drawer(props) {
           backgroundColor: isDark
             ? Colors.backgroundDark
             : Colors.backgroundLight,
-          paddingLeft: left || 24,
           paddingBottom: bottom,
           paddingTop: top,
         },
       ]}
     >
       <View style={{ flex: 1 }}>
-        <HeaderPhoto />
-        <H4>Evan Bacon</H4>
+        <View
+          style={{
+            paddingLeft: sidePadding,
+            borderBottomColor: isDark
+              ? Colors.borderColorLight
+              : Colors.borderColorDark,
+            borderBottomWidth: StyleSheet.hairlineWidth,
+          }}
+        >
+          <HeaderPhoto />
+          <H4>Evan Bacon</H4>
+        </View>
 
         <ScrollView style={{ flex: 1 }}>
-          <View>
-            <Text style={styles.sectionHeadingStyle}>Section 1</Text>
-            <View style={styles.navSectionStyle}>
-              <Text
-                style={styles.navItemStyle}
-                onPress={navigateToScreen('Page1')}
-              >
-                Page1
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Text style={styles.sectionHeadingStyle}>Section 2</Text>
-            <View style={styles.navSectionStyle}>
-              <Text
-                style={styles.navItemStyle}
-                onPress={navigateToScreen('Page2')}
-              >
-                Page2
-              </Text>
-              <Text
-                style={styles.navItemStyle}
-                onPress={navigateToScreen('Page3')}
-              >
-                Page3
-              </Text>
-            </View>
-          </View>
+          {Routes.map(route => (
+            <DrawerItem
+              key={route.title}
+              url={route.url}
+              target={route.target}
+              style={drawerItemStyle}
+              title={route.title}
+            />
+          ))}
         </ScrollView>
-        <View style={styles.footer}>
+        <View
+          style={[
+            {
+              paddingTop: 16,
+              paddingLeft: sidePadding,
+              borderTopColor: isDark
+                ? Colors.borderColorLight
+                : Colors.borderColorDark,
+              borderTopWidth: StyleSheet.hairlineWidth,
+            },
+          ]}
+        >
           <AppearanceSwitch />
         </View>
       </View>
