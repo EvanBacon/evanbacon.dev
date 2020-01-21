@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 import StyleSheet from 'react-native-extended-stylesheet';
 
@@ -40,6 +40,7 @@ const socials = [
 ];
 export default function Footer() {
   const { bottom, left, right } = useSafeArea();
+
   return (
     <View style={styles.container}>
       <View

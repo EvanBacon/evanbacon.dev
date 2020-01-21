@@ -4,6 +4,7 @@ import { Platform, ScrollView, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useLayout } from 'react-native-web-hooks';
 
+import { useSafeArea } from 'react-native-safe-area-context';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Footer from './Footer';
 import Header from './Header';
@@ -18,6 +19,7 @@ export default function Layout({ children }) {
   const mainStyle =
     width > MAX_WIDTH + 40 ? styles.mainLarge : styles.mainSmall;
 
+  const { bottom, left, right } = useSafeArea();
   const backgroundColor = isDark ? '#1a1923' : 'rgb(250, 250, 250)';
   const style: any = StyleSheet.flatten(
     Platform.select({
@@ -27,21 +29,37 @@ export default function Layout({ children }) {
         transitionDuration: '0.5s',
         backgroundColor,
       },
-      default: { flex: 1, backgroundColor: 'green' },
+      default: {
+        flex: 1,
+        backgroundColor,
+        // TODO: Account for tab bar changing height
+        marginBottom: bottom + 24,
+      },
     })
   );
 
   return (
     <ScrollView
       onLayout={onLayout as any}
-      contentContainerStyle={{ backgroundColor }}
+      contentContainerStyle={{
+        backgroundColor,
+      }}
       style={style}
     >
       <Header siteTitle="Evan Bacon" />
-      <View style={[mainStyle, { opacity: width === 0 ? 0 : 1 }]}>
+      <View
+        style={[
+          mainStyle,
+          {
+            paddingLeft: left,
+            paddingRight: right,
+            opacity: width === 0 ? 0 : 1,
+          },
+        ]}
+      >
         <View accessibilityRole="summary">{children}</View>
       </View>
-      <Footer />
+      {Platform.OS === 'web' && <Footer />}
     </ScrollView>
   );
 }
