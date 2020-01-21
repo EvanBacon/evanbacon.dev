@@ -4,10 +4,11 @@ import { useHover, useREM } from 'react-native-web-hooks';
 
 import AspectImage from '../components/AspectImage';
 import { H2, H4, P } from '../components/Elements';
+import Layout from '../components/Layout';
+import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
-import Layout from '../components/Layout';
 
 const Text = RNText as any;
 function TalkCardPresentationRow({
@@ -153,7 +154,7 @@ export default function({ navigation }) {
         title="Talks"
         description="Live talks and presentations given by Evan Bacon about exciting new software he created"
       />
-      <H2>Talks</H2>
+      <PageHeader>Talks</PageHeader>
       {Talks.map((talk: any) => (
         <TalkCard key={talk.title} {...talk} />
       ))}

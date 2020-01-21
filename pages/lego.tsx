@@ -10,6 +10,7 @@ import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Lego } from '../Data';
 import Layout from '../components/Layout';
+import PageHeader from '../components/PageHeader';
 
 function ProjectCard({ title, group, color, gallery, preview }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
@@ -147,7 +148,7 @@ export default function({ navigation }) {
         title="Lego"
         description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
       />
-      <H2>Lego</H2>
+      <PageHeader>Lego</PageHeader>
       {Lego.map((project: any) => (
         <ProjectCard key={project.title} {...project} />
       ))}

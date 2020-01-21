@@ -7,6 +7,7 @@ import { H2, H4, P } from '../components/Elements';
 import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Layout from '../components/Layout';
+import PageHeader from '../components/PageHeader';
 
 const Text = RNText as any;
 function TalkCardPresentationRow({
@@ -152,7 +153,7 @@ export default function({ navigation }) {
         title="Brand"
         description="Branding resources for events representing Evan Bacon"
       />
-      <H2>Brand</H2>
+      <PageHeader>Brand</PageHeader>
     </Layout>
   );
 }

@@ -10,6 +10,7 @@ import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Projects } from '../Data';
 import Layout from '../components/Layout';
+import PageHeader from '../components/PageHeader';
 
 function ProjectCard({
   title,
@@ -118,7 +119,7 @@ export default function({ navigation }) {
         title="Games"
         description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"
       />
-      <H2>Games</H2>
+      <PageHeader>Games</PageHeader>
       {Projects.map((project: any) => (
         <ProjectCard key={project.title} {...project} />
       ))}
