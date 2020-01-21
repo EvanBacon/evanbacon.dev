@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AsyncStorage, View, Platform } from 'react-native';
+import { StatusBar, AsyncStorage, View, Platform } from 'react-native';
 
 import { useColorScheme } from 'react-native-appearance';
 import CustomAppearanceContext from './CustomAppearanceContext';
@@ -46,6 +46,10 @@ export default function ModulesProvider({ children }) {
 
     parseModulesAsync();
   }, []);
+
+  React.useEffect(() => {
+    StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content', true);
+  }, [isDark]);
 
   if (!isLoaded) {
     return <View />;
