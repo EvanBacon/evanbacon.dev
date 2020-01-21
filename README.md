@@ -1,9 +1,14 @@
 <h1 align="center">Welcome to My Portfolio 👋</h1>
 
 <p align="center">
-  <a aria-label="made with expo" href="https://github.com/expo">
+ 
+   <a aria-label="made with expo" href="https://github.com/expo">
     <img src="https://img.shields.io/badge/Made%20With%20Expo-000.svg?style=flat-square&logo=expo&labelColor=4630eb&logoWidth=20">
   </a>
+  <a href="/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" target="_blank" />
+  </a>
+  <br>
    <a href="https://twitter.com/baconbrix">
     <img alt="Twitter: baconbrix" src="https://img.shields.io/twitter/follow/baconbrix.svg?style=flat-square&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=20&color=lightgray" target="_blank" />
   </a>
@@ -22,9 +27,7 @@
     <a href="https://blog.expo.io/@Baconbrix" aria-label="Follow Baconbrix on Medium">
     <img alt="Medium: baconbrix" src="https://img.shields.io/badge/Bacon%20Blog%20🥓-4630EB.svg?style=flat-square&logo=MEDIUM&labelColor=000&logoWidth=20" target="_blank" />
   </a>
-  <a href="/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg?style=flat-square" target="_blank" />
-  </a>
+ 
 </p>
 
 <img alt="Product: demo" src="assets/shoes.jpeg" />
