@@ -1,6 +1,11 @@
 import { Link as EXLink } from 'expo-next-react-navigation';
 import React from 'react';
-import { Linking, Platform, Text as RNText } from 'react-native';
+import {
+  Linking,
+  Platform,
+  Text as RNText,
+  TouchableOpacity,
+} from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useFocus, useHover } from 'react-native-web-hooks';
 
@@ -8,6 +13,12 @@ const Text = RNText as any;
 const Link = EXLink as any;
 
 export default function UniversalLink({ routeName, style, ...props }) {
+  // if (Platform.OS !== 'web' && typeof props.children !== 'string') {
+  //   throw new Error(
+  //     `Adding anything besides text to a <Text /> renders wrong on native. Please check children of link with routeName: ${routeName} `
+  //   );
+  // }
+
   const ref = React.useRef(null);
   const { isFocused } = useFocus(ref);
   const { isHovered } = useHover(ref);
@@ -29,8 +40,11 @@ export default function UniversalLink({ routeName, style, ...props }) {
     const onPress = React.useCallback(() => {
       if (Platform.OS !== 'web') Linking.openURL(routeName);
     }, [routeName]);
+
+    const WrapperView =
+      typeof props.children === 'string' ? Text : TouchableOpacity;
     return (
-      <Text
+      <WrapperView
         {...props}
         ref={ref}
         style={responsiveStyle}

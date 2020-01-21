@@ -80,13 +80,21 @@ function ProjectCard({ title, group, color, gallery, preview }) {
 
                   marginBottom: 0,
                   fontSize: useREM(1.51572),
+                  lineHeight: useREM(1.51572),
                 }}
               >
                 {title}
               </H2>
             )}
             {group && (
-              <P style={{ marginTop: 4, color: 'white', marginBottom: 0 }}>
+              <P
+                style={{
+                  marginTop: 4,
+                  marginVertical: 0,
+                  color: 'white',
+                  marginBottom: 0,
+                }}
+              >
                 {group}
               </P>
             )}
@@ -94,7 +102,6 @@ function ProjectCard({ title, group, color, gallery, preview }) {
 
           {socials.map(social => (
             <UniversalLink
-              style={{ marginRight: 8 }}
               target="_blank"
               key={social.name}
               routeName={social.url}
