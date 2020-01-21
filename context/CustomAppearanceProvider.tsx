@@ -15,7 +15,7 @@ async function cacheModules(appearance) {
 }
 
 async function rehydrateModules() {
-  if (!shouldRehydrate) {
+  if (!shouldRehydrate || !AsyncStorage) {
     return defaultState;
   }
   try {

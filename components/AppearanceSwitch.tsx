@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Switch, View } from 'react-native';
+import { Animated, Switch, View, Platform } from 'react-native';
 
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 
@@ -19,6 +19,20 @@ function AppearanceSwitch() {
     textAlign: 'center',
     marginHorizontal: 4,
   };
+
+  const switchProps = Platform.select({
+    web: {
+      tintColor: '#4d4d4d',
+      onTintColor: '#4d4d4d',
+      trackColor: {
+        false: '#4d4d4d',
+        true: '#4d4d4d',
+      },
+      thumbTintColor: 'white',
+      thumbColor: 'white',
+    },
+    default: {},
+  });
   return (
     <View
       style={{ marginLeft: 12, alignItems: 'center', flexDirection: 'row' }}
@@ -45,14 +59,7 @@ function AppearanceSwitch() {
         ☀️
       </Animated.Text>
       <Switch
-        tintColor="#4d4d4d"
-        onTintColor="#4d4d4d"
-        trackColor={{
-          false: '#4d4d4d',
-          true: '#4d4d4d',
-        }}
-        thumbTintColor="white"
-        thumbColor="white"
+        {...switchProps}
         value={isDark}
         onValueChange={value => {
           setIsDark(value);

@@ -31,20 +31,6 @@ export default function Layout({ children }) {
     })
   );
 
-  // return (
-  //     <ScrollView onLayout={onLayout} style={style}>
-  //         <Header siteTitle={"Evan Bacon"} />
-
-  //         <View style={mainStyle}>
-  //             <View accessibilityRole="summary">{children}</View>
-  //         </View>
-
-  //         {/* footer */}
-  //         <Footer />
-
-  //     </ScrollView>
-
-  // )
   return (
     <ScrollView
       onLayout={onLayout as any}

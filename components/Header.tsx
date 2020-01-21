@@ -154,7 +154,7 @@ const Header = ({ siteTitle }) => {
 function HeaderLink({ title, target, style, routeName }) {
   const router = useRouter();
 
-  const isActive = router.pathname === `/${routeName}`;
+  const isActive = router ? router.pathname === `/${routeName}` : false;
 
   return (
     <UniversalLink
