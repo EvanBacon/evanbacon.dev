@@ -143,7 +143,7 @@ const Header = ({ siteTitle, navigation }) => {
             />
           ))}
 
-          <AppearanceSwitch />
+          <AppearanceSwitch style={{ marginLeft: 12 }} />
         </View>
       </View>
     </View>

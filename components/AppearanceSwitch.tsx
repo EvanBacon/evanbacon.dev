@@ -1,91 +1,15 @@
+import Switch from 'expo-dark-mode-switch';
 import React from 'react';
-import { Animated, Switch, View, Platform } from 'react-native';
+import { View } from 'react-native';
 
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 
-function AppearanceSwitch() {
+function AppearanceSwitch(props) {
   const { isDark, setIsDark } = React.useContext(CustomAppearanceContext);
-  const value = React.useMemo(() => new Animated.Value(isDark ? 1 : 0), []);
 
-  React.useEffect(() => {
-    Animated.timing(value, {
-      duration: 150,
-      toValue: isDark ? 1 : 0,
-    }).start();
-  }, [isDark]);
-
-  const tstyle = {
-    fontSize: 16,
-    textAlign: 'center',
-    marginHorizontal: 4,
-  };
-
-  const switchProps = Platform.select({
-    web: {
-      tintColor: '#4d4d4d',
-      onTintColor: '#4d4d4d',
-      trackColor: {
-        false: '#4d4d4d',
-        true: '#4d4d4d',
-      },
-      thumbTintColor: 'white',
-      thumbColor: 'white',
-    },
-    default: {},
-  });
   return (
-    <View
-      style={{ marginLeft: 12, alignItems: 'center', flexDirection: 'row' }}
-    >
-      <Animated.Text
-        style={[
-          tstyle,
-          {
-            opacity: value.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0],
-            }),
-            transform: [
-              {
-                translateX: value.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 20],
-                }),
-              },
-            ],
-          },
-        ]}
-      >
-        ☀️
-      </Animated.Text>
-      <Switch
-        {...switchProps}
-        value={isDark}
-        onValueChange={value => {
-          setIsDark(value);
-        }}
-      />
-      <Animated.Text
-        style={[
-          tstyle,
-          {
-            opacity: value.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, 1],
-            }),
-            transform: [
-              {
-                translateX: value.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [-20, 0],
-                }),
-              },
-            ],
-          },
-        ]}
-      >
-        🌙
-      </Animated.Text>
+    <View {...props}>
+      <Switch value={isDark} onChange={value => setIsDark(value)} />
     </View>
   );
 }

@@ -14,6 +14,7 @@
     "@react-native-community/masked-view": "^0.1.5",
     "expo": "~36.0.0",
     "expo-blur": "^8.0.0",
+    "expo-dark-mode-switch": "^0.0.1",
     "expo-linear-gradient": "^8.0.0",
     "expo-next-react-navigation": "^0.0.23",
     "next": "^9.1.6",
