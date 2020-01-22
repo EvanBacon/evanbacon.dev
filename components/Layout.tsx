@@ -2,10 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
+import { useSafeArea } from 'react-native-safe-area-context';
 import { useLayout } from 'react-native-web-hooks';
 
-import { useSafeArea } from 'react-native-safe-area-context';
-import { useColorScheme } from 'react-native-appearance';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Footer from './Footer';
 import Header from './Header';
@@ -14,16 +13,12 @@ const MAX_WIDTH = 720;
 
 export default function Layout({ children, navigation }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
-
-  const scheme = useColorScheme();
-
   const backgroundColor = isDark ? '#1a1923' : 'rgb(250, 250, 250)';
+
   React.useEffect(() => {
-    const backgroundColor =
-      scheme === 'dark' ? '#1a1923' : 'rgb(250, 250, 250)';
     // @ts-ignore
     document.body.style.backgroundColor = backgroundColor;
-  }, [scheme]);
+  }, [isDark]);
 
   const { onLayout, width } = useLayout();
 
