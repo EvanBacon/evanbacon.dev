@@ -53,6 +53,12 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          key: 'viewport',
+          name: 'viewport',
+          content:
+            'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1.00001,viewport-fit=cover',
+        },
       ].concat(meta)}
     />
   );
