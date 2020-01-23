@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Platform, ScrollView, View } from 'react-native';
@@ -5,15 +6,26 @@ import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useLayout } from 'react-native-web-hooks';
 
+import Colors from '../constants/Colors';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Footer from './Footer';
 import Header from './Header';
 
 const MAX_WIDTH = 720;
 
+const transitionStyle = Platform.select({
+  web: {
+    transitionDuration: '0.5s',
+    transitionProperty: 'all',
+  },
+  default: {},
+});
+
 export default function Layout({ children, navigation }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
-  const backgroundColor = isDark ? '#1a1923' : 'rgb(250, 250, 250)';
+  const backgroundColor = isDark
+    ? Colors.backgroundDark
+    : Colors.backgroundLight;
 
   React.useEffect(() => {
     // @ts-ignore
@@ -27,21 +39,6 @@ export default function Layout({ children, navigation }) {
 
   const { bottom, left, right } = useSafeArea();
 
-  const style: any = StyleSheet.flatten(
-    Platform.select({
-      web: {
-        ...StyleSheet.absoluteFillObject,
-        overflow: 'scroll',
-        transitionDuration: '0.5s',
-        backgroundColor,
-      },
-      default: {
-        flex: 1,
-        backgroundColor,
-      },
-    })
-  );
-
   // TODO: Account for tab bar changing height
   const paddingBottom = Platform.select({ web: 0, default: bottom + 24 });
 
@@ -50,25 +47,40 @@ export default function Layout({ children, navigation }) {
       onLayout={onLayout as any}
       contentContainerStyle={{
         backgroundColor,
+        ...transitionStyle,
       }}
       contentInset={{ top: 0, bottom: paddingBottom }}
-      style={style}
+      style={styles.scrollView}
     >
-      <Header siteTitle="Evan Bacon" navigation={navigation} />
-      <View
-        style={[
-          mainStyle,
-          {
-            paddingLeft: left,
-            paddingRight: right,
-            opacity: width === 0 ? 0 : 1,
-          },
-        ]}
-      >
-        <View accessibilityRole="summary">{children}</View>
-      </View>
+      <Sky isDark={isDark}>
+        <Header siteTitle="Evan Bacon" navigation={navigation} />
+        <View
+          style={[
+            mainStyle,
+            {
+              paddingLeft: left,
+              paddingRight: right,
+              opacity: width === 0 ? 0 : 1,
+            },
+          ]}
+        >
+          <View accessibilityRole="summary">{children}</View>
+        </View>
+      </Sky>
       {Platform.OS === 'web' && <Footer />}
     </ScrollView>
+  );
+}
+
+function Sky({ children, isDark }) {
+  return children;
+
+  return (
+    <LinearGradient
+      colors={isDark ? ['#192740', '#35465d'] : ['#94C6C9', '#D5DEBB']}
+      style={{ ...transitionStyle, flex: 1 }}
+      children={children}
+    />
   );
 }
 
@@ -88,4 +100,13 @@ const styles = StyleSheet.create({
     paddingBottom: `1.0875rem`,
     paddingTop: 0,
   },
+  scrollView: Platform.select({
+    web: {
+      ...StyleSheet.absoluteFillObject,
+      overflow: 'scroll',
+    },
+    default: {
+      flex: 1,
+    },
+  }),
 });
