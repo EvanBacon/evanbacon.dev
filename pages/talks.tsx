@@ -44,7 +44,7 @@ function TalkCardPresentationRow({
           {title}
         </Text>
         {date && (
-          <Text style={{ color: isDark ? '#ffffff' : '#222426', fontSize: 18 }}>
+          <Text style={{ color: isDark ? cardLight : cardDark, fontSize: 18 }}>
             {date}
           </Text>
         )}
