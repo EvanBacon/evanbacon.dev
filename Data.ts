@@ -93,7 +93,6 @@ export const Projects = [
     year: 2017,
     color: '#6dceea',
   },
-
   {
     url: 'https://evanbacon.github.io/Expo-Pillar-Valley/',
     source: 'https://github.com/evanbacon/expo-pillar-valley',
@@ -104,13 +103,13 @@ export const Projects = [
     color: '#E07C4C',
   },
   {
-    url: '#',
-    source: 'https://github.com/evanbacon/expo-nitro-roll',
-    preview: require('./assets/projects/nitro-roll/preview.png'),
-    icon: require('./assets/projects/nitro-roll/app-icon.png'),
-    title: 'Nitro Roll',
-    year: 2018,
-    color: '#fff',
+    url: 'https://retrosnake.netlify.com',
+    source: 'https://github.com/evanbacon/snake',
+    preview: require('./assets/projects/snake/preview.jpeg'),
+    icon: require('./assets/projects/snake/app-icon.jpg'),
+    title: 'Snake',
+    year: 2019,
+    color: '#7ED321',
   },
   {
     url: 'https://cyberspace.netlify.com/',
@@ -149,13 +148,13 @@ export const Projects = [
     color: '#b80300',
   },
   {
-    url: 'https://retrosnake.netlify.com',
-    source: 'https://github.com/evanbacon/snake',
-    preview: require('./assets/projects/snake/preview.jpeg'),
-    icon: require('./assets/projects/snake/app-icon.jpg'),
-    title: 'Snake',
-    year: 2019,
-    color: '#7ED321',
+    url: '#',
+    source: 'https://github.com/evanbacon/expo-nitro-roll',
+    preview: require('./assets/projects/nitro-roll/preview.png'),
+    icon: require('./assets/projects/nitro-roll/app-icon.png'),
+    title: 'Nitro Roll',
+    year: 2018,
+    color: '#fff',
   },
 ];
 
