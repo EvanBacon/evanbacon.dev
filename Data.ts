@@ -149,13 +149,13 @@ export const Projects = [
     color: '#b80300',
   },
   {
-    url: 'https://snack.expo.io/@git/github.com/EvanBacon/pixi-snake',
-    source: 'https://github.com/evanbacon/pixi-snake',
+    url: 'https://retrosnake.netlify.com',
+    source: 'https://github.com/evanbacon/snake',
     preview: require('./assets/projects/snake/preview.jpeg'),
-    icon: require('./assets/projects/snake/app-icon.png'),
+    icon: require('./assets/projects/snake/app-icon.jpg'),
     title: 'Snake',
     year: 2019,
-    color: '#f5f5f5',
+    color: '#7ED321',
   },
 ];
 
