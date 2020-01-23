@@ -6,7 +6,9 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "build": "next build",
-    "predeploy:web": "next build && next export",
+    "optimize": "rm -rf out; npx expo-optimize",
+    "build:web": "next build && next export",
+    "predeploy:web": "yarn run optimize && yarn run build:web",
     "deploy:web": "netlify deploy --dir out --prod"
   },
   "dependencies": {
