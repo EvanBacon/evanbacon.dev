@@ -1,11 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
+import Quote from './Quote';
+import Quotes from '../constants/Quotes';
 
 const socials = [
   {
@@ -38,8 +40,14 @@ const socials = [
   //     url: 'https://dev.to/evanbacon'
   // },
 ];
+
+const hourIndex = new Date().getHours();
+
 export default function Footer() {
   const { bottom, left, right } = useSafeArea();
+
+  const [index, setIndex] = React.useState(hourIndex);
+  const quote = Quotes[index % Quotes.length];
 
   return (
     <View style={styles.container}>
@@ -51,11 +59,17 @@ export default function Footer() {
           paddingRight: right,
         }}
       >
-        <View style={styles.linkContainer}>
-          <UniversalLink routeName="https://www.expo.io" style={styles.link}>
-            Built with Expo
-          </UniversalLink>
-        </View>
+        <TouchableOpacity
+          style={{ alignItems: 'center', marginVertical: 8 }}
+          onPress={() => setIndex(index + 1)}
+        >
+          <Quote
+            quote={quote}
+            author="Evan Bacon 🥓"
+            url="https://github.com/evanbacon"
+          />
+        </TouchableOpacity>
+
         <View style={styles.socialWrapper}>
           {socials.map(social => (
             <UniversalLink
@@ -67,6 +81,11 @@ export default function Footer() {
               <SocialIcon name={social.name} color="white" size={16 * 2.2} />
             </UniversalLink>
           ))}
+        </View>
+        <View style={styles.linkContainer}>
+          <UniversalLink routeName="https://www.expo.io" style={styles.link}>
+            Built with Expo
+          </UniversalLink>
         </View>
       </View>
     </View>
@@ -84,6 +103,6 @@ const styles = StyleSheet.create({
   socialWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: useREM(2.2),
+    marginVertical: useREM(2.2),
   },
 });
