@@ -309,6 +309,7 @@ export const Lego = [
 export const Talks = [
   {
     title: 'Expo for Web',
+    image: require('./assets/talks/expo-for-web.jpg'),
     description:
       'Using Expo you can build an app that runs natively for iOS, Android, and in the web browser. You’ll see how Expo and React Native for web enable you to use cutting-edge browser functionality to create websites, progressive web apps, and Electron apps that emulate the functionality of your native app as closely as possible. You’ll also learn what you can do with it, why you would use it, and how it works with other popular web development tools.',
     presentedData: [
@@ -364,6 +365,7 @@ export const Talks = [
   },
   {
     title: 'Announcing Expo for web',
+    image: require('./assets/talks/debut-expo-web.jpg'),
     description:
       'Expo is on a mission to create the best possible end-to-end developer experiences for building and deploying apps on multiple platforms. Today we are very excited to announce experimental web support for the Expo CLI and SDK!',
     presentedData: [
@@ -387,6 +389,7 @@ export const Talks = [
   },
   {
     title: 'AR in React Native',
+    image: require('./assets/talks/expo-ar.jpg'),
     description:
       "Creating augmented reality apps with Expo is exciting and easy! We'll discuss how it's possible, what you can do with it, and why React Native + AR is an exciting new approach.",
     presentedData: [
@@ -405,6 +408,7 @@ export const Talks = [
   },
   {
     title: 'Using lit APIs to make dope games with Expo',
+    image: require('./assets/talks/expo-gaming.jpg'),
     description:
       'In this expo symposium (exposium) 🎙 we shall cordially discuss the usage of recreational cyber-gaming frameworks and their place in the native development environment.📱👾',
     presentedData: [

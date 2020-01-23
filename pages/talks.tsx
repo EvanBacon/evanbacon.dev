@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text as RNText, View } from 'react-native';
+import { Image, StyleSheet, Text as RNText, View } from 'react-native';
 import { useHover, useREM } from 'react-native-web-hooks';
 
-import AspectImage from '../components/AspectImage';
 import { H2, H4, P } from '../components/Elements';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
@@ -10,10 +9,13 @@ import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
 
+const cardDark = '#222426';
+const cardLight = '#fff';
+
 const Text = RNText as any;
+
 function TalkCardPresentationRow({
   href,
-  thumbnail,
   date,
   title,
   resources = [],
@@ -37,16 +39,7 @@ function TalkCardPresentationRow({
           target="_blank"
           accessibilityRole="link"
           href={href}
-          style={[
-            {
-              color: 'blue',
-              marginBottom: 10,
-              fontSize: 18,
-              borderBottomWidth: StyleSheet.hairlineWidth,
-              borderBottomColor: 'transparent',
-            },
-            isHovered && { borderBottomColor: 'blue' },
-          ]}
+          style={[styles.presTitle, isHovered && { borderBottomColor: 'blue' }]}
         >
           {title}
         </Text>
@@ -56,21 +49,6 @@ function TalkCardPresentationRow({
           </Text>
         )}
       </View>
-      {thumbnail && (
-        <>
-          <H2 style={{ fontSize: useREM(1.51572) }}>Watch Now</H2>
-
-          <AspectImage
-            loading="lazy"
-            source={{ uri: thumbnail }}
-            style={{
-              aspectRatio: 0.75,
-              width: 100,
-            }}
-          />
-          <Divider />
-        </>
-      )}
 
       {!!resources.length && (
         <View style={{ marginLeft: 24 }}>
@@ -89,60 +67,41 @@ function TalkCardPresentationRow({
   );
 }
 
-function Divider() {
+function TalkCard({ title, image, description, presentedData = [] }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
   return (
     <View
-      style={{
-        backgroundColor: isDark ? 'white' : 'black',
-        opacity: 0.1,
-        flex: 1,
-        minHeight: StyleSheet.hairlineWidth,
-        maxHeight: StyleSheet.hairlineWidth,
-        marginVertical: 20,
-      }}
-    />
-  );
-}
-
-function TalkCard({
-  title,
-  thumbnail,
-  description,
-  presentedData = [],
-  resourcesData = [],
-}) {
-  const { isDark } = React.useContext(CustomAppearanceContext);
-  return (
-    <View
-      style={{
-        maxWidth: 720,
-        flex: 1,
-        marginBottom: 20,
-        padding: 40,
-        paddingTop: 0,
-        backgroundColor: isDark ? 'black' : 'white',
-      }}
+      style={[
+        styles.container,
+        {
+          backgroundColor: isDark ? cardDark : cardLight,
+        },
+      ]}
     >
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <H2 style={{ fontSize: useREM(1.51572) }}>{title}</H2>
-      </View>
-
-      <P style={{ marginBottom: useREM(1.55) }}>{description}</P>
-      <Divider />
-      {!!presentedData.length && (
-        <H4 style={{ opacity: 0.6, marginBottom: 24 }}>PRESENTED AT</H4>
+      {image && (
+        <Image style={styles.image} resizeMode="cover" source={image} />
       )}
+      <View style={styles.resContainer}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <H2 style={{ fontSize: useREM(1.51572) }}>{title}</H2>
+        </View>
 
-      {presentedData.map((presentation: any) => (
-        <TalkCardPresentationRow
-          key={presentation.title}
-          title={presentation.title}
-          href={presentation.href}
-          date={presentation.date}
-          resources={presentation.resources}
-        />
-      ))}
+        <P style={{ marginBottom: useREM(1.55) }}>{description}</P>
+        <Divider />
+        {!!presentedData.length && (
+          <H4 style={styles.presentedTitle}>PRESENTED AT</H4>
+        )}
+
+        {presentedData.map((presentation: any) => (
+          <TalkCardPresentationRow
+            key={presentation.title}
+            title={presentation.title}
+            href={presentation.href}
+            date={presentation.date}
+            resources={presentation.resources}
+          />
+        ))}
+      </View>
     </View>
   );
 }
@@ -161,3 +120,51 @@ export default function({ navigation }) {
     </Layout>
   );
 }
+
+function Divider() {
+  const { isDark } = React.useContext(CustomAppearanceContext);
+  return (
+    <View
+      style={[
+        {
+          backgroundColor: isDark ? cardLight : cardDark,
+        },
+        styles.divider,
+      ]}
+    />
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    maxWidth: 720,
+    flex: 1,
+    marginBottom: 20,
+  },
+  divider: {
+    opacity: 0.1,
+    flex: 1,
+    minHeight: StyleSheet.hairlineWidth,
+    maxHeight: StyleSheet.hairlineWidth,
+    marginVertical: 20,
+  },
+  presentedTitle: {
+    opacity: 0.6,
+    marginBottom: 24,
+  },
+  resContainer: {
+    flex: 1,
+    padding: 40,
+  },
+  image: {
+    flex: 1,
+    minHeight: 360,
+  },
+  presTitle: {
+    color: 'blue',
+    marginBottom: 10,
+    fontSize: 18,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'transparent',
+  },
+});
