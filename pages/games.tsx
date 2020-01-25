@@ -8,7 +8,7 @@ import SEO from '../components/SEO';
 import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Projects } from '../Data';
+import { Projects, OpenGraphImages } from '../Data';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 
@@ -118,6 +118,7 @@ export default function({ navigation }) {
       <SEO
         title="Games"
         description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"
+        image={OpenGraphImages.game}
       />
       <PageHeader>Games</PageHeader>
       {Projects.map((project: any) => (

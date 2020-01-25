@@ -8,7 +8,7 @@ import SEO from '../components/SEO';
 import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Lego } from '../Data';
+import { Lego, OpenGraphImages } from '../Data';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 
@@ -147,6 +147,7 @@ export default function({ navigation }) {
       <SEO
         title="Lego"
         description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
+        image={OpenGraphImages.lego}
       />
       <PageHeader>Lego</PageHeader>
       {Lego.map((project: any) => (

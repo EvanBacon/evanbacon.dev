@@ -8,6 +8,7 @@ import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
+import { OpenGraphImages } from '../Data';
 
 const Text = RNText as any;
 function TalkCardPresentationRow({
@@ -152,6 +153,7 @@ export default function({ navigation }) {
       <SEO
         title="Brand"
         description="Branding resources for events representing Evan Bacon"
+        image={OpenGraphImages.brand}
       />
       <PageHeader>Brand</PageHeader>
     </Layout>

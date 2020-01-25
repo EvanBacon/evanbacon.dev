@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Talks } from '../Data';
+import { Talks, OpenGraphImages } from '../Data';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
@@ -112,6 +112,7 @@ export default function({ navigation }) {
       <SEO
         title="Talks"
         description="Live talks and presentations given by Evan Bacon about exciting new software he created"
+        image={OpenGraphImages.talks}
       />
       <PageHeader>Talks</PageHeader>
       {Talks.map((talk: any) => (

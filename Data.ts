@@ -1,3 +1,38 @@
+export const OpenGraphImages = {
+  brand: {
+    url: 'https://evanbacon.dev/og/brand.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description:
+      'Evan Bacon as a child holding a Batman t-shirt his mom got him for Christmas',
+  },
+  game: {
+    url: 'https://evanbacon.dev/og/games.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description:
+      'Shirtless Evan Bacon holding a Super Smash Bros. themed Nintendo Switch lovingly against his face',
+  },
+  lego: {
+    url: 'https://evanbacon.dev/og/lego.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description:
+      'Modest Evan Bacon standing humbly amongst his Marvel Lego creations at Salt Lake City Comic Con',
+  },
+  talks: {
+    url: 'https://evanbacon.dev/og/talks.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description:
+      'Sleepy Evan Bacon sleeping before giving his App.js Conference Talk in 2019',
+  },
+};
+
 export const Images = [
   { url: 'https://avatars.io/twitter/baconbrix', title: 'Twitter' },
   // { url: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
