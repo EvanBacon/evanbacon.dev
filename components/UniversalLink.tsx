@@ -41,8 +41,12 @@ export default function UniversalLink({ routeName, style, ...props }: any) {
       if (Platform.OS !== 'web') Linking.openURL(routeName);
     }, [routeName]);
 
-    const WrapperView =
-      typeof props.children === 'string' ? Text : TouchableOpacity;
+    const isText = typeof props.children === 'string';
+    const WrapperView = isText ? Text : TouchableOpacity;
+    const safeStyle = StyleSheet.flatten(responsiveStyle);
+    if (!isText) {
+      delete safeStyle.color;
+    }
     return (
       <WrapperView
         {...props}
