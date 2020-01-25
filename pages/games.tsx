@@ -118,6 +118,7 @@ export default function({ navigation }) {
       <SEO
         title="Games"
         description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"
+        urlPath="games"
         image={OpenGraphImages.game}
       />
       <PageHeader>Games</PageHeader>

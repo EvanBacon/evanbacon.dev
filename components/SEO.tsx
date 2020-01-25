@@ -1,7 +1,14 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-function SEO({ description = '', image, lang = 'en', meta = [], title }: any) {
+function SEO({
+  description = '',
+  image,
+  lang = 'en',
+  meta = [],
+  title,
+  urlPath,
+}: any) {
   const site = {
     siteMetadata: {
       title: 'Evan Bacon',
@@ -20,6 +27,7 @@ function SEO({ description = '', image, lang = 'en', meta = [], title }: any) {
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
+        { name: 'og:url', content: `https://www.evanbacon.dev/${urlPath}` },
         { name: 'og:image', content: image.url },
         { name: 'og:image:secure_url', content: image.url },
         { name: 'og:image:type', content: image.type },

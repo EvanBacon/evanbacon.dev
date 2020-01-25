@@ -112,6 +112,7 @@ export default function({ navigation }) {
       <SEO
         title="Talks"
         description="Live talks and presentations given by Evan Bacon about exciting new software he created"
+        urlPath="talks"
         image={OpenGraphImages.talks}
       />
       <PageHeader>Talks</PageHeader>

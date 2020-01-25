@@ -147,6 +147,7 @@ export default function({ navigation }) {
       <SEO
         title="Lego"
         description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
+        urlPath="lego"
         image={OpenGraphImages.lego}
       />
       <PageHeader>Lego</PageHeader>

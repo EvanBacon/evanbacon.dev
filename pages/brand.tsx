@@ -153,6 +153,7 @@ export default function({ navigation }) {
       <SEO
         title="Brand"
         description="Branding resources for events representing Evan Bacon"
+        urlPath="brand"
         image={OpenGraphImages.brand}
       />
       <PageHeader>Brand</PageHeader>
