@@ -1,16 +1,15 @@
 import { BlurView } from 'expo-blur';
 import React from 'react';
-import { ImageBackground, View, Platform } from 'react-native';
+import { ImageBackground, Platform, View } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
 import { H2, P } from '../components/Elements';
-import SEO from '../components/SEO';
+import Layout from '../components/Layout';
+import PageHeader from '../components/PageHeader';
 import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Lego, OpenGraphImages } from '../Data';
-import Layout from '../components/Layout';
-import PageHeader from '../components/PageHeader';
+import { Lego } from '../Data';
 
 function ProjectCard({ title, group, color, gallery, preview }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
@@ -144,12 +143,6 @@ function ProjectCard({ title, group, color, gallery, preview }) {
 export default function({ navigation }) {
   return (
     <Layout navigation={navigation}>
-      <SEO
-        title="Lego"
-        description="Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon"
-        urlPath="lego"
-        image={OpenGraphImages.lego}
-      />
       <PageHeader>Lego</PageHeader>
       {Lego.map((project: any) => (
         <ProjectCard key={project.title} {...project} />

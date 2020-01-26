@@ -4,13 +4,12 @@ import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
 import { H2, P } from '../components/Elements';
-import SEO from '../components/SEO';
+import Layout from '../components/Layout';
+import PageHeader from '../components/PageHeader';
 import SocialIcon from '../components/SocialIcon';
 import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Projects, OpenGraphImages } from '../Data';
-import Layout from '../components/Layout';
-import PageHeader from '../components/PageHeader';
+import { Projects } from '../Data';
 
 function ProjectCard({
   title,
@@ -115,12 +114,6 @@ function ProjectCard({
 export default function({ navigation }) {
   return (
     <Layout navigation={navigation}>
-      <SEO
-        title="Games"
-        description="Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!"
-        urlPath="games"
-        image={OpenGraphImages.game}
-      />
       <PageHeader>Games</PageHeader>
       {Projects.map((project: any) => (
         <ProjectCard key={project.title} {...project} />

@@ -26,7 +26,6 @@
     "next-transpile-modules": "^2.3.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
-    "react-helmet": "^5.2.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-appearance": "^0.3.2",
     "react-native-extended-stylesheet": "^0.12.0",

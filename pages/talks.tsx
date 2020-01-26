@@ -5,9 +5,8 @@ import { useHover, useREM } from 'react-native-web-hooks';
 import { H2, H4, P } from '../components/Elements';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
-import SEO from '../components/SEO';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Talks, OpenGraphImages } from '../Data';
+import { Talks } from '../Data';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
@@ -109,12 +108,6 @@ function TalkCard({ title, image, description, presentedData = [] }) {
 export default function({ navigation }) {
   return (
     <Layout navigation={navigation}>
-      <SEO
-        title="Talks"
-        description="Live talks and presentations given by Evan Bacon about exciting new software he created"
-        urlPath="talks"
-        image={OpenGraphImages.talks}
-      />
       <PageHeader>Talks</PageHeader>
       {Talks.map((talk: any) => (
         <TalkCard key={talk.title} {...talk} />

@@ -1,6 +1,6 @@
 export const OpenGraphImages = {
   brand: {
-    url: 'https://evanbacon.dev/og/brand.jpg',
+    url: 'og/brand.jpg',
     type: 'image/jpeg',
     width: 1280,
     height: 720,
@@ -8,7 +8,7 @@ export const OpenGraphImages = {
       'Evan Bacon as a child holding a Batman t-shirt his mom got him for Christmas',
   },
   game: {
-    url: 'https://evanbacon.dev/og/games.jpg',
+    url: 'og/games.jpg',
     type: 'image/jpeg',
     width: 1280,
     height: 720,
@@ -16,7 +16,7 @@ export const OpenGraphImages = {
       'Shirtless Evan Bacon holding a Super Smash Bros. themed Nintendo Switch lovingly against his face',
   },
   lego: {
-    url: 'https://evanbacon.dev/og/lego.jpg',
+    url: 'og/lego.jpg',
     type: 'image/jpeg',
     width: 1280,
     height: 720,
@@ -24,12 +24,41 @@ export const OpenGraphImages = {
       'Modest Evan Bacon standing humbly amongst his Marvel Lego creations at Salt Lake City Comic Con',
   },
   talks: {
-    url: 'https://evanbacon.dev/og/talks.jpg',
+    url: 'og/talks.jpg',
     type: 'image/jpeg',
     width: 1280,
     height: 720,
     description:
       'Sleepy Evan Bacon sleeping before giving his App.js Conference Talk in 2019',
+  },
+};
+
+export const Meta = {
+  brand: {
+    title: 'Brand',
+    description: 'Branding resources for events representing Evan Bacon!',
+    urlPath: 'brand',
+    image: OpenGraphImages.brand,
+  },
+  games: {
+    title: 'Games',
+    description:
+      'Super fun free video games programmed by Evan Bacon that you can try now in the browser or on the App Store!',
+    urlPath: 'games',
+    image: OpenGraphImages.game,
+  },
+  lego: {
+    title: 'Lego',
+    description:
+      "Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon!",
+    urlPath: 'lego',
+    image: OpenGraphImages.lego,
+  },
+  talks: {
+    title: 'Talks',
+    description: `Live talks and presentations given by Evan Bacon about exciting new software he's building!`,
+    urlPath: 'talks',
+    image: OpenGraphImages.talks,
   },
 };
 
