@@ -27,13 +27,13 @@ function SEO({
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
-        { name: 'og:url', content: `https://www.evanbacon.dev/${urlPath}` },
-        { name: 'og:image', content: image.url },
-        { name: 'og:image:secure_url', content: image.url },
-        { name: 'og:image:type', content: image.type },
-        { name: 'og:image:width', content: image.width },
-        { name: 'og:image:height', content: image.height },
-        { name: 'og:image:alt', content: image.description },
+        { property: 'og:url', content: `https://www.evanbacon.dev/${urlPath}` },
+        { property: 'og:image', content: image.url },
+        { property: 'og:image:secure_url', content: image.url },
+        { property: 'og:image:type', content: image.type },
+        { property: 'og:image:width', content: image.width },
+        { property: 'og:image:height', content: image.height },
+        { property: 'og:image:alt', content: image.description },
 
         {
           name: `description`,
@@ -56,19 +56,19 @@ function SEO({
           content: `website`,
         },
         {
-          name: `twitter:card`,
+          property: `twitter:card`,
           content: `summary`,
         },
         {
-          name: `twitter:creator`,
+          property: `twitter:creator`,
           content: site.siteMetadata.author,
         },
         {
-          name: `twitter:title`,
+          property: `twitter:title`,
           content: title,
         },
         {
-          name: `twitter:description`,
+          property: `twitter:description`,
           content: metaDescription,
         },
         {
