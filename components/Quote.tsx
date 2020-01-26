@@ -57,19 +57,27 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
+    transitionDuration: '200ms',
   },
   blockQuote: {
     alignItems: 'stretch',
     maxWidth: 720,
     marginHorizontal: useREM(0.5),
+    transitionDuration: '200ms',
   },
-  quote: { color, fontSize: 24, fontWeight: 'bold', textAlign: 'left' },
-
+  quote: {
+    color,
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    transitionDuration: '200ms',
+  },
   footerText: {
     color,
     fontSize: 24,
     fontStyle: 'italic',
     textAlign: 'right',
+    transitionDuration: '200ms',
   },
   startLeaf: { minWidth: 48, fill: color },
   endLeaf: { minWidth: 48, fill: color, transform: [{ scaleX: -1 }] },
