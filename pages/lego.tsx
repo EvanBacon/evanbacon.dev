@@ -103,6 +103,7 @@ function ProjectCard({ title, group, color, gallery, preview }) {
 
           {socials.map(social => (
             <UniversalLink
+              focusStyle={{ transform: [{ scale: 1.1 }] }}
               target="_blank"
               key={social.name}
               routeName={social.url}

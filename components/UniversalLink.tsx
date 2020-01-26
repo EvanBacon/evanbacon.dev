@@ -12,7 +12,13 @@ import { useFocus, useHover } from 'react-native-web-hooks';
 const Text = RNText as any;
 const Link = EXLink as any;
 
-export default function UniversalLink({ routeName, style, ...props }: any) {
+export default function UniversalLink({
+  routeName,
+  style,
+  hoverStyle = { opacity: 0.6 },
+  focusStyle = { borderBottomColor: 'white' },
+  ...props
+}: any) {
   // if (Platform.OS !== 'web' && typeof props.children !== 'string') {
   //   throw new Error(
   //     `Adding anything besides text to a <Text /> renders wrong on native. Please check children of link with routeName: ${routeName} `
@@ -31,8 +37,8 @@ export default function UniversalLink({ routeName, style, ...props }: any) {
       ...Platform.select({ web: { outlineStyle: 'none' }, default: {} }),
     },
     style,
-    isHovered && { opacity: 0.6 },
-    isFocused && { borderBottomColor: 'white' },
+    isHovered && hoverStyle,
+    isFocused && focusStyle,
   ]);
 
   // Handle External links

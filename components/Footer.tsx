@@ -77,6 +77,7 @@ export default function Footer() {
               target="_blank"
               key={social.name}
               routeName={social.url}
+              focusStyle={{ transform: [{ scale: 1.1 }] }}
             >
               <SocialIcon name={social.name} color="white" size={16 * 2.2} />
             </UniversalLink>

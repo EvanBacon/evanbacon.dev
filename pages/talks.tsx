@@ -68,38 +68,31 @@ function TalkCardPresentationRow({
 
 function TalkCard({ title, image, description, presentedData = [] }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
+  const backgroundColor = isDark ? cardDark : cardLight;
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: isDark ? cardDark : cardLight,
-        },
-      ]}
-    >
+    <View style={[styles.container, { backgroundColor }]}>
       {image && (
         <Image style={styles.image} resizeMode="cover" source={image} />
       )}
       <View style={styles.resContainer}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <H2 style={{ fontSize: useREM(1.51572) }}>{title}</H2>
-        </View>
-
+        <H2 style={{ fontSize: useREM(1.51572) }}>{title}</H2>
         <P style={{ marginBottom: useREM(1.55) }}>{description}</P>
         <Divider />
-        {!!presentedData.length && (
-          <H4 style={styles.presentedTitle}>PRESENTED AT</H4>
-        )}
 
-        {presentedData.map((presentation: any) => (
-          <TalkCardPresentationRow
-            key={presentation.title}
-            title={presentation.title}
-            href={presentation.href}
-            date={presentation.date}
-            resources={presentation.resources}
-          />
-        ))}
+        {!!presentedData.length && (
+          <>
+            <H4 style={styles.presentedTitle}>PRESENTED AT</H4>
+            {presentedData.map((presentation: any) => (
+              <TalkCardPresentationRow
+                key={presentation.title}
+                title={presentation.title}
+                href={presentation.href}
+                date={presentation.date}
+                resources={presentation.resources}
+              />
+            ))}
+          </>
+        )}
       </View>
     </View>
   );

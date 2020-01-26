@@ -93,6 +93,7 @@ function ProjectCard({
             <View key={social.name}>
               <UniversalLink
                 style={{ marginRight: 8 }}
+                focusStyle={{ transform: [{ scale: 1.1 }] }}
                 target="_blank"
                 routeName={social.url}
               >
