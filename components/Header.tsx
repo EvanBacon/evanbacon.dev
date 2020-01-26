@@ -139,7 +139,7 @@ const Header = ({ siteTitle, navigation }) => {
 
         {isSmall && (
           <View style={styles.rightHeader}>
-            <AppearanceSwitch style={{ marginRight: 12 }} />
+            <AppearanceSwitch />
             <MenuButton onPress={onPressMenu} isActive={isActive} />
           </View>
         )}
