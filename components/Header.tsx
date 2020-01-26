@@ -12,6 +12,8 @@ import AppearanceSwitch from './AppearanceSwitch';
 import HeaderPhoto from './HeaderPhoto';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import Colors from '../constants/Colors';
 
 const TABS = [
   // {
@@ -50,6 +52,7 @@ const Header = ({ siteTitle, navigation }) => {
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();
   const { navigate } = useRouting();
+  const { isDark } = React.useContext(CustomAppearanceContext);
 
   function onPressMenu() {
     if (Platform.OS !== 'web') {
@@ -61,11 +64,22 @@ const Header = ({ siteTitle, navigation }) => {
     const destructiveButtonIndex = options.length - 1;
     const cancelButtonIndex = options.length - 1;
 
+    const backgroundColor = isDark
+      ? Colors.backgroundDark
+      : Colors.backgroundLight;
+    const color = !isDark ? Colors.backgroundDark : Colors.backgroundLight;
+
     showActionSheetWithOptions(
       {
         options,
         cancelButtonIndex,
         destructiveButtonIndex,
+        containerStyle: {
+          backgroundColor,
+        },
+        textStyle: {
+          color,
+        },
       },
       buttonIndex => {
         setActive(false);
@@ -123,7 +137,12 @@ const Header = ({ siteTitle, navigation }) => {
           </View>
         </View>
 
-        {isSmall && <MenuButton onPress={onPressMenu} isActive={isActive} />}
+        {isSmall && (
+          <View style={styles.rightHeader}>
+            <AppearanceSwitch style={{ marginRight: 12 }} />
+            <MenuButton onPress={onPressMenu} isActive={isActive} />
+          </View>
+        )}
 
         <View
           style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex' }]}
