@@ -1,28 +1,9 @@
 import React from 'react';
-import { createElement, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import * as SVG from 'react-native-svg';
 import { useREM } from 'react-native-web-hooks';
-
-type NativeTextProps = React.ComponentProps<typeof Text>;
-
-type WebTextProps = NativeTextProps & {
-  cite?: string;
-};
-
-export const BlockQuote: React.ComponentType<WebTextProps> = React.forwardRef(
-  (props, ref) => createElement('blockquote', { ...props, ref })
-);
-
-export const Cite: React.ComponentType<WebTextProps> = React.forwardRef(
-  (props, ref) => createElement('cite', { ...props, ref })
-);
-
-export const FooterText: React.ComponentType<React.ComponentProps<
-  typeof Text
->> = React.forwardRef((props, ref) =>
-  createElement('footer', { ...props, ref })
-);
+import { BlockQuote, Footer } from '@expo/html-elements';
 
 function Laurel({ style }: any) {
   return (
@@ -46,7 +27,9 @@ export default function Quote({ quote, author, url }) {
       <Laurel style={styles.startLeaf} />
       <BlockQuote cite={url} style={styles.blockQuote}>
         <Text style={styles.quote}>{quote}</Text>
-        <FooterText style={styles.footerText}>{`~ ${author}`}</FooterText>
+        <Footer style={styles.footerText}>
+          <Text style={styles.author}>{`~ ${author}`}</Text>
+        </Footer>
       </BlockQuote>
       <Laurel style={styles.endLeaf} />
     </View>
@@ -81,4 +64,10 @@ const styles = StyleSheet.create({
   },
   startLeaf: { minWidth: 48, fill: color },
   endLeaf: { minWidth: 48, fill: color, transform: [{ scaleX: -1 }] },
+  author: {
+    fontSize: 24,
+    color: 'white',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+  },
 });

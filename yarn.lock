@@ -1235,6 +1235,10 @@
     resolve-from "^5.0.0"
     slugify "^1.3.4"
 
+"@expo/html-elements@./expo-html-elements-0.0.0-alpha.4.tgz":
+  version "0.0.0-alpha.4"
+  resolved "./expo-html-elements-0.0.0-alpha.4.tgz#c05cd9bdd1332feca7f85616ea38a7a4a8ac48bf"
+
 "@expo/image-utils@^0.2.10":
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/@expo/image-utils/-/image-utils-0.2.10.tgz#2ad9ac3f26bbe9924bc5025804351fbfea5945ce"

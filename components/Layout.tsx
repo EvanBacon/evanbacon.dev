@@ -6,6 +6,7 @@ import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useLayout } from 'react-native-web-hooks';
 
+import { Main, Section } from '@expo/html-elements';
 import Colors from '../constants/Colors';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Footer from './Footer';
@@ -54,7 +55,7 @@ export default function Layout({ children, navigation }) {
     >
       <Sky isDark={isDark}>
         <Header siteTitle="Evan Bacon" navigation={navigation} />
-        <View
+        <Main
           style={[
             mainStyle,
             {
@@ -64,8 +65,8 @@ export default function Layout({ children, navigation }) {
             },
           ]}
         >
-          <View accessibilityRole="summary">{children}</View>
-        </View>
+          <Section>{children}</Section>
+        </Main>
       </Sky>
       {Platform.OS === 'web' && <Footer />}
     </ScrollView>

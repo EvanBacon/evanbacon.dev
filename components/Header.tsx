@@ -1,12 +1,12 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useRouting } from 'expo-next-react-navigation';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Linking, Platform, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useDimensions, useREM } from 'react-native-web-hooks';
+import { Header, Nav } from '@expo/html-elements';
 
 import AppearanceSwitch from './AppearanceSwitch';
 import HeaderPhoto from './HeaderPhoto';
@@ -48,7 +48,7 @@ const TABS = [
   },
 ];
 
-const Header = ({ siteTitle, navigation }) => {
+const CustomHeader = ({ siteTitle, navigation }) => {
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();
   const { navigate } = useRouting();
@@ -108,18 +108,16 @@ const Header = ({ siteTitle, navigation }) => {
   } = useDimensions();
   const isSmall = width < 720;
   const isXSmall = width < 360;
-  const accessibilityRole: any = 'banner';
   const { top } = useSafeArea();
 
   return (
-    <View
-      accessibilityRole={accessibilityRole}
-      style={[styles.container, { paddingTop: top }]}
-    >
-      <View
+    <Header style={[styles.container, { paddingTop: top }]}>
+      <Nav
         style={[
           styles.innerContainer,
-          isSmall && { paddingHorizontal: useREM(1.0875) },
+          isSmall
+            ? { paddingHorizontal: useREM(1.0875) }
+            : styles.innerContainerLarge,
         ]}
       >
         <View style={styles.leftHeader}>
@@ -162,8 +160,8 @@ const Header = ({ siteTitle, navigation }) => {
 
           <AppearanceSwitch style={{ marginLeft: 12 }} />
         </View>
-      </View>
-    </View>
+      </Nav>
+    </Header>
   );
 };
 
@@ -192,7 +190,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: `#4630eb`,
     marginBottom: useREM(1.45),
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
   link: Platform.select({
     web: {
@@ -213,11 +211,14 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     maxWidth: 720,
+    display: 'flex',
     flexDirection: 'row',
-    width: '100%',
     justifyContent: 'space-between',
     paddingVertical: useREM(1.45),
     flex: 1,
+  },
+  innerContainerLarge: {
+    width: '100%',
     marginHorizontal: 'auto',
   },
   leftHeader: {
@@ -244,12 +245,4 @@ const styles = StyleSheet.create({
   },
 });
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Header.defaultProps = {
-  siteTitle: ``,
-};
-
-export default Header;
+export default CustomHeader;
