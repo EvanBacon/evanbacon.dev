@@ -10,7 +10,7 @@ import { Talks } from '../Data';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
-const titleDark = '#fff';
+const titleDark = 'rgb(158, 231, 255)';
 const titleLight = 'blue';
 
 const Text = RNText as any;
