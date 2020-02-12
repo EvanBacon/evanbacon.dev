@@ -27,8 +27,8 @@ export default function Quote({ quote, author, url }) {
       <Laurel style={styles.startLeaf} />
       <BlockQuote cite={url} style={styles.blockQuote}>
         <Text style={styles.quote}>{quote}</Text>
-        <Footer style={styles.footerText}>
-          <Text style={styles.author}>{`~ ${author}`}</Text>
+        <Footer>
+          <Text style={styles.footerText}>{`~ ${author}`}</Text>
         </Footer>
       </BlockQuote>
       <Laurel style={styles.endLeaf} />
@@ -60,14 +60,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontStyle: 'italic',
     textAlign: 'right',
+    fontWeight: 'bold',
     transitionDuration: '200ms',
+    flex: 1,
+    marginTop: 15,
   },
   startLeaf: { minWidth: 48, fill: color },
   endLeaf: { minWidth: 48, fill: color, transform: [{ scaleX: -1 }] },
-  author: {
-    fontSize: 24,
-    color: 'white',
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-  },
 });
