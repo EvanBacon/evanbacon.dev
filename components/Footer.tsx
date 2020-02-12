@@ -1,13 +1,14 @@
+import { Footer } from '@expo/html-elements';
 import React from 'react';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 
+import Quotes from '../constants/Quotes';
+import Quote from './Quote';
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
-import Quote from './Quote';
-import Quotes from '../constants/Quotes';
 
 const socials = [
   {
@@ -43,14 +44,14 @@ const socials = [
 
 const hourIndex = new Date().getHours();
 
-export default function Footer() {
+export default function CustomFooter() {
   const { bottom, left, right } = useSafeArea();
 
   const [index, setIndex] = React.useState(hourIndex);
   const quote = Quotes[index % Quotes.length];
 
   return (
-    <View style={styles.container}>
+    <Footer style={styles.container}>
       <View
         style={{
           flex: 1,
@@ -89,7 +90,7 @@ export default function Footer() {
           </UniversalLink>
         </View>
       </View>
-    </View>
+    </Footer>
   );
 }
 

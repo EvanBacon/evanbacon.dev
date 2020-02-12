@@ -7,11 +7,16 @@ import {
   View,
   Platform,
 } from 'react-native';
-import { useHover, useREM, useLayout } from 'react-native-web-hooks';
+import {
+  useHover,
+  useREM,
+  useLayout,
+  useDimensions,
+} from 'react-native-web-hooks';
 import isHoverEnabled from 'react-native-web-hooks/build/isHoverEnabled';
 
 import { BlurView } from 'expo-blur';
-import { H2, P } from '../components/Elements';
+import { H2, P, Footer, Article } from '@expo/html-elements';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 import SocialIcon from '../components/SocialIcon';
@@ -85,6 +90,9 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
   );
 }
 
+const upperFlow = 16;
+const ICON_SIZE = 72;
+
 function ProjectCard({
   title,
   icon,
@@ -93,6 +101,7 @@ function ProjectCard({
   url,
   year,
   source,
+  isMobile,
   group,
   isDarkColored,
   description,
@@ -112,38 +121,18 @@ function ProjectCard({
   ];
 
   const themeColor = color || (isDark ? 'black' : 'white');
-  const ICON_SIZE = 72;
 
   const ref = React.useRef(null);
 
   const { isHovered } = useHover(ref);
 
-  const footerProps: any = { accessibilityRole: 'footer' };
-  const upperFlow = 16;
-  const { onLayout, width }: any = useLayout();
   return (
-    <View
-      onLayout={onLayout}
+    <Article
       ref={ref}
       style={[
+        styles.container,
         {
-          maxWidth: 720,
-          flex: 1,
-          borderRadius: 12,
-          marginBottom: 20,
-          overflow: 'hidden',
-          shadowColor: 'black',
-          shadowRadius: 8,
-          shadowOpacity: 0.5,
-
-          shadowOffset: { height: 4, width: 0 },
-          backgroundColor: themeColor,
-          ...Platform.select({
-            web: {
-              transitionDuration: '0.4s',
-            },
-            default: {},
-          }),
+          marginHorizontal: isMobile ? 16 : 0,
         },
       ]}
     >
@@ -153,93 +142,17 @@ function ProjectCard({
         video={video}
         resizeMode="cover"
       >
-        <View
-          {...footerProps}
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            justifyContent: 'space-between',
-            left: 0,
-            paddingHorizontal: 16,
-            paddingBottom: 12,
-            paddingTop: upperFlow + 8,
-            right: 0,
-            flexDirection: 'row',
-            alignItems: 'center',
-            maxWidth: '100%',
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: themeColor,
-              position: 'absolute',
-              opacity: 0.4,
-              top: upperFlow,
-              bottom: 0,
-              left: 0,
-              right: 0,
-            }}
-          />
-          <BlurView
-            intensity={100}
-            style={{
-              position: 'absolute',
-              top: upperFlow,
-              bottom: 0,
-              left: 0,
-              right: 0,
-            }}
-          />
+        <Footer style={styles.footer}>
+          <Underlay color={themeColor} />
+          <BlurView intensity={100} style={styles.blur} />
           <View
             style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}
           >
-            <Image
-              source={icon}
-              style={{
-                width: ICON_SIZE,
-                height: ICON_SIZE,
-                marginRight: 16,
-                borderRadius: 8,
-                transform: [{ translateY: -upperFlow }],
-              }}
-              resizeMode="cover"
-            />
+            <Image source={icon} style={styles.icon} resizeMode="cover" />
             <View style={{ flex: 1 }}>
-              {title && (
-                <H2
-                  style={{
-                    color: 'white',
-
-                    marginBottom: 8,
-                    fontSize: useREM(1.51572),
-                    lineHeight: useREM(1.51572),
-                  }}
-                >
-                  {title}
-                </H2>
-              )}
-              {description && (
-                <P
-                  style={{
-                    color: 'white',
-                    marginBottom: 8,
-                  }}
-                >
-                  {description}
-                </P>
-              )}
-              {year && (
-                <P
-                  style={{
-                    color: 'white',
-                    fontWeight: 'bold',
-                    opacity: 0.7,
-                    marginBottom: 0,
-                  }}
-                >
-                  {year}
-                </P>
-              )}
+              {title && <H2 style={styles.title}>{title}</H2>}
+              {description && <P style={styles.description}>{description}</P>}
+              {year && <P style={styles.year}>{year}</P>}
             </View>
           </View>
 
@@ -266,19 +179,107 @@ function ProjectCard({
               </View>
             ))}
           </View>
-        </View>
+        </Footer>
       </MediaBackground>
-    </View>
+    </Article>
   );
 }
 
-export default function({ navigation }) {
+function Underlay({ color }) {
+  return (
+    <View
+      style={{
+        backgroundColor: color,
+        position: 'absolute',
+        opacity: 0.4,
+        top: upperFlow,
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
+    />
+  );
+}
+
+export default function ({ navigation }) {
+  const {
+    window: { width },
+  } = useDimensions();
+
+  const isMobile = width < 720;
+
   return (
     <Layout navigation={navigation}>
       <PageHeader>Games</PageHeader>
       {Projects.map((project: any) => (
-        <ProjectCard key={project.title} {...project} />
+        <ProjectCard key={project.title} isMobile={isMobile} {...project} />
       ))}
     </Layout>
   );
 }
+
+const styles = StyleSheet.create({
+  blur: {
+    position: 'absolute',
+    top: upperFlow,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  icon: {
+    width: ICON_SIZE,
+    height: ICON_SIZE,
+    marginRight: 16,
+    borderRadius: 8,
+    transform: [{ translateY: -upperFlow }],
+  },
+  container: {
+    maxWidth: 720,
+    flex: 1,
+    borderRadius: 12,
+    marginBottom: 20,
+    overflow: 'hidden',
+    shadowColor: 'black',
+    shadowRadius: 8,
+    shadowOpacity: 0.5,
+
+    shadowOffset: { height: 4, width: 0 },
+    ...Platform.select({
+      web: {
+        transitionDuration: '0.4s',
+      },
+      default: {},
+    }),
+  },
+  title: {
+    color: 'white',
+    marginBottom: 8,
+    marginTop: 0,
+    fontSize: useREM(1.51572),
+    lineHeight: useREM(1.51572),
+  },
+  description: {
+    color: 'white',
+    marginTop: 0,
+    marginBottom: 8,
+  },
+  year: {
+    color: 'white',
+    fontWeight: 'bold',
+    opacity: 0.7,
+    marginVertical: 0,
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    maxWidth: '100%',
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+    paddingTop: upperFlow + 8,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});

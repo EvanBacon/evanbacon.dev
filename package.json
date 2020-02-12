@@ -12,6 +12,7 @@
     "deploy:web": "netlify deploy --dir out --prod"
   },
   "dependencies": {
+    "@expo/html-elements": "./expo-html-elements-0.0.0-alpha.4.tgz",
     "@expo/react-native-action-sheet": "^3.4.1",
     "@react-native-community/masked-view": "^0.1.5",
     "expo": "~36.0.0",

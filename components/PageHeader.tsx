@@ -1,25 +1,42 @@
+import { H1 } from '@expo/html-elements';
 import React from 'react';
-import { useDimensions } from 'react-native-web-hooks';
+import { Platform, StyleSheet } from 'react-native';
+import { useDimensions, useREM } from 'react-native-web-hooks';
 
-import { Platform } from 'react-native';
-import { H2 } from './Elements';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
 
-export default function({ children }) {
+export default function ({ children }) {
   const {
     window: { width },
   } = useDimensions();
+  const { isDark } = React.useContext(CustomAppearanceContext);
 
   const isSmall = width < 720;
-  const transitionStyle = Platform.select({
-    web: {
-      transitionDuration: '0.5s',
-      transitionProperty: 'color',
-    },
-    default: {},
-  });
   return (
-    <H2 style={{ ...transitionStyle, marginLeft: isSmall ? 40 : 0 }}>
+    <H1
+      style={[
+        styles.container,
+        {
+          color: isDark ? 'white' : 'black',
+          marginLeft: isSmall ? 16 : 0,
+        },
+      ]}
+    >
       {children}
-    </H2>
+    </H1>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    ...Platform.select({
+      web: {
+        transitionDuration: '0.5s',
+        transitionProperty: 'color',
+      },
+      default: {},
+    }),
+    fontSize: useREM(3),
+    marginTop: 0,
+  },
+});

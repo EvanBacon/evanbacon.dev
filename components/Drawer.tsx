@@ -12,11 +12,11 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 import { NavigationActions } from 'react-navigation';
 
+import { B, H4 } from '@expo/html-elements';
 import Colors from '../constants/Colors';
 import Routes from '../constants/Routes';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import AppearanceSwitch from './AppearanceSwitch';
-import { B, H4 } from './Elements';
 import HeaderPhoto from './HeaderPhoto';
 
 function DrawerItem({ title, url, style, target }) {
