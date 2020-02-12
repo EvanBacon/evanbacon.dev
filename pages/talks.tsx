@@ -11,6 +11,8 @@ import Colors from '../constants/Colors';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
+const titleDark = 'rgb(158, 231, 255)';
+const titleLight = 'blue';
 
 const Text = RNText as any;
 
@@ -34,7 +36,9 @@ function TalkCardPresentationRow({
 
   const link = React.useRef(null);
   const { isHovered } = useHover(link);
+  const titleColor = isDark ? titleDark : titleLight;
 
+  // Intetionally inverted
   const textSyle = isDark ? { color: cardLight } : { color: cardDark };
   return (
     <View>
@@ -44,7 +48,13 @@ function TalkCardPresentationRow({
           target="_blank"
           accessibilityRole="link"
           href={href}
-          style={[styles.presTitle, isHovered && { borderBottomColor: 'blue' }]}
+          style={[
+            styles.presTitle,
+            {
+              color: titleColor,
+              borderBottomColor: isHovered ? titleColor : 'transparent',
+            },
+          ]}
         >
           {title}
         </Text>
