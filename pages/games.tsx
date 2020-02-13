@@ -110,7 +110,7 @@ function ProjectCard({
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const socials = [
-    {
+    url && {
       name: 'play',
       url,
     },
@@ -118,7 +118,7 @@ function ProjectCard({
       name: 'code',
       url: source,
     },
-  ];
+  ].filter(Boolean);
 
   const themeColor = color || (isDark ? 'black' : 'white');
 
@@ -201,7 +201,7 @@ function Underlay({ color }) {
   );
 }
 
-export default function ({ navigation }) {
+export default function({ navigation }) {
   const {
     window: { width },
   } = useDimensions();

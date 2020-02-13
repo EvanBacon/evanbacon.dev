@@ -215,8 +215,8 @@ export const Projects = [
     isDarkColored: true,
   },
   {
-    url: 'https://supermario.netlify.com/',
-    source: 'https://github.com/evanbacon/expo-super-mario',
+    // url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
+    source: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
     preview: require('./assets/projects/super-mario/preview.jpeg'),
     icon: require('./assets/projects/super-mario/app-icon.png'),
     title: 'Super Mario',
@@ -225,7 +225,7 @@ export const Projects = [
     color: '#b80300',
   },
   {
-    url: '#',
+    // url: '#',
     source: 'https://github.com/evanbacon/expo-nitro-roll',
     preview: require('./assets/projects/nitro-roll/preview.png'),
     icon: require('./assets/projects/nitro-roll/app-icon.png'),
