@@ -19,6 +19,12 @@ import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Projects } from '../Data';
 
+function isMobileSafari() {
+  var userAgent = window.navigator.userAgent;
+
+  return !!(userAgent.match(/iPad/i) || userAgent.match(/iPhone/i));
+}
+
 function MediaBackground({ resizeMode, isHovered, ...props }) {
   const baseStyle = {
     flex: 1,
@@ -29,7 +35,9 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
   const videoRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (isHoverEnabled() && videoRef.current) {
+    if (!videoRef.current) return;
+
+    if (isHoverEnabled()) {
       if (isHovered) {
         videoRef.current.playAsync();
       } else {
@@ -47,7 +55,7 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
           posterSource={props.image}
           isMuted
           resizeMode={resizeMode}
-          shouldPlay={!isHoverEnabled()}
+          shouldPlay={!isHoverEnabled() || isMobileSafari()}
           isLooping
           style={[StyleSheet.absoluteFill, { zIndex: -1 }]}
         />
