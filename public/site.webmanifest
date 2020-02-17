@@ -1,19 +1,23 @@
 {
-    "name": "",
-    "short_name": "",
-    "icons": [
-        {
-            "src": "/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+  "name": "Evan Bacon",
+  "description": "Portfolio of Evan Bacon; an American developer, artist, and child prodigy who creates sculptures from LEGO toy bricks.",
+  "short_name": "Evan Bacon",
+  "lang": "en",
+  "orientation": "portrait",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#4630EB",
+  "background_color": "#4630EB",
+  "display": "standalone"
 }
