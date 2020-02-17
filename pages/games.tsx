@@ -1,22 +1,17 @@
+import { Article, Footer, H2, P } from '@expo/html-elements';
 import { Video } from 'expo-av';
+import { BlurView } from 'expo-blur';
 import React from 'react';
 import {
   Image,
   ImageBackground,
+  Platform,
   StyleSheet,
   View,
-  Platform,
 } from 'react-native';
-import {
-  useHover,
-  useREM,
-  useLayout,
-  useDimensions,
-} from 'react-native-web-hooks';
+import { useDimensions, useHover, useREM } from 'react-native-web-hooks';
 import isHoverEnabled from 'react-native-web-hooks/build/isHoverEnabled';
 
-import { BlurView } from 'expo-blur';
-import { H2, P, Footer, Article } from '@expo/html-elements';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 import SocialIcon from '../components/SocialIcon';
@@ -54,10 +49,11 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
           resizeMode={resizeMode}
           shouldPlay={!isHoverEnabled()}
           isLooping
-          style={StyleSheet.absoluteFill}
+          style={[StyleSheet.absoluteFill, { zIndex: -1 }]}
         />
         <View
           style={{
+            zIndex: 5,
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
@@ -144,7 +140,9 @@ function ProjectCard({
       >
         <Footer style={styles.footer}>
           <Underlay color={themeColor} />
+
           <BlurView intensity={100} style={styles.blur} />
+
           <View
             style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}
           >
@@ -220,6 +218,7 @@ export default function({ navigation }) {
 
 const styles = StyleSheet.create({
   blur: {
+    zIndex: -1,
     position: 'absolute',
     top: upperFlow,
     bottom: 0,
