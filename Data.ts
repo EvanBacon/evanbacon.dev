@@ -185,8 +185,7 @@ export const Projects = [
     icon: require('./assets/projects/sunset-cyberspace/app-icon.png'),
     video: require('./assets/projects/sunset-cyberspace/demo.mp4'),
     title: 'Sunset Cyberspace',
-    description:
-      'The story follows a mystic neo-sage Chucky Cheevs who fights off the boring-bots known as Xamaronians.',
+    description: 'A mystic sage Chucky Cheevs fights off the Xamaronians.',
     year: 2017,
     color: '#F914E4',
   },
