@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     maxWidth: 720,
+    flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: useREM(1.45),
     flex: 1,

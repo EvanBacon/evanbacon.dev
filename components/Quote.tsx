@@ -41,9 +41,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     transitionDuration: '200ms',
+    flex: 1,
   },
   blockQuote: {
     alignItems: 'stretch',
+    flex: 1,
     maxWidth: 720,
     marginHorizontal: useREM(0.5),
     transitionDuration: '200ms',
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
   quote: {
     color,
     fontSize: 24,
+    flexWrap: 'wrap',
     fontWeight: 'bold',
     textAlign: 'left',
     transitionDuration: '200ms',
