@@ -1,7 +1,6 @@
 <h1 align="center">Welcome to My Portfolio 👋</h1>
 
 <p align="center">
- 
    <a aria-label="made with expo" href="https://github.com/expo">
     <img src="https://img.shields.io/badge/Made%20With%20Expo-000.svg?style=flat-square&logo=expo&labelColor=4630eb&logoWidth=20">
   </a>
