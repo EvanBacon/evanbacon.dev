@@ -109,10 +109,16 @@ function TalkCard({ title, image, description, presentedData = [] }) {
         <Image style={styles.image} resizeMode="cover" source={image} />
       )}
       <Article style={styles.resContainer}>
-        <H2 style={{ color: textColor, fontSize: useREM(1.51572) }}>{title}</H2>
-        <P style={{ color: textColor, marginBottom: useREM(1.55) }}>
-          {description}
-        </P>
+        <H2
+          style={{
+            color: textColor,
+            marginBottom: 0,
+            fontSize: useREM(1.51572),
+          }}
+        >
+          {title}
+        </H2>
+        <P style={{ color: textColor, marginBottom: 0 }}>{description}</P>
         <Divider />
 
         {!!presentedData.length && (
@@ -168,6 +174,7 @@ const styles = StyleSheet.create({
   presentedTitle: {
     opacity: 0.6,
     marginBottom: 24,
+    marginTop: 0,
   },
   resContainer: {
     flex: 1,
