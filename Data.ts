@@ -38,6 +38,13 @@ export const OpenGraphImages = {
     height: 720,
     description: 'Focused Evan Bacon writing code with an intense stare',
   },
+  media: {
+    url: 'og/media.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description: 'Happy Evan Bacon interviewed at Comic Con',
+  },
 };
 
 export const Meta = {
@@ -73,6 +80,12 @@ export const Meta = {
     urlPath: 'code',
     image: OpenGraphImages.code,
   },
+  media: {
+    title: 'Media',
+    description: `Evan Bacon in the media`,
+    urlPath: 'media',
+    image: OpenGraphImages.media,
+  },
 };
 
 export const Images = [
@@ -83,20 +96,53 @@ export const Images = [
 export const Podcasts = [
   {
     url:
-      'https://devchat.tv/react-native-radio/react-native-at-expo-feat-evan-bacon/',
-    title: 'React Native Radio',
+      'https://www.stitcher.com/podcast/react-training/the-react-podcast/e/67313854',
+    image: require('./assets/podcast/react-podcast.jpg'),
+    title: 'React Podcast',
   },
+  // {
+  //   url:
+  //     'https://devchat.tv/react-native-radio/react-native-at-expo-feat-evan-bacon/',
+  //     image: '',
+  //   title: 'React Native Radio',
+  // },
   {
     url: 'https://undefined.fm/radio/react-native-web-with-expos-evan-bacon',
+    image: require('./assets/podcast/undefined-podcast.jpg'),
     title: 'Undefined Podcast',
   },
+  // {
+  //   url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
+  //   image: '',
+  //   title: 'Behind the brick with Evan Bacon (2012)',
+  // },
+];
+
+export const News = [
   {
-    url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
-    title: 'Behind the brick with Evan Bacon (2012)',
+    title: 'Wikipedia',
+    url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
+  },
+  {
+    url:
+      'http://www.mtv.com/news/2623063/13-year-old-wins-awards-for-life-size-lego-batman/',
+    title: 'MTV at age 13',
+  },
+  {
+    url: 'http://www.mtv.com/news/2626251/life-size-lego-iron-man/',
+    title: 'MTV at age 14',
+  },
+  {
+    url: 'https://www.huffpost.com/entry/evan-bacon-15-year-old-bu_n_2876505',
+    title: 'Huffington Post at age 15',
+  },
+  {
+    url: 'https://madewithreactnative.com/pillar-valley/',
+    title: 'Blog: How I started programming',
   },
 ];
 
-export const Stories = [
+export const Videos = [
   {
     title: 'Wikipedia',
     url: 'https://en.wikipedia.org/wiki/Evan_Bacon',

@@ -32,6 +32,10 @@ const TABS = [
     title: 'Lego',
     url: 'lego',
   },
+  {
+    title: 'Media',
+    url: 'media',
+  },
   // {
   //   title: 'Watch',
   //   url: 'watch'
