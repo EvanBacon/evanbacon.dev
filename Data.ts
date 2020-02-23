@@ -12,7 +12,7 @@ export type Project = {
   isDarkColored?: boolean;
   title: string;
   description?: string;
-  year?: number;
+  year?: number | string;
   color?: string;
   authors?: string[];
   actions: ProjectAction[];
@@ -115,6 +115,11 @@ export const Images = [
 
 export const Podcasts: Project[] = [
   {
+    title: 'React Podcast',
+    image: require('./assets/podcast/react-podcast.jpg'),
+    year: '2020',
+    color: '#FFE000',
+    authors: ['chantastic'],
     actions: [
       {
         url:
@@ -122,12 +127,13 @@ export const Podcasts: Project[] = [
         icon: 'microphone',
       },
     ],
-    color: '#FFE000',
-    image: require('./assets/podcast/react-podcast.jpg'),
-    authors: ['chantastic'],
-    title: 'React Podcast',
   },
   {
+    title: 'Undefined Podcast',
+    image: require('./assets/podcast/undefined-podcast.jpg'),
+    year: '2019',
+    color: '#539EF9',
+    authors: ['jaredpalmer', 'ken_wheeler'],
     actions: [
       {
         url:
@@ -135,12 +141,13 @@ export const Podcasts: Project[] = [
         icon: 'microphone',
       },
     ],
-    color: '#539EF9',
-    image: require('./assets/podcast/undefined-podcast.jpg'),
-    authors: ['jaredpalmer', 'ken_wheeler'],
-    title: 'Undefined Podcast',
   },
   {
+    title: 'React Native Radio',
+    image: require('./assets/podcast/react-native-radio-podcast.jpg'),
+    year: '2018',
+    color: '#F5A623',
+    authors: ['dabit3', 'spencer_carli', 'peterpme'],
     actions: [
       {
         url:
@@ -148,12 +155,13 @@ export const Podcasts: Project[] = [
         icon: 'microphone',
       },
     ],
-    color: '#F5A623',
-    image: require('./assets/podcast/react-native-radio-podcast.jpg'),
-    authors: ['dabit3', 'spencer_carli', 'peterpme'],
-    title: 'React Native Radio',
   },
   {
+    title: 'Beyond the brick with Evan Bacon',
+    image: require('./assets/podcast/behind-the-brick.jpg'),
+    year: '2012',
+    color: '#FFC100',
+    authors: ['John_Hanlon', 'BeyondtheBrick'],
     actions: [
       {
         url:
@@ -161,10 +169,6 @@ export const Podcasts: Project[] = [
         icon: 'microphone',
       },
     ],
-    color: '#FFC100',
-    image: require('./assets/podcast/behind-the-brick.jpg'),
-    authors: ['John_Hanlon', 'BeyondtheBrick'],
-    title: 'Beyond the brick with Evan Bacon (2012)',
   },
 ];
 
@@ -462,87 +466,155 @@ export const Workshops = [
   },
 ];
 
-export const Lego = [
+type LegoProject = Project & {
+  event?: string;
+  awards?: string[];
+  bricks?: string;
+  height?: string;
+  weight?: string;
+};
+
+export const Lego: LegoProject[] = [
   {
+    title: 'Batman',
+    description: 'DC Comics',
+    image: require('./assets/lego/batman.jpg'),
+    color: '#fde219',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/uw8kZjuFzABwMzYu6',
+      },
+    ],
     event: 'Brick Fiesta 2011',
     awards: [
       'Best Youth Creation',
       'Best Artistic Creation',
       `People's choice award`,
     ],
-    gallery: 'https://photos.app.goo.gl/uw8kZjuFzABwMzYu6',
-    preview: require('./assets/lego/batman.jpg'),
-    title: 'Batman',
-    group: 'DC Comics',
     year: '2011',
-    color: '#fde219',
     bricks: '15,000 - 20,000',
     height: `6'2"`,
     weight: '60lb',
   },
   {
     title: 'Thor',
-    group: 'Marvel',
-    gallery: 'https://photos.app.goo.gl/rUdXMnyGkmXiZij4A',
-    preview: require('./assets/lego/thor.jpg'),
+    description: 'Marvel',
+    image: require('./assets/lego/thor.jpg'),
+    color: '#A68950',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/rUdXMnyGkmXiZij4A',
+      },
+    ],
     year: '2016',
   },
   {
     title: 'Iron Man',
-    group: 'Marvel',
-    gallery: 'https://photos.app.goo.gl/TyfRHGfWMhCz4uRq5',
-    preview: require('./assets/lego/ironman.jpg'),
+    description: 'Marvel',
+    image: require('./assets/lego/ironman.jpg'),
+    color: '#782E2A',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/TyfRHGfWMhCz4uRq5',
+      },
+    ],
     year: '2012',
   },
 
   {
     title: 'Superman',
     bricks: '18,000',
-    group: 'DC Comics',
-    gallery: 'https://photos.app.goo.gl/GiQrFAoLhVDfmumS6',
-    preview: require('./assets/lego/superman.jpg'),
+    description: 'DC Comics',
+    color: '#4277E1',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/GiQrFAoLhVDfmumS6',
+      },
+    ],
+    image: require('./assets/lego/superman.jpg'),
     year: '2012',
   },
   {
     title: 'Captain Kirk',
-    group: 'Star Trek',
-    gallery: 'https://photos.app.goo.gl/7zfDKW9Pf9ssiLv56',
-    preview: require('./assets/lego/captainkirk.jpg'),
+    description: 'Star Trek',
+    color: '#DCC743',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/7zfDKW9Pf9ssiLv56',
+      },
+    ],
+    image: require('./assets/lego/captainkirk.jpg'),
     year: '2013',
   },
   {
     title: 'Darth Vader',
-    group: 'Star Wars',
-    gallery: 'https://photos.app.goo.gl/ukFadzsRyMgA9p338',
-    preview: require('./assets/lego/darthvader.jpg'),
+    description: 'Star Wars',
+    color: '#E43C39',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/ukFadzsRyMgA9p338',
+      },
+    ],
+    image: require('./assets/lego/darthvader.jpg'),
     year: '2016',
   },
   {
     title: 'Sarge',
-    group: 'Red Vs. Blue',
-    gallery: 'https://photos.app.goo.gl/C3dGAKruSsh1xLEi7',
-    preview: require('./assets/lego/sarge.jpg'),
+    description: 'Red Vs. Blue',
+    color: '#C65728',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/C3dGAKruSsh1xLEi7',
+      },
+    ],
+    image: require('./assets/lego/sarge.jpg'),
+    year: '2016',
   },
   {
     title: 'Wonder Woman',
-    group: 'DC Comics',
-    gallery: 'https://photos.app.goo.gl/PjsnkENMKfZjfSTj9',
-    preview: require('./assets/lego/wonderwoman.jpg'),
+    description: 'DC Comics',
+    color: '#316FDF',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/PjsnkENMKfZjfSTj9',
+      },
+    ],
+    image: require('./assets/lego/wonderwoman.jpg'),
     year: '2015',
   },
 
   {
     title: 'Captain America',
-    group: 'Marvel',
-    gallery: 'https://photos.app.goo.gl/ejuBH4RWnPTDUgdf6',
-    preview: require('./assets/lego/captainamerica.jpg'),
+    description: 'Marvel',
+    color: '#70ACEC',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/ejuBH4RWnPTDUgdf6',
+      },
+    ],
+    image: require('./assets/lego/captainamerica.jpg'),
     year: '2016',
   },
   {
     title: 'Minion',
-    group: 'Despicable Me',
-    gallery: 'https://photos.app.goo.gl/CttdaRbsHKLcq1Tq9',
-    preview: require('./assets/lego/minion.jpg'),
+    description: 'Despicable Me',
+    color: '#F5F858',
+    actions: [
+      {
+        icon: 'photo',
+        url: 'https://photos.app.goo.gl/CttdaRbsHKLcq1Tq9',
+      },
+    ],
+    image: require('./assets/lego/minion.jpg'),
     year: '2013',
   },
 ];
