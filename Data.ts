@@ -18,6 +18,14 @@ export type Project = {
   actions: ProjectAction[];
 };
 
+export type LegoProject = Project & {
+  event?: string;
+  awards?: string[];
+  bricks?: string;
+  height?: string;
+  weight?: string;
+};
+
 export const OpenGraphImages = {
   brand: {
     url: 'og/brand.jpg',
@@ -466,14 +474,6 @@ export const Workshops = [
   },
 ];
 
-type LegoProject = Project & {
-  event?: string;
-  awards?: string[];
-  bricks?: string;
-  height?: string;
-  weight?: string;
-};
-
 export const Lego: LegoProject[] = [
   {
     title: 'Batman',
@@ -629,7 +629,7 @@ export const Talks = [
       {
         title: 'App.js Conf',
         href: 'https://appjs.co/',
-        date: '2020.4.23',
+        date: 'April 4th, 2020',
         upcoming: true,
         resources: [],
       },
@@ -642,7 +642,7 @@ export const Talks = [
       {
         title: 'React Europe',
         href: 'https://www.react-europe.org/',
-        date: '2020.5.15',
+        date: 'May 15th, 2020',
         upcoming: true,
         resources: [],
       },
@@ -656,7 +656,7 @@ export const Talks = [
       {
         title: 'Reactathon',
         href: 'https://www.reactathon.com/',
-        date: '2020.3.31',
+        date: 'March 31st, 2020',
         upcoming: true,
         resources: [],
       },
@@ -671,7 +671,7 @@ export const Talks = [
       {
         title: 'React Europe',
         href: 'https://2019.react-europe.org/',
-        date: '2019.5.21',
+        date: 'May 21st, 2019',
         resources: [
           {
             title: 'Video',
@@ -687,7 +687,7 @@ export const Talks = [
       {
         title: 'Reactive Conf',
         href: 'https://reactiveconf.com/',
-        date: '2019.10.30',
+        date: 'October 30th, 2019',
         resources: [
           {
             title: 'Video',
@@ -703,7 +703,7 @@ export const Talks = [
       {
         title: 'React Day Berlin',
         href: 'https://reactday.berlin/',
-        date: '2019.12.6',
+        date: 'December 6th, 2019',
         resources: [
           {
             title: 'Video',
@@ -727,7 +727,7 @@ export const Talks = [
       {
         title: 'App.js Conf',
         href: 'https://appjs.co/2019/',
-        date: '2019.4.4',
+        date: 'April 4th, 2019',
         resources: [
           {
             title: 'Video',
@@ -751,7 +751,7 @@ export const Talks = [
       {
         title: 'Chicago JS Camp',
         href: 'https://chicagojs.org/',
-        date: '2018.9.22',
+        date: 'September 9th, 2018',
         resources: [
           {
             title: 'Photos',
@@ -770,7 +770,7 @@ export const Talks = [
       {
         title: 'React Europe',
         href: 'https://2018.react-europe.org/#schedule-item-1454',
-        date: '2018.5.18',
+        date: 'May 18th, 2018',
         resources: [
           {
             title: 'Video',
