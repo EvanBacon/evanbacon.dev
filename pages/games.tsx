@@ -128,7 +128,7 @@ function ProjectCard({
 
   const ref = React.useRef(null);
 
-  const { isHovered } = useHover(ref);
+  const isHovered = useHover(ref);
 
   return (
     <Article

@@ -1,13 +1,13 @@
+import { Article, H2, H4, HR, P } from '@expo/html-elements';
 import React from 'react';
 import { Image, StyleSheet, Text as RNText, View } from 'react-native';
 import { useHover, useREM } from 'react-native-web-hooks';
 
-import { H2, H4, P, Section, Article, HR } from '@expo/html-elements';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
+import Colors from '../constants/Colors';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Talks } from '../Data';
-import Colors from '../constants/Colors';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
@@ -35,7 +35,7 @@ function TalkCardPresentationRow({
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const link = React.useRef(null);
-  const { isHovered } = useHover(link);
+  const isHovered = useHover(link);
   const titleColor = isDark ? titleDark : titleLight;
 
   // Intetionally inverted
@@ -138,7 +138,7 @@ function TalkCard({ title, image, description, presentedData = [] }) {
   );
 }
 
-export default function ({ navigation }) {
+export default function({ navigation }) {
   return (
     <Layout navigation={navigation}>
       <PageHeader>Talks</PageHeader>

@@ -31,6 +31,13 @@ export const OpenGraphImages = {
     description:
       'Sleepy Evan Bacon sleeping before giving his App.js Conference Talk in 2019',
   },
+  code: {
+    url: 'og/code.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description: 'Focused Evan Bacon writing code with an intense stare',
+  },
 };
 
 export const Meta = {
@@ -59,6 +66,12 @@ export const Meta = {
     description: `Live talks and presentations given by Evan Bacon about exciting new software he's building!`,
     urlPath: 'talks',
     image: OpenGraphImages.talks,
+  },
+  code: {
+    title: 'Code',
+    description: `Cool things programmed by Evan Bacon ... probably while tired!`,
+    urlPath: 'code',
+    image: OpenGraphImages.code,
   },
 };
 

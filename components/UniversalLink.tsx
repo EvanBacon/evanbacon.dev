@@ -26,8 +26,8 @@ export default function UniversalLink({
   // }
 
   const ref = React.useRef(null);
-  const { isFocused } = useFocus(ref);
-  const { isHovered } = useHover(ref);
+  const isFocused = useFocus(ref);
+  const isHovered = useHover(ref);
 
   const responsiveStyle = StyleSheet.flatten([
     {
