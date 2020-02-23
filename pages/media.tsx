@@ -1,4 +1,4 @@
-import { Article, Footer, H2, P } from '@expo/html-elements';
+import { Article, Footer, H2, P, A } from '@expo/html-elements';
 import { BlurView } from 'expo-blur';
 import React from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
@@ -11,14 +11,22 @@ import UniversalLink from '../components/UniversalLink';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import { Podcasts } from '../Data';
 
-function ProjectCard({ title, url, group, color, gallery, image }) {
+function ProjectCard({
+  title,
+  url,
+  group,
+  authors = [],
+  color,
+  gallery,
+  image,
+}) {
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const socials = [
-    gallery && {
-      icon: 'photo',
-      name: 'Photos',
-      url: gallery,
+    url && {
+      icon: 'microphone',
+      name: 'Listen',
+      url,
     },
   ].filter(Boolean);
 
@@ -30,66 +38,68 @@ function ProjectCard({ title, url, group, color, gallery, image }) {
   const isSmall = width < 720;
 
   return (
-    <UniversalLink routeName={url}>
-      <Article
+    <Article
+      style={[
+        styles.container,
+        {
+          marginHorizontal: isSmall ? 16 : 0,
+          backgroundColor: themeColor,
+        },
+      ]}
+    >
+      <ImageBackground
+        source={image}
         style={[
-          styles.container,
           {
-            marginHorizontal: isSmall ? 16 : 0,
-            backgroundColor: themeColor,
+            flex: 1,
+
+            paddingHorizontal: 8,
+            minHeight: 360,
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
           },
         ]}
+        resizeMode="cover"
       >
-        <ImageBackground
-          source={image}
-          style={[
-            {
-              flex: 1,
-
-              paddingHorizontal: 8,
-              minHeight: 360,
-              justifyContent: 'center',
-              alignItems: 'center',
-              overflow: 'hidden',
-            },
-          ]}
-          resizeMode="cover"
+        <Footer
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}
         >
-          <Footer
+          <BlurView
+            tint="dark"
+            intensity={100}
             style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
+              flex: 1,
+              justifyContent: 'space-between',
+              paddingHorizontal: 16,
+              paddingVertical: 12,
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
-            <BlurView
-              tint="dark"
-              intensity={100}
-              style={{
-                flex: 1,
-                justifyContent: 'space-between',
-                paddingHorizontal: 16,
-                paddingVertical: 12,
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
-              <View>
-                {title && (
-                  <H2
-                    style={{
-                      color: 'white',
-                      marginVertical: 0,
-                      fontSize: useREM(1.51572),
-                      lineHeight: useREM(1.51572),
-                    }}
-                  >
-                    {title}
-                  </H2>
-                )}
-                {group && (
-                  <P
+            <View>
+              {title && (
+                <H2
+                  style={{
+                    color: 'white',
+                    marginVertical: 0,
+                    fontSize: useREM(1.51572),
+                    lineHeight: useREM(1.51572),
+                  }}
+                >
+                  {title}
+                </H2>
+              )}
+              <View style={{ flexDirection: 'row' }}>
+                {authors.map(author => (
+                  <A
+                    key={author}
+                    href={`https://twitter.com/${author}`}
                     style={{
                       marginTop: 4,
                       marginVertical: 0,
@@ -97,50 +107,50 @@ function ProjectCard({ title, url, group, color, gallery, image }) {
                       marginBottom: 0,
                     }}
                   >
-                    {group}
-                  </P>
-                )}
+                    {`@${author} `}
+                  </A>
+                ))}
               </View>
+            </View>
 
-              {socials.map(social => (
-                <UniversalLink
-                  focusStyle={{ transform: [{ scale: 1.1 }] }}
-                  target="_blank"
-                  key={social.name}
-                  routeName={social.url}
+            {socials.map(social => (
+              <UniversalLink
+                focusStyle={{ transform: [{ scale: 1.1 }] }}
+                target="_blank"
+                key={social.name}
+                routeName={social.url}
+              >
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 20,
+                    paddingVertical: 8,
+                    borderRadius: 20,
+                    backgroundColor: 'white',
+                  }}
                 >
-                  <View
+                  <SocialIcon name={social.icon} color="black" size={16} />
+                  <P
                     style={{
-                      justifyContent: 'center',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      paddingHorizontal: 20,
-                      paddingVertical: 8,
-                      borderRadius: 20,
-                      backgroundColor: 'white',
+                      marginLeft: 6,
+                      fontSize: useREM(1),
+                      marginTop: 0,
+                      marginBottom: 0,
+                      color: 'black',
+                      fontWeight: 'bold',
                     }}
                   >
-                    <SocialIcon name={social.icon} color="black" size={16} />
-                    <P
-                      style={{
-                        marginLeft: 6,
-                        fontSize: useREM(1),
-                        marginTop: 0,
-                        marginBottom: 0,
-                        color: 'black',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      {social.name.toUpperCase()}
-                    </P>
-                  </View>
-                </UniversalLink>
-              ))}
-            </BlurView>
-          </Footer>
-        </ImageBackground>
-      </Article>
-    </UniversalLink>
+                    {social.name.toUpperCase()}
+                  </P>
+                </View>
+              </UniversalLink>
+            ))}
+          </BlurView>
+        </Footer>
+      </ImageBackground>
+    </Article>
   );
 }
 
