@@ -1,3 +1,23 @@
+import { ImageSourcePropType } from 'react-native';
+
+export type ProjectAction = {
+  icon: string;
+  url: string;
+};
+
+export type Project = {
+  image: ImageSourcePropType;
+  icon?: ImageSourcePropType;
+  video?: ImageSourcePropType;
+  isDarkColored?: boolean;
+  title: string;
+  description?: string;
+  year?: number;
+  color?: string;
+  authors?: string[];
+  actions: ProjectAction[];
+};
+
 export const OpenGraphImages = {
   brand: {
     url: 'og/brand.jpg',
@@ -93,32 +113,54 @@ export const Images = [
   // { url: 'https://avatars.io/gravatar/baconbrix@gmail.com', title: 'Gravatar' },
 ];
 
-export const Podcasts = [
+export const Podcasts: Project[] = [
   {
-    url:
-      'https://www.stitcher.com/podcast/react-training/the-react-podcast/e/67313854',
+    actions: [
+      {
+        url:
+          'https://www.stitcher.com/podcast/react-training/the-react-podcast/e/67313854',
+        icon: 'microphone',
+      },
+    ],
     color: '#FFE000',
     image: require('./assets/podcast/react-podcast.jpg'),
     authors: ['chantastic'],
     title: 'React Podcast',
   },
   {
-    url: 'https://undefined.fm/radio/react-native-web-with-expos-evan-bacon',
+    actions: [
+      {
+        url:
+          'https://undefined.fm/radio/react-native-web-with-expos-evan-bacon',
+        icon: 'microphone',
+      },
+    ],
     color: '#539EF9',
     image: require('./assets/podcast/undefined-podcast.jpg'),
     authors: ['jaredpalmer', 'ken_wheeler'],
     title: 'Undefined Podcast',
   },
   {
-    url:
-      'https://devchat.tv/react-native-radio/react-native-at-expo-feat-evan-bacon/',
+    actions: [
+      {
+        url:
+          'https://devchat.tv/react-native-radio/react-native-at-expo-feat-evan-bacon/',
+        icon: 'microphone',
+      },
+    ],
     color: '#F5A623',
     image: require('./assets/podcast/react-native-radio-podcast.jpg'),
     authors: ['dabit3', 'spencer_carli', 'peterpme'],
     title: 'React Native Radio',
   },
   {
-    url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
+    actions: [
+      {
+        url:
+          'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
+        icon: 'microphone',
+      },
+    ],
     color: '#FFC100',
     image: require('./assets/podcast/behind-the-brick.jpg'),
     authors: ['John_Hanlon', 'BeyondtheBrick'],
@@ -210,56 +252,85 @@ export const Work = [
   },
 ];
 
-export const Projects = [
+export const Projects: Project[] = [
   {
-    url: 'https://crossyroad.netlify.com/',
-    source: 'https://github.com/evanbacon/expo-crossy-road',
-    preview: require('./assets/projects/crossy-road/preview.jpg'),
+    image: require('./assets/projects/crossy-road/preview.jpg'),
     icon: require('./assets/projects/crossy-road/app-icon.png'),
     video: require('./assets/projects/crossy-road/demo.mp4'),
-
     title: 'Crossy Road',
     description: `The endless arcade hopper you'll never want to put down.`,
     year: 2017,
     color: '#6dceea',
+    actions: [
+      {
+        icon: 'play',
+        url: 'https://crossyroad.netlify.com/',
+      },
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/expo-crossy-road',
+      },
+    ],
   },
   {
-    url: 'https://evanbacon.github.io/Expo-Pillar-Valley/',
-    source: 'https://github.com/evanbacon/expo-pillar-valley',
-    preview: require('./assets/projects/pillar-valley/preview.png'),
+    image: require('./assets/projects/pillar-valley/preview.png'),
     icon: require('./assets/projects/pillar-valley/app-icon.png'),
     video: require('./assets/projects/pillar-valley/demo.mp4'),
     description: 'Immerse yourself in a suave world of zen.',
     title: 'Pillar Valley',
     year: 2018,
     color: '#E07C4C',
+    actions: [
+      {
+        icon: 'play',
+        url: 'https://evanbacon.github.io/Expo-Pillar-Valley/',
+      },
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/expo-pillar-valley',
+      },
+    ],
   },
   {
-    url: 'https://retrosnake.netlify.com',
-    source: 'https://github.com/evanbacon/snake',
-    preview: require('./assets/projects/snake/preview.jpeg'),
+    image: require('./assets/projects/snake/preview.jpeg'),
     icon: require('./assets/projects/snake/app-icon.jpg'),
     video: require('./assets/projects/snake/demo.mp4'),
     title: 'Snake',
     description: 'Slither your way through this retro snake adventure.',
     year: 2019,
     color: '#7ED321',
+    actions: [
+      {
+        icon: 'play',
+        url: 'https://retrosnake.netlify.com',
+      },
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/snake',
+      },
+    ],
   },
   {
-    url: 'https://cyberspace.netlify.com/',
-    source: 'https://github.com/evanbacon/sunset-cyberspace',
-    preview: require('./assets/projects/sunset-cyberspace/preview.png'),
+    image: require('./assets/projects/sunset-cyberspace/preview.png'),
     icon: require('./assets/projects/sunset-cyberspace/app-icon.png'),
     video: require('./assets/projects/sunset-cyberspace/demo.mp4'),
     title: 'Sunset Cyberspace',
     description: 'A mystic sage Chucky Cheevs fights off the Xamaronians.',
     year: 2017,
     color: '#F914E4',
+    actions: [
+      {
+        icon: 'play',
+        url: 'https://cyberspace.netlify.com/',
+      },
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/sunset-cyberspace',
+      },
+    ],
   },
   {
-    url: 'https://doodlejump.netlify.com/',
-    source: 'https://github.com/evanbacon/expo-doodle-jump',
-    preview: require('./assets/projects/doodle-jump/preview.jpeg'),
+    image: require('./assets/projects/doodle-jump/preview.jpeg'),
     icon: require('./assets/projects/doodle-jump/app-icon.png'),
     video: require('./assets/projects/doodle-jump/demo.mp4'),
     title: 'Doodle Jump',
@@ -267,11 +338,19 @@ export const Projects = [
     year: 2018,
     color: '#cbc816',
     isDarkColored: true,
+    actions: [
+      {
+        icon: 'play',
+        url: 'https://doodlejump.netlify.com/',
+      },
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/expo-doodle-jump',
+      },
+    ],
   },
   {
-    url: 'https://flappybacon.netlify.com/',
-    source: 'https://github.com/evanbacon/react-native-flappy-bird',
-    preview: require('./assets/projects/flappy-bird/preview.jpeg'),
+    image: require('./assets/projects/flappy-bird/preview.jpeg'),
     icon: require('./assets/projects/flappy-bird/app-icon.png'),
     video: require('./assets/projects/flappy-bird/demo.mp4'),
     title: 'Flappy Bird',
@@ -279,27 +358,45 @@ export const Projects = [
     year: 2018,
     color: '#DDD79F',
     isDarkColored: true,
+    actions: [
+      {
+        icon: 'play',
+        url: 'https://flappybacon.netlify.com/',
+      },
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/react-native-flappy-bird',
+      },
+    ],
   },
   {
-    // url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
-    source: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
-    preview: require('./assets/projects/super-mario/preview.jpeg'),
+    image: require('./assets/projects/super-mario/preview.jpeg'),
     icon: require('./assets/projects/super-mario/app-icon.png'),
     title: 'Super Mario',
     description: 'Phaser used for ultra fun times.',
     year: 2018,
     color: '#b80300',
+    actions: [
+      {
+        icon: 'code',
+        url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
+      },
+    ],
   },
   {
-    // url: '#',
-    source: 'https://github.com/evanbacon/expo-nitro-roll',
-    preview: require('./assets/projects/nitro-roll/preview.png'),
+    image: require('./assets/projects/nitro-roll/preview.png'),
     icon: require('./assets/projects/nitro-roll/app-icon.png'),
     title: 'Nitro Roll',
     description:
       'Roll through the nitro-sonic Voidiverse avoiding the Bleaqaulizers!',
     year: 2018,
     color: '#fff',
+    actions: [
+      {
+        icon: 'code',
+        url: 'https://github.com/evanbacon/expo-nitro-roll',
+      },
+    ],
   },
 ];
 
