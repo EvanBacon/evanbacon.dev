@@ -17,13 +17,13 @@ export default function({ navigation }) {
           {...project}
           renderDescription={() => (
             <View style={styles.aWrapper}>
-              {authors.map(author => (
+              {authors.map((author, index) => (
                 <A
                   key={author}
                   href={`https://twitter.com/${author}`}
                   style={styles.a}
                 >
-                  {`@${author} `}
+                  {`@${author}${index !== authors.length - 1 ? ' | ' : ''}`}
                 </A>
               ))}
             </View>
@@ -37,9 +37,8 @@ export default function({ navigation }) {
 const styles = StyleSheet.create({
   aWrapper: { flexDirection: 'row' },
   a: {
-    marginTop: 4,
     marginVertical: 0,
     color: 'white',
-    marginBottom: 0,
+    marginBottom: 4,
   },
 });
