@@ -1,4 +1,4 @@
-import { Article, Footer, H2, P } from '@expo/html-elements';
+import { Article, Footer, H2, H3, P } from '@expo/html-elements';
 import { Video } from 'expo-av';
 import { BlurView } from 'expo-blur';
 import React from 'react';
@@ -149,7 +149,7 @@ export default function ProjectCard({
             <View style={{ flex: 1 }}>
               {title && <H2 style={styles.title}>{title}</H2>}
               {description && !renderDescription && (
-                <P style={styles.description}>{description}</P>
+                <H3 style={styles.description}>{description}</H3>
               )}
               {renderDescription && renderDescription()}
               {year && <P style={styles.year}>{year}</P>}
@@ -237,15 +237,14 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    marginBottom: 8,
-    marginTop: 0,
+    marginVertical: 0,
     fontSize: useREM(1.51572),
-    lineHeight: useREM(1.51572),
   },
   description: {
     color: 'white',
-    marginTop: 0,
-    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: '500',
+    marginVertical: 0,
   },
   year: {
     color: 'white',
