@@ -97,25 +97,33 @@ export const Podcasts = [
   {
     url:
       'https://www.stitcher.com/podcast/react-training/the-react-podcast/e/67313854',
+    color: '#FFE000',
     image: require('./assets/podcast/react-podcast.jpg'),
+    authors: ['chantastic'],
     title: 'React Podcast',
   },
-  // {
-  //   url:
-  //     'https://devchat.tv/react-native-radio/react-native-at-expo-feat-evan-bacon/',
-  //     image: '',
-  //   title: 'React Native Radio',
-  // },
   {
     url: 'https://undefined.fm/radio/react-native-web-with-expos-evan-bacon',
+    color: '#539EF9',
     image: require('./assets/podcast/undefined-podcast.jpg'),
+    authors: ['jaredpalmer', 'ken_wheeler'],
     title: 'Undefined Podcast',
   },
-  // {
-  //   url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
-  //   image: '',
-  //   title: 'Behind the brick with Evan Bacon (2012)',
-  // },
+  {
+    url:
+      'https://devchat.tv/react-native-radio/react-native-at-expo-feat-evan-bacon/',
+    color: '#F5A623',
+    image: require('./assets/podcast/react-native-radio-podcast.jpg'),
+    authors: ['dabit3', 'spencer_carli', 'peterpme'],
+    title: 'React Native Radio',
+  },
+  {
+    url: 'https://modernlife.network/interview-with-lego-builder-evan-bacon/',
+    color: '#FFC100',
+    image: require('./assets/podcast/behind-the-brick.jpg'),
+    authors: ['John_Hanlon', 'BeyondtheBrick'],
+    title: 'Beyond the brick with Evan Bacon (2012)',
+  },
 ];
 
 export const News = [
