@@ -90,18 +90,14 @@ const CustomHeader = ({ siteTitle, navigation }) => {
 
         if (buttonIndex !== cancelButtonIndex) {
           const { url } = TABS[buttonIndex];
-          // if (Platform.OS !== 'web' && url === '') {
-          //   navigate({ routeName: '/' })
-          // } else {
           if (url.startsWith('http://') || url.startsWith('https://')) {
             Linking.openURL(url);
           } else {
-            navigate({ routeName: url || '/' });
+            navigate({
+              routeName: url || Platform.select({ web: '', default: '/' }),
+            });
           }
-          // }
-          // Linking.openURL(TABS[buttonIndex].url)
         }
-        // Do something here depending on the button index selected
       }
     );
 
@@ -111,7 +107,7 @@ const CustomHeader = ({ siteTitle, navigation }) => {
     window: { width },
   } = useDimensions();
   const isSmall = width < 720;
-  const isXSmall = width < 360;
+  const isXSmall = width < 520;
   const { top } = useSafeArea();
 
   return (
