@@ -1,3 +1,4 @@
+import { Header, Nav } from '@expo/html-elements';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useRouting } from 'expo-next-react-navigation';
 import { useRouter } from 'next/router';
@@ -6,14 +7,13 @@ import { Linking, Platform, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useDimensions, useREM } from 'react-native-web-hooks';
-import { Header, Nav } from '@expo/html-elements';
 
+import Colors from '../constants/Colors';
+import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import AppearanceSwitch from './AppearanceSwitch';
 import HeaderPhoto from './HeaderPhoto';
 import MenuButton from './MenuButton';
 import UniversalLink from './UniversalLink';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import Colors from '../constants/Colors';
 
 const TABS = [
   // {
@@ -33,13 +33,9 @@ const TABS = [
     url: 'lego',
   },
   {
-    title: 'Media',
+    title: 'Listen',
     url: 'media',
   },
-  // {
-  //   title: 'Watch',
-  //   url: 'watch'
-  // },
   {
     title: 'About',
     target: '_blank',
