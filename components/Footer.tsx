@@ -19,6 +19,10 @@ const socials = [
     url: 'https://twitter.com/baconbrix',
   },
   {
+    name: 'youtube-play',
+    url: 'https://www.youtube.com/baconbrix',
+  },
+  {
     name: 'github',
     url: 'https://github.com/evanbacon',
   },
@@ -89,6 +93,7 @@ export default function CustomFooter() {
         </View>
         <View style={styles.linkContainer}>
           <UniversalLink
+            target="_blank"
             routeName="https://www.expo.io"
             style={styles.link}
             focusStyle={styles.linkFocus}
@@ -110,9 +115,6 @@ const styles = StyleSheet.create({
   },
   linkContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   link: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: useREM(1.2),
     flexDirection: 'row',
     alignItems: 'center',
     transitionProperty: 'all',
