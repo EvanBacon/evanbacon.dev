@@ -1,4 +1,4 @@
-import { Footer } from '@expo/html-elements';
+import { H5, Footer } from '@expo/html-elements';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
@@ -9,6 +9,9 @@ import Quotes from '../constants/Quotes';
 import Quote from './Quote';
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
+import ExpoIcon from './ExpoIcon';
+
+const ICON_SIZE = 24;
 
 const socials = [
   {
@@ -85,8 +88,13 @@ export default function CustomFooter() {
           ))}
         </View>
         <View style={styles.linkContainer}>
-          <UniversalLink routeName="https://www.expo.io" style={styles.link}>
-            Built with Expo
+          <UniversalLink
+            routeName="https://www.expo.io"
+            style={styles.link}
+            focusStyle={styles.linkFocus}
+          >
+            <ExpoIcon width={ICON_SIZE} height={ICON_SIZE} fill="white" />
+            <H5 style={styles.footerText}>Built with Expo</H5>
           </UniversalLink>
         </View>
       </View>
@@ -101,10 +109,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: `1.45rem`,
   },
   linkContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  link: { color: 'white', fontWeight: 'bold', fontSize: useREM(1.2) },
+  link: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: useREM(1.2),
+    flexDirection: 'row',
+    alignItems: 'center',
+    transitionProperty: 'all',
+    transitionDuration: '250ms',
+  },
+  linkFocus: {
+    color: 'white',
+    borderBottomColor: 'transparent',
+    transform: [{ translateY: -4 }],
+  },
   socialWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginVertical: useREM(2.2),
+  },
+  footerText: {
+    marginVertical: 0,
+    marginLeft: 8,
+    color: 'white',
+    fontSize: useREM(1.5),
   },
 });
