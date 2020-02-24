@@ -65,6 +65,7 @@ function TalkCardPresentationRow({
               <Text
                 style={{
                   padding: 4,
+                  marginTop: -4,
                   marginLeft: 8,
                   borderRadius: 4,
                   alignSelf: 'center',
