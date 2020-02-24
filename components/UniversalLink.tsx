@@ -37,9 +37,9 @@ export default function UniversalLink({
 
   // Handle External links
   if (routeName.startsWith('http://') || routeName.startsWith('https://')) {
-    const isText = typeof props.children === 'string';
+    const isText = Platform.OS === 'web' || typeof props.children === 'string';
     const onPress = React.useCallback(() => {
-      if (Platform.OS !== 'web' || !isText) Linking.openURL(routeName);
+      Linking.openURL(routeName);
     }, [routeName, isText]);
 
     const WrapperView = isText ? Text : TouchableOpacity;
@@ -47,6 +47,8 @@ export default function UniversalLink({
     if (!isText) {
       delete safeStyle.color;
     }
+
+    if (Platform.OS !== 'web') props.onPress = onPress;
     return (
       <WrapperView
         {...props}
@@ -54,7 +56,6 @@ export default function UniversalLink({
         style={responsiveStyle}
         href={routeName}
         accessibilityRole="link"
-        onPress={onPress}
       />
     );
   }
