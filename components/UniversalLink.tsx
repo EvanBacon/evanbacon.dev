@@ -37,11 +37,11 @@ export default function UniversalLink({
 
   // Handle External links
   if (routeName.startsWith('http://') || routeName.startsWith('https://')) {
-    const onPress = React.useCallback(() => {
-      if (Platform.OS !== 'web') Linking.openURL(routeName);
-    }, [routeName]);
-
     const isText = typeof props.children === 'string';
+    const onPress = React.useCallback(() => {
+      if (Platform.OS !== 'web' || !isText) Linking.openURL(routeName);
+    }, [routeName, isText]);
+
     const WrapperView = isText ? Text : TouchableOpacity;
     const safeStyle = StyleSheet.flatten(responsiveStyle);
     if (!isText) {
