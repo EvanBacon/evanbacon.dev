@@ -31,6 +31,8 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
     flex: 1,
     minHeight: 360,
     maxHeight: 360,
+    borderRadius: 12,
+    overflow: 'hidden'
   };
 
   const videoRef = React.useRef(null);
