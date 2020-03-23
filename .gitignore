@@ -8,12 +8,13 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-web-report/
 
 # macOS
 .DS_Store
 
-# @generated: @expo/next-adapter@2.0.0-beta.10
+assets/portfolio-assets.sketch
+
+# @generated: @expo/next-adapter@2.0.14
 /.expo/*
 # Expo Web
 /web-build/*
@@ -34,4 +35,3 @@ web-report/
 /.pnp
 .pnp.js
 # @end @expo/next-adapter
-assets/portfolio-assets.sketch
