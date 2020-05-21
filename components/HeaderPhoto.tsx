@@ -8,7 +8,7 @@ const SIZE = 48;
 const HeaderPhoto = () => {
   return (
     <AspectImage
-      source={{ uri: 'https://avatars.io/twitter/baconbrix' }}
+      source={require('../assets/pfp.jpg')}
       loading="lazy"
       style={styles.image}
     />
