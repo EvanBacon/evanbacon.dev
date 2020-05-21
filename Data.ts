@@ -622,19 +622,19 @@ export const Lego: LegoProject[] = [
 export const Talks = [
   // TODO: Bacon: Add graphql contributor days
   // Add future events: reactathon 2020, app.js conf 2020, react europe 2020
-  {
-    title: 'Announcing Expo for Web v1',
-    description: `Proudly presenting the first production ready version of Expo in the browser`,
-    presentedData: [
-      {
-        title: 'App.js Conf',
-        href: 'https://appjs.co/',
-        date: 'April 4th, 2020',
-        upcoming: true,
-        resources: [],
-      },
-    ],
-  },
+  // {
+  //   title: 'Announcing Expo for Web v1',
+  //   description: `Proudly presenting the first production ready version of Expo in the browser`,
+  //   presentedData: [
+  //     {
+  //       title: 'App.js Conf',
+  //       href: 'https://appjs.co/',
+  //       date: 'April 4th, 2020',
+  //       upcoming: true,
+  //       resources: [],
+  //     },
+  //   ],
+  // },
   {
     title: 'React Native for React Developers',
     description: `React Native can be pretty intimidating for web developers. See what I've been doing at Expo to close the gap.`,
@@ -642,26 +642,25 @@ export const Talks = [
       {
         title: 'React Europe',
         href: 'https://www.react-europe.org/',
-        date: 'May 15th, 2020',
-        upcoming: true,
+        date: 'May 14th, 2020',
         resources: [],
       },
     ],
   },
-  {
-    title: 'Build it once with Expo for Web',
-    description:
-      'Latest info on build websites with Expo! Get your tickets now :D',
-    presentedData: [
-      {
-        title: 'Reactathon',
-        href: 'https://www.reactathon.com/',
-        date: 'March 31st, 2020',
-        upcoming: true,
-        resources: [],
-      },
-    ],
-  },
+  // {
+  //   title: 'Build it once with Expo for Web',
+  //   description:
+  //     'Latest info on build websites with Expo! Get your tickets now :D',
+  //   presentedData: [
+  //     {
+  //       title: 'Reactathon',
+  //       href: 'https://www.reactathon.com/',
+  //       date: 'March 31st, 2020',
+  //       upcoming: false,
+  //       resources: [],
+  //     },
+  //   ],
+  // },
   {
     title: 'Expo for Web',
     image: require('./assets/talks/expo-for-web.jpg'),
