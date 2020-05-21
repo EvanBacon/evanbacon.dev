@@ -123,6 +123,19 @@ export const Images = [
 
 export const Podcasts: Project[] = [
   {
+    title: "Evan's World",
+    image: require('./assets/podcast/evans-world.jpg'),
+    year: '2020',
+    color: '#F8E71C',
+    authors: ['lydiahallie', 'baconbrix'],
+    actions: [
+      {
+        url: 'https://podcasts.apple.com/us/podcast/evans-world/id1502259756',
+        icon: 'microphone',
+      },
+    ],
+  },
+  {
     title: 'React Podcast',
     image: require('./assets/podcast/react-podcast.jpg'),
     year: '2020',
