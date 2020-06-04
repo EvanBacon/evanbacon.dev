@@ -22,7 +22,7 @@
     "expo-dark-mode-switch": "^0.0.1",
     "expo-linear-gradient": "~8.1.0",
     "expo-next-react-navigation": "^0.0.23",
-    "next": "^9.1.6",
+    "next": "^9.3.2",
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/unstable/sdk-37.tar.gz",
