@@ -1,4 +1,4 @@
-import { Header, Nav } from '@expo/html-elements';
+import { Header, B, A, Nav } from '@expo/html-elements';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useRouting } from 'expo-next-react-navigation';
 import { useRouter } from 'next/router';
@@ -108,6 +108,35 @@ const CustomHeader = ({ siteTitle, navigation }) => {
 
   return (
     <Header style={[styles.container, { paddingTop: top }]}>
+      <View
+        style={{
+          backgroundColor: 'black',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <B
+          style={{
+            paddingVertical: 16,
+            paddingHorizontal: 8,
+            fontSize: 16,
+            color: 'white',
+            textAlign: 'center',
+          }}
+        >
+          Black Lives Matter.{' '}
+          <A
+            href="https://support.eji.org/give/153413/#!/donation/checkout"
+            style={{
+              color: '#A3A1F7',
+              textDecorationStyle: 'solid',
+              textDecorationLine: 'underline',
+            }}
+          >
+            Support the Equal Justice Initiative.
+          </A>
+        </B>
+      </View>
       <Nav
         style={[
           styles.innerContainer,
