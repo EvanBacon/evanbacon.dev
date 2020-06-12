@@ -308,7 +308,7 @@ export const Projects: Project[] = [
     actions: [
       {
         icon: 'play',
-        url: 'https://evanbacon.github.io/Expo-Pillar-Valley/',
+        url: 'https://pillarvalley.netlify.app',
       },
       {
         icon: 'code',
