@@ -81,7 +81,7 @@ const CustomHeader = ({ siteTitle, navigation }) => {
           color,
         },
       },
-      buttonIndex => {
+      (buttonIndex) => {
         setActive(false);
 
         if (buttonIndex !== cancelButtonIndex) {
@@ -108,35 +108,6 @@ const CustomHeader = ({ siteTitle, navigation }) => {
 
   return (
     <Header style={[styles.container, { paddingTop: top }]}>
-      <View
-        style={{
-          backgroundColor: 'black',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <B
-          style={{
-            paddingVertical: 16,
-            paddingHorizontal: 8,
-            fontSize: 16,
-            color: 'white',
-            textAlign: 'center',
-          }}
-        >
-          Black Lives Matter.{' '}
-          <A
-            href="https://support.eji.org/give/153413/#!/donation/checkout"
-            style={{
-              color: '#A3A1F7',
-              textDecorationStyle: 'solid',
-              textDecorationLine: 'underline',
-            }}
-          >
-            Support the Equal Justice Initiative.
-          </A>
-        </B>
-      </View>
       <Nav
         style={[
           styles.innerContainer,
@@ -170,7 +141,7 @@ const CustomHeader = ({ siteTitle, navigation }) => {
         <View
           style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex' }]}
         >
-          {TABS.map(info => (
+          {TABS.map((info) => (
             <HeaderLink
               title={info.title}
               key={info.title}
