@@ -19,11 +19,11 @@ const Routes = [
   //   title: 'Watch',
   //   url: 'watch'
   // },
-  {
-    title: 'About',
-    target: '_blank',
-    url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
-  },
+  // {
+  //   title: 'About',
+  //   target: '_blank',
+  //   url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
+  // },
   {
     title: 'Source',
     target: '_blank',

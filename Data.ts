@@ -632,6 +632,16 @@ export const Lego: LegoProject[] = [
   },
 ];
 
+function ytvid(
+  id: string
+): { title: 'Video'; href: string; thumbnail: string } {
+  return {
+    title: 'Video',
+    href: `https://www.youtube.com/watch?v=${id}`,
+    thumbnail: `http://img.youtube.com/vi/${id}/hqdefault.jpg`,
+  };
+}
+
 export const Talks = [
   // TODO: Bacon: Add graphql contributor days
   // Add future events: reactathon 2020, app.js conf 2020, react europe 2020
@@ -649,39 +659,35 @@ export const Talks = [
   //   ],
   // },
   {
-    title: 'React Native panel',
+    title: 'React Native Panel (Error Stack Traces)',
+    image: { uri: 'http://img.youtube.com/vi/_HKzhe8f47Y/hqdefault.jpg' },
     description: `I give a brief overview of Error improvements in Expo SDK 41`,
     presentedData: [
       {
         title: 'React Day Bangalore',
         href: 'https://reactday.in/',
         date: 'May 20th, 2021',
-        resources: [
-          {
-            title: 'Video',
-            href: 'https://www.youtube.com/watch?v=_HKzhe8f47Y',
-            thumbnail: 'http://img.youtube.com/vi/_HKzhe8f47Y/hqdefault.jpg',
-          },
-        ],
+        resources: [ytvid('_HKzhe8f47Y')],
       },
     ],
   },
   {
     title: 'React Native for React Developers',
+    image: { uri: 'http://img.youtube.com/vi/uyZslq7Jsno/hqdefault.jpg' },
     description: `React Native can be pretty intimidating for web developers. See what I've been doing at Expo to close the gap.`,
     presentedData: [
       {
         title: 'React Europe',
         href: 'https://www.react-europe.org/',
         date: 'May 14th, 2020',
-        resources: [],
+        resources: [ytvid('uyZslq7Jsno')],
       },
     ],
   },
   {
     title: 'Build it once with Expo for Web',
     description:
-      'Latest info on build websites with Expo! Get your tickets now :D',
+      'Latest info on building websites with Expo. (Cancelled due to covid related restrictions)',
     presentedData: [
       {
         title: 'Reactathon',
@@ -703,11 +709,7 @@ export const Talks = [
         href: 'https://2019.react-europe.org/',
         date: 'May 21st, 2019',
         resources: [
-          {
-            title: 'Video',
-            href: 'https://www.youtube.com/watch?v=UcjCuWy81YM',
-            thumbnail: 'http://img.youtube.com/vi/UcjCuWy81YM/hqdefault.jpg',
-          },
+          ytvid('UcjCuWy81YM'),
           {
             title: 'Photos',
             href: 'https://photos.app.goo.gl/HNYBza7dAu6N92nD6',
@@ -719,11 +721,7 @@ export const Talks = [
         href: 'https://reactiveconf.com/',
         date: 'October 30th, 2019',
         resources: [
-          {
-            title: 'Video',
-            href: 'https://www.youtube.com/watch?v=k1FdrhA2sCY',
-            thumbnail: 'http://img.youtube.com/vi/k1FdrhA2sCY/hqdefault.jpg',
-          },
+          ytvid('k1FdrhA2sCY'),
           {
             title: 'Photos',
             href: 'https://photos.app.goo.gl/QjnahANvA7Vn1V9b7',
@@ -735,11 +733,7 @@ export const Talks = [
         href: 'https://reactday.berlin/',
         date: 'December 6th, 2019',
         resources: [
-          {
-            title: 'Video',
-            href: 'https://www.youtube.com/watch?v=ykBxY01j_rA',
-            thumbnail: 'http://img.youtube.com/vi/ykBxY01j_rA/hqdefault.jpg',
-          },
+          ytvid('ykBxY01j_rA'),
           {
             title: 'Photos',
             href: 'https://photos.app.goo.gl/T8rjmu6JxNr31bNw7',
@@ -759,11 +753,7 @@ export const Talks = [
         href: 'https://appjs.co/2019/',
         date: 'April 4th, 2019',
         resources: [
-          {
-            title: 'Video',
-            href: 'https://www.youtube.com/watch?v=jt7NCutWcUU',
-            thumbnail: 'http://img.youtube.com/vi/jt7NCutWcUU/hqdefault.jpg',
-          },
+          ytvid('jt7NCutWcUU'),
           {
             title: 'Photos',
             href: 'https://photos.app.goo.gl/Hwqd6gLVgx6UBFQWA',
@@ -802,11 +792,7 @@ export const Talks = [
         href: 'https://2018.react-europe.org/#schedule-item-1454',
         date: 'May 18th, 2018',
         resources: [
-          {
-            title: 'Video',
-            href: 'https://www.youtube.com/watch?v=oHBGhHlVOI0',
-            thumbnail: 'http://img.youtube.com/vi/oHBGhHlVOI0/hqdefault.jpg',
-          },
+          ytvid('oHBGhHlVOI0'),
           {
             title: 'Photos',
             href: 'https://photos.app.goo.gl/93R1rqyu3rL6YjkaA',

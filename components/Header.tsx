@@ -36,11 +36,11 @@ const TABS = [
     title: 'Listen',
     url: 'media',
   },
-  {
-    title: 'About',
-    target: '_blank',
-    url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
-  },
+  // {
+  //   title: 'About',
+  //   target: '_blank',
+  //   url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
+  // },
   {
     title: 'Source',
     target: '_blank',
