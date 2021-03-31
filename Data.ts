@@ -649,6 +649,24 @@ export const Talks = [
   //   ],
   // },
   {
+    title: 'React Native panel',
+    description: `I give a brief overview of Error improvements in Expo SDK 41`,
+    presentedData: [
+      {
+        title: 'React Day Bangalore',
+        href: 'https://reactday.in/',
+        date: 'May 20th, 2021',
+        resources: [
+          {
+            title: 'Video',
+            href: 'https://www.youtube.com/watch?v=_HKzhe8f47Y',
+            thumbnail: 'http://img.youtube.com/vi/_HKzhe8f47Y/hqdefault.jpg',
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: 'React Native for React Developers',
     description: `React Native can be pretty intimidating for web developers. See what I've been doing at Expo to close the gap.`,
     presentedData: [
@@ -660,20 +678,20 @@ export const Talks = [
       },
     ],
   },
-  // {
-  //   title: 'Build it once with Expo for Web',
-  //   description:
-  //     'Latest info on build websites with Expo! Get your tickets now :D',
-  //   presentedData: [
-  //     {
-  //       title: 'Reactathon',
-  //       href: 'https://www.reactathon.com/',
-  //       date: 'March 31st, 2020',
-  //       upcoming: false,
-  //       resources: [],
-  //     },
-  //   ],
-  // },
+  {
+    title: 'Build it once with Expo for Web',
+    description:
+      'Latest info on build websites with Expo! Get your tickets now :D',
+    presentedData: [
+      {
+        title: 'Reactathon',
+        href: 'https://www.reactathon.com/',
+        date: 'March 31st, 2020',
+        upcoming: false,
+        resources: [],
+      },
+    ],
+  },
   {
     title: 'Expo for Web',
     image: require('./assets/talks/expo-for-web.jpg'),
