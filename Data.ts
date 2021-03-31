@@ -660,7 +660,7 @@ export const Talks = [
   // },
   {
     title: 'React Native Panel (Error Stack Traces)',
-    image: { uri: 'http://img.youtube.com/vi/_HKzhe8f47Y/hqdefault.jpg' },
+    image: require('./assets/talks/react-native-bangalore.png'),
     description: `I give a brief overview of Error improvements in Expo SDK 41`,
     presentedData: [
       {
@@ -673,7 +673,7 @@ export const Talks = [
   },
   {
     title: 'React Native for React Developers',
-    image: { uri: 'http://img.youtube.com/vi/uyZslq7Jsno/hqdefault.jpg' },
+    image: require('./assets/talks/expo-html.webp'),
     description: `React Native can be pretty intimidating for web developers. See what I've been doing at Expo to close the gap.`,
     presentedData: [
       {
