@@ -10,6 +10,7 @@ import Quote from './Quote';
 import SocialIcon from './SocialIcon';
 import UniversalLink from './UniversalLink';
 import ExpoIcon from './ExpoIcon';
+import Colors from '../constants/Colors';
 
 const ICON_SIZE = 24;
 
@@ -109,7 +110,7 @@ export default function CustomFooter() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#4630eb',
+    backgroundColor: Colors.theme,
     paddingVertical: `1.0875rem`,
     paddingHorizontal: `1.45rem`,
   },

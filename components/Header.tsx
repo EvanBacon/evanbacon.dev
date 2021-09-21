@@ -184,7 +184,7 @@ function HeaderLink({ title, target, style, routeName }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: `#4630eb`,
+    backgroundColor: Colors.theme,
     marginBottom: useREM(1.45),
     alignItems: 'stretch',
   },
@@ -219,12 +219,12 @@ const styles = StyleSheet.create({
   leftHeader: {
     flexDirection: 'row',
     zIndex: 1,
-    backgroundColor: `#4630eb`,
+    backgroundColor: Colors.theme,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   rightHeader: {
-    backgroundColor: `#4630eb`,
+    backgroundColor: Colors.theme,
     ...Platform.select({
       web: {
         transitionProperty: 'all',

@@ -4,6 +4,7 @@ import React from 'react';
 import { AppearanceProvider } from 'react-native-appearance';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Colors from '../constants/Colors';
 
 import CustomAppearanceProvider from '../context/CustomAppearanceProvider';
 import { Meta } from '../Data';
@@ -29,7 +30,7 @@ export function ensureSlash(inputPath: string, needsSlash: boolean): string {
 EStyleSheet.build({}); // always call EStyleSheet.build() even if you don't use global variables!
 
 export default function App({ Component, router = {}, pageProps }: any) {
-  const themeColor = '#4630eb';
+  const themeColor = Colors.theme;
 
   const currentPath = ensureSlash(router.route || '', false) || 'talks';
   const { image = {}, title = site.title, description = site.description } =
