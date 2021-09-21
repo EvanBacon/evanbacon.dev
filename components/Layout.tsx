@@ -22,7 +22,7 @@ const transitionStyle = Platform.select({
   default: {},
 });
 
-export default function Layout({ children, navigation }) {
+export default function Layout({ children, maxWidth, navigation }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
   const backgroundColor = isDark
     ? Colors.backgroundDark
@@ -34,9 +34,9 @@ export default function Layout({ children, navigation }) {
   }, [isDark]);
 
   const { onLayout, width } = useLayout();
-
+  const trueMaxWidth = maxWidth || MAX_WIDTH;
   const mainStyle =
-    width > MAX_WIDTH + 40 ? styles.mainLarge : styles.mainSmall;
+    width > (trueMaxWidth) + 40 ? [styles.mainLarge, { width: trueMaxWidth }] : styles.mainSmall;
 
   const { bottom, left, right } = useSafeArea();
 
