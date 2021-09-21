@@ -1,6 +1,6 @@
 import NativeView from '@expo/html-elements/build/primitives/View';
 import React, { ClassAttributes, ComponentProps, ComponentType } from 'react';
-import { StyleProp, StyleSheet, ViewStyle as NativeViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, AccessibilityRole, ViewStyle as NativeViewStyle } from 'react-native';
 
 
 
