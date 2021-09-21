@@ -72,9 +72,6 @@ export default function FAQ({ navigation }) {
     );
 }
 
-
-
-
 function FAQItem({ question, children }: { question: string, children: any }) {
     const { isDark } = React.useContext(CustomAppearanceContext);
     const text = isDark ? 'white' : 'black'

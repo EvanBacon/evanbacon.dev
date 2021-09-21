@@ -1,9 +1,10 @@
 import { Article, H2, H4, HR, P } from '@expo/html-elements';
 import React from 'react';
-import { Image, StyleSheet, Text as RNText, View } from 'react-native';
+import { Image, StyleSheet, Text as RNText, } from 'react-native';
 import { useHover, useREM } from 'react-native-web-hooks';
 
 import Layout from '../components/Layout';
+import { View } from '../components/View';
 import PageHeader from '../components/PageHeader';
 import Colors from '../constants/Colors';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
@@ -42,7 +43,7 @@ function TalkCardPresentationRow({
   const textSyle = isDark ? { color: cardLight } : { color: cardDark };
   return (
     <View>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between' }]}>
         <Text
           ref={link}
           target="_blank"
@@ -109,7 +110,7 @@ function TalkCard({ title, image, description, presentedData = [] }) {
       {image && (
         <Image style={styles.image} resizeMode="cover" source={image} />
       )}
-      <Article style={styles.resContainer}>
+      <Article style={[styles.resContainer]}>
         <H2
           style={{
             color: textColor,
@@ -182,8 +183,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     padding: 40,
-    // weird hack
-    minHeight: undefined,
+
   },
   image: {
     flex: 1,
@@ -196,4 +196,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'transparent',
   },
+
 });
