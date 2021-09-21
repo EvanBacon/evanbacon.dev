@@ -1,12 +1,12 @@
+import { Main, Section } from '@expo/html-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Platform, ScrollView, View } from 'react-native';
+import { Platform, ScrollView } from 'react-native';
 import StyleSheet from 'react-native-extended-stylesheet';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useLayout } from 'react-native-web-hooks';
 
-import { Main, Section } from '@expo/html-elements';
 import Colors from '../constants/Colors';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import Footer from './Footer';
@@ -22,14 +22,14 @@ const transitionStyle = Platform.select({
   default: {},
 });
 
-export default function Layout({ children, maxWidth, navigation }) {
+export default function Layout({ children, maxWidth, navigation }: { children?: any, maxWidth?: number, navigation?: any }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
   const backgroundColor = isDark
     ? Colors.backgroundDark
     : Colors.backgroundLight;
 
   React.useEffect(() => {
-    // @ts-ignore
+    // eslint-disable-next-line
     document.body.style.backgroundColor = backgroundColor;
   }, [isDark]);
 

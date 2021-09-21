@@ -25,6 +25,7 @@ export default function Quote({ quote, author, url }) {
   return (
     <View style={styles.container}>
       <Laurel style={styles.startLeaf} />
+      {/* @ts-ignore */}
       <BlockQuote cite={url} style={styles.blockQuote}>
         <Text style={styles.quote}>{quote}</Text>
         <Footer>

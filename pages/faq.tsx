@@ -78,14 +78,19 @@ export default function FAQ({ navigation }) {
 function FAQItem({ question, children }: { question: string, children: any }) {
     const { isDark } = React.useContext(CustomAppearanceContext);
     const text = isDark ? 'white' : 'black'
+    // @ts-ignore
     return (
-        <View itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+        <IView itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+            {/* @ts-ignore */}
             <H3 itemProp="name" style={{ color: text }}>{question}</H3>
-            <View itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+            <IView itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                {/* @ts-ignore */}
                 <Text itemProp="text" style={{ color: text }}>
                     {children}
                 </Text>
-            </View>
-        </View>
+            </IView>
+        </IView>
     )
 }
+
+const IView = View as any;

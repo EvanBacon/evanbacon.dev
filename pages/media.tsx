@@ -7,7 +7,8 @@ import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 import { Podcasts } from '../Data';
 
-export default function({ navigation }) {
+const IA = A as any;
+export default function Media({ navigation }) {
   return (
     <Layout navigation={navigation}>
       <PageHeader>Podcasts</PageHeader>
@@ -17,14 +18,15 @@ export default function({ navigation }) {
           {...project}
           renderDescription={() => (
             <View style={styles.aWrapper}>
+
               {authors.map((author, index) => (
-                <A
+                <IA
                   key={author}
                   href={`https://twitter.com/${author}`}
                   style={styles.a}
                 >
                   {`@${author}${index !== authors.length - 1 ? ' | ' : ''}`}
-                </A>
+                </IA>
               ))}
             </View>
           )}
