@@ -1,11 +1,20 @@
 import { getInitialProps } from '@expo/next-adapter/document';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
 class CustomDocument extends Document {
   static getInitialProps = async props => {
     const isProduction = process.env.NODE_ENV === 'production';
     const result = await getInitialProps(props);
+
+    console.log(props)
+    if (props.pathname === '/faq') {
+      result.htmlProps = {
+        itemScope: true,
+        itemType: "https://schema.org/FAQPage"
+      }
+    }
+
     return { ...result, isProduction };
   };
 
@@ -33,9 +42,9 @@ class CustomDocument extends Document {
   render() {
     // @ts-ignore
     const { isProduction } = this.props;
-
     return (
-      <html>
+      <Html>
+
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           {isProduction && (
@@ -127,7 +136,7 @@ class CustomDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

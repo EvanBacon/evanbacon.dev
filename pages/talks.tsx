@@ -145,7 +145,7 @@ function TalkCard({ title, image, description, presentedData = [] }) {
   );
 }
 
-export default function({ navigation }) {
+export default function ({ navigation }) {
   return (
     <Layout navigation={navigation}>
       <PageHeader>Talks</PageHeader>
@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   divider: {
-    flex: 1,
+
+    maxHeight: 0,
     marginHorizontal: 0,
     marginVertical: 20,
   },
@@ -181,6 +182,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     padding: 40,
+    // weird hack
+    minHeight: undefined,
   },
   image: {
     flex: 1,
