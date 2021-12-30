@@ -1,11 +1,10 @@
-import { H1 } from '@expo/html-elements';
 import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 
-export default function ({ children }) {
+export default function({ children }) {
   const {
     window: { width },
   } = useDimensions();
@@ -13,7 +12,7 @@ export default function ({ children }) {
 
   const isSmall = width < 720;
   return (
-    <H1
+    <h1
       style={[
         styles.container,
         {
@@ -23,7 +22,7 @@ export default function ({ children }) {
       ]}
     >
       {children}
-    </H1>
+    </h1>
   );
 }
 

@@ -1,28 +1,16 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "jsx": "preserve",
-    "lib": [
-      "dom",
-      "esnext"
+    "typeRoots": [
+      "./global.d.ts"
     ],
-    "moduleResolution": "node",
-    "noEmit": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "target": "es5",
-    "allowJs": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "isolatedModules": true
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "extends": "expo/tsconfig.base",
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ]

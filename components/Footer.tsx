@@ -1,16 +1,14 @@
-import { H5, Footer } from '@expo/html-elements';
+import ExpoIcon from '@/assets/expo.svg';
+import { Link } from 'expo-router';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import StyleSheet from 'react-native-extended-stylesheet';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 
+import Colors from '../constants/Colors';
 import Quotes from '../constants/Quotes';
 import Quote from './Quote';
 import SocialIcon from './SocialIcon';
-import UniversalLink from './UniversalLink';
-import ExpoIcon from './ExpoIcon';
-import Colors from '../constants/Colors';
 
 const ICON_SIZE = 24;
 
@@ -53,14 +51,14 @@ const socials = [
 const hourIndex = new Date().getHours();
 
 export default function CustomFooter() {
-  const { bottom, left, right } = useSafeArea();
+  const { bottom, left, right } = useSafeAreaInsets();
 
   const [index, setIndex] = React.useState(hourIndex);
   const quote = Quotes[index % Quotes.length];
 
   return (
-    <Footer style={styles.container}>
-      <View
+    <footer style={styles.container}>
+      <div
         style={{
           flex: 1,
           paddingBottom: bottom,
@@ -79,32 +77,32 @@ export default function CustomFooter() {
           />
         </TouchableOpacity>
 
-        <View style={styles.socialWrapper}>
+        <div style={styles.socialWrapper}>
           {socials.map(social => (
-            <UniversalLink
+            <Link
               style={{ marginRight: 8 }}
               target="_blank"
               key={social.name}
-              routeName={social.url}
-              focusStyle={{ transform: [{ scale: 1.1 }] }}
+              href={social.url}
+              hoverStyle={{ transform: [{ scale: 1.1 }] }}
             >
               <SocialIcon name={social.name} color="white" size={16 * 2.2} />
-            </UniversalLink>
+            </Link>
           ))}
-        </View>
-        <View style={styles.linkContainer}>
-          <UniversalLink
+        </div>
+        <div style={styles.linkContainer}>
+          <Link
             target="_blank"
-            routeName="https://www.expo.io"
+            href="https://www.expo.io"
             style={styles.link}
-            focusStyle={styles.linkFocus}
+            hoverStyle={styles.linkFocus}
           >
             <ExpoIcon width={ICON_SIZE} height={ICON_SIZE} fill="white" />
-            <H5 style={styles.footerText}>Built with Expo</H5>
-          </UniversalLink>
-        </View>
-      </View>
-    </Footer>
+            <h5 style={styles.footerText}>Built with Expo</h5>
+          </Link>
+        </div>
+      </div>
+    </footer>
   );
 }
 

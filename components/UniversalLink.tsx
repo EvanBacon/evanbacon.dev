@@ -1,16 +1,16 @@
-import { Link as EXLink } from 'expo-next-react-navigation';
+// import { Link as EXLink } from 'expo-next-react-navigation';
+import { Link } from 'expo-router';
 import React from 'react';
 import {
   Linking,
   Platform,
   Text as RNText,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
-import StyleSheet from 'react-native-extended-stylesheet';
 import { useFocus, useHover } from 'react-native-web-hooks';
 
 const Text = RNText as any;
-const Link = EXLink as any;
 
 export default function UniversalLink({
   routeName,
@@ -65,11 +65,6 @@ export default function UniversalLink({
   if (Platform.OS !== 'web' && routeName === '') outputRouteName = '/';
 
   return (
-    <Link
-      ref={ref}
-      routeName={outputRouteName}
-      {...props}
-      style={responsiveStyle}
-    />
+    <Link ref={ref} href={outputRouteName} {...props} style={responsiveStyle} />
   );
 }

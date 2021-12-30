@@ -1,10 +1,7 @@
-import { Main, Section } from '@expo/html-elements';
 import { LinearGradient } from 'expo-linear-gradient';
-import PropTypes from 'prop-types';
 import React from 'react';
-import { Platform, ScrollView } from 'react-native';
-import StyleSheet from 'react-native-extended-stylesheet';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { Platform, ScrollView, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLayout } from 'react-native-web-hooks';
 
 import Colors from '../constants/Colors';
@@ -22,7 +19,15 @@ const transitionStyle = Platform.select({
   default: {},
 });
 
-export default function Layout({ children, maxWidth, navigation }: { children?: any, maxWidth?: number, navigation?: any }) {
+export default function Layout({
+  children,
+  maxWidth,
+  navigation,
+}: {
+  children?: any;
+  maxWidth?: number;
+  navigation?: any;
+}) {
   const { isDark } = React.useContext(CustomAppearanceContext);
   const backgroundColor = isDark
     ? Colors.backgroundDark
@@ -36,9 +41,11 @@ export default function Layout({ children, maxWidth, navigation }: { children?: 
   const { onLayout, width } = useLayout();
   const trueMaxWidth = maxWidth || MAX_WIDTH;
   const mainStyle =
-    width > (trueMaxWidth) + 40 ? [styles.mainLarge, { width: trueMaxWidth }] : styles.mainSmall;
+    width > trueMaxWidth + 40
+      ? [styles.mainLarge, { width: trueMaxWidth }]
+      : styles.mainSmall;
 
-  const { bottom, left, right } = useSafeArea();
+  const { bottom, left, right } = useSafeAreaInsets();
 
   // TODO: Account for tab bar changing height
   const paddingBottom = Platform.select({ web: 0, default: bottom + 24 });
@@ -54,8 +61,8 @@ export default function Layout({ children, maxWidth, navigation }: { children?: 
       style={styles.scrollView}
     >
       <Sky isDark={isDark}>
-        <Header siteTitle="Evan Bacon" navigation={navigation} />
-        <Main
+        <Header siteTitle="Evan Bacon 🥓" navigation={navigation} />
+        <main
           style={[
             mainStyle,
             {
@@ -65,8 +72,8 @@ export default function Layout({ children, maxWidth, navigation }: { children?: 
             },
           ]}
         >
-          <Section>{children}</Section>
-        </Main>
+          <section>{children}</section>
+        </main>
       </Sky>
       {Platform.OS === 'web' && <Footer />}
     </ScrollView>
@@ -84,10 +91,6 @@ function Sky({ children, isDark }) {
     />
   );
 }
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 const styles = StyleSheet.create({
   mainLarge: {

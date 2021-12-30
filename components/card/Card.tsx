@@ -1,6 +1,6 @@
-import { Article, Footer, H2, H3, P } from '@expo/html-elements';
 import { Video } from 'expo-av';
 import { BlurView } from 'expo-blur';
+import { Link } from 'expo-router';
 import React from 'react';
 import {
   Image,
@@ -13,9 +13,8 @@ import { useDimensions, useHover, useREM } from 'react-native-web-hooks';
 import isHoverEnabled from 'react-native-web-hooks/build/isHoverEnabled';
 
 import CustomAppearanceContext from '../../context/CustomAppearanceContext';
-import SocialIcon from '../SocialIcon';
-import UniversalLink from '../UniversalLink';
 import { Project } from '../../Data';
+import SocialIcon from '../SocialIcon';
 
 const upperFlow = 16;
 const ICON_SIZE = 72;
@@ -49,7 +48,7 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
 
   if (props.video) {
     return (
-      <View style={baseStyle}>
+      <div style={baseStyle}>
         <Video
           ref={videoRef}
           source={props.video}
@@ -60,7 +59,7 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
           isLooping
           style={[StyleSheet.absoluteFill, { zIndex: -1 }]}
         />
-        <View
+        <div
           style={{
             zIndex: 5,
             flex: 1,
@@ -70,18 +69,20 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
           }}
         >
           {props.children}
-        </View>
-      </View>
+        </div>
+      </div>
     );
   }
 
   return (
-    <ImageBackground
-      source={props.image}
-      style={baseStyle}
-      resizeMode={resizeMode}
-    >
-      <View
+    <div style={baseStyle} resizeMode={resizeMode}>
+      <Image
+        source={props.image}
+        style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]}
+        resizeMode={resizeMode}
+      />
+
+      <div
         style={{
           flex: 1,
           justifyContent: 'center',
@@ -90,8 +91,8 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
         }}
       >
         {props.children}
-      </View>
-    </ImageBackground>
+      </div>
+    </div>
   );
 }
 
@@ -120,7 +121,7 @@ export default function ProjectCard({
   const isHovered = useHover(ref);
 
   return (
-    <Article
+    <article
       ref={ref}
       style={[
         styles.container,
@@ -135,53 +136,51 @@ export default function ProjectCard({
         video={video}
         resizeMode="cover"
       >
-        <Footer style={styles.footer}>
+        <footer style={styles.footer}>
           <Underlay color={themeColor} />
 
           <BlurView intensity={100} style={styles.blur} />
 
-          <View
-            style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}
-          >
+          <div style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}>
             {icon && (
               <Image source={icon} style={styles.icon} resizeMode="cover" />
             )}
-            <View style={{ flex: 1 }}>
-              {title && <H2 style={styles.title}>{title}</H2>}
+            <div style={{ flex: 1 }}>
+              {title && <h2 style={styles.title}>{title}</h2>}
               {description && !renderDescription && (
-                <H3 style={styles.description}>{description}</H3>
+                <h3 style={styles.description}>{description}</h3>
               )}
               {renderDescription && renderDescription()}
-              {year && <P style={styles.year}>{year}</P>}
-            </View>
-          </View>
+              {year && <p style={styles.year}>{year}</p>}
+            </div>
+          </div>
 
-          <View
+          <div
             style={{
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}
           >
             {actions.map((social, index) => (
-              <View key={social.icon}>
-                <UniversalLink
+              <div key={social.icon}>
+                <Link
                   style={{ marginLeft: index === 0 ? 0 : 24 }}
-                  focusStyle={{ transform: [{ scale: 1.1 }] }}
+                  hoverStyle={{ transform: [{ scale: 1.1 }] }}
                   target="_blank"
-                  routeName={social.url}
+                  href={social.url}
                 >
                   <SocialIcon
                     name={social.icon}
                     color="white"
                     size={16 * 2.2}
                   />
-                </UniversalLink>
-              </View>
+                </Link>
+              </div>
             ))}
-          </View>
-        </Footer>
+          </div>
+        </footer>
       </MediaBackground>
-    </Article>
+    </article>
   );
 }
 

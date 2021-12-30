@@ -1,13 +1,10 @@
 {
   "expo": {
-    "name": "basic-portfolio",
-    "slug": "basic-portfolio",
+    "name": "Bacon",
+    "slug": "bacon",
+    "scheme": "bacon",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -19,10 +16,18 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "web": {
+      "bundler": "metro"
+    },
+    "android": {
+      "package": "evanbacon.dev"
+    },
+    "experiments": {
+      "tsconfigPaths": true
+    },
     "ios": {
+      "bundleIdentifier": "evanbacon.dev",
       "supportsTablet": true
     }
   }

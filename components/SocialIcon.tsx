@@ -1,5 +1,4 @@
 import { FontAwesome } from '@expo/vector-icons';
-import React from 'react';
 
 export const colors = {
   link: '#517fa4',

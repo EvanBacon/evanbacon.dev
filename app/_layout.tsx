@@ -1,11 +1,9 @@
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import Head from 'next/head';
+import { Slot, usePathname } from 'expo-router';
+import Head from 'expo-router/head';
 import React from 'react';
-import { AppearanceProvider } from 'react-native-appearance';
-import EStyleSheet from 'react-native-extended-stylesheet';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Colors from '../constants/Colors';
 
+import Colors from '../constants/Colors';
 import CustomAppearanceProvider from '../context/CustomAppearanceProvider';
 import { Meta } from '../Data';
 
@@ -27,12 +25,11 @@ export function ensureSlash(inputPath: string, needsSlash: boolean): string {
   }
 }
 
-EStyleSheet.build({}); // always call EStyleSheet.build() even if you don't use global variables!
-
-export default function App({ Component, router = {}, pageProps }: any) {
+export default function App() {
   const themeColor = Colors.theme;
+  const pathname = usePathname();
 
-  const currentPath = ensureSlash(router.route || '', false) || 'talks';
+  const currentPath = ensureSlash(pathname || '', false) || 'talks';
   const { image = {}, title = site.title, description = site.description } =
     Meta[currentPath] || Meta.brand;
 
@@ -101,21 +98,17 @@ export default function App({ Component, router = {}, pageProps }: any) {
       <Head>
         <title>{siteTitle}</title>
 
-        {injectMeta.map((value, index) => {
-          return <meta key={`meta-${index}`} {...value} />;
-        })}
+        {injectMeta.map((value, index) => (
+          <meta key={`meta-${index}`} {...value} />
+        ))}
       </Head>
-      <SafeAreaProvider>
-        <AppearanceProvider>
-          <CustomAppearanceProvider>
-            <ActionSheetProvider>
-              <>
-                <Component {...pageProps} />
-              </>
-            </ActionSheetProvider>
-          </CustomAppearanceProvider>
-        </AppearanceProvider>
-      </SafeAreaProvider>
+      <CustomAppearanceProvider>
+        <ActionSheetProvider>
+          <>
+            <Slot />
+          </>
+        </ActionSheetProvider>
+      </CustomAppearanceProvider>
     </>
   );
 }

@@ -44,11 +44,8 @@ npm install
 ## Usage
 
 ```sh
-# Web
-yarn next dev
-
-# Native
-expo start
+# Web & Native
+yarn expo
 ```
 
 ## Author

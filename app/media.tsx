@@ -1,16 +1,13 @@
-import React from 'react';
-
+import { Link } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
-import { A } from '@expo/html-elements';
 import ProjectCard from '../components/card/Card';
 import Layout from '../components/Layout';
 import PageHeader from '../components/PageHeader';
 import { Podcasts } from '../Data';
 
-const IA = A as any;
-export default function Media({ navigation }) {
+export default function Media() {
   return (
-    <Layout navigation={navigation}>
+    <Layout>
       <PageHeader>Podcasts</PageHeader>
       {Podcasts.map(({ authors, ...project }) => (
         <ProjectCard
@@ -18,15 +15,14 @@ export default function Media({ navigation }) {
           {...project}
           renderDescription={() => (
             <View style={styles.aWrapper}>
-
               {authors.map((author, index) => (
-                <IA
+                <Link
                   key={author}
                   href={`https://twitter.com/${author}`}
                   style={styles.a}
                 >
                   {`@${author}${index !== authors.length - 1 ? ' | ' : ''}`}
-                </IA>
+                </Link>
               ))}
             </View>
           )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import StyleSheet from 'react-native-extended-stylesheet';
+import { StyleSheet } from 'react-native';
 
 import AspectImage from './AspectImage';
 

@@ -1,10 +1,9 @@
-import { Article, H2, H4, HR, P } from '@expo/html-elements';
+import { Link } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, Text as RNText, } from 'react-native';
-import { useHover, useREM } from 'react-native-web-hooks';
+import { Image, StyleSheet, Text } from 'react-native';
+import { useREM } from 'react-native-web-hooks';
 
 import Layout from '../components/Layout';
-import { View } from '../components/View';
 import PageHeader from '../components/PageHeader';
 import Colors from '../constants/Colors';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
@@ -14,8 +13,6 @@ const cardDark = '#222426';
 const cardLight = '#fff';
 const titleDark = 'rgb(158, 231, 255)';
 const titleLight = 'blue';
-
-const Text = RNText as any;
 
 function TalkCardPresentationRow({
   href,
@@ -36,31 +33,32 @@ function TalkCardPresentationRow({
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const link = React.useRef(null);
-  const isHovered = useHover(link);
   const titleColor = isDark ? titleDark : titleLight;
 
-  // Intetionally inverted
+  // inverted
   const textSyle = isDark ? { color: cardLight } : { color: cardDark };
   return (
-    <View>
-      <View style={[{ flexDirection: 'row', justifyContent: 'space-between' }]}>
-        <Text
+    <div>
+      <div style={[{ flexDirection: 'row', justifyContent: 'space-between' }]}>
+        <Link
           ref={link}
           target="_blank"
-          accessibilityRole="link"
           href={href}
+          hoverStyle={{
+            borderBottomColor: titleColor,
+          }}
           style={[
             styles.presTitle,
             {
               color: titleColor,
-              borderBottomColor: isHovered ? titleColor : 'transparent',
+              borderBottomColor: 'transparent',
             },
           ]}
         >
           {title}
-        </Text>
+        </Link>
         {date && (
-          <View style={{ flexDirection: 'row' }}>
+          <div style={{ flexDirection: 'row' }}>
             <Text style={[{ fontSize: 18 }, textSyle]}>{date}</Text>
             {upcoming && (
               <Text
@@ -79,13 +77,13 @@ function TalkCardPresentationRow({
                 Upcoming!
               </Text>
             )}
-          </View>
+          </div>
         )}
-      </View>
+      </div>
 
       {!!resources.length && (
-        <View style={{ marginLeft: 24 }}>
-          <H4 style={[{ opacity: 0.6 }, textSyle]}>RESOURCES</H4>
+        <div style={{ marginLeft: 24 }}>
+          <h4 style={[{ opacity: 0.6 }, textSyle]}>RESOURCES</h4>
           {resources.map((resource: any, index: number) => (
             <TalkCardPresentationRow
               key={resource.title}
@@ -95,9 +93,9 @@ function TalkCardPresentationRow({
             />
           ))}
           {!isLast && <Divider />}
-        </View>
+        </div>
       )}
-    </View>
+    </div>
   );
 }
 
@@ -106,12 +104,22 @@ function TalkCard({ title, image, description, presentedData = [] }) {
   const backgroundColor = isDark ? cardDark : cardLight;
   const textColor = isDark ? 'white' : 'black';
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <div style={[styles.container, { backgroundColor }]}>
       {image && (
-        <Image style={styles.image} resizeMode="cover" source={image} />
+        <Image
+          testID="talk-img"
+          style={{
+            flex: 1,
+            minHeight: 360,
+            maxWidth: 720,
+            width: '100%',
+          }}
+          resizeMode="cover"
+          source={image}
+        />
       )}
-      <Article style={[styles.resContainer]}>
-        <H2
+      <article style={[styles.resContainer]}>
+        <h2
           style={{
             color: textColor,
             marginBottom: 0,
@@ -119,15 +127,15 @@ function TalkCard({ title, image, description, presentedData = [] }) {
           }}
         >
           {title}
-        </H2>
-        <P style={{ color: textColor, marginBottom: 0 }}>{description}</P>
+        </h2>
+        <p style={{ color: textColor, marginBottom: 0 }}>{description}</p>
         <Divider />
 
         {!!presentedData.length && (
           <>
-            <H4 style={[styles.presentedTitle, { color: textColor }]}>
+            <h4 style={[styles.presentedTitle, { color: textColor }]}>
               PRESENTED AT
-            </H4>
+            </h4>
             {presentedData.map((presentation: any, index: number) => (
               <TalkCardPresentationRow
                 isLast={index === presentedData.length - 1}
@@ -141,12 +149,12 @@ function TalkCard({ title, image, description, presentedData = [] }) {
             ))}
           </>
         )}
-      </Article>
-    </View>
+      </article>
+    </div>
   );
 }
 
-export default function ({ navigation }) {
+export default function({ navigation }) {
   return (
     <Layout navigation={navigation}>
       <PageHeader>Talks</PageHeader>
@@ -159,17 +167,15 @@ export default function ({ navigation }) {
 
 function Divider() {
   const { isDark } = React.useContext(CustomAppearanceContext);
-  return <HR style={[{ opacity: isDark ? 0.4 : 0.8 }, styles.divider]} />;
+  return <hr style={[{ opacity: isDark ? 0.4 : 0.8 }, styles.divider]} />;
 }
 
 const styles = StyleSheet.create({
   container: {
     maxWidth: 720,
-    flex: 1,
     marginBottom: 20,
   },
   divider: {
-
     maxHeight: 0,
     marginHorizontal: 0,
     marginVertical: 20,
@@ -183,11 +189,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
     padding: 40,
-
   },
   image: {
     flex: 1,
     minHeight: 360,
+    maxWidth: 720,
   },
   presTitle: {
     color: 'blue',
@@ -196,5 +202,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'transparent',
   },
-
 });

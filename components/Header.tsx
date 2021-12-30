@@ -1,25 +1,16 @@
-import { Header, B, A, Nav } from '@expo/html-elements';
+import AppearanceSwitch from '@/components/AppearanceSwitch';
+import HeaderPhoto from '@/components/HeaderPhoto';
+import MenuButton from '@/components/MenuButton';
+import Colors from '@/constants/Colors';
+import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import { useRouting } from 'expo-next-react-navigation';
-import { useRouter } from 'next/router';
+import { Link, useNavigation, usePathname, useRouter } from 'expo-router';
 import React from 'react';
-import { Linking, Platform, View } from 'react-native';
-import StyleSheet from 'react-native-extended-stylesheet';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { Linking, Platform, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
-import Colors from '../constants/Colors';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import AppearanceSwitch from './AppearanceSwitch';
-import HeaderPhoto from './HeaderPhoto';
-import MenuButton from './MenuButton';
-import UniversalLink from './UniversalLink';
-
 const TABS = [
-  // {
-  //   title: 'Blog',
-  //   url: 'blog'
-  // },
   {
     title: 'Home',
     url: '',
@@ -48,10 +39,11 @@ const TABS = [
   },
 ];
 
-const CustomHeader = ({ siteTitle, navigation }) => {
+const CustomHeader = ({ siteTitle }) => {
+  const navigation = useNavigation();
   const [isActive, setActive] = React.useState(false);
   const { showActionSheetWithOptions } = useActionSheet();
-  const { navigate } = useRouting();
+  const router = useRouter();
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   function onPressMenu() {
@@ -81,7 +73,7 @@ const CustomHeader = ({ siteTitle, navigation }) => {
           color,
         },
       },
-      (buttonIndex) => {
+      buttonIndex => {
         setActive(false);
 
         if (buttonIndex !== cancelButtonIndex) {
@@ -89,9 +81,7 @@ const CustomHeader = ({ siteTitle, navigation }) => {
           if (url.startsWith('http://') || url.startsWith('https://')) {
             Linking.openURL(url);
           } else {
-            navigate({
-              routeName: url || Platform.select({ web: '', default: '/' }),
-            });
+            router.push(url || '/');
           }
         }
       }
@@ -104,11 +94,11 @@ const CustomHeader = ({ siteTitle, navigation }) => {
   } = useDimensions();
   const isSmall = width < 720;
   const isXSmall = width < 520;
-  const { top } = useSafeArea();
+  const { top } = useSafeAreaInsets();
 
   return (
-    <Header style={[styles.container, { paddingTop: top }]}>
-      <Nav
+    <header style={[styles.container, { paddingTop: top }]}>
+      <nav
         style={[
           styles.innerContainer,
           isSmall
@@ -116,32 +106,32 @@ const CustomHeader = ({ siteTitle, navigation }) => {
             : styles.innerContainerLarge,
         ]}
       >
-        <View style={styles.leftHeader}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <div style={styles.leftHeader}>
+          <div style={{ flexDirection: 'row', alignItems: 'center' }}>
             {!isXSmall && <HeaderPhoto />}
-            <UniversalLink
-              routeName={Platform.select({ web: '', default: '/' })}
+            <Link
+              href="/"
               style={[
                 styles.link,
                 { fontWeight: 'bold', fontSize: useREM(2.25) },
               ]}
             >
               {siteTitle}
-            </UniversalLink>
-          </View>
-        </View>
+            </Link>
+          </div>
+        </div>
 
         {isSmall && (
-          <View style={styles.rightHeader}>
+          <div style={styles.rightHeader}>
             <AppearanceSwitch />
             <MenuButton onPress={onPressMenu} isActive={isActive} />
-          </View>
+          </div>
         )}
 
-        <View
+        <div
           style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex' }]}
         >
-          {TABS.map((info) => (
+          {TABS.map(info => (
             <HeaderLink
               title={info.title}
               key={info.title}
@@ -155,19 +145,20 @@ const CustomHeader = ({ siteTitle, navigation }) => {
           ))}
 
           <AppearanceSwitch style={{ marginLeft: 12 }} />
-        </View>
-      </Nav>
-    </Header>
+        </div>
+      </nav>
+    </header>
   );
 };
 
 function HeaderLink({ title, target, style, routeName }) {
-  const router = useRouter();
+  const pathname = usePathname();
 
-  const isActive = router ? router.pathname === `/${routeName}` : false;
+  // TODO: CHECK
+  const isActive = pathname ? pathname === `/${routeName}` : false;
 
   return (
-    <UniversalLink
+    <Link
       target={target}
       style={[
         styles.link,
@@ -175,10 +166,10 @@ function HeaderLink({ title, target, style, routeName }) {
         style,
         isActive && { borderBottomColor: 'white' },
       ]}
-      routeName={routeName}
+      href={routeName}
     >
       {title}
-    </UniversalLink>
+    </Link>
   );
 }
 
