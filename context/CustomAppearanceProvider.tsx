@@ -51,9 +51,9 @@ export default function ModulesProvider({ children }) {
     StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content', true);
   }, [isDark]);
 
-  if (!isLoaded) {
-    return <View />;
-  }
+  // if (!isLoaded) {
+  //   return <View />;
+  // }
 
   return (
     <CustomAppearanceContext.Provider

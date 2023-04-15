@@ -52,6 +52,7 @@ export default function Layout({
 
   return (
     <ScrollView
+      testID="scroller"
       onLayout={onLayout as any}
       contentContainerStyle={{
         backgroundColor,
@@ -61,14 +62,14 @@ export default function Layout({
       style={styles.scrollView}
     >
       <Sky isDark={isDark}>
-        <Header siteTitle="Evan Bacon 🥓" navigation={navigation} />
+        <Header siteTitle="Evan Bacon" navigation={navigation} />
         <main
           style={[
             mainStyle,
             {
               paddingLeft: left,
               paddingRight: right,
-              opacity: width === 0 ? 0 : 1,
+              // opacity: width === 0 ? 0 : 1,
             },
           ]}
         >
