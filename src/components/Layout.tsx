@@ -33,7 +33,7 @@ export default function Layout({
 
   React.useEffect(() => {
     // eslint-disable-next-line
-    document.body.style.backgroundColor = backgroundColor;
+    // document.body.style.backgroundColor = backgroundColor;
   }, [isDark]);
 
   const { onLayout, width } = useLayout();
@@ -52,17 +52,18 @@ export default function Layout({
     <ScrollView
       testID="scroller"
       onLayout={onLayout as any}
-      contentContainerStyle={{
-        backgroundColor,
-        ...transitionStyle,
-      }}
+      // contentContainerStyle={{
+      //   // backgroundColor,
+      //   ...transitionStyle,
+      // }}
+      style={{ flex: 1 }}
       contentInset={{ top: 0, bottom: paddingBottom }}
-      style={styles.scrollView}
+      // style={styles.scrollView}
     >
-      <Sky isDark={isDark}>
-        <Header siteTitle="Evan Bacon" />
-        {/* <Header siteTitle="Evan Bacon 🥓" /> */}
-        <main
+      {/* <Sky isDark={isDark}> */}
+      <Header siteTitle="Evan Bacon" />
+      {/* <Header siteTitle="Evan Bacon 🥓" /> */}
+      {/* <main
           style={[
             mainStyle,
             {
@@ -71,10 +72,10 @@ export default function Layout({
               // opacity: width === 0 ? 0 : 1,
             },
           ]}
-        >
-          <section>{children}</section>
-        </main>
-      </Sky>
+        > */}
+      {children}
+      {/* </main> */}
+      {/* </Sky> */}
       {Platform.OS === 'web' && <Footer />}
     </ScrollView>
   );

@@ -8,6 +8,7 @@ import React from 'react';
 import Colors from '@/constants/Colors';
 import CustomAppearanceProvider from '@/context/CustomAppearanceProvider';
 import { Meta } from '@/Data';
+import Layout from '@/components/Layout';
 
 const site = {
   title: 'Evan Bacon',
@@ -107,7 +108,9 @@ export default function App() {
       <Background />
       <CustomAppearanceProvider>
         <ActionSheetProvider>
-          <Slot />
+          <Layout>
+            <Slot />
+          </Layout>
         </ActionSheetProvider>
       </CustomAppearanceProvider>
     </>

@@ -27,6 +27,7 @@ function sortByFramework(a: AppItem, b: AppItem) {
 }
 
 const A = 'a';
+const B = 'b';
 const H1 = 'h1';
 const Span = 'span';
 const Div = 'div';
@@ -34,6 +35,7 @@ const P = 'p';
 const H2 = 'h2';
 const H3 = 'h3';
 const Img = 'img';
+const BR = 'br';
 
 export default function Showcase() {
   const apps = useMemo(() => {
@@ -77,9 +79,9 @@ export default function Showcase() {
               Expo Open Source Showcase
             </H1>
             <H3 className="text-2xl mb-2">
-              Top ranked iOS Apps using <b>Expo Open Source software</b>
+              Top ranked iOS Apps using <B>Expo Open Source software</B>
               .
-              <br />
+              <BR />
               This includes the{' '}
               <ExpoIcon
                 className="inline"
@@ -88,9 +90,9 @@ export default function Showcase() {
                 }}
                 width={'1.5rem'}
               />{' '}
-              <a className="underline" href="https://expo.dev" target="_blank">
+              <A className="underline" href="https://expo.dev" target="_blank">
                 Expo SDK
-              </a>{' '}
+              </A>{' '}
               and{' '}
               <ReactNavigationIcon
                 className="inline"
@@ -109,32 +111,30 @@ export default function Showcase() {
               </A>
             </H3>
           </Div>
-          <NoSSR>
-            {apps.map(([category, apps]) => (
-              <Div key={category} className="flex flex-col gap-y-1">
-                <Div className="flex flex-row px-4 gap-y-1 mb-4  items-center">
-                  <Div className="flex flex-row items-center">
-                    <Img
-                      src={'/categories/' + category + '.png'}
-                      className="pr-2"
-                    />
-                    <H2 className="font-bold text-2xl md:text-3xl lg:text-4xl">
-                      {ITUNES_GENRE_TO_CATEGORY[category] ?? category}
-                    </H2>
-                  </Div>
-                  <Span className="flex-1 border-b border-default mx-2 md:mx-3 min-w-[2rem]" />
-
-                  <P className="text-gray-500">
-                    {apps.map(apps => apps).flat().length} Apps
-                  </P>
+          {apps.map(([category, apps]) => (
+            <Div key={category} className="flex flex-col gap-y-1">
+              <Div className="flex flex-row px-4 gap-y-1 mb-4  items-center">
+                <Div className="flex flex-row items-center">
+                  <Img
+                    src={'/categories/' + category + '.png'}
+                    className="pr-2"
+                  />
+                  <H2 className="font-bold text-2xl md:text-3xl lg:text-4xl">
+                    {ITUNES_GENRE_TO_CATEGORY[category] ?? category}
+                  </H2>
                 </Div>
-                <Row
-                  title={ITUNES_GENRE_TO_CATEGORY[category] ?? category}
-                  apps={apps.flat()}
-                />
+                <Span className="flex-1 border-b border-default mx-2 md:mx-3 min-w-[2rem]" />
+
+                <P className="text-gray-500">
+                  {apps.map(apps => apps).flat().length} Apps
+                </P>
               </Div>
-            ))}
-          </NoSSR>
+              <Row
+                title={ITUNES_GENRE_TO_CATEGORY[category] ?? category}
+                apps={apps.flat()}
+              />
+            </Div>
+          ))}
         </Div>
       </Div>
     </>
