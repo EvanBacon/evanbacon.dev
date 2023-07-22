@@ -22,11 +22,9 @@ const transitionStyle = Platform.select({
 export default function Layout({
   children,
   maxWidth,
-  navigation,
 }: {
   children?: any;
   maxWidth?: number;
-  navigation?: any;
 }) {
   const { isDark } = React.useContext(CustomAppearanceContext);
   const backgroundColor = isDark
@@ -62,7 +60,8 @@ export default function Layout({
       style={styles.scrollView}
     >
       <Sky isDark={isDark}>
-        <Header siteTitle="Evan Bacon 🥓" />
+        <Header siteTitle="Evan Bacon" />
+        {/* <Header siteTitle="Evan Bacon 🥓" /> */}
         <main
           style={[
             mainStyle,

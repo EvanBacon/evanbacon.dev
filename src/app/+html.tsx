@@ -24,9 +24,15 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export default function Html({ children }) {
   return (
-    <html>
+    <html lang="en">
       <head>
+        <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+
         {isProduction && (
           <>
             <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js" />
@@ -111,11 +117,8 @@ export default function Html({ children }) {
           sizes="180x180"
           href="/pwa/apple-touch-icon/apple-touch-icon-180.png"
         ></link>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        />
-        {/* <ScrollViewStyleReset /> */}
+
+        <ScrollViewStyleReset />
       </head>
       <body>{children}</body>
     </html>

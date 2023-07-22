@@ -5,9 +5,10 @@ import { useDimensions, useREM } from 'react-native-web-hooks';
 import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 
 export default function({ children }) {
-  const {
-    window: { width },
-  } = useDimensions();
+  const width = 1024;
+  // const {
+  //   window: { width },
+  // } = useDimensions();
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const isSmall = width < 720;

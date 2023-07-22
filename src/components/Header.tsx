@@ -89,9 +89,10 @@ const CustomHeader = ({ siteTitle }) => {
 
     setActive(!isActive);
   }
-  const {
-    window: { width },
-  } = useDimensions();
+  const width = 1248;
+  // const {
+  //   window: { width },
+  // } = useDimensions();
   const isSmall = width < 720;
   const isXSmall = width < 520;
   const { top } = useSafeAreaInsets();

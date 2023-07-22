@@ -107,9 +107,7 @@ export default function App() {
       <Background />
       <CustomAppearanceProvider>
         <ActionSheetProvider>
-          <>
-            <Slot />
-          </>
+          <Slot />
         </ActionSheetProvider>
       </CustomAppearanceProvider>
     </>
