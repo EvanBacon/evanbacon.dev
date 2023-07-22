@@ -659,6 +659,38 @@ export const Talks = [
   //   ],
   // },
   {
+    title: 'Expo Router v2',
+    image: require('../assets/talks/appjs-2023.jpg'),
+    description: `Announcing Expo Router v2. Static Rendering, automatically typed routes, async bundle splitting, CSS for web, and more!`,
+    presentedData: [
+      {
+        title: 'App.js Conf',
+        href: 'https://appjs.co/',
+        date: 'May 11th, 2023',
+        resources: [ytvid('608r8etX_cg')],
+      },
+    ],
+  },
+  {
+    title: 'Expo Router',
+    image: require('../assets/talks/modernfrontends.jpg'),
+    description: `File-based routing for native apps with Expo Router.`,
+    presentedData: [
+      {
+        title: 'Twitter',
+        href: 'https://twitter.com/Baconbrix',
+        date: 'Nov 19th, 2022',
+        resources: [
+          {
+            title: 'Tweet',
+            href: `https://twitter.com/Baconbrix/status/1593961233165811712?s=20`,
+            thumbnail: `https://twitter.com/Baconbrix/status/1593961233165811712?s=20`,
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: 'React Native Panel (Error Stack Traces)',
     image: require('../assets/talks/react-native-bangalore.png'),
     description: `I give a brief overview of Error improvements in Expo SDK 41`,
