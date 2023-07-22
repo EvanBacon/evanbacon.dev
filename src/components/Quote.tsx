@@ -1,21 +1,22 @@
 import Laurel from '../../assets/laurel.svg';
 import { StyleSheet } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
+import { BlockQuote, Div, Footer, P, Span } from '@expo/html-elements';
 
 const color = 'white';
 
 export default function Quote({ quote, author, url }) {
   return (
-    <div style={styles.container}>
+    <Div style={styles.container}>
       <Laurel style={styles.startLeaf} />
-      <blockquote cite={url} style={styles.blockQuote}>
-        <span style={styles.quote}>{quote}</span>
-        <footer>
-          <p style={styles.footerText}>{`~ ${author}`}</p>
-        </footer>
-      </blockquote>
+      <BlockQuote cite={url} style={styles.blockQuote}>
+        <Span style={styles.quote}>{quote}</Span>
+        <Footer>
+          <P style={styles.footerText}>{`~ ${author}`}</P>
+        </Footer>
+      </BlockQuote>
       <Laurel style={styles.endLeaf} />
-    </div>
+    </Div>
   );
 }
 

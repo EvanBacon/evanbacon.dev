@@ -9,6 +9,7 @@ import Colors from '@/constants/Colors';
 import Quotes from '@/constants/Quotes';
 import Quote from './Quote';
 import SocialIcon from './SocialIcon';
+import { Div, Footer, H5 } from '@expo/html-elements';
 
 const ICON_SIZE = 24;
 
@@ -57,8 +58,8 @@ export default function CustomFooter() {
   const quote = Quotes[index % Quotes.length];
 
   return (
-    <footer style={styles.container}>
-      <div
+    <Footer style={styles.container}>
+      <Div
         style={{
           flex: 1,
           paddingBottom: bottom,
@@ -77,7 +78,7 @@ export default function CustomFooter() {
           />
         </TouchableOpacity>
 
-        <div style={styles.socialWrapper}>
+        <Div style={styles.socialWrapper}>
           {socials.map(social => (
             <Link
               style={{ marginRight: 8 }}
@@ -89,8 +90,8 @@ export default function CustomFooter() {
               <SocialIcon name={social.name} color="white" size={16 * 2.2} />
             </Link>
           ))}
-        </div>
-        <div style={styles.linkContainer}>
+        </Div>
+        <Div style={styles.linkContainer}>
           <Link
             target="_blank"
             href="https://www.expo.io"
@@ -98,11 +99,11 @@ export default function CustomFooter() {
             hoverStyle={styles.linkFocus}
           >
             <ExpoIcon width={ICON_SIZE} height={ICON_SIZE} fill="white" />
-            <h5 style={styles.footerText}>Built with Expo</h5>
+            <H5 style={styles.footerText}>Built with Expo</H5>
           </Link>
-        </div>
-      </div>
-    </footer>
+        </Div>
+      </Div>
+    </Footer>
   );
 }
 
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
   },
   linkContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   link: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     transitionProperty: 'all',

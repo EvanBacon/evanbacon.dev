@@ -1,13 +1,13 @@
 import { Link } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, Text } from 'react-native';
+import { View, Image, StyleSheet, Text } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import Colors from '@/constants/Colors';
 import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 import { Talks } from '@/Data';
+import { Article, P, H2, H3, H1, H4, HR } from '@expo/html-elements';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
@@ -38,8 +38,8 @@ function TalkCardPresentationRow({
   // inverted
   const textSyle = isDark ? { color: cardLight } : { color: cardDark };
   return (
-    <div>
-      <div style={[{ flexDirection: 'row', justifyContent: 'space-between' }]}>
+    <View>
+      <View style={[{ flexDirection: 'row', justifyContent: 'space-between' }]}>
         <Link
           ref={link}
           target="_blank"
@@ -58,7 +58,7 @@ function TalkCardPresentationRow({
           {title}
         </Link>
         {date && (
-          <div style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row' }}>
             <Text style={[{ fontSize: 18 }, textSyle]}>{date}</Text>
             {upcoming && (
               <Text
@@ -77,13 +77,13 @@ function TalkCardPresentationRow({
                 Upcoming!
               </Text>
             )}
-          </div>
+          </View>
         )}
-      </div>
+      </View>
 
       {!!resources.length && (
-        <div style={{ marginLeft: 24 }}>
-          <h4 style={[{ opacity: 0.6 }, textSyle]}>RESOURCES</h4>
+        <View style={{ marginLeft: 24 }}>
+          <H4 style={[{ opacity: 0.6 }, textSyle]}>RESOURCES</H4>
           {resources.map((resource: any, index: number) => (
             <TalkCardPresentationRow
               key={resource.title}
@@ -93,9 +93,9 @@ function TalkCardPresentationRow({
             />
           ))}
           {!isLast && <Divider />}
-        </div>
+        </View>
       )}
-    </div>
+    </View>
   );
 }
 
@@ -104,7 +104,7 @@ function TalkCard({ title, image, description, presentedData = [] }) {
   const backgroundColor = isDark ? cardDark : cardLight;
   const textColor = isDark ? 'white' : 'black';
   return (
-    <div style={[styles.container, { backgroundColor }]}>
+    <View style={[styles.container, { backgroundColor }]}>
       {image && (
         <Image
           testID="talk-img"
@@ -118,8 +118,8 @@ function TalkCard({ title, image, description, presentedData = [] }) {
           source={image}
         />
       )}
-      <article style={[styles.resContainer]}>
-        <h2
+      <Article style={styles.resContainer}>
+        <H2
           style={{
             color: textColor,
             marginBottom: 0,
@@ -127,15 +127,15 @@ function TalkCard({ title, image, description, presentedData = [] }) {
           }}
         >
           {title}
-        </h2>
-        <p style={{ color: textColor, marginBottom: 0 }}>{description}</p>
+        </H2>
+        <P style={{ color: textColor, marginBottom: 0 }}>{description}</P>
         <Divider />
 
         {!!presentedData.length && (
           <>
-            <h4 style={[styles.presentedTitle, { color: textColor }]}>
+            <H4 style={[styles.presentedTitle, { color: textColor }]}>
               PRESENTED AT
-            </h4>
+            </H4>
             {presentedData.map((presentation: any, index: number) => (
               <TalkCardPresentationRow
                 isLast={index === presentedData.length - 1}
@@ -149,25 +149,27 @@ function TalkCard({ title, image, description, presentedData = [] }) {
             ))}
           </>
         )}
-      </article>
-    </div>
+      </Article>
+    </View>
   );
 }
 
-export default function({ navigation }) {
+export default function TalksScreen() {
   return (
-    <Layout navigation={navigation}>
-      <PageHeader>Talks</PageHeader>
-      {Talks.map((talk: any) => (
-        <TalkCard key={talk.title} {...talk} />
-      ))}
-    </Layout>
+    <div className="container relative flex flex-col">
+      <div className="mx-auto">
+        <PageHeader>Talks</PageHeader>
+        {Talks.map((talk: any) => (
+          <TalkCard key={talk.title} {...talk} />
+        ))}
+      </div>
+    </div>
   );
 }
 
 function Divider() {
   const { isDark } = React.useContext(CustomAppearanceContext);
-  return <hr style={[{ opacity: isDark ? 0.4 : 0.8 }, styles.divider]} />;
+  return <HR style={[{ opacity: isDark ? 0.4 : 0.8 }, styles.divider]} />;
 }
 
 const styles = StyleSheet.create({
