@@ -4,7 +4,11 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -16,7 +20,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "web": {
       "bundler": "metro"
     },
@@ -29,6 +35,9 @@
     "ios": {
       "bundleIdentifier": "evanbacon.dev",
       "supportsTablet": true
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

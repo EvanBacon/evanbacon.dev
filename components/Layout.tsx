@@ -62,7 +62,7 @@ export default function Layout({
       style={styles.scrollView}
     >
       <Sky isDark={isDark}>
-        <Header siteTitle="Evan Bacon" navigation={navigation} />
+        <Header siteTitle="Evan Bacon 🥓" />
         <main
           style={[
             mainStyle,
