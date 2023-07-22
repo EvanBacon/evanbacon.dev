@@ -18,7 +18,9 @@
     },
     "assetBundlePatterns": ["**/*"],
     "web": {
-      "bundler": "metro"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static"
     },
     "android": {
       "package": "evanbacon.dev"

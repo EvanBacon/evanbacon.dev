@@ -5,8 +5,7 @@ module.exports = function(api) {
     plugins: [
       '@expo/html-elements/babel',
       'react-native-reanimated/plugin',
-      '@babel/plugin-proposal-export-namespace-from',
-      require.resolve('expo-router/babel'),
+      'expo-router/babel',
     ],
   };
 };

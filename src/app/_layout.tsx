@@ -1,3 +1,5 @@
+import { Background } from '@/components/background';
+
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
@@ -102,6 +104,7 @@ export default function App() {
           <meta key={`meta-${index}`} {...value} />
         ))}
       </Head>
+      <Background />
       <CustomAppearanceProvider>
         <ActionSheetProvider>
           <>

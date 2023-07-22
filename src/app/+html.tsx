@@ -111,7 +111,11 @@ export default function Html({ children }) {
           sizes="180x180"
           href="/pwa/apple-touch-icon/apple-touch-icon-180.png"
         ></link>
-        <ScrollViewStyleReset />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
+        {/* <ScrollViewStyleReset /> */}
       </head>
       <body>{children}</body>
     </html>
