@@ -7,8 +7,7 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import { Link, useNavigation, usePathname, useRouter } from 'expo-router';
 import React from 'react';
 import { Linking, Platform, StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useDimensions, useREM } from 'react-native-web-hooks';
+import { useREM } from 'react-native-web-hooks';
 
 const TABS = [
   {
@@ -90,26 +89,18 @@ const CustomHeader = ({ siteTitle }) => {
     setActive(!isActive);
   }
   const width = 1248;
-  // const {
-  //   window: { width },
-  // } = useDimensions();
+
   const isSmall = width < 720;
   const isXSmall = width < 520;
-  const { top } = useSafeAreaInsets();
 
   return (
-    <header style={[styles.container, { paddingTop: top }]}>
-      <nav
-        style={[
-          styles.innerContainer,
-          isSmall
-            ? { paddingHorizontal: useREM(1.0875) }
-            : styles.innerContainerLarge,
-        ]}
-      >
-        <div style={styles.leftHeader}>
-          <div style={{ flexDirection: 'row', alignItems: 'center' }}>
-            {!isXSmall && <HeaderPhoto />}
+    <header className="bg-black items-stretch mb-2 px-6 py-4">
+      <nav className="flex flex-row justify-between items-center">
+        <div className="flex flex-row items-center justify-between z-10">
+          <div className="flex flex-row items-center">
+            <div className="hidden md:flex flex-1">
+              <HeaderPhoto />
+            </div>
             <Link
               href="/"
               style={[
@@ -122,16 +113,12 @@ const CustomHeader = ({ siteTitle }) => {
           </div>
         </div>
 
-        {isSmall && (
-          <div style={styles.rightHeader}>
-            <AppearanceSwitch />
-            <MenuButton onPress={onPressMenu} isActive={isActive} />
-          </div>
-        )}
+        <div className="flex md:hidden flex flex-row items-center justify-evenly wrap">
+          <AppearanceSwitch />
+          <MenuButton onPress={onPressMenu} isActive={isActive} />
+        </div>
 
-        <div
-          style={[styles.rightHeader, { display: isSmall ? 'none' : 'flex' }]}
-        >
+        <div className="hidden md:flex flex-row items-center justify-evenly">
           {TABS.map(info => (
             <HeaderLink
               title={info.title}
@@ -177,7 +164,6 @@ function HeaderLink({ title, target, style, routeName }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.theme,
-    marginBottom: useREM(1.45),
     alignItems: 'stretch',
   },
   link: Platform.select({

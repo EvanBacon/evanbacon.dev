@@ -7,6 +7,13 @@ const SIZE = 48;
 
 const HeaderPhoto = () => {
   return (
+    <img
+      src={'/pfp.png'}
+      loading="lazy"
+      className="aspect-square w-[48px] h-[48px] rounded-full mr-3"
+    />
+  );
+  return (
     <AspectImage
       source={require('../../assets/pfp.jpg')}
       loading="lazy"
