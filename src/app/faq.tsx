@@ -2,9 +2,9 @@ import Head from 'expo-router/head';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import Layout from '../components/Layout';
-import PageHeader from '../components/PageHeader';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader';
+import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 
 const QA = [
   {

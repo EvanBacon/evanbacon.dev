@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { useDimensions, useREM } from 'react-native-web-hooks';
 
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 
 export default function({ children }) {
   const {

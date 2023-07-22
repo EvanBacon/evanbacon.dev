@@ -1,7 +1,7 @@
-import ProjectCard from '../components/card/Card';
-import Layout from '../components/Layout';
-import PageHeader from '../components/PageHeader';
-import { Lego } from '../Data';
+import ProjectCard from '@/components/card/Card';
+import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader';
+import { Lego } from '@/Data';
 
 export default function LegoPage() {
   return (

@@ -8,7 +8,7 @@ const SIZE = 48;
 const HeaderPhoto = () => {
   return (
     <AspectImage
-      source={require('../assets/pfp.jpg')}
+      source={require('../../assets/pfp.jpg')}
       loading="lazy"
       style={styles.image}
     />

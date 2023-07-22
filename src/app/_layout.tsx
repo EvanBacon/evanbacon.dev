@@ -3,9 +3,9 @@ import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
 
-import Colors from '../constants/Colors';
-import CustomAppearanceProvider from '../context/CustomAppearanceProvider';
-import { Meta } from '../Data';
+import Colors from '@/constants/Colors';
+import CustomAppearanceProvider from '@/context/CustomAppearanceProvider';
+import { Meta } from '@/Data';
 
 const site = {
   title: 'Evan Bacon',

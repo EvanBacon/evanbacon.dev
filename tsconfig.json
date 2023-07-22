@@ -1,17 +1,10 @@
 {
   "compilerOptions": {
-    "typeRoots": [
-      "./global.d.ts"
-    ],
+    "typeRoots": ["./global.d.ts"],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "extends": "expo/tsconfig.base",
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

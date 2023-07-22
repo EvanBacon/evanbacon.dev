@@ -124,7 +124,7 @@ export const Images = [
 export const Podcasts: Project[] = [
   {
     title: "Evan's World",
-    image: require('./assets/podcast/evans-world.jpg'),
+    image: require('../assets/podcast/evans-world.jpg'),
     year: '2020',
     color: '#F8E71C',
     authors: ['lydiahallie', 'baconbrix'],
@@ -137,7 +137,7 @@ export const Podcasts: Project[] = [
   },
   {
     title: 'React Podcast',
-    image: require('./assets/podcast/react-podcast.jpg'),
+    image: require('../assets/podcast/react-podcast.jpg'),
     year: '2020',
     color: '#FFE000',
     authors: ['chantastic'],
@@ -151,7 +151,7 @@ export const Podcasts: Project[] = [
   },
   {
     title: 'Undefined Podcast',
-    image: require('./assets/podcast/undefined-podcast.jpg'),
+    image: require('../assets/podcast/undefined-podcast.jpg'),
     year: '2019',
     color: '#539EF9',
     authors: ['jaredpalmer', 'ken_wheeler'],
@@ -165,7 +165,7 @@ export const Podcasts: Project[] = [
   },
   {
     title: 'React Native Radio',
-    image: require('./assets/podcast/react-native-radio-podcast.jpg'),
+    image: require('../assets/podcast/react-native-radio-podcast.jpg'),
     year: '2018',
     color: '#F5A623',
     authors: ['dabit3', 'spencer_carli', 'peterpme'],
@@ -179,7 +179,7 @@ export const Podcasts: Project[] = [
   },
   {
     title: 'Beyond the brick with Evan Bacon',
-    image: require('./assets/podcast/behind-the-brick.jpg'),
+    image: require('../assets/podcast/behind-the-brick.jpg'),
     year: '2012',
     color: '#FFC100',
     authors: ['John_Hanlon', 'BeyondtheBrick'],
@@ -279,9 +279,9 @@ export const Work = [
 
 export const Projects: Project[] = [
   {
-    image: require('./assets/projects/crossy-road/preview.jpg'),
-    icon: require('./assets/projects/crossy-road/app-icon.png'),
-    video: require('./assets/projects/crossy-road/demo.mp4'),
+    image: require('../assets/projects/crossy-road/preview.jpg'),
+    icon: require('../assets/projects/crossy-road/app-icon.png'),
+    video: require('../assets/projects/crossy-road/demo.mp4'),
     title: 'Crossy Road',
     description: `The endless arcade hopper you'll never want to put down.`,
     year: 2017,
@@ -298,9 +298,9 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/pillar-valley/preview.png'),
-    icon: require('./assets/projects/pillar-valley/app-icon.png'),
-    video: require('./assets/projects/pillar-valley/demo.mp4'),
+    image: require('../assets/projects/pillar-valley/preview.png'),
+    icon: require('../assets/projects/pillar-valley/app-icon.png'),
+    video: require('../assets/projects/pillar-valley/demo.mp4'),
     description: 'Immerse yourself in a suave world of zen.',
     title: 'Pillar Valley',
     year: 2018,
@@ -317,9 +317,9 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/snake/preview.jpeg'),
-    icon: require('./assets/projects/snake/app-icon.jpg'),
-    video: require('./assets/projects/snake/demo.mp4'),
+    image: require('../assets/projects/snake/preview.jpeg'),
+    icon: require('../assets/projects/snake/app-icon.jpg'),
+    video: require('../assets/projects/snake/demo.mp4'),
     title: 'Snake',
     description: 'Slither your way through this retro snake adventure.',
     year: 2019,
@@ -336,9 +336,9 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/sunset-cyberspace/preview.png'),
-    icon: require('./assets/projects/sunset-cyberspace/app-icon.png'),
-    video: require('./assets/projects/sunset-cyberspace/demo.mp4'),
+    image: require('../assets/projects/sunset-cyberspace/preview.png'),
+    icon: require('../assets/projects/sunset-cyberspace/app-icon.png'),
+    video: require('../assets/projects/sunset-cyberspace/demo.mp4'),
     title: 'Sunset Cyberspace',
     description: 'A mystic sage Chucky Cheevs fights off the Xamaronians.',
     year: 2017,
@@ -355,9 +355,9 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/doodle-jump/preview.jpeg'),
-    icon: require('./assets/projects/doodle-jump/app-icon.png'),
-    video: require('./assets/projects/doodle-jump/demo.mp4'),
+    image: require('../assets/projects/doodle-jump/preview.jpeg'),
+    icon: require('../assets/projects/doodle-jump/app-icon.png'),
+    video: require('../assets/projects/doodle-jump/demo.mp4'),
     title: 'Doodle Jump',
     description: 'Bounce for hours in this cute lil clone.',
     year: 2018,
@@ -375,9 +375,9 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/flappy-bird/preview.jpeg'),
-    icon: require('./assets/projects/flappy-bird/app-icon.png'),
-    video: require('./assets/projects/flappy-bird/demo.mp4'),
+    image: require('../assets/projects/flappy-bird/preview.jpeg'),
+    icon: require('../assets/projects/flappy-bird/app-icon.png'),
+    video: require('../assets/projects/flappy-bird/demo.mp4'),
     title: 'Flappy Bird',
     description: 'Infatuation knows no bounds in this maddening monstrosity.',
     year: 2018,
@@ -395,8 +395,8 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/super-mario/preview.jpeg'),
-    icon: require('./assets/projects/super-mario/app-icon.png'),
+    image: require('../assets/projects/super-mario/preview.jpeg'),
+    icon: require('../assets/projects/super-mario/app-icon.png'),
     title: 'Super Mario',
     description: 'Phaser used for ultra fun times.',
     year: 2018,
@@ -409,8 +409,8 @@ export const Projects: Project[] = [
     ],
   },
   {
-    image: require('./assets/projects/nitro-roll/preview.png'),
-    icon: require('./assets/projects/nitro-roll/app-icon.png'),
+    image: require('../assets/projects/nitro-roll/preview.png'),
+    icon: require('../assets/projects/nitro-roll/app-icon.png'),
     title: 'Nitro Roll',
     description:
       'Roll through the nitro-sonic Voidiverse avoiding the Bleaqaulizers!',
@@ -491,7 +491,7 @@ export const Lego: LegoProject[] = [
   {
     title: 'Batman',
     description: 'DC Comics',
-    image: require('./assets/lego/batman.jpg'),
+    image: require('../assets/lego/batman.jpg'),
     color: '#fde219',
     actions: [
       {
@@ -513,7 +513,7 @@ export const Lego: LegoProject[] = [
   {
     title: 'Thor',
     description: 'Marvel',
-    image: require('./assets/lego/thor.jpg'),
+    image: require('../assets/lego/thor.jpg'),
     color: '#A68950',
     actions: [
       {
@@ -526,7 +526,7 @@ export const Lego: LegoProject[] = [
   {
     title: 'Iron Man',
     description: 'Marvel',
-    image: require('./assets/lego/ironman.jpg'),
+    image: require('../assets/lego/ironman.jpg'),
     color: '#782E2A',
     actions: [
       {
@@ -548,7 +548,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/GiQrFAoLhVDfmumS6',
       },
     ],
-    image: require('./assets/lego/superman.jpg'),
+    image: require('../assets/lego/superman.jpg'),
     year: '2012',
   },
   {
@@ -561,7 +561,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/7zfDKW9Pf9ssiLv56',
       },
     ],
-    image: require('./assets/lego/captainkirk.jpg'),
+    image: require('../assets/lego/captainkirk.jpg'),
     year: '2013',
   },
   {
@@ -574,7 +574,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/ukFadzsRyMgA9p338',
       },
     ],
-    image: require('./assets/lego/darthvader.jpg'),
+    image: require('../assets/lego/darthvader.jpg'),
     year: '2016',
   },
   {
@@ -587,7 +587,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/C3dGAKruSsh1xLEi7',
       },
     ],
-    image: require('./assets/lego/sarge.jpg'),
+    image: require('../assets/lego/sarge.jpg'),
     year: '2016',
   },
   {
@@ -600,7 +600,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/PjsnkENMKfZjfSTj9',
       },
     ],
-    image: require('./assets/lego/wonderwoman.jpg'),
+    image: require('../assets/lego/wonderwoman.jpg'),
     year: '2015',
   },
 
@@ -614,7 +614,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/ejuBH4RWnPTDUgdf6',
       },
     ],
-    image: require('./assets/lego/captainamerica.jpg'),
+    image: require('../assets/lego/captainamerica.jpg'),
     year: '2016',
   },
   {
@@ -627,7 +627,7 @@ export const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/CttdaRbsHKLcq1Tq9',
       },
     ],
-    image: require('./assets/lego/minion.jpg'),
+    image: require('../assets/lego/minion.jpg'),
     year: '2013',
   },
 ];
@@ -660,7 +660,7 @@ export const Talks = [
   // },
   {
     title: 'React Native Panel (Error Stack Traces)',
-    image: require('./assets/talks/react-native-bangalore.png'),
+    image: require('../assets/talks/react-native-bangalore.png'),
     description: `I give a brief overview of Error improvements in Expo SDK 41`,
     presentedData: [
       {
@@ -673,7 +673,7 @@ export const Talks = [
   },
   {
     title: 'React Native for React Developers',
-    image: require('./assets/talks/expo-html.webp'),
+    image: require('../assets/talks/expo-html.webp'),
     description: `React Native can be pretty intimidating for web developers. See what I've been doing at Expo to close the gap.`,
     presentedData: [
       {
@@ -700,7 +700,7 @@ export const Talks = [
   },
   {
     title: 'Expo for Web',
-    image: require('./assets/talks/expo-for-web.jpg'),
+    image: require('../assets/talks/expo-for-web.jpg'),
     description:
       'Using Expo you can build an app that runs natively for iOS, Android, and in the web browser. You’ll see how Expo and React Native for web enable you to use cutting-edge browser functionality to create websites, progressive web apps, and Electron apps that emulate the functionality of your native app as closely as possible. You’ll also learn what you can do with it, why you would use it, and how it works with other popular web development tools.',
     presentedData: [
@@ -744,7 +744,7 @@ export const Talks = [
   },
   {
     title: 'Announcing Expo for web',
-    image: require('./assets/talks/debut-expo-web.jpg'),
+    image: require('../assets/talks/debut-expo-web.jpg'),
     description:
       'Expo is on a mission to create the best possible end-to-end developer experiences for building and deploying apps on multiple platforms. Today we are very excited to announce experimental web support for the Expo CLI and SDK!',
     presentedData: [
@@ -764,7 +764,7 @@ export const Talks = [
   },
   {
     title: 'AR in React Native',
-    image: require('./assets/talks/expo-ar.jpg'),
+    image: require('../assets/talks/expo-ar.jpg'),
     description:
       "Creating augmented reality apps with Expo is exciting and easy! We'll discuss how it's possible, what you can do with it, and why React Native + AR is an exciting new approach.",
     presentedData: [
@@ -783,7 +783,7 @@ export const Talks = [
   },
   {
     title: 'Using lit APIs to make dope games with Expo',
-    image: require('./assets/talks/expo-gaming.jpg'),
+    image: require('../assets/talks/expo-gaming.jpg'),
     description:
       'In this expo symposium (exposium) 🎙 we shall cordially discuss the usage of recreational cyber-gaming frameworks and their place in the native development environment.📱👾',
     presentedData: [

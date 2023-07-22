@@ -1,9 +1,9 @@
 import { Link } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
-import ProjectCard from '../components/card/Card';
-import Layout from '../components/Layout';
-import PageHeader from '../components/PageHeader';
-import { Podcasts } from '../Data';
+import ProjectCard from '@/components/card/Card';
+import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader';
+import { Podcasts } from '@/Data';
 
 export default function Media() {
   return (

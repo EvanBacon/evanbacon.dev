@@ -10,8 +10,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 
-import Colors from '../constants/Colors';
-import Routes from '../constants/Routes';
+import Colors from '@/constants/Colors';
+import Routes from '@/constants/Routes';
 import CustomAppearanceContext from '../context/CustomAppearanceContext';
 import AppearanceSwitch from './AppearanceSwitch';
 import HeaderPhoto from './HeaderPhoto';

@@ -3,11 +3,11 @@ import React from 'react';
 import { Image, StyleSheet, Text } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-import Layout from '../components/Layout';
-import PageHeader from '../components/PageHeader';
-import Colors from '../constants/Colors';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import { Talks } from '../Data';
+import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader';
+import Colors from '@/constants/Colors';
+import CustomAppearanceContext from '@/context/CustomAppearanceContext';
+import { Talks } from '@/Data';
 
 const cardDark = '#222426';
 const cardLight = '#fff';

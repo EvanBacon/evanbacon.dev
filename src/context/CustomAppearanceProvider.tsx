@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StatusBar, useColorScheme, Platform } from 'react-native';
 
-import AsyncStorage from '../packages/async-storage/AsyncStorage';
+import AsyncStorage from '@/packages/async-storage/AsyncStorage';
 import CustomAppearanceContext from './CustomAppearanceContext';
 
 // import AsyncStorage from '@react-native-community/async-storage';

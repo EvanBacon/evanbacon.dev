@@ -1,12 +1,12 @@
-import ExpoIcon from '@/assets/expo.svg';
+import ExpoIcon from '../../assets/expo.svg';
 import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 
-import Colors from '../constants/Colors';
-import Quotes from '../constants/Quotes';
+import Colors from '@/constants/Colors';
+import Quotes from '@/constants/Quotes';
 import Quote from './Quote';
 import SocialIcon from './SocialIcon';
 

@@ -2,7 +2,7 @@ import Switch from 'expo-dark-mode-switch';
 import React from 'react';
 import { View } from 'react-native';
 
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 
 function AppearanceSwitch(props) {
   const { isDark, setIsDark } = React.useContext(CustomAppearanceContext);

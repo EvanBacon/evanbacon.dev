@@ -1,4 +1,4 @@
-import Laurel from '@/assets/laurel.svg';
+import Laurel from '../../assets/laurel.svg';
 import { StyleSheet } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 

@@ -4,8 +4,8 @@ import { Platform, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLayout } from 'react-native-web-hooks';
 
-import Colors from '../constants/Colors';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
+import Colors from '@/constants/Colors';
+import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 import Footer from './Footer';
 import Header from './Header';
 
