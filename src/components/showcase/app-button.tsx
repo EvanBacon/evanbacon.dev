@@ -38,10 +38,8 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
             )}
           </Div>
         </Div>
-        <H3 className="font-normal text-lg">{altSafe(app.name)}</H3>
-        <Div className="flex items-center">
-          <Span className="text-sm text-gray-500">{app.author}</Span>
-        </Div>
+        <H3 className="line-clamp-2	font-normal text-lg">{altSafe(app.name)}</H3>
+        <Span className="line-clamp-2	text-sm text-gray-500">{app.author}</Span>
       </Div>
     </A>
   );

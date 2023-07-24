@@ -107,7 +107,10 @@ const CustomHeader = ({ siteTitle }) => {
               href="/"
               style={[
                 styles.link,
-                { fontWeight: 'bold', fontSize: useREM(2.25) },
+                {
+                  $$css: true,
+                  _: 'text-2xl md:text-3xl font-bold',
+                },
               ]}
             >
               {siteTitle}

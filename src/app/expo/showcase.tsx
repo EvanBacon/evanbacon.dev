@@ -73,11 +73,11 @@ export default function Showcase() {
     <>
       <Div className="relative flex flex-col">
         <Div className="mx-auto">
-          <Div className="px-4 py-4">
-            <H1 className="text-4xl md:text-5xl lg:text-6xl font-bold my-4">
+          <Div className="p-4">
+            <H1 className="text-4xl md:text-5xl lg:text-6xl my-2 md:my-4 font-bold">
               Expo Open Source Showcase
             </H1>
-            <H3 className="text-2xl mb-2">
+            <H3 className="text-1xl md:text-2xl mb-2">
               Top ranked iOS Apps using <B>Expo Open Source software</B>
               .
               <BR />
@@ -112,15 +112,17 @@ export default function Showcase() {
           </Div>
           {apps.map(([category, apps]) => (
             <Div key={category} className="flex flex-col gap-y-1">
-              <Div className="flex flex-row px-4 gap-y-1 mb-4  items-center">
+              <Div className="flex flex-row px-4 gap-y-1 mb-4 items-center">
                 <Div className="flex flex-row items-center">
-                  <Img
-                    src={'/categories/' + category + '.png'}
-                    className="pr-2 w-10"
-                  />
                   <H2 className="font-bold text-2xl md:text-3xl lg:text-4xl">
                     {ITUNES_GENRE_TO_CATEGORY[category] ?? category}
                   </H2>
+                  {category !== 'top' && (
+                    <Img
+                      src={'/categories/' + category + '.png'}
+                      className="pl-2 w-8"
+                    />
+                  )}
                 </Div>
                 <Span className="flex-1 border-b border-default mx-2 md:mx-3 min-w-[2rem]" />
 
