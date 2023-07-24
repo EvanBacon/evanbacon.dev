@@ -19,7 +19,7 @@ const Row = ({ title, apps }: { title: string; apps: AppItem[] }) => {
       showsHorizontalScrollIndicator={false}
     >
       {apps.map((item, id) => (
-        <Div key={id} className="w-[8rem] md:w-[12rem]">
+        <Div key={id} className="w-[8rem] md:w-[12rem] aspect-square">
           <AppButton key={id} app={item} />
         </Div>
       ))}
