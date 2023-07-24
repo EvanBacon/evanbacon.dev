@@ -27,21 +27,26 @@ export type LegoProject = Project & {
 };
 
 export const OpenGraphImages = {
-  brand: {
-    url: 'og/brand.jpg',
+  showcase: {
+    url: 'og/default.jpg',
     type: 'image/jpeg',
     width: 1280,
     height: 720,
-    description:
-      'Evan Bacon as a child holding a Batman t-shirt his mom got him for Christmas',
+    description: 'Top iOS apps using Expo Open Source Software in production',
+  },
+  brand: {
+    url: 'og/default.jpg',
+    type: 'image/jpeg',
+    width: 1280,
+    height: 720,
+    description: 'Brand assets',
   },
   game: {
-    url: 'og/games.jpg',
+    url: 'og/default.jpg',
     type: 'image/jpeg',
     width: 1280,
     height: 720,
-    description:
-      'Shirtless Evan Bacon holding a Super Smash Bros. themed Nintendo Switch lovingly against his face',
+    description: 'Games',
   },
   lego: {
     url: 'og/lego.jpg',
@@ -76,6 +81,12 @@ export const OpenGraphImages = {
 };
 
 export const Meta = {
+  showcase: {
+    title: 'Expo OSS Showcase',
+    description: 'Top iOS apps using Expo open source software in production',
+    urlPath: 'expo/showcase',
+    image: OpenGraphImages.showcase,
+  },
   brand: {
     title: 'Brand',
     description: 'Branding resources for events representing Evan Bacon!',
