@@ -1,3 +1,4 @@
+import { Article, Footer, Div, H2, H3, P } from '@expo/html-elements';
 import { Video } from 'expo-av';
 import { BlurView } from 'expo-blur';
 import { Link } from 'expo-router';
@@ -48,7 +49,7 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
 
   if (props.video) {
     return (
-      <div style={baseStyle}>
+      <Div style={baseStyle}>
         <Video
           ref={videoRef}
           source={props.video}
@@ -59,7 +60,7 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
           isLooping
           style={[StyleSheet.absoluteFill, { zIndex: -1 }]}
         />
-        <div
+        <Div
           style={{
             zIndex: 5,
             flex: 1,
@@ -69,20 +70,20 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
           }}
         >
           {props.children}
-        </div>
-      </div>
+        </Div>
+      </Div>
     );
   }
 
   return (
-    <div style={baseStyle} resizeMode={resizeMode}>
+    <Div style={baseStyle}>
       <Image
         source={props.image}
         style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]}
         resizeMode={resizeMode}
       />
 
-      <div
+      <Div
         style={{
           flex: 1,
           justifyContent: 'center',
@@ -91,8 +92,8 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
         }}
       >
         {props.children}
-      </div>
-    </div>
+      </Div>
+    </Div>
   );
 }
 
@@ -107,11 +108,6 @@ export default function ProjectCard({
   video,
   renderDescription,
 }: Project & { renderDescription?: () => any }) {
-  const {
-    window: { width },
-  } = useDimensions();
-
-  const isMobile = width < 720;
   const { isDark } = React.useContext(CustomAppearanceContext);
 
   const themeColor = color || (isDark ? 'black' : 'white');
@@ -121,14 +117,9 @@ export default function ProjectCard({
   const isHovered = useHover(ref);
 
   return (
-    <article
+    <Article
       ref={ref}
-      style={[
-        styles.container,
-        {
-          marginHorizontal: isMobile ? 16 : 0,
-        },
-      ]}
+      style={[styles.container, { $$css: true, _: 'mx-2 md:mx-0' }]}
     >
       <MediaBackground
         isHovered={isHovered}
@@ -136,33 +127,33 @@ export default function ProjectCard({
         video={video}
         resizeMode="cover"
       >
-        <footer style={styles.footer}>
+        <Footer style={styles.footer}>
           <Underlay color={themeColor} />
 
           <BlurView intensity={100} style={styles.blur} />
 
-          <div style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}>
+          <Div style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}>
             {icon && (
               <Image source={icon} style={styles.icon} resizeMode="cover" />
             )}
-            <div style={{ flex: 1 }}>
-              {title && <h2 style={styles.title}>{title}</h2>}
+            <Div style={{ flex: 1 }}>
+              {title && <H2 style={styles.title}>{title}</H2>}
               {description && !renderDescription && (
-                <h3 style={styles.description}>{description}</h3>
+                <H3 style={styles.description}>{description}</H3>
               )}
               {renderDescription && renderDescription()}
-              {year && <p style={styles.year}>{year}</p>}
-            </div>
-          </div>
+              {year && <P style={styles.year}>{year}</P>}
+            </Div>
+          </Div>
 
-          <div
+          <Div
             style={{
               flexDirection: 'row',
               justifyContent: 'space-around',
             }}
           >
             {actions.map((social, index) => (
-              <div key={social.icon}>
+              <Div key={social.icon}>
                 <Link
                   style={{ marginLeft: index === 0 ? 0 : 24 }}
                   hoverStyle={{ transform: [{ scale: 1.1 }] }}
@@ -175,12 +166,12 @@ export default function ProjectCard({
                     size={16 * 2.2}
                   />
                 </Link>
-              </div>
+              </Div>
             ))}
-          </div>
-        </footer>
+          </Div>
+        </Footer>
       </MediaBackground>
-    </article>
+    </Article>
   );
 }
 
@@ -217,16 +208,15 @@ const styles = StyleSheet.create({
     transform: [{ translateY: -upperFlow }],
   },
   container: {
-    maxWidth: 720,
     flex: 1,
     borderRadius: 12,
     marginBottom: 20,
     overflow: 'hidden',
-    shadowColor: 'black',
-    shadowRadius: 8,
-    shadowOpacity: 0.5,
+    // shadowColor: 'black',
+    // shadowRadius: 8,
+    // shadowOpacity: 0.5,
 
-    shadowOffset: { height: 4, width: 0 },
+    // shadowOffset: { height: 4, width: 0 },
     ...Platform.select({
       web: {
         transitionDuration: '0.4s',

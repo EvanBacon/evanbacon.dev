@@ -22,10 +22,10 @@ const TABS = [
     title: 'Lego',
     url: 'lego',
   },
-  {
-    title: 'Listen',
-    url: 'media',
-  },
+  // {
+  //   title: 'Listen',
+  //   url: 'media',
+  // },
   // {
   //   title: 'About',
   //   target: '_blank',
@@ -93,8 +93,10 @@ const CustomHeader = ({ siteTitle }) => {
   const isSmall = width < 720;
   const isXSmall = width < 520;
 
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
   return (
-    <header className="bg-black items-stretch mb-2 px-6 py-4">
+    <header className="bg-black items-stretch mb-2 px-2 md:px-6 py-4">
       <nav className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center justify-between z-10">
           <div className="flex flex-row items-center">
@@ -113,12 +115,11 @@ const CustomHeader = ({ siteTitle }) => {
           </div>
         </div>
 
-        <div className="flex md:hidden flex flex-row items-center justify-evenly wrap">
-          <AppearanceSwitch />
+        {/* <div className="flex md:hidden flex flex-row items-center justify-evenly wrap">
           <MenuButton onPress={onPressMenu} isActive={isActive} />
-        </div>
+        </div> */}
 
-        <div className="hidden md:flex flex-row items-center justify-evenly">
+        <div className=" flex-row items-center justify-evenly">
           {TABS.map(info => (
             <HeaderLink
               title={info.title}
@@ -132,7 +133,7 @@ const CustomHeader = ({ siteTitle }) => {
             />
           ))}
 
-          <AppearanceSwitch style={{ marginLeft: 12 }} />
+          {/* <AppearanceSwitch style={{ marginLeft: 12 }} /> */}
         </div>
       </nav>
     </header>

@@ -10,7 +10,6 @@ import {
 } from '@/data/getAppStoreData';
 import Row from '@/components/showcase/row';
 import { ExpoIcon, ReactNavigationIcon } from '@/components/showcase/icons';
-import { NoSSR } from '@/components/no-ssr';
 
 function sortByFramework(a: AppItem, b: AppItem) {
   const frameworksA = getFrameworks(a);
@@ -117,7 +116,7 @@ export default function Showcase() {
                 <Div className="flex flex-row items-center">
                   <Img
                     src={'/categories/' + category + '.png'}
-                    className="pr-2"
+                    className="pr-2 w-10"
                   />
                   <H2 className="font-bold text-2xl md:text-3xl lg:text-4xl">
                     {ITUNES_GENRE_TO_CATEGORY[category] ?? category}

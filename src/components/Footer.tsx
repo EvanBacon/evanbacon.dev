@@ -15,13 +15,15 @@ const ICON_SIZE = 24;
 
 const socials = [
   {
-    name: 'twitter',
-    url: 'https://twitter.com/baconbrix',
+    name: 'x',
+    url: 'https://x.com/baconbrix',
+    // name: 'twitter',
+    // url: 'https://twitter.com/baconbrix',
   },
-  {
-    name: 'youtube-play',
-    url: 'https://www.youtube.com/baconbrix',
-  },
+  // {
+  //   name: 'youtube-play',
+  //   url: 'https://www.youtube.com/baconbrix',
+  // },
   {
     name: 'github',
     url: 'https://github.com/evanbacon',
@@ -30,18 +32,18 @@ const socials = [
     name: 'instagram',
     url: 'https://www.instagram.com/baconbrix/',
   },
-  {
-    name: 'medium',
-    url: 'http://medium.com/@baconbrix',
-  },
-  {
-    name: 'twitch',
-    url: 'https://www.twitch.tv/baconbrix',
-  },
-  {
-    name: 'linkedin',
-    url: 'https://www.linkedin.com/in/evanbacon',
-  },
+  // {
+  //   name: 'medium',
+  //   url: 'http://medium.com/@baconbrix',
+  // },
+  // {
+  //   name: 'twitch',
+  //   url: 'https://www.twitch.tv/baconbrix',
+  // },
+  // {
+  //   name: 'linkedin',
+  //   url: 'https://www.linkedin.com/in/evanbacon',
+  // },
   // dev icon not supported in current version of FontAwesome (@expo/vector-icons)
   // {
   //     name: 'dev',
@@ -67,7 +69,7 @@ export default function CustomFooter() {
           paddingRight: right,
         }}
       >
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ alignItems: 'center', marginVertical: 8 }}
           onPress={() => setIndex(index + 1)}
         >
@@ -76,7 +78,7 @@ export default function CustomFooter() {
             author="Evan Bacon 🥓"
             url="https://github.com/evanbacon"
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Div style={styles.socialWrapper}>
           {socials.map(social => (

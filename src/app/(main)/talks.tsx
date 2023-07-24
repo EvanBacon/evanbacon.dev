@@ -111,7 +111,7 @@ function TalkCard({ title, image, description, presentedData = [] }) {
           style={{
             flex: 1,
             minHeight: 360,
-            maxWidth: 720,
+
             width: '100%',
           }}
           resizeMode="cover"
@@ -156,14 +156,12 @@ function TalkCard({ title, image, description, presentedData = [] }) {
 
 export default function TalksScreen() {
   return (
-    <div className="container relative flex flex-col">
-      <div className="mx-auto">
-        <PageHeader>Talks</PageHeader>
-        {Talks.map((talk: any) => (
-          <TalkCard key={talk.title} {...talk} />
-        ))}
-      </div>
-    </div>
+    <>
+      <PageHeader>Talks</PageHeader>
+      {Talks.map((talk: any) => (
+        <TalkCard key={talk.title} {...talk} />
+      ))}
+    </>
   );
 }
 
@@ -174,7 +172,6 @@ function Divider() {
 
 const styles = StyleSheet.create({
   container: {
-    maxWidth: 720,
     marginBottom: 20,
   },
   divider: {
@@ -195,7 +192,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     minHeight: 360,
-    maxWidth: 720,
   },
   presTitle: {
     color: 'blue',

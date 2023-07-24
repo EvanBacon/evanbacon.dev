@@ -2,7 +2,6 @@ import Head from 'expo-router/head';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 
@@ -54,48 +53,34 @@ const QA = [
   },
 ];
 
-export default function FAQ({ navigation }) {
+export default function FAQ() {
   return (
     <>
       <Head>
         <title>Evan Bacon - Frequently Asked Questions (FAQ)</title>
       </Head>
-      <Layout navigation={navigation}>
-        <PageHeader>Frequently Asked Questions</PageHeader>
-        {QA.map(({ q, a }, i) => (
-          <FAQItem key={String(i)} question={q} children={a} />
-        ))}
-      </Layout>
+
+      <PageHeader>Frequently Asked Questions</PageHeader>
+      {QA.map(({ q, a }, i) => (
+        <FAQItem key={String(i)} question={q} children={a} />
+      ))}
     </>
   );
 }
 
 function FAQItem({ question, children }: { question: string; children: any }) {
-  const { isDark } = React.useContext(CustomAppearanceContext);
-  const text = isDark ? 'white' : 'black';
-  // @ts-ignore
   return (
-    <IView
-      itemScope
-      itemProp="mainEntity"
-      itemType="https://schema.org/Question"
-    >
+    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
       {/* @ts-ignore */}
-      <h3 itemProp="name" style={{ color: text }}>
-        {question}
-      </h3>
-      <IView
+      <h3 itemProp="name">{question}</h3>
+      <div
         itemScope
         itemProp="acceptedAnswer"
         itemType="https://schema.org/Answer"
       >
         {/* @ts-ignore */}
-        <Text itemProp="text" style={{ color: text }}>
-          {children}
-        </Text>
-      </IView>
-    </IView>
+        <span itemProp="text">{children}</span>
+      </div>
+    </div>
   );
 }
-
-const IView = View as any;

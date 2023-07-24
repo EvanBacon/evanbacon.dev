@@ -1,13 +1,12 @@
-import { Link } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
 import ProjectCard from '@/components/card/Card';
-import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader';
 import { Podcasts } from '@/Data';
+import { Link } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 
 export default function Media() {
   return (
-    <Layout>
+    <>
       <PageHeader>Podcasts</PageHeader>
       {Podcasts.map(({ authors, ...project }) => (
         <ProjectCard
@@ -28,7 +27,7 @@ export default function Media() {
           )}
         />
       ))}
-    </Layout>
+    </>
   );
 }
 
