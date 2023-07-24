@@ -1,10 +1,9 @@
-import { unstable_styles } from '@/styles/background.module.css';
-import { View } from 'react-native';
+import styles from '@/styles/background.module.css';
 
 export function Background() {
   return (
-    <View style={unstable_styles.main}>
-      <View className={unstable_styles.content} />
-    </View>
+    <div className={styles.main}>
+      <div className={styles.content} />
+    </div>
   );
 }
