@@ -18,17 +18,21 @@
     },
     "assetBundlePatterns": ["**/*"],
     "web": {
-      "bundler": "metro"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "static"
     },
     "android": {
       "package": "evanbacon.dev"
     },
     "experiments": {
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "typedRoutes": true
     },
     "ios": {
       "bundleIdentifier": "evanbacon.dev",
       "supportsTablet": true
-    }
+    },
+    "plugins": ["expo-router"]
   }
 }
