@@ -81,7 +81,7 @@ export const OpenGraphImages = {
 };
 
 export const Meta = {
-  showcase: {
+  'expo/showcase': {
     title: 'Expo OSS Showcase',
     description: 'Top iOS apps using Expo open source software in production',
     urlPath: 'expo/showcase',
