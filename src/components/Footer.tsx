@@ -96,7 +96,7 @@ export default function CustomFooter() {
         <Div style={styles.linkContainer}>
           <Link
             target="_blank"
-            href="https://www.expo.io"
+            href="https://www.expo.dev"
             style={styles.link}
             hoverStyle={styles.linkFocus}
           >
