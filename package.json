@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@bacons/mdx": "^0.1.0",
+    "@expo-google-fonts/inter": "^0.2.3",
+    "@expo-google-fonts/source-code-pro": "^0.2.3",
     "@expo/html-elements": "^0.4.2",
     "@expo/react-native-action-sheet": "^3.12.0",
     "@react-native-community/async-storage": "^1.10.3",

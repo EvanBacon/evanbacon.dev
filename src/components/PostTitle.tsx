@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from './useFont';
 
 export function Title({ children, date: dateString }) {
@@ -11,7 +11,7 @@ export function Title({ children, date: dateString }) {
 
   const dateFormatted = `${month} ${day}, ${year}`;
   return (
-    <>
+    <View style={{ gap: 8 }}>
       {Platform.OS !== 'ios' && (
         <Text
           style={{
@@ -23,8 +23,8 @@ export function Title({ children, date: dateString }) {
           {children}
         </Text>
       )}
-      <div style={{ alignItems: 'center', flexDirection: 'row' }}>
-        <div
+      <div style={{ alignItems: 'center', flexDirection: 'row', gap: 8 }}>
+        {/* <div
           style={{
             flex: 1,
             backgroundColor: 'black',
@@ -32,7 +32,7 @@ export function Title({ children, date: dateString }) {
             borderRadius: 2,
             marginRight: 16,
           }}
-        />
+        /> */}
         <Text
           style={{
             fontFamily: 'Inter_400Regular',
@@ -48,6 +48,6 @@ export function Title({ children, date: dateString }) {
           {dateFormatted}
         </Text>
       </div>
-    </>
+    </View>
   );
 }

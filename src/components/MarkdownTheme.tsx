@@ -1,64 +1,79 @@
-import { MDXComponents, MDXStyles } from "@bacons/mdx";
-import React from "react";
-import { Image } from "react-native";
+import { MDXComponents, MDXStyles } from '@bacons/mdx';
+import React from 'react';
+import { Image } from 'react-native';
 
-import { useFont } from "./useFont";
+import { loadAsync, useFont } from './useFont';
+import {
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_700Bold,
+  Inter_900Black,
+} from '@expo-google-fonts/inter';
+import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 
 export function MarkdownTheme({ children }: { children: React.ReactNode }) {
+  loadAsync({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_700Bold,
+    Inter_900Black,
+    SourceCodePro_400Regular,
+  });
+
   return (
     <MDXStyles
       h1={{
-        fontFamily: useFont("Inter_900Black"),
+        fontFamily: useFont('Inter_900Black'),
         fontSize: 32,
       }}
       h2={{
-        fontFamily: useFont("Inter_900Black"),
+        fontFamily: useFont('Inter_900Black'),
         marginTop: 16,
         fontSize: 22,
         marginBottom: 0,
       }}
       code={{
-        fontFamily: "SourceCodePro_400Regular",
+        fontFamily: 'SourceCodePro_400Regular',
         borderRadius: 2,
-        backgroundColor: "#f2f2f2",
+        backgroundColor: '#f2f2f2',
         padding: 20,
         fontSize: 16,
       }}
       inlineCode={{
-        fontFamily: "SourceCodePro_400Regular",
+        fontFamily: 'SourceCodePro_400Regular',
         borderRadius: 2,
         fontSize: 15,
-        backgroundColor: "#f2f2f2",
+        backgroundColor: '#f2f2f2',
         paddingVertical: 2,
         paddingHorizontal: 4,
       }}
       p={{
-        fontFamily: useFont("Inter_400Regular"),
+        fontFamily: useFont('Inter_400Regular'),
         lineHeight: 30,
         fontSize: 20,
         marginBottom: 8,
       }}
       blockquote={{
-        fontFamily: useFont("Inter_400Regular"),
+        fontFamily: useFont('Inter_400Regular'),
         borderLeftWidth: 3,
         fontSize: 21,
-        borderLeftColor: "#292929",
+        borderLeftColor: '#292929',
         paddingLeft: 23,
       }}
       img={{
-        width: "100%",
-        resizeMode: "contain",
-        minWidth: "100%",
-        maxWidth: "100%",
+        width: '100%',
+        resizeMode: 'contain',
+        minWidth: '100%',
+        maxWidth: '100%',
         minHeight: 180,
         maxHeight: 360,
       }}
       a={{
-        fontFamily: useFont("Inter_400Regular"),
-        textDecorationLine: "underline",
+        fontFamily: useFont('Inter_400Regular'),
+        textDecorationLine: 'underline',
       }}
       li={{
-        fontFamily: useFont("Inter_400Regular"),
+        fontFamily: useFont('Inter_400Regular'),
         fontSize: 16,
         lineHeight: 30,
       }}
@@ -66,15 +81,15 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         paddingBottom: 10,
         marginBottom: 14,
         marginTop: 32,
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingTop: 24,
       }}
     >
       <MDXComponents
         li={({ style, ...props }) => (
-          <div style={{ flexDirection: "row", alignItems: "flex-start" }}>
+          <div style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
             <div
               style={{
                 marginTop: 12,
@@ -82,7 +97,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
                 width: 6,
                 height: 6,
                 borderRadius: 3,
-                backgroundColor: "black",
+                backgroundColor: 'black',
               }}
             />
             <div style={{ flex: 1 }}>
@@ -92,7 +107,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         )}
         hr={({ style }) => (
           <div style={style}>
-            {["", "", ""].map((v, i) => (
+            {['', '', ''].map((v, i) => (
               <div
                 key={String(i)}
                 style={{
@@ -100,7 +115,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
                   width: 3,
                   height: 3,
                   borderRadius: 1.5,
-                  backgroundColor: "black",
+                  backgroundColor: 'black',
                 }}
               />
             ))}
@@ -137,7 +152,7 @@ function AutoHeightImage(props) {
   return (
     <Image
       style={[props.style, { height: imageHeight }]}
-      onLayout={(e) => {
+      onLayout={e => {
         if (layoutWidth === e.nativeEvent.layout.width) return;
         setLayoutWidth(e.nativeEvent.layout.width);
       }}

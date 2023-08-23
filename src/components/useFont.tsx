@@ -49,6 +49,7 @@ function normalizeSource(
 }
 
 function loadFontAsync(sources: Record<string, Font.FontSource>) {
+  Font.loadAsync(sources);
   return Promise.all(
     Object.entries(sources).map(([name, source]) => {
       Font.loadAsync(name, source).then(() => {
@@ -110,7 +111,7 @@ export const Text = React.forwardRef<
   const children = shouldBlock ? '' : props.children;
 
   return (
-    <span
+    <UpstreamText
       ref={ref}
       {...props}
       children={children}
