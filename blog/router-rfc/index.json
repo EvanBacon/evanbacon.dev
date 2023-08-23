@@ -1,0 +1,37 @@
+{
+  "title": "RFC: File-Based Routing in React Native",
+  "subtitle": "They said it couldn't be done...",
+  "author": "Evan Bacon",
+  "date": "2022-09-27T00:31:23.913Z",
+  "slug": "router-rfc",
+  "url": "https://blog.expo.dev/rfc-file-system-based-routing-in-react-native-7a35474722a",
+  "images": [
+    "./images/1YzCMKjZ6pS63hS-N_efNxg.png",
+    "./images/1iLEJMJ2uFG_CfzdkTrotjQ.png",
+    "./images/1pIlbQ1TbALbsTKH-ibhYOA.png",
+    "./images/1wCKlTNGpkSBU0Uktj6HVmA.png",
+    "./images/1Q-94OUpmJoae0HBu0Mti7A.gif",
+    "./images/1YUNNVfUJvCV8xHgNplFR4Q.png",
+    "./images/1KBT-K8gZZOn3r8fKKXEjgQ.png",
+    "./images/1u-kVuwo2xKn2zs_DJ59yhA.png",
+    "./images/1YUNNVfUJvCV8xHgNplFR4Q.png",
+    "./images/1iNCWIvukczHDJKPYsAFx-A.png",
+    "./images/1gWG4Lvi9bcp-yyDVEi4jbw.png"
+  ],
+  "language": "en",
+  "tags": [
+    "react-native",
+    "react",
+    "javascript",
+    "app-development",
+    "mobile-app-development"
+  ],
+  "authors": [
+    {
+      "name": "Evan Bacon",
+      "username": "Baconbrix",
+      "userId": "16b715de038f"
+    }
+  ],
+  "featuredImage": "./images/1_F1z7x8KWlE2dcUuQ-udxw.png"
+}
