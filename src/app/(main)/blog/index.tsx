@@ -51,7 +51,7 @@ export default function App() {
 function LineItem({ title, description, value, href }: DataType) {
   return (
     <Link href={href}>
-      <div className="text-default text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-700 p-4 transition-colors ease-in-out">
+      <div className="text-default text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out">
         <span className="inline">
           <b>
             {title}

@@ -126,8 +126,6 @@ export default function Page() {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{
           paddingVertical: 24,
-          maxWidth: 680,
-          marginHorizontal: 'auto',
         }}
       >
         <View style={{ flex: 1, paddingHorizontal: 12 }}>

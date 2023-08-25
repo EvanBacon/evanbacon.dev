@@ -58,7 +58,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         color: '#ffffff',
         backgroundColor: 'rgba(115, 125, 140, 0.17)',
         padding: 20,
-        fontSize: 16,
+        fontSize: 'unset',
         marginTop: 0,
       }}
       inlineCode={{
@@ -102,6 +102,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         maxHeight: 360,
       }}
       a={{
+        fontSize: 'unset',
         fontFamily: useFont('Inter_400Regular'),
         textDecorationLine: 'underline',
         color: '#f2f5f7',
@@ -127,10 +128,10 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         //   console.log('code', props);
         //   return <Code {...props} style={[style]} />;
         // }}
-        em={({ ...props }) => <em {...props} />}
-        p={({ ...props }) => <p {...props} />}
-        strong={({ ...props }) => <b {...props} />}
-        blockquote={({ style, children, ...props }) => (
+        em={({ parentName, ...props }) => <em {...props} />}
+        p={({ parentName, ...props }) => <p {...props} />}
+        strong={({ parentName, ...props }) => <b {...props} />}
+        blockquote={({ parentName, style, children, ...props }) => (
           <BlockQuote {...props} style={[style]}>
             <div
               style={{
@@ -156,7 +157,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             {children}
           </BlockQuote>
         )}
-        li={({ style, ...props }) => (
+        li={({ parentName, style, ...props }) => (
           <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
             <View
               style={{
@@ -177,7 +178,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
         // )}
-        hr={({ style }) => (
+        hr={({ parentName, style }) => (
           <View style={style}>
             {['', '', ''].map((v, i) => (
               <View
