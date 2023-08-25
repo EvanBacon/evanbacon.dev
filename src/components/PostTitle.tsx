@@ -11,10 +11,11 @@ export function Title({ children, date: dateString }) {
 
   const dateFormatted = `${month} ${day}, ${year}`;
   return (
-    <View style={{ gap: 8 }}>
+    <View style={{ gap: 8, marginBottom: '1.25em' }}>
       {Platform.OS !== 'ios' && (
         <Text
           style={{
+            color: '#f2f5f7',
             fontFamily: 'Inter_900Black',
             fontSize: 32,
             marginBottom: 8,
@@ -38,7 +39,7 @@ export function Title({ children, date: dateString }) {
             fontFamily: 'Inter_400Regular',
             fontSize: 16,
 
-            backgroundColor: 'black',
+            backgroundColor: 'rgba(115, 125, 140, 0.17)',
             borderRadius: 8,
             paddingVertical: 4,
             paddingHorizontal: 8,

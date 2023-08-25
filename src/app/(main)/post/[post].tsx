@@ -2,7 +2,7 @@ import Head from 'expo-router/head';
 import { Stack, usePathname, useSearchParams } from 'expo-router';
 import * as Linking from 'expo-linking';
 import React from 'react';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
 import { useFont } from '@/components/useFont';
 import { LD_EVAN_BACON } from '@/data/structured';
 
@@ -123,7 +123,6 @@ export default function Page() {
       />
 
       <ScrollView
-        style={{ backgroundColor: 'white' }}
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{
           paddingVertical: 24,
@@ -131,11 +130,11 @@ export default function Page() {
           marginHorizontal: 'auto',
         }}
       >
-        <div style={{ flex: 1, paddingHorizontal: 12 }}>
+        <View style={{ flex: 1, paddingHorizontal: 12 }}>
           <MarkdownTheme>
             <MarkdownComponent />
           </MarkdownTheme>
-        </div>
+        </View>
       </ScrollView>
     </>
   );

@@ -56,7 +56,7 @@ export default function Layout({
       //   // backgroundColor,
       //   ...transitionStyle,
       // }}
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#10141A' }}
       contentInset={{ top: 0, bottom: paddingBottom }}
       // style={styles.scrollView}
     >

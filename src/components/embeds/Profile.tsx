@@ -1,5 +1,6 @@
 import { Image, Pressable } from '@bacons/react-views';
 import React from 'react';
+import { View, Text } from 'react-native';
 
 import { ExternalLink } from '../ExternalLink';
 
@@ -18,7 +19,7 @@ export function ProfileCard({
 }) {
   return (
     <ExternalCard url={url}>
-      <div
+      <View
         style={{
           flex: 1,
           justifyContent: 'space-around',
@@ -27,33 +28,34 @@ export function ProfileCard({
           padding: 12,
         }}
       >
-        <span
+        <Text
           style={{
             fontSize: 16,
             fontWeight: 'bold',
+            color: '#f2f5f7',
           }}
         >
           {title} – Overview
-        </span>
-        <span
+        </Text>
+        <Text
           style={{
             fontSize: 16,
 
             // light gray
-            color: '#6a737d',
+            color: '#f2f5f7',
           }}
         >
           {subtitle ?? 'No bio available'}
-        </span>
-        <span
+        </Text>
+        <Text
           style={{
             fontSize: 14,
-            color: '#6a737d',
+            color: '#6572A0',
           }}
         >
           Follow on {website}
-        </span>
-      </div>
+        </Text>
+      </View>
 
       <Image
         source={{ uri: image }}
@@ -79,20 +81,20 @@ export function ExternalCard({
     <ExternalLink asChild href={url} style={{ flex: 1 }}>
       <Pressable>
         {({ hovered }) => (
-          <div
+          <View
             style={{
               marginTop: 8,
-              borderColor: '#e6e6e6',
+              borderColor: '#6572A0',
               borderWidth: 1,
               transitionDuration: '200ms',
-              backgroundColor: hovered ? '#f6f8fa' : 'white',
+              backgroundColor: hovered ? '#373848' : '#21222B',
 
               flexDirection: 'row',
               alignItems: 'center',
             }}
           >
             {children}
-          </div>
+          </View>
         )}
       </Pressable>
     </ExternalLink>

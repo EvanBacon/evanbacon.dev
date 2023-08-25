@@ -105,7 +105,7 @@ export default function App() {
           <meta key={`meta-${index}`} {...value} />
         ))}
       </Head>
-      <Background />
+      {/* <Background /> */}
       <CustomAppearanceProvider>
         <ActionSheetProvider>
           <Layout>
