@@ -127,6 +127,8 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         //   console.log('code', props);
         //   return <Code {...props} style={[style]} />;
         // }}
+        em={({ ...props }) => <em {...props} />}
+        p={({ ...props }) => <p {...props} />}
         strong={({ ...props }) => <b {...props} />}
         blockquote={({ style, children, ...props }) => (
           <BlockQuote {...props} style={[style]}>

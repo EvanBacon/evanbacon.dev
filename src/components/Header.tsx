@@ -35,11 +35,11 @@ const TABS = [
   //   target: '_blank',
   //   url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
   // },
-  {
-    title: 'Source',
-    target: '_blank',
-    url: 'https://github.com/EvanBacon/Portfolio',
-  },
+  // {
+  //   title: 'Source',
+  //   target: '_blank',
+  //   url: 'https://github.com/EvanBacon/Portfolio',
+  // },
 ];
 
 const CustomHeader = ({ siteTitle }) => {
