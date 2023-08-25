@@ -272,35 +272,35 @@ export const Projects: Project[] = [
       },
     ],
   },
-  {
-    image: require('assets/projects/super-mario/preview.jpeg'),
-    icon: require('assets/projects/super-mario/app-icon.png'),
-    title: 'Super Mario',
-    description: 'Phaser used for ultra fun times.',
-    year: 2018,
-    color: '#b80300',
-    actions: [
-      {
-        icon: 'code',
-        url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
-      },
-    ],
-  },
-  {
-    image: require('assets/projects/nitro-roll/preview.png'),
-    icon: require('assets/projects/nitro-roll/app-icon.png'),
-    title: 'Nitro Roll',
-    description:
-      'Roll through the nitro-sonic Voidiverse avoiding the Bleaqaulizers!',
-    year: 2018,
-    color: '#fff',
-    actions: [
-      {
-        icon: 'code',
-        url: 'https://github.com/evanbacon/expo-nitro-roll',
-      },
-    ],
-  },
+  // {
+  //   image: require('assets/projects/super-mario/preview.jpeg'),
+  //   icon: require('assets/projects/super-mario/app-icon.png'),
+  //   title: 'Super Mario',
+  //   description: 'Phaser used for ultra fun times.',
+  //   year: 2018,
+  //   color: '#b80300',
+  //   actions: [
+  //     {
+  //       icon: 'code',
+  //       url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
+  //     },
+  //   ],
+  // },
+  // {
+  //   image: require('assets/projects/nitro-roll/preview.png'),
+  //   icon: require('assets/projects/nitro-roll/app-icon.png'),
+  //   title: 'Nitro Roll',
+  //   description:
+  //     'Roll through the nitro-sonic Voidiverse avoiding the Bleaqaulizers!',
+  //   year: 2018,
+  //   color: '#fff',
+  //   actions: [
+  //     {
+  //       icon: 'code',
+  //       url: 'https://github.com/evanbacon/expo-nitro-roll',
+  //     },
+  //   ],
+  // },
 ];
 
 export const Social = [

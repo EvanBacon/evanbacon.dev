@@ -22,10 +22,10 @@ const TABS = [
     title: 'Games',
     url: 'games',
   },
-  {
-    title: 'Lego',
-    url: 'lego',
-  },
+  // {
+  //   title: 'Lego',
+  //   url: 'lego',
+  // },
   // {
   //   title: 'Listen',
   //   url: 'media',
@@ -104,21 +104,22 @@ const CustomHeader = ({ siteTitle }) => {
       <nav className="flex flex-row justify-between items-center container mx-auto px-6 md:px-0">
         <div className="flex flex-row items-center justify-between z-10">
           <div className="flex flex-row items-center">
+            <HeaderPhoto />
+
             <div className="hidden md:flex flex-1">
-              <HeaderPhoto />
+              <Link
+                href="/"
+                style={[
+                  styles.link,
+                  {
+                    $$css: true,
+                    _: 'text-2xl md:text-3xl font-bold',
+                  },
+                ]}
+              >
+                {siteTitle}
+              </Link>
             </div>
-            <Link
-              href="/"
-              style={[
-                styles.link,
-                {
-                  $$css: true,
-                  _: 'text-2xl md:text-3xl font-bold',
-                },
-              ]}
-            >
-              {siteTitle}
-            </Link>
           </div>
         </div>
 
