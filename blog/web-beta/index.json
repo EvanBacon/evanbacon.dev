@@ -1,6 +1,6 @@
 {
-  "title": "Expo CLI and SDK web support beta",
-  "subtitle": "Expo is on a mission to create the best possible end-to-end developer experiences for building and deploying apps on multiple platforms. Today we are very excited to announce experimental* web support for the Expo CLI and SDK!",
+  "title": "Expo Web beta",
+  "subtitle": "Brining Expo to the web",
   "author": "Evan Bacon",
   "date": "2019-03-18T20:42:46.857Z",
   "slug": "web-beta",

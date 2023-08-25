@@ -133,12 +133,15 @@ export default function Page() {
         <View style={{ flex: 1, paddingHorizontal: 12 }}>
           <MarkdownTheme>
             <MarkdownComponent />
+            <Thanks />
           </MarkdownTheme>
         </View>
       </ScrollView>
     </>
   );
 }
+
+import Thanks from '@/components/thanks';
 
 function AutoHeightImage(props) {
   const [imgSize, setImageSize] = React.useState({});

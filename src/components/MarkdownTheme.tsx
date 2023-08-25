@@ -11,7 +11,7 @@ import {
   Inter_900Black,
 } from '@expo-google-fonts/inter';
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
-import { BlockQuote } from '@expo/html-elements';
+import { BlockQuote, Code } from '@expo/html-elements';
 
 export function MarkdownTheme({ children }: { children: React.ReactNode }) {
   loadAsync({
@@ -123,6 +123,10 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       }}
     >
       <MDXComponents
+        // code={({ style, ...props }) => {
+        //   console.log('code', props);
+        //   return <Code {...props} style={[style]} />;
+        // }}
         strong={({ ...props }) => <b {...props} />}
         blockquote={({ style, children, ...props }) => (
           <BlockQuote {...props} style={[style]}>

@@ -1,6 +1,6 @@
 {
   "title": "Introducing: Expo Run Commands",
-  "subtitle": "Expo Go can get you from zero to “hello world” without ever needing to do a native build. This works great for many cases, but when it comes time for custom native code, then what do you do?",
+  "subtitle": "Streamlining xcodebuild and gradle",
   "author": "Evan Bacon",
   "date": "2021-05-28T00:16:51.286Z",
   "slug": "run-cmd",

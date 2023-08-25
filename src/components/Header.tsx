@@ -15,6 +15,10 @@ const TABS = [
     url: '',
   },
   {
+    title: 'Blog',
+    url: 'blog',
+  },
+  {
     title: 'Games',
     url: 'games',
   },
