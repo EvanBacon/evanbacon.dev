@@ -49,6 +49,9 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         // color: '#f2f5f7',
         color: '#B695F3',
       }}
+      strong={{
+        color: '#B695F3',
+      }}
       code={{
         fontFamily: 'SourceCodePro_400Regular',
         borderRadius: 2,
@@ -120,6 +123,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       }}
     >
       <MDXComponents
+        strong={({ ...props }) => <b {...props} />}
         blockquote={({ style, children, ...props }) => (
           <BlockQuote {...props} style={[style]}>
             <div
