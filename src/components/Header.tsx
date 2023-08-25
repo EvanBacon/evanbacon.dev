@@ -100,8 +100,8 @@ const CustomHeader = ({ siteTitle }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
-    <header className="bg-black items-stretch mb-2 px-2 md:px-6 py-4">
-      <nav className="flex flex-row justify-between items-center">
+    <header className="bg-black mb-2 py-4">
+      <nav className="flex flex-row justify-between items-center container mx-auto px-6 md:px-0">
         <div className="flex flex-row items-center justify-between z-10">
           <div className="flex flex-row items-center">
             <div className="hidden md:flex flex-1">
