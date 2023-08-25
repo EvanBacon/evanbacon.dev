@@ -2,6 +2,13 @@ import PageHeader from '@/components/PageHeader';
 import { Link } from 'expo-router';
 import React from 'react';
 
+type DataType = {
+  title: string;
+  description: string;
+  value: string;
+  href: string;
+};
+
 const mdxctx = require.context('../../../../blog', true, /\.(mdx|js)$/);
 
 const posts = mdxctx
@@ -26,29 +33,20 @@ const POSTS = posts
 export default function App() {
   return (
     <>
-      <>
-        <PageHeader>Blog</PageHeader>
+      <PageHeader>Blog</PageHeader>
 
-        <div className="mt-8 space-y-6">
-          <ul className="divide-y divide-slate-800/50">
-            {POSTS.map((item, index) => (
-              <li key={index} className="py-4">
-                <LineItem key={index} {...item} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </>
+      <div className="mt-8 space-y-6">
+        <ul className="divide-y divide-slate-800/50">
+          {POSTS.map((item, index) => (
+            <li key={index} className="py-4">
+              <LineItem key={index} {...item} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
-
-type DataType = {
-  title: string;
-  description: string;
-  value: string;
-  href: string;
-};
 
 function LineItem({ title, description, value, href }: DataType) {
   return (
