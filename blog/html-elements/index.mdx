@@ -1,0 +1,199 @@
+import { Embed } from '@/components/embeds';
+import Thanks from '@/components/thanks';
+import { Title } from '@/components/PostTitle';
+
+<Title date="2020-02-19T22:45:36.616Z">React Native for web developers</Title>
+
+In the world of web development, **everything** is streamlined. The concept of React Native is really appealing to a React developer on paper, but abandoning your existing knowledge of HTML and CSS in favor of primitives like View, Image, Text can be a lot to handle. But what if it didn't need to be? What if you could _truly_ build native apps with your already existing knowledge of building websites.
+
+**TL;DR:** [You can now](https://github.com/expo/expo/blob/master/packages/html-elements)
+
+## The Issue
+
+> This article assumes you know React Native can be used to create iOS, Android, and Web apps. If you don't [watch this](https://www.youtube.com/watch?v=ykBxY01j_rA)!
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/l1wvn3lgbpyby0n9tr8f.png)
+
+React Native is great ... for native developers (and by extension the entire human race 😁). Instead of using Objective-C, or Java you can build your native app cross-platform with just ~~JavaScript~~ TypeScript! Even with the entirely original ideas of Flutter and SwiftUI from Google and Apple respectively, React Native is a no-brainer. The flexibility of JavaScript, the convenience of OTA updates, **[Expo as a whole](https://expo.io/)**. React Native has it all.
+
+...unless you're a web developer. Then it's missing a few things.
+
+## The learning curve of React Native
+
+The default flavor of React Native considers all platforms equally, this means the API you interface with doesn't have any platform specific references. A good example of this is linking.
+
+Say we want to create a text link to open another website.
+
+In the browser you simply create a link:
+
+```html
+<a href="https://dev.to">Link</a>
+```
+
+Natively you would create a generic `Text` element and use the `Linking` API to open a URL:
+
+```tsx
+import { Text, Linking } from 'react-native';
+
+function openLink() {
+  Linking.openURL('https://dev.to');
+}
+
+export default () => <Text onPress={openLink}>Link</Text>;
+```
+
+Now universally with Expo (iOS, Android, and Web), you'd do this:
+
+```tsx
+import { Text, Platform, Linking } from 'react-native';
+
+const Link = ({ href, ...props }) => (
+  <Text
+    {...props}
+    accessibilityRole="link"
+    href={href}
+    onPress={() => {
+      if (Platform.OS !== 'web') Linking.openURL(href);
+    }}
+  />
+);
+
+export default () => <Link href="https://dev.to">Link</Link>;
+```
+
+This is pretty unintuitive if you're coming from a web development background. For the sake of brevity I won't get into how much of nightmare it is to use this with TypeScript. `href` isn't in the TypeScript definition for `<Text />` because web support is an out-of-tree solution. If you want to add TypeScript support you'd have to remap the types of the Text element which takes a lot of digging to get right.
+
+## Problem 002
+
+Every front end developer talks about how native apps have features that you just can't get in the browser. But what about the web-only features that you can't get natively? Possibly the most important feature like this is SEO. For many websites _indexing_ is critical to success.
+SEO is a very unexplored, and difficult thing to do with React Native (minus this article I wrote about [using Expo with Next.js](https://dev.to/evanbacon/next-js-expo-and-react-native-for-web-3kd9)).
+
+## The Solution
+
+Considering the issues I just laid out, the solution is somewhat obvious. React developers don't need "React Native", they need "React DOM rendered natively".
+So I created a library which helps you do just that, called [**`@expo/html-elements`**](http://npmjs.com/package/@expo/html-elements).
+A set of (currently **40** new) light-weight, universal components named after HTML elements that help ease you into the React Native world without actually adding any overhead to your native project.
+
+`@expo/html-elements` also help you accomplish:
+
+- An easier path for all users of React Native to implement common web functionality in their universal apps.
+- Optimized for SEO by using the correct DOM element whenever possible.
+- More automation around A11Y in your iOS, Android, and web projects.
+
+---
+
+![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/u9cv0f3nji1az58hebzs.png)
+
+Now if you want to build a simple link you can!
+
+```js
+import { A } from '@expo/html-elements';
+
+return <A href="#" target="_blank" />;
+```
+
+This link then converts to the following A11Y compliant link element while stripping away unused props:
+
+- **Web**: `<a dir="auto" href="#" role="link" target="_blank" />`
+- **Native**: `<Text accessibilityRole="link" onPress={() => Linking.openURL('#')} />`
+
+Having an `<a>` element is good for a few reasons. You get the "copy link address" feature, the hover preview, peek and pop on iOS, and a few other things users have come to expect from the web.
+
+## Smarter Layouts
+
+Using headers and other layout elements won't impact your native app, but not using them can impact your web search results. Consider the following page in my app:
+
+[**Try it**](https://snack.expo.io/@bacon/basic-seo-001)
+
+```tsx
+import { View, Text, Button } from 'react-native';
+
+export default () => (
+  <>
+    <Text>My Story</Text>
+    <View>
+      <Text>I did a thing with Lego now I code</Text>
+    </View>
+    <View>
+      <Button title="follow me" />
+    </View>
+  </>
+);
+```
+
+Web crawlers and screen readers see a bunch of raw data like this:
+
+```html
+<div>My Story</div>
+<div>
+  <div>I did a thing with Lego now I code</div>
+</div>
+<div>
+  <div role="button"></div>
+</div>
+```
+
+If you were making a basic website with HTML (and not creating an app) you would probably use a variety of elements to ensure screen readers and crawlers work optimally:
+
+```html
+<h1>My Story</h1>
+<main role="main">
+  <p>I did a thing with Lego now I code</p>
+</main>
+<footer>
+  <div role="button"></div>
+</footer>
+```
+
+This tells the crawlers so much about our page, but how do we get this without compromising our native app? Well, to be honest it was actually pretty difficult and required a deep understanding of React Native web to figure out... But now with `@expo/html-elements` (!!) you simply:
+
+```tsx
+import { H1, Main, P, Footer } from '@expo/html-elements';
+import { Button } from 'react-native';
+
+export default () => (
+  <>
+    <H1>My Story</H1>
+    <Main>
+      <P>I did a thing with Lego now I code</P>
+    </Main>
+    <Footer>
+      <Button title="follow me" />
+    </Footer>
+  </>
+);
+```
+
+Now my page has universal A11Y features, and uses more of the correct DOM elements in the browser! 😎
+
+- **Web**: `<h1>My Story</h1><main role="main"><div>I did a thing with Lego now I code</div></main><footer><div role="button" /></footer>`
+- **Native**: `<Text>My Story</Text><View><Text>I did a thing with Lego now I code</Text></View><View><Button title="follow me" /></View>`
+
+> Due to the way text style inheritance works we still use a `div` for things like p, b, strong, etc. unless that text is a child, then it uses a `span`.
+
+## Getting Started
+
+You can get started right away using snack: https://snack.expo.io/@bacon/blank-elements
+
+**- Or -**
+
+Create a universal project and get started using it locally:
+
+- Install the CLI `npm i -g expo-cli`
+- Create a new project `expo init my-project`
+- Install the package `yarn add @expo/html-elements`
+- Start the project with `expo start`
+
+  - Press `w` to open in the browser
+  - Press `i` to open iOS in the simulator
+  - Press `a` to start the project on an Android emulator
+
+- **Optionally:** You can also use this package with any React Native tool
+  - Ignite CLI: [`ignite-cli`](https://github.com/infinitered/ignite)
+  - Community CLI: `@react-native-community/cli`
+
+## Final Thoughts
+
+Perhaps you haven't encountered any of the issues `@expo/html-elements` solves, or you think they could be solved in a different way, I'd love to hear your feedback.
+
+I imagine some people may see this package and think that their native app is simply running in a web view like Cordova. This is absolutely **NOT** the case. Your views are still all optimally rendered as native views. If you encounter any misconceptions regarding this, I would appreciate you directing those folks to this post!
