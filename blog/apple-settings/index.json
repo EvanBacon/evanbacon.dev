@@ -1,0 +1,16 @@
+{
+    "title": "Apple Settings UI with Expo",
+    "shortTitle": " Settings.bundle",
+    "subtitle": "Adding custom UI to the Apple Settings app",
+    "author": "Evan Bacon",
+    "date": "2023-08-22T17:36:02.536Z",
+    "slug": "apple-settings",
+    "tags": [
+      "react",
+      "react-native",
+      "Swift",
+      "NSUserDefaults",
+      "Settings.bundle"
+    ],
+    "featuredImage": "./images/header.jpg"
+  }
