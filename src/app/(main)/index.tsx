@@ -5,7 +5,7 @@ import PageHeader from '@/components/PageHeader';
 export default function App() {
   return (
     <>
-      <PageHeader>hello world</PageHeader>
+      <PageHeader>Hello world</PageHeader>
 
       <div className="mt-8 space-y-6 mx-2 md:mx-0">
         <MarkdownTheme>

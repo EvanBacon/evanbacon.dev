@@ -54,22 +54,34 @@ function MasonryPhotoGrid({ images }: { images: [string, string][] }) {
         <div
           key={index}
           className={cn(
-            'relative h-40 rounded-lg overflow-hidden object-cover',
+            'relative h-40 rounded-lg overflow-hidden bg-[#00000042]',
             index === 1 ? 'h-full row-span-2' : 'h-40'
           )}
         >
-          <Image
-            alt={alt}
-            source={{ uri: src }}
-            resizeMode="cover"
+          <div
+            className="opacity-0 animate-kennyburns"
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               bottom: 0,
               right: 0,
+              animationDelay: 1000 + index * 200 + 'ms',
             }}
-          />
+          >
+            <Image
+              alt={alt}
+              source={{ uri: src }}
+              resizeMode="cover"
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+              }}
+            />
+          </div>
         </div>
       ))}
     </div>
