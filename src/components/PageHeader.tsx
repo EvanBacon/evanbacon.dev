@@ -2,7 +2,7 @@ import React from 'react';
 import gsap from 'gsap';
 
 export default function PageHeader({ children }) {
-  const [text, setText] = React.useState('|');
+  const [text, setText] = React.useState('  ');
 
   React.useEffect(() => {
     const arr1 = children.split('');
@@ -17,7 +17,7 @@ export default function PageHeader({ children }) {
         innerHTML: arr2.join(''),
       },
       {
-        duration: arr1.length / 20,
+        duration: arr1.length / 15,
         ease: 'power4.in',
         delay: 0.2,
         onUpdate: () => {
@@ -35,16 +35,17 @@ export default function PageHeader({ children }) {
   }, [children]);
 
   return (
-    <h1 className="text-5xl font-bold my-3 mx-2 md:mx-0 text-slate-50">
+    <h1 className="text-5xl h-[3rem] font-bold my-3 mx-2 md:mx-0 text-slate-50">
       {text}
     </h1>
   );
 }
 
 function randChar() {
-  return 'x';
   // let c = 'x';
-  let c = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$^&*()…æ_+-=;[]/~`';
+  let c = 'abcdefghijklmnopqrstuvwxyz';
+  // let c = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$^&*()…æ_+-=;[]/~`';
   c = c[Math.floor(Math.random() * c.length)];
-  return Math.random() > 0.5 ? c : c.toUpperCase();
+  return c;
+  // return Math.random() > 0.5 ? c : c.toUpperCase();
 }

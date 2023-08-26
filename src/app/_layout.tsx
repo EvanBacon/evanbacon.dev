@@ -32,7 +32,7 @@ export default function App() {
   const themeColor = Colors.theme;
   const pathname = usePathname();
 
-  const currentPath = ensureSlash(pathname || '', false) || 'talks';
+  const currentPath = ensureSlash(pathname || '', false) || 'home';
   const { image = {}, title = site.title, description = site.description } =
     Meta[currentPath] || Meta.brand;
 

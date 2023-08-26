@@ -1,5 +1,6 @@
 {
   "title": "RFC: File-Based Routing in React Native",
+  "shortTitle": "Expo Router proposal",
   "subtitle": "They said it couldn't be done...",
   "author": "Evan Bacon",
   "date": "2022-09-27T00:31:23.913Z",

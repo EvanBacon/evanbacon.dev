@@ -17,8 +17,8 @@ const posts = mdxctx
   .map(key => mdxctx(key));
 
 const POSTS = posts
-  .map(({ title, subtitle, date, slug }) => ({
-    title: title,
+  .map(({ title, shortTitle, subtitle, date, slug }) => ({
+    title: shortTitle ?? title,
     description: subtitle,
     value: new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -58,7 +58,7 @@ function LineItem({ title, description, value, href }: DataType) {
             {'  '}
           </b>
 
-          <span className="opacity-60">{description}</span>
+          <span className="opacity-60 hidden md:flex">{description}</span>
         </span>
         {/* divider pushing  */}
         <span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />

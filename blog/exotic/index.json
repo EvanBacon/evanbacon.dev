@@ -1,5 +1,6 @@
 {
   "title": "Drastically Faster Bundling in React Native",
+  "shortTitle": "Conditional Metro Bundling",
   "subtitle": "Expo “Exotic” mode for Metro bundler.",
   "author": "Evan Bacon",
   "date": "2021-10-08T22:45:36.616Z",

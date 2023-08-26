@@ -1,6 +1,4 @@
-import AppearanceSwitch from '@/components/AppearanceSwitch';
 import HeaderPhoto from '@/components/HeaderPhoto';
-import MenuButton from '@/components/MenuButton';
 import Colors from '@/constants/Colors';
 import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 import { useActionSheet } from '@expo/react-native-action-sheet';
@@ -104,7 +102,9 @@ const CustomHeader = ({ siteTitle }) => {
       <nav className="flex flex-row justify-between items-center container mx-auto px-6 md:px-0 max-w-3xl">
         <div className="flex flex-row items-center justify-between z-10">
           <div className="flex flex-row items-center">
-            <HeaderPhoto />
+            <Link href="/">
+              <HeaderPhoto />
+            </Link>
 
             <div className="hidden md:flex flex-1">
               <Link
@@ -155,18 +155,20 @@ function HeaderLink({ title, target, style, routeName }) {
   const isActive = pathname ? pathname === `/${routeName}` : false;
 
   return (
-    <Link
-      target={target}
-      style={[
-        styles.link,
-        styles.headerLink,
-        style,
-        isActive && { borderBottomColor: 'white' },
-      ]}
-      href={routeName}
-    >
-      {title}
-    </Link>
+    <span className="hover:opacity-80 transition-opacity">
+      <Link
+        target={target}
+        style={[
+          styles.link,
+          styles.headerLink,
+          style,
+          isActive && { borderBottomColor: 'white' },
+        ]}
+        href={routeName}
+      >
+        {title}
+      </Link>
+    </span>
   );
 }
 

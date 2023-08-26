@@ -1,5 +1,6 @@
 {
   "title": "Introducing: Expo Run Commands",
+  "shortTitle": "npx expo run",
   "subtitle": "Streamlining xcodebuild and gradle",
   "author": "Evan Bacon",
   "date": "2021-05-28T00:16:51.286Z",

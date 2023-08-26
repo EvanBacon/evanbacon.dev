@@ -52,6 +52,12 @@ export const Meta = {
     urlPath: 'talks',
     image: OpenGraphImages.talks,
   },
+  home: {
+    title: 'Evan Bacon',
+    description: `Artist and Software Developer. Currently reimagining mobile software with Expo.`,
+    urlPath: '',
+    image: OpenGraphImages.talks,
+  },
   code: {
     title: 'Code',
     description: `Cool things programmed by Evan Bacon ... probably while tired!`,

@@ -10,7 +10,8 @@ const HeaderPhoto = () => {
     <img
       src={'/pfp.png'}
       loading="lazy"
-      className="aspect-square w-[48px] h-[48px] rounded-full mr-3"
+      style={{ animationDuration: '500ms', animationDelay: '0ms' }}
+      className="opacity-0 animate-kennyburns aspect-square w-[48px] h-[48px] rounded-full mr-3"
     />
   );
   return (

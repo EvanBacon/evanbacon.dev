@@ -114,7 +114,7 @@ export default function CustomFooter() {
               <a
                 target="_blank"
                 href={href}
-                className="text-slate-200 transition-colors hover:text-slate-50"
+                className="text-slate-200 transition-opacity hover:opacity-70"
               >
                 {title}
               </a>

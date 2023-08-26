@@ -1,5 +1,6 @@
 {
   "title": "The New Expo CLI",
+  "shortTitle": "Expo CLI",
   "subtitle": "npx expo start",
   "author": "Evan Bacon",
   "date": "2022-08-09T09:10:56.839Z",

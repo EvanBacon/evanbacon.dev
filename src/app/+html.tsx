@@ -59,7 +59,7 @@ export default function Html({ children }) {
           href="/favicon-32.png"
         />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4630eb" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000" />
 
         <link
           rel="apple-touch-startup-image"
