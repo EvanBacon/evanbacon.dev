@@ -24,7 +24,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export default function Html({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: '#10141A' }}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

@@ -1,0 +1,38 @@
+{
+  "title": "Drastically Faster Bundling in React Native",
+  "subtitle": "Expo “Exotic” mode for Metro bundler.",
+  "author": "Evan Bacon",
+  "date": "2021-10-08T22:45:36.616Z",
+  "slug": "exotic",
+  "url": "https://blog.expo.dev/drastically-faster-bundling-in-react-native-a54f268e0ed1",
+  "images": [
+    "./images/1fw5SabzHwU--AfKU_OhUWA.gif",
+    "./images/1WL6XApqsIwbJmBrCV_HkxA.gif",
+    "./images/1T3Egnv7dDun-TmFSp9deOw.gif",
+    "./images/1JMvPYWUN2oNGW7Hlwkpl5w.gif",
+    "./images/1QHcSinKGEjyRyv70LkEuoQ.gif",
+    "./images/1rc2fr3hivkO6aCc-F99jtQ.gif",
+    "./images/1SwwWbiffPQxOlRj2gOBseg.gif",
+    "./images/1WTya9sLMBf2fIjJpXk_1iQ.png",
+    "./images/1CqJF-PC33tQ0yIueed_q1A.gif",
+    "./images/145DZ235fD5sWzgQeQpILdQ.png",
+    "./images/14v8JefXaoMg-q2GmLzdW7A.gif",
+    "./images/1WL6XApqsIwbJmBrCV_HkxA.gif"
+  ],
+  "language": "en",
+  "tags": [
+    "react",
+    "react-native",
+    "coding",
+    "development",
+    "javascript"
+  ],
+  "authors": [
+    {
+      "name": "Evan Bacon",
+      "username": "Baconbrix",
+      "userId": "16b715de038f"
+    }
+  ],
+  "featuredImage": "./images/1FRz1jt03Gnz9nYaiYFbeEw.png"
+}

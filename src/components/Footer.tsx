@@ -1,4 +1,7 @@
 import ExpoIcon from '../../assets/expo.svg';
+import GitHubIcon from '../../assets/github.svg';
+import InstagramIcon from '../../assets/instagram.svg';
+import XIcon from '../../assets/x.svg';
 import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -51,61 +54,75 @@ const socials = [
   // },
 ];
 
-const hourIndex = new Date().getHours();
-
 export default function CustomFooter() {
-  const { bottom, left, right } = useSafeAreaInsets();
-
-  const [index, setIndex] = React.useState(hourIndex);
-  const quote = Quotes[index % Quotes.length];
-
   return (
-    <Footer style={styles.container}>
-      <Div
-        style={{
-          flex: 1,
-          paddingBottom: bottom,
-          paddingLeft: left,
-          paddingRight: right,
-        }}
-      >
-        {/* <TouchableOpacity
-          style={{ alignItems: 'center', marginVertical: 8 }}
-          onPress={() => setIndex(index + 1)}
-        >
-          <Quote
-            quote={quote}
-            author="Evan Bacon 🥓"
-            url="https://github.com/evanbacon"
-          />
-        </TouchableOpacity> */}
+    <footer className="border-t-2 border-t-slate-800 mt-2 py-6">
+      <nav className="flex container mx-auto px-6 md:px-0 max-w-3xl">
+        <ul>
+          {[
+            [
+              <>
+                <XIcon
+                  className="inline mt-[-3px] mr-2"
+                  width={18}
+                  height={18}
+                  fill="white"
+                />
+                Follow on Twitter
+              </>,
+              'https://x.com/baconbrix',
+            ],
+            [
+              <>
+                <GitHubIcon
+                  className="inline mt-[-3px] mr-2"
+                  width={18}
+                  height={18}
+                  fill="white"
+                />
+                View code on GitHub
+              </>,
 
-        <Div style={styles.socialWrapper}>
-          {socials.map(social => (
-            <Link
-              style={{ marginRight: 8 }}
-              target="_blank"
-              key={social.name}
-              href={social.url}
-              hoverStyle={{ transform: [{ scale: 1.1 }] }}
-            >
-              <SocialIcon name={social.name} color="white" size={16 * 2.2} />
-            </Link>
+              'https://github.com/evanbacon',
+            ],
+            // [
+            //   <span className="inline">
+            //     Ephemeral content on Instagram{' '}
+            //     <InstagramIcon
+            //       className="inline"
+            //       width={18}
+            //       height={18}
+            //       fill="white"
+            //     />
+            //   </span>,
+            //   'https://instagram.com/baconbrix',
+            // ],
+            [
+              <>
+                <ExpoIcon
+                  className="inline mt-[-3px] mr-2"
+                  width={18}
+                  height={18}
+                  fill="white"
+                />
+                Powered by Expo
+              </>,
+              'https://www.expo.dev',
+            ],
+          ].map(([title, href], index) => (
+            <li key={index} className="leading-loose h-10">
+              <a
+                target="_blank"
+                href={href}
+                className="text-slate-200 transition-colors hover:text-slate-50"
+              >
+                {title}
+              </a>
+            </li>
           ))}
-        </Div>
-        <Div style={styles.linkContainer}>
-          <Link
-            target="_blank"
-            href="https://www.expo.dev"
-            style={styles.link}
-            hoverStyle={styles.linkFocus}
-          >
-            <ExpoIcon width={ICON_SIZE} height={ICON_SIZE} fill="white" />
-            <H5 style={styles.footerText}>Built with Expo</H5>
-          </Link>
-        </Div>
-      </Div>
-    </Footer>
+        </ul>
+      </nav>
+    </footer>
   );
 }
 

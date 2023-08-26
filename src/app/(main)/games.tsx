@@ -8,6 +8,7 @@ export default function Games() {
   return (
     <>
       <PageHeader>Games</PageHeader>
+      <br />
       {Projects.map((project: any) => (
         <ProjectCard key={project.title} {...project} />
       ))}

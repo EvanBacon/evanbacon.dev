@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
-    "typeRoots": [
-      "./global.d.ts"
-    ],
+    "typeRoots": ["./global.d.ts"],
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "extends": "expo/tsconfig.base",
@@ -14,6 +11,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
+    "mdx-env.d.ts",
     "expo-env.d.ts"
   ]
 }

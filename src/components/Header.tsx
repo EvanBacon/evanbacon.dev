@@ -15,13 +15,17 @@ const TABS = [
     url: '',
   },
   {
+    title: 'Blog',
+    url: 'blog',
+  },
+  {
     title: 'Games',
     url: 'games',
   },
-  {
-    title: 'Lego',
-    url: 'lego',
-  },
+  // {
+  //   title: 'Lego',
+  //   url: 'lego',
+  // },
   // {
   //   title: 'Listen',
   //   url: 'media',
@@ -31,11 +35,11 @@ const TABS = [
   //   target: '_blank',
   //   url: 'https://en.wikipedia.org/wiki/Evan_Bacon',
   // },
-  {
-    title: 'Source',
-    target: '_blank',
-    url: 'https://github.com/EvanBacon/Portfolio',
-  },
+  // {
+  //   title: 'Source',
+  //   target: '_blank',
+  //   url: 'https://github.com/EvanBacon/Portfolio',
+  // },
 ];
 
 const CustomHeader = ({ siteTitle }) => {
@@ -96,25 +100,26 @@ const CustomHeader = ({ siteTitle }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
-    <header className="bg-black items-stretch mb-2 px-2 md:px-6 py-4">
-      <nav className="flex flex-row justify-between items-center">
+    <header className="bg-black mb-2 py-4">
+      <nav className="flex flex-row justify-between items-center container mx-auto px-6 md:px-0 max-w-3xl">
         <div className="flex flex-row items-center justify-between z-10">
           <div className="flex flex-row items-center">
+            <HeaderPhoto />
+
             <div className="hidden md:flex flex-1">
-              <HeaderPhoto />
+              <Link
+                href="/"
+                style={[
+                  styles.link,
+                  {
+                    $$css: true,
+                    _: 'text-2xl md:text-3xl font-bold',
+                  },
+                ]}
+              >
+                {siteTitle}
+              </Link>
             </div>
-            <Link
-              href="/"
-              style={[
-                styles.link,
-                {
-                  $$css: true,
-                  _: 'text-2xl md:text-3xl font-bold',
-                },
-              ]}
-            >
-              {siteTitle}
-            </Link>
           </div>
         </div>
 
