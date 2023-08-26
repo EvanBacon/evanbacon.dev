@@ -14,7 +14,7 @@ The most important difference is that users must now invoke `npx expo start` ins
 
 You can continue to use `yarn start` or `npm run start` when the `package.json` contains:
 
-```json
+```json package.json
 {
   "scripts": {
     "start": "expo start"
@@ -28,7 +28,7 @@ This means you'll also no longer see the annoying and persistent “There is a n
 
 This does mean if you need a CLI bug fix, you'll either need to update your `expo` package version or force the CLI version with Yarn resolutions in the `package.json`:
 
-```json
+```json package.json
 {
   "resolutions": {
     "@expo/cli": "xxx"

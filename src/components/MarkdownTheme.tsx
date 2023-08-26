@@ -1,5 +1,4 @@
 import { MDXComponents, MDXStyles } from '@bacons/mdx';
-import { UL } from '@bacons/mdx/build/list/List';
 import React from 'react';
 import { Image, View } from 'react-native';
 
@@ -11,9 +10,107 @@ import {
   Inter_900Black,
 } from '@expo-google-fonts/inter';
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
-import { BlockQuote, Code } from '@expo/html-elements';
+import { BlockQuote } from '@expo/html-elements';
+
+import { Highlight, themes } from 'prism-react-renderer';
+
+const remapLanguages: Record<string, string> = {
+  'objective-c': 'objc',
+  sh: 'bash',
+  rb: 'ruby',
+  json: 'js',
+};
+
+function BaconCode(props: {
+  children: string;
+  // language-ts
+  className: string;
+  // "app.config.ts"
+  metastring: string;
+  // "html.pre"
+  parentName: string;
+}) {
+  const title = !props.metastring
+    ? ''
+    : props.metastring.match(/title="(.*)"/)?.[1] ?? props.metastring;
+
+  let lang = props.className?.slice(9).toLowerCase() ?? 'txt';
+  if (lang in remapLanguages) {
+    lang = remapLanguages[lang];
+  }
+
+  return (
+    <div
+      data-lang={lang}
+      className="rounded-lg bg-[#282A36] overflow-hidden"
+      style={{
+        boxShadow: 'inset 0 0 0 1px #ffffff1a',
+      }}
+    >
+      {title && (
+        <span className="flex p-3 gap-2 border-b border-b-[#ffffff1a]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-4 text-slate-50"
+            role="img"
+          >
+            <g id="file-code-01">
+              <path
+                id="Icon"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 17.5L16.5 15L14 12.5M10 12.5L7.5 15L10 17.5M20 9.98822V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V6.8C4 5.11984 4 4.27976 4.32698 3.63803C4.6146 3.07354 5.07354 2.6146 5.63803 2.32698C6.27976 2 7.11984 2 8.8 2H12.0118C12.7455 2 13.1124 2 13.4577 2.08289C13.7638 2.15638 14.0564 2.27759 14.3249 2.44208C14.6276 2.6276 14.887 2.88703 15.4059 3.40589L18.5941 6.59411C19.113 7.11297 19.3724 7.3724 19.5579 7.67515C19.7224 7.94356 19.8436 8.2362 19.9171 8.5423C20 8.88757 20 9.25445 20 9.98822Z"
+              ></path>
+            </g>
+          </svg>
+
+          <h3
+            className="text-slate-50"
+            style={{
+              fontWeight: 'bold',
+              fontFamily: useFont('Inter_400Regular'),
+            }}
+          >
+            {title}
+          </h3>
+        </span>
+      )}
+
+      <Highlight
+        theme={themes.dracula}
+        code={props.children.trim()}
+        language={lang}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre
+            style={style}
+            className="p-4 overflow-auto padding-r-4 m-[1px] rounded-b-lg grid"
+          >
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })} className="inline">
+                {/* Line Number */}
+                {/* <span className="w-8 inline-block select-none opacity-50">
+                  {i + 1}
+                </span> */}
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </div>
+  );
+}
 
 export function MarkdownTheme({ children }: { children: React.ReactNode }) {
+  // installLanguages(Prism);
+
   loadAsync({
     Inter_300Light,
     Inter_400Regular,
@@ -124,10 +221,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       }}
     >
       <MDXComponents
-        // code={({ style, ...props }) => {
-        //   console.log('code', props);
-        //   return <Code {...props} style={[style]} />;
-        // }}
+        code={BaconCode}
         em={({ parentName, ...props }) => <em {...props} />}
         p={({ parentName, ...props }) => <p {...props} />}
         strong={({ parentName, ...props }) => <b {...props} />}

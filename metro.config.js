@@ -11,7 +11,13 @@ module.exports = (async () => {
     isSVGEnabled: true,
   });
 
-  config.resolver.sourceExts.push('md', 'mdx', 'svg');
+  config.resolver.sourceExts.push(
+    // TODO: Remove mjs in SDK 50
+    'mjs',
+    'md',
+    'mdx',
+    'svg'
+  );
 
   config.resolver.assetExts = config.resolver.assetExts.filter(
     ext => !config.resolver.sourceExts.includes(ext)

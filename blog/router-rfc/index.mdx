@@ -80,21 +80,68 @@ The following is a simple example of migrating a single-screen app from the most
 
 First, you need to create a screen component:
 
-![app/home.js](./images/1YUNNVfUJvCV8xHgNplFR4Q.png)_app/home.js_
+```js app/home.js
+import { Text } from 'react-native';
+
+export default function Home() {
+  return <Text>Welcome Home</Text>;
+}
+```
 
 Then a navigation file:
 
-![./App.js](./images/1KBT-K8gZZOn3r8fKKXEjgQ.png)_./App.js_
+```jsx App.js
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Linking from 'expo-linking';
+import HomeScreen from './app/home';
+
+const Stack = createNativeStackNavigator();
+const prefix = Linking.createURL('/');
+
+const linking = {
+  prefixes: [prefix],
+  config: {
+    // Deep link configuration
+    home: {
+      // Must be updated to match the screens in the project
+      path: '/home',
+      screens: {},
+    },
+  },
+};
+
+export default function App() {
+  return (
+    <NavigationContainer linking={linking}>
+      <Stack.Navigator>
+        <Stack.Screen name="home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
 
 Finally create an entry file for registering the root componet:
 
-![index.js](./images/1u-kVuwo2xKn2zs_DJ59yhA.png)_index.js_
+```js index.js
+import { AppRegistry } from 'react-native';
+import App from './App';
+
+AppRegistry.registerComponent('main', () => App);
+```
 
 ### ✅ After Expo Router
 
 Delete the `index.js` and `App.js` — Simply create a file in the [**app** directory](https://expo.github.io/router/docs/features/routes), and export a React component. The framework will generate the navigation and deep links in-memory, instantly with Fast Refresh!
 
-![app/home.js](./images/1YUNNVfUJvCV8xHgNplFR4Q.png)_app/home.js_
+```js app/home.js
+import { Text } from 'react-native';
+
+export default function Home() {
+  return <Text>Welcome Home</Text>;
+}
+```
 
 You can start the app with `npx expo start` and visit the `/home` route on any device. I recommend using `[uri-scheme`](https://www.npmjs.com/package/uri-scheme) to test deep links on iOS and Android. You can also navigate to `/__index` to reach the sitemap (development only):
 
