@@ -7,3 +7,8 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
+::selection {
+  background: #b695f3db;
+  color: #ffffffdb;
+}
