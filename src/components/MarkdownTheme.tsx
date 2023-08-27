@@ -1,6 +1,6 @@
 import { MDXComponents, MDXStyles } from '@bacons/mdx';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Platform, Text, View } from 'react-native';
 import {
   TerminalSquareIcon,
   FileCode01Icon,
@@ -19,6 +19,7 @@ import { BlockQuote } from '@expo/html-elements';
 
 import { Prism, Highlight, themes } from 'prism-react-renderer';
 import cn from 'classnames';
+import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 
 if (typeof window !== 'undefined') {
   (typeof global !== 'undefined' ? global : window).Prism = Prism;
@@ -331,12 +332,8 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         marginBottom: '1.25em',
       }}
       img={{
-        width: '100%',
-        resizeMode: 'contain',
-        minWidth: '100%',
-        maxWidth: '100%',
+        marginBottom: '1.25em',
         minHeight: 180,
-        maxHeight: 360,
       }}
       a={{
         fontSize: 'unset',
@@ -373,14 +370,19 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           parentName,
           ...props
         }) => <em {...props} />}
-        p={({
-          firstChild,
-          firstOfType,
-          prevSibling,
-          lastChild,
-          parentName,
-          ...props
-        }) => <p {...props} />}
+        p={({ style, children, ...props }) => {
+          // NOTE(EvanBacon): Unclear why, but mdxjs is wrapping an image in a paragraph tag.
+          const image = React.Children.toArray(children).find(child => {
+            return (
+              typeof child === 'object' && 'props' in child && child.props.src
+            );
+          });
+          if (image) {
+            return <>{children}</>;
+          }
+
+          return <p style={style} children={children} />;
+        }}
         br={() => <br />}
         strong={({
           firstChild,
@@ -434,6 +436,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             {children}
           </BlockQuote>
         )}
+        img={Img}
         li={({
           firstChild,
           lastChild,
@@ -463,7 +466,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
         // )}
-        hr={({ parentName, lastChild, firstOfType, style }) => (
+        hr={({ style }) => (
           <View style={style}>
             {['', '', ''].map((v, i) => (
               <View
@@ -486,35 +489,14 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
   );
 }
 
-function AutoHeightImage(props) {
-  const [imgSize, setImageSize] = React.useState({});
-  const [imageHeight, setImageHeight] = React.useState(100);
-
-  React.useEffect(() => {
-    Image.getSize(props.source.uri, (w, h) => {
-      setImageSize({ width: w, height: h });
-    });
-  }, [props.source]);
-
-  const [layoutWidth, setLayoutWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    if (layoutWidth === 0) return;
-
-    const ratio = imgSize.width / imgSize.height;
-    const newHeight = layoutWidth / ratio;
-    if (isNaN(newHeight)) return;
-    setImageHeight(newHeight);
-  }, [imgSize, layoutWidth]);
-
+function Img({ src, style }) {
+  const source = typeof src === 'string' ? { uri: src } : src;
+  const srcUrl = resolveAssetUri(source);
   return (
-    <Image
-      style={[props.style, { height: imageHeight }]}
-      onLayout={e => {
-        if (layoutWidth === e.nativeEvent.layout.width) return;
-        setLayoutWidth(e.nativeEvent.layout.width);
-      }}
-      source={props.source}
+    <img
+      src={srcUrl}
+      style={style}
+      className="h-auto max-w-full overflow-clip object-contain"
     />
   );
 }
