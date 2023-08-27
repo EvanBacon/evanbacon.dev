@@ -390,25 +390,16 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             return <>{children}</>;
           }
 
-          return <p style={style} children={children} />;
+          return <Text style={style} children={children} />;
         }}
         br={() => <br />}
-        strong={({
-          firstChild,
-          firstOfType,
-          lastChild,
-          parentName,
-          prevSibling,
-          ...props
-        }) => {
+        strong={({ style, children }) => {
+          const localStyles = { fontWeight: 'bold' };
           // Special branding for bold text containing "Pillar Valley".
-          if (props.children.toString().match(/pillar valley/i)) {
-            props.style = {
-              ...props.style,
-              color: '#F09458',
-            };
+          if (children.toString().match(/pillar valley/i)) {
+            localStyles.color = '#F09458';
           }
-          return <b {...props} />;
+          return <Text children={children} style={[style, localStyles]} />;
         }}
         blockquote={({
           firstChild,
