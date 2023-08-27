@@ -62,7 +62,7 @@ function LineItem({ title, description, value, href }: DataType) {
         </span>
         {/* divider pushing  */}
         <span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
-        <span className="">{value}</span>
+        <span>{value}</span>
       </div>
     </Link>
   );

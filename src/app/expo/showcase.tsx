@@ -73,17 +73,18 @@ export default function Showcase() {
     <>
       <Div className="relative flex flex-col">
         <Div className="mx-auto">
-          <Div className="p-4">
-            <H1 className="text-4xl md:text-5xl lg:text-6xl my-2 md:my-4 font-bold">
+          <Div className="p-8">
+            <H1 className="text-4xl text-slate-50 md:text-5xl lg:text-6xl my-2 md:my-4 font-bold">
               Expo Open Source Showcase
             </H1>
-            <H3 className="text-1xl md:text-2xl mb-2">
+            <H3 className="text-1xl text-slate-50 md:text-2xl mb-2">
               Top ranked iOS Apps using <B>Expo Open Source software</B>
               .
               <BR />
               This includes the{' '}
               <ExpoIcon
-                className="inline"
+                fill="white"
+                className="inline "
                 style={{
                   marginTop: -3,
                 }}
@@ -94,12 +95,12 @@ export default function Showcase() {
               </A>{' '}
               and{' '}
               <ReactNavigationIcon
-                className="inline"
+                className="inline "
+                stroke="white"
                 style={{
                   marginTop: -3,
                 }}
                 width={'1.5rem'}
-                stroke="black"
               />{' '}
               <A
                 className="underline"
@@ -112,9 +113,9 @@ export default function Showcase() {
           </Div>
           {apps.map(([category, apps]) => (
             <Div key={category} className="flex flex-col gap-y-1">
-              <Div className="flex flex-row px-4 gap-y-1 mb-4 items-center">
+              <Div className="flex flex-row px-8 gap-y-1 mb-4 items-center">
                 <Div className="flex flex-row items-center">
-                  <H2 className="font-bold text-2xl md:text-3xl lg:text-4xl">
+                  <H2 className="font-bold text-slate-50 text-2xl md:text-3xl lg:text-4xl">
                     {ITUNES_GENRE_TO_CATEGORY[category] ?? category}
                   </H2>
                   {category !== 'top' && (
@@ -124,7 +125,7 @@ export default function Showcase() {
                     />
                   )}
                 </Div>
-                <Span className="flex-1 border-b border-default mx-2 md:mx-3 min-w-[2rem]" />
+                <Span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
 
                 <P className="text-gray-500">
                   {apps.map(apps => apps).flat().length} Apps

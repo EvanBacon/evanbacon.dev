@@ -3,7 +3,7 @@
   "scripts": {
     "start": "expo",
     "prepare": "npx patch-package",
-    "predeploy:web": "expo export --platform web",
+    "predeploy:web": "expo export --platform web && node ./sitemap-gen.js",
     "deploy:web": "netlify deploy --dir dist --prod"
   },
   "dependencies": {

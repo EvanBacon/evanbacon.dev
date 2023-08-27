@@ -17,13 +17,13 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
       key={app.id}
       href={app.url}
       target="_blank"
-      className="gap-y-1 flex flex-col"
+      className="gap-y-1 text-slate-50 flex flex-col"
     >
       <AppIcon iconUrl={app.iconUrl!} name={app.name!} />
 
       <Div className="gap-y-1 flex flex-col relative">
         <Div className="flex items-center mt-2">
-          <Div className="flex items-center mt-2 gap-2 bg-black/20 backdrop-blur rounded-full p-2 px-4">
+          <Div className="flex items-center mt-2 gap-2 bg-slate-600/40 backdrop-blur rounded-full p-2 px-4">
             {frameworks.expoSdk && (
               <ExpoIcon
                 fill="white"

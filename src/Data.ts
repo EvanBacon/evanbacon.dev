@@ -32,6 +32,18 @@ export const Meta = {
     urlPath: 'brand',
     image: OpenGraphImages.brand,
   },
+  blog: {
+    title: 'Blog',
+    description: 'Writing and releases by Evan Bacon',
+    urlPath: 'blog',
+    image: OpenGraphImages.talks,
+  },
+  faq: {
+    title: 'Frequently Asked Questions',
+    description: 'Questions and answers about Evan Bacon',
+    urlPath: 'faq',
+    image: OpenGraphImages.talks,
+  },
   games: {
     title: 'Games',
     description:

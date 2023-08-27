@@ -12,7 +12,7 @@ const Row = ({ title, apps }: { title: string; apps: AppItem[] }) => {
       style={{ width: '100vw', overflowY: 'visible' }}
       contentContainerStyle={{
         overflowY: 'visible',
-        paddingHorizontal: 12,
+        paddingHorizontal: 24,
         gap: 12,
         paddingBottom: 12,
       }}
