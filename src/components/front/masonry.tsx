@@ -58,7 +58,7 @@ const images: [string, string][] = [
 
 function MasonryPhotoGrid({ images }: { images: [string, string][] }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full pb-5">
       {images.map(([src, alt], index) => (
         <div
           key={index}
