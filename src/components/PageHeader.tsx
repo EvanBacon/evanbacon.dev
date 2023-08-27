@@ -36,7 +36,7 @@ export default function PageHeader({ children }) {
   }, [children]);
 
   return (
-    <h1 className="text-5xl h-[3rem] font-bold my-3 mx-2 md:mx-0 text-slate-50">
+    <h1 className="text-5xl min-h-[3rem] font-bold my-3 mx-2 md:mx-0 text-slate-50">
       {text}
     </h1>
   );
