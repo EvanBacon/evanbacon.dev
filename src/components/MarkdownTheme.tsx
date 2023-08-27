@@ -16,6 +16,7 @@ import {
 } from '@expo-google-fonts/inter';
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { BlockQuote } from '@expo/html-elements';
+import { Title } from '@/components/PostTitle';
 
 import { Prism, Highlight, themes } from 'prism-react-renderer';
 import cn from 'classnames';
@@ -358,6 +359,9 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       }}
     >
       <MDXComponents
+        components={{
+          Title,
+        }}
         code={BaconCode}
         pre={({ style, children }) => {
           return <pre style={style} children={children} className="mb-5" />;
@@ -446,9 +450,16 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           style,
           ...props
         }) => (
-          <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+          <li
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+            }}
+          >
             <View
               style={{
+                userSelect: 'none',
                 display: 'block',
                 marginTop: 12,
                 marginRight: 8,
@@ -458,10 +469,8 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
                 backgroundColor: '#f2f5f7',
               }}
             />
-            <View style={{ flex: 1, display: 'block' }}>
-              <Text {...props} style={[style, { display: 'block' }]} />
-            </View>
-          </View>
+            <Text {...props} style={[style, { display: 'block' }]} />
+          </li>
         )}
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
