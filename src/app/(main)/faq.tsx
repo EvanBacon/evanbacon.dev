@@ -1,86 +1,84 @@
+import PageHeader from '@/components/PageHeader';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Text, View } from 'react-native';
-
-import PageHeader from '@/components/PageHeader';
-import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 
 const QA = [
   {
-    q: 'How old were you when you started making Lego art?',
-    a: `I built my first Lego sculpture, a life-sized Lego Batman, when I was 13 years old. As far as I know, I was the youngest artist building life-sized Lego sculptures.`,
+    q: 'Who is Evan Bacon?',
+    a: `Bacon is a software developer and artist from Austin, Texas. He is best known for his work on Expo, the universal React framework, and his life-sized Lego sculptures.`,
   },
   {
-    q: `What do you do for fun?`,
-    a: `Play Enter the Gungeon, hang out with my siblings Collin, Ams, and Kiki, code side-projects with the Avocoder, and make fake FAQs like this one to test random web features like structured JSON SEO.`,
+    q: 'Is Evan Bacon related to Kevin Bacon?',
+    a: `Kevin Bacon is Evan Bacon's 10th cousin 1x removed. They share a common ancestor, William Miller Bacon.`,
   },
   {
-    q: `What's your dream job?`,
-    a:
-      'Making it easier for creative-types like myself to create things -- this is my goal with Expo, and why I work on a wide variety of things.',
+    q: `How did Evan Bacon join Expo?`,
+    a: `During his time at Frog Design, Evan Bacon used Expo to develop and prototype apps for clients. In his spare time, he built video games with Expo and shared them on Twitter, eventually leading to being discovered by Charlie Cheever and the Expo team.`,
   },
   {
-    q: `Do you have any pets?`,
-    a: 'My kitten Gucci Mane',
+    q: `What does Evan Bacon work on at Expo?`,
+    a: `Evan Bacon is the engineering manager of developer tools at 650 Industries (AKA Expo). He manages a team of developers who maintain Expo CLI, web support, Expo Router, Metro bundler, and other Node.js tools.`,
   },
   {
-    q: 'When did you start making mobile apps?',
-    a: `My interest in app development started when I was 17 years old. I wanted to make iPhone apps to help people create Lego sculptures (Rubrick).`,
+    q: `Where did Evan Bacon go to school?`,
+    a: `Evan Bacon was home-schooled and never attended college. He's a self-taught software developer and artist.`,
   },
   {
-    q: `How did you join Expo?`,
-    a: `I was a design technologist at Frog Design (youngest ever), and I got to experiment with lots of different ways to make apps and websites. Expo was <b>by far</b> the best way to make an app. A few months of using Expo was all it took for me to quit my job and work on Expo full time!`,
+    q: 'How old was Evan Bacon when he built his first Lego sculpture?',
+    a: `Bacon completed his first life-sized Lego sculpture, a life-sized Lego Batman, when he was 13 years old.`,
   },
   {
-    q: `What things do you work on at Expo?`,
-    a: `I maintain Expo CLI, Expo for Web, Expo Config Plugins and prebuilding, Create React Native App (v3+), Jest Expo, and the bundlers. I also work on the Expo SDK; mainly Auth Session, and Crypto.`,
-  },
-  {
-    q: 'Do you still make Lego art?',
-    a: `I've retired from Lego art to focus on making open source software. I will return to Lego art someday, and it'll be awesome.`,
-  },
-  {
-    q: `Where did you go to school?`,
-    a: `I've never been to school in my entire life. I'm fully home-schooled, all the way through high-school, which is not uncommon in Texas. I decided that college was not the right fit for me, and went right into working as a self-taught Software Engineer.`,
-  },
-  {
-    q: `How do you stay motivated to write code?`,
-    a: `By constantly challenging myself with new and exciting ideas! I also surround myself with talented individuals, like coworkers, or friends that I met online who share similar interests.`,
-  },
-  {
-    q: `How did you learn how to code?`,
-    a: `I had tons of ideas for things I wanted to make, and I would just Google tutorials until I knew how to make those things. Eventually I filled in many of the basic gaps in my knowledge, but I still have lots to learn!`,
+    q: 'Does Evan Bacon still make Lego art?',
+    a: `Evan Bacon unofficially retired from Lego art in 2015 to pursue software development full-time.`,
   },
 ];
 
 export default function FAQ() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: QA.map(faq => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  };
+
   return (
     <>
       <Head>
         <title>Evan Bacon - Frequently Asked Questions (FAQ)</title>
+        <script type="application/ld+json" id="faq">
+          {JSON.stringify(structuredData)}
+        </script>
       </Head>
 
       <PageHeader>Frequently Asked Questions</PageHeader>
-      {QA.map(({ q, a }, i) => (
-        <FAQItem key={String(i)} question={q} children={a} />
-      ))}
+      <div className="mt-8 space-y-6">
+        <ul className="divide-y divide-slate-800/50">
+          {QA.map(({ q, a }, i) => (
+            <LineItem key={String(i)} question={q} answer={a} />
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
 
-function FAQItem({ question, children }: { question: string; children: any }) {
+function LineItem({ question, answer }: { question: string; answer: string }) {
   return (
-    <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-      {/* @ts-ignore */}
-      <h3 itemProp="name">{question}</h3>
-      <div
-        itemScope
-        itemProp="acceptedAnswer"
-        itemType="https://schema.org/Answer"
-      >
-        {/* @ts-ignore */}
-        <span itemProp="text">{children}</span>
-      </div>
+    <div className="text-default text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out">
+      <span className="inline">
+        <b>
+          {question}
+          {'  '}
+        </b>
+
+        <span className="opacity-60 hidden md:flex">{answer}</span>
+      </span>
     </div>
   );
 }
