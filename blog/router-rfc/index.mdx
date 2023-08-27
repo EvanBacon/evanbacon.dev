@@ -44,7 +44,9 @@ Ultimately we'd like to make all native apps support [**app search and content i
 
 Unlike web apps, native apps are all expected to work offline. This means that the app must be able to handle any incoming URL without a network connection or server.
 
-![Navigation is truly native and optimized for iOS and Android](./images/1pIlbQ1TbALbsTKH-ibhYOA.png)_Navigation is truly native and optimized for iOS and Android_
+![Navigation is truly native and optimized for iOS and Android](./images/1pIlbQ1TbALbsTKH-ibhYOA.png)
+
+Navigation is truly native and optimized for iOS and Android
 
 We solved this by implementing new features across the entire framework ranging from [Expo SDK](https://docs.expo.dev/versions/latest/) to [Expo CLI](https://docs.expo.dev/workflow/expo-cli/) to the [Metro bundler](https://facebook.github.io/metro/).
 
@@ -54,7 +56,9 @@ The end-user experience is fast and light-weight since the router can change the
 
 One of the most exciting parts of React is the ability to divide your app's UI and data fetching into reusable components.
 
-![React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page.](./images/1wCKlTNGpkSBU0Uktj6HVmA.png)_React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page._
+![React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page.](./images/1wCKlTNGpkSBU0Uktj6HVmA.png)
+
+React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page.
 
 Expo Router has the ability to set up [React Error Boundaries](https://reactjs.org/docs/error-boundaries.html) for each route (Suspense boundaries coming in a later version). This means that you can easily handle errors and data fetching states in a consistent way across the entire app and retry failed requests.
 
@@ -68,7 +72,9 @@ The following is a simple example of migrating a single-screen app from the most
 
 > Expo Router builds on top of React Navigation making it easier to migrate existing React Native apps to file system-based routing.
 
-![No boilerplate needed! Apps now have multiple static entry points which makes it possible for tooling to reason about the structure of your app and make optimizations behind the scenes.](./images/1Q-94OUpmJoae0HBu0Mti7A.gif)_No boilerplate needed! Apps now have multiple static entry points which makes it possible for tooling to reason about the structure of your app and make optimizations behind the scenes._
+![No boilerplate needed! Apps now have multiple static entry points which makes it possible for tooling to reason about the structure of your app and make optimizations behind the scenes.](./images/1Q-94OUpmJoae0HBu0Mti7A.gif)
+
+No boilerplate needed! Apps now have multiple static entry points which makes it possible for tooling to reason about the structure of your app and make optimizations behind the scenes.
 
 ### ❌ Before Expo Router
 
@@ -141,7 +147,9 @@ export default function Home() {
 
 You can start the app with `npx expo start` and visit the `/home` route on any device. I recommend using [`uri-scheme`](https://www.npmjs.com/package/uri-scheme) to test deep links on iOS and Android. You can also navigate to `/_sitemap` to reach the sitemap (development only):
 
-![Apache index throwback](./images/1iNCWIvukczHDJKPYsAFx-A.png)_Apache index throwback_
+![Apache index throwback](./images/1iNCWIvukczHDJKPYsAFx-A.png)
+
+Apache index throwback.
 
 As you can imagine, this scales nicely and is very easy to maintain. You can create as many pages as you want, and the framework will accommodate the linking structure in a reliable way. [**See the official setup guide here**](https://expo.github.io/router/docs/intro).
 
@@ -149,7 +157,9 @@ As you can imagine, this scales nicely and is very easy to maintain. You can cre
 
 If you navigate to a route that isn't matched, the default behavior is to have a 404-esque response which enables the user to navigate back to the root path `/` — this can be replaced by using a top-level [deep dynamic route](https://expo.github.io/router/docs/features/dynamic-routes#deep-dynamic-routes).
 
-![Virtual pages have a recurring theme.](./images/1gWG4Lvi9bcp-yyDVEi4jbw.png)_Virtual pages have a recurring theme._
+![Virtual pages have a recurring theme.](./images/1gWG4Lvi9bcp-yyDVEi4jbw.png)
+
+Virtual pages have a recurring theme.
 
 ## Request for Comments
 

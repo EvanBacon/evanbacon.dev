@@ -2,7 +2,9 @@
 
 Expo is on a mission to create the best possible end-to-end developer experiences for building and deploying apps on multiple platforms. Today we are very excited to announce experimental\* web support for the Expo CLI and SDK!
 
-![Browser, Desktop PWA, Mobile PWA, Native Mobile Apps](./images/17IZet0jkXYQ9xz1cQt-jkg.png)_Browser, Desktop PWA, Mobile PWA, Native Mobile Apps_
+![Browser, Desktop PWA, Mobile PWA, Native Mobile Apps](./images/17IZet0jkXYQ9xz1cQt-jkg.png)
+
+Browser, Desktop PWA, Mobile PWA, Native Mobile Apps.
 
 _It is stable enough for you to start playing with it, but not quite stable enough that you should use it to deploy an important app to production quite yet. Additionally, it will not be until the next SDK version that Expo Web projects are compatible with managed Android and iOS projects since this web beta is not part of an official Expo SDK version._
 
@@ -35,7 +37,9 @@ Behind the scenes we handle the Webpack and Babel configuration for you. We've c
 
 Once your project is set up, you will ask yourself “what's next?” Well, you probably want to write code. Actually, why write code when you can install some from npm, drop it in your app, and take the rest of the day off? Sadly you may find that this won't work quite as well as you would expect with RNW because most libraries in the React Native community do not support web.
 
-![Gaming in the browser with Expo and Three.js](./images/1tWsl4KubvXHAcQHcwTyOPg.png)_Gaming in the browser with Expo and Three.js_
+![Gaming in the browser with Expo and Three.js](./images/1tWsl4KubvXHAcQHcwTyOPg.png)
+
+Gaming in the browser with Expo and Three.js.
 
 What does it mean to support web? It means that either all of the code in the package depends only on the primitives that RNW makes available, or wherever that's not possible within the package it provides an alternative implementation with the `.web.js` extension. Over the past few months we have updated most of the Expo SDK to work the same on web where possible, and fall back to something reasonable where not. For example, expo-linear-gradient [uses the linear-gradient CSS function ](https://github.com/expo/expo/blob/master/packages/expo-linear-gradient/src/NativeLinearGradient.web.tsx)on web since it's available there, but expo-calendar doesn't do anything because there is no equivalent web API. This won't quite solve all your problems but we hope it helps. We also have started to work on [a document](https://github.com/expo/expo/blob/d64340f028d8d2a0ce69e85efa3c915bbadb7413/guides/Creating%20Web%20Platform%20Modules.md)[ ](https://github.com/expo/expo/blob/master/guides/Creating%20Web%20Platform%20Modules.md)that can help guide developers to build React Native libraries that work on iOS, Android, and web. See the list of [currently supported SDK modules here](https://github.com/expo/web-examples/blob/master/FEATURES.md), and head over to [native.directory](https://www.native.directory/) to filter by web to see what else is available.
 

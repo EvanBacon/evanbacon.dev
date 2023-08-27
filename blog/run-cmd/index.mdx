@@ -14,7 +14,9 @@ Today we're introducing the `expo run:[ios|android]` commands, the next step in 
 
 - Build and run your Android app: `expo run:android`
 
-![Building a custom native app on iOS](./images/1lGdcmmEH8EhXtYMSzfFnGg.gif)_Building a custom native app on iOS_
+![Building a custom native app on iOS](./images/1lGdcmmEH8EhXtYMSzfFnGg.gif)
+
+Building a custom native app on iOS
 
 The first time you run these commands in an Expo app, they'll generate all of the native code for your project by running `expo prebuild`. Prebuild is similar to `expo eject`, but there's an important distinction — the wording clarifies that you're not actually losing anything when you run the command, you're just creating the Android and iOS native directories that are required for building the project.
 
@@ -74,7 +76,9 @@ If you want to see how your app will run on your device, all you have to do is c
 
 Expo CLI will automatically sign the device for development, install the app, and open it! Here's a demo of signing with multiple developer profiles installed on your computer:
 
-![The first option is bold because it was used it in my previous projects.](./images/1CpXm3T7VjNWxHRY_8TrEpQ.gif)_The first option is bold because it was used it in my previous projects._
+![The first option is bold because it was used it in my previous projects.](./images/1CpXm3T7VjNWxHRY_8TrEpQ.gif)
+
+The first option is bold because it was used it in my previous projects.
 
 Users with a single profile will skip the prompt and go right to building. All subsequent runs will read your preference from the Xcode project so you can easily switch between Xcode and Expo CLI!
 
@@ -84,13 +88,17 @@ Users with a single profile will skip the prompt and go right to building. All s
 
 If you forgot to unlock your device (or it just auto locked because Xcode builds take so long), Expo CLI will prompt you to unlock it and try installation again.
 
-![Notice that we automatically copy less files on subsequent installs.](./images/1mcQimZNoH5xotsLXd6PZgw.gif)_Notice that we automatically copy less files on subsequent installs._
+![Notice that we automatically copy less files on subsequent installs.](./images/1mcQimZNoH5xotsLXd6PZgw.gif)
+
+Notice that we automatically copy less files on subsequent installs.
 
 ## Highlighted features of `expo run:android`
 
 In general, Android apps are just easier to build and install, but `expo run:android` still includes a few clever optimizations.
 
-![Building a custom native app on Android](./images/1zJK-fnYqLX2YQgvzCpROGQ.gif)_Building a custom native app on Android_
+![Building a custom native app on Android](./images/1zJK-fnYqLX2YQgvzCpROGQ.gif)
+
+Building a custom native app on Android.
 
 ## Fast rebuilds and build profiling
 
@@ -112,7 +120,9 @@ The run commands integrate with dev client to provide an experience that is very
 
 A great feature of Expo Go (and all web browsers) is the ability to run multiple projects at once using different ports. This is difficult in React Native because server information is [hard coded into the native app](https://github.com/facebook/react-native/blob/d1ab03235cb4b93304150878d2b9057ab45bba77/React/Base/RCTDefines.h#L87). But using the new `expo-dev-client` package with Expo run commands, you can use any port to run your project, not just 8081! If 8081 is busy, you'll be prompted to use another port.
 
-![Every React Native developer has been confused by an error caused by their app using the bundler for another project that they previously ran on their machine and forgot to close. Expo CLI will let you know if the port is busy and if it's because a bundler is already running for the same project, or a different project in another window.](./images/1Uq_nRwiJ0PXJ8QxiyoV-VQ.png)_Every React Native developer has been confused by an error caused by their app using the bundler for another project that they previously ran on their machine and forgot to close. Expo CLI will let you know if the port is busy and if it's because a bundler is already running for the same project, or a different project in another window._
+![Every React Native developer has been confused by an error caused by their app using the bundler for another project that they previously ran on their machine and forgot to close. Expo CLI will let you know if the port is busy and if it's because a bundler is already running for the same project, or a different project in another window.](./images/1Uq_nRwiJ0PXJ8QxiyoV-VQ.png)
+
+Every React Native developer has been confused by an error caused by their app using the bundler for another project that they previously ran on their machine and forgot to close. Expo CLI will let you know if the port is busy and if it's because a bundler is already running for the same project, or a different project in another window.
 
 ## Future plans
 

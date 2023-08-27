@@ -83,7 +83,7 @@ function LineItem({ question, answer }: { question: string; answer: string }) {
           {'  '}
         </b>
 
-        <span className="opacity-60 hidden md:flex">{answer}</span>
+        <span className="opacity-60 flex">{answer}</span>
       </span>
     </div>
   );

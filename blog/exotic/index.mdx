@@ -25,9 +25,9 @@ The results are as follows (measured against a hello world app):
 
 ![](./images/1fw5SabzHwU--AfKU_OhUWA.gif)
 
-![`expo start -c` in a blank project (iOS) with Exotic enabled: ~100% faster.](./images/1WL6XApqsIwbJmBrCV_HkxA.gif)
+![expo start -c in a blank project (iOS) with Exotic enabled: ~100% faster.](./images/1WL6XApqsIwbJmBrCV_HkxA.gif)
 
-_`expo start -c` in a blank project (iOS) with Exotic enabled: ~100% faster._
+`expo start -c` in a blank project (iOS) with Exotic enabled: ~100% faster.
 
 ## Improvements Explained
 
@@ -82,9 +82,9 @@ As mentioned earlier, Babel has many customizations that you add for your projec
 
 Switching all transformation over to one of these tools would be far from ideal because users would lose out on the ability to add custom language features to their projects. But there is one place we can safely use them…
 
-![Breakdown of JS transformers. [Cite: Sucrase repo](https://github.com/alangpierce/sucrase/blob/68ed7ff/README.md)](./images/1WTya9sLMBf2fIjJpXk_1iQ.png)
+![Breakdown of JS transformers](./images/1WTya9sLMBf2fIjJpXk_1iQ.png)
 
-_Breakdown of JS transformers. [Cite: Sucrase repo](https://github.com/alangpierce/sucrase/blob/68ed7ff/README.md)_
+Breakdown of JS transformers. [Cite: Sucrase repo](https://github.com/alangpierce/sucrase/blob/68ed7ff/README.md)
 
 In Expo CLI, we configure Metro to transpile our untransformed Node modules with Sucrase, resulting in substantially faster React Native bundling! We currently use Sucrase because:
 
@@ -94,7 +94,7 @@ In Expo CLI, we configure Metro to transpile our untransformed Node modules with
 
 ![We use a faster system for transforming static libraries; Surcase instead of Babel.](./images/1CqJF-PC33tQ0yIueed_q1A.gif)
 
-_We use a faster system for transforming static libraries; Surcase instead of Babel._
+We use a faster system for transforming static libraries; Surcase instead of Babel.
 
 Metro bundler has no concept of “loader rules”, this is a feature from the popular bundler **Webpack,** that I've shoehorned into Metro with a custom transformer.
 
@@ -106,7 +106,7 @@ To summarize: “Exotic” is a Metro transformer with three default “loader r
 
 ![Exotic is a metro transformer with loader rules that handle groups of files differently.](./images/145DZ235fD5sWzgQeQpILdQ.png)
 
-_Exotic is a metro transformer with loader rules that handle groups of files differently._
+Exotic is a metro transformer with loader rules that handle groups of files differently.
 
 And just like that, we now have a system which is a lot more like web development, and in some regards a little bit better. In the web ecosystem, there are so few (major) packages that need to be transformed locally that the concept of having first-class support for optimizing this step isn't really worth the effort or added complexity.
 
@@ -116,7 +116,7 @@ Again, the results are about 2x faster in basic “Hello World” projects and s
 
 ![At Scale: Expo “Native Component List” Monorepo bundles ~14s faster (gif 2x playback)](./images/14v8JefXaoMg-q2GmLzdW7A.gif)
 
-_At Scale: Expo “Native Component List” Monorepo bundles ~14s faster (gif 2x playback)_
+At Scale: Expo “Native Component List” Monorepo bundles ~14s faster (gif 2x playback).
 
 As a bonus, bundle sizes are also smaller by about 18% in “Hello World” apps. This is because many libraries are already shipped in an optimal format, and by needlessly transforming them with a random Babel cocktail, we increase the size, but only a little bit, and everywhere.
 
@@ -124,7 +124,7 @@ With Expo's Exotic transformer we don't have this issue, we do less, and get mor
 
 ![Running `expo export` in a fresh project with Exotic enabled: ~18% size reduction.](./images/1WL6XApqsIwbJmBrCV_HkxA.gif)
 
-_Running `expo export` in a fresh project with Exotic enabled: ~18% size reduction._
+Running `expo export` in a fresh project with Exotic enabled: ~18% size reduction.
 
 ## Important Considerations
 
