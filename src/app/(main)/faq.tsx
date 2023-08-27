@@ -31,12 +31,18 @@ const QA = [
     q: 'Does Evan Bacon still make Lego art?',
     a: `Evan Bacon unofficially retired from Lego art in 2015 to pursue software development full-time.`,
   },
+  {
+    q: 'Why does this page exist?',
+    a: `I'm dogfooding Expo Router static generation and SEO.`,
+  },
 ];
 
 export default function FAQ() {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    '@name': 'Evan Bacon frequently asked questions',
+
     mainEntity: QA.map(faq => ({
       '@type': 'Question',
       name: faq.q,
