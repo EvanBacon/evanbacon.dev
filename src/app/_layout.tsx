@@ -1,5 +1,3 @@
-import { Background } from '@/components/background';
-
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
