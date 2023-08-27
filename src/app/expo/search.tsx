@@ -47,7 +47,7 @@ const AppData = () => {
   }, [search, sortExpo]);
 
   return (
-    <div className="container mx-auto p-2 px-4">
+    <div className="container mx-auto p-2 px-4 text-white">
       <input
         type="text"
         placeholder="Search"
@@ -58,7 +58,7 @@ const AppData = () => {
       <div className="overflow-x-auto mt-2">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-gray-200 text-black">
               <th className="px-2 sm:px-4 py-2 border-b">Name</th>
               {/* Hide on mobile */}
               <th className="px-2 sm:px-4 py-2 border-b hidden sm:table-cell">

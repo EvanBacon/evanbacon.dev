@@ -14,7 +14,7 @@ export function AppIcon({ iconUrl, name }: { iconUrl: string; name: string }) {
       <Img
         draggable={false}
         style={{ zIndex: 1 }}
-        className={'object-cover flex-1 bg-slate-100 ' + styles.appIcon}
+        className={'object-cover flex-1 bg-slate-800 ' + styles.appIcon}
         src={iconUrl}
         alt={`${altSafe(name)} icon`}
       />
