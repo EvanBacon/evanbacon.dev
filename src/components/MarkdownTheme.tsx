@@ -1,6 +1,11 @@
 import { MDXComponents, MDXStyles } from '@bacons/mdx';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
+import {
+  TerminalSquareIcon,
+  FileCode01Icon,
+  LayoutAlt01Icon,
+} from '@expo/styleguide-icons';
 
 import { loadAsync, useFont } from './useFont';
 import {
@@ -132,6 +137,13 @@ const draculaPlusJson = {
   ],
 };
 
+function getIconForFile(filename: string) {
+  if (/_layout\.[jt]sx?$/.test(filename)) {
+    return LayoutAlt01Icon;
+  }
+  return FileCode01Icon;
+}
+
 function BaconCode(props: {
   children: string;
   // language-ts
@@ -160,8 +172,10 @@ function BaconCode(props: {
     title = 'Terminal';
   }
 
+  const FileIcon = isTerminal ? TerminalSquareIcon : getIconForFile(title);
+
   return (
-    <div className={cn('rounded-lg transition-shadow hover:shadow-xl')}>
+    <div className={cn('rounded-lg transition-shadow hover:shadow-xl mt-0')}>
       <div
         data-lang={lang}
         className={cn('rounded-lg overflow-hidden', 'bg-[#191A20]')}
@@ -171,45 +185,7 @@ function BaconCode(props: {
       >
         {title && (
           <span className="flex p-3 gap-2 border-b border-b-[#ffffff1a]">
-            {isTerminal ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-4 text-slate-50"
-                role="img"
-              >
-                <g id="terminal-square">
-                  <path
-                    id="Icon"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z"
-                  ></path>
-                </g>
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-4 text-slate-50"
-                role="img"
-              >
-                <g id="file-code-01">
-                  <path
-                    id="Icon"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14 2.26953V6.40007C14 6.96012 14 7.24015 14.109 7.45406C14.2049 7.64222 14.3578 7.7952 14.546 7.89108C14.7599 8.00007 15.0399 8.00007 15.6 8.00007H19.7305M14 17.5L16.5 15L14 12.5M10 12.5L7.5 15L10 17.5M20 9.98822V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V6.8C4 5.11984 4 4.27976 4.32698 3.63803C4.6146 3.07354 5.07354 2.6146 5.63803 2.32698C6.27976 2 7.11984 2 8.8 2H12.0118C12.7455 2 13.1124 2 13.4577 2.08289C13.7638 2.15638 14.0564 2.27759 14.3249 2.44208C14.6276 2.6276 14.887 2.88703 15.4059 3.40589L18.5941 6.59411C19.113 7.11297 19.3724 7.3724 19.5579 7.67515C19.7224 7.94356 19.8436 8.2362 19.9171 8.5423C20 8.88757 20 9.25445 20 9.98822Z"
-                  ></path>
-                </g>
-              </svg>
-            )}
+            <FileIcon className="w-4 text-slate-50" />
 
             <h3
               className="text-slate-50"
@@ -386,6 +362,9 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
     >
       <MDXComponents
         code={BaconCode}
+        pre={({ style, children }) => {
+          return <pre style={style} children={children} className="mb-5" />;
+        }}
         em={({
           firstChild,
           firstOfType,
