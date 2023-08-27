@@ -22,13 +22,12 @@ import { Prism, Highlight, themes } from 'prism-react-renderer';
 import cn from 'classnames';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 
-if (typeof window !== 'undefined') {
-  (typeof global !== 'undefined' ? global : window).Prism = Prism;
-  require('prismjs/components/prism-shell-session');
-  require('prismjs/components/prism-json');
-  require('prismjs/components/prism-json5');
-  require('prismjs/components/prism-css-extras.min');
-}
+(typeof global !== 'undefined' ? global : window).Prism = Prism;
+
+require('prismjs/components/prism-shell-session');
+require('prismjs/components/prism-json');
+require('prismjs/components/prism-json5');
+require('prismjs/components/prism-css-extras.min');
 
 // src/themes/dracula.ts
 const terminalTheme = {
@@ -215,8 +214,14 @@ function BaconCode(props: {
               )}
             >
               {tokens.map((line, i) => {
-                const isCommand = isTerminal && line.length === 1;
-                const isComment = isTerminal && !isCommand;
+                const isComment =
+                  isTerminal &&
+                  line.find(
+                    line =>
+                      line.content === '#' &&
+                      line.types.includes('shell-symbol')
+                  );
+                const isCommand = isTerminal && !isComment;
                 return (
                   <div key={i} {...getLineProps({ line })} className="inline">
                     {/* Line Number */}

@@ -109,7 +109,10 @@ Could you imagine if I actually shipped this though, haha.
 
 Unlike most of Apple's configuration-based feature, Settings.bundle is actually suprisingly really well typed/documented. The first thing I did was create a [JSON schema][apple-settings-json] then I generated TypeScript types based on the JSON schema, this ensured I could extract as much validation as possible out of Xcode and into the "user"-space.
 
-> TypeScript generation command: `npx json2ts -i ./schema.json -o ./src/schema.d.ts --additionalProperties=false --unknownAny=false`
+```term
+# TypeScript generation command
+npx json2ts -i ./schema.json -o ./src/schema.d.ts --additionalProperties=false --unknownAny=false
+```
 
 With this, we had perfect autocomplete for every field, and full static validation + standardized errors across the entire system.
 
@@ -130,7 +133,10 @@ I paired this with [Zustand][zustand] using `"zustand/middleware"` to sync the i
 
 To generate the licenses page, we generate a JSON file with all the third-party licenses data:
 
-> Licenses generation command: `npx npm-license-crawler --onlyDirectDependencies --dependencies --json src/constants/Licenses.json`
+```term
+# Licenses generation command
+npx npm-license-crawler --onlyDirectDependencies --dependencies --json src/constants/Licenses.json
+```
 
 Then I used the the config plugin to create a licenses page with the third-party licenses JSON:
 
