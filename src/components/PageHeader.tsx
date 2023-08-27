@@ -1,37 +1,38 @@
 import React from 'react';
-import gsap from 'gsap';
+import { Animated, Easing } from 'react-native';
 
 export default function PageHeader({ children }) {
   const [text, setText] = React.useState('  ');
 
+  const animated = React.useRef(new Animated.Value(0)).current;
+
   React.useEffect(() => {
+    if (animated._value === 1) return;
     const arr1 = children.split('');
     const arr2 = [];
     arr1.forEach((char, i) => (arr2[i] = randChar())); //fill arr2 with random characters
 
-    const tl = gsap.timeline();
     let step = 0;
-    tl.fromTo(
-      {},
-      {
-        innerHTML: arr2.join(''),
-      },
-      {
-        duration: arr1.length / 15,
-        ease: 'power4.in',
-        delay: 0.2,
-        onUpdate: () => {
-          const p = Math.floor(tl.progress() * arr1.length);
-          if (step != p) {
-            step = p;
-            arr1.forEach((char, i) => (arr2[i] = randChar()));
-            const pt1 = arr1.join('').substring(p, 0);
-            const pt2 = arr2.join('').substring(arr2.length - p, 0);
-            setText(pt1 + pt2);
-          }
-        },
+
+    animated.addListener(({ value }) => {
+      const p = Math.floor(value * arr1.length);
+      if (step != p) {
+        step = p;
+        arr1.forEach((char, i) => (arr2[i] = randChar()));
+        const pt1 = arr1.join('').substring(p, 0);
+        const pt2 = arr2.join('').substring(arr2.length - p, 0);
+        setText(pt1 + pt2);
       }
-    );
+    });
+
+    Animated.timing(animated, {
+      toValue: 1.1,
+      duration: 200 * arr1.length,
+      // Power4: Easing.ease,
+      easing: Easing.inOut(Easing.exp),
+      useNativeDriver: false,
+      delay: 100,
+    }).start();
   }, [children]);
 
   return (
