@@ -1,10 +1,13 @@
-import Head from 'expo-router/head';
-import { Stack, usePathname, useSearchParams } from 'expo-router';
-import * as Linking from 'expo-linking';
-import React from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { MarkdownTheme } from '@/components/MarkdownTheme';
+import Thanks from '@/components/thanks';
 import { useFont } from '@/components/useFont';
 import { LD_EVAN_BACON } from '@/data/structured';
+import { resolveAssetUri } from '@/utils/resolveMetroAsset';
+import * as Linking from 'expo-linking';
+import { Stack, useLocalSearchParams, usePathname } from 'expo-router';
+import Head from 'expo-router/head';
+import React from 'react';
+import { Image, ScrollView, View } from 'react-native';
 
 export async function generateStaticParams(): Promise<{ post: string }[]> {
   return mdxctx
@@ -50,9 +53,6 @@ function useData(
   return { MarkdownComponent: MD, info: Info };
 }
 
-import { resolveAssetUri } from '@/utils/resolveMetroAsset';
-import { MarkdownTheme } from '@/components/MarkdownTheme';
-
 function BlogHead({ info }: { info: PostInfo }) {
   const pathname = usePathname();
   const url = React.useMemo(() => Linking.createURL(pathname), [pathname]);
@@ -95,7 +95,7 @@ function BlogHead({ info }: { info: PostInfo }) {
 }
 
 export default function Page() {
-  const { post: postId } = useSearchParams();
+  const { post: postId } = useLocalSearchParams<{ post: string }>();
   const data = useData(postId);
 
   const Inter_900Black = useFont('Inter_900Black');
@@ -138,8 +138,6 @@ export default function Page() {
     </>
   );
 }
-
-import Thanks from '@/components/thanks';
 
 function AutoHeightImage(props) {
   const [imgSize, setImageSize] = React.useState({});

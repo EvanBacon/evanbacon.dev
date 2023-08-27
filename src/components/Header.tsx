@@ -10,15 +10,15 @@ import { useREM } from 'react-native-web-hooks';
 const TABS = [
   {
     title: 'Home',
-    url: '',
+    url: '/',
   },
   {
     title: 'Blog',
-    url: 'blog',
+    url: '/blog',
   },
   {
     title: 'Games',
-    url: 'games',
+    url: '/games',
   },
   // {
   //   title: 'Lego',

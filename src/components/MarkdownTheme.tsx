@@ -1,6 +1,6 @@
 import { MDXComponents, MDXStyles } from '@bacons/mdx';
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 import { loadAsync, useFont } from './useFont';
 import {
@@ -17,8 +17,11 @@ import cn from 'classnames';
 
 if (typeof window !== 'undefined') {
   (typeof global !== 'undefined' ? global : window).Prism = Prism;
+  require('prismjs/components/prism-shell-session');
+  require('prismjs/components/prism-json');
+  require('prismjs/components/prism-json5');
+  require('prismjs/components/prism-css-extras.min');
 }
-require('prismjs/components/prism-shell-session');
 
 // src/themes/dracula.ts
 const terminalTheme = {
@@ -41,7 +44,92 @@ const remapLanguages: Record<string, string> = {
   sh: 'bash',
   shell: 'shell-session',
   rb: 'ruby',
-  json: 'js',
+  json: 'json5',
+  javascript: 'js',
+  typescript: 'ts',
+};
+
+const DRACULA_COLORS = {
+  purple: 'rgb(189, 147, 249)',
+  blue: '#A1E7FA',
+  yellow: 'rgb(241, 250, 140)',
+  pink: 'rgb(255, 121, 198)',
+  green: 'rgb(80, 250, 123)',
+};
+
+const draculaPlusJson = {
+  ...themes.dracula,
+  styles: [
+    ...themes.dracula.styles,
+    ...[
+      {
+        types: ['boolean'],
+        style: {
+          color: DRACULA_COLORS.purple,
+        },
+      },
+    ].map(selectors => ({ ...selectors, languages: ['js', 'json5'] })),
+
+    // JSON theme
+    ...[
+      {
+        types: ['property'],
+        style: {
+          color: DRACULA_COLORS.blue,
+        },
+      },
+      {
+        types: ['string'],
+        style: {
+          color: DRACULA_COLORS.yellow,
+        },
+      },
+      {
+        types: ['boolean', 'number'],
+        style: {
+          color: DRACULA_COLORS.purple,
+        },
+      },
+      {
+        types: ['operator'],
+        style: {
+          color: DRACULA_COLORS.pink,
+        },
+      },
+    ].map(selectors => ({ ...selectors, languages: ['json', 'json5'] })),
+
+    // CSS theme
+    ...[
+      {
+        types: ['property'],
+        style: {
+          color: DRACULA_COLORS.blue,
+        },
+      },
+      {
+        types: ['class'],
+        style: {
+          color: DRACULA_COLORS.green,
+        },
+      },
+      {
+        types: ['atrule'],
+        style: {
+          color: DRACULA_COLORS.purple,
+        },
+      },
+      {
+        types: [
+          'rule',
+          'keyword',
+          // 'punctuation'
+        ],
+        style: {
+          color: DRACULA_COLORS.pink,
+        },
+      },
+    ].map(selectors => ({ ...selectors, languages: ['css', 'scss'] })),
+  ],
 };
 
 function BaconCode(props: {
@@ -53,12 +141,8 @@ function BaconCode(props: {
   // "html.pre"
   parentName: string;
 }) {
-  let title = !props.metastring
-    ? ''
-    : props.metastring.match(/title="(.*)"/)?.[1] ?? props.metastring;
-
   let lang = props.className?.slice(9).toLowerCase() ?? 'txt';
-  const isTerminal = lang.toLowerCase() === 'terminal';
+  const isTerminal = ['terminal', 'term'].includes(lang.toLowerCase());
 
   if (isTerminal) {
     lang = 'shell-session';
@@ -67,6 +151,10 @@ function BaconCode(props: {
   if (lang in remapLanguages) {
     lang = remapLanguages[lang];
   }
+
+  let title = !props.metastring
+    ? ''
+    : props.metastring.match(/title="(.*)"/)?.[1] ?? props.metastring;
 
   if (isTerminal && !title) {
     title = 'Terminal';
@@ -136,7 +224,7 @@ function BaconCode(props: {
         )}
 
         <Highlight
-          theme={isTerminal ? terminalTheme : themes.dracula}
+          theme={isTerminal ? terminalTheme : draculaPlusJson}
           code={props.children.trim()}
           language={lang}
         >
@@ -144,13 +232,13 @@ function BaconCode(props: {
             <pre
               style={style}
               className={cn(
-                'p-4 overflow-auto padding-r-4 m-[1px] rounded-b-lg grid',
+                'p-4 overflow-auto padding-r-4 m-[1px] mt-0 rounded-b-lg grid',
                 isTerminal && 'bg-black'
               )}
             >
               {tokens.map((line, i) => {
                 const isCommand = isTerminal && line.length === 1;
-
+                const isComment = isTerminal && !isCommand;
                 return (
                   <div key={i} {...getLineProps({ line })} className="inline">
                     {/* Line Number */}
@@ -162,9 +250,16 @@ function BaconCode(props: {
                         𝝠{' '}
                       </span>
                     )}
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
+                    {line.map((token, key) => {
+                      const { className, ...props } = getTokenProps({ token });
+                      return (
+                        <span
+                          key={key}
+                          {...props}
+                          className={cn(className, isComment && 'select-none')}
+                        />
+                      );
+                    })}
                   </div>
                 );
               })}
@@ -291,9 +386,31 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
     >
       <MDXComponents
         code={BaconCode}
-        em={({ parentName, ...props }) => <em {...props} />}
-        p={({ parentName, ...props }) => <p {...props} />}
-        strong={({ parentName, ...props }) => {
+        em={({
+          firstChild,
+          firstOfType,
+          prevSibling,
+          lastChild,
+          parentName,
+          ...props
+        }) => <em {...props} />}
+        p={({
+          firstChild,
+          firstOfType,
+          prevSibling,
+          lastChild,
+          parentName,
+          ...props
+        }) => <p {...props} />}
+        br={() => <br />}
+        strong={({
+          firstChild,
+          firstOfType,
+          lastChild,
+          parentName,
+          prevSibling,
+          ...props
+        }) => {
           // Special branding for bold text containing "Pillar Valley".
           if (props.children.toString().match(/pillar valley/i)) {
             props.style = {
@@ -303,7 +420,16 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           }
           return <b {...props} />;
         }}
-        blockquote={({ parentName, style, children, ...props }) => (
+        blockquote={({
+          firstChild,
+          lastChild,
+          parentName,
+          style,
+          firstOfType,
+          children,
+          prevSibling,
+          ...props
+        }) => (
           <BlockQuote {...props} style={[style]}>
             {/* <div
               style={{
@@ -329,7 +455,15 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             {children}
           </BlockQuote>
         )}
-        li={({ parentName, style, ...props }) => (
+        li={({
+          firstChild,
+          lastChild,
+          parentName,
+          prevSibling,
+          firstOfType,
+          style,
+          ...props
+        }) => (
           <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
             <View
               style={{
@@ -343,14 +477,14 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
               }}
             />
             <View style={{ flex: 1, display: 'block' }}>
-              <View {...props} style={[style, { display: 'block' }]} />
+              <Text {...props} style={[style, { display: 'block' }]} />
             </View>
           </View>
         )}
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
         // )}
-        hr={({ parentName, style }) => (
+        hr={({ parentName, lastChild, firstOfType, style }) => (
           <View style={style}>
             {['', '', ''].map((v, i) => (
               <View

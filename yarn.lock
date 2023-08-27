@@ -2260,6 +2260,13 @@
   dependencies:
     cross-spawn "^6.0.5"
 
+"@expo/styleguide-icons@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@expo/styleguide-icons/-/styleguide-icons-1.0.1.tgz#ea9d3b370a202caded9896ba8723519d39a1301f"
+  integrity sha512-mfQw5wlCUzuz3Zg+A8Wgt+YNt4LwttDLbROsMgSJnBHjTTBLjl13jSxtHhAlhqz4JMxS3hJw6yvGd7becJbXTQ==
+  dependencies:
+    tailwind-merge "^1.13.2"
+
 "@expo/vector-icons@^13.0.0":
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-13.0.0.tgz#e2989b85e95a82bce216f88cf8fb583ab050ec95"
@@ -9426,6 +9433,11 @@ table@^5.2.3:
     lodash "^4.17.14"
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
+
+tailwind-merge@^1.13.2:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.14.0.tgz#e677f55d864edc6794562c63f5001f45093cdb8b"
+  integrity sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==
 
 tailwindcss@3.3.2:
   version "3.3.2"

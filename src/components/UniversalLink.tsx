@@ -55,7 +55,7 @@ export default function UniversalLink({
         ref={ref}
         style={responsiveStyle}
         href={routeName}
-        accessibilityRole="link"
+        role="link"
       />
     );
   }
