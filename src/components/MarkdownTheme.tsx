@@ -176,10 +176,10 @@ function BaconCode(props: {
   const FileIcon = isTerminal ? TerminalSquareIcon : getIconForFile(title);
 
   return (
-    <div className={cn('rounded-lg transition-shadow hover:shadow-xl mt-0')}>
+    <div className={cn('rounded-2xl transition-shadow hover:shadow-xl mt-0')}>
       <div
         data-lang={lang}
-        className={cn('rounded-lg overflow-hidden', 'bg-[#191A20]')}
+        className={cn('rounded-2xl overflow-hidden', 'bg-[#191A20]')}
         style={{
           boxShadow: 'inset 0 0 0 1px #ffffff1a',
         }}
@@ -209,7 +209,7 @@ function BaconCode(props: {
             <pre
               style={style}
               className={cn(
-                'p-4 overflow-auto padding-r-4 m-[1px] mt-0 rounded-b-lg grid',
+                'p-4 overflow-auto padding-r-4 m-[1px] mt-0 rounded-b-2xl grid',
                 isTerminal && 'bg-black'
               )}
             >
@@ -338,6 +338,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         marginBottom: '1.25em',
       }}
       img={{
+        borderRadius: '1rem',
         marginBottom: '1.25em',
         minHeight: 180,
       }}
