@@ -28,6 +28,7 @@ export default function Games() {
           );
         })}
       </div>
+      <br />
     </>
   );
 }
