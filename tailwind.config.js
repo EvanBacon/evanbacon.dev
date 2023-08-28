@@ -6,6 +6,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      screens: {
+        canhover: { raw: '(hover: hover)' },
+      },
       animation: {
         kennyburns: 'kennyburns 1s ease 1s forwards',
       },

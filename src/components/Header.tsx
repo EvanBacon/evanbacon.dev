@@ -41,61 +41,10 @@ const TABS = [
 ];
 
 const CustomHeader = ({ siteTitle }) => {
-  const navigation = useNavigation();
-  const [isActive, setActive] = React.useState(false);
-  const { showActionSheetWithOptions } = useActionSheet();
-  const router = useRouter();
-  const { isDark } = React.useContext(CustomAppearanceContext);
-
-  function onPressMenu() {
-    if (Platform.OS !== 'web') {
-      navigation.openDrawer();
-      return;
-    }
-    // Same interface as https://facebook.github.io/react-native/docs/actionsheetios.html
-    const options = [...TABS.map(({ title }) => title), 'Cancel'];
-    const destructiveButtonIndex = options.length - 1;
-    const cancelButtonIndex = options.length - 1;
-
-    const backgroundColor = isDark
-      ? Colors.backgroundDark
-      : Colors.backgroundLight;
-    const color = !isDark ? Colors.backgroundDark : Colors.backgroundLight;
-
-    showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex,
-        destructiveButtonIndex,
-        containerStyle: {
-          backgroundColor,
-        },
-        textStyle: {
-          color,
-        },
-      },
-      buttonIndex => {
-        setActive(false);
-
-        if (buttonIndex !== cancelButtonIndex) {
-          const { url } = TABS[buttonIndex];
-          if (url.startsWith('http://') || url.startsWith('https://')) {
-            Linking.openURL(url);
-          } else {
-            router.push(url || '/');
-          }
-        }
-      }
-    );
-
-    setActive(!isActive);
-  }
   const width = 1248;
 
   const isSmall = width < 720;
   const isXSmall = width < 520;
-
-  const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
     <header className="bg-black mb-2 py-4">
@@ -152,7 +101,7 @@ function HeaderLink({ title, target, style, routeName }) {
   const pathname = usePathname();
 
   // TODO: CHECK
-  const isActive = pathname ? pathname === `/${routeName}` : false;
+  const isActive = pathname ? pathname === `${routeName}` : false;
 
   return (
     <span className="hover:opacity-80 transition-opacity">
