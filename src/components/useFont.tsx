@@ -22,6 +22,8 @@ export function useLoadFonts(
 ) {
   const [loaded, setLoaded] = React.useState(false);
 
+  Font.loadAsync(fontFamilyOrFontMap);
+
   React.useEffect(() => {
     let mounted = true;
     loadFontAsync(fontFamilyOrFontMap).then(() => {
@@ -50,6 +52,7 @@ function normalizeSource(
 
 function loadFontAsync(sources: Record<string, Font.FontSource>) {
   Font.loadAsync(sources);
+
   return Promise.all(
     Object.entries(sources).map(([name, source]) => {
       Font.loadAsync(name, source).then(() => {

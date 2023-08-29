@@ -1,4 +1,11 @@
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import {
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_700Bold,
+  Inter_900Black,
+} from '@expo-google-fonts/inter';
+import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
@@ -7,6 +14,7 @@ import Colors from '@/constants/Colors';
 import CustomAppearanceProvider from '@/context/CustomAppearanceProvider';
 import { Meta } from '@/Data';
 import Layout from '@/components/Layout';
+import { loadAsync } from '@/components/useFont';
 
 const site = {
   title: 'Evan Bacon',
@@ -27,6 +35,14 @@ export function ensureSlash(inputPath: string, needsSlash: boolean): string {
 }
 
 export default function App() {
+  loadAsync({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_700Bold,
+    Inter_900Black,
+    SourceCodePro_400Regular,
+  });
+
   const themeColor = Colors.theme;
   const pathname = usePathname();
 

@@ -20,7 +20,7 @@ function collectForDir(dir, parent = '') {
     .map(file => {
       const url = `https://evanbacon.dev/${path
         .join(parent, file)
-        .replace('.html', '')}`;
+        .replace(/(index)?\.html/, '')}`;
       // Formatted as `2022-01-01`
       const date = new Date().toISOString().split('T')[0];
       return `<url><loc>${url}</loc><lastmod>${date}</lastmod></url>`;
