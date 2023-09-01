@@ -21,7 +21,7 @@ function collectForDir(dir, parent = '') {
     .map(file => {
       const url = `https://evanbacon.dev/${path
         .join(parent, file)
-        .replace(/(index)?\.html/, '')}`;
+        .replace(/(index)?\.html/, '')}`.replace(/\/$/, '');
       // Formatted as `2022-01-01`
       const date = new Date().toISOString().split('T')[0];
       return `<url><loc>${url}</loc><lastmod>${date}</lastmod></url>`;
@@ -44,7 +44,7 @@ function collectForDir(dir, parent = '') {
   return lines;
 }
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${collectForDir(
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${collectForDir(
   distPath
 ).join('\n')}</urlset>`;
 fs.writeFileSync(path.join(__dirname, './public/sitemap.xml'), sitemap);
