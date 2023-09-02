@@ -170,7 +170,7 @@ export default function ResponsiveNavigator() {
 
         <AppHeader />
 
-        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 md:pt-8 gap-4">
+        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 ">
           <TabbedNavigator.Slot />
           <CustomFooter />
         </div>
@@ -184,8 +184,7 @@ export default function ResponsiveNavigator() {
 function AppHeader() {
   return (
     <div className="flex md:hidden">
-      <div className="h-14" />
-      <div className="h-14 flex flex-1 z-10 bg-[#10141A] fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d]">
+      <div className="h-14 flex flex-1 z-10 bg-[#10141a2e] backdrop-blur-lg fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d]">
         <Icon
           name="logo"
           width={undefined}
