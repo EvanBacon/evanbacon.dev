@@ -346,51 +346,28 @@ export function ResponsiveNavigator() {
         inactiveTintColor: 'gray',
       }}
     >
-      <View
-        style={[
-          jsStyles.flex1,
-          Platform.select({
-            default: {
-              flexDirection: isRowLayout ? 'row' : 'column',
-            },
-            web: cssStyles.container,
-          }),
-        ]}
-      >
+      <div className="flex flex-1 flex-col md:flex-row">
         <SideBar visible={isRowLayout} />
-        <AppHeader visible={!isRowLayout} />
+        <AppHeader />
 
         <div className="container mx-auto px-4 max-w-3xl md:px-0 flex flex-1">
           <TabbedNavigator.Slot />
         </div>
 
         <TabBar visible={!isRowLayout} />
-      </View>
+      </div>
     </TabbedNavigator>
   );
 }
 
-function AppHeader({ visible }) {
-  const { top } = useSafeAreaInsets();
-  const height = 60 + top;
+function AppHeader() {
   return (
-    <>
-      <View style={{ height }} />
-      <View
-        style={[
-          Platform.select({
-            default: !visible && {
-              display: 'none',
-            },
-            web: cssStyles.smallVisible,
-          }),
-          { height, paddingTop: top },
-          jsStyles.appHeader,
-        ]}
-      >
+    <div className="flex md:hidden">
+      <div className="h-16" />
+      <div className="flex flex-1 z-10 bg-black fixed top-0 left-0 right-0 px-4 flex-row items-center justify-between border-b border-b-[#30363d] h-16">
         <Icon name="logo" fill={Colors.dark} />
-      </View>
-    </>
+      </div>
+    </div>
   );
 }
 
