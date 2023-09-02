@@ -84,8 +84,10 @@ export function ExternalCard({
           <View
             style={{
               marginTop: 8,
-              borderColor: '#6572A0',
-              borderWidth: 1,
+              borderRadius: '1rem',
+              overflow: 'hidden',
+              // borderColor: '#6572A0',
+              // borderWidth: 1,
               transitionDuration: '200ms',
               backgroundColor: hovered ? '#373848' : '#21222B',
 

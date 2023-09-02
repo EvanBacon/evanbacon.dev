@@ -10,6 +10,22 @@ As someone who's constantly in the pursuit of making the most native possible us
 
 Before we begin, I'll be the first to say that unless you're building the [Blackbox app][blackbox], custom Apple Settings UI should probably not be a release-blocking feature for your app. The usefulness is questionable, and the value is fleeting. However, if you over-index on native app quality, then this post is for you.
 
+## Features
+
+Outside of the obvious, having your app's settings in the native settings app, there are a few other neat features that come with implementing `Settings.bundle`.
+
+### Spotlight Search
+
+Auxillary pages and controls for your app show up in the native Spotlight search. This helps users find the settings they're looking for.
+
+![](./images/settings-spotlight.png)
+
+### Desktop Support
+
+If your iOS app is available in the Mac App Store, then your settings will also be available in the native settings for the app when you press <Kbd>⌘,</Kbd>.
+
+![](./images/mac-settings.png)
+
 ## The Goal
 
 Many years ago, I built a small video game, [**Pillar Valley**](https://pillarvalley.netlify.app/), that I now pump full of whatever native functionality I stumble across. It has haptics, native navigation controllers, full universal linking, quick notes, Apple Handoff, password sharing, custom app icons, runs on iOS, Android and web, and is optimized for start-up by using Hermes (no JavaScript runs on-device on native platforms). All the features you expect when downloading a single-tap video game from the store.
@@ -22,6 +38,8 @@ The goal was to add the following pages to the system settings:
 - Some shared interactive setting. I landed on a switch for toggling the in-app audio.
 - A custom page with third-party licenses and attribution. Sometimes these show up in the setting search and I thought it'd be cool if I saw some of my friends pop up in there from time to time.
 - Finally, I wanted a page with preset fields that would be updated on app-launch. I planned to use this page to display remote config info for the particular launch of the app.
+
+![Custom native settings controls in the iOS Pillar Valley app](./images/main-settings.jpeg)
 
 ## Implementation
 
@@ -129,6 +147,33 @@ const switchValue = Boolean(Settings.get('p_inapp_audio'));
 
 I paired this with [Zustand][zustand] using `"zustand/middleware"` to sync the in-app toggle with the system settings toggle.
 
+For the more static data, I added a [hook that runs at startup](https://github.com/EvanBacon/pillar-valley/blob/fba10cbedd593e4976ad4d1aeada1a5834f1100e/src/hooks/useUpdatesInAppleSettings.ts#L14) in the application to sync info to the system settings. This is where I'd add the remote config info.
+
+```ts
+import * as Updates from 'expo-updates';
+import { Settings } from 'react-native';
+
+function displayDate() {
+  return new Date().toLocaleString('en-US', {
+    timeZoneName: 'short',
+  });
+}
+
+export function useUpdatedUpdatesInfoInSettings() {
+  Updates.useUpdateEvents(event => {
+    Settings.set({
+      p_exupdates_live_type: event.type,
+      p_exupdates_live_message: event.message ?? '',
+      p_exupdates_live__updatedAt: displayDate(),
+    });
+  });
+}
+```
+
+As a result, we can now see startup info in the system settings.
+
+![Runtime settings in the iOS Pillar Valley app](./images/runtime-settings.jpeg)
+
 ### Licenses page
 
 To generate the licenses page, we generate a JSON file with all the third-party licenses data:
@@ -190,15 +235,21 @@ module.exports = ({ config }) => {
 };
 ```
 
+Now we can generate a ton of XML data at build-time, and we can also use TypeScript to validate the data.
+
+![Licenses settings page in Pillar Valley](./images/licenses-settings.jpeg)
+
 ## Conclusion
 
 We now have a fully-typed, and script-able system to generate complex native settings pages with ease, entirely with clean-up built-in so I can remove it in the future if I ever come to my senses.
 
 Now my app feels just a little bit more native and I didn't have to compromise on upgradability or maintainability.
 
-Thanks for reading.
+- Example: [Settings plugin in **Pillar Valley**](https://github.com/EvanBacon/pillar-valley/blob/fba10cbedd593e4976ad4d1aeada1a5834f1100e/app.config.ts#L39-L166).
+- [`@config-plugins/apple-settings`](https://github.com/expo/config-plugins/tree/main/packages/apple-settings)
+- Download [**Pillar Valley** in the iOS App Store](https://apps.apple.com/us/app/pillar-valley/id1336398804) to see the settings in action.
 
 [apple-docs]: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/UserDefaults/Preferences/Preferences.html
-[apple-settings-json]: https://github.com/EvanBacon/Apple-Settings-Expo-Config-Plugin/blob/4faa2dd820ad7e0f51202baeacce8fc0507d3b78/settings-plugin/schema/SettingsPlist.json#L1
+[apple-settings-json]: https://github.com/expo/config-plugins/blob/b90eed0c0c749c5e87227eb59eba4509ddd0528c/packages/apple-settings/src/schema/SettingsPlist.json
 [zustand]: https://github.com/pmndrs/zustand
 [blackbox]: https://www.blackboxpuzzles.com/

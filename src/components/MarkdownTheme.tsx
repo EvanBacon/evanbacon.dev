@@ -138,6 +138,27 @@ const draculaPlusJson = {
   ],
 };
 
+function Kbd({ children }) {
+  const keys = children.split('');
+  return (
+    <>
+      {keys.map((key, i) => (
+        <React.Fragment key={i}>
+          <kbd
+            className="px-1  min-w-5 bg-[#10141A] border border-b-2 rounded border-[#3a3f42]"
+            style={{
+              boxShadow: '0 0.1rem 0 1px #3a3f42',
+            }}
+          >
+            {key}
+          </kbd>
+          {i < keys.length - 1 ? ' + ' : null}
+        </React.Fragment>
+      ))}
+    </>
+  );
+}
+
 function getIconForFile(filename: string) {
   if (/_layout\.[jt]sx?$/.test(filename)) {
     return LayoutAlt01Icon;
@@ -341,6 +362,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         borderRadius: '1rem',
         marginBottom: '1.25em',
         minHeight: 180,
+        maxHeight: 480,
       }}
       a={{
         fontSize: 'unset',
@@ -367,6 +389,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       <MDXComponents
         components={{
           Title,
+          Kbd,
         }}
         code={BaconCode}
         pre={({ style, children }) => {
