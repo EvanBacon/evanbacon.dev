@@ -7,8 +7,8 @@ import React from 'react';
 
 function HeaderLogo() {
   return (
-    <Link className="group focus:outline-none" href="/">
-      <div className="pt-5 pb-8 items-start xl:pt-0 min-h-[96px] h-[96px]">
+    <Link style={{ $$css: true, _: 'group focus:outline-none' }} href="/">
+      <div className="flex pt-5 pb-8 items-start h-[96px] max-h-[96px]">
         <div className="flex items-center p-3 my-1 rounded transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none">
           <Icon
             width={undefined}
@@ -32,8 +32,8 @@ function HeaderLogo() {
 
 function SideBar() {
   return (
-    <div className="w-20 xl:min-w-[244px]">
-      <div className="fixed h-full max-h-full items-stretch flex border-r bg-black border-r-[#30363d] min-w-20 pt-2 px-3 pb-5  xl:w-[244px] xl:items-start">
+    <div className="w-20 xl:w-[244px]">
+      <div className="xl:w-[244px] fixed h-full items-stretch flex border-r bg-black border-r-[#30363d] min-w-20 pt-2 px-3 pb-5 xl:items-start">
         <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
           <HeaderLogo />
 

@@ -49,7 +49,7 @@ const socials = [
 
 export default function CustomFooter() {
   return (
-    <footer className="border-t-2 border-t-slate-800 mt-2 py-6">
+    <footer className="border-t border-t-slate-800 mt-2 py-6">
       <nav className="flex container mx-auto px-6 md:px-0 max-w-3xl">
         <ul>
           {[
