@@ -1,56 +1,68 @@
 import { Icon } from '@/components/top-nav/icon';
 import { makeIcon, TabBarIcon } from '@/components/top-nav/tab-bar-icon';
 import { TabbedNavigator } from '@/components/top-nav/tab-slot';
+import classNames from 'classnames';
 import { Link } from 'expo-router';
 import React from 'react';
-import { Text, ViewStyle } from 'react-native';
 
 function HeaderLogo() {
   return (
-    <Link
-      style={{
-        $$css: true,
-        _: 'group focus:outline-none',
-      }}
-      href="/"
-    >
-      <div className="py-5 items-start xl:pt-0 min-h-[96px] h-[96px] mt-3 pb-6">
-        <div className="flex items-center p-3 my-1 rounded transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none">
-          <Icon className="hidden xl:block" name="logo" fill={Colors.dark} />
-          <Icon
-            className="block xl:hidden"
-            name="logo-small"
-            fill={Colors.dark}
-          />
+    <Link className="group focus:outline-none" asChild href="/">
+      <a title="Evan Bacon">
+        <div className="pt-5 pb-8 items-start xl:pt-0 min-h-[96px] h-[96px]">
+          <div className="flex items-center p-3 my-1 rounded transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none">
+            <Icon
+              width={undefined}
+              height={undefined}
+              className="hidden xl:block h-12"
+              name="logo"
+              fill={Colors.dark}
+            />
+            <Icon
+              width={undefined}
+              height={undefined}
+              className="block xl:hidden w-10"
+              name="logo-small"
+              fill={Colors.dark}
+            />
+          </div>
         </div>
-      </div>
+      </a>
     </Link>
   );
 }
 
 function SideBar() {
   return (
-    <div className="w-20 min-w-20 xl:min-w-[244px]">
-      <div className="fixed h-full max-h-full items-stretch flex border-r border-r-[#30363d] min-w-20 w-20 pt-2 px-3 pb-5 xl:min-w-[244px] xl:w-[244px] xl:items-start">
+    <div className="w-20 xl:min-w-[244px]">
+      <div className="fixed h-full max-h-full items-stretch flex border-r border-r-[#30363d] min-w-20 pt-2 px-3 pb-5 xl:min-w-[244px] xl:w-[244px] xl:items-start">
         <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
           <HeaderLogo />
 
-          <div className="gap-1 flex flex-1 flex-col">
-            <SideBarTabItem name="index" icon={makeIcon('home')}>
+          <div className="gap-3 flex flex-1 flex-col">
+            <SideBarTabItem name="index" icon={makeIcon('home')} popup="Home">
               Home
             </SideBarTabItem>
-            <SideBarTabItem name="blog/index" icon={makeIcon('explore')}>
+            <SideBarTabItem
+              name="blog/index"
+              icon={makeIcon('blog')}
+              popup="Blog"
+            >
               Blog
             </SideBarTabItem>
-            <SideBarTabItem name="games" icon={makeIcon('explore')}>
+            <SideBarTabItem name="games" icon={makeIcon('games')} popup="Games">
               Games
             </SideBarTabItem>
-            {/* Divider */}
           </div>
 
-          <SideBarTabItem name="/more" icon={makeIcon('more')}>
-            More
-          </SideBarTabItem>
+          <div>
+            <SideBarTabItem
+              name="https://x.com/baconbrix"
+              icon={makeIcon('twitter')}
+            >
+              Follow
+            </SideBarTabItem>
+          </div>
         </div>
       </div>
     </div>
@@ -69,27 +81,29 @@ function useIsTabSelected(name: string): boolean {
 function TabBarItem({
   children,
   name,
-  style,
   id,
+  popup = name.replace(/\/index$/, ''),
+  className,
 }: {
   children?: any;
   name: string;
-  style?: ViewStyle;
   id: string;
+  popup?: string;
+  className?: string;
 }) {
   const focused = useIsTabSelected(id);
 
-  if (name.startsWith('/') || name.startsWith('.')) {
+  if (name.match(/^([./]|https?:\/\/)/)) {
     return (
-      <Link href={name} style={style}>
+      <Link href={name} hrefAttrs={{ target: '_blank' }} className={className}>
         {children({ focused })}
       </Link>
     );
   }
 
   return (
-    <TabbedNavigator.Link name={id} style={style}>
-      {children({ focused })}
+    <TabbedNavigator.Link name={id} asChild className={className}>
+      <a title={popup}>{children({ focused })}</a>
     </TabbedNavigator.Link>
   );
 }
@@ -98,40 +112,23 @@ function SideBarTabItem({
   children,
   icon,
   name,
+  popup,
 }: {
   children: string;
   icon: (props: { focused?: boolean; color: string }) => JSX.Element;
   name: string;
+  popup?: string;
 }) {
   return (
     <TabBarItem
       name={name}
       id={name}
       accessibilityHasPopup="menu"
-      style={[
-        {
-          $$css: true,
-          __: 'group w-full py-1 focus:outline-none',
-        },
-      ]}
+      className="group w-full py-1 focus:outline-none"
+      popup={popup}
     >
-      {({ focused, hovered }) => (
-        <div
-          className="flex p-3 flex-row items-center rounded-full transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none"
-          // style={[
-          //   {
-          //     padding: 12,
-          //     flexDirection: 'row',
-          //     alignItems: 'center',
-          //     borderRadius: 999,
-          //     transitionProperty: ['background-color', 'box-shadow'],
-          //     transitionDuration: '200ms',
-          //   },
-          //   hovered && {
-          //     backgroundColor: 'rgba(0, 0, 0, 0.1)',
-          //   },
-          // ]}
-        >
+      {({ focused }) => (
+        <div className="flex p-3 flex-row items-center rounded-full transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none">
           <div
             className="flex transition-transform duration-150 group-hover:scale-110 group-focus:scale-110"
             style={{
@@ -140,36 +137,20 @@ function SideBarTabItem({
           >
             {icon({
               focused,
-              color: '#000',
+              width: 30,
+              height: 30,
+              color: '#fff',
             })}
           </div>
 
-          <Text
-            style={[
-              {
-                $$css: true,
-                _: 'text-white text-base mx-4 hidden xl:flex',
-              },
-              // // {
-              // //   color: 'white',
-              // //   fontSize: 16,
-              // //   marginLeft: 16,
-              // //   marginRight: 16,
-              // //   lineHeight: 24,
-              // // },
-              // // Platform.select({
-              // //   default: {
-              // //     display: isLarge ? 'flex' : 'none',
-              // //   },
-              // //   web: cssStyles.sideBarTabItemText,
-              // // }),
-              focused && {
-                fontWeight: 'bold',
-              },
-            ]}
+          <span
+            className={classNames(
+              'text-white text-lg mx-4 hidden xl:flex',
+              focused ? 'font-bold' : 'font-medium'
+            )}
           >
             {children}
-          </Text>
+          </span>
         </div>
       )}
     </TabBarItem>
@@ -194,7 +175,7 @@ export function ResponsiveNavigator() {
 
         <AppHeader />
 
-        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1">
+        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 md:pt-8">
           <TabbedNavigator.Slot />
         </div>
 
@@ -208,8 +189,39 @@ function AppHeader() {
   return (
     <div className="flex md:hidden">
       <div className="h-16" />
-      <div className="flex flex-1 z-10 bg-black fixed top-0 left-0 right-0 px-4 flex-row items-center justify-between border-b border-b-[#30363d] h-16">
-        <Icon name="logo" fill={Colors.dark} />
+      <div className="flex flex-1 z-10 bg-black fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d] h-16">
+        <Icon
+          name="logo"
+          width={undefined}
+          height={undefined}
+          className="w-40"
+          fill={Colors.dark}
+        />
+
+        <Link
+          style={[
+            {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+            {
+              $$css: true,
+              _:
+                'transition-transform mr-[-8px] my-2 rounded-full aspect-square hover:scale-110 hover:bg-white/10 active:scale-90 active:opacity-80',
+            },
+          ]}
+          href="https://x.com/baconbrix"
+          hrefAttrs={{ target: '_blank' }}
+        >
+          <Icon
+            width={undefined}
+            height={undefined}
+            className="w-8"
+            name="twitter"
+            fill={Colors.dark}
+          />
+        </Link>
       </div>
     </div>
   );
@@ -223,24 +235,21 @@ function TabBar() {
       <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch h-12 px-4">
         {[
           { name: 'index', id: 'index', icon: 'home' },
-          { name: 'blog', id: 'blog/index', icon: 'explore' },
-          { name: 'games', id: 'games', icon: 'explore' },
-          { name: '/more', id: 'more', icon: 'more' },
+          { name: 'blog', id: 'blog/index', icon: 'blog' },
+          { name: 'games', id: 'games', icon: 'games' },
+          // { name: 'https://x.com/baconbrix', id: 'twitter', icon: 'twitter' },
         ].map((tab, i) => (
           <TabBarItem
-            style={[
-              {
-                $$css: true,
-                __: 'group flex items-center focus:outline-none',
-              },
-            ]}
+            className="group flex items-center focus:outline-none"
             key={i}
             name={tab.name}
             id={tab.id}
           >
             {({ focused }) => (
               <TabBarIcon
-                style={{ width: '2.5rem', height: '2.5rem' }}
+                width={undefined}
+                height={undefined}
+                style={{ width: '2.8rem', height: '2.8rem' }}
                 className="flex-1 px-2 transition-transform hover:scale-110 active:scale-90 active:opacity-80"
                 color="white"
                 name={tab.icon}

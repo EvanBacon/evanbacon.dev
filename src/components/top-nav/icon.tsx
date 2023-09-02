@@ -5,12 +5,12 @@ const icons = require.context('./icons');
 export type IconName =
   | 'logo'
   | 'logo-small'
-  | 'more'
-  | 'explore-active'
-  | 'explore'
-  | 'home-active'
+  | 'games'
+  | 'games-active'
+  | 'blog'
+  | 'blog-active'
   | 'home'
-  | 'messages-active'
+  | 'home-active'
   | 'messages'
   | 'notifications';
 

@@ -23,7 +23,7 @@ export function TabBarIcon({
 
   return (
     <Icon
-      style={[{ width: 22, height: 22 }, props.style]}
+      style={props.style}
       {...props}
       name={resolvedName}
       fill={props.color}
