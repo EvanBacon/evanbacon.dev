@@ -194,7 +194,7 @@ export function ResponsiveNavigator() {
 
         <AppHeader />
 
-        <div className="container mx-auto px-4 max-w-3xl md:px-0 flex flex-1">
+        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1">
           <TabbedNavigator.Slot />
         </div>
 
