@@ -23,6 +23,7 @@ export function Icon({
   style?: any;
   width?: number;
   height?: number;
+  className?: string;
 }) {
   const Comp = React.useMemo(() => {
     const imp = icons(`./${name}.svg`);
