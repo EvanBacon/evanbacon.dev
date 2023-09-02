@@ -1,19 +1,12 @@
-import { Article, Footer, Div, H2, H3, P } from '@expo/html-elements';
+import { Article, Div, Footer, H2, H3, P } from '@expo/html-elements';
 import { Video } from 'expo-av';
 import { BlurView } from 'expo-blur';
 import { Link } from 'expo-router';
 import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
-import { useDimensions, useHover, useREM } from 'react-native-web-hooks';
+import { Image, Platform, StyleSheet, View } from 'react-native';
+import { useHover, useREM } from 'react-native-web-hooks';
 import isHoverEnabled from 'react-native-web-hooks/build/isHoverEnabled';
 
-import CustomAppearanceContext from '../../context/CustomAppearanceContext';
 import { Project } from '../../Data';
 import SocialIcon from '../SocialIcon';
 
@@ -108,7 +101,7 @@ export default function ProjectCard({
   video,
   renderDescription,
 }: Project & { renderDescription?: () => any }) {
-  const { isDark } = React.useContext(CustomAppearanceContext);
+  const isDark = false;
 
   const themeColor = color || (isDark ? 'black' : 'white');
 

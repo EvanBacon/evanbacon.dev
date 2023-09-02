@@ -1,10 +1,8 @@
 import HeaderPhoto from '@/components/HeaderPhoto';
 import Colors from '@/constants/Colors';
-import CustomAppearanceContext from '@/context/CustomAppearanceContext';
-import { useActionSheet } from '@expo/react-native-action-sheet';
-import { Link, useNavigation, usePathname, useRouter } from 'expo-router';
+import { Link, usePathname } from 'expo-router';
 import React from 'react';
-import { Linking, Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
 const TABS = [
@@ -89,8 +87,6 @@ const CustomHeader = ({ siteTitle }) => {
               routeName={info.url}
             />
           ))}
-
-          {/* <AppearanceSwitch style={{ marginLeft: 12 }} /> */}
         </div>
       </nav>
     </header>

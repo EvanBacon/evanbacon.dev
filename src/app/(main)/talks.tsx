@@ -1,13 +1,11 @@
-import { Link } from 'expo-router';
-import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
-import { useREM } from 'react-native-web-hooks';
-
 import PageHeader from '@/components/PageHeader';
 import Colors from '@/constants/Colors';
-import CustomAppearanceContext from '@/context/CustomAppearanceContext';
 import { Talks } from '@/Data';
-import { Article, P, H2, H3, H1, H4, HR } from '@expo/html-elements';
+import { Article, H2, H4, HR, P } from '@expo/html-elements';
+import { Link } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { useREM } from 'react-native-web-hooks';
 
 const cardDark = '#222426';
 const cardLight = '#fff';
@@ -30,7 +28,7 @@ function TalkCardPresentationRow({
   title: string;
   resources?: any[];
 }) {
-  const { isDark } = React.useContext(CustomAppearanceContext);
+  const isDark = false;
 
   const link = React.useRef(null);
   const titleColor = isDark ? titleDark : titleLight;
@@ -100,7 +98,7 @@ function TalkCardPresentationRow({
 }
 
 function TalkCard({ title, image, description, presentedData = [] }) {
-  const { isDark } = React.useContext(CustomAppearanceContext);
+  const isDark = false;
   const backgroundColor = isDark ? cardDark : cardLight;
   const textColor = isDark ? 'white' : 'black';
   return (
@@ -166,7 +164,7 @@ export default function TalksScreen() {
 }
 
 function Divider() {
-  const { isDark } = React.useContext(CustomAppearanceContext);
+  const isDark = false;
   return <HR style={[{ opacity: isDark ? 0.4 : 0.8 }, styles.divider]} />;
 }
 

@@ -11,7 +11,6 @@ import Head from 'expo-router/head';
 import React from 'react';
 
 import Colors from '@/constants/Colors';
-import CustomAppearanceProvider from '@/context/CustomAppearanceProvider';
 import { Meta } from '@/Data';
 import Layout from '@/components/Layout';
 import { loadAsync } from '@/components/useFont';
@@ -120,13 +119,11 @@ export default function App() {
         ))}
       </Head>
       {/* <Background /> */}
-      <CustomAppearanceProvider>
-        <ActionSheetProvider>
-          <Layout>
-            <Slot />
-          </Layout>
-        </ActionSheetProvider>
-      </CustomAppearanceProvider>
+      <ActionSheetProvider>
+        <Layout>
+          <Slot />
+        </Layout>
+      </ActionSheetProvider>
     </>
   );
 }
