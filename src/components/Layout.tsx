@@ -27,5 +27,5 @@ export default function Layout({ children }: { children?: any }) {
 }
 
 const styles = StyleSheet.create({
-  mainLarge: { flex: 1, backgroundColor: '#10141A' },
+  mainLarge: { flex: 1 },
 });

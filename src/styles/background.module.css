@@ -10,8 +10,10 @@
   pointer-events: none;
 }
 
+/* backgroundColor: '#10141A' */
+
 .main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #10141A 100%);
   position: absolute;
   content: "";
   z-index: 2;
@@ -28,12 +30,12 @@
   width: 100%;
   height: 100%;
   top: 0;
-  opacity: 0.4;
-  filter: invert(1);
+  opacity: 0.3;
+  /* filter: invert(1); */
 }
 
 .content {
-  height: fit-content;
+  /* height: fit-content;
   z-index: 3;
   width: 100%;
   max-width: 640px;
@@ -54,7 +56,7 @@
   height: 100%;
   filter: blur(100px) saturate(150%);
   top: 80px;
-  opacity: 0.15;
+  opacity: 0.15; */
 }
 
 @media screen and (max-width: 640px) {

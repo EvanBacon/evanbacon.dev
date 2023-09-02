@@ -9,7 +9,7 @@ import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-
+import { Background } from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import Layout from '@/components/Layout';
@@ -118,7 +118,7 @@ export default function App() {
           <meta key={`meta-${index}`} {...value} />
         ))}
       </Head>
-      {/* <Background /> */}
+      <Background />
       <ActionSheetProvider>
         <Layout>
           <Slot />
