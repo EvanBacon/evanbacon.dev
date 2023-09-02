@@ -1,18 +1,11 @@
-import ExpoIcon from '../../assets/expo.svg';
-import GitHubIcon from '../../assets/github.svg';
-import InstagramIcon from '../../assets/instagram.svg';
-import XIcon from '../../assets/x.svg';
-import { Link } from 'expo-router';
+import Colors from '@/constants/Colors';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-import Colors from '@/constants/Colors';
-import Quotes from '@/constants/Quotes';
-import Quote from './Quote';
-import SocialIcon from './SocialIcon';
-import { Div, Footer, H5 } from '@expo/html-elements';
+import ExpoIcon from 'assets/expo.svg';
+import GitHubIcon from 'assets/github.svg';
+import XIcon from 'assets/x.svg';
 
 const ICON_SIZE = 24;
 

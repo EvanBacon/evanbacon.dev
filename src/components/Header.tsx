@@ -70,10 +70,6 @@ const CustomHeader = ({ siteTitle }) => {
           </div>
         </div>
 
-        {/* <div className="flex md:hidden flex flex-row items-center justify-evenly wrap">
-          <MenuButton onPress={onPressMenu} isActive={isActive} />
-        </div> */}
-
         <div className=" flex-row items-center justify-evenly">
           {TABS.map(info => (
             <HeaderLink
