@@ -118,6 +118,7 @@ export default function Html({ children }) {
           href="/pwa/apple-touch-icon/apple-touch-icon-180.png"
         ></link>
 
+        {/* TODO: Allow body scrolling */}
         <ScrollViewStyleReset />
       </head>
       <body>{children}</body>

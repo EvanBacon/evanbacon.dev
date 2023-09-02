@@ -1,26 +1,26 @@
 // Like <Slot /> from Expo Router but with stored tab history.
-import { CommonActions } from "@react-navigation/native";
-import { TabRouter } from "@react-navigation/routers";
-import { Link, Navigator } from "expo-router";
-import { Screen as RouterScreen } from "expo-router/src/views/Screen";
-import * as React from "react";
-import { StyleSheet, ViewStyle } from "react-native";
-import { Screen, ScreenContainer } from "react-native-screens";
+import { CommonActions } from '@react-navigation/native';
+import { TabRouter } from '@react-navigation/routers';
+import { Link, Navigator } from 'expo-router';
+import { Screen as RouterScreen } from 'expo-router/src/views/Screen';
+import * as React from 'react';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { Screen, ScreenContainer } from 'react-native-screens';
 
-import { useLinkBuilder } from "./useLinkBuilder";
+import { useLinkBuilder } from './useLinkBuilder';
 
 function useNavigatorContext() {
   const context = Navigator.useContext();
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== 'production') {
     if (
       !(
-        context.router.name === "TabRouter" ||
+        context.router.name === 'TabRouter' ||
         context.router instanceof TabRouter
       )
     ) {
       throw new Error(
-        "useTabbedSlot must be used inside a Navigator with a tab router: <Navigator route={TabRouter} />"
+        'useTabbedSlot must be used inside a Navigator with a tab router: <Navigator route={TabRouter} />'
       );
     }
   }
@@ -53,7 +53,10 @@ export default function TabbedSlot({
     <ScreenContainer
       enabled={detachInactiveScreens}
       hasTwoStates
-      style={styles.container}
+      style={[
+        { $$css: true, _: 'w-full' },
+        // styles.container
+      ]}
     >
       {routes.map((route, index) => {
         const descriptor = descriptors[route.key];
@@ -74,13 +77,16 @@ export default function TabbedSlot({
             activityState={isFocused ? 2 : 0}
             key={route.key}
             style={[
-              StyleSheet.absoluteFill,
-              { overflow: "hidden", zIndex: isFocused ? 0 : -1 },
+              // StyleSheet.absoluteFill,
+              {
+                // overflow: 'hidden',
+                zIndex: isFocused ? 0 : -1,
+              },
               style,
             ]}
             accessibilityElementsHidden={!isFocused}
             importantForAccessibility={
-              isFocused ? "auto" : "no-hide-descendants"
+              isFocused ? 'auto' : 'no-hide-descendants'
             }
             enabled={detachInactiveScreens}
             freezeOnBlur={descriptor.options.freezeOnBlur}
@@ -105,8 +111,8 @@ function useContextRoute(name: string) {
   if (!current) {
     console.warn(
       `Could not find route with name: ${name}. Options: ${state.routes
-        .map((r) => r.name)
-        .join(", ")}`
+        .map(r => r.name)
+        .join(', ')}`
     );
   }
 
@@ -127,7 +133,7 @@ export function TabLink({
   ...props
 }: { name: string } & Omit<
   React.ComponentProps<typeof Link>,
-  "href" | "onPress" | "onLongPress"
+  'href' | 'onPress' | 'onLongPress'
 >) {
   const buildLink = useLinkBuilder();
   const ctxRoute = useContextRoute(name);
@@ -138,9 +144,9 @@ export function TabLink({
 
   const { route, target, navigation } = ctxRoute;
 
-  const onPress = (e) => {
+  const onPress = e => {
     const event = navigation.emit({
-      type: "tabPress",
+      type: 'tabPress',
       target: route.key,
       canPreventDefault: true,
     });
@@ -156,7 +162,7 @@ export function TabLink({
 
   const onLongPress = () => {
     navigation.emit({
-      type: "tabLongPress",
+      type: 'tabLongPress',
       target: route.key,
     });
   };
@@ -179,6 +185,6 @@ TabbedNavigator.useContext = useNavigatorContext;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: "hidden",
+    overflowY: 'scroll',
   },
 });

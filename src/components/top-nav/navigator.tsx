@@ -57,41 +57,6 @@ function SideBar() {
   );
 }
 
-function TabBar() {
-  return (
-    <div className="flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch h-12 px-4">
-      {[
-        { name: 'index', id: 'index', icon: 'home' },
-        { name: 'blog', id: 'blog/index', icon: 'explore' },
-        { name: 'games', id: 'games', icon: 'explore' },
-        { name: '/more', id: 'more', icon: 'more' },
-      ].map((tab, i) => (
-        <TabBarItem
-          style={[
-            {
-              $$css: true,
-              __: 'group flex items-center focus:outline-none',
-            },
-          ]}
-          key={i}
-          name={tab.name}
-          id={tab.id}
-        >
-          {({ focused }) => (
-            <TabBarIcon
-              style={{ width: '2.5rem', height: '2.5rem' }}
-              className="flex-1 px-2 transition-transform hover:scale-110 active:scale-90 active:opacity-80"
-              color="white"
-              name={tab.icon}
-              focused={focused}
-            />
-          )}
-        </TabBarItem>
-      ))}
-    </div>
-  );
-}
-
 function useIsTabSelected(name: string): boolean {
   const { navigation } = TabbedNavigator.useContext();
 
@@ -227,17 +192,13 @@ export function ResponsiveNavigator() {
           <SideBar />
         </div>
 
-        <div className="flex md:hidden">
-          <AppHeader />
-        </div>
+        <AppHeader />
 
         <div className="container mx-auto px-4 max-w-3xl md:px-0 flex flex-1">
           <TabbedNavigator.Slot />
         </div>
 
-        <div className="flex md:hidden">
-          <TabBar />
-        </div>
+        <TabBar />
       </div>
     </TabbedNavigator>
   );
@@ -245,12 +206,51 @@ export function ResponsiveNavigator() {
 
 function AppHeader() {
   return (
-    <>
+    <div className="flex md:hidden">
       <div className="h-16" />
       <div className="flex flex-1 z-10 bg-black fixed top-0 left-0 right-0 px-4 flex-row items-center justify-between border-b border-b-[#30363d] h-16">
         <Icon name="logo" fill={Colors.dark} />
       </div>
-    </>
+    </div>
+  );
+}
+
+function TabBar() {
+  return (
+    <div className="flex md:hidden">
+      <div className="h-12" />
+
+      <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch h-12 px-4">
+        {[
+          { name: 'index', id: 'index', icon: 'home' },
+          { name: 'blog', id: 'blog/index', icon: 'explore' },
+          { name: 'games', id: 'games', icon: 'explore' },
+          { name: '/more', id: 'more', icon: 'more' },
+        ].map((tab, i) => (
+          <TabBarItem
+            style={[
+              {
+                $$css: true,
+                __: 'group flex items-center focus:outline-none',
+              },
+            ]}
+            key={i}
+            name={tab.name}
+            id={tab.id}
+          >
+            {({ focused }) => (
+              <TabBarIcon
+                style={{ width: '2.5rem', height: '2.5rem' }}
+                className="flex-1 px-2 transition-transform hover:scale-110 active:scale-90 active:opacity-80"
+                color="white"
+                name={tab.icon}
+                focused={focused}
+              />
+            )}
+          </TabBarItem>
+        ))}
+      </div>
+    </div>
   );
 }
 
