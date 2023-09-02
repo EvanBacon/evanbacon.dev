@@ -521,6 +521,19 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
 function Img({ src, style }) {
   const source = typeof src === 'string' ? { uri: src } : src;
   const srcUrl = resolveAssetUri(source);
+
+  if (srcUrl.match(/\.mp4$/)) {
+    return (
+      <video
+        src={srcUrl}
+        style={style}
+        controls
+        autoPlay
+        playsInline
+        className="h-auto max-w-full overflow-clip object-contain"
+      />
+    );
+  }
   return (
     <img
       src={srcUrl}
