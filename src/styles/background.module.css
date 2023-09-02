@@ -1,66 +1,19 @@
 /* From: https://github.com/steven-tey/dub/blob/0279fd5b9e89cccd95d4e3b66bb4cbe277a05ac9/app/ui/home/background/background.module.css */
-.main {
-  width: 100vw;
-  min-height: 100vh;
-  position: fixed;
-  z-index: -1;
-  display: flex;
-  justify-content: center;
-  padding: 120px 24px 160px 24px;
-  pointer-events: none;
-}
 
-/* backgroundColor: '#10141A' */
-
-.main:before {
+.radialGradient {
   background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #10141A 100%);
-  position: absolute;
-  content: "";
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  top: 0;
 }
-
-.main:after {
-  content: "";
-  background-image: url("/grid.svg");
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  opacity: 0.3;
-  /* filter: invert(1); */
-}
-
-.content {
-  /* height: fit-content;
-  z-index: 3;
-  width: 100%;
-  max-width: 640px;
+.complexGradient {
   background-image: radial-gradient(
-      at 27% 37%,
-      hsla(215, 98%, 61%, 1) 0px,
-      transparent 0%
-    ),
-    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
-    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  filter: blur(100px) saturate(150%);
-  top: 80px;
-  opacity: 0.15; */
-}
-
-@media screen and (max-width: 640px) {
-  .content {
-    display: none;
-  }
+    at 27% 37%,
+    hsla(215, 98%, 61%, 1) 0px,
+    transparent 0%
+  ),
+  radial-gradient(at 97% 21%, #8CC7D9 0px, transparent 50%),
+  radial-gradient(at 52% 99%, rgb(58, 129, 253) 0px, transparent 50%),
+  radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+  radial-gradient(at 97% 96%, rgb(188, 164, 122) 0px, transparent 50%),
+  radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+  radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  filter: blur(120px) saturate(150%);
 }
