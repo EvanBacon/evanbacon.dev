@@ -1,4 +1,3 @@
-import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import {
   Inter_300Light,
   Inter_400Regular,
@@ -14,6 +13,7 @@ import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import Layout from '@/components/Layout';
 import { loadAsync } from '@/components/useFont';
+import { ResponsiveNavigator } from '@/components/top-nav/navigator';
 
 const site = {
   title: 'Evan Bacon',
@@ -119,11 +119,11 @@ export default function App() {
         ))}
       </Head>
       <Background />
-      <ActionSheetProvider>
-        <Layout>
-          <Slot />
-        </Layout>
-      </ActionSheetProvider>
+
+      {/* <Layout> */}
+      <Slot />
+
+      {/* </Layout> */}
     </>
   );
 }
