@@ -66,7 +66,17 @@ function TabBar() {
         { name: 'games', id: 'games', icon: 'explore' },
         { name: '/more', id: 'more', icon: 'more' },
       ].map((tab, i) => (
-        <TabBarItem key={i} name={tab.name} id={tab.id}>
+        <TabBarItem
+          style={[
+            {
+              $$css: true,
+              __: 'group flex items-center focus:outline-none',
+            },
+          ]}
+          key={i}
+          name={tab.name}
+          id={tab.id}
+        >
           {({ focused }) => (
             <TabBarIcon
               style={{ width: '2.5rem', height: '2.5rem' }}
