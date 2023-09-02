@@ -16,58 +16,54 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function HeaderLogo() {
-  const isLargeHorizontal = useWidth(1264);
+  const isLargeHorizontal = useWidth(1281);
   const isSmallHorizontal = useWidth(768);
 
   return (
     <Link
-      style={[
-        { paddingVertical: 20, alignItems: 'flex-start' },
-        Platform.select({
-          default: isSmallHorizontal &&
-            !isLargeHorizontal && {
-              paddingTop: 0,
-              minHeight: 96,
-              marginTop: 12,
-              paddingBottom: 23,
-              height: 96,
-            },
-          web: cssStyles.headerLink,
-        }),
-        cssStyles.tabLink,
-      ]}
-      href="/"
       asChild
+      // outline: none;
+      // background-color: rgba(0, 0, 0, 0.1);
+      // border-radius: 999px;
+
+      // padding-top: 0px;
+      // min-height: 96px;
+      // height: 96px;
+      // margin-top: 12px;
+      // padding-bottom: 23px;
+
+      // style={[
+      //   { paddingVertical: 20, alignItems: 'flex-start' },
+      //   Platform.select({
+      //     default: isSmallHorizontal &&
+      //       !isLargeHorizontal && {
+      //         paddingTop: 0,
+      //         marginTop: 12,
+      //         paddingBottom: 23,
+      //         height: 96,
+      //       },
+      //     web: cssStyles.headerLink,
+      //   }),
+      //   // cssStyles.tabLink,
+      // ]}
+      href="/"
     >
-      <Pressable>
-        {({ hovered }) => (
-          <Text
-            style={[
-              jsStyles.headerLogo,
-              {
-                backgroundColor: hovered ? 'rgba(0, 0, 0, 0.1)' : 'transparent',
-              },
-            ]}
-          >
-            <Icon
-              style={Platform.select({
-                default: !isLargeHorizontal && { display: 'none' },
-                web: cssStyles.wideVisible,
-              })}
-              name="logo"
-              fill={Colors.dark}
-            />
-            <Icon
-              style={Platform.select({
-                default: isLargeHorizontal && { display: 'none' },
-                web: cssStyles.wideHidden,
-              })}
-              name="logo-small"
-              fill={Colors.dark}
-            />
-          </Text>
-        )}
-      </Pressable>
+      <Text
+        style={{
+          $$css: true,
+          _:
+            'py-5 items-start xl:pt-0 min-h-[96px] h-[96px] mt-3 pb-6 focus:outline-none focus:rounded-2xl focus:bg-white/10',
+        }}
+      >
+        <div className="flex items-center p-3 my-1 rounded transition-colors hover:bg-white/10">
+          <Icon className="hidden xl:block" name="logo" fill={Colors.dark} />
+          <Icon
+            className="block xl:hidden"
+            name="logo-small"
+            fill={Colors.dark}
+          />
+        </div>
+      </Text>
     </Link>
   );
 }
@@ -87,37 +83,37 @@ function SideBar() {
   const isLarge = useWidth(1265);
 
   return (
-    <View
-      style={[
-        jsStyles.sideBar,
+    <div
+      className="w-20 min-w-20 xl:min-w-[244px]"
+      // style={[
+      //   // jsStyles.sideBar,
 
-        ...Platform.select({
-          default: [
-            isLarge && {
-              minWidth: NAV_MEDIUM_WIDTH,
-            },
-          ],
+      //   ...Platform.select({
+      //     default: [
+      //       isLarge && {
+      //         minWidth: NAV_MEDIUM_WIDTH,
+      //       },
+      //     ],
 
-          web: [cssStyles.largeVisible, cssStyles.sideBar],
-        }),
-      ]}
+      //     web: [cssStyles.largeVisible, cssStyles.sideBar],
+      //   }),
+      // ]}
     >
-      <View
-        style={[
-          jsStyles.sidebarInner,
-          ...Platform.select({
-            default: [
-              isLarge &&
-                ({
-                  width: NAV_MEDIUM_WIDTH,
-                  minWidth: NAV_MEDIUM_WIDTH,
-                  alignItems: 'flex-start',
-                } as const),
-            ],
-            web: [cssStyles.sideBarInner],
-          }),
-        ]}
-      >
+      {/* position: Platform.select({ web: 'fixed', default: 'absolute' }),
+    height: '100%',
+    maxHeight: '100%',
+    alignItems: 'stretch',
+    borderRightWidth: 1,
+    borderRightColor: Colors.lightGray,
+    minWidth: 72,
+    width: 72,
+    paddingTop: 8,
+    paddingHorizontal: 12,
+    paddingBottom: 20, */}
+      {/* min-width: $ui-sidebar;
+    width: $ui-sidebar;
+    align-items: flex-start; */}
+      <div className="fixed h-full max-h-full items-stretch flex border-r border-r-[#30363d] min-w-20 w-20 pt-2 px-3 pb-5 xl:min-w-[244px] xl:w-[244px] xl:items-start">
         <View
           zIndex={3}
           style={[
@@ -150,8 +146,8 @@ function SideBar() {
             </SideBarTabItem>
           </View>
         </View>
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }
 
