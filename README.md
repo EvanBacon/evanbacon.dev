@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to My Portfolio 👋</h1>
+<h1 align="center">Welcome to my portfolio 👋</h1>
 
 <img alt="Product: demo" src="assets/shoes.jpeg" />
 
