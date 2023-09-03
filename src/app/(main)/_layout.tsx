@@ -4,11 +4,15 @@ import { makeIcon, TabBarIcon } from '@/components/top-nav/tab-bar-icon';
 import { TabbedNavigator } from '@/components/top-nav/tab-slot';
 import classNames from 'classnames';
 import { Link } from 'expo-router';
-import React from 'react';
+import React, { useRef } from 'react';
 
 function HeaderLogo() {
   return (
-    <Link style={{ $$css: true, _: 'group focus:outline-none' }} href="/">
+    <TabbedNavigator.Link
+      style={{ $$css: true, _: 'group focus:outline-none' }}
+      name="index"
+      href="/"
+    >
       <div className="flex pt-5 pb-8 items-start h-[96px] max-h-[96px]">
         <div className="flex items-center p-3 my-1 rounded transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none">
           <Icon
@@ -27,7 +31,7 @@ function HeaderLogo() {
           />
         </div>
       </div>
-    </Link>
+    </TabbedNavigator.Link>
   );
 }
 
@@ -42,11 +46,7 @@ function SideBar() {
             <SideBarTabItem name="index" icon={makeIcon('home')} popup="Home">
               Home
             </SideBarTabItem>
-            <SideBarTabItem
-              name="blog/index"
-              icon={makeIcon('blog')}
-              popup="Blog"
-            >
+            <SideBarTabItem name="blog" icon={makeIcon('blog')} popup="Blog">
               Blog
             </SideBarTabItem>
             <SideBarTabItem name="games" icon={makeIcon('games')} popup="Games">
@@ -230,7 +230,7 @@ function TabBar() {
       <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch h-12 px-4">
         {[
           { name: 'index', id: 'index', icon: 'home' },
-          { name: 'blog', id: 'blog/index', icon: 'blog' },
+          { name: 'blog', id: 'blog', icon: 'blog' },
           { name: 'games', id: 'games', icon: 'games' },
           // { name: 'https://x.com/baconbrix', id: 'twitter', icon: 'twitter' },
         ].map((tab, i) => (

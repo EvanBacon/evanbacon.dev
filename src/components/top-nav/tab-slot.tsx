@@ -136,6 +136,7 @@ export function TabLink({
   'href' | 'onPress' | 'onLongPress'
 >) {
   const buildLink = useLinkBuilder();
+
   const ctxRoute = useContextRoute(name);
 
   if (!ctxRoute) {
@@ -153,6 +154,7 @@ export function TabLink({
 
     if (!event.defaultPrevented) {
       e.preventDefault();
+
       navigation.dispatch({
         ...CommonActions.navigate({ name: route.name, merge: true }),
         target,
@@ -181,10 +183,3 @@ TabbedNavigator.Slot = TabbedSlot;
 TabbedNavigator.Link = TabLink;
 TabbedNavigator.Screen = RouterScreen;
 TabbedNavigator.useContext = useNavigatorContext;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    overflowY: 'scroll',
-  },
-});
