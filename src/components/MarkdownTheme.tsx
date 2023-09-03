@@ -448,7 +448,6 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             if (possibleAuthor) {
               quote = quote.replace(/~(?:\s+)?(.*)/m, '').trim();
             }
-            console.log('possibleAuthor', nextChildren[0], possibleAuthor);
             return <Quote quote={quote} author={possibleAuthor} />;
           }
 
