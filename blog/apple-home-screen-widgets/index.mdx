@@ -1,0 +1,156 @@
+<Title date="2023-08-22T17:36:02.536Z">
+  Apple Home Screen Widgets with Expo CNG
+</Title>
+
+_Creating Home Screen Widgets with Expo's Native Generation (CNG)._
+
+## Introduction
+
+Apple introduced Home Screen Widgets in iOS 14. Widgets are a great way to surface information from your app to the user without them having to open the app. They can be used to display information such as the weather, your calendar, or even the latest news. Widgets can be added to the Home Screen or the Today View.
+
+Expo apps have two workflows:
+
+- **Standard:** you have an ios and android directory that you are responsible for building, maintaining, and upgrading.
+- **Continuous Native Generation (CNG):** the `ios` and `android` directories are continuously generated based on project configuration. This system is unique to Expo and makes it easy to upgrade, and reduces the overhead of your project as it scales.
+
+Building anything with the standard workflow is pretty straightforward, just look up how to do X topic for Y platform and follow whatever guide comes up.
+
+This post, however, will cover how I built and shipped a Home Screen widget for my app **Pillar Valley** all while using CNG!
+
+## Features
+
+For this widget, I wanted to display some syncronized data from my app. I decided to display the total number of pillars traversed in the game. I also wanted to support light and dark mode.
+
+## Problems
+
+The main difficulty with this project is that I didn't want to pull in React Native to display some basic elements in the widget, so I'd need to use SwiftUI directly. The problem here is that SwiftUI can realistically only be developed in Xcode, and I wanted to use CNG.
+
+One possible solution to this problem was to write a Config Plugin which generated a native iOS target, and linked all the Swift code outside of the `ios` directory. This would enable me to open and develop the widget in Xcode, while saving any changes for this particular target outside of the iOS directory.
+
+The tricky part would be manipulating the pbxproj file to do nonstandard things. `pbxproj` is Apple's proprietary file format that they use for Xcode projects and never bothered to document. Luckily, I've spent a lot of time reverse engineering it and have a pretty good understanding of how it works.
+
+## Config Plugin
+
+...
+
+## Developing a widget with SwiftUI
+
+I don't really care to learn much about SwiftUI, I get the gist, it's React but without any attribution to Meta.
+
+To build the plugin, I asked ChatGPT what I wanted, and it gave it to me after about three tries.
+
+## Codesigning
+
+One of the best parts of life as an Expo developer is using EAS Build because it automatically handles codesigning for you. However, if you introduce additional targets, you need to inform EAS Build about them.
+
+## Sharing data
+
+Widgets are effectively standalone apps that are bundled with your main app. This means that they don't have access to any of your app's sandboxed data. Apple provides a mechanism for sharing data between your app and your widget called App Groups. App Groups are a way to share data between apps that are part of the same App Group. You can read more about App Groups [here](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups).
+
+### Setting data
+
+To set data and update the widget, I built a local Expo module which would write a value to NSUserDefaults and then trigger a widget update. The widget would then read the value from NSUserDefaults and display it.
+
+## Dark mode
+
+To support dark mode, Apple recommends you use `colorset` files to represent dynamic colors in your app.
+
+Where a web developer using Tailwind might write: `bg-black dark:bg-white`, an Apple developer would pop open Xcode and create a new colorset file folder, then step through a GUI to pick the exact red, green, and blue values for each color. The output looks something like this:
+
+```json Assets.xcassets/gradient1.colorset/Contents.json
+{
+  "colors": [
+    {
+      "color": {
+        "color-space": "srgb",
+        "components": {
+          "red": 0.8941176470588236,
+          "green": 0.592156862745098,
+          "blue": 0.36470588235294116,
+          "alpha": 1
+        }
+      },
+      "idiom": "universal"
+    },
+    {
+      "appearances": [
+        {
+          "appearance": "luminosity",
+          "value": "dark"
+        }
+      ],
+      "color": {
+        "color-space": "srgb",
+        "components": {
+          "red": 0.24313725490196078,
+          "green": 0.4470588235294118,
+          "blue": 0.6274509803921569,
+          "alpha": 1
+        }
+      },
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "version": 1,
+    "author": "expo"
+  }
+}
+```
+
+As you can imagine, this is a miserable experience, so I built CSS color conversion into my Config Plugin. Now I can just write:
+
+```js expo-target.config.js
+module.exports = {
+  colors: {
+    gradient1: {
+      light: '#E4975D',
+      dark: '#3E72A0',
+    },
+  },
+};
+```
+
+And simply run the following to generate my colors:
+
+```term
+npx expo prebuild -p ios --no-install
+```
+
+The resulting color could be used with `Color('gradient1')` in SwiftUI. This is a huge improvement over the default Apple workflow, I could import and share constants from JS, then use them in my SwiftUI code.
+
+## Building and deploying
+
+After I had everything wired up, all I needed to do was build and submit with EAS:
+
+```term
+eas build -p ios --auto-submit
+```
+
+All of the codesigning, provisioning, and submission was handled for me. I just submitted for review and waited for Apple to approve it, this took about 30 hours.
+
+**Pro tip:** If your app is _not_ using some non-standard encryption (e.g. not a crypto wallet), then you can set the following in your Expo config and submissions will go right to Test Flight without having to visit the App Store Connect website:
+
+```json app.json
+{
+  "ios": {
+    "infoPlist": {
+      "ITSAppUsesNonExemptEncryption": false
+    }
+  }
+}
+```
+
+## Conclusion
+
+I love continuous native generation, the amount of convenience scripting and automation it enables is incredible. I'm very cautious about introducing functionality that will make it harder to upgrade my app, but thanks to Config Plugins, I was able to build a widget without sacrificing the benefits of CNG.
+
+`@bacons/xcode` is really exciting. Excited to find time to further build this package out and make it easier to manipulate pbxproj files.
+
+EAS Build having simple hooks into configuring codesigning is fantastic, I love that the same JavaScript function that can whitelabel and generate my native code, can also ensure the E2E build process works.
+
+Local Expo Modules are a godsend, being able to just drop-in a single native function for my specific purpose is a dream come true.
+
+All together, the various different aspects of Expo came together to make this project a breeze. Native development certainly isn't easy, but Expo makes it a lot better.
+
+[prebuild]: https://docs.expo.dev/workflow/prebuild/
