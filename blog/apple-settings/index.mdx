@@ -43,8 +43,6 @@ The goal was to add the following pages to the system settings:
 
 ## Implementation
 
-> Why do in an hour what you could do in a day. ~Untitled Software Developer.
-
 Adding the settings is a process that involves using some obscure plists in a particular order, then linking those plists with strings files for localization. Some values are localizable, others aren't. Finally, building the app a bunch of times to validate the "types".
 
 There are three core concepts involved:
@@ -60,6 +58,9 @@ Not to mention, these are all unique to the various other aspects of my app. Ult
 So the challenge here is to reduce the cognitive overhead such that the amount of value users get (near none) is roughly equal to the amount of time it takes for a developer to implement. Additionally, I want a page for third-party licenses that would need to be manually updated/unified every time I update, add, or remove a library––sounds like a nightmare.
 
 This is where Expo Config Plugins really shine.
+
+> [!QUOTE]
+> Why do in one hour what you could do in twelve. ~My subconscious
 
 ## Enter Expo
 
