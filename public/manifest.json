@@ -1,6 +1,6 @@
 {
   "name": "Evan Bacon",
-  "description": "Portfolio of Evan Bacon; an American developer, artist, and child prodigy who creates sculptures from LEGO toy bricks.",
+  "description": "Portfolio of Evan Bacon; Artist, and Software Developer.",
   "short_name": "Evan Bacon",
   "lang": "en",
   "orientation": "portrait",
@@ -22,7 +22,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#4630EB",
-  "background_color": "#4630EB",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "display": "standalone"
 }
