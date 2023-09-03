@@ -1,7 +1,10 @@
 import CustomFooter from '@/components/Footer';
 import { Icon } from '@/components/top-nav/icon';
 import { makeIcon, TabBarIcon } from '@/components/top-nav/tab-bar-icon';
-import { TabbedNavigator } from '@/components/top-nav/tab-slot';
+import {
+  TabbedNavigator,
+  useTabScrollToTop,
+} from '@/components/top-nav/tab-slot';
 import classNames from 'classnames';
 import { Link } from 'expo-router';
 import React, { useRef } from 'react';
@@ -9,6 +12,7 @@ import React, { useRef } from 'react';
 function HeaderLogo() {
   return (
     <TabbedNavigator.Link
+      scrollToTop
       style={{ $$css: true, _: 'group focus:outline-none' }}
       name="index"
       href="/"
@@ -43,13 +47,23 @@ function SideBar() {
           <HeaderLogo />
 
           <div className="gap-3 flex flex-1 flex-col">
-            <SideBarTabItem name="index" icon={makeIcon('home')} popup="Home">
+            <SideBarTabItem
+              name="index"
+              icon={makeIcon('home')}
+              popup="Home"
+              scrollToTop
+            >
               Home
             </SideBarTabItem>
             <SideBarTabItem name="blog" icon={makeIcon('blog')} popup="Blog">
               Blog
             </SideBarTabItem>
-            <SideBarTabItem name="games" icon={makeIcon('games')} popup="Games">
+            <SideBarTabItem
+              name="games"
+              icon={makeIcon('games')}
+              popup="Games"
+              scrollToTop
+            >
               Games
             </SideBarTabItem>
           </div>
@@ -83,12 +97,14 @@ function TabBarItem({
   id,
   popup = name.replace(/\/index$/, ''),
   className,
+  scrollToTop,
 }: {
   children?: any;
   name: string;
   id: string;
   popup?: string;
   className?: string;
+  scrollToTop?: boolean;
 }) {
   const focused = useIsTabSelected(id);
 
@@ -105,7 +121,11 @@ function TabBarItem({
   }
 
   return (
-    <TabbedNavigator.Link name={id} style={{ $$css: true, _: className }}>
+    <TabbedNavigator.Link
+      scrollToTop={scrollToTop}
+      name={id}
+      style={{ $$css: true, _: className }}
+    >
       {children({ focused })}
     </TabbedNavigator.Link>
   );
@@ -116,16 +136,19 @@ function SideBarTabItem({
   icon,
   name,
   popup,
+  scrollToTop,
 }: {
   children: string;
   icon: (props: { focused?: boolean; color: string }) => JSX.Element;
   name: string;
   popup?: string;
+  scrollToTop?: boolean;
 }) {
   return (
     <TabBarItem
       name={name}
       id={name}
+      scrollToTop={scrollToTop}
       accessibilityHasPopup="menu"
       className="group w-full py-1 focus:outline-none"
       popup={popup}
@@ -171,7 +194,7 @@ export default function ResponsiveNavigator() {
         <AppHeader />
 
         <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 ">
-          <TabbedNavigator.Slot />
+          <InnerSlot />
           <CustomFooter />
         </div>
 
@@ -179,6 +202,12 @@ export default function ResponsiveNavigator() {
       </div>
     </TabbedNavigator>
   );
+}
+
+function InnerSlot() {
+  useTabScrollToTop();
+
+  return <TabbedNavigator.Slot />;
 }
 
 function AppHeader() {
@@ -229,9 +258,9 @@ function TabBar() {
 
       <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch h-12 px-4">
         {[
-          { name: 'index', id: 'index', icon: 'home' },
+          { name: 'index', id: 'index', icon: 'home', scrollToTop: true },
           { name: 'blog', id: 'blog', icon: 'blog' },
-          { name: 'games', id: 'games', icon: 'games' },
+          { name: 'games', id: 'games', icon: 'games', scrollToTop: true },
           // { name: 'https://x.com/baconbrix', id: 'twitter', icon: 'twitter' },
         ].map((tab, i) => (
           <TabBarItem
@@ -239,6 +268,7 @@ function TabBar() {
             key={i}
             name={tab.name}
             id={tab.id}
+            scrollToTop={tab.scrollToTop}
           >
             {({ focused }) => (
               <TabBarIcon

@@ -4,10 +4,26 @@ import { TabRouter } from '@react-navigation/routers';
 import { Link, Navigator } from 'expo-router';
 import { Screen as RouterScreen } from 'expo-router/src/views/Screen';
 import * as React from 'react';
-import { StyleSheet, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { Screen, ScreenContainer } from 'react-native-screens';
 
 import { useLinkBuilder } from './useLinkBuilder';
+
+export function useTabScrollToTop() {
+  const { navigation, state } = Navigator.useContext();
+
+  React.useEffect(() => {
+    // @ts-expect-error: there may not be a tab navigator in parent
+    navigation?.addListener?.('tabPress', (e: any) => {
+      const isFocused = navigation.isFocused();
+
+      if (state.index === 0 && isFocused) {
+        // Scroll body to top
+        window.scrollTo(0, 0);
+      }
+    });
+  }, [navigation, state.index, state.key]);
+}
 
 function useNavigatorContext() {
   const context = Navigator.useContext();
@@ -53,10 +69,7 @@ export default function TabbedSlot({
     <ScreenContainer
       enabled={detachInactiveScreens}
       hasTwoStates
-      style={[
-        { $$css: true, _: 'w-full' },
-        // styles.container
-      ]}
+      style={{ $$css: true, _: 'w-full' }}
     >
       {routes.map((route, index) => {
         const descriptor = descriptors[route.key];
@@ -77,7 +90,6 @@ export default function TabbedSlot({
             activityState={isFocused ? 2 : 0}
             key={route.key}
             style={[
-              // StyleSheet.absoluteFill,
               {
                 // overflow: 'hidden',
                 zIndex: isFocused ? 0 : -1,
@@ -124,14 +136,16 @@ function useContextRoute(name: string) {
     route: current,
     target: state.key,
     navigation,
+    state,
     descriptor: descriptors[current.key],
   };
 }
 
 export function TabLink({
   name,
+  scrollToTop,
   ...props
-}: { name: string } & Omit<
+}: { name: string; scrollToTop?: boolean } & Omit<
   React.ComponentProps<typeof Link>,
   'href' | 'onPress' | 'onLongPress'
 >) {
@@ -154,6 +168,11 @@ export function TabLink({
 
     if (!event.defaultPrevented) {
       e.preventDefault();
+
+      if (scrollToTop && navigation.isFocused()) {
+        // Scroll body to top
+        window.scrollTo(0, 0);
+      }
 
       navigation.dispatch({
         ...CommonActions.navigate({ name: route.name, merge: true }),

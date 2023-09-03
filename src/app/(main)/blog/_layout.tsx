@@ -1,6 +1,11 @@
+import { useTabScrollToTop } from '@/components/top-nav/tab-slot';
+import { EventArg, StackActions } from '@react-navigation/core';
+import { Navigator, Slot } from 'expo-router';
 import React from 'react';
-import { Slot, Navigator, Stack } from 'expo-router';
-import { StackActions, EventArg } from '@react-navigation/core';
+
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
 
 export default function BlogLayout() {
   return (
@@ -11,6 +16,12 @@ export default function BlogLayout() {
 }
 
 function InnerSlot() {
+  useTabToTop();
+  useTabScrollToTop();
+  return <Slot />;
+}
+
+function useTabToTop() {
   const { navigation, state } = Navigator.useContext();
   React.useEffect(
     () =>
@@ -38,6 +49,4 @@ function InnerSlot() {
       }),
     [navigation, state.index, state.key]
   );
-
-  return <Slot />;
 }
