@@ -548,6 +548,7 @@ function Img({ src, style }) {
         style={style}
         controls
         autoPlay
+        loop
         playsInline
         className="h-auto max-w-full overflow-clip object-contain"
       />
