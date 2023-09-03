@@ -34,3 +34,54 @@ index 7fdae39..702f2e5 100644
    return "<!DOCTYPE html>" + output;
  }
  
+diff --git a/node_modules/expo-router/types/global.d.ts b/node_modules/expo-router/types/global.d.ts
+index ac91dd4..45ecd5b 100644
+--- a/node_modules/expo-router/types/global.d.ts
++++ b/node_modules/expo-router/types/global.d.ts
+@@ -3,27 +3,36 @@
+ // Extend the NodeJS namespace
+ declare namespace NodeJS {
+   interface ProcessEnv {
+-    readonly NODE_ENV: "development" | "production" | "test";
++    readonly NODE_ENV: 'development' | 'production' | 'test';
+   }
+ }
+ 
+-// Allow for css imports, but don't export anything
+-declare module "*.css";
+-declare module "*.sass";
+-declare module "*.scss";
+-
+ // Create types for CSS modules
+-declare module "*.module.css" {
++declare module '*.module.css' {
++  /** **Experimental:** Import styles that can be used with `react-native-web` components, using the `style` prop. */
++  export const unstable_styles: { readonly [key: string]: object };
++
+   const classes: { readonly [key: string]: string };
+   export default classes;
+ }
+ 
+-declare module "*.module.sass" {
++declare module '*.module.sass' {
++  /** **Experimental:** Import styles that can be used with `react-native-web` components, using the `style` prop. */
++  export const unstable_styles: { readonly [key: string]: object };
++
+   const classes: { readonly [key: string]: string };
+   export default classes;
+ }
+ 
+-declare module "*.module.scss" {
++declare module '*.module.scss' {
++  /** **Experimental:** Import styles that can be used with `react-native-web` components, using the `style` prop. */
++  export const unstable_styles: { readonly [key: string]: object };
++
+   const classes: { readonly [key: string]: string };
+   export default classes;
+ }
++
++// Allow for css imports, but don't export anything
++declare module '*.css';
++declare module '*.sass';
++declare module '*.scss';
+\ No newline at end of file

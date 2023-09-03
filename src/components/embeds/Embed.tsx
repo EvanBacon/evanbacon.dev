@@ -58,8 +58,6 @@ export function Embed({ url }: { url: string }) {
         paddingHorizontal: 12,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#e6e6e6',
-        borderWidth: 1,
       }}
     >
       <a target="_blank" href={url}>

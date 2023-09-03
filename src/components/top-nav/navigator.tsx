@@ -1,4 +1,3 @@
-import CustomFooter from '@/components/Footer';
 import { Icon } from '@/components/top-nav/icon';
 import { makeIcon, TabBarIcon } from '@/components/top-nav/tab-bar-icon';
 import { TabbedNavigator } from '@/components/top-nav/tab-slot';
@@ -160,9 +159,17 @@ function SideBarTabItem({
   );
 }
 
-export default function ResponsiveNavigator() {
+export function ResponsiveNavigator() {
   return (
-    <TabbedNavigator screenOptions={{}}>
+    <TabbedNavigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarActiveTintColor: 'white',
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}
+    >
       <div className="flex flex-1 flex-col md:flex-row">
         <div className="hidden md:flex">
           <SideBar />
@@ -170,9 +177,8 @@ export default function ResponsiveNavigator() {
 
         <AppHeader />
 
-        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 ">
+        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 md:pt-8">
           <TabbedNavigator.Slot />
-          <CustomFooter />
         </div>
 
         <TabBar />
@@ -184,12 +190,13 @@ export default function ResponsiveNavigator() {
 function AppHeader() {
   return (
     <div className="flex md:hidden">
-      <div className="h-14 flex flex-1 z-10 bg-[#10141a2e] backdrop-blur-lg fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d]">
+      <div className="h-16" />
+      <div className="flex flex-1 z-10 bg-black fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d] h-16">
         <Icon
           name="logo"
           width={undefined}
           height={undefined}
-          className="w-36"
+          className="w-40"
           fill={Colors.dark}
         />
 

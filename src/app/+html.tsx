@@ -46,19 +46,6 @@ export default function Html({ children }) {
           href="/apple-touch-icon.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32.png"
-        />
-        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000" />
 
         <link
@@ -118,6 +105,7 @@ export default function Html({ children }) {
           href="/pwa/apple-touch-icon/apple-touch-icon-180.png"
         ></link>
 
+        {/* TODO: Allow body scrolling */}
         <ScrollViewStyleReset />
       </head>
       <body>{children}</body>

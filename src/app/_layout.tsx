@@ -1,4 +1,3 @@
-import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import {
   Inter_300Light,
   Inter_400Regular,
@@ -9,12 +8,12 @@ import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-
+import { Background } from '@/components/background';
 import Colors from '@/constants/Colors';
-import CustomAppearanceProvider from '@/context/CustomAppearanceProvider';
 import { Meta } from '@/Data';
 import Layout from '@/components/Layout';
 import { loadAsync } from '@/components/useFont';
+import { ResponsiveNavigator } from '@/components/top-nav/navigator';
 
 const site = {
   title: 'Evan Bacon',
@@ -119,14 +118,12 @@ export default function App() {
           <meta key={`meta-${index}`} {...value} />
         ))}
       </Head>
-      {/* <Background /> */}
-      <CustomAppearanceProvider>
-        <ActionSheetProvider>
-          <Layout>
-            <Slot />
-          </Layout>
-        </ActionSheetProvider>
-      </CustomAppearanceProvider>
+      <Background />
+
+      {/* <Layout> */}
+      <Slot />
+
+      {/* </Layout> */}
     </>
   );
 }

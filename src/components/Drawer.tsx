@@ -1,3 +1,5 @@
+import Colors from '@/constants/Colors';
+import Routes from '@/constants/Routes';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import {
@@ -10,10 +12,6 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useREM } from 'react-native-web-hooks';
 
-import Colors from '@/constants/Colors';
-import Routes from '@/constants/Routes';
-import CustomAppearanceContext from '../context/CustomAppearanceContext';
-import AppearanceSwitch from './AppearanceSwitch';
 import HeaderPhoto from './HeaderPhoto';
 
 function DrawerItem({ title, url, style }) {
@@ -45,7 +43,7 @@ function Drawer() {
   //   props.navigation.dispatch(navigateAction);
   // };
 
-  const { isDark } = React.useContext(CustomAppearanceContext);
+  const isDark = false;
 
   const { top, left, right, bottom } = useSafeAreaInsets();
 
@@ -101,9 +99,7 @@ function Drawer() {
               borderTopWidth: StyleSheet.hairlineWidth,
             },
           ]}
-        >
-          <AppearanceSwitch />
-        </div>
+        ></div>
       </div>
     </View>
   );
