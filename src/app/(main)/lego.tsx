@@ -14,7 +14,7 @@ const Lego: LegoProject[] = [
   {
     title: 'Batman',
     description: 'DC Comics',
-    image: require('assets/lego/batman.jpg'),
+    image: require('assets/lego/batman.avif'),
     color: '#fde219',
     actions: [
       {
@@ -36,7 +36,7 @@ const Lego: LegoProject[] = [
   {
     title: 'Thor',
     description: 'Marvel',
-    image: require('assets/lego/thor.jpg'),
+    image: require('assets/lego/thor.avif'),
     color: '#A68950',
     actions: [
       {
@@ -49,7 +49,7 @@ const Lego: LegoProject[] = [
   {
     title: 'Iron Man',
     description: 'Marvel',
-    image: require('assets/lego/ironman.jpg'),
+    image: require('assets/lego/ironman.avif'),
     color: '#782E2A',
     actions: [
       {
@@ -71,7 +71,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/GiQrFAoLhVDfmumS6',
       },
     ],
-    image: require('assets/lego/superman.jpg'),
+    image: require('assets/lego/superman.avif'),
     year: '2012',
   },
   {
@@ -84,7 +84,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/7zfDKW9Pf9ssiLv56',
       },
     ],
-    image: require('assets/lego/captainkirk.jpg'),
+    image: require('assets/lego/captainkirk.avif'),
     year: '2013',
   },
   {
@@ -97,7 +97,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/ukFadzsRyMgA9p338',
       },
     ],
-    image: require('assets/lego/darthvader.jpg'),
+    image: require('assets/lego/darthvader.avif'),
     year: '2016',
   },
   {
@@ -110,7 +110,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/C3dGAKruSsh1xLEi7',
       },
     ],
-    image: require('assets/lego/sarge.jpg'),
+    image: require('assets/lego/sarge.avif'),
     year: '2016',
   },
   {
@@ -123,7 +123,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/PjsnkENMKfZjfSTj9',
       },
     ],
-    image: require('assets/lego/wonderwoman.jpg'),
+    image: require('assets/lego/wonderwoman.avif'),
     year: '2015',
   },
 
@@ -137,7 +137,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/ejuBH4RWnPTDUgdf6',
       },
     ],
-    image: require('assets/lego/captainamerica.jpg'),
+    image: require('assets/lego/captainamerica.avif'),
     year: '2016',
   },
   {
@@ -150,7 +150,7 @@ const Lego: LegoProject[] = [
         url: 'https://photos.app.goo.gl/CttdaRbsHKLcq1Tq9',
       },
     ],
-    image: require('assets/lego/minion.jpg'),
+    image: require('assets/lego/minion.avif'),
     year: '2013',
   },
 ];
