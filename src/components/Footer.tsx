@@ -3,9 +3,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-import ExpoIcon from 'assets/expo.svg';
-import GitHubIcon from 'assets/github.svg';
-import XIcon from 'assets/x.svg';
+import ExpoIcon from '@/svg/expo.svg';
+import GitHubIcon from '@/svg/github.svg';
+import XIcon from '@/svg/x.svg';
 
 const ICON_SIZE = 24;
 

@@ -46,7 +46,6 @@ export default function Html({ children }) {
           href="/apple-touch-icon.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000" />
 
         {/* Make the top status bar/safe-area space transparent on iOS PWAs */}
         <meta

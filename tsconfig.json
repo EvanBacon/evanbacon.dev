@@ -12,6 +12,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "mdx-env.d.ts",
+    "global.d.ts",
     "expo-env.d.ts"
   ]
 }

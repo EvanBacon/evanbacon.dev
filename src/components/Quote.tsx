@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { useREM } from 'react-native-web-hooks';
 
-import Laurel from '../../assets/laurel.svg';
+import Laurel from '@/svg/laurel.svg';
 
 const color = 'white';
 
