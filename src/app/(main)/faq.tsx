@@ -1,6 +1,9 @@
-import PageHeader from '@/components/PageHeader';
 import Head from 'expo-router/head';
 import React from 'react';
+
+import About from '@/components/about.mdx';
+import { MarkdownTheme } from '@/components/MarkdownTheme';
+import PageHeader from '@/components/PageHeader';
 
 const QA = [
   {
@@ -30,6 +33,10 @@ const QA = [
   {
     q: 'Does Evan Bacon still make Lego art?',
     a: `Evan Bacon unofficially retired from Lego art in 2015 to pursue software development full-time.`,
+  },
+  {
+    q: 'Where is Evan Bacon from?',
+    a: `Born in Ohio, Evan Bacon grew up in Austin, Texas.`,
   },
   {
     q: 'Why does this page exist?',
@@ -69,6 +76,10 @@ export default function FAQ() {
             <LineItem key={String(i)} question={q} answer={a} />
           ))}
         </ul>
+        <br />
+        <MarkdownTheme>
+          <About />
+        </MarkdownTheme>
       </div>
     </>
   );

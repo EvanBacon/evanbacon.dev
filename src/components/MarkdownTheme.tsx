@@ -1,12 +1,12 @@
 import { MDXComponents, MDXStyles } from '@bacons/mdx';
 import React from 'react';
-import { Image, Platform, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import {
   TerminalSquareIcon,
   FileCode01Icon,
   LayoutAlt01Icon,
 } from '@expo/styleguide-icons';
-
+import ExpoRouterSvg from '@/svg/expo-router.svg';
 import { loadAsync, useFont } from './useFont';
 import {
   Inter_300Light,
@@ -22,6 +22,7 @@ import { Prism, Highlight, themes } from 'prism-react-renderer';
 import cn from 'classnames';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 import Quote from './Quote';
+import { Link } from 'expo-router';
 
 (typeof global !== 'undefined' ? global : window).Prism = Prism;
 
@@ -295,6 +296,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         color: '#f2f5f7',
       }}
       h2={{
+        display: 'block',
         fontFamily: useFont('Inter_900Black'),
         marginTop: '0.25em',
         // marginTop: '1em',
@@ -365,12 +367,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         minHeight: 180,
         maxHeight: 480,
       }}
-      a={{
-        fontSize: 'unset',
-        fontFamily: useFont('Inter_400Regular'),
-        textDecorationLine: 'underline',
-        color: '#f2f5f7',
-      }}
+      a={styles.a}
       li={{
         fontFamily: useFont('Inter_400Regular'),
         fontSize: 16,
@@ -420,9 +417,24 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         br={() => <br />}
         strong={({ style, children }) => {
           const localStyles = { fontWeight: 'bold' };
+          const brand = getAnchorBrand(children);
           // Special branding for bold text containing "Pillar Valley".
           if (children.toString().match(/pillar valley/i)) {
             localStyles.color = '#F09458';
+          }
+          if (brand) {
+            localStyles.color = '#fff';
+            const Logo = BRAND_TO_LOGO[brand];
+            return (
+              <div className="p-1 inline bg-[#10141A] border rounded border-[#232731]">
+                <Logo className="inline w-5 h-5 mt-[-3px]" fill="white" />{' '}
+                <Text children={children} style={[style, localStyles]} />
+              </div>
+              // <div className="px-1 inline-flex items-center gap-1 min-w-5 bg-[#10141A] border rounded border-[#232731]">
+              //   <ExpoRouterSvg className="inline w-5 h-5" fill="white" />
+              //   <Text children={children} style={[style, localStyles]} />
+              // </div>
+            );
           }
           return <Text children={children} style={[style, localStyles]} />;
         }}
@@ -453,29 +465,25 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
 
           return (
             <BlockQuote {...props} style={[style]}>
-              {/* <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                transform: 'translateX(-50%) translateY(-50%)',
-                padding: 4,
-                borderRadius: 9999,
-                backgroundColor: '#10141A',
-              }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="#f2f5f7"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M21.6664 6.67319C19.8396 5.02559 17.4782 4.27661 15.0128 4.55796L15.0105 4.55823C11.0775 5.02532 7.941 8.22887 7.54886 12.1752C7.24603 15.0458 8.36328 17.8451 10.5543 19.6622C11.1657 20.1981 11.4917 20.8925 11.4917 21.6194V24.7615C11.4917 26.2694 12.7106 27.5 14.21 27.5H17.7953C19.2947 27.5 20.5136 26.2694 20.5136 24.7615V21.4243C20.5867 20.812 20.9006 20.1742 21.3775 19.7615C23.362 18.0925 24.5 15.6658 24.5 13.0966C24.5 10.6362 23.4678 8.29515 21.6664 6.67319ZM15.2667 6.69546C17.1231 6.47978 18.8863 7.04097 20.2428 8.26908C21.585 9.48256 22.3622 11.2458 22.3622 13.0883C22.3622 15.0198 21.5039 16.8532 20.0035 18.1106L19.9995 18.114C19.2208 18.7807 18.6947 19.7261 18.4748 20.6883H17.0757V16.9431C18.398 16.491 19.3431 15.219 19.3431 13.7433C19.3431 11.8804 17.8473 10.3665 16.0027 10.3665C14.1571 10.3665 12.6623 11.8897 12.6623 13.7433C12.6623 15.2273 13.608 16.4925 14.9297 16.9433V20.6966H13.5515C13.3445 19.6675 12.7874 18.7398 11.966 18.0214L11.9526 18.0078L11.9324 17.9912C10.298 16.6501 9.45341 14.5623 9.68934 12.3963L9.68988 12.3908C9.97813 9.4406 12.3251 7.04115 15.2667 6.69546ZM14.8082 13.7516C14.8082 13.0766 15.3516 12.5354 16.0027 12.5354C16.6537 12.5354 17.1971 13.0766 17.1971 13.7516C17.1971 14.4266 16.6537 14.9677 16.0027 14.9677C15.3516 14.9677 14.8082 14.4266 14.8082 13.7516ZM13.6377 24.7615V22.8573H18.3676V24.7615C18.3676 25.0833 18.1075 25.3393 17.7953 25.3393H14.21C13.8978 25.3393 13.6377 25.0833 13.6377 24.7615Z" />
-              </svg>
-            </div> */}
               {children}
             </BlockQuote>
+          );
+        }}
+        a={({ href, children, style, className, ...props }) => {
+          const brand =
+            children?.props?.parentName === 'html.a' &&
+            getAnchorBrand(children.props.children);
+
+          return (
+            <Link
+              href={href}
+              hrefAttrs={{
+                target: href.startsWith('http') ? '_blank' : undefined,
+              }}
+              style={[style, !brand && styles.standardLink]}
+              className={className}
+              children={children}
+            />
           );
         }}
         img={Img}
@@ -560,3 +568,40 @@ function Img({ src, style }) {
     />
   );
 }
+
+const styles = StyleSheet.create({
+  a: {
+    fontSize: 'unset',
+    fontFamily: 'Inter_400Regular',
+    color: '#f2f5f7',
+  },
+  standardLink: {
+    textDecorationLine: 'underline',
+  },
+});
+
+function getAnchorBrand(text: string) {
+  if (text.toString().match(/^expo[-\s]?router$/i)) {
+    return 'expo-router';
+  }
+  if (text.toString().match(/^sirius[-\s]?xm$/i)) {
+    return 'sirusxm';
+  }
+  if (text.toString().match(/^lego$/i)) {
+    return 'lego';
+  }
+  if (text.toString().match(/^expo$/i)) {
+    return 'expo';
+  }
+  return null;
+}
+
+const BRAND_TO_LOGO = {
+  'expo-router': ExpoRouterSvg,
+  sirusxm: SiriusXM,
+  expo: ExpoSvg,
+  lego: LegoSvg,
+};
+import LegoSvg from '@/svg/lego.svg';
+import ExpoSvg from '@/svg/expo.svg';
+import SiriusXM from '@/svg/sirus-xm.svg';
