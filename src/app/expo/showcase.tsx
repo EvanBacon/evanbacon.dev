@@ -120,7 +120,7 @@ export default function Showcase() {
                   </H2>
                   {category !== 'top' && (
                     <Img
-                      src={'/categories/' + category + '.png'}
+                      src={'/categories/' + category + '.avif'}
                       className="pl-2 w-8"
                     />
                   )}
