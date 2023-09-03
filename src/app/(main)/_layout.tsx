@@ -188,7 +188,7 @@ function SideBarTabItem({
 export default function ResponsiveNavigator() {
   return (
     <TabbedNavigator screenOptions={{}}>
-      <div className="flex flex-1 flex-col md:flex-row pr-safe">
+      <div className="flex flex-1 flex-col md:flex-row pr-safe pt-safe">
         <div className="hidden md:flex">
           <SideBar />
         </div>
@@ -215,7 +215,7 @@ function InnerSlot() {
 function AppHeader() {
   return (
     <div className="flex md:hidden">
-      <div className="h-14 flex flex-1 z-10 bg-[#10141a2e] backdrop-blur-lg fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d]">
+      <div className="pt-safe min-h-14 flex flex-1 z-10 bg-[#10141a2e] backdrop-blur-lg fixed top-0 left-0 right-0 px-6 flex-row items-stretch justify-between border-b border-b-[#30363d]">
         <Icon
           name="logo"
           width={undefined}
