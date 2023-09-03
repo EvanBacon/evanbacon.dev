@@ -8,15 +8,13 @@ _Creating Home Screen Widgets with Expo's Native Generation (CNG)._
 
 ## Introduction
 
-Based on analysis of the top 10k apps in the iOS App Store, I found that 80.2% had at least one extension.
-
-The top three most common extensions were:
+Based on analysis of the top 10k apps in the iOS App Store, I found that 80.2% had at least one extension. Out of the 80% that have an extension, the _top three_ most common extensions were:
 
 1. **Notification Service:** 34.8%
-2. **Widgets:** 25.5% (stat combines Home Screen widgets and Today extensions).
-3. **Siri Intents:** 11%.
+2. **Widgets:** 25.5% (Home Screen & Today)
+3. **Siri Intents:** 11%
 
-So how do we build these extensions with Expo? Luckily, the team at [SweetGreen](https://www.sweetgreen.com) contributed a Config Plugin to OneSignal for configuring a Notification Service; [`onesignal-expo-plugin`](https://github.com/OneSignal/onesignal-expo-plugin).
+So how do we build these features with Expo? Luckily, the team at [SweetGreen](https://www.sweetgreen.com) contributed a Config Plugin to OneSignal for configuring a Notification Service; [`onesignal-expo-plugin`](https://github.com/OneSignal/onesignal-expo-plugin).
 
 Moving down the line, the next most common extension is the Home Screen Widget. 20.5% of the top 10k apps have a Home Screen Widget. If one in five apps have a Home Screen Widget, then it should probably be pretty obvious how to add one.
 
@@ -28,12 +26,12 @@ So how do we use these with Expo? Well first we have to understand what "with Ex
 
 ## Continuous Native Generation
 
-Expo apps are usually developed in one of two workflows:
+Expo apps are usually developed in one of two ways:
 
-- **Standard:** you have an `ios` and `android` directory that you are responsible for building, maintaining, and upgrading. This is the default and it comes with a lot of drawbacks. The main one being that it's hard to upgrade and maintain your project as it scales.
+- **Standard:** you have an `ios` and `android` directory that you are responsible for building, maintaining, and upgrading. This is the default workflow of Expo, it's the easiest to understand, but it does have some drawbacks. The main one being that it's hard to upgrade and maintain your project as it scales.
 - **Continuous Native Generation (CNG):** the `ios` and `android` directories are continuously generated based on project configuration. This system is unique to Expo and makes it easy to upgrade, and reduces the overhead of your project as it scales.
 
-Building anything with the standard workflow is pretty straightforward, just look up how to "do X topic for Y platform" and follow whatever guide comes up.
+Building anything with the standard workflow is pretty straightforward, just look up _"how to do X topic for Y platform"_ and follow whatever guide comes up.
 
 This post, however, will cover how I built and shipped an Apple Home Screen widget for my app **Pillar Valley** all while using CNG!
 
