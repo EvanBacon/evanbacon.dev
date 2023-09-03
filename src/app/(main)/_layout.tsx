@@ -41,40 +41,42 @@ function HeaderLogo() {
 
 function SideBar() {
   return (
-    <div className="w-20 xl:w-[244px]">
-      <div className="xl:w-[244px] fixed h-full items-stretch flex border-r bg-black border-r-[#30363d] min-w-20 pt-2 px-3 pb-5 xl:items-start">
-        <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
-          <HeaderLogo />
+    <div className="w-20 xl:w-[244px] mr-safe">
+      <div className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]">
+        <div className="items-stretch flex pl-safe xl:items-start">
+          <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
+            <HeaderLogo />
 
-          <div className="gap-3 flex flex-1 flex-col">
-            <SideBarTabItem
-              name="index"
-              icon={makeIcon('home')}
-              popup="Home"
-              scrollToTop
-            >
-              Home
-            </SideBarTabItem>
-            <SideBarTabItem name="blog" icon={makeIcon('blog')} popup="Blog">
-              Blog
-            </SideBarTabItem>
-            <SideBarTabItem
-              name="games"
-              icon={makeIcon('games')}
-              popup="Games"
-              scrollToTop
-            >
-              Games
-            </SideBarTabItem>
-          </div>
+            <div className="gap-3 flex flex-1 flex-col">
+              <SideBarTabItem
+                name="index"
+                icon={makeIcon('home')}
+                popup="Home"
+                scrollToTop
+              >
+                Home
+              </SideBarTabItem>
+              <SideBarTabItem name="blog" icon={makeIcon('blog')} popup="Blog">
+                Blog
+              </SideBarTabItem>
+              <SideBarTabItem
+                name="games"
+                icon={makeIcon('games')}
+                popup="Games"
+                scrollToTop
+              >
+                Games
+              </SideBarTabItem>
+            </div>
 
-          <div>
-            <SideBarTabItem
-              name="https://x.com/baconbrix"
-              icon={makeIcon('twitter')}
-            >
-              Follow
-            </SideBarTabItem>
+            <div>
+              <SideBarTabItem
+                name="https://x.com/baconbrix"
+                icon={makeIcon('twitter')}
+              >
+                Follow
+              </SideBarTabItem>
+            </div>
           </div>
         </div>
       </div>
@@ -186,14 +188,14 @@ function SideBarTabItem({
 export default function ResponsiveNavigator() {
   return (
     <TabbedNavigator screenOptions={{}}>
-      <div className="flex flex-1 flex-col md:flex-row">
+      <div className="flex flex-1 flex-col md:flex-row pr-safe">
         <div className="hidden md:flex">
           <SideBar />
         </div>
 
         <AppHeader />
 
-        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 ">
+        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4">
           <InnerSlot />
           <CustomFooter />
         </div>
@@ -254,9 +256,9 @@ function AppHeader() {
 function TabBar() {
   return (
     <div className="flex md:hidden">
-      <div className="h-12" />
+      <div className="h-12 pb-safe" />
 
-      <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch h-12 px-4">
+      <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch min-h-12 px-4 pb-safe">
         {[
           { name: 'index', id: 'index', icon: 'home', scrollToTop: true },
           { name: 'blog', id: 'blog', icon: 'blog' },

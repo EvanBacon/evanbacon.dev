@@ -24,5 +24,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-safe-area')],
 };
