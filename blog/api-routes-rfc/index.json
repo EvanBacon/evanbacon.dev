@@ -1,0 +1,18 @@
+{
+    "title": "RFC: API Routes in Expo Router",
+    "shortTitle": "API Routes Proposal",
+    "subtitle": "Adding first-class serverless functionality to Expo Router",
+    "author": "Evan Bacon",
+    "date": "2023-09-14T00:00:00.000Z",
+    "slug": "api-routes-rfc",
+    "tags": [
+      "react",
+      "react-native",
+      "api-routes",
+      "lambda",
+      "server-side",
+      "edge",
+      "cloud-functions"
+    ],
+    "featuredImage": "./images/header.jpg"
+  }
