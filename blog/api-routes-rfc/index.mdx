@@ -1,0 +1,187 @@
+![](./images/header.avif)
+
+<Title date="2023-09-13T00:16:51.286Z">RFC: API Routes in Expo Router</Title>
+
+This RFC proposes the introduction of API Routes (aka server functions) into the React Native ecosystem as part of [Expo Router](https://docs.expo.dev/routing/introduction/) v3 and the upcoming **Expo SDK 50**.
+
+The goal is to enable developers to write server-side logic directly in their React Native (iOS, Android, web) projects in a simple and developer-friendly manner. This feature aims to simplify server-side development — a required by most applications, foster better security practices, and improve the developer experience.
+
+## Motivation
+
+Building server-side logic can be a complicated part of developing mobile applications. Currently, React Native developers often have to switch between multiple codebases or use third-party services to handle server-side logic. By incorporating API Routes directly into the React Native project using Expo CLI and Expo Router, we provide a seamless way for developers to handle server-side logic, thus reducing context switching and making the process more straightforward. Additionally, we'll improve the native runtime to better support working _across_ environments. Ultimately, this builds towards a future where React Server Components can be properly supported in native apps: [Example video](https://x.com/Baconbrix/status/1629909713910480898?s=20).
+
+## Proposed Server-side Development Solution
+
+### API Routes Syntax
+
+API Routes can be created by adding a new file with a `+api.ts` suffix in the **app** directory. You can export any of the following functions `GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS` from a server route. The function will be executed when the corresponding HTTP method is matched. Unsupported methods will automatically return `405: Method not allowed`.
+
+For instance, a route that securely interacts with OpenAI can be created as follows:
+
+```ts app/generate+api.ts
+import { ExpoRequest, ExpoResponse } from 'expo-router/server';
+
+export async function POST(req: ExpoRequest): Promise<ExpoResponse> {
+  const { prompt } = await req.json();
+
+  const json = await fetch(
+    'https://api.openai.com/v1/engines/text-davinci-003/completions',
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        // `OPENAI_API_KEY` is pulled from the .env file when running in Expo CLI.
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ''}`,
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        prompt,
+        max_tokens: 100,
+      }),
+    }
+  ).then(res => res.json());
+
+  // Return as JSON
+  return ExpoResponse.json(json);
+}
+```
+
+Secrets can be loaded securely through `.env` files––which we already landed support for in Expo Router v2/SDK 49:
+
+```sh .env.development
+OPENAI_API_KEY=xxxxxx
+```
+
+### Routing and Request Handling
+
+The above API route (`app/generate+api.ts`) will be served at `http://localhost:8081/generate` with `npx expo` and can be used by making a **POST** request:
+
+```term
+curl -X POST -H "Content-Type: application/json" -d \'{"prompt":"Hello, my name is"}\' http://localhost:8081/generate
+```
+
+Expo Router polyfills the URL and `window.location` object on native to allow for universally requesting with a relative URL:
+
+```js
+// Expo prepends the host and port to the URL automatically in development.
+const json = await fetch('/generate').then(res => res.json());
+```
+
+You can also serve this from a public URL in development with the built-in [Tunneling support](https://docs.expo.dev/more/expo-cli/#tunneling) in Expo CLI:
+
+```term
+npx expo start --tunnel
+# Available to anyone with internet
+```
+
+### Middleware and Runtime Environment
+
+A new package, `@expo/server`, will be introduced to provide the necessary middleware and runtime environment to run server-side logic.
+
+### Features
+
+### Bundling
+
+Server code is bundled with Expo CLI and [Metro bundler](https://docs.expo.dev/guides/customizing-metro/), meaning they have access to all of the same language features as your client code.
+
+- [TypeScript:](https://docs.expo.dev/guides/typescript) types and [`tsconfig.json` paths](https://docs.expo.dev/guides/typescript/#path-aliases).
+- [**Environment variables:**](https://docs.expo.dev/guides/environment-variables) server routes have access to all environment variables, not just the ones prefixed with `EXPO_PUBLIC_`.
+- **Runtime built-ins:** If you run the server with Bun or Node.js, the globals will be available for import and usage in the API Routes.
+- **Error handling and source maps:** errors in your server are formatted and fixed the same as your app and website. Solve once, fix everywhere!
+
+The Babel config is used to transpile the API routes. Indication is passed to the Babel caller via the `isServer` boolean. This can be used to change the preset based on the environment.
+
+Each API route is bundled into a standalone file in the `dist/_expo` directory. This is akin to _ncc_, the tool we use to make Create Expo App [download in ~1 second](https://x.com/Baconbrix/status/1262050245934022658?s=20).
+
+### Request and Response Objects
+
+New request and response objects, [`ExpoRequest`][wcg-request] and [`ExpoResponse`][wcg-response], will be introduced. They will be based on the [WinterCG specification](https://wintercg.org/work) and include additional properties to make them compatible with Expo Router. These are inspired by Remix, SvelteKit, and Next.js for simplicity.
+
+The new Server API will be available through the export `expo-router/server` (potentially will be moved to `expo/server`).
+
+### Error Handling
+
+You can respond with server errors by using the `ExpoResponse` object.
+
+```ts app/blog/[post].ts
+
+import { ExpoRequest, ExpoResponse } from 'expo-router/server';
+
+export async function GET(request: ExpoRequest, { post }: Record<string, string>) {
+  if (!post) {
+    return new ExpoResponse('No post found', {
+      status: 404,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
+  }
+  // fetch data for `post`
+  return ExpoResponse.json({ ... });
+}
+```
+
+Making requests with an undefined method will automatically return `405: Method not allowed`.
+
+If an error is thrown during the request, it will automatically return `500: Internal server error`.
+
+### Polyfills
+
+Expo Router will add support for relative network requests on native, making it easier to work across web and native.
+
+Consider the following example:
+
+```js
+fetch('/generate');
+```
+
+This will work by default on web, but native isn't hosted on a server with the API Routes, so it's unclear what should come before `/generate`.
+
+In development, we can solve this by automatically by using the dev server location, but in production, we need to know the URL of the server.
+
+Users will be able to define the production target in the `app.json` with the Expo Router config plugin (pending full support):
+
+```json app.json
+{
+  "plugins": [
+    [
+      "expo-router",
+      {
+        "origin": "https://evanbacon.dev"
+      }
+    ]
+  ]
+}
+```
+
+In preparation for this feature, we've also built-in first-class support for [debugging network requests](https://docs.expo.dev/debugging/tools/) in Expo SDK 49 using **Chrome DevTools**.
+
+### Production
+
+Expo CLI will support a new `server` output mode, in addition to `single` (single page app) and `static` (build-time SSG). This can export the API routes for the app, and assume that the user will deploy them to a WinterCG-compliant server (i.e. using `@expo/server` middleware).
+
+Unlike the `static` mode, users will be able to support server-navigating to dynamic routes (e.g. `app/[post].tsx`) without `generateStaticParams`. We will also be able to do less work at build-time, leading to faster exports.
+
+The functions can be deployed to most web hosting providers, however we will need to build in adapters for each. The first PR will include support for Express and HTTP servers, with more to come.
+
+> In order for the API Routes to be available to the native app, you will need to deploy them to a server.
+
+## Future work
+
+API Routes will introduce a first-class story for using servers with Expo apps, this will enable us to build new features like server-side rendering, and eventually React Server Components. But perhaps most exciting, we'll finally be able to provide an end-to-end solution for authentication across platforms, making it as close to drop-in as possible.
+
+We can also add support for server-side redirects, and rewrites on web.
+
+## Conclusion
+
+> We plan to release an early beta of this feature with **Expo SDK 50**.
+
+Introducing API Routes in React Native using Expo CLI and Expo Router aims to simplify server-side logic development, thus improving the developer experience. It allows developers to focus more on the application logic rather than context switching between client and server codebases. With a simple and intuitive API, it is a promising step towards making full-stack development in React Native more accessible and efficient.
+
+You can see the first PR here: [Expo Router API Routes](https://github.com/expo/expo/pull/24429).
+
+### Feedback
+
+Your feedback is invaluable for making this feature robust and developer-friendly. Please submit your thoughts, suggestions, and concerns in the discussion section below.
+
+[wcg-request]: https://fetch.spec.whatwg.org/#request
+[wcg-response]: https://fetch.spec.whatwg.org/#response
