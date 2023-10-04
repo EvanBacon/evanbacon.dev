@@ -24,6 +24,24 @@ export type CategoryItem = {
 const altSafe = (name: string) => name.replace('–', '-').replace('’', "'");
 
 export function getAppStoreData(): Record<string, AppItem[]> {
+  // const mapped = data.reduce((acc, app) => {
+  //   if (!acc[app.category]) {
+  //     acc[app.category] = [];
+  //   }
+  //   acc[app.category].push(app);
+  //   return acc;
+  // }, {}) as Record<string, AppItem[]>;
+
+  // return Object.fromEntries(
+  //   Object.entries(mapped).map(([key, value]) => [
+  //     key,
+  //     uniqeBy(value, 'bundleId').map(value => ({
+  //       ...value,
+  //       name: altSafe(value.name),
+  //     })),
+  //   ])
+  // );
+
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [
       key,
@@ -33,6 +51,10 @@ export function getAppStoreData(): Record<string, AppItem[]> {
       })),
     ])
   );
+}
+
+function uniqeBy<T>(arr: T[], key: keyof T) {
+  return arr.filter((v, i, a) => a.findIndex(t => t[key] === v[key]) === i);
 }
 
 export function getFrameworks(app: Partial<AppItem>) {
