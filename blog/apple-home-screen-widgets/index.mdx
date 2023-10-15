@@ -39,21 +39,29 @@ This post, however, will cover how I built and shipped an Apple Home Screen widg
 
 It's best to design these things with a goal in mind. I wanted to display some syncronized data from my app, in this case, the total number of points that have ever been scored. To iterate a little further, I also wanted to support light and dark modes. Based on a quick look around the top apps, these appear to be the most common features of widgets.
 
-## Generating magic targets
+## Generating Apple targets
+
+> iOS apps have a default target, the app, but you can add additional targets which are distributed around the main one.
 
 The main difficulty with this project is that I didn't want to pull in React Native to display some basic elements in the widget, so I'd need to use SwiftUI directly. The problem here is that SwiftUI can realistically only be developed in Xcode (Xcode is not the best editor for automation).
 
-To support this, I designed an Expo Config Plugin which could generate a native target outside the generated `ios` directory, that was linked to the generated `pbxproj` file. This would enable me to open and develop the widget in Xcode, while saving any changes for this particular target outside of the `ios` directory.
+To support this workflow, I designed an [Expo Config Plugin][config-plugins] which could generate a native target outside the generated `ios` directory, that was linked to the generated `pbxproj` file. This would enable me to open and develop the widget in Xcode, while saving any changes for this particular target outside of the generated `ios` directory.
 
-This is possible due to the maddness that is `pbxproj`. File in `pbxproj` are represented twice, once as the build/asset file, and a second time as the visual reference in Xcode. This behavior is generally a major nightmare as a file would appear one way in Xcode, and a totally different way in the file system, however in this case, it's an opportunity!
+This is possible due to the maddness that is Apple's `pbxproj` file format. Files in `pbxproj` are represented twice, once as the build/asset file (like a JavaScript bundler), and a second time as the visual reference in Xcode (which directories the file lives in). This behavior is generally a major nightmare as a file would appear one way in Xcode, and a totally different way in the file system, however in this case, it's an opportunity!
 
-Of course, theory will only get you so far, how do we actually do this? `pbxproj` is Apple's proprietary file format that they use for Xcode projects and never bothered to document. Luckily, I've spent a lot of time reverse engineering it and have a pretty good understanding of how it works. All of my findings are public in the [`@bacons/xcode`][bacons-xcode] package.
+Of course, theory will only get us so far :] how do we actually do this? `pbxproj` is Apple's proprietary file format that they use for Xcode projects and never bothered to document. Luckily, I've spent a lot of time reverse engineering it and have a pretty good understanding of how it works. All of my findings are public in the [`@bacons/xcode`][bacons-xcode] package.
 
 ![How mock files show in Xcode](./images/files-in-xcode.avif)
 
-In order to determine the correct settings, I wrote a script which would diff a project before and after adding a target via Xcode, then I replicated the `PBXNativeTarget` and `PBXProject` settings in my Config Plugin. I then assigned the different targets to a preset name like `widget`.
+In order to determine the correct settings, I [wrote a script which would diff a project](https://github.com/EvanBacon/pillar-valley/blob/a724e04ebee5a2771c446f02768d7c73749dbb5e/target-plugin/sync/generate.ts#L1) before and after adding a target via Xcode, then I replicated the `PBXNativeTarget` and `PBXProject` settings in my Config Plugin. I then assigned the different targets to a preset name like `widget`.
 
-One other thing that made testing much faster was to create a prebuild template that didn't contain React Native. React Native ships a lot of uncompiled code to the user, and the user is responsible for compiling this unchanging code everytime. Since Expo Prebuild is technically agnostic to React Native, this was no problem. I would then run prebuild with `expo prebuild --template ./prebuild-template-no-rn.tgz -p ios`.
+One other thing that made testing much faster was to create a [prebuild template](https://docs.expo.dev/workflow/prebuild/#templates) that didn't contain React Native. React Native ships a lot of uncompiled code to the user, and the user is responsible for compiling this unchanging code everytime. Since Expo Prebuild is technically agnostic to React Native, this was no problem. 
+
+With everything configured, I could perform a fully clean prebuild/build with:
+
+```term
+npx expo prebuild --template ./prebuild-template-no-rn.tgz -p ios --clean && npx expo run:ios
+```
 
 > Learn more: [Expo Apple Targets](https://github.com/EvanBacon/expo-apple-targets/).
 
@@ -67,9 +75,10 @@ This config file would give us a hook to add other important features like frame
 
 ## Developing a widget with SwiftUI
 
-After I run prebuild, I'd get a template project with a new target called `widgets`. I could open this in Xcode and start developing my widget. The template has the following files:
+After I run prebuild, I'd get a template project with a new target called `widgets`. I could open this in Xcode and start developing my standard Apple widget. The template has the following files:
 
 ```swift targets/widgets/index.swift
+// (Entry file)
 import WidgetKit
 import SwiftUI
 
@@ -132,21 +141,25 @@ struct widgets_Previews: PreviewProvider {
 }
 ```
 
-Everything here can be modified as-is in Xcode and the changes will be saved outside the project.
+Everything here can be modified as-is in Xcode and the changes will be saved outside the project. There is nothing React Native specific about this, it's just single-platform native development.
 
-To build the plugin, I asked ChatGPT what I wanted, and it gave it to me after about three tries. The built-in SwiftUI preview thing is kinda nice for the couple seconds you can get it working, otherwise it's pretty frustrating. At first I thought I could iterate directly in Xcode like I would with Expo Go, but that was a mistake. I ended up designing the widget in Figma, then writing the SwiftUI code in VS Code with comments and ChatGPT's code side-by-side. The changes would show up in Xcode and I'd build there to test it out.
+## Toiling with SwiftUI Preview
 
-Ultimately I ended up needing to build the app maybe a dozen times to get the widget looking right. Definitely Looking forward to a future where Xcode is stable enough to iterate on widgets directly.
+Around the time React's Fast Refresh was released (Sep 2019 / React Native 0.61), Apple released a fast preview feature to SwiftUI––SwiftUI Preview (Sep 2019, Xcode 11). You may hear from developer advocates that these two tools are analogous as they serve the same purpose, but this couldn't be further from the truth. While React Refresh works at any scale and stays fast, SwiftUI seemingly corrupts state between runs and needs to be hard reset after a while. It's possible to get SwiftUI previews that show you the wrong update, causing you to modify code incorrectly. I spent a fair amount of time restarting Xcode to get things working again every 5 or so updates.
+
+I ended up designing the widget in Figma, then writing the SwiftUI code in VS Code with comments and GitHub Copilot's code side-by-side. The changes would show up in Xcode and I'd build/validate types there to test it out.
+
+Ultimately I ended up needing to recompile the widget target maybe a dozen times to get the widget looking right. Definitely looking forward to a future where SwiftUI Preview is stable enough to iterate on widgets directly, but glad I had access to both Xcode and VS Code with this workflow.
 
 ## Sharing data
 
-Widgets are effectively standalone apps that are bundled with your main app. This means that they don't have access to any of your app's sandboxed data. Apple provides a mechanism for sharing data between your app and your widget called App Groups. App Groups are a way to share data between apps that are part of the same App Group. You can read more about App Groups [here](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups).
+Widgets are effectively standalone apps that are bundled with your main app. This means that they don't have access to any of your app's sandboxed data. Apple provides a mechanism for sharing data between your app and your widget called **App Groups**. App Groups are a way to share data between apps that are part of the same App Group. You can read more about App Groups [here](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_security_application-groups).
 
 ### Setting up the App Group
 
 I needed to pick an app group and assign it to my widget and app, App Group strings are prefixed with `group.` and often just use `group.<bundle-identifier>`. I decided to use `group.bacon.data` for my app group because I wasn't thinking straight.
 
-First I set the app group in my `app.json`, Prebuild converts this into a native entitlement, and EAS CLI will automatically configure the App Group for you.
+First, I set the app group in my `app.json`, Prebuild converts this into a native entitlement, and EAS CLI will automatically configure the App Group for you on Apple's servers.
 
 ```json app.json
 {
@@ -158,7 +171,7 @@ First I set the app group in my `app.json`, Prebuild converts this into a native
 }
 ```
 
-Second, I updated my _Apple Targets Config Plugin_ to support entitlements directly in the `expo-target.config.js` file:
+Second, I updated my _Apple Targets Config Plugin_ to support entitlements directly in the `expo-target.config.js` file. This would allow me to configure the App Group for my widget target (`targets/widgets/target.entitlements`). This step wasn't required but I prefer using autocomplete+JSON to using entitlements plist.
 
 ```js expo-target.config.js
 module.exports = {
@@ -196,17 +209,19 @@ EAS CLI is smart enough to use our default Apple target for codesigning, but any
 }
 ```
 
-I wrote an additional config plugin which could do this automatically, so we don't need to worry about it getting out of sync with the target. Throughout this process, I was running `npx expo config --type introspect` to preview the generated native settings quickly.
+I wrote an additional Config Plugin which could do this automatically, so we don't need to worry about it getting out of sync with the target. Throughout this process, I was running `npx expo config --type introspect` to preview the generated native settings quickly.
 
-I regenerated the native ios project with the new config plugins and entitlements, then everything was ready to start sharing!
+I regenerated the native `ios` project with the new Config Plugins and entitlements, then everything was ready to start sharing!
 
 ```term
-npx expo prebuild -p ios
+npx expo prebuild --clean --platform ios
 ```
 
 ### Writing shared settings
 
-To set data and update the widget, I built a local Expo module which would write a value to NSUserDefaults and then trigger a widget update. The widget would then read the value from NSUserDefaults and display it.
+To set data and update the widget, I built a [local Expo module](https://docs.expo.dev/modules/third-party-library/) which would write a value to `NSUserDefaults` and then trigger a widget update. The widget would then read the value from `NSUserDefaults` and display it.
+
+> `NSUserDefaults` is the native API for using App Groups to share data between apps.
 
 Creating a local Expo module is very easy, I simply ran the following in my project root:
 
@@ -242,7 +257,7 @@ public class SmartSettingsModule: Module {
 }
 ```
 
-Additionally, I used the new tsconfig paths feature to make importing the module easier:
+Additionally, I used the new [tsconfig paths](https://docs.expo.dev/guides/typescript/#path-aliases) feature to make importing the module easier:
 
 ```json tsconfig.json
 {
@@ -261,7 +276,7 @@ This enabled me to import the module like so:
 import SmartSettings from 'local:smart-settings';
 ```
 
-After rebuilding the with the new module:
+After rebuilding the iOS app with the new module:
 
 ```term
 npx expo run:ios
@@ -277,7 +292,7 @@ SmartSettings.set('pillarsTraversed', total, 'group.bacon.data');
 
 ### Reading shared settings
 
-On the App Clip side (SwiftUI), I asked ChatGPT to give me some code to read the value from NSUserDefaults and display it in the widget.
+On the App Clip side (SwiftUI), I asked ChatGPT to give me some code to read the value from `NSUserDefaults` and display it in the widget.
 
 ```swift
 
@@ -306,7 +321,7 @@ To support dark mode, Apple recommends you use `colorset` files to represent dyn
 
 ![colorset UI in Xcode](./images/colorset-xcode.avif)
 
-Where a web developer using Tailwind might write: `bg-black dark:bg-white`, an Apple developer would open Xcode and create a new colorset file folder, then step through a GUI to pick the exact red, green, and blue values for each color. The on-disk output of this UI looks something like this:
+Where a web developer using Tailwind might write: `bg-black dark:bg-white`, an Apple developer would open Xcode and create a new `*.colorset` file folder, then step through a UI to pick the exact red, green, and blue values for each color. The on-disk output of this UI looks something like this:
 
 ```json Assets.xcassets/gradient1.colorset/Contents.json
 {
@@ -349,9 +364,11 @@ Where a web developer using Tailwind might write: `bg-black dark:bg-white`, an A
 }
 ```
 
-As you can imagine, this is a miserable developer experience, so I built CSS color conversion into my Config Plugin. Now I can just write:
+As you can imagine, this is a **miserable developer experience**, so I built CSS color conversion into my Config Plugin. 
 
-```js expo-target.config.js
+Now I can just write the following to define a native responsive color:
+
+```ts expo-target.config.js
 module.exports = {
   colors: {
     gradient1: {
@@ -380,7 +397,7 @@ After I had everything wired up, all I needed to do was build and submit with EA
 eas build -p ios --auto-submit
 ```
 
-All of the codesigning, provisioning, and submission was handled for me. I just submitted for review and waited for Apple to approve it, this took about 30 hours.
+All of the codesigning, provisioning, and submission was handled for me. I just submitted for review and waited for Apple to approve it, the review took about 30 hours.
 
 ---
 
@@ -400,12 +417,13 @@ All of the codesigning, provisioning, and submission was handled for me. I just 
 
 You can download [**Pillar Valley**](https://apps.apple.com/us/app/pillar-valley/id1336398804) and try the widget today, or check out the [source code](https://github.com/EvanBacon/pillar-valley/blob/fba10cbedd593e4976ad4d1aeada1a5834f1100e/targets/widgets/widgets.swift).
 
-1. I love **continuous native generation**, the amount of convenience scripting and automation it enables is incredible. I'm very cautious about introducing functionality that will make it harder to upgrade my app, but thanks to Config Plugins, I was able to build a widget without sacrificing the benefits of CNG.
+1. I love [**Continuous Native Generation**](https://docs.expo.dev/workflow/continuous-native-generation/), the amount of convenience scripting and automation it enables is incredible! I'm very cautious about introducing functionality that will make it harder to upgrade my app, but thanks to Expo Config Plugins, I was able to build a sustainable new feature without sacrificing the simplicity of future upgrades.
 2. [`@bacons/xcode`][bacons-xcode] is really exciting! There's no shortage of things to improve in Xcode.
-3. EAS Build having simple hooks into configuring codesigning is fantastic, I love that the same JavaScript function that can whitelabel and generate my native code, can also ensure the E2E build process works.
-4. Local Expo Modules are a miracle, being able to just drop-in a single native function for my specific purpose is a dream come true.
+3. EAS Build having simple hooks into configuring codesigning is fantastic, I love that the same JavaScript function that can whitelabel and generate my native code, can also ensure the E2E build process works. Without this, the last half of the article would've been much longer than a single command.
+4. Local Expo Modules are **a miracle**, being able to just drop-in a single Swift function for my specific purpose is a dream come true.
 
-All together, the various different aspects of **Expo** came together to make this project a breeze while still remaining highly powerful!
+All together, the various different aspects of **Expo CLI** and **EAS CLI** came together to make this project a breeze while still remaining highly powerful!
 
 [prebuild]: https://docs.expo.dev/workflow/prebuild/
 [bacons-xcode]: https://github.com/EvanBacon/xcode
+[config-plugins]: https://docs.expo.dev/config-plugins/introduction/
