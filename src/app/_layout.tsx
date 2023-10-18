@@ -1,3 +1,5 @@
+import { LogBox, View } from 'react-native';
+
 import {
   Inter_300Light,
   Inter_400Regular,
@@ -14,6 +16,12 @@ import { Meta } from '@/Data';
 import Layout from '@/components/Layout';
 import { loadAsync } from '@/components/useFont';
 import { ResponsiveNavigator } from '@/components/top-nav/navigator';
+
+if (__DEV__) {
+  LogBox.ignoreLogs(['"transform" style array value is deprecated.']);
+} else {
+  LogBox.ignoreAllLogs();
+}
 
 const site = {
   title: 'Evan Bacon',
@@ -118,6 +126,8 @@ export default function App() {
           <meta key={`meta-${index}`} {...value} />
         ))}
       </Head>
+      <header />
+      <View testID="HEADER" role="summary" />
       <Background />
 
       {/* <Layout> */}

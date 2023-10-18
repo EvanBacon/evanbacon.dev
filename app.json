@@ -20,7 +20,7 @@
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
-      "output": "static"
+      "output": "server"
     },
     "android": {
       "package": "evanbacon.dev"
@@ -33,6 +33,13 @@
       "bundleIdentifier": "evanbacon.dev",
       "supportsTablet": true
     },
-    "plugins": ["expo-router"]
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://evanbacon.dev/"
+        }
+      ]
+    ]
   }
 }

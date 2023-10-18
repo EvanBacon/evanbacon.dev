@@ -2,7 +2,7 @@
 import { CommonActions } from '@react-navigation/native';
 import { TabRouter } from '@react-navigation/routers';
 import { Link, Navigator } from 'expo-router';
-import { Screen as RouterScreen } from 'expo-router/src/views/Screen';
+import { Screen as RouterScreen } from 'expo-router/build/views/Screen';
 import * as React from 'react';
 import { ViewStyle } from 'react-native';
 import { Screen, ScreenContainer } from 'react-native-screens';
