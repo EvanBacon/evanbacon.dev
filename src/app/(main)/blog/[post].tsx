@@ -56,7 +56,8 @@ function useData(
 function BlogHead({ info }: { info: PostInfo }) {
   const pathname = usePathname();
   const url = React.useMemo(() => Linking.createURL(pathname), [pathname]);
-  const img = resolveAssetUri(info.featuredImage) ?? '/images/appjs-2022.jpg';
+  const img =
+    resolveAssetUri(info.featuredImage) ?? '/blog/og-image/' + info.slug;
   return (
     <Head>
       <title>{info.title}</title>
