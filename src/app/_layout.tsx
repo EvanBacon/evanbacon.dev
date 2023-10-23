@@ -87,7 +87,7 @@ export default function App() {
     { property: 'og:image', content: `http://evanbacon.dev${image.url}` },
     {
       property: 'og:image:secure_url',
-      content: `https://evanbacon.dev/${image.url}`,
+      content: `https://evanbacon.dev/${image.url.replace(/^\/+/, '')}`,
     },
     { property: 'og:image:type', content: image.type },
     { property: 'og:image:width', content: image.width },
