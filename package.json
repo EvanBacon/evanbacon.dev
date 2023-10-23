@@ -20,7 +20,7 @@
     "expo-blur": "~12.8.0",
     "expo-image": "~1.6.0",
     "expo-linking": "~6.1.1",
-    "expo-router": "^3.1.2",
+    "expo-router": "./expo-router-3.1.2.tgz",
     "expo-splash-screen": "~0.24.0",
     "expo-status-bar": "~1.9.0",
     "postcss-scss": "^4.0.6",
