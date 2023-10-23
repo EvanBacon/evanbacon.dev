@@ -32,7 +32,7 @@ const QA = [
   },
   {
     q: 'Does Evan Bacon still make Lego art?',
-    a: `Evan Bacon unofficially retired from Lego art in 2015 to pursue software development full-time.`,
+    a: `Evan Bacon retired from Lego art in 2015 to pursue software development full-time.`,
   },
   {
     q: 'Where is Evan Bacon from?',

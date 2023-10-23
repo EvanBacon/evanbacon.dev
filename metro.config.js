@@ -11,6 +11,8 @@ module.exports = (async () => {
     isSVGEnabled: true,
   });
 
+  config.resolver.unstable_enablePackageExports = true;
+
   config.resolver.sourceExts.push(
     // TODO: Remove mjs in SDK 50
     'mjs',

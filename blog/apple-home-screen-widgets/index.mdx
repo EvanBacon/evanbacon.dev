@@ -1,4 +1,4 @@
-<Title date="2023-10-15T17:36:02.536Z">
+<Title date="2023-10-23T17:36:02.536Z">
   Apple Home Screen Widgets with Expo CNG
 </Title>
 
@@ -55,7 +55,7 @@ Of course, theory will only get us so far :] how do we actually do this? `pbxpro
 
 In order to determine the correct settings, I [wrote a script which would diff a project](https://github.com/EvanBacon/pillar-valley/blob/a724e04ebee5a2771c446f02768d7c73749dbb5e/target-plugin/sync/generate.ts#L1) before and after adding a target via Xcode, then I replicated the `PBXNativeTarget` and `PBXProject` settings in my Config Plugin. I then assigned the different targets to a preset name like `widget`.
 
-One other thing that made testing much faster was to create a [prebuild template](https://docs.expo.dev/workflow/prebuild/#templates) that didn't contain React Native. React Native ships a lot of uncompiled code to the user, and the user is responsible for compiling this unchanging code everytime. Since Expo Prebuild is technically agnostic to React Native, this was no problem. 
+One other thing that made testing much faster was to create a [prebuild template](https://docs.expo.dev/workflow/prebuild/#templates) that didn't contain React Native. React Native ships a lot of uncompiled code to the user, and the user is responsible for compiling this unchanging code everytime. Since Expo Prebuild is technically agnostic to React Native, this was no problem.
 
 With everything configured, I could perform a fully clean prebuild/build with:
 
@@ -364,7 +364,7 @@ Where a web developer using Tailwind might write: `bg-black dark:bg-white`, an A
 }
 ```
 
-As you can imagine, this is a **miserable developer experience**, so I built CSS color conversion into my Config Plugin. 
+As you can imagine, this is a **miserable developer experience**, so I built CSS color conversion into my Config Plugin.
 
 Now I can just write the following to define a native responsive color:
 
