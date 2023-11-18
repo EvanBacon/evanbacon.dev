@@ -1,51 +1,7 @@
-import Colors from '@/constants/Colors';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { useREM } from 'react-native-web-hooks';
-
 import ExpoIcon from '@/svg/expo.svg';
 import GitHubIcon from '@/svg/github.svg';
 import XIcon from '@/svg/x.svg';
-
-const ICON_SIZE = 24;
-
-const socials = [
-  {
-    name: 'x',
-    url: 'https://x.com/baconbrix',
-    // name: 'twitter',
-    // url: 'https://twitter.com/baconbrix',
-  },
-  // {
-  //   name: 'youtube-play',
-  //   url: 'https://www.youtube.com/baconbrix',
-  // },
-  {
-    name: 'github',
-    url: 'https://github.com/evanbacon',
-  },
-  {
-    name: 'instagram',
-    url: 'https://www.instagram.com/baconbrix/',
-  },
-  // {
-  //   name: 'medium',
-  //   url: 'http://medium.com/@baconbrix',
-  // },
-  // {
-  //   name: 'twitch',
-  //   url: 'https://www.twitch.tv/baconbrix',
-  // },
-  // {
-  //   name: 'linkedin',
-  //   url: 'https://www.linkedin.com/in/evanbacon',
-  // },
-  // dev icon not supported in current version of FontAwesome (@expo/vector-icons)
-  // {
-  //     name: 'dev',
-  //     url: 'https://dev.to/evanbacon'
-  // },
-];
+import React from 'react';
 
 export default function CustomFooter() {
   return (
@@ -78,18 +34,6 @@ export default function CustomFooter() {
 
               'https://github.com/evanbacon',
             ],
-            // [
-            //   <span className="inline">
-            //     Ephemeral content on Instagram{' '}
-            //     <InstagramIcon
-            //       className="inline"
-            //       width={18}
-            //       height={18}
-            //       fill="white"
-            //     />
-            //   </span>,
-            //   'https://instagram.com/baconbrix',
-            // ],
             [
               <>
                 <ExpoIcon
@@ -118,35 +62,3 @@ export default function CustomFooter() {
     </footer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.theme,
-    paddingVertical: `1.0875rem`,
-    paddingHorizontal: `1.45rem`,
-  },
-  linkContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  link: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    transitionProperty: 'all',
-    transitionDuration: '250ms',
-  },
-  linkFocus: {
-    color: 'white',
-    borderBottomColor: 'transparent',
-    transform: [{ translateY: -4 }],
-  },
-  socialWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginVertical: useREM(2.2),
-  },
-  footerText: {
-    marginVertical: 0,
-    marginLeft: 8,
-    color: 'white',
-    fontSize: useREM(1.5),
-  },
-});

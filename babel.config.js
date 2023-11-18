@@ -5,8 +5,6 @@ module.exports = function(api) {
     presets: ['babel-preset-expo'],
     plugins: [
       // '@expo/html-elements/babel',
-      'react-native-reanimated/plugin',
-      'expo-router/babel',
       isServer && require('@babel/plugin-transform-dotall-regex'),
     ].filter(Boolean),
   };

@@ -56,13 +56,7 @@ const CustomHeader = ({ siteTitle }) => {
             <div className="hidden md:flex flex-1">
               <Link
                 href="/"
-                style={[
-                  styles.link,
-                  {
-                    $$css: true,
-                    _: 'text-2xl md:text-3xl font-bold',
-                  },
-                ]}
+                className="text-2xl md:text-3xl font-bold text-white border-b border-b-transparent duration-200"
               >
                 {siteTitle}
               </Link>

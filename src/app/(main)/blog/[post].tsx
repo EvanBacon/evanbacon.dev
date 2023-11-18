@@ -129,12 +129,12 @@ export default function Page() {
           paddingVertical: 24,
         }}
       >
-        <View style={{ flex: 1, paddingHorizontal: 12 }}>
+        <div className="flex flex-1 px-3 flex-col">
           <MarkdownTheme>
             <MarkdownComponent />
             <Thanks />
           </MarkdownTheme>
-        </View>
+        </div>
       </ScrollView>
     </>
   );

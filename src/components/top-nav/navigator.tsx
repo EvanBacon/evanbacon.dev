@@ -7,7 +7,7 @@ import React from 'react';
 
 function HeaderLogo() {
   return (
-    <Link style={{ $$css: true, _: 'group focus:outline-none' }} href="/">
+    <Link className="group focus:outline-none" href="/">
       <div className="flex pt-5 pb-8 items-start h-[96px] max-h-[96px]">
         <div className="flex items-center p-3 my-1 rounded transition-colors group-hover:bg-white/10 group-focus:bg-white/10 group-focus:outline-none">
           <Icon
@@ -93,18 +93,14 @@ function TabBarItem({
 
   if (name.match(/^([./]|https?:\/\/)/)) {
     return (
-      <Link
-        href={name}
-        hrefAttrs={{ target: '_blank' }}
-        style={{ $$css: true, _: className }}
-      >
+      <Link href={name} target="_blank" className={className}>
         {children({ focused })}
       </Link>
     );
   }
 
   return (
-    <TabbedNavigator.Link name={id} style={{ $$css: true, _: className }}>
+    <TabbedNavigator.Link name={id} className={className}>
       {children({ focused })}
     </TabbedNavigator.Link>
   );
@@ -201,20 +197,9 @@ function AppHeader() {
         />
 
         <Link
-          style={[
-            {
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
-            {
-              $$css: true,
-              _:
-                'transition-transform mr-[-8px] my-2 rounded-full aspect-square hover:scale-110 hover:bg-white/10 active:scale-90 active:opacity-80',
-            },
-          ]}
+          className="flex items-center justify-center transition-transform mr-[-8px] my-2 rounded-full aspect-square hover:scale-110 hover:bg-white/10 active:scale-90 active:opacity-80"
           href="https://x.com/baconbrix"
-          hrefAttrs={{ target: '_blank' }}
+          target="_blank"
         >
           <Icon
             width={undefined}

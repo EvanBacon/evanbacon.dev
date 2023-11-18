@@ -13,7 +13,7 @@ function collectForDir(dir, parent = '') {
     .filter(
       file =>
         file.endsWith('.html') &&
-        file !== '[...404].html' &&
+        file !== '+not-found.html' &&
         file !== '_sitemap.html' &&
         !file.match(/\(.*\)/) &&
         !file.match(/\[.*\]/)

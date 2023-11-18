@@ -63,7 +63,7 @@ function Drawer() {
         },
       ]}
     >
-      <div style={{ flex: 1 }}>
+      <div className="flex flex-1">
         <div
           style={{
             paddingLeft: sidePadding,
@@ -89,17 +89,13 @@ function Drawer() {
           ))}
         </ScrollView>
         <div
-          style={[
-            {
-              paddingTop: 16,
-              paddingLeft: sidePadding,
-              borderTopColor: isDark
-                ? Colors.borderColorLight
-                : Colors.borderColorDark,
-              borderTopWidth: StyleSheet.hairlineWidth,
-            },
-          ]}
-        ></div>
+          className="pt-4 border-t border-t-[#1a1923] dark:border-t-[#ccc]"
+          style={{
+            paddingTop: 16,
+            paddingLeft: sidePadding,
+            borderTopWidth: StyleSheet.hairlineWidth,
+          }}
+        />
       </div>
     </View>
   );

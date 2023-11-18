@@ -477,9 +477,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           return (
             <Link
               href={href}
-              hrefAttrs={{
-                target: href.startsWith('http') ? '_blank' : undefined,
-              }}
+              target={href.startsWith('http') ? '_blank' : undefined}
               style={[style, !brand && styles.standardLink]}
               className={className}
               children={children}

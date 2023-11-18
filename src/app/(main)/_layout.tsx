@@ -7,13 +7,13 @@ import {
 } from '@/components/top-nav/tab-slot';
 import classNames from 'classnames';
 import { Link } from 'expo-router';
-import React, { useRef } from 'react';
+import React from 'react';
 
 function HeaderLogo() {
   return (
     <TabbedNavigator.Link
       scrollToTop
-      style={{ $$css: true, _: 'group focus:outline-none' }}
+      className="group focus:outline-none"
       name="index"
       href="/"
     >
@@ -112,11 +112,7 @@ function TabBarItem({
 
   if (name.match(/^([./]|https?:\/\/)/)) {
     return (
-      <Link
-        href={name}
-        hrefAttrs={{ target: '_blank' }}
-        style={{ $$css: true, _: className }}
-      >
+      <Link href={name} target="_blank" className={className}>
         {children({ focused })}
       </Link>
     );
@@ -126,7 +122,7 @@ function TabBarItem({
     <TabbedNavigator.Link
       scrollToTop={scrollToTop}
       name={id}
-      style={{ $$css: true, _: className }}
+      className={className}
     >
       {children({ focused })}
     </TabbedNavigator.Link>
@@ -225,20 +221,18 @@ function AppHeader() {
         />
 
         <Link
+          className={
+            'transition-transform mr-[-8px] my-2 rounded-full aspect-square hover:scale-110 hover:bg-white/10 active:scale-90 active:opacity-80'
+          }
           style={[
             {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             },
-            {
-              $$css: true,
-              _:
-                'transition-transform mr-[-8px] my-2 rounded-full aspect-square hover:scale-110 hover:bg-white/10 active:scale-90 active:opacity-80',
-            },
           ]}
           href="https://x.com/baconbrix"
-          hrefAttrs={{ target: '_blank' }}
+          target="_blank"
         >
           <Icon
             width={undefined}

@@ -12,7 +12,7 @@ export default function Games() {
       <PageHeader>Games</PageHeader>
       <br />
 
-      <div className={cn('gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4')}>
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
         {Projects.map((project, index) => {
           return (
             <GridItem
@@ -53,7 +53,7 @@ function GridItem({
   href: string;
 }) {
   return (
-    <Link href={href} style={{ $$css: true, _: cn(ratio, 'flex') }}>
+    <Link href={href} className={cn(ratio, 'flex')}>
       <div
         className={cn(
           'group flex-1 rounded-2xl overflow-hidden gap-2 bg-[#191A20] border border-[#2e2e2e] flex flex-col',

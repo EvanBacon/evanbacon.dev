@@ -1,4 +1,4 @@
-import { LogBox, View } from 'react-native';
+import { LogBox } from 'react-native';
 
 import {
   Inter_300Light,
@@ -13,9 +13,9 @@ import React from 'react';
 import { Background } from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
-import Layout from '@/components/Layout';
 import { loadAsync } from '@/components/useFont';
-import { ResponsiveNavigator } from '@/components/top-nav/navigator';
+
+import '../../global.css';
 
 if (__DEV__) {
   LogBox.ignoreLogs(['"transform" style array value is deprecated.']);
@@ -126,8 +126,6 @@ export default function App() {
           <meta key={`meta-${index}`} {...value} />
         ))}
       </Head>
-      <header />
-      <View testID="HEADER" role="summary" />
       <Background />
 
       {/* <Layout> */}

@@ -110,9 +110,9 @@ export default function ProjectCard({
   const isHovered = useHover(ref);
 
   return (
-    <Article
+    <article
       ref={ref}
-      style={[styles.container, { $$css: true, _: 'mx-2 md:mx-0' }]}
+      className="flex flex-1 overflow-hidden duration-500 rounded-xl mb-5 mx-2 md:mx-0"
     >
       <MediaBackground
         isHovered={isHovered}
@@ -125,19 +125,19 @@ export default function ProjectCard({
 
           <BlurView intensity={100} style={styles.blur} />
 
-          <Div style={{ flexDirection: 'row', flexShrink: 1, paddingRight: 8 }}>
+          <div className="flex flex-row shrink pr-2">
             {icon && (
               <Image source={icon} style={styles.icon} resizeMode="cover" />
             )}
-            <Div style={{ flex: 1 }}>
-              {title && <H2 style={styles.title}>{title}</H2>}
+            <div className="flex flex-1 flex-col">
+              {title && <h2 className="text-white text-base">{title}</h2>}
               {description && !renderDescription && (
                 <H3 style={styles.description}>{description}</H3>
               )}
               {renderDescription && renderDescription()}
               {year && <P style={styles.year}>{year}</P>}
-            </Div>
-          </Div>
+            </div>
+          </div>
 
           <Div
             style={{
@@ -164,7 +164,7 @@ export default function ProjectCard({
           </Div>
         </Footer>
       </MediaBackground>
-    </Article>
+    </article>
   );
 }
 
