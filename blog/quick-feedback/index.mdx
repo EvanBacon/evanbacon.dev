@@ -1,0 +1,175 @@
+<Title date="2023-11-24T22:45:36.616Z">Quick Feedback with Expo Router</Title>
+
+
+Use the config plugin [`@config-plugins/react-native-quick-actions`](https://www.npmjs.com/package/@config-plugins/react-native-quick-actions):
+
+> Note: Only iOS supports build-time quick actions. Use the runtime API to set quick actions on Android.
+
+```json app.json
+{
+    "plugins": [
+        [
+            "@config-plugins/react-native-quick-actions",
+            [
+                {
+                    "title": "Something wrong?",
+                    "subtitle": "Please leave us feedback before app deletion.",
+                    "type": "feedback",
+                    "iconSymbolName": "heart.fill",
+                    "userInfo": {
+                        "url": "/feedback"
+                    }
+                }
+            ]
+        ]
+    ]
+}
+```
+
+We're going to pass the URL we want Expo Router to handle via the `userInfo.url`, in this case, we'll have the quick action launch `/feedback`. Now let's sync the config and rebuild:
+
+```term
+npx expo prebuild -p ios
+
+npx expo run:ios
+```
+
+We'll create a hook to handle incoming quick actions and redirect them according to the `userInfo.url`:
+
+```ts hooks/useQuickActionRedirect.ts 
+import { router } from "expo-router";
+import React from "react";
+import { Platform, DeviceEventEmitter } from "react-native";
+import QuickActions from "react-native-quick-actions";
+
+export function useInstalledQuickActions() {
+  
+  if (Platform.OS !== "android") {
+    return;
+}
+
+  React.useEffect(() => {
+    QuickActions.setShortcutItems([
+        {
+            type: "feedback",
+            title: "Something wrong?",
+            subtitle: "Please leave us feedback before app deletion.",
+            userInfo: {
+                url: "/feedback" // Provide any custom data like deep linking URL
+            }
+        }
+    ]);
+  }, []);
+}
+
+export function useQuickActionRedirect() {
+  const isMounted = React.useRef(true);
+
+  React.useEffect(() => {
+    QuickActions.popInitialAction().then((action) => {
+      if (isMounted.current && action?.userInfo?.url) {
+        router.push(action.userInfo.url!);
+      }
+    });
+
+    const sub = DeviceEventEmitter.addListener(
+      "quickActionShortcut",
+      (action) => {
+        if (isMounted.current && action?.userInfo?.url) {
+          router.push(action.userInfo.url!);
+        }
+      }
+    );
+    return () => {
+      isMounted.current = false;
+      sub.remove();
+    };
+  }, []);
+}
+```
+
+We'll use this hook in the root layout of our Expo Router app:
+
+```tsx app/_layout.tsx
+import { Stack } from "expo-router";
+import { useInstalledQuickActions, useQuickActionRedirect } from "@/hooks/useQuickActionRedirect";
+
+export default function RootLayoutNav() {
+  useInstalledQuickActions();
+  useQuickActionRedirect();
+
+  return <Stack />
+}
+```
+
+Now we just need a route at `/feedback` to be presented when the quick action is launched. For the sake of this example, we'll skip setting up a database to collect feedback, and instead just show the user some links to contact us like Twitter and Email. We can do both of these things with Expo Router's [`Link`](https://docs.expo.dev/routing/navigating-pages/) component:
+
+```js app/feedback.tsx
+import { StatusBar } from "expo-status-bar";
+import { View, Text, StyleSheet } from "react-native";
+
+import { Link } from "expo-router";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+
+export default function ModalScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        Sorry for any issues you may have encountered while using our app!
+      </Text>
+     
+      <View style={styles.center}>
+        {/* This universal link will open the Twitter app on native and link to the Twitter website when unavailable. */}
+        <Link style={styles.link} href="https://x.com/baconbrix">
+          <FontAwesome size={24} name="twitter" /> Tweet at @baconbrix
+        </Link>
+
+        {/* Use a `mailto:` deep link to open the native Mail app (this doesn't work in simulators). */}
+        <Link style={styles.link} href="mailto:bacon@expo.dev">
+          <FontAwesome size={24} name="envelope" />
+          {"  "}Email support
+        </Link>
+      </View>
+
+      {/* Optional: Use a light status bar on iOS to account for the black space above the modal */}
+      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  center: { gap: 8, alignItems: "center", justifyContent: "center" },
+  link: {
+    fontSize: 24,
+    color: "#38434D",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+});
+```
+
+As an added bonus, let's configure the `/feedback` page to use a modal presentation style. We can do this by adding a `presentation` prop to the `Stack.Screen` component:
+
+```js app/_layout.tsx
+import { Stack } from "expo-router";
+import { useQuickActionRedirect } from "@/hooks/useQuickActionRedirect";
+
+export default function RootLayoutNav() {
+  useQuickActionRedirect();
+
+  return (
+    <Stack>
+      <Stack.Screen name="feedback" presentation="modal" />
+    </Stack>
+  )
+}
+```
+
+And that's it! Now when the user launches the app via the quick action, they'll be presented with a modal to contact us. You can test this by long-pressing the app icon on your home screen and selecting the "Something wrong?" quick action.
