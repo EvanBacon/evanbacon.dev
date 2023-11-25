@@ -11,7 +11,7 @@ export function Title({ children, date: dateString }) {
 
   const dateFormatted = `${month} ${day}, ${year}`;
   return (
-    <div className="gap-2 mb-5">
+    <div className="flex flex-col gap-2 mb-5">
       {Platform.OS !== 'ios' && (
         <Text
           style={{

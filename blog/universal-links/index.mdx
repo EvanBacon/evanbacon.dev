@@ -1,0 +1,136 @@
+<Title date="2023-11-24T22:29:27.907Z">Universal Links are Important</Title>
+
+import UniversalLinksChart, { VoterGraph } from '@/components/universal-links/LinksChart'
+
+[Universal Links](https://developer.apple.com/ios/universal-links/) are a native feature for making installed content linkable to anyone with standard URLs.
+
+Consider the following URL for my [X](https://x.com) profile:
+
+```
+https://x.com/baconbrix
+```
+
+If you open [this URL](https://x.com/baconbrix), it will do one of two things:
+
+- If you have the X native app installed, it will open the app and direct you to my profile.
+- If you don't have the X native app, it will open a nearly identical profile page in the browser.
+
+While the native version is smooth and tailored to the platform, the web version is searchable and available to anyone with a browser. This––**obtaining the best of both web and native**––is the power of universal links.
+
+## Raw data
+
+Universal links are the optimal way to share content with users and drive them to your app. But is this just my personal theory, how common are they, and should you even care about adding them to your app?
+
+To answer these questions, I analyzed the **top 100 apps for every category in the Apple App Store** and recorded whether or not they have universal links configured. I've also included the three highest rated apps, containing universal links, for each category below.
+
+<UniversalLinksChart endpoint="/why-are-you-here/universal-link-data.json" />
+
+Here we can see a clear trend where **commerce-based, and content-driven apps are more likely to use universal links than utility apps**.
+
+This phenomenon makes sense: content-driven apps are all about sharing and discovering things. Whereas utility-based apps (calculators, video games, timers) are more likely to be used offline for a specific purpose.
+
+But even at the bottom of the list, Developer Tools, we see that apps like GitHub and TestFlight fit the content-driven pattern we observe at the top.
+
+## Quality vs quantity
+
+Showing a large number on its own is only sometimes a perfect metric for quality (over half of all websites are built with WordPress). Luckily, the App Store also provides user ratings for each app, which we can use as a rough metric for overall quality.
+
+Below is the star-rating distribution for apps with and without universal links.
+
+### User ratings for apps with universal links
+
+<VoterGraph />
+
+Interestingly, apps with universal links have a higher **absolute rating** than apps without universal links, and this applies across all categories (!!). I mentioned earlier that this isn't a perfect metric, but it's certainly better than the alternative.
+
+## Counter example
+
+These numbers are great but they're just one data point. Maybe all native features have high adoption at the top of the App Store, and universal links are just a byproduct of that.
+
+Well let's compare discovery to something equally, if not more, important: **money**. Apple is very strict about the flow of commerce in their store ... \[ending the sentence here\]. We can very accurately measure the number of apps with in-app purchases enabled, and compare with universal links adoption.
+
+### In-app purchases feature adoption
+
+<UniversalLinksChart endpoint="/why-are-you-here/iap-data.json" />
+
+### In-app purchases user ratings
+
+<VoterGraph iap />
+
+As you can see, both ratings and adoption for apps with in-app purchases are substantially lower than the same metrics applied to universal links. There are even a number of categories (with 100 top apps) that have no apps with in-app purchases enabled at all.
+
+The **average adoption for in-app purchases is 9% compared to 68% for universal links**.
+
+But I digress, back to universal links.
+
+## Implementing Universal Links
+
+Implementing universal links is very challenging. Beyond the requirement of having both a production-ready website and a native app that share URLs, universal links demand extensive configuration, a two-way credential handshake, and considerable manual testing with tunnel servers since they don't work on localhost. They are among the most difficult features to implement correctly in a native app. Their complexity, combined with their importance, raises the question of whether we're approaching them in the right way.
+
+The technical discussion surrounding universal links bears many similarities to that of server-side rendering for websites (~3 years ago). Both aim to improve content discoverability, and neither is a perfect fit for every project type. They are also more complex to implement compared to their simpler alternatives.
+
+Before mainstream server-rendering solutions like Next.js and Remix, website developers would server-render only specific pages for search engine indexing. Nowadays, it's common to build everything in a way that _could_ be server-rendered, then conditionally use build-time static rendering for efficiency and cost-effectiveness. The moral here is that it was easier to conditionally disable server-rendering than to enable it as needed.
+
+Thanks to significant community innovation, our approach to website development has evolved.
+
+But what is the equivalent innovation or opinionated development pattern for universal links? I've pondered this question extensively, and my current answer is [**Expo Router**](https://docs.expo.dev/routing/introduction/).
+
+## Expo Router
+
+[**Expo Router**](https://docs.expo.dev/routing/introduction/) is a framework for building discoverable apps. It combines several fundamental ideas:
+
+### File-Based Routing
+
+Expo Router is the first framework to implement a file-based router for native apps. It enforces the principle that every route in your app should be linkable and shared across web and native, facilitating a seamless integration between your app and website.
+
+Testing and debugging Universal Links is challenging. The file-based routing approach addresses this by integrating URLs into your app's architecture, ensuring functionality only when the URLs are correct.
+
+Like the server-rendering scenario, it's easier to selectively disable universal links when they're ubiquitous than to enable them where they're absent.
+
+### React
+
+Both the website and app built with Expo Router are powered by React, enabling a mostly reusable codebase across platforms. However, it's not just any website/app; it's native to the platform.
+
+When I say the code is "mostly reusable," I'm highlighting that being a no-code platform is not the priority of Expo Router. The focus is on solving the discoverability issue.
+
+Where other cross-platform solutions like Flutter prioritize visual consistency across platforms by adopting a full-canvas approach on the web, **Expo Router** opts for true platform nativity. On the web, this translates to SEO-friendliness and a server-driven design when feasible.
+
+### Universal
+
+> Note: I refer to iOS+Web, Android+Web as "Universal" and iOS+Android as "Cross-Platform". This follows the "Universal Links" naming convention.
+
+One of the most powerful features of the web is the ability for crawlers to index content and make it discoverable by search engines. This is how Google became the most popular search engine, and it's how the web became the most popular platform for content discovery. Static content could also be used as training data for machine learning models.
+
+Native apps, on the other hand, default to being completely closed off from the web. Unless you go out of your way to make a subsection of your content also available on the web, then your app is not linkable, discoverable, or indexable by search engines.
+
+Over half of internet traffic comes from mobile devices (cite: [StatCounter](https://gs.statcounter.com/platform-market-share/desktop-mobile-tablet)), and over 90% of mobile usage is spent in native apps (cite: [BuildFire](https://buildfire.com/app-statistics/#:~:text=The%20average%20smartphone%20user%20spends,installed%20on%20the%20average%20smartphone.)).
+
+The ultimate goal of Expo Router is to create a streamlined framework for developing a semantically-searchable website with a universally linked native app—creating a fully discoverable and indexable offline experience. This is the human-centered approach to app development.
+
+But it's not _easy_. There are lots of incredible ways to create standalone websites and apps, but I'm a firm believer that a seamless user experience between the two is the future of apps (more specifically, content-driven apps like the ones currently leveraging universal links).
+
+### Continuity-First
+
+As an iPhone user, I love building apps that leverage all the most obscure features of iOS (see: [Apple Settings UI](/blog/apple-settings)). Universal links are part of a larger Apple system known as "[Continuity](https://support.apple.com/en-us/HT204689)". These features connect one device or platform to another for a seamless user experience.
+
+Apple's _Continuity_ features include:
+
+- [Handoff to iPhone](https://support.apple.com/en-us/102426).
+- [Shared Credentials](https://developer.apple.com/documentation/security/shared_web_credentials/managing_shared_credentials).
+- [App Clips](https://developer.apple.com/app-clips/).
+- [Universal Clipboard](https://support.apple.com/en-us/HT209460).
+- Spotlight Search.
+- Siri Suggestions.
+- Quick Notes.
+
+Apple leverages many of these features in their stock apps (Safari, Notes, iMessage) to create perfect continuity between devices (also known as "the walled garden"). 
+
+These features can also be leveraged by third-party developers (you and me) to build similarly engaging user experiences. Expo Router already enables Quick Note and Handoff via the `<Head>` module: [demo video](https://x.com/Baconbrix/status/1641850192839180315?s=20).
+
+This continuity-based intersection of web and native is especially interesting to me. It seemingly defines a category of apps where universal-first development would lead to experiences that feel **more native** than apps built native-only, with a disjointed web experience attached to them.
+
+## Conclusion
+
+**Universal links are important.** They're a powerful native feature that top iOS apps highly leverage. Not implementing them feels very similar to building a website without SEO––highly unadvisable. However, implementing them is also very difficult, requiring a lot of time and effort to get right.
+
+I hope that by sharing my thoughts and this data, I can help developers and teams make a more informed decision about whether or not universal links are right for their app. And if they are, I encourage you to investigate [**Expo Router**](https://docs.expo.dev/routing/introduction/).

@@ -1,7 +1,29 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Animated, Easing } from 'react-native';
 
-export default function PageHeader({ children }) {
+export default function PageHeader({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
+  const text = useGlitchText(children);
+
+  return (
+    <h1
+      className={classNames(
+        'text-5xl min-h-[3rem] font-bold my-3 mx-2 md:mx-0 text-slate-50',
+        className
+      )}
+    >
+      {text}
+    </h1>
+  );
+}
+
+function useGlitchText(children: string) {
   const [text, setText] = React.useState('  ');
 
   const animated = React.useRef(new Animated.Value(0)).current;
@@ -35,11 +57,19 @@ export default function PageHeader({ children }) {
     }).start();
   }, [children]);
 
-  return (
-    <h1 className="text-5xl min-h-[3rem] font-bold my-3 mx-2 md:mx-0 text-slate-50">
-      {text}
-    </h1>
-  );
+  return text;
+}
+
+export function GlitchText({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
+  const text = useGlitchText(children);
+
+  return <p className={classNames(className)}>{text}</p>;
 }
 
 function randChar() {

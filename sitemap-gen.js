@@ -4,48 +4,27 @@ const fs = require('fs');
 const path = require('path');
 
 // Read all .html files in the dist folder and generate a sitemap from them, write it to both public/sitemap.xml and dist/sitemap.xml
-const distPath = path.join(__dirname, './dist');
+const distPath = path.join(__dirname, './dist/_expo/routes.json');
 
-function collectForDir(dir, parent = '') {
-  const files = fs.readdirSync(dir);
+const routes = JSON.parse(fs.readFileSync(distPath, 'utf8'))
+  .htmlRoutes.filter(
+    ({ generated, routeKeys }) => !generated && !Object.keys(routeKeys).length
+  )
+  .map(({ page }) => {
+    return page
+      .replace(/^\.\//, '')
+      .replace(/\/index$/, '')
+      .split('/')
+      .filter(segment => !segment.match(/\(.*\)/))
+      .join('/');
+  })
+  .map(url => {
+    const date = new Date().toISOString().split('T')[0];
+    return `<url><loc>https://evanbacon.dev/${url}</loc><lastmod>${date}</lastmod></url>`;
+  });
 
-  let lines = files
-    .filter(
-      file =>
-        file.endsWith('.html') &&
-        file !== '+not-found.html' &&
-        file !== '_sitemap.html' &&
-        !file.match(/\(.*\)/) &&
-        !file.match(/\[.*\]/)
-    )
-    .map(file => {
-      const url = `https://evanbacon.dev/${path
-        .join(parent, file)
-        .replace(/(index)?\.html/, '')}`.replace(/\/$/, '');
-      // Formatted as `2022-01-01`
-      const date = new Date().toISOString().split('T')[0];
-      return `<url><loc>${url}</loc><lastmod>${date}</lastmod></url>`;
-    });
-
-  // recurse into subdirectories
-
-  for (const file of files) {
-    if (
-      fs.statSync(path.join(dir, file)).isDirectory() &&
-      !file.match(/\(.*\)/) &&
-      !file.match(/\[.*\]/)
-    ) {
-      lines = lines.concat(
-        collectForDir(path.join(dir, file), path.join(parent, file))
-      );
-    }
-  }
-
-  return lines;
-}
-
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${collectForDir(
-  distPath
-).join('\n')}</urlset>`;
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${routes.join(
+  '\n'
+)}</urlset>`;
 fs.writeFileSync(path.join(__dirname, './public/sitemap.xml'), sitemap);
 fs.writeFileSync(path.join(__dirname, './dist/sitemap.xml'), sitemap);
