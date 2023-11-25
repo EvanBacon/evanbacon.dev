@@ -55,9 +55,11 @@ function useData(
 
 function BlogHead({ info }: { info: PostInfo }) {
   const pathname = usePathname();
-  const url = React.useMemo(() => Linking.createURL(pathname), [pathname]);
+  // const url = React.useMemo(() => Linking.createURL(pathname), [pathname]);
   const img =
     resolveAssetUri(info.featuredImage) ?? '/blog/og-image/' + info.slug;
+  const imgUrl = `http://evanbacon.dev${img}`;
+  const url = `http://evanbacon.dev${pathname}`;
   return (
     <Head>
       <title>{info.title}</title>
@@ -65,7 +67,7 @@ function BlogHead({ info }: { info: PostInfo }) {
       {/* TODO: Dynamic */}
       <meta name="keywords" content={info.tags.join(',')} />
 
-      <meta property="og:image" content={img} />
+      <meta property="og:image" content={imgUrl} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={info.title} />
       <meta property="og:description" content={info.subtitle} />
@@ -85,7 +87,7 @@ function BlogHead({ info }: { info: PostInfo }) {
           slug: info.slug,
           url: url,
           status: 'Published',
-          image: [img],
+          image: [imgUrl],
           datePublished: info.date,
           dateModified: info.date,
           author: [LD_EVAN_BACON],
