@@ -25,17 +25,6 @@ function sortByFramework(a: AppItem, b: AppItem) {
   return 0;
 }
 
-const A = 'a';
-const B = 'b';
-const H1 = 'h1';
-const Span = 'span';
-const Div = 'div';
-const P = 'p';
-const H2 = 'h2';
-const H3 = 'h3';
-const Img = 'img';
-const BR = 'br';
-
 export default function Showcase() {
   const apps = useMemo(() => {
     return Object.entries(getAppStoreData())
@@ -71,16 +60,16 @@ export default function Showcase() {
 
   return (
     <>
-      <Div className="relative flex flex-col">
-        <Div className="mx-auto">
-          <Div className="p-8">
-            <H1 className="text-4xl text-slate-50 md:text-5xl lg:text-6xl my-2 md:my-4 font-bold">
+      <div className="relative flex flex-col">
+        <div className="mx-auto">
+          <div className="p-8">
+            <h1 className="text-4xl text-slate-50 md:text-5xl lg:text-6xl my-2 md:my-4 font-bold">
               Expo Open Source Showcase
-            </H1>
-            <H3 className="text-1xl text-slate-50 md:text-2xl mb-2">
-              Top ranked iOS Apps using <B>Expo Open Source software</B>
+            </h1>
+            <h3 className="text-1xl text-slate-50 md:text-2xl mb-2">
+              Top ranked iOS Apps using <b>Expo Open Source software</b>
               .
-              <BR />
+              <br />
               This includes the{' '}
               <ExpoIcon
                 fill="white"
@@ -90,55 +79,55 @@ export default function Showcase() {
                 }}
                 width={'1.5rem'}
               />{' '}
-              <A className="underline" href="https://expo.dev" target="_blank">
+              <a className="underline" href="https://expo.dev" target="_blank">
                 Expo SDK
-              </A>{' '}
+              </a>{' '}
               and{' '}
               <ReactNavigationIcon
                 className="inline "
-                stroke="white"
+                fill="white"
                 style={{
                   marginTop: -3,
                 }}
                 width={'1.5rem'}
               />{' '}
-              <A
+              <a
                 className="underline"
                 href="https://reactnavigation.org/"
                 target="_blank"
               >
                 React Navigation.
-              </A>
-            </H3>
-          </Div>
+              </a>
+            </h3>
+          </div>
           {apps.map(([category, apps]) => (
-            <Div key={category} className="flex flex-col gap-y-1">
-              <Div className="flex flex-row px-8 gap-y-1 mb-4 items-center">
-                <Div className="flex flex-row items-center">
-                  <H2 className="font-bold text-slate-50 text-2xl md:text-3xl lg:text-4xl">
+            <div key={category} className="flex flex-col gap-y-1">
+              <div className="flex flex-row px-8 gap-y-1 mb-4 items-center">
+                <div className="flex flex-row items-center">
+                  <h2 className="font-bold text-slate-50 text-2xl md:text-3xl lg:text-4xl">
                     {ITUNES_GENRE_TO_CATEGORY[category] ?? category}
-                  </H2>
+                  </h2>
                   {category !== 'top' && (
-                    <Img
+                    <img
                       src={'/categories/' + category + '.avif'}
                       className="pl-2 w-8"
                     />
                   )}
-                </Div>
-                <Span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
+                </div>
+                <span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
 
-                <P className="text-gray-500">
+                <p className="text-gray-500">
                   {apps.map(apps => apps).flat().length} Apps
-                </P>
-              </Div>
+                </p>
+              </div>
               <Row
                 title={ITUNES_GENRE_TO_CATEGORY[category] ?? category}
                 apps={apps.flat()}
               />
-            </Div>
+            </div>
           ))}
-        </Div>
-      </Div>
+        </div>
+      </div>
     </>
   );
 }

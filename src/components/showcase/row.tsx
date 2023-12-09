@@ -1,10 +1,9 @@
 import { AppItem } from '@/data/getAppStoreData';
 import React from 'react';
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 
 import { AppButton } from './app-button';
 
-const Div = 'div';
 const Row = ({ title, apps }: { title: string; apps: AppItem[] }) => {
   return (
     <FlatList
@@ -19,9 +18,9 @@ const Row = ({ title, apps }: { title: string; apps: AppItem[] }) => {
       showsHorizontalScrollIndicator={false}
       data={apps}
       renderItem={({ item, index }) => (
-        <Div key={index} className="w-[8rem] md:w-[12rem] aspect-square">
+        <div key={index} className="w-[8rem] md:w-[12rem] aspect-square">
           <AppButton app={item} />
-        </Div>
+        </div>
       )}
     />
   );

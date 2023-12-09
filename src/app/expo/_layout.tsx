@@ -2,7 +2,7 @@ import Layout from '@/components/Layout';
 import { Slot } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: 'universal-links',
+  initialRouteName: 'showcase',
 };
 
 export default function ExpoLayout() {

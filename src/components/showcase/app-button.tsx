@@ -3,17 +3,13 @@ import { ExpoIcon, ReactNavigationIcon } from '@/components/showcase/icons';
 import { AppItem, getFrameworks } from '@/data/getAppStoreData';
 import React from 'react';
 
-const Div = 'div';
-const A = 'a';
-const H3 = 'h3';
-const Span = 'span';
 const altSafe = (name: string) => name.replace('–', '-').replace('’', "'");
 
 export function AppButton({ app }: { app: Partial<AppItem> }) {
   const iconSize = 24;
   const frameworks = getFrameworks(app);
   return (
-    <A
+    <a
       key={app.id}
       href={app.url}
       target="_blank"
@@ -21,9 +17,9 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
     >
       <AppIcon iconUrl={app.iconUrl!} name={app.name!} />
 
-      <Div className="gap-y-1 flex flex-col relative">
-        <Div className="flex items-center mt-2">
-          <Div className="flex items-center mt-2 gap-2 bg-slate-600/40 backdrop-blur rounded-full p-2 px-4">
+      <div className="gap-y-1 flex flex-col relative">
+        <div className="flex items-center mt-2">
+          <div className="flex items-center mt-2 gap-2 bg-slate-600/40 backdrop-blur rounded-full p-2 px-4">
             {frameworks.expoSdk && (
               <ExpoIcon
                 fill="white"
@@ -32,15 +28,15 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
             )}
             {frameworks.reactNavigation && (
               <ReactNavigationIcon
-                stroke="white"
+                fill="white"
                 style={{ width: iconSize, height: iconSize }}
               />
             )}
-          </Div>
-        </Div>
-        <H3 className="line-clamp-2	font-normal text-lg">{altSafe(app.name)}</H3>
-        <Span className="line-clamp-2	text-sm text-gray-500">{app.author}</Span>
-      </Div>
-    </A>
+          </div>
+        </div>
+        <h3 className="line-clamp-2	font-normal text-lg">{altSafe(app.name)}</h3>
+        <span className="line-clamp-2	text-sm text-gray-500">{app.author}</span>
+      </div>
+    </a>
   );
 }
