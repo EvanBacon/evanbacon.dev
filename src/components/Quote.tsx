@@ -31,5 +31,5 @@ export default function Quote({
 
 const styles = StyleSheet.create({
   startLeaf: { minWidth: 48, fill: color },
-  endLeaf: { minWidth: 48, fill: color, transform: [{ scaleX: -1 }] },
+  endLeaf: { minWidth: 48, fill: color, transform: `scaleX(-1)` },
 });

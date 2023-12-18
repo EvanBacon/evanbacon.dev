@@ -10,7 +10,7 @@
     "@bacons/mdx": "^0.1.0",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/source-code-pro": "^0.2.3",
-    "@expo/html-elements": "^0.4.2",
+    "@expo/html-elements": "^0.9.1",
     "@expo/react-native-action-sheet": "^3.12.0",
     "@expo/styleguide-icons": "^1.0.1",
     "@tanstack/react-query": "^5.8.7",
@@ -45,7 +45,8 @@
     "tailwindcss-safe-area": "^0.4.0"
   },
   "resolutions": {
-    "@expo/image-utils": "0.4.0"
+    "@expo/image-utils": "0.4.0",
+    "@expo/html-elements": "^0.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

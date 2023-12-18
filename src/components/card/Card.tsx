@@ -149,7 +149,7 @@ export default function ProjectCard({
               <Div key={social.icon}>
                 <Link
                   style={{ marginLeft: index === 0 ? 0 : 24 }}
-                  hoverStyle={{ transform: [{ scale: 1.1 }] }}
+                  hoverStyle={{ transform: `scale(1.1)` }}
                   target="_blank"
                   href={social.url}
                 >
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     height: ICON_SIZE,
     marginRight: 16,
     borderRadius: 8,
-    transform: [{ translateY: -upperFlow }],
+    transform: `translateY(${-upperFlow})`,
   },
   container: {
     flex: 1,
