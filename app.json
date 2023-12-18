@@ -37,7 +37,11 @@
       [
         "expo-router",
         {
-          "origin": "https://evanbacon.dev/"
+          "origin": "https://evanbacon.dev/",
+          "asyncRoutes": {
+            "web": true,
+            "default": false
+          }
         }
       ]
     ]

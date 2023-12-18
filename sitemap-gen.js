@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Read all .html files in the dist folder and generate a sitemap from them, write it to both public/sitemap.xml and dist/sitemap.xml
-const distPath = path.join(__dirname, './dist/_expo/routes.json');
+const distPath = path.join(__dirname, './dist/client/_expo/routes.json');
 
 const routes = JSON.parse(fs.readFileSync(distPath, 'utf8'))
   .htmlRoutes.filter(
