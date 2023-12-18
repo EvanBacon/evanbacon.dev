@@ -113,7 +113,7 @@ export default function Html({ children }) {
         {/* TODO: Allow body scrolling */}
         <ScrollViewStyleReset />
       </head>
-      <body>{children}</body>
+      <body style={{ overflowY: 'scroll' }}>{children}</body>
     </html>
   );
 }
