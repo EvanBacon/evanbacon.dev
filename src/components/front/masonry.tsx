@@ -5,7 +5,7 @@ const legoImages: [string, string][] = [
   ['/front/lego/stanlee.avif', 'Stan Lee and Evan Bacon in Austin, 2013'],
 
   [
-    '/front/lego/evan-superman.jpg',
+    '/front/lego/evan-superman.avif',
     'Evan Bacon with his life-size Lego Superman statue in Houston, May 2013',
   ],
   ['/front/lego/chrisevans.avif', 'Chris Evans and Evan Bacon in Utah'],
