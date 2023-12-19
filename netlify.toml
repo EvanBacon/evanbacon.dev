@@ -1,7 +1,7 @@
 [build]
-  command = "expo export --platform web --dump-sourcemap && node ./sitemap-gen.js"
+  command = "expo export -p web"
   functions = "netlify/functions"
-  publish = "dist"
+  publish = "dist/client"
 
 [[redirects]]
   from = "/*"
@@ -10,10 +10,10 @@
 
 [functions]
   # Include everything to ensure dynamic routes can be used.
-  included_files = ["dist/**/*.html", "dist/_expo/routes.json", "dist/_expo/functions/**/*"]
+  included_files = ["dist/server/**/*"]
 
 [[headers]]
-  for = "/dist/_expo/functions/*"
+  for = "/dist/server/_expo/functions/*"
   [headers.values]
     # Set to 60 seconds as an example.
     "Cache-Control" = "public, max-age=60, s-maxage=60"

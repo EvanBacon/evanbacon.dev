@@ -35,6 +35,7 @@ export default function Html({ children }) {
 
         {isProduction && (
           <>
+            {/* TODO: Prevent render blocking */}
             <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js" />
             <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-analytics.js" />
             <script dangerouslySetInnerHTML={setFirebase()} />
