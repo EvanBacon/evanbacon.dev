@@ -1,20 +1,21 @@
+import Intro from './intro.mdx'
+import After from './after.mdx'
+import Center from '@/components/center-in-full'
+import {ShowcaseData} from '../../src/app/expo/showcase';
 
-<Title date="2023-12-21T00:00:00.000Z">Expo Apps in 2023</Title>
+<Center>
+<Intro />
+</Center>
 
-Expo is a framework for building universal React apps. I've always wondered who uses our open source libraries and how impactful they are. Unlike the web where you can easily detect what frameworks or libraries a website is using, it's much more difficult to detect what apps are using your libraries.
+<br />
 
-In my personal time, I built a system to measure and detect which apps are using Expo, specifically which iOS apps were using either the Expo SDK, or the Expo navigation library React Navigation.
+<div className='max-w-full'>
+<ShowcaseData />
+</div>
 
-## Results
+<br />
 
+<Center>
+<After />
+</Center>
 
-
-
-
-## Detection
-
-Parsing all of the millions of iOS apps on the App Store is a daunting task. So I narrowed the measurement down to simply check trending apps. If an app appeared on the top charts, and hadn't been checked before, it would be checked for Expo usage.
-
-This is valuable because we can measure high-usage examples. If an app is trending, it's likely that it's being used by a lot of people. Meaning we can measure ratings, reviews, sentiment and other meaningful metrics.
-
-One of the most powerful aspects of React Native is that it works in brownfield apps. This makes it substantially harder to measure since the files can be added in unpredictable locations. For my measuring, I wanted to be conservative with the detection heursitic, if a file was detected in a non-standard location, I'd manually verify that it was a meaningful usage of Expo. There were at least two trending apps that shipped the hello world template and all requisite dependencies, then didn't appear to use them.

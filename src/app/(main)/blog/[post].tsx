@@ -1,8 +1,11 @@
 import { MarkdownTheme } from '@/components/MarkdownTheme';
+import CenterInFull from '@/components/center-in-full';
 import Thanks from '@/components/thanks';
 import { useFont } from '@/components/useFont';
+import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import { LD_EVAN_BACON } from '@/data/structured';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
+import classNames from 'classnames';
 import * as Linking from 'expo-linking';
 import { Stack, useLocalSearchParams, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
@@ -99,6 +102,7 @@ function BlogHead({ info }: { info: PostInfo }) {
 
 export default function Page() {
   const { post: postId } = useLocalSearchParams<{ post: string }>();
+  const isFullScreen = useIsFullScreenRoute();
   const data = useData(postId);
 
   const Inter_900Black = useFont('Inter_900Black');
@@ -131,10 +135,22 @@ export default function Page() {
           paddingVertical: 24,
         }}
       >
-        <div className="flex flex-1 px-3 flex-col">
+        <div
+          className={classNames(
+            'flex flex-1 flex-col',
+            !isFullScreen && 'px-3'
+          )}
+        >
           <MarkdownTheme>
             <MarkdownComponent />
-            <Thanks />
+
+            {isFullScreen ? (
+              <CenterInFull>
+                <Thanks />
+              </CenterInFull>
+            ) : (
+              <Thanks />
+            )}
           </MarkdownTheme>
         </div>
       </ScrollView>

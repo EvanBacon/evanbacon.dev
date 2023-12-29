@@ -69,7 +69,7 @@ export default function TabbedSlot({
     <ScreenContainer
       enabled={detachInactiveScreens}
       hasTwoStates
-      style={{ $$css: true, _: 'w-full' }}
+      style={{ $$css: true }}
     >
       {routes.map((route, index) => {
         const descriptor = descriptors[route.key];

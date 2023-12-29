@@ -1,0 +1,8 @@
+
+## Detection
+
+Parsing all of the millions of iOS apps on the App Store is a daunting task. So I narrowed the measurement down to simply check trending apps. If an app appeared on the top charts, and hadn't been checked before, it would be checked for Expo usage.
+
+This is valuable because we can measure high-usage examples. If an app is trending, it's likely that it's being used by a lot of people. Meaning we can measure ratings, reviews, sentiment and other meaningful metrics.
+
+One of the most powerful aspects of React Native is that it works in brownfield apps. This makes it substantially harder to measure since the files can be added in unpredictable locations. For my measuring, I wanted to be conservative with the detection heursitic, if a file was detected in a non-standard location, I'd manually verify that it was a meaningful usage of Expo. There were at least two trending apps that shipped the hello world template and all requisite dependencies, then didn't appear to use them.
