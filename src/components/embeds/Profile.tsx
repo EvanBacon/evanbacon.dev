@@ -84,7 +84,7 @@ export function ExternalCard({
           <View
             style={{
               marginTop: 8,
-              borderRadius: '1rem',
+              borderRadius: '0.2rem',
               overflow: 'hidden',
               // borderColor: '#6572A0',
               // borderWidth: 1,
