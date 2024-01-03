@@ -52,24 +52,27 @@ function getAppData() {
       // Sort by length of data array
       return b[1].length - a[1].length;
     })
+    .filter(([category, apps]) => {
+      // Filter out categories with less than 5 apps
+      return category !== 'top' && category !== 'kids';
+    })
     .sort((a, b) => {
       // Sort by preferred order
       return preferredOrder.indexOf(b[0]) - preferredOrder.indexOf(a[0]);
     })
-
     .map(category => {
       // If an app's bundle ID is in the FAVORITES array, ensure it shows in the ranked category
-      category[1].forEach(app => {
-        if (app.rank === -1 && FAVORITES.includes(app.bundleId)) {
-          // Doesn't need to be at the top, usually this is for displaying the brand,
-          // however if the app wasn't ranked then it may not be the most refined.
-          app.rank = 1000;
-        }
-      });
+      // category[1].forEach(app => {
+      //   if (app.rank === -1 && FAVORITES.includes(app.bundleId)) {
+      //     // Doesn't need to be at the top, usually this is for displaying the brand,
+      //     // however if the app wasn't ranked then it may not be the most refined.
+      //     app.rank = 1000;
+      //   }
+      // });
 
-      // Split the data into two arrays, one with ranked apps and one with unranked apps
-      const ranked = category[1].filter(app => app.rank !== -1);
-      const unranked = category[1].filter(app => app.rank === -1);
+      // // Split the data into two arrays, one with ranked apps and one with unranked apps
+      // const ranked = category[1].filter(app => app.rank !== -1);
+      // const unranked = category[1].filter(app => app.rank === -1);
 
       // Sort the ranked apps by rank
       return [
@@ -150,6 +153,17 @@ export function ShowcaseData({
 }: {
   apps?: (readonly [string, AppItem[]])[];
 }) {
+  const totalApps = useMemo(() => {
+    const count = uniqueBy(
+      apps.map(([category, apps]) => apps).flat(),
+      'bundleId'
+    ).length;
+
+    return new Intl.NumberFormat('en-US').format(count);
+  }, [apps]);
+
+  console.log('totalApps', totalApps);
+
   return (
     <>
       {apps.map(([category, apps]) => (

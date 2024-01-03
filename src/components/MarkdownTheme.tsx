@@ -344,6 +344,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         marginTop: 0,
         marginBottom: '1.25em',
         color: '#f2f5f7',
+        display: 'block',
       }}
       blockquote={{
         fontFamily: useFont('Inter_400Regular'),
