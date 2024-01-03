@@ -3,9 +3,11 @@
 
 Parsing all of the millions of iOS apps on the App Store is a daunting task. So I narrowed the measurement down to simply check trending apps. If an app appeared on the top charts, and hadn't been checked before, it would be checked for Expo usage.
 
-This is valuable because we can measure high-usage examples. If an app is trending, it's likely that it's being used by a lot of people. Meaning we can measure ratings, reviews, sentiment and other meaningful metrics.
+This is valuable because if an app is trending, it's likely to have lots of users and serve real-world value. It's motivating to see that our open-source efforts have helped to make the world a better place.
 
-One of the most powerful aspects of React Native is that it works in brownfield apps. This makes it substantially harder to measure since the files can be added in unpredictable locations. For my measuring, I wanted to be conservative with the detection heursitic, if a file was detected in a non-standard location, I'd manually verify that it was a meaningful usage of Expo. There were at least two trending apps that shipped the hello world template and all requisite dependencies, then didn't appear to use them.
+One of the most powerful aspects of React Native is that it works in brownfield apps. This makes it substantially harder to measure for usage since the files can be added in unpredictable locations. For my measuring, I wanted to be conservative with the detection heursitic, if a file was detected in a non-standard location, I'd manually verify that it was a meaningful usage before adding it to the overal heuristic. There were at least two trending apps that shipped the hello world template and all requisite dependencies, then didn't appear to use them.
+
+Processing the data become slow after a while, but I switched from `ts-node` to [**Bun**](https://bun.sh/) and saw exponentially faster results.
 
 ## Further
 

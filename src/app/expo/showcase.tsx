@@ -148,7 +148,8 @@ export default function Showcase() {
     </>
   );
 }
-export function ShowcaseData({
+
+export function TotalApps({
   apps = getAppData(),
 }: {
   apps?: (readonly [string, AppItem[]])[];
@@ -162,8 +163,14 @@ export function ShowcaseData({
     return new Intl.NumberFormat('en-US').format(count);
   }, [apps]);
 
-  console.log('totalApps', totalApps);
+  return <span>{totalApps}</span>;
+}
 
+export function ShowcaseData({
+  apps = getAppData(),
+}: {
+  apps?: (readonly [string, AppItem[]])[];
+}) {
   return (
     <>
       {apps.map(([category, apps]) => (

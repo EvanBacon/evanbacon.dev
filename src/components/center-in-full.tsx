@@ -1,6 +1,12 @@
 import cn from 'classnames';
 
-export default function CenterInFull({ children, className }) {
+export default function CenterInFull({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
     <div
       className={cn(
