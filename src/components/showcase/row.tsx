@@ -9,6 +9,7 @@ const Row = ({ title, apps }: { title: string; apps: AppItem[] }) => {
     <FlatList
       horizontal
       style={{ width: '100vw', overflowY: 'visible' } as any}
+      initialNumToRender={12}
       contentContainerStyle={{
         overflowY: 'visible',
         paddingHorizontal: 24,

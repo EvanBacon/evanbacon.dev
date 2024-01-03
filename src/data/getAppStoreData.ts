@@ -7,12 +7,13 @@ export type AppItem = {
   bundleId: string;
   rank: number;
   rating: number;
-  minimumOsVersion: string;
+  absoluteRating: number;
   releaseDate: string;
   url: string;
   iconUrl: string;
   bannerUrl?: string;
   matches: string[];
+  checkedAt?: string;
 };
 
 export type CategoryItem = {

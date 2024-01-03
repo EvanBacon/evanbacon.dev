@@ -36,6 +36,15 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
         </div>
         <h3 className="line-clamp-2	font-normal text-lg">{altSafe(app.name)}</h3>
         <span className="line-clamp-2	text-sm text-gray-500">{app.author}</span>
+        {app.checkedAt && (
+          <span className="line-clamp-2	text-sm text-gray-500">
+            {new Intl.DateTimeFormat('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }).format(new Date(app.checkedAt!))}
+          </span>
+        )}
       </div>
     </a>
   );
