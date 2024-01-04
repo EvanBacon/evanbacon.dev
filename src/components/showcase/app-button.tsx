@@ -3,8 +3,6 @@ import { ExpoIcon, ReactNavigationIcon } from '@/components/showcase/icons';
 import { AppItem, getFrameworks } from '@/data/getAppStoreData';
 import React from 'react';
 
-const altSafe = (name: string) => name.replace('–', '-').replace('’', "'");
-
 export function AppButton({ app }: { app: Partial<AppItem> }) {
   const iconSize = 24;
   const frameworks = getFrameworks(app);
@@ -41,7 +39,7 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
 
   return (
     <a
-      key={app.id}
+      key={app.url}
       href={app.url}
       target="_blank"
       className="gap-y-1 text-slate-50 flex flex-col"
@@ -65,7 +63,7 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
             )}
           </div>
         </div>
-        <h3 className="line-clamp-2	font-normal text-lg">{altSafe(app.name)}</h3>
+        <h3 className="line-clamp-2	font-normal text-lg">{app.name}</h3>
         {/* <span className="line-clamp-2	text-sm text-gray-500">{app.author}</span> */}
         {checkedAt && (
           <span

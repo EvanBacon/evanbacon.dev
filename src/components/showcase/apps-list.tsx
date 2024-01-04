@@ -1,10 +1,6 @@
 import Row from '@/components/showcase/row';
 import { ITUNES_GENRE_TO_CATEGORY } from '@/data/app-store-categories';
-import {
-  AppItem,
-  getAppStoreData,
-  getFrameworks,
-} from '@/data/getAppStoreData';
+import { AppItem, getAppStoreData } from '@/data/getAppStoreData';
 import React, { useMemo } from 'react';
 
 const preferredOrder = [
@@ -57,10 +53,8 @@ export function TotalApps({
   apps?: (readonly [string, AppItem[]])[];
 }) {
   const totalApps = useMemo(() => {
-    const count = uniqueBy(
-      apps.map(([category, apps]) => apps).flat(),
-      'bundleId'
-    ).length;
+    const count = uniqueBy(apps.map(([category, apps]) => apps).flat(), 'url')
+      .length;
 
     return new Intl.NumberFormat('en-US').format(count);
   }, [apps]);

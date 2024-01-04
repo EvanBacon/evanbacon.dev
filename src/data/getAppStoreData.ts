@@ -1,19 +1,19 @@
 import data from '@/expo-oss-showcase-data.json';
 
 export type AppItem = {
-  id: string;
-  author: string;
   name: string;
-  bundleId: string;
-  rank: number;
-  rating: number;
   absoluteRating: number;
-  releaseDate: string;
   url: string;
   iconUrl: string;
-  bannerUrl?: string;
   matches: string[];
   checkedAt?: string;
+  // id: string;
+  // author: string;
+  // bundleId: string;
+  // rank: number;
+  // rating: number;
+  // releaseDate: string;
+  // bannerUrl?: string;
 };
 
 export type CategoryItem = {

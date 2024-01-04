@@ -6,11 +6,10 @@ import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import { LD_EVAN_BACON } from '@/data/structured';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 import classNames from 'classnames';
-import * as Linking from 'expo-linking';
 import { Stack, useLocalSearchParams, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 
 export async function generateStaticParams(): Promise<{ post: string }[]> {
   return mdxctx
