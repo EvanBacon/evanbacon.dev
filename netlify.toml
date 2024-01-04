@@ -10,7 +10,7 @@
 
 [[redirects]]
   from = "/expo/showcase"
-  to = "/blog/expo-2023"
+  to = "/blog/expo-2024"
 
 [functions]
   # Include everything to ensure dynamic routes can be used.
