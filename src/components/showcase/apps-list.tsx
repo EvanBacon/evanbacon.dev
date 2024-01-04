@@ -42,7 +42,11 @@ function getAppData() {
       // Sort the ranked apps by rank
       return [
         category[0],
-        category[1].sort((a, b) => b.absoluteRating - a.absoluteRating),
+        category[1].sort(
+          (a, b) => b.absoluteRating - a.absoluteRating
+          // b.absoluteRating * b.matches.length -
+          // a.absoluteRating * a.matches.length
+        ),
       ] as const;
     });
 }

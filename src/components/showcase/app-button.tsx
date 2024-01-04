@@ -49,7 +49,7 @@ export function AppButton({ app }: { app: Partial<AppItem> }) {
       <AppIcon iconUrl={app.iconUrl!} name={app.name!} />
 
       <div className="gap-y-1 flex flex-col relative" title={matches}>
-        <div className="flex items-center mt-2">
+        <div className="flex items-center">
           <div className="flex items-center mt-2 gap-2 bg-slate-600/40 backdrop-blur rounded-full p-2 px-4 select-none">
             {frameworks.expoSdk && (
               <ExpoIcon
