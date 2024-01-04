@@ -70,6 +70,7 @@ function BlogHead({ info }: { info: PostInfo }) {
       {/* TODO: Dynamic */}
       <meta name="keywords" content={info.tags.join(',')} />
 
+      <meta property="og:image:secure_url" content={imgUrl} />
       <meta property="og:image" content={imgUrl} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={info.title} />

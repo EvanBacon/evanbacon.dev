@@ -8,10 +8,6 @@
   to = "/.netlify/functions/server"
   status = 404
 
-[[redirects]]
-  from = "/expo/showcase"
-  to = "/blog/expo-2024"
-
 [functions]
   # Include everything to ensure dynamic routes can be used.
   included_files = ["dist/server/**/*"]
