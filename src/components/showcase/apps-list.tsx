@@ -4,8 +4,8 @@ import { AppItem, getAppStoreData } from '@/data/getAppStoreData';
 import React, { useMemo } from 'react';
 
 const preferredOrder = [
-  'food',
   'finance',
+  'food',
   'sports',
   'shopping',
   'business',
@@ -39,9 +39,10 @@ function getAppData() {
       return [
         category[0],
         category[1].sort(
-          (a, b) => b.absoluteRating - a.absoluteRating
-          // b.absoluteRating * b.matches.length -
-          // a.absoluteRating * a.matches.length
+          (a, b) =>
+            //   b.absoluteRating - a.absoluteRating
+            b.absoluteRating * b.matches.length -
+            a.absoluteRating * a.matches.length
         ),
       ] as const;
     });

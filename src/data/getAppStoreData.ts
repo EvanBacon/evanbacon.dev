@@ -21,20 +21,16 @@ export type CategoryItem = {
   data: AppItem[];
 };
 
-// NOTE(EvanBacon): Expo Router static rendering struggles with unicode characters
-const altSafe = (name: string) => name.replace('–', '-').replace('’', "'");
-
 export function getAppStoreData(): Record<string, AppItem[]> {
   return data;
 }
 
-function uniqeBy<T>(arr: T[], key: keyof T) {
-  return arr.filter((v, i, a) => a.findIndex(t => t[key] === v[key]) === i);
-}
-
 export function getFrameworks(app: Partial<AppItem>) {
+  const expoMatches = app.matches.find(p =>
+    p.match(/(expo*|EXConstants|EXUpdates)/gi)
+  );
   return {
-    expoSdk: app.matches.find(p => p.match(/(expo*|EXConstants|EXUpdates)/gi)),
-    reactNavigation: app.matches.find(p => p.includes('react-navigation')),
+    expoSdk: expoMatches,
+    reactNavigation: app.matches.find(p => expoMatches !== p),
   };
 }

@@ -74,12 +74,12 @@ export default function App() {
       content: `website`,
     },
     // Image
-    { property: 'og:image', content: `http://evanbacon.dev${image.url}` },
+    { property: 'og:image', content: `https://evanbacon.dev${image.url}` },
     {
       property: 'og:image:secure_url',
       content: `https://evanbacon.dev/${image.url.replace(/^\/+/, '')}`,
     },
-    { property: 'og:image:type', content: image.type },
+    // { property: 'og:image:type', content: image.type },
     { property: 'og:image:width', content: image.width },
     { property: 'og:image:height', content: image.height },
     { property: 'og:image:alt', content: image.description },
@@ -88,6 +88,8 @@ export default function App() {
     { name: `twitter:creator`, content: site.author },
     { name: `twitter:title`, content: title },
     { name: `twitter:description`, content: description },
+    { name: `twitter:image`, content: `https://evanbacon.dev${image.url}` },
+
     // Fix viewport by disabling scaling
     {
       key: 'viewport',

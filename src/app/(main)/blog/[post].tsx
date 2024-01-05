@@ -60,8 +60,8 @@ function BlogHead({ info }: { info: PostInfo }) {
   // const url = React.useMemo(() => Linking.createURL(pathname), [pathname]);
   const img =
     resolveAssetUri(info.featuredImage) ?? '/blog/og-image/' + info.slug;
-  const imgUrl = `http://evanbacon.dev${img}`;
-  const url = `http://evanbacon.dev${pathname}`;
+  const imgUrl = `https://evanbacon.dev${img}`;
+  const url = `https://evanbacon.dev${pathname}`;
   return (
     <Head>
       <title>{info.title}</title>
@@ -71,15 +71,18 @@ function BlogHead({ info }: { info: PostInfo }) {
 
       <meta property="og:image:secure_url" content={imgUrl} />
       <meta property="og:image" content={imgUrl} />
+      <meta property="og:image:alt" content={info.subtitle} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={info.title} />
       <meta property="og:description" content={info.subtitle} />
       <meta property="og:url" content={url} />
       <meta property="og:published_time" content={info.date} />
 
-      <meta name="twitter:card" content="summary" />
+      <meta property="twitter:url" content={url} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={info.title} />
       <meta name="twitter:description" content={info.subtitle} />
+      <meta name="twitter:image" content={imgUrl} />
 
       <script id="ld+article" type="application/ld+json">
         {JSON.stringify({
