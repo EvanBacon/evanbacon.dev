@@ -1,0 +1,22 @@
+diff --git a/node_modules/expo-router/build/views/SuspenseFallback.js b/node_modules/expo-router/build/views/SuspenseFallback.js
+index 99cc020..ad7cef9 100644
+--- a/node_modules/expo-router/build/views/SuspenseFallback.js
++++ b/node_modules/expo-router/build/views/SuspenseFallback.js
+@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.SuspenseFallback = void 0;
+ const react_1 = __importDefault(require("react"));
+ const Toast_1 = require("./Toast");
++
+ function SuspenseFallback({ route }) {
+     if (__DEV__) {
+         return (<Toast_1.ToastWrapper>
+@@ -13,7 +14,7 @@ function SuspenseFallback({ route }) {
+       </Toast_1.ToastWrapper>);
+     }
+     // TODO: Support user's customizing the fallback.
+-    return null;
++    return <div style={{ minHeight: '100vh' }}/>
+ }
+ exports.SuspenseFallback = SuspenseFallback;
+ //# sourceMappingURL=SuspenseFallback.js.map
+\ No newline at end of file

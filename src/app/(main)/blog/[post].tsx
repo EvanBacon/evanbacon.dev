@@ -1,13 +1,15 @@
 import { MarkdownTheme } from '@/components/MarkdownTheme';
+import CenterInFull from '@/components/center-in-full';
 import Thanks from '@/components/thanks';
 import { useFont } from '@/components/useFont';
+import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import { LD_EVAN_BACON } from '@/data/structured';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
-import * as Linking from 'expo-linking';
+import classNames from 'classnames';
 import { Stack, useLocalSearchParams, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 
 export async function generateStaticParams(): Promise<{ post: string }[]> {
   return mdxctx
@@ -67,6 +69,7 @@ function BlogHead({ info }: { info: PostInfo }) {
       {/* TODO: Dynamic */}
       <meta name="keywords" content={info.tags.join(',')} />
 
+      <meta property="og:image:secure_url" content={imgUrl} />
       <meta property="og:image" content={imgUrl} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={info.title} />
@@ -99,6 +102,7 @@ function BlogHead({ info }: { info: PostInfo }) {
 
 export default function Page() {
   const { post: postId } = useLocalSearchParams<{ post: string }>();
+  const isFullScreen = useIsFullScreenRoute();
   const data = useData(postId);
 
   const Inter_900Black = useFont('Inter_900Black');
@@ -131,10 +135,22 @@ export default function Page() {
           paddingVertical: 24,
         }}
       >
-        <div className="flex flex-1 px-3 flex-col">
+        <div
+          className={classNames(
+            'flex flex-1 flex-col',
+            !isFullScreen && 'px-3'
+          )}
+        >
           <MarkdownTheme>
             <MarkdownComponent />
-            <Thanks />
+
+            {isFullScreen ? (
+              <CenterInFull>
+                <Thanks />
+              </CenterInFull>
+            ) : (
+              <Thanks />
+            )}
           </MarkdownTheme>
         </div>
       </ScrollView>

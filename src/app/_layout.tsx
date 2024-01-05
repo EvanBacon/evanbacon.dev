@@ -1,5 +1,3 @@
-import { LogBox } from 'react-native';
-
 import {
   Inter_300Light,
   Inter_400Regular,
@@ -14,14 +12,6 @@ import { Background } from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
-
-import '../../global.css';
-
-if (__DEV__) {
-  LogBox.ignoreLogs(['"transform" style array value is deprecated.']);
-} else {
-  LogBox.ignoreAllLogs();
-}
 
 const site = {
   title: 'Evan Bacon',

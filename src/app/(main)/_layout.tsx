@@ -5,8 +5,9 @@ import {
   TabbedNavigator,
   useTabScrollToTop,
 } from '@/components/top-nav/tab-slot';
+import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import classNames from 'classnames';
-import { Link } from 'expo-router';
+import { Link, usePathname } from 'expo-router';
 import React from 'react';
 
 function HeaderLogo() {
@@ -41,7 +42,7 @@ function HeaderLogo() {
 
 function SideBar() {
   return (
-    <div className="w-20 xl:w-[244px] mr-safe">
+    <div className="w-mdrail xl:w-[244px] mr-safe">
       <div className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]">
         <div className="items-stretch flex pl-safe xl:items-start">
           <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
@@ -182,16 +183,25 @@ function SideBarTabItem({
 }
 
 export default function ResponsiveNavigator() {
+  const isFullScreen = useIsFullScreenRoute();
   return (
     <TabbedNavigator screenOptions={{}}>
-      <div className="flex flex-1 flex-col md:flex-row pr-safe pt-safe">
+      <div className="flex flex-1 flex-col md:flex-row pr-safe pt-safe max-w-full">
         <div className="hidden md:flex">
           <SideBar />
         </div>
 
         <AppHeader />
 
-        <div className="container mx-auto px-4 max-w-3xl md:px-6 lg:px-0 flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4">
+        <div
+          className={classNames(
+            'flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 overflow-x-hidden',
+
+            isFullScreen
+              ? 'px-0 mx-0 max-w-full'
+              : 'container mx-auto px-4 md:px-6 lg:px-0 max-w-3xl'
+          )}
+        >
           <InnerSlot />
           <CustomFooter />
         </div>

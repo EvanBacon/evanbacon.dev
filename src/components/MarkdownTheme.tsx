@@ -344,6 +344,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         marginTop: 0,
         marginBottom: '1.25em',
         color: '#f2f5f7',
+        display: 'block',
       }}
       blockquote={{
         fontFamily: useFont('Inter_400Regular'),
@@ -589,7 +590,10 @@ function getAnchorBrand(text: string) {
   if (text.toString().match(/^lego$/i)) {
     return 'lego';
   }
-  if (text.toString().match(/^expo$/i)) {
+  if (text.toString().match(/^(react-navigation|react navigation)$/i)) {
+    return 'react-navigation';
+  }
+  if (text.toString().match(/^(expo|expo sdk)$/i)) {
     return 'expo';
   }
   return null;
@@ -597,6 +601,7 @@ function getAnchorBrand(text: string) {
 
 const BRAND_TO_LOGO = {
   'expo-router': ExpoRouterSvg,
+  'react-navigation': ReactNavigation,
   sirusxm: SiriusXM,
   expo: ExpoSvg,
   lego: LegoSvg,
@@ -604,3 +609,4 @@ const BRAND_TO_LOGO = {
 import LegoSvg from '@/svg/lego.svg';
 import ExpoSvg from '@/svg/expo.svg';
 import SiriusXM from '@/svg/sirus-xm.svg';
+import ReactNavigation from '@/svg/react-navigation.svg';

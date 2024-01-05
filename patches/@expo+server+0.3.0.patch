@@ -1,0 +1,26 @@
+diff --git a/node_modules/@expo/server/build/index.js b/node_modules/@expo/server/build/index.js
+index 51e01fb..da2c969 100644
+--- a/node_modules/@expo/server/build/index.js
++++ b/node_modules/@expo/server/build/index.js
+@@ -102,9 +102,20 @@ function createRequestHandler(distFolder, { getRoutesManifest: getInternalRoutes
+             routesManifest = getRoutesManifest(distFolder);
+         }
+         const url = new url_1.URL(request.url, 'http://expo.dev');
+-        const sanitizedPathname = url.pathname;
++        let sanitizedPathname = url.pathname;
+         debug('Request', sanitizedPathname);
+         if (request.method === 'GET' || request.method === 'HEAD') {
++
++            // TODO: Official redirect support
++            if (sanitizedPathname.match(/^\/expo\/showcase/)) {
++                return new environment_1.ExpoResponse('Redirecting', {
++                    status: 301,
++                    headers: {
++                        Location: '/blog/expo-2024',
++                    },
++                });
++            }
++
+             // First test static routes
+             for (const route of routesManifest.htmlRoutes) {
+                 if (!route.namedRegex.test(sanitizedPathname)) {

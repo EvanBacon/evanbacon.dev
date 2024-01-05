@@ -6,6 +6,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      width: {
+        mdrail: 'calc(1.5rem + 65px)',
+      },
       screens: {
         canhover: { raw: '(hover: hover)' },
       },

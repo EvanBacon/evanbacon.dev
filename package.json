@@ -1,5 +1,5 @@
 {
-  "main": "expo-router/entry",
+  "main": "./index",
   "scripts": {
     "start": "expo",
     "prepare": "npx patch-package",

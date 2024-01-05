@@ -1,10 +1,5 @@
-import { MarkdownTheme } from '@/components/MarkdownTheme';
 import { AppIcon } from '@/components/showcase/app-icon';
-import LinksInfo from '@/components/universal-links/about-links.mdx';
-import {
-  ITUNES_GENRE_TO_CATEGORY,
-  ITUNES_GENRE_TO_CATEGORY_SHORT,
-} from '@/data/app-store-categories';
+import { ITUNES_GENRE_TO_CATEGORY_SHORT } from '@/data/app-store-categories';
 import {
   QueryClient,
   QueryClientProvider,

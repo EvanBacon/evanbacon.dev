@@ -1,18 +1,19 @@
 import data from '@/expo-oss-showcase-data.json';
 
 export type AppItem = {
-  id: string;
-  author: string;
   name: string;
-  bundleId: string;
-  rank: number;
-  rating: number;
-  minimumOsVersion: string;
-  releaseDate: string;
+  absoluteRating: number;
   url: string;
   iconUrl: string;
-  bannerUrl?: string;
   matches: string[];
+  checkedAt?: string;
+  // id: string;
+  // author: string;
+  // bundleId: string;
+  // rank: number;
+  // rating: number;
+  // releaseDate: string;
+  // bannerUrl?: string;
 };
 
 export type CategoryItem = {
@@ -24,33 +25,7 @@ export type CategoryItem = {
 const altSafe = (name: string) => name.replace('–', '-').replace('’', "'");
 
 export function getAppStoreData(): Record<string, AppItem[]> {
-  // const mapped = data.reduce((acc, app) => {
-  //   if (!acc[app.category]) {
-  //     acc[app.category] = [];
-  //   }
-  //   acc[app.category].push(app);
-  //   return acc;
-  // }, {}) as Record<string, AppItem[]>;
-
-  // return Object.fromEntries(
-  //   Object.entries(mapped).map(([key, value]) => [
-  //     key,
-  //     uniqeBy(value, 'bundleId').map(value => ({
-  //       ...value,
-  //       name: altSafe(value.name),
-  //     })),
-  //   ])
-  // );
-
-  return Object.fromEntries(
-    Object.entries(data).map(([key, value]) => [
-      key,
-      value.map(value => ({
-        ...value,
-        name: altSafe(value.name),
-      })),
-    ])
-  );
+  return data;
 }
 
 function uniqeBy<T>(arr: T[], key: keyof T) {

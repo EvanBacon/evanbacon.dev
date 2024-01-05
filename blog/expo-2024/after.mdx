@@ -1,0 +1,29 @@
+## Motivation
+
+Unlike the web where you can easily detect what frameworks or libraries a website is using by opening the console, it's much more difficult to detect what libraries are used in native iOS apps.
+
+In my personal time, I built a [Rube Goldberg](https://en.wikipedia.org/wiki/Rube_Goldberg_machine)-styled contraption to measure which of the top trending iOS apps are using Expo's open source libraries in production. I only wanted to include apps with meaningful usage (e.g. not some small utility package), so I only measured for React Navigation and Expo SDK, which both require a fair amount of integration.
+
+The results were astounding, and as it turns out, it's pretty easy to get certain accounts flagged and closed.
+
+## Detection
+
+Parsing all of the millions of iOS apps on the App Store is a daunting task. So I narrowed the measurement down to check trending apps, from the top down. If an app appeared on the top charts, and hadn't been checked before, it would be checked for meaningful Expo OSS usage.
+
+This is valuable because if an app appears in trending, it's likely to have lots of users and serve real-world value.
+
+One of the most powerful aspects of React Native is that it works in brownfield apps. This makes it substantially harder to measure for usage since the files can be added in unpredictable locations. For my measuring, I wanted to be conservative with the detection heursitic, if a file was detected in a non-standard location, I'd manually verify that it was a meaningful usage before adding it to the overal heuristic. There were at least two trending apps that shipped the hello world template and all requisite dependencies, then didn't appear to use them.
+
+Processing the data became very slow after a while, but I switched from `ts-node` to [**Bun**](https://bun.sh/) and saw exponentially faster results. Specifically for reading files on disk.
+
+All of the data above is publicly accessible and can be independently verified by downloading the app files from the store. I only performed the search against the top free charts.
+
+## Non sequiturs
+
+For certain categories, such as "News", I experimented with collecting the top 500 trending apps instead of the standard 100. This was in an effort to determine a correlation between trending rank and framework usage. At the time of writing this, I found no conclusive evidence of any such correlation. I'm currently expanding more categories, but there are challenges related to rate limiting that have delayed this for a while.
+
+As a result, the number of apps in a given category according to this list is not an accurate reflection of the popularity of that category in regards to React Native. For example, the "Developer Tools" section ranks closer to the bottom of the list, even though this category tends to have a higher frequency of framework usage.
+
+## Further
+
+If you have recommendations, tweet them at me [@baconbrix](https://x.com/baconbrix), or open an [issue on the repo](https://github.com/EvanBacon/evanbacon.dev/issues). If you want to repost this data, please attribute the original project.
