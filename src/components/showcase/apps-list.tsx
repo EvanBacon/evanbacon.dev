@@ -1,9 +1,10 @@
 import Row from '@/components/showcase/row';
-import { ITUNES_GENRE_TO_CATEGORY } from '@/data/app-store-categories';
+import { ITUNES_GENRE_TO_CATEGORY_SHORT } from '@/data/app-store-categories';
 import { AppItem, getAppStoreData } from '@/data/getAppStoreData';
 import React, { useMemo } from 'react';
 
 const preferredOrder = [
+  'top',
   'finance',
   'food',
   'sports',
@@ -75,7 +76,7 @@ export function ShowcaseData({
           <div className="flex flex-row px-8 gap-y-1 mb-4 items-center">
             <div className="flex flex-row items-center">
               <h2 className="font-bold text-slate-50 text-2xl md:text-3xl lg:text-4xl">
-                {ITUNES_GENRE_TO_CATEGORY[category] ?? category}
+                {ITUNES_GENRE_TO_CATEGORY_SHORT[category] ?? category}
               </h2>
               {category !== 'top' && (
                 <img
@@ -88,10 +89,7 @@ export function ShowcaseData({
 
             <p className="text-gray-500">{apps.length} Apps</p>
           </div>
-          <Row
-            title={ITUNES_GENRE_TO_CATEGORY[category] ?? category}
-            apps={apps}
-          />
+          <Row apps={apps} />
         </div>
       ))}
     </>

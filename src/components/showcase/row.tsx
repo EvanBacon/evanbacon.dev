@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 
 import { AppButton } from './app-button';
 
-const Row = ({ title, apps }: { title: string; apps: AppItem[] }) => {
+const Row = ({ apps }: { apps: AppItem[] }) => {
   return (
     <FlatList
       horizontal
