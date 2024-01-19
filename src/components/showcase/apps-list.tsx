@@ -35,6 +35,10 @@ function getAppData() {
       // Sort by preferred order
       return preferredOrder.indexOf(b[0]) - preferredOrder.indexOf(a[0]);
     })
+    .filter(([category, apps]) => {
+      // Filter out categories with no apps
+      return apps.length > 1;
+    })
     .map(category => {
       // Sort the ranked apps by rank
       return [
@@ -55,7 +59,7 @@ export function TotalApps({
   apps?: (readonly [string, AppItem[]])[];
 }) {
   const totalApps = useMemo(() => {
-    const count = uniqueBy(apps.map(([category, apps]) => apps).flat(), 'url')
+    const count = uniqueBy(apps.map(([category, apps]) => apps).flat(), 'id')
       .length;
 
     return new Intl.NumberFormat('en-US').format(count);

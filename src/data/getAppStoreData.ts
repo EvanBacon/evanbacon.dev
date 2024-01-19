@@ -2,6 +2,7 @@ import data from '@/expo-oss-showcase-data.json';
 
 export type AppItem = {
   name: string;
+  id: string;
   absoluteRating: number;
   url: string;
   iconUrl: string;
