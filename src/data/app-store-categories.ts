@@ -82,4 +82,5 @@ export const ITUNES_GENRE_TO_CATEGORY_SHORT = {
   weather: 'Weather',
   developer: 'Dev Tools',
   top: 'Top Apps',
+  new: 'Newly Discovered',
 };

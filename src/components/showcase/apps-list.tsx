@@ -73,29 +73,74 @@ export function ShowcaseData({
 }: {
   apps?: (readonly [string, AppItem[]])[];
 }) {
+  const newCategory = useMemo(() => {
+    return apps
+      .map(([, apps]) => apps)
+      .flat()
+      .sort((a, b) => {
+        return (
+          new Date(b.checkedAt!).getTime() - new Date(a.checkedAt!).getTime()
+        );
+      })
+      .slice(0, 50)
+      .sort((a, b) => {
+        return b.absoluteRating - a.absoluteRating;
+      });
+  }, [apps]);
+
+  const appsWithNewInjected = useMemo(() => {
+    return [apps[0], ['new', newCategory], ...apps.slice(1)] as (readonly [
+      string,
+      AppItem[]
+    ])[];
+  }, [apps, newCategory]);
+
   return (
     <>
-      {apps.map(([category, apps]) => (
-        <div key={category} className="flex flex-col gap-y-1">
-          <div className="flex flex-row px-8 gap-y-1 mb-4 items-center">
-            <div className="flex flex-row items-center">
-              <h2 className="font-bold text-slate-50 text-2xl md:text-3xl lg:text-4xl">
-                {ITUNES_GENRE_TO_CATEGORY_SHORT[category] ?? category}
-              </h2>
-              {category !== 'top' && (
-                <img
-                  src={'/categories/' + category + '.avif'}
-                  className="pl-2 w-8"
-                />
-              )}
-            </div>
-            <span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
-
-            <p className="text-gray-500">{apps.length} Apps</p>
-          </div>
-          <Row apps={apps} />
-        </div>
+      {appsWithNewInjected.map(([category, apps]) => (
+        <ShowcaseCategoryRow
+          key={category}
+          category={category}
+          apps={apps}
+          title={ITUNES_GENRE_TO_CATEGORY_SHORT[category] ?? category}
+        />
       ))}
     </>
+  );
+}
+
+function ShowcaseCategoryRow({
+  category,
+  title,
+  apps,
+  icon = ['top', 'new'].includes(category)
+    ? ''
+    : '/categories/' + category + '.avif',
+}: {
+  category: string;
+  title: string;
+  apps: AppItem[];
+  icon?: string;
+}) {
+  return (
+    <div className="flex flex-col gap-y-1">
+      <div className="flex flex-row px-8 gap-y-1 mb-4 items-center">
+        <div className="flex flex-row items-center">
+          <h2 className="font-bold text-slate-50 text-2xl md:text-3xl lg:text-4xl">
+            {title}
+          </h2>
+          {icon && (
+            <img
+              src={'/categories/' + category + '.avif'}
+              className="pl-2 w-8"
+            />
+          )}
+        </div>
+        <span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
+
+        <p className="text-gray-500">{apps.length} Apps</p>
+      </div>
+      <Row apps={apps} />
+    </div>
   );
 }
