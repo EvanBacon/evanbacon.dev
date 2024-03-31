@@ -1,4 +1,5 @@
 const { getDefaultConfig } = require('expo/metro-config');
+const { withExpoAtlas } = require('expo-atlas/metro');
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname, {
@@ -16,4 +17,4 @@ config.resolver.assetExts = config.resolver.assetExts.filter(
 
 config.transformer.babelTransformerPath = require.resolve('./transformer.js');
 
-module.exports = config;
+module.exports = withExpoAtlas(config);
