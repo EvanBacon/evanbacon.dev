@@ -4,7 +4,7 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["web"],
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",

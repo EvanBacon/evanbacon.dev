@@ -2,7 +2,7 @@ import { ImageSourcePropType } from 'react-native';
 import { OpenGraphImages } from '@/constants/og';
 
 export type ProjectAction = {
-  icon: string;
+  icon: 'photo';
   url: string;
 };
 

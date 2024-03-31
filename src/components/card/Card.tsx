@@ -1,4 +1,4 @@
-import { Article, Div, Footer, H2, H3, P } from '@expo/html-elements';
+import { Div, Footer, H3, P } from '@expo/html-elements';
 import { Video } from 'expo-av';
 import { BlurView } from 'expo-blur';
 import { Link } from 'expo-router';
@@ -6,9 +6,8 @@ import React from 'react';
 import { Image, Platform, StyleSheet, View } from 'react-native';
 import { useHover, useREM } from 'react-native-web-hooks';
 import isHoverEnabled from 'react-native-web-hooks/build/isHoverEnabled';
-
+import PhotoLibraryIcon from '@/svg/photo-library.svg';
 import { Project } from '../../Data';
-import SocialIcon from '../SocialIcon';
 
 const upperFlow = 16;
 const ICON_SIZE = 72;
@@ -153,11 +152,7 @@ export default function ProjectCard({
                   target="_blank"
                   href={social.url}
                 >
-                  <SocialIcon
-                    name={social.icon}
-                    color="white"
-                    size={16 * 2.2}
-                  />
+                  <PhotoLibraryIcon fill="white" height={36} width={36} />
                 </Link>
               </Div>
             ))}
