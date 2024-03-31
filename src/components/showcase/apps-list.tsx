@@ -89,10 +89,7 @@ export function ShowcaseData({
   }, [apps]);
 
   const appsWithNewInjected = useMemo(() => {
-    return [apps[0], ['new', newCategory], ...apps.slice(1)] as (readonly [
-      string,
-      AppItem[]
-    ])[];
+    return [...apps, ['new', newCategory]] as (readonly [string, AppItem[]])[];
   }, [apps, newCategory]);
 
   return (
