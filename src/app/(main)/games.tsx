@@ -3,7 +3,6 @@ import { Project } from '@/Data';
 import cn from 'classnames';
 import { ResizeMode, Video } from 'expo-av';
 import { Link } from 'expo-router';
-import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function Games() {
@@ -53,7 +52,11 @@ function GridItem({
   href: string;
 }) {
   return (
-    <Link href={href} className={cn(ratio, 'flex')}>
+    <Link
+      // @ts-expect-error
+      href={href}
+      className={cn(ratio, 'flex')}
+    >
       <div
         className={cn(
           'group flex-1 rounded-2xl overflow-hidden gap-2 bg-[#191A20] border border-[#2e2e2e] flex flex-col',
@@ -68,12 +71,6 @@ function GridItem({
             'transition-all canhover:grayscale group-hover:grayscale-0 overflow-hidden rounded-2xl'
           )}
         >
-          {/* <img
-            className="absolute top-0 left-0 bottom-0 right-0 object-cover rounded-2xl w-full h-full"
-            src={resolveAssetUri(
-              require('assets/projects/crossy-road/preview.jpg')
-            )}
-          /> */}
           <div
             className={cn(
               'absolute top-0 left-0 bottom-0 right-0 overflow-hidden',
@@ -130,20 +127,18 @@ const Projects: (Project & { button?: string })[] = [
   {
     button: 'Play now',
     ratio: 'md:col-span-2 md:row-span-2',
-    image: require('assets/projects/crossy-road/preview.jpg'),
-    icon: require('assets/projects/crossy-road/app-icon.png'),
-    video: require('assets/projects/crossy-road/demo.mp4'),
+    image: { uri: '/projects/crossy-road/preview.jpg' },
+    icon: { uri: '/projects/crossy-road/app-icon.png' },
+    video: { uri: '/projects/crossy-road/demo.mp4' },
     title: 'Crossy Platform',
     description: `The endless arcade hopper you'll never want to put down.`,
     year: 2017,
     color: '#6dceea',
     actions: [
       {
-        icon: 'play',
         url: 'https://crossyroad.netlify.com/',
       },
       {
-        icon: 'code',
         url: 'https://github.com/evanbacon/expo-crossy-road',
       },
     ],
@@ -151,48 +146,44 @@ const Projects: (Project & { button?: string })[] = [
   {
     button: 'Traverse Pillars',
     ratio: 'md:row-span-3',
-    image: require('assets/projects/pillar-valley/preview.png'),
-    icon: require('assets/projects/pillar-valley/app-icon.png'),
-    video: require('assets/projects/pillar-valley/demo.mp4'),
+    image: { uri: '/projects/pillar-valley/preview.png' },
+    icon: { uri: '/projects/pillar-valley/app-icon.png' },
+    video: { uri: '/projects/pillar-valley/demo.mp4' },
     description: 'Immerse yourself in a suave world of zen.',
     title: 'Pillar Valley',
     year: 2018,
     color: '#E07C4C',
     actions: [
       {
-        icon: 'play',
         url: 'https://pillarvalley.netlify.app',
       },
       {
-        icon: 'code',
         url: 'https://github.com/evanbacon/expo-pillar-valley',
       },
     ],
   },
   {
-    image: require('assets/projects/snake/preview.jpeg'),
-    icon: require('assets/projects/snake/app-icon.jpg'),
-    video: require('assets/projects/snake/demo.mp4'),
+    image: { uri: '/projects/snake/preview.jpeg' },
+    icon: { uri: '/projects/snake/app-icon.jpg' },
+    video: { uri: '/projects/snake/demo.mp4' },
     title: 'Snake',
     description: 'Slither your way through this retro snake adventure.',
     year: 2019,
     color: '#7ED321',
     actions: [
       {
-        icon: 'play',
         url: 'https://retrosnake.netlify.com',
       },
       {
-        icon: 'code',
         url: 'https://github.com/evanbacon/snake',
       },
     ],
   },
   {
     // ratio: 'row-span-4',
-    image: require('assets/projects/doodle-jump/preview.jpeg'),
-    icon: require('assets/projects/doodle-jump/app-icon.png'),
-    video: require('assets/projects/doodle-jump/demo.mp4'),
+    image: { uri: '/projects/doodle-jump/preview.jpeg' },
+    icon: { uri: '/projects/doodle-jump/app-icon.png' },
+    video: { uri: '/projects/doodle-jump/demo.mp4' },
     title: 'Doodle Jump',
     description: 'Bounce for hours in this cute lil clone.',
     year: 2018,
@@ -200,20 +191,18 @@ const Projects: (Project & { button?: string })[] = [
     isDarkColored: true,
     actions: [
       {
-        icon: 'play',
         url: 'https://doodlejump.netlify.com/',
       },
       {
-        icon: 'code',
         url: 'https://github.com/evanbacon/expo-doodle-jump',
       },
     ],
   },
 
   {
-    image: require('assets/projects/flappy-bird/preview.jpeg'),
-    icon: require('assets/projects/flappy-bird/app-icon.png'),
-    video: require('assets/projects/flappy-bird/demo.mp4'),
+    image: { uri: '/projects/flappy-bird/preview.jpeg' },
+    icon: { uri: '/projects/flappy-bird/app-icon.png' },
+    video: { uri: '/projects/flappy-bird/demo.mp4' },
     title: 'Flappy Bird',
     description: 'Infatuation knows no bounds in this maddening monstrosity.',
     year: 2018,
@@ -221,11 +210,9 @@ const Projects: (Project & { button?: string })[] = [
     isDarkColored: true,
     actions: [
       {
-        icon: 'play',
         url: 'https://flappybacon.netlify.com/',
       },
       {
-        icon: 'code',
         url: 'https://github.com/evanbacon/react-native-flappy-bird',
       },
     ],
@@ -234,9 +221,9 @@ const Projects: (Project & { button?: string })[] = [
   {
     ratio: 'md:col-span-2 md:row-span-1',
     button: 'Play now',
-    image: require('assets/projects/sunset-cyberspace/preview.png'),
-    icon: require('assets/projects/sunset-cyberspace/app-icon.png'),
-    video: require('assets/projects/sunset-cyberspace/demo.mp4'),
+    image: { uri: '/projects/sunset-cyberspace/preview.png' },
+    icon: { uri: '/projects/sunset-cyberspace/app-icon.png' },
+    video: { uri: '/projects/sunset-cyberspace/demo.mp4' },
     // ratio: 'row-span-2 col-span-1',
     title: 'Sunset Cyberspace',
     description: 'A mystic sage Chucky Cheevs fights off the Xamaronians.',
@@ -244,33 +231,30 @@ const Projects: (Project & { button?: string })[] = [
     color: '#F914E4',
     actions: [
       {
-        icon: 'play',
         url: 'https://cyberspace.netlify.com/',
       },
       {
-        icon: 'code',
         url: 'https://github.com/evanbacon/sunset-cyberspace',
       },
     ],
   },
 
   // {
-  //   image: require('assets/projects/super-mario/preview.jpeg'),
-  //   icon: require('assets/projects/super-mario/app-icon.png'),
+  //   image: { uri: '/projects/super-mario/preview.jpeg' },
+  //   icon: { uri: '/projects/super-mario/app-icon.png' },
   //   title: 'Super Mario',
   //   description: 'Phaser used for ultra fun times.',
   //   year: 2018,
   //   color: '#b80300',
   //   actions: [
   //     {
-  //       icon: 'code',
   //       url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
   //     },
   //   ],
   // },
   // {
-  //   image: require('assets/projects/nitro-roll/preview.png'),
-  //   icon: require('assets/projects/nitro-roll/app-icon.png'),
+  //   image: { uri: '/projects/nitro-roll/preview.png' },
+  //   icon: { uri: '/projects/nitro-roll/app-icon.png' },
   //   title: 'Nitro Roll',
   //   description:
   //     'Roll through the nitro-sonic Voidiverse avoiding the Bleaqaulizers!',
@@ -278,7 +262,6 @@ const Projects: (Project & { button?: string })[] = [
   //   color: '#fff',
   //   actions: [
   //     {
-  //       icon: 'code',
   //       url: 'https://github.com/evanbacon/expo-nitro-roll',
   //     },
   //   ],
