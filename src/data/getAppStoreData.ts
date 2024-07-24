@@ -10,7 +10,7 @@ export type AppItem = {
   checkedAt?: string;
   // id: string;
   // author: string;
-  // bundleId: string;
+  bundleId: string;
   // rank: number;
   // rating: number;
   // releaseDate: string;

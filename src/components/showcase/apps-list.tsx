@@ -74,18 +74,21 @@ export function ShowcaseData({
   apps?: (readonly [string, AppItem[]])[];
 }) {
   const newCategory = useMemo(() => {
-    return apps
-      .map(([, apps]) => apps)
-      .flat()
-      .sort((a, b) => {
-        return (
-          new Date(b.checkedAt!).getTime() - new Date(a.checkedAt!).getTime()
-        );
-      })
-      .slice(0, 50)
-      .sort((a, b) => {
-        return b.absoluteRating - a.absoluteRating;
-      });
+    return uniqueBy(
+      apps
+        .map(([, apps]) => apps)
+        .flat()
+        .sort((a, b) => {
+          return (
+            new Date(b.checkedAt!).getTime() - new Date(a.checkedAt!).getTime()
+          );
+        })
+        .slice(0, 50)
+        .sort((a, b) => {
+          return b.absoluteRating - a.absoluteRating;
+        }),
+      'bundleId'
+    );
   }, [apps]);
 
   const appsWithNewInjected = useMemo(() => {

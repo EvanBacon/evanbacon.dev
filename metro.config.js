@@ -17,4 +17,11 @@ config.resolver.assetExts = config.resolver.assetExts.filter(
 
 config.transformer.babelTransformerPath = require.resolve('./transformer.js');
 
+config.transformer.getTransformOptions = async () => ({
+  transform: {
+    experimentalImportSupport: true,
+    inlineRequires: false,
+  },
+});
+
 module.exports = withExpoAtlas(config);
