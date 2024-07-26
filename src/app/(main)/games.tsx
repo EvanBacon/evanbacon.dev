@@ -136,7 +136,7 @@ const Projects: (Project & { button?: string })[] = [
     color: '#6dceea',
     actions: [
       {
-        url: 'https://crossyroad.netlify.com/',
+        url: 'https://crossyroad.netlify.app/',
       },
       {
         url: 'https://github.com/evanbacon/expo-crossy-road',
@@ -172,7 +172,7 @@ const Projects: (Project & { button?: string })[] = [
     color: '#7ED321',
     actions: [
       {
-        url: 'https://retrosnake.netlify.com',
+        url: 'https://retrosnake.netlify.app',
       },
       {
         url: 'https://github.com/evanbacon/snake',
@@ -191,7 +191,7 @@ const Projects: (Project & { button?: string })[] = [
     isDarkColored: true,
     actions: [
       {
-        url: 'https://doodlejump.netlify.com/',
+        url: 'https://doodlejump.netlify.app/',
       },
       {
         url: 'https://github.com/evanbacon/expo-doodle-jump',
@@ -210,7 +210,7 @@ const Projects: (Project & { button?: string })[] = [
     isDarkColored: true,
     actions: [
       {
-        url: 'https://flappybacon.netlify.com/',
+        url: 'https://flappybacon.netlify.app/',
       },
       {
         url: 'https://github.com/evanbacon/react-native-flappy-bird',
@@ -231,7 +231,7 @@ const Projects: (Project & { button?: string })[] = [
     color: '#F914E4',
     actions: [
       {
-        url: 'https://cyberspace.netlify.com/',
+        url: 'https://cyberspace.netlify.app/',
       },
       {
         url: 'https://github.com/evanbacon/sunset-cyberspace',
