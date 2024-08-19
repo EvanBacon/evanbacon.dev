@@ -4,7 +4,9 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": ["web"],
+    "platforms": [
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -16,7 +18,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
@@ -44,6 +48,12 @@
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d2118d4b-3005-4939-848c-3ba54b81e7fe"
+      }
+    },
+    "owner": "bacon_staging"
   }
 }
