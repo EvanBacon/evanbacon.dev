@@ -1,26 +1,13 @@
-// import { Inter_400Regular } from '@expo-google-fonts/inter';
-// import registry from '@react-native/assets-registry/registry';
-import { ExpoRequest, ExpoResponse } from 'expo-router/server';
-// import fs from 'fs';
-// import path from 'path';
 import React from 'react';
 import { Text, View } from 'react-native';
 import satori from 'satori';
 
-// const origin = manifest?.extra?.router?.origin
-// const MyFont = fs.readFileSync(assetToPath(Inter_400Regular));
-
-const root =
-  process.env.NODE_ENV === 'production'
-    ? 'https://evanbacon.dev'
-    : 'http://localhost:8081';
-
 const blogs = require.context('../../../../../blog', true, /\.json$/);
 
-export async function GET(req: ExpoRequest, { post }: { post: string }) {
-  const MyFont = await fetch(root + '/fonts/Inter_400Regular.ttf').then(res =>
-    res.arrayBuffer()
-  );
+export async function GET(req: Request, { post }: { post: string }) {
+  const MyFont = await fetch(
+    new URL('/fonts/Inter_400Regular.ttf', req.url).toString()
+  ).then(res => res.arrayBuffer());
 
   const matchedPost = blogs
     .keys()
@@ -37,7 +24,10 @@ export async function GET(req: ExpoRequest, { post }: { post: string }) {
         alignItems: 'flex-start',
         justifyContent: 'center',
         flexDirection: 'column',
-        backgroundImage: `url(${root}/og/og-background.jpg)`,
+        backgroundImage: `url(${new URL(
+          '/og/og-background.jpg',
+          req.url
+        ).toString()})`,
       }}
     >
       <Text
@@ -66,27 +56,9 @@ export async function GET(req: ExpoRequest, { post }: { post: string }) {
     }
   );
 
-  return new ExpoResponse(svgString, {
+  return new Response(svgString, {
     headers: {
       'Content-Type': 'image/svg+xml',
     },
   });
 }
-
-// function assetToPath(source: number): string {
-//   // get the URI from the packager
-//   const asset = registry.getAssetByID(source);
-//   if (asset == null) {
-//     throw new Error(
-//       `Asset with ID "${source}" could not be found. Please check the image source or packager.`
-//     );
-//   }
-//   return path.join(
-//     __dirname,
-//     process.env.NODE_ENV === 'production' ? '../../../' : '',
-//     decodeURIComponent(
-//       asset.httpServerLocation.replace('/assets/?unstable_path=', '')
-//     ),
-//     `${asset.name}.${asset.type}`
-//   );
-// }
