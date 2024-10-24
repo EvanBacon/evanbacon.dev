@@ -4,23 +4,22 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": [
-      "web"
-    ],
+    "platforms": ["ios", "web"],
     "version": "1.0.0",
     "orientation": "default",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#000",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000"
     },
+    "newArchEnabled": true,
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
@@ -35,13 +34,18 @@
     },
     "ios": {
       "bundleIdentifier": "evanbacon.dev",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIViewControllerBasedStatusBarAppearance": true,
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "plugins": [
       [
         "expo-router",
         {
-          "origin": "https://evanbacon.dev/",
+          "origin": "",
+          "headOrigin": "https://evanbacon.dev",
           "asyncRoutes": {
             "web": true,
             "default": false
@@ -50,7 +54,6 @@
       ]
     ],
     "extra": {
-     
       "eas": {
         "projectId": "d2118d4b-3005-4939-848c-3ba54b81e7fe"
       }

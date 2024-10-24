@@ -2,13 +2,14 @@ import PageHeader from '@/components/PageHeader';
 import { Project } from '@/Data';
 import cn from 'classnames';
 import { ResizeMode, Video } from 'expo-av';
-import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
+import { Link } from 'expo-router';
 
-export default function Games() {
+export default function GamesRoute() {
   return (
-    <>
+    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
       <PageHeader>Games</PageHeader>
+
       <br />
 
       <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
@@ -28,7 +29,7 @@ export default function Games() {
         })}
       </div>
       <br />
-    </>
+    </div>
   );
 }
 
@@ -55,6 +56,7 @@ function GridItem({
     <Link
       // @ts-expect-error
       href={href}
+      target="_blank"
       className={cn(ratio, 'flex')}
     >
       <div
@@ -127,9 +129,11 @@ const Projects: (Project & { button?: string })[] = [
   {
     button: 'Play now',
     ratio: 'md:col-span-2 md:row-span-2',
-    image: { uri: '/projects/crossy-road/preview.jpg' },
+    image: {
+      uri: '/projects/crossy-road/preview.jpg',
+    },
     icon: { uri: '/projects/crossy-road/app-icon.png' },
-    video: { uri: '/projects/crossy-road/demo.mp4' },
+    video: require('../../../public/projects/crossy-road/demo.webm'),
     title: 'Crossy Platform',
     description: `The endless arcade hopper you'll never want to put down.`,
     year: 2017,
@@ -148,7 +152,7 @@ const Projects: (Project & { button?: string })[] = [
     ratio: 'md:row-span-3',
     image: { uri: '/projects/pillar-valley/preview.png' },
     icon: { uri: '/projects/pillar-valley/app-icon.png' },
-    video: { uri: '/projects/pillar-valley/demo.mp4' },
+    video: require('../../../public/projects/pillar-valley/demo.webm'),
     description: 'Immerse yourself in a suave world of zen.',
     title: 'Pillar Valley',
     year: 2018,
@@ -165,7 +169,7 @@ const Projects: (Project & { button?: string })[] = [
   {
     image: { uri: '/projects/snake/preview.jpeg' },
     icon: { uri: '/projects/snake/app-icon.jpg' },
-    video: { uri: '/projects/snake/demo.mp4' },
+    video: require('../../../public/projects/snake/demo.webm'),
     title: 'Snake',
     description: 'Slither your way through this retro snake adventure.',
     year: 2019,
@@ -183,7 +187,7 @@ const Projects: (Project & { button?: string })[] = [
     // ratio: 'row-span-4',
     image: { uri: '/projects/doodle-jump/preview.jpeg' },
     icon: { uri: '/projects/doodle-jump/app-icon.png' },
-    video: { uri: '/projects/doodle-jump/demo.mp4' },
+    video: require('../../../public/projects/doodle-jump/demo.webm'),
     title: 'Doodle Jump',
     description: 'Bounce for hours in this cute lil clone.',
     year: 2018,
@@ -202,7 +206,7 @@ const Projects: (Project & { button?: string })[] = [
   {
     image: { uri: '/projects/flappy-bird/preview.jpeg' },
     icon: { uri: '/projects/flappy-bird/app-icon.png' },
-    video: { uri: '/projects/flappy-bird/demo.mp4' },
+    video: require('../../../public/projects/flappy-bird/demo.webm'),
     title: 'Flappy Bird',
     description: 'Infatuation knows no bounds in this maddening monstrosity.',
     year: 2018,
@@ -223,7 +227,7 @@ const Projects: (Project & { button?: string })[] = [
     button: 'Play now',
     image: { uri: '/projects/sunset-cyberspace/preview.png' },
     icon: { uri: '/projects/sunset-cyberspace/app-icon.png' },
-    video: { uri: '/projects/sunset-cyberspace/demo.mp4' },
+    video: require('../../../public/projects/sunset-cyberspace/demo.webm'),
     // ratio: 'row-span-2 col-span-1',
     title: 'Sunset Cyberspace',
     description: 'A mystic sage Chucky Cheevs fights off the Xamaronians.',
@@ -238,32 +242,4 @@ const Projects: (Project & { button?: string })[] = [
       },
     ],
   },
-
-  // {
-  //   image: { uri: '/projects/super-mario/preview.jpeg' },
-  //   icon: { uri: '/projects/super-mario/app-icon.png' },
-  //   title: 'Super Mario',
-  //   description: 'Phaser used for ultra fun times.',
-  //   year: 2018,
-  //   color: '#b80300',
-  //   actions: [
-  //     {
-  //       url: 'https://github.com/EvanBacon/Expo-Super-Mario-World',
-  //     },
-  //   ],
-  // },
-  // {
-  //   image: { uri: '/projects/nitro-roll/preview.png' },
-  //   icon: { uri: '/projects/nitro-roll/app-icon.png' },
-  //   title: 'Nitro Roll',
-  //   description:
-  //     'Roll through the nitro-sonic Voidiverse avoiding the Bleaqaulizers!',
-  //   year: 2018,
-  //   color: '#fff',
-  //   actions: [
-  //     {
-  //       url: 'https://github.com/evanbacon/expo-nitro-roll',
-  //     },
-  //   ],
-  // },
 ];

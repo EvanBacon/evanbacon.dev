@@ -8,7 +8,7 @@ import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { Slot, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Background } from '@/components/background';
+import Background from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
@@ -31,15 +31,7 @@ export function ensureSlash(inputPath: string, needsSlash: boolean): string {
   }
 }
 
-export default function App() {
-  loadAsync({
-    Inter_300Light,
-    Inter_400Regular,
-    Inter_700Bold,
-    Inter_900Black,
-    SourceCodePro_400Regular,
-  });
-
+function CustomHead() {
   const themeColor = Colors.theme;
   const pathname = usePathname();
 
@@ -92,7 +84,7 @@ export default function App() {
 
     // Fix viewport by disabling scaling
     {
-      key: 'viewport',
+      // key: 'viewport',
       name: 'viewport',
       content:
         'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1.00001,viewport-fit=cover',
@@ -110,20 +102,30 @@ export default function App() {
   const siteTitle = title === site.title ? title : `${title} | ${site.title}`;
 
   return (
+    <Head>
+      <title>{siteTitle}</title>
+
+      {injectMeta.map((value, index) => (
+        <meta key={`meta-${index}`} {...value} />
+      ))}
+    </Head>
+  );
+}
+
+export default function App() {
+  loadAsync({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_700Bold,
+    Inter_900Black,
+    SourceCodePro_400Regular,
+  });
+
+  return (
     <>
-      <Head>
-        <title>{siteTitle}</title>
-
-        {injectMeta.map((value, index) => (
-          <meta key={`meta-${index}`} {...value} />
-        ))}
-      </Head>
+      <CustomHead />
       <Background />
-
-      {/* <Layout> */}
       <Slot />
-
-      {/* </Layout> */}
     </>
   );
 }

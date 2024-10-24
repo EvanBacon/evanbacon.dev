@@ -1,6 +1,6 @@
-import PageHeader from '@/components/PageHeader';
 import { Link } from 'expo-router';
-import React from 'react';
+
+import PageHeader from '@/components/PageHeader';
 
 type DataType = {
   title: string;
@@ -32,7 +32,7 @@ const POSTS = posts
 
 export default function App() {
   return (
-    <>
+    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
       <PageHeader>Blog</PageHeader>
 
       <div className="mt-8 space-y-6">
@@ -44,7 +44,7 @@ export default function App() {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 }
 

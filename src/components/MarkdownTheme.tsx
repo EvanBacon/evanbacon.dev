@@ -17,12 +17,16 @@ import {
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { BlockQuote } from '@expo/html-elements';
 import { Title } from '@/components/PostTitle';
+import LegoSvg from '@/svg/lego.svg';
+import ExpoSvg from '@/svg/expo.svg';
+import SiriusXM from '@/svg/sirus-xm.svg';
+import ReactNavigation from '@/svg/react-navigation.svg';
+import { Link } from 'expo-router';
 
 import { Prism, Highlight, themes } from 'prism-react-renderer';
 import cn from 'classnames';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 import Quote from './Quote';
-import { Link } from 'expo-router';
 
 (typeof global !== 'undefined' ? global : window).Prism = Prism;
 
@@ -621,7 +625,7 @@ function Img({ src, style }) {
       <video
         src={srcUrl}
         style={style}
-        controls
+        controls={false}
         autoPlay
         loop
         playsInline
@@ -675,7 +679,3 @@ const BRAND_TO_LOGO = {
   expo: ExpoSvg,
   lego: LegoSvg,
 };
-import LegoSvg from '@/svg/lego.svg';
-import ExpoSvg from '@/svg/expo.svg';
-import SiriusXM from '@/svg/sirus-xm.svg';
-import ReactNavigation from '@/svg/react-navigation.svg';
