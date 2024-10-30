@@ -1,15 +1,13 @@
-import { MarkdownTheme } from '@/components/MarkdownTheme';
-import CenterInFull from '@/components/center-in-full';
-import Thanks from '@/components/thanks';
+import BlogPostRoute from '@/components/blog-post-route';
+import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useFont } from '@/components/useFont';
 import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import { LD_EVAN_BACON } from '@/data/structured';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
-import classNames from 'classnames';
-import { Stack, useLocalSearchParams, usePathname } from 'expo-router';
+import { router, Stack, useLocalSearchParams, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Image, ScrollView } from 'react-native';
+import { Clipboard, Text } from 'react-native';
 
 export async function generateStaticParams(): Promise<{ post: string }[]> {
   return mdxctx
@@ -107,14 +105,15 @@ export default function Page() {
   const { post: postId } = useLocalSearchParams<{ post: string }>();
   const isFullScreen = useIsFullScreenRoute();
   const data = useData(postId);
-
   const Inter_900Black = useFont('Inter_900Black');
 
+  const paddingBottom = useBottomTabOverflow();
+
   if (!data) {
-    return <span>Not Found: {postId}</span>;
+    return <Text>Not Found: {postId}</Text>;
   }
 
-  const { MarkdownComponent, info } = data;
+  const { info } = data;
 
   return (
     <>
@@ -132,64 +131,35 @@ export default function Page() {
         }}
       />
 
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={{
-          paddingVertical: 24,
+      <BlogPostRoute
+        paddingBottom={paddingBottom}
+        dom={{
+          menuItems: [
+            { key: 'copy', label: 'Copy' },
+            { key: 'x', label: '𝕏' },
+          ],
+          onCustomMenuSelection({ nativeEvent }) {
+            if (nativeEvent.key === 'copy') {
+              Clipboard.setString(nativeEvent.selectedText);
+            } else if (nativeEvent.key === 'x') {
+              // compose a tweet with the selected text
+              const tweet = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                nativeEvent.selectedText
+              )}`;
+              router.navigate(
+                // @ts-expect-error
+                tweet
+              );
+            }
+          },
+          contentInsetAdjustmentBehavior: 'automatic',
+          automaticallyAdjustsScrollIndicatorInsets: true,
+          mediaPlaybackRequiresUserAction: false,
+          allowsInlineMediaPlayback: true,
         }}
-      >
-        <div
-          className={classNames(
-            'flex flex-1 flex-col',
-            !isFullScreen && 'px-3'
-          )}
-        >
-          <MarkdownTheme>
-            <MarkdownComponent />
-
-            {isFullScreen ? (
-              <CenterInFull>
-                <Thanks />
-              </CenterInFull>
-            ) : (
-              <Thanks />
-            )}
-          </MarkdownTheme>
-        </div>
-      </ScrollView>
+        isFullScreen={!!isFullScreen}
+        postId={postId}
+      />
     </>
-  );
-}
-
-function AutoHeightImage(props) {
-  const [imgSize, setImageSize] = React.useState({});
-  const [imageHeight, setImageHeight] = React.useState(100);
-
-  React.useEffect(() => {
-    Image.getSize(props.source.uri, (w, h) => {
-      setImageSize({ width: w, height: h });
-    });
-  }, [props.source]);
-
-  const [layoutWidth, setLayoutWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    if (layoutWidth === 0) return;
-
-    const ratio = imgSize.width / imgSize.height;
-    const newHeight = layoutWidth / ratio;
-    if (isNaN(newHeight)) return;
-    setImageHeight(newHeight);
-  }, [imgSize, layoutWidth]);
-
-  return (
-    <Image
-      style={[props.style, { height: imageHeight }]}
-      onLayout={e => {
-        if (layoutWidth === e.nativeEvent.layout.width) return;
-        setLayoutWidth(e.nativeEvent.layout.width);
-      }}
-      source={props.source}
-    />
   );
 }

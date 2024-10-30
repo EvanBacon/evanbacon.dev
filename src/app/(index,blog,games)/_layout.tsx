@@ -7,7 +7,7 @@ import {
 } from '@/components/top-nav/tab-slot';
 import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import classNames from 'classnames';
-import { Link, usePathname } from 'expo-router';
+import { Link } from 'expo-router';
 import React from 'react';
 
 function HeaderLogo() {
@@ -57,7 +57,11 @@ function SideBar() {
               >
                 Home
               </SideBarTabItem>
-              <SideBarTabItem name="blog" icon={makeIcon('blog')} popup="Blog">
+              <SideBarTabItem
+                name="blog/index"
+                icon={makeIcon('blog')}
+                popup="Blog"
+              >
                 Blog
               </SideBarTabItem>
               <SideBarTabItem
@@ -265,7 +269,7 @@ function TabBar() {
       <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch min-h-12 px-4 pb-safe">
         {[
           { name: 'index', id: 'index', icon: 'home', scrollToTop: true },
-          { name: 'blog', id: 'blog', icon: 'blog' },
+          { name: 'blog/index', id: 'blog/index', icon: 'blog' },
           { name: 'games', id: 'games', icon: 'games', scrollToTop: true },
           // { name: 'https://x.com/baconbrix', id: 'twitter', icon: 'twitter' },
         ].map((tab, i) => (

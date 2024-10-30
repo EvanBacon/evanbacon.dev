@@ -5,13 +5,45 @@ import {
   Inter_900Black,
 } from '@expo-google-fonts/inter';
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
-import { Slot, usePathname } from 'expo-router';
+import { Slot, Tabs, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Background } from '@/components/background';
+import Background from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
+import { HapticTab } from '@/components/HapticTab';
+
+import * as QuickActions from 'expo-quick-actions';
+import { RouterAction } from 'expo-quick-actions/router';
+
+QuickActions.setItems<RouterAction>([
+  {
+    id: '1',
+    title: 'Read',
+    icon: 'symbol:book.fill',
+    params: {
+      href: '/(blog)/blog',
+    },
+  },
+  {
+    id: '2',
+    title: 'Play',
+    icon: 'symbol:gamecontroller.fill',
+    params: {
+      href: '/(games)/games',
+    },
+  },
+  {
+    id: '3',
+    title: "Wait! Don't Delete!",
+    subtitle: 'Let us help you out',
+    icon: 'symbol:person.bubble',
+    params: {
+      href: 'mailto:bacon@expo.io',
+    },
+  },
+]);
 
 const site = {
   title: 'Evan Bacon',
@@ -31,15 +63,7 @@ export function ensureSlash(inputPath: string, needsSlash: boolean): string {
   }
 }
 
-export default function App() {
-  loadAsync({
-    Inter_300Light,
-    Inter_400Regular,
-    Inter_700Bold,
-    Inter_900Black,
-    SourceCodePro_400Regular,
-  });
-
+function CustomHead() {
   const themeColor = Colors.theme;
   const pathname = usePathname();
 
@@ -92,7 +116,7 @@ export default function App() {
 
     // Fix viewport by disabling scaling
     {
-      key: 'viewport',
+      // key: 'viewport',
       name: 'viewport',
       content:
         'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1.00001,viewport-fit=cover',
@@ -110,20 +134,96 @@ export default function App() {
   const siteTitle = title === site.title ? title : `${title} | ${site.title}`;
 
   return (
+    <Head>
+      <title>{siteTitle}</title>
+
+      {injectMeta.map((value, index) => (
+        <meta key={`meta-${index}`} {...value} />
+      ))}
+    </Head>
+  );
+}
+
+import { ThemeProvider, DarkTheme } from '@react-navigation/native';
+import { IconSymbol } from '@/components/ui/IconSymbol';
+import BlurTabBarBackground from '@/components/ui/TabBarBackground.ios';
+
+import * as AppleColors from '@bacons/apple-colors';
+
+export default function App() {
+  loadAsync({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_700Bold,
+    Inter_900Black,
+    SourceCodePro_400Regular,
+  });
+
+  if (process.env.EXPO_OS !== 'web') {
+    return (
+      <ThemeProvider value={DarkTheme}>
+        <Tabs
+          screenOptions={{
+            // lazy: false,
+            headerShown: false,
+            tabBarButton: HapticTab,
+            tabBarActiveTintColor: 'white',
+            tabBarBackground: BlurTabBarBackground,
+            tabBarInactiveTintColor: AppleColors.placeholderText,
+            tabBarStyle:
+              process.env.EXPO_OS === 'ios' ? { position: 'absolute' } : {},
+          }}
+        >
+          <Tabs.Screen
+            name="(blog)"
+            options={{
+              title: 'Read',
+              tabBarIcon: ({ color, focused }) => (
+                <IconSymbol
+                  size={28}
+                  name={focused ? 'book.fill' : 'book'}
+                  color={color}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="(index)"
+            options={{
+              title: 'Hello',
+              tabBarIcon: ({ color, focused }) => (
+                <IconSymbol
+                  size={28}
+                  name={focused ? 'hand.wave.fill' : 'hand.wave'}
+                  color={color}
+                />
+              ),
+            }}
+          />
+
+          <Tabs.Screen
+            name="(games)"
+            options={{
+              title: 'Play',
+              tabBarIcon: ({ color, focused }) => (
+                <IconSymbol
+                  size={28}
+                  name={focused ? 'gamecontroller.fill' : 'gamecontroller'}
+                  color={color}
+                />
+              ),
+            }}
+          />
+        </Tabs>
+      </ThemeProvider>
+    );
+  }
+
+  return (
     <>
-      <Head>
-        <title>{siteTitle}</title>
-
-        {injectMeta.map((value, index) => (
-          <meta key={`meta-${index}`} {...value} />
-        ))}
-      </Head>
+      <CustomHead />
       <Background />
-
-      {/* <Layout> */}
       <Slot />
-
-      {/* </Layout> */}
     </>
   );
 }

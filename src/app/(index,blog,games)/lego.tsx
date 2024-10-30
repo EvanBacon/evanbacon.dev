@@ -157,11 +157,11 @@ const Lego: LegoProject[] = [
 
 export default function LegoPage() {
   return (
-    <>
+    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
       <PageHeader>Lego</PageHeader>
       {Lego.map((project: any) => (
         <ProjectCard key={project.title} {...project} />
       ))}
-    </>
+    </div>
   );
 }

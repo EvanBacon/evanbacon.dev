@@ -1,11 +1,7 @@
 const { getDefaultConfig } = require('expo/metro-config');
-const { withExpoAtlas } = require('expo-atlas/metro');
 
 /** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname, {
-  // Enable CSS support.
-  isCSSEnabled: true,
-});
+const config = getDefaultConfig(__dirname);
 
 config.resolver.unstable_enablePackageExports = true;
 
@@ -24,4 +20,4 @@ config.transformer.getTransformOptions = async () => ({
   },
 });
 
-module.exports = withExpoAtlas(config);
+module.exports = config;
