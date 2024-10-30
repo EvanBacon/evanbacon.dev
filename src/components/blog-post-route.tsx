@@ -52,6 +52,7 @@ export default function Page({
   postId: string;
   paddingBottom: number;
   isFullScreen: boolean;
+  dom?: import('expo/dom').DOMProps;
 }) {
   const data = useData(postId);
 

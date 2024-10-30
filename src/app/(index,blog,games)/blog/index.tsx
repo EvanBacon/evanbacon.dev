@@ -82,54 +82,56 @@ export default function App() {
 }
 
 import { Div, UL, LI, Span, B } from '@expo/html-elements';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 
 function LineItemNative({ title, description, value, href }: DataType) {
   return (
-    <Link href={href}>
-      <Div
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 16,
-          justifyContent: 'center',
-        }}
-        className="text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out"
-      >
-        <Span
-          className="inline"
+    <Link href={href} asChild>
+      <TouchableOpacity>
+        <Div
           style={{
-            color: '#f8fafc',
+            flexDirection: 'row',
+            alignItems: 'center',
+            padding: 16,
+            justifyContent: 'center',
           }}
+          className="text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out"
         >
-          <B>
-            {title}
-            {'  '}
-          </B>
+          <Span
+            className="inline"
+            style={{
+              color: '#f8fafc',
+            }}
+          >
+            <B>
+              {title}
+              {'  '}
+            </B>
 
-          {/* <Span className="opacity-60 hidden md:flex">{description}</Span> */}
-        </Span>
-        {/* divider pushing  */}
-        <Span
-          style={{
-            flex: 1,
-            height: StyleSheet.hairlineWidth,
-            backgroundColor: 'rgba(255, 255, 255, 0.5)',
-            // borderStyle: 'dotted',
-            // minWidth: '2rem',
-            marginHorizontal: 8,
-          }}
-          className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]"
-        />
-        <Span
-          style={{
-            color: '#f8fafc',
-          }}
-        >
-          {value}
-        </Span>
-      </Div>
+            {/* <Span className="opacity-60 hidden md:flex">{description}</Span> */}
+          </Span>
+          {/* divider pushing  */}
+          <Span
+            style={{
+              flex: 1,
+              height: StyleSheet.hairlineWidth,
+              backgroundColor: 'rgba(255, 255, 255, 0.5)',
+              // borderStyle: 'dotted',
+              // minWidth: '2rem',
+              marginHorizontal: 8,
+            }}
+            className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]"
+          />
+          <Span
+            style={{
+              color: '#f8fafc',
+            }}
+          >
+            {value}
+          </Span>
+        </Div>
+      </TouchableOpacity>
     </Link>
   );
 }
