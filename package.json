@@ -23,7 +23,6 @@
     "expo-av": "~15.0.1",
     "expo-blur": "~14.0.1",
     "expo-haptics": "~14.0.0",
-    "expo-image": "~2.0.0-preview.0",
     "expo-linking": "~7.0.2",
     "expo-quick-actions": "^2.0.0",
     "expo-router": "4.0.0-preview.6",

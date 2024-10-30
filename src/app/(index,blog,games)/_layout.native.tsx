@@ -60,3 +60,13 @@ const titles = {
   games: 'Games',
   index: 'Home',
 };
+
+export const unstable_settings = {
+  anchor: 'index',
+  '(blog)': {
+    anchor: 'blog/index',
+  },
+  '(games)': {
+    anchor: 'games',
+  },
+};

@@ -7,7 +7,7 @@ import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 import { router, Stack, useLocalSearchParams, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import { Clipboard, Linking, Text } from 'react-native';
+import { Clipboard, Text } from 'react-native';
 
 export async function generateStaticParams(): Promise<{ post: string }[]> {
   return mdxctx

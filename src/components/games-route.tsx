@@ -1,59 +1,279 @@
-'use dom';
-
 import PageHeader from '@/components/PageHeader';
 import { Project } from '@/Data';
 import cn from 'classnames';
 import { ResizeMode, Video } from 'expo-av';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Link } from 'expo-router';
 
 import '../../global.css';
 import { IS_DOM } from 'expo/dom';
 import { StyleNoSelect } from './no-select';
 import classNames from 'classnames';
+import { H3, P, Span } from '@expo/html-elements';
 
-export default function GamesRoute({
-  openExternalUrl,
-  paddingBottom,
-}: {
-  paddingBottom: number;
-  openExternalUrl: (url: string) => void;
-  dom?: import('expo/dom').DOMProps;
-}) {
+export default function GamesRoute() {
+  const paddingBottom = useBottomTabOverflow();
+
+  if (process.env.EXPO_OS === 'web') {
+    return (
+      <div
+        className={classNames(
+          'flex flex-1 flex-col gap-4 overflow-x-hidden',
+          IS_DOM && 'px-4'
+        )}
+        style={{
+          paddingBottom,
+        }}
+      >
+        <StyleNoSelect />
+        <PageHeader>Games</PageHeader>
+
+        <br />
+
+        <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
+          {Projects.map((project, index) => {
+            return (
+              <GridItem
+                href={project.actions[0].url}
+                video={project.video}
+                key={project.title}
+                title={project.title}
+                subtitle={project.description}
+                year={project.year}
+                ratio={project.ratio ?? 'row-span-1 col-span-1'}
+                buttonTitle={project.button}
+              />
+            );
+          })}
+        </div>
+        <br />
+      </div>
+    );
+  }
+
+  const ref = useRef(null);
+
+  useScrollToTop(ref, -150);
+
   return (
-    <div
-      className={classNames(
-        'flex flex-1 flex-col gap-4 overflow-x-hidden',
-        IS_DOM && 'px-4'
-      )}
+    <ScrollView
+      ref={ref}
+      scrollToOverflowEnabled
+      contentInsetAdjustmentBehavior="automatic"
+      automaticallyAdjustsScrollIndicatorInsets
       style={{
-        paddingBottom,
+        flex: 1,
+      }}
+      scrollIndicatorInsets={{ bottom: paddingBottom }}
+      contentContainerStyle={{
+        paddingBottom: paddingBottom + 16,
+        gap: 16,
+        padding: 16,
       }}
     >
-      <StyleNoSelect />
       <PageHeader>Games</PageHeader>
 
-      <br />
+      {Projects.map((project, index) => {
+        return (
+          <GridItemNative
+            href={project.actions[0].url}
+            video={project.video}
+            key={project.title}
+            title={project.title}
+            subtitle={project.description}
+            year={project.year}
+            ratio={project.ratio ?? 'row-span-1 col-span-1'}
+            buttonTitle={project.button}
+          />
+        );
+      })}
+    </ScrollView>
+  );
+}
 
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
-        {Projects.map((project, index) => {
-          return (
-            <GridItem
-              openExternalUrl={openExternalUrl}
-              href={project.actions[0].url}
-              video={project.video}
-              key={project.title}
-              title={project.title}
-              subtitle={project.description}
-              year={project.year}
-              ratio={project.ratio ?? 'row-span-1 col-span-1'}
-              buttonTitle={project.button}
-            />
-          );
-        })}
-      </div>
-      <br />
-    </div>
+import * as WebBrowser from 'expo-web-browser';
+import { TouchableImpact } from './ui/TouchableImpact';
+import { useScrollRef, useScrollToTop } from '@/hooks/useTabToTop';
+import { useRef } from 'react';
+import { useBottomTabOverflow } from './ui/TabBarBackground';
+
+function GridItemNative({
+  buttonTitle,
+  year,
+  ratio,
+  title,
+  subtitle,
+  video,
+
+  href,
+}: {
+  title: string;
+  buttonTitle?: string;
+  ratio?: string;
+  subtitle?: string;
+  year?: number | string;
+  video?: any;
+
+  href: string;
+}) {
+  return (
+    <TouchableImpact
+      onPress={() => {
+        WebBrowser.openBrowserAsync(href, {
+          toolbarColor: 'black',
+          controlsColor: 'white',
+          presentationStyle: WebBrowser.WebBrowserPresentationStyle.AUTOMATIC,
+        });
+      }}
+    >
+      <View
+        style={{
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          padding: buttonTitle ? 8 : 8,
+          justifyContent: 'center',
+          borderRadius: 24,
+          backgroundColor: '#191A20',
+          borderWidth: 1,
+          borderColor: '#2e2e2e',
+          gap: 8,
+        }}
+      >
+        <View
+          style={{
+            aspectRatio: '16 / 9',
+            borderRadius: 16,
+            overflow: 'hidden',
+            flex: 1,
+            width: '100%',
+          }}
+        >
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              overflow: 'hidden',
+            }}
+          >
+            {video && (
+              <Video
+                source={video}
+                isMuted
+                resizeMode={ResizeMode.COVER}
+                shouldPlay
+                isLooping
+                videoStyle={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                style={[
+                  StyleSheet.absoluteFill,
+                  {
+                    borderRadius: 8,
+                    width: '100%',
+                    height: '100%',
+                  },
+                ]}
+              />
+            )}
+          </View>
+
+          <View
+            style={{
+              position: 'absolute',
+              top: '33.3333%',
+              left: 0,
+              bottom: 0,
+              right: 0,
+              [process.env.EXPO_OS === 'web'
+                ? 'backgroundImage'
+                : `experimental_backgroundImage`]: 'linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent)',
+              borderRadius: 16,
+            }}
+          />
+          {/* Text Container */}
+          <View
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: 16,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <View
+              style={{
+                gap: 2,
+                flex: 1,
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <H3
+                style={{
+                  fontSize: 24,
+                  lineHeight: 32,
+                  marginBottom: 0,
+                  fontWeight: 'bold',
+                  color: '#e5e5e5',
+                }}
+              >
+                {title}
+              </H3>
+              {subtitle && (
+                <Span
+                  style={{
+                    color: '#e5e5e5',
+                  }}
+                >
+                  {subtitle}
+                </Span>
+              )}
+            </View>
+            {year && (
+              <Span
+                style={{
+                  color: '#e5e5e5',
+                  opacity: 0.8,
+                }}
+                //   className="text-slate-50 opacity-80"
+              >
+                {year}
+              </Span>
+            )}
+          </View>
+        </View>
+        {buttonTitle && (
+          <View
+            style={{
+              padding: 2,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 16,
+              flex: 1,
+              backgroundColor: '#21222B',
+            }}
+          >
+            <P
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#f8fafc',
+              }}
+            >
+              {buttonTitle}
+            </P>
+          </View>
+        )}
+      </View>
+    </TouchableImpact>
   );
 }
 
@@ -66,9 +286,7 @@ function GridItem({
   video,
   image,
   href,
-  openExternalUrl,
 }: {
-  openExternalUrl: (url: string) => void;
   title: string;
   buttonTitle?: string;
   ratio?: string;
@@ -84,12 +302,6 @@ function GridItem({
       href={href}
       target="_blank"
       className={cn(ratio, 'flex')}
-      onPress={e => {
-        if (IS_DOM) {
-          e.preventDefault();
-          openExternalUrl(href);
-        }
-      }}
     >
       <div
         className={cn(
@@ -164,8 +376,7 @@ const Projects: (Project & { button?: string })[] = [
     image: {
       uri: '/projects/crossy-road/preview.jpg',
     },
-    icon: { uri: '/projects/crossy-road/app-icon.png' },
-    video: require('../../public/projects/crossy-road/demo.webm'),
+    video: require('../../public/projects/crossy-road/demo.mp4'),
     title: 'Crossy Platform',
     description: `The endless arcade hopper you'll never want to put down.`,
     year: 2017,
@@ -183,8 +394,7 @@ const Projects: (Project & { button?: string })[] = [
     button: 'Traverse Pillars',
     ratio: 'md:row-span-3',
     image: { uri: '/projects/pillar-valley/preview.png' },
-    icon: { uri: '/projects/pillar-valley/app-icon.png' },
-    video: require('../../public/projects/pillar-valley/demo.webm'),
+    video: require('../../public/projects/pillar-valley/demo.mp4'),
     description: 'Immerse yourself in a suave world of zen.',
     title: 'Pillar Valley',
     year: 2018,
@@ -200,8 +410,7 @@ const Projects: (Project & { button?: string })[] = [
   },
   {
     image: { uri: '/projects/snake/preview.jpeg' },
-    icon: { uri: '/projects/snake/app-icon.jpg' },
-    video: require('../../public/projects/snake/demo.webm'),
+    video: require('../../public/projects/snake/demo.mp4'),
     title: 'Snake',
     description: 'Slither your way through this retro snake adventure.',
     year: 2019,
@@ -218,8 +427,7 @@ const Projects: (Project & { button?: string })[] = [
   {
     // ratio: 'row-span-4',
     image: { uri: '/projects/doodle-jump/preview.jpeg' },
-    icon: { uri: '/projects/doodle-jump/app-icon.png' },
-    video: require('../../public/projects/doodle-jump/demo.webm'),
+    video: require('../../public/projects/doodle-jump/demo.mp4'),
     title: 'Doodle Jump',
     description: 'Bounce for hours in this cute lil clone.',
     year: 2018,
@@ -237,8 +445,7 @@ const Projects: (Project & { button?: string })[] = [
 
   {
     image: { uri: '/projects/flappy-bird/preview.jpeg' },
-    icon: { uri: '/projects/flappy-bird/app-icon.png' },
-    video: require('../../public/projects/flappy-bird/demo.webm'),
+    video: require('../../public/projects/flappy-bird/demo.mp4'),
     title: 'Flappy Bird',
     description: 'Infatuation knows no bounds in this maddening monstrosity.',
     year: 2018,
@@ -258,8 +465,7 @@ const Projects: (Project & { button?: string })[] = [
     ratio: 'md:col-span-2 md:row-span-1',
     button: 'Play now',
     image: { uri: '/projects/sunset-cyberspace/preview.png' },
-    icon: { uri: '/projects/sunset-cyberspace/app-icon.png' },
-    video: require('../../public/projects/sunset-cyberspace/demo.webm'),
+    video: require('../../public/projects/sunset-cyberspace/demo.mp4'),
     // ratio: 'row-span-2 col-span-1',
     title: 'Sunset Cyberspace',
     description: 'A mystic sage Chucky Cheevs fights off the Xamaronians.',

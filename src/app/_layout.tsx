@@ -17,13 +17,6 @@ import { HapticTab } from '@/components/HapticTab';
 import * as QuickActions from 'expo-quick-actions';
 import { RouterAction } from 'expo-quick-actions/router';
 
-// Read
-// book.fill
-// Hello
-// hand.wave.fill
-// Play
-// gamecontroller.fill
-
 QuickActions.setItems<RouterAction>([
   {
     id: '1',
@@ -155,6 +148,8 @@ import { ThemeProvider, DarkTheme } from '@react-navigation/native';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import BlurTabBarBackground from '@/components/ui/TabBarBackground.ios';
 
+import * as AppleColors from '@bacons/apple-colors';
+
 export default function App() {
   loadAsync({
     Inter_300Light,
@@ -169,10 +164,12 @@ export default function App() {
       <ThemeProvider value={DarkTheme}>
         <Tabs
           screenOptions={{
+            // lazy: false,
             headerShown: false,
             tabBarButton: HapticTab,
             tabBarActiveTintColor: 'white',
             tabBarBackground: BlurTabBarBackground,
+            tabBarInactiveTintColor: AppleColors.placeholderText,
             tabBarStyle:
               process.env.EXPO_OS === 'ios' ? { position: 'absolute' } : {},
           }}
@@ -181,8 +178,12 @@ export default function App() {
             name="(blog)"
             options={{
               title: 'Read',
-              tabBarIcon: ({ color }) => (
-                <IconSymbol size={28} name="book.fill" color={color} />
+              tabBarIcon: ({ color, focused }) => (
+                <IconSymbol
+                  size={28}
+                  name={focused ? 'book.fill' : 'book'}
+                  color={color}
+                />
               ),
             }}
           />
@@ -190,8 +191,12 @@ export default function App() {
             name="(index)"
             options={{
               title: 'Hello',
-              tabBarIcon: ({ color }) => (
-                <IconSymbol size={28} name="hand.wave.fill" color={color} />
+              tabBarIcon: ({ color, focused }) => (
+                <IconSymbol
+                  size={28}
+                  name={focused ? 'hand.wave.fill' : 'hand.wave'}
+                  color={color}
+                />
               ),
             }}
           />
@@ -200,10 +205,10 @@ export default function App() {
             name="(games)"
             options={{
               title: 'Play',
-              tabBarIcon: ({ color }) => (
+              tabBarIcon: ({ color, focused }) => (
                 <IconSymbol
                   size={28}
-                  name="gamecontroller.fill"
+                  name={focused ? 'gamecontroller.fill' : 'gamecontroller'}
                   color={color}
                 />
               ),
