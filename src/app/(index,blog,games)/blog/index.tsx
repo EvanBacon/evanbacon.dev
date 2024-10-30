@@ -33,6 +33,7 @@ const POSTS = posts
   .sort((a, b) => b.date.localeCompare(a.date));
 
 export default function App() {
+  const paddingBottom = useBottomTabOverflow();
   if (process.env.EXPO_OS === 'web') {
     return (
       <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
@@ -58,6 +59,10 @@ export default function App() {
         flexDirection: 'column',
         gap: 16,
       }}
+      contentContainerStyle={{
+        paddingBottom,
+      }}
+      scrollIndicatorInsets={{ bottom: paddingBottom }}
       contentInsetAdjustmentBehavior="automatic"
       automaticallyAdjustsScrollIndicatorInsets
     >
@@ -78,6 +83,7 @@ export default function App() {
 
 import { Div, UL, LI, Span, B } from '@expo/html-elements';
 import { ScrollView, StyleSheet } from 'react-native';
+import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 
 function LineItemNative({ title, description, value, href }: DataType) {
   return (

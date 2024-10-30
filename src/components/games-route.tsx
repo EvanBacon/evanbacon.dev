@@ -12,12 +12,19 @@ import { IS_DOM } from 'expo/dom';
 
 export default function GamesRoute({
   openExternalUrl,
+  paddingBottom,
 }: {
+  paddingBottom: number;
   openExternalUrl: (url: string) => void;
   dom?: import('expo/dom').DOMProps;
 }) {
   return (
-    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
+    <div
+      className="flex flex-1 flex-col gap-4 overflow-x-hidden"
+      style={{
+        paddingBottom,
+      }}
+    >
       <PageHeader>Games</PageHeader>
 
       <br />

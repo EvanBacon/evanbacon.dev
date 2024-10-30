@@ -115,6 +115,7 @@ function CustomHead() {
 
 import { ThemeProvider, DarkTheme } from '@react-navigation/native';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import BlurTabBarBackground from '@/components/ui/TabBarBackground.ios';
 
 export default function App() {
   loadAsync({
@@ -133,17 +134,11 @@ export default function App() {
             headerShown: false,
             tabBarButton: HapticTab,
             tabBarActiveTintColor: 'white',
+            tabBarBackground: BlurTabBarBackground,
+            tabBarStyle:
+              process.env.EXPO_OS === 'ios' ? { position: 'absolute' } : {},
           }}
         >
-          <Tabs.Screen
-            name="(index)"
-            options={{
-              title: 'Hello',
-              tabBarIcon: ({ color }) => (
-                <IconSymbol size={28} name="hand.wave.fill" color={color} />
-              ),
-            }}
-          />
           <Tabs.Screen
             name="(blog)"
             options={{
@@ -153,6 +148,16 @@ export default function App() {
               ),
             }}
           />
+          <Tabs.Screen
+            name="(index)"
+            options={{
+              title: 'Hello',
+              tabBarIcon: ({ color }) => (
+                <IconSymbol size={28} name="hand.wave.fill" color={color} />
+              ),
+            }}
+          />
+
           <Tabs.Screen
             name="(games)"
             options={{
@@ -174,17 +179,7 @@ export default function App() {
   return (
     <>
       <CustomHead />
-      <Background
-        dom={{
-          containerStyle: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-          },
-        }}
-      />
+      <Background />
       <Slot />
     </>
   );

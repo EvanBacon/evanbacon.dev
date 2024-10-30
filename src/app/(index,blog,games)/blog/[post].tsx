@@ -1,4 +1,5 @@
 import BlogPostRoute from '@/components/blog-post-route';
+import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { useFont } from '@/components/useFont';
 import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import { LD_EVAN_BACON } from '@/data/structured';
@@ -106,6 +107,8 @@ export default function Page() {
   const data = useData(postId);
   const Inter_900Black = useFont('Inter_900Black');
 
+  const paddingBottom = useBottomTabOverflow();
+
   if (!data) {
     return <Text>Not Found: {postId}</Text>;
   }
@@ -129,6 +132,7 @@ export default function Page() {
       />
 
       <BlogPostRoute
+        paddingBottom={paddingBottom}
         dom={{
           contentInsetAdjustmentBehavior: 'automatic',
           automaticallyAdjustsScrollIndicatorInsets: true,

@@ -47,8 +47,10 @@ function useData(
 export default function Page({
   postId,
   isFullScreen,
+  paddingBottom,
 }: {
   postId: string;
+  paddingBottom: number;
   isFullScreen: boolean;
 }) {
   const data = useData(postId);
@@ -64,6 +66,7 @@ export default function Page({
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{
         paddingVertical: 24,
+        paddingBottom: paddingBottom + 24,
       }}
     >
       <div

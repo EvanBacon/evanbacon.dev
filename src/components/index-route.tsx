@@ -7,9 +7,17 @@ import PageHeader from '@/components/PageHeader';
 import '../../global.css';
 import { IS_DOM } from 'expo/dom';
 
-export default function HomeRoute(_: { dom?: import('expo/dom').DOMProps }) {
+export default function HomeRoute({
+  paddingBottom,
+}: {
+  paddingBottom: number;
+  dom?: import('expo/dom').DOMProps;
+}) {
   return (
-    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
+    <div
+      className="flex flex-1 flex-col gap-4 overflow-x-hidden"
+      style={{ paddingBottom }}
+    >
       {!IS_DOM && <PageHeader>Hello world</PageHeader>}
       <div className="mt-8 space-y-6 mx-2 md:mx-0">
         <MarkdownTheme>

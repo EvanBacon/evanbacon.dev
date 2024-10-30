@@ -39,6 +39,14 @@ export default function Layout({ segment }: { segment: string }) {
           headerTitle: 'Blog',
         }}
       />
+      <Stack.Screen
+        name={'faq'}
+        options={{
+          headerLargeTitle: false,
+          headerTitle: 'FAQ',
+          presentation: 'modal',
+        }}
+      />
     </Stack>
   );
 }
