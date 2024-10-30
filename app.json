@@ -1,13 +1,10 @@
 {
   "expo": {
-    "name": "Bacon",
+    "name": "Bacon Blog",
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "web"
-    ],
+    "platforms": ["ios", "web"],
     "version": "1.0.0",
     "orientation": "default",
     "userInterfaceStyle": "dark",
@@ -22,9 +19,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
@@ -58,9 +53,8 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "d2118d4b-3005-4939-848c-3ba54b81e7fe"
+        "projectId": "64b8e4a4-baf5-4160-90fe-ecfa7a32e6b8"
       }
-    },
-    "owner": "bacon_staging"
+    }
   }
 }

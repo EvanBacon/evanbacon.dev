@@ -31,6 +31,7 @@
     "expo-splash-screen": "~0.28.5",
     "expo-status-bar": "~2.0.0",
     "expo-symbols": "~0.2.0",
+    "expo-system-ui": "~4.0.2",
     "expo-video": "~2.0.0-preview.0",
     "expo-web-browser": "~14.0.0",
     "postcss-scss": "^4.0.6",

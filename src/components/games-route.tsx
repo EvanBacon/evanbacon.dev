@@ -9,6 +9,7 @@ import { Link } from 'expo-router';
 
 import '../../global.css';
 import { IS_DOM } from 'expo/dom';
+import { StyleNoSelect } from './no-select';
 
 export default function GamesRoute({
   openExternalUrl,
@@ -25,11 +26,12 @@ export default function GamesRoute({
         paddingBottom,
       }}
     >
+      <StyleNoSelect />
       <PageHeader>Games</PageHeader>
 
       <br />
 
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4 px-2">
         {Projects.map((project, index) => {
           return (
             <GridItem

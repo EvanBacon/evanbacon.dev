@@ -1,6 +1,10 @@
-import { Link } from 'expo-router';
+import '../../../../global.css';
 
 import PageHeader from '@/components/PageHeader';
+import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
+import { B, Div, LI, Span, UL } from '@expo/html-elements';
+import { Link } from 'expo-router';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 type DataType = {
   title: string;
@@ -8,8 +12,6 @@ type DataType = {
   value: string;
   href: string;
 };
-
-import '../../../../global.css';
 
 const mdxctx = require.context('../../../../blog', true, /\.(mdx|js)$/);
 
@@ -80,10 +82,6 @@ export default function App() {
     </ScrollView>
   );
 }
-
-import { Div, UL, LI, Span, B } from '@expo/html-elements';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 
 function LineItemNative({ title, description, value, href }: DataType) {
   return (

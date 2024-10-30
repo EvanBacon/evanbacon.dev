@@ -1,5 +1,8 @@
 import cn from 'classnames';
+import { IS_DOM } from 'expo/dom';
 import { Image } from 'react-native';
+
+const baseUrl = IS_DOM ? process.env.EXPO_DOM_BASE_URL : '';
 
 const legoImages: [string, string][] = [
   ['/front/lego/stanlee.avif', 'Stan Lee and Evan Bacon in Austin, 2013'],
@@ -81,7 +84,7 @@ function MasonryPhotoGrid({ images }: { images: [string, string][] }) {
           >
             <Image
               alt={alt}
-              source={{ uri: src }}
+              source={{ uri: baseUrl + src }}
               resizeMode="cover"
               style={{
                 position: 'absolute',
