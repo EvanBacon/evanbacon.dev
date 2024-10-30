@@ -63,6 +63,7 @@ export default function App() {
       }}
       contentContainerStyle={{
         paddingBottom,
+        paddingHorizontal: 4,
       }}
       scrollIndicatorInsets={{ bottom: paddingBottom }}
       contentInsetAdjustmentBehavior="automatic"

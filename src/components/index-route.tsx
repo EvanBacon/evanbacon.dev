@@ -6,6 +6,7 @@ import PageHeader from '@/components/PageHeader';
 
 import '../../global.css';
 import { IS_DOM } from 'expo/dom';
+import classNames from 'classnames';
 
 export default function HomeRoute({
   paddingBottom,
@@ -15,7 +16,10 @@ export default function HomeRoute({
 }) {
   return (
     <div
-      className="flex flex-1 flex-col gap-4 overflow-x-hidden"
+      className={classNames(
+        'flex flex-1 flex-col gap-4 overflow-x-hidden',
+        IS_DOM && 'px-2'
+      )}
       style={{ paddingBottom }}
     >
       {!IS_DOM && <PageHeader>Hello world</PageHeader>}

@@ -10,6 +10,7 @@ import { Link } from 'expo-router';
 import '../../global.css';
 import { IS_DOM } from 'expo/dom';
 import { StyleNoSelect } from './no-select';
+import classNames from 'classnames';
 
 export default function GamesRoute({
   openExternalUrl,
@@ -21,7 +22,10 @@ export default function GamesRoute({
 }) {
   return (
     <div
-      className="flex flex-1 flex-col gap-4 overflow-x-hidden"
+      className={classNames(
+        'flex flex-1 flex-col gap-4 overflow-x-hidden',
+        IS_DOM && 'px-4'
+      )}
       style={{
         paddingBottom,
       }}
@@ -31,7 +35,7 @@ export default function GamesRoute({
 
       <br />
 
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4 px-2">
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
         {Projects.map((project, index) => {
           return (
             <GridItem
