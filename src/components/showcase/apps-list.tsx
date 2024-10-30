@@ -1,6 +1,7 @@
 import Row from '@/components/showcase/row';
 import { ITUNES_GENRE_TO_CATEGORY_SHORT } from '@/data/app-store-categories';
 import { AppItem, getAppStoreData } from '@/data/getAppStoreData';
+import { IS_DOM } from 'expo/dom';
 import React, { useMemo } from 'react';
 
 const preferredOrder = [
@@ -109,13 +110,15 @@ export function ShowcaseData({
   );
 }
 
+const baseUrl = IS_DOM ? process.env.EXPO_DOM_BASE_URL : '';
+
 function ShowcaseCategoryRow({
   category,
   title,
   apps,
   icon = ['top', 'new'].includes(category)
     ? ''
-    : '/categories/' + category + '.avif',
+    : baseUrl + '/categories/' + category + '.avif',
 }: {
   category: string;
   title: string;
@@ -131,7 +134,7 @@ function ShowcaseCategoryRow({
           </h2>
           {icon && (
             <img
-              src={'/categories/' + category + '.avif'}
+              src={baseUrl + '/categories/' + category + '.avif'}
               className="pl-2 w-8"
             />
           )}

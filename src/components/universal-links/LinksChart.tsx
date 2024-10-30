@@ -7,7 +7,8 @@ import {
 } from '@tanstack/react-query';
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import PageHeader, { GlitchText } from '../PageHeader';
+import { GlitchText } from '../PageHeader';
+import { IS_DOM } from 'expo/dom';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,9 +55,13 @@ export default function UniversalLinksVisualized({
 }: {
   endpoint: string;
 }) {
+  const baseUrl = IS_DOM ? process.env.EXPO_DOM_BASE_URL : '';
+
+  const modifiedEndpoint = baseUrl + endpoint;
+
   return (
     <FetchedProvider>
-      <UniversalLinksVisualizedInner endpoint={endpoint} />
+      <UniversalLinksVisualizedInner endpoint={modifiedEndpoint} />
     </FetchedProvider>
   );
 }

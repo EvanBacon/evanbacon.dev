@@ -20,16 +20,16 @@ import { RouterAction } from 'expo-quick-actions/router';
 QuickActions.setItems<RouterAction>([
   {
     id: '1',
-    title: 'Read',
-    icon: 'symbol:book.fill',
+    title: 'Read Blog',
+    icon: 'symbol:book',
     params: {
       href: '/(blog)/blog',
     },
   },
   {
     id: '2',
-    title: 'Play',
-    icon: 'symbol:gamecontroller.fill',
+    title: 'Play Games',
+    icon: 'symbol:gamecontroller',
     params: {
       href: '/(games)/games',
     },
