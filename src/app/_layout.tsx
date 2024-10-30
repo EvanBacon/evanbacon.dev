@@ -14,6 +14,44 @@ import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
 import { HapticTab } from '@/components/HapticTab';
 
+import * as QuickActions from 'expo-quick-actions';
+import { RouterAction } from 'expo-quick-actions/router';
+
+// Read
+// book.fill
+// Hello
+// hand.wave.fill
+// Play
+// gamecontroller.fill
+
+QuickActions.setItems<RouterAction>([
+  {
+    id: '1',
+    title: 'Read',
+    icon: 'symbol:book.fill',
+    params: {
+      href: '/(blog)/blog',
+    },
+  },
+  {
+    id: '2',
+    title: 'Play',
+    icon: 'symbol:gamecontroller.fill',
+    params: {
+      href: '/(games)/games',
+    },
+  },
+  {
+    id: '3',
+    title: "Wait! Don't Delete!",
+    subtitle: 'Let us help you out',
+    icon: 'symbol:person.bubble',
+    params: {
+      href: 'mailto:bacon@expo.io',
+    },
+  },
+]);
+
 const site = {
   title: 'Evan Bacon',
   author: '@baconbrix',

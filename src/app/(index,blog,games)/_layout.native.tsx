@@ -1,9 +1,13 @@
 import { Stack } from 'expo-router';
 
 import * as AppleColors from '@bacons/apple-colors';
+import { useQuickActionRouting } from 'expo-quick-actions/router';
 
 export default function Layout({ segment }: { segment: string }) {
   const route = segment.match(/\((.*)\)/)[1]!;
+  useQuickActionRouting(callback => {
+    console.log('Quick action', callback);
+  });
   return (
     <Stack
       screenOptions={{
