@@ -13,6 +13,8 @@ import { H3, P, Span } from '@expo/html-elements';
 
 export default function GamesRoute() {
   const paddingBottom = useBottomTabOverflow();
+  const ref = useRef(null);
+  useScrollToTop(ref, -150);
 
   if (process.env.EXPO_OS === 'web') {
     return (
@@ -50,10 +52,6 @@ export default function GamesRoute() {
       </div>
     );
   }
-
-  const ref = useRef(null);
-
-  useScrollToTop(ref, -150);
 
   return (
     <ScrollView
