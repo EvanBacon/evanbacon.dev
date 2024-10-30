@@ -2,7 +2,6 @@ import '../../../../global.css';
 
 import PageHeader from '@/components/PageHeader';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
-import { useScrollRef } from '@/hooks/useTabToTop';
 import { B, Div, LI, Span, UL } from '@expo/html-elements';
 import { Link } from 'expo-router';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
