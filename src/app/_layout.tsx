@@ -12,6 +12,7 @@ import Background from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
+import { HapticTab } from '@/components/HapticTab';
 
 const site = {
   title: 'Evan Bacon',
@@ -113,6 +114,7 @@ function CustomHead() {
 }
 
 import { ThemeProvider, DarkTheme } from '@react-navigation/native';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function App() {
   loadAsync({
@@ -129,8 +131,42 @@ export default function App() {
         <Tabs
           screenOptions={{
             headerShown: false,
+            tabBarButton: HapticTab,
+            tabBarActiveTintColor: 'white',
           }}
-        />
+        >
+          <Tabs.Screen
+            name="(index)"
+            options={{
+              title: 'Hello',
+              tabBarIcon: ({ color }) => (
+                <IconSymbol size={28} name="hand.wave.fill" color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="(blog)"
+            options={{
+              title: 'Read',
+              tabBarIcon: ({ color }) => (
+                <IconSymbol size={28} name="book.fill" color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="(games)"
+            options={{
+              title: 'Play',
+              tabBarIcon: ({ color }) => (
+                <IconSymbol
+                  size={28}
+                  name="gamecontroller.fill"
+                  color={color}
+                />
+              ),
+            }}
+          />
+        </Tabs>
       </ThemeProvider>
     );
   }
