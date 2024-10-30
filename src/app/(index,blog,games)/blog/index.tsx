@@ -9,6 +9,8 @@ type DataType = {
   href: string;
 };
 
+import '../../../../global.css';
+
 const mdxctx = require.context('../../../../blog', true, /\.(mdx|js)$/);
 
 const posts = mdxctx
@@ -31,20 +33,98 @@ const POSTS = posts
   .sort((a, b) => b.date.localeCompare(a.date));
 
 export default function App() {
+  if (process.env.EXPO_OS === 'web') {
+    return (
+      <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
+        <PageHeader>Blog</PageHeader>
+
+        <div className="mt-8 space-y-6">
+          <ul className="divide-y divide-slate-800/50">
+            {POSTS.map((item, index) => (
+              <li key={index} className="py-4">
+                <LineItem key={index} {...item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
+    <ScrollView
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        gap: 16,
+      }}
+      contentInsetAdjustmentBehavior="automatic"
+      automaticallyAdjustsScrollIndicatorInsets
+    >
       <PageHeader>Blog</PageHeader>
 
-      <div className="mt-8 space-y-6">
-        <ul className="divide-y divide-slate-800/50">
+      <Div className="mt-8 space-y-6">
+        <UL className="divide-y divide-slate-800/50">
           {POSTS.map((item, index) => (
-            <li key={index} className="py-4">
-              <LineItem key={index} {...item} />
-            </li>
+            <LI key={index} className="py-4">
+              <LineItemNative key={index} {...item} />
+            </LI>
           ))}
-        </ul>
-      </div>
-    </div>
+        </UL>
+      </Div>
+    </ScrollView>
+  );
+}
+
+import { Div, UL, LI, Span, B } from '@expo/html-elements';
+import { ScrollView, StyleSheet } from 'react-native';
+
+function LineItemNative({ title, description, value, href }: DataType) {
+  return (
+    <Link href={href}>
+      <Div
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: 16,
+          justifyContent: 'center',
+        }}
+        className="text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out"
+      >
+        <Span
+          className="inline"
+          style={{
+            color: '#f8fafc',
+          }}
+        >
+          <B>
+            {title}
+            {'  '}
+          </B>
+
+          {/* <Span className="opacity-60 hidden md:flex">{description}</Span> */}
+        </Span>
+        {/* divider pushing  */}
+        <Span
+          style={{
+            flex: 1,
+            height: StyleSheet.hairlineWidth,
+            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            // borderStyle: 'dotted',
+            // minWidth: '2rem',
+            marginHorizontal: 8,
+          }}
+          className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]"
+        />
+        <Span
+          style={{
+            color: '#f8fafc',
+          }}
+        >
+          {value}
+        </Span>
+      </Div>
+    </Link>
   );
 }
 

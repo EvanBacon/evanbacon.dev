@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { IS_DOM } from 'expo/dom';
 import React from 'react';
 import { Animated, Easing } from 'react-native';
 
@@ -9,6 +10,8 @@ export default function PageHeader({
   children: string;
   className?: string;
 }) {
+  if (IS_DOM || process.env.EXPO_OS !== 'web') return null;
+
   const text = useGlitchText(children);
 
   return (

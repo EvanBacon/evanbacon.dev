@@ -5,7 +5,7 @@ import {
   Inter_900Black,
 } from '@expo-google-fonts/inter';
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
-import { Slot, usePathname } from 'expo-router';
+import { Slot, Tabs, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
 import Background from '@/components/background';
@@ -112,6 +112,8 @@ function CustomHead() {
   );
 }
 
+import { ThemeProvider, DarkTheme } from '@react-navigation/native';
+
 export default function App() {
   loadAsync({
     Inter_300Light,
@@ -121,10 +123,32 @@ export default function App() {
     SourceCodePro_400Regular,
   });
 
+  if (process.env.EXPO_OS !== 'web') {
+    return (
+      <ThemeProvider value={DarkTheme}>
+        <Tabs
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </ThemeProvider>
+    );
+  }
+
   return (
     <>
       <CustomHead />
-      <Background />
+      <Background
+        dom={{
+          containerStyle: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+          },
+        }}
+      />
       <Slot />
     </>
   );

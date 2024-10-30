@@ -128,7 +128,16 @@ export default function Page() {
         }}
       />
 
-      <BlogPostRoute isFullScreen={isFullScreen} postId={postId} />
+      <BlogPostRoute
+        dom={{
+          contentInsetAdjustmentBehavior: 'automatic',
+          automaticallyAdjustsScrollIndicatorInsets: true,
+          mediaPlaybackRequiresUserAction: false,
+          allowsInlineMediaPlayback: true,
+        }}
+        isFullScreen={isFullScreen}
+        postId={postId}
+      />
     </>
   );
 }

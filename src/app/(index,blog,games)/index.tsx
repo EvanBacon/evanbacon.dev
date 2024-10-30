@@ -1,16 +1,12 @@
-import Intro from '@/components/front/intro.mdx';
-import { MarkdownTheme } from '@/components/MarkdownTheme';
-import PageHeader from '@/components/PageHeader';
+import HomeRoute from '@/components/index-route';
 
-export default function HomeRoute() {
+export default function IndexRoute() {
   return (
-    <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
-      <PageHeader>Hello world</PageHeader>
-      <div className="mt-8 space-y-6 mx-2 md:mx-0">
-        <MarkdownTheme>
-          <Intro />
-        </MarkdownTheme>
-      </div>
-    </div>
+    <HomeRoute
+      dom={{
+        contentInsetAdjustmentBehavior: 'automatic',
+        automaticallyAdjustsScrollIndicatorInsets: true,
+      }}
+    />
   );
 }

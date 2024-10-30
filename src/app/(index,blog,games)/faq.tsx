@@ -1,9 +1,13 @@
+'use dom';
+
 import About from '@/components/about.mdx';
 import { QA } from '@/components/faq-info';
 import { MarkdownTheme } from '@/components/MarkdownTheme';
 import PageHeader from '@/components/PageHeader';
 import classNames from 'classnames';
 import Head from 'expo-router/head';
+
+import '../../../global.css';
 
 export default function FAQ() {
   const structuredData = {

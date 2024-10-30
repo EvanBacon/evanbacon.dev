@@ -46,10 +46,7 @@
         {
           "origin": "",
           "headOrigin": "https://evanbacon.dev",
-          "asyncRoutes": {
-            "web": true,
-            "default": false
-          }
+          "asyncRoutes": true
         }
       ]
     ],

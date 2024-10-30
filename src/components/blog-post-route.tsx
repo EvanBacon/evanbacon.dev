@@ -1,3 +1,4 @@
+'use dom';
 import { MarkdownTheme } from '@/components/MarkdownTheme';
 import CenterInFull from '@/components/center-in-full';
 import Thanks from '@/components/thanks.mdx';
@@ -6,6 +7,8 @@ import React from 'react';
 import { ScrollView, Text } from 'react-native';
 
 const mdxctx = require.context('../../blog', true, /\.(mdx|js)$/);
+
+import '../../global.css';
 
 type PostInfo = {
   tags: string[];
