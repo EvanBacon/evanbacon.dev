@@ -26,14 +26,14 @@ QuickActions.setItems<RouterAction>([
       href: '/(blog)/blog',
     },
   },
-  {
-    id: '2',
-    title: 'Play Games',
-    icon: 'symbol:gamecontroller',
-    params: {
-      href: '/(games)/games',
-    },
-  },
+  // {
+  //   id: '2',
+  //   title: 'Play Games',
+  //   icon: 'symbol:gamecontroller',
+  //   params: {
+  //     href: '/(games)/games',
+  //   },
+  // },
   {
     id: '3',
     title: "Wait! Don't Delete!",
@@ -175,19 +175,6 @@ export default function App() {
           }}
         >
           <Tabs.Screen
-            name="(blog)"
-            options={{
-              title: 'Read',
-              tabBarIcon: ({ color, focused }) => (
-                <IconSymbol
-                  size={28}
-                  name={focused ? 'book.fill' : 'book'}
-                  color={color}
-                />
-              ),
-            }}
-          />
-          <Tabs.Screen
             name="(index)"
             options={{
               title: 'Hello',
@@ -202,9 +189,25 @@ export default function App() {
           />
 
           <Tabs.Screen
+            name="(blog)"
+            options={{
+              title: 'Read',
+              tabBarIcon: ({ color, focused }) => (
+                <IconSymbol
+                  size={28}
+                  name={focused ? 'book.fill' : 'book'}
+                  color={color}
+                />
+              ),
+            }}
+          />
+
+          <Tabs.Screen
             name="(games)"
             options={{
               title: 'Play',
+              // Apple does not allow opening clones of other apps inside of your app. Hide this for now.
+              href: null,
               tabBarIcon: ({ color, focused }) => (
                 <IconSymbol
                   size={28}
