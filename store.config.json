@@ -17,6 +17,7 @@
         "promoText": "Learn about universal app and web development"
       }
     },
+    "copyright": "2024 Evan Bacon",
     "advisory": {
       "alcoholTobaccoOrDrugUseOrReferences": "NONE",
       "contests": "NONE",
@@ -34,6 +35,14 @@
       "unrestrictedWebAccess": false,
       "kidsAgeBand": null,
       "seventeenPlus": false
+    },
+    "review": {
+      "firstName": "Evan",
+      "lastName": "Bacon",
+      "email": "baconbrix@gmail.com",
+      "phone": "2243030301",
+      "demoRequired": false,
+      "notes": "First release, public testing went well"
     }
   }
 }
