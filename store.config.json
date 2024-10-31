@@ -1,0 +1,39 @@
+{
+  "configVersion": 0,
+  "apple": {
+    "version": "1.0",
+    "release": {
+      "automaticRelease": true
+    },
+    "info": {
+      "en-US": {
+        "title": "Bacon Blog",
+        "subtitle": "Learn about universal app dev",
+        "description": "Learn about universal app and web development with detailed articles and tutorials.",
+        "keywords": ["evanbacon", "expo", "react", "javascript", "web", "development"],
+        "marketingUrl": "https://evanbacon.dev",
+        "supportUrl": "https://evanbacon.dev",
+        "privacyPolicyUrl": "https://evanbacon.dev",
+        "promoText": "Learn about universal app and web development"
+      }
+    },
+    "advisory": {
+      "alcoholTobaccoOrDrugUseOrReferences": "NONE",
+      "contests": "NONE",
+      "gamblingSimulated": "NONE",
+      "horrorOrFearThemes": "NONE",
+      "matureOrSuggestiveThemes": "NONE",
+      "medicalOrTreatmentInformation": "NONE",
+      "profanityOrCrudeHumor": "NONE",
+      "sexualContentGraphicAndNudity": "NONE",
+      "sexualContentOrNudity": "NONE",
+      "violenceCartoonOrFantasy": "NONE",
+      "violenceRealistic": "NONE",
+      "violenceRealisticProlongedGraphicOrSadistic": "NONE",
+      "gambling": false,
+      "unrestrictedWebAccess": false,
+      "kidsAgeBand": null,
+      "seventeenPlus": false
+    }
+  }
+}

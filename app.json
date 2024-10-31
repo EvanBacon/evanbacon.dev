@@ -34,7 +34,7 @@
     },
     "ios": {
       "bundleIdentifier": "evanbacon.dev",
-      "supportsTablet": true,
+      "supportsTablet": false,
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true,
         "ITSAppUsesNonExemptEncryption": false
