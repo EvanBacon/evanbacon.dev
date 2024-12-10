@@ -135,9 +135,9 @@ struct NewsWidgetEntryView: View {
               .resizable()
               .frame(width: 18, height: 18)
               .padding(4)
-              .background(Color.white.opacity(0.8))
+              .background(.white.opacity(0.5))
               .clipShape(.circle)
-              .tint(.black)
+              .foregroundColor(.black)
           }
           Spacer()
         }
@@ -165,9 +165,9 @@ struct NewsWidgetEntryView: View {
             .resizable()
             .frame(width: 18, height: 18)
             .padding(4)
-            .background(Color.white.opacity(0.8))
+            .background(.white.opacity(0.5))
             .clipShape(.circle)
-            .tint(.black)
+            .foregroundColor(.black)
           
         }
         Spacer()
