@@ -261,15 +261,15 @@ struct NewsEntry: TimelineEntry {
 
 @main
 struct NewsWidget: Widget {
-  let kind: String = "NewsWidget"
+  let kind: String = "widget"
   
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: NewsProvider()) { entry in
       NewsWidgetEntryView(entry: entry)
     }
     .supportedFamilies([.systemSmall, .systemMedium])
-    .configurationDisplayName("News")
-    .description("View the latest news articles.")
+    .configurationDisplayName("Bacon Blog")
+    .description("View the latest articles.")
   }
 }
 
