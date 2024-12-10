@@ -33,14 +33,19 @@
       "typedRoutes": true
     },
     "ios": {
+      "appleTeamId": "QQ57RJ5UTD",
       "bundleIdentifier": "evanbacon.dev",
       "supportsTablet": false,
+      "entitlements": {
+        "com.apple.security.application-groups": ["group.bacon.data"]
+      },
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true,
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "plugins": [
+      "@bacons/apple-targets",
       [
         "expo-router",
         {

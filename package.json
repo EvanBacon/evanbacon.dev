@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@bacons/apple-colors": "^0.0.6",
+    "@bacons/apple-targets": "^0.1.7",
     "@bacons/mdx": "^0.3.7",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/source-code-pro": "^0.2.3",

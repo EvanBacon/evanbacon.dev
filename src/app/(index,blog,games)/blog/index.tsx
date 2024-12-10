@@ -34,8 +34,35 @@ const POSTS = posts
   }))
   .sort((a, b) => b.date.localeCompare(a.date));
 
+import { ExtensionStorage } from '@bacons/apple-targets';
+import { useEffect } from 'react';
+
+const extStorage = new ExtensionStorage('group.bacon.data');
+
+function updateWidgetData(
+  data: {
+    imageUrl: string;
+    title: string;
+    date: string;
+  }[]
+) {
+  extStorage.set('stories', data);
+  ExtensionStorage.reloadWidget();
+}
+
 export default function App() {
   const paddingBottom = useBottomTabOverflow();
+
+  useEffect(() => {
+    updateWidgetData(
+      POSTS.slice(0, 3).map(({ title, value, date }) => ({
+        title,
+        date: new Date(date).toISOString(),
+        imageUrl: 'https://github.com/evanbacon.png',
+      }))
+    );
+  }, []);
+
   if (process.env.EXPO_OS === 'web') {
     return (
       <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
