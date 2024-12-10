@@ -54,15 +54,12 @@ function updateWidgetData(
   ExtensionStorage.reloadWidget();
 }
 
-import { Asset } from 'expo-asset';
-
 export default function App() {
   const paddingBottom = useBottomTabOverflow();
 
   useEffect(() => {
     if (process.env.EXPO_OS === 'ios') {
       (async () => {
-        console.log('start');
         try {
           const posts = await Promise.all(
             POSTS.slice(0, 3).map(async ({ title, img, date, href, slug }) => ({
@@ -81,7 +78,6 @@ export default function App() {
           );
 
           updateWidgetData(posts);
-          console.log(posts);
         } catch (error) {
           console.error('error', error);
         }
