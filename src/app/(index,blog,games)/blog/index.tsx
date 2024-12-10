@@ -47,7 +47,7 @@ function updateWidgetData(
     href: string;
   }[]
 ) {
-  extStorage.set('stories', data);
+  extStorage.set('articlesData', data);
   ExtensionStorage.reloadWidget();
 }
 

@@ -23,6 +23,12 @@ struct WidgetData: Codable {
 struct ArticleView: View {
   let article: ArticleData
   
+  let isoFormatter: ISO8601DateFormatter = {
+    let formatter = ISO8601DateFormatter()
+    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    return formatter
+  }()
+  
   var body: some View {
     Link(destination: URL(string: article.href)!) {
       HStack {
@@ -41,9 +47,12 @@ struct ArticleView: View {
           Text(article.title)
             .font(.headline)
             .lineLimit(2)
-          Text(article.date)
-            .font(.caption)
-            .foregroundColor(Color(.secondaryLabel))
+          
+          if let date = isoFormatter.date(from: article.date) {
+            Text(date, style: .date)
+              .font(.caption)
+              .foregroundColor(Color(.secondaryLabel))
+          }
         }
       }
     }
@@ -75,16 +84,22 @@ struct NewsWidgetEntryView: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .clipped() // Ensures the image doesn't overflow
+            .clipped()
         } else {
           Color(.systemBackground)
         }
-        
       } else {
         Color(.systemBackground)
       }
     }
   }
+  
+  let isoFormatter: ISO8601DateFormatter = {
+    let formatter = ISO8601DateFormatter()
+    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+    return formatter
+  }()
+  
   
   @ViewBuilder
   private var smallView: some View {
@@ -92,7 +107,7 @@ struct NewsWidgetEntryView: View {
       ZStack {
         
         // Text overlay
-        VStack {
+        VStack(alignment: .leading) {
           Spacer()
           Text(article.title)
             .font(.headline)
@@ -100,6 +115,15 @@ struct NewsWidgetEntryView: View {
             .multilineTextAlignment(.leading)
             .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
             .padding([.leading, .trailing], 0)
+          if let date = isoFormatter.date(from: article.date) {
+            Text(date, style: .date)
+              .font(.caption)
+              .foregroundColor(.white)
+              .multilineTextAlignment(.leading)
+              .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
+              .foregroundColor(Color(.secondaryLabel))
+            
+          }
         }
         
         // Logo overlay
@@ -222,7 +246,7 @@ struct NewsProvider: TimelineProvider {
   
   func sampleArticles() -> [ArticleData] {
     return [
-      ArticleData(imageUrl: "https://github.com/evanbacon.png", title: "Sample Article 1", date: "2023-10-01", href: "/blog"),
+      ArticleData(imageUrl: "https://github.com/evanbacon.png", title: "Sample Article 1", date: "2024-12-10T05:18:58.102Z", href: "/blog"),
       ArticleData(imageUrl: "https://github.com/expo.png", title: "Sample Article 2", date: "2023-10-02", href: "/blog"),
       ArticleData(imageUrl: "https://github.com/evanbacon.png", title: "Sample Article 3", date: "2023-10-03", href: "/blog"),
       ArticleData(imageUrl: "https://github.com/expo.png", title: "Sample Article 4", date: "2023-10-04", href: "/blog")
@@ -253,7 +277,7 @@ struct NewsWidget: Widget {
 struct NewsWidgetEntryView_Previews: PreviewProvider {
   static var sampleData: WidgetData {
     WidgetData(articles: [
-      ArticleData(imageUrl: "https://github.com/evanbacon.png", title: "Sample Article 1", date: "2023-10-01", href: "/blog"),
+      ArticleData(imageUrl: "https://github.com/evanbacon.png", title: "Sample Article 1", date: "2024-12-10T05:18:58.102Z", href: "/blog"),
       ArticleData(imageUrl: "https://github.com/expo.png", title: "Sample Article 2", date: "2023-10-02", href: "/blog"),
       ArticleData(imageUrl: "https://github.com/evanbacon.png", title: "Sample Article 3", date: "2023-10-03", href: "/blog"),
       ArticleData(imageUrl: "https://github.com/expo.png", title: "Sample Article 4", date: "2023-10-04", href: "/blog")
@@ -272,8 +296,8 @@ struct NewsWidgetEntryView_Previews: PreviewProvider {
       NewsWidgetEntryView(entry: entry)
         .previewContext(WidgetPreviewContext(family: .systemMedium))
       
-//      NewsWidgetEntryView(entry: entry)
-//        .previewContext(WidgetPreviewContext(family: .systemLarge))
+      //      NewsWidgetEntryView(entry: entry)
+      //        .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
   }
 }
