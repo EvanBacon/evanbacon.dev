@@ -44,6 +44,7 @@ function updateWidgetData(
     imageUrl: string;
     title: string;
     date: string;
+    href: string;
   }[]
 ) {
   extStorage.set('stories', data);
@@ -55,10 +56,11 @@ export default function App() {
 
   useEffect(() => {
     updateWidgetData(
-      POSTS.slice(0, 3).map(({ title, value, date }) => ({
+      POSTS.slice(0, 3).map(({ title, value, date, href }) => ({
         title,
         date: new Date(date).toISOString(),
         imageUrl: 'https://github.com/evanbacon.png',
+        href,
       }))
     );
   }, []);
