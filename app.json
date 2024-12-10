@@ -40,7 +40,7 @@
         "com.apple.security.application-groups": ["group.bacon.data"]
       },
       "infoPlist": {
-        "UIViewControllerBasedStatusBarAppearance": true,
+        "UIViewControllerBasedStatusBarAppearance": false,
         "ITSAppUsesNonExemptEncryption": false
       }
     },

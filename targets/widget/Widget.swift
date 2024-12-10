@@ -114,7 +114,7 @@ struct NewsWidgetEntryView: View {
             .foregroundColor(.white)
             .multilineTextAlignment(.leading)
             .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
-            .padding([.leading, .trailing], 0)
+            .padding(0)
           if let date = isoFormatter.date(from: article.date) {
             Text(date, style: .date)
               .font(.caption)
