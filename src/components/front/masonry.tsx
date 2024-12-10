@@ -2,7 +2,11 @@ import cn from 'classnames';
 import { IS_DOM } from 'expo/dom';
 import { Image } from 'react-native';
 
-const baseUrl = IS_DOM ? process.env.EXPO_DOM_BASE_URL : '';
+const baseUrl = IS_DOM
+  ? __DEV__
+    ? new URL('/', window.location.href).toString()
+    : process.env.EXPO_BASE_URL
+  : '';
 
 const legoImages: [string, string][] = [
   ['/front/lego/stanlee.avif', 'Stan Lee and Evan Bacon in Austin, 2013'],

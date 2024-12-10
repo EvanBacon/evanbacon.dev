@@ -110,7 +110,11 @@ export function ShowcaseData({
   );
 }
 
-const baseUrl = IS_DOM ? process.env.EXPO_DOM_BASE_URL : '';
+const baseUrl = IS_DOM
+  ? __DEV__
+    ? new URL('/', window.location.href).toString()
+    : process.env.EXPO_BASE_URL
+  : '';
 
 function ShowcaseCategoryRow({
   category,

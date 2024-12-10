@@ -4,7 +4,10 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": ["ios", "web"],
+    "platforms": [
+      "ios",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "default",
     "userInterfaceStyle": "dark",
@@ -19,7 +22,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
@@ -37,7 +42,9 @@
       "bundleIdentifier": "evanbacon.dev",
       "supportsTablet": false,
       "entitlements": {
-        "com.apple.security.application-groups": ["group.bacon.data"]
+        "com.apple.security.application-groups": [
+          "group.bacon.data"
+        ]
       },
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": false,
@@ -54,7 +61,8 @@
           "asyncRoutes": true
         }
       ],
-      "expo-quick-actions"
+      "expo-quick-actions",
+      "expo-video"
     ],
     "extra": {
       "eas": {
