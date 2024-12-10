@@ -32,6 +32,7 @@ struct ArticleView: View {
             .aspectRatio(contentMode: .fill)
             .frame(width: 50, height: 50)
             .clipped()
+            .clipShape(.rect(cornerSize: .init(width: 12, height: 12)))
         } else {
           Color.gray
             .frame(width: 50, height: 50)
@@ -42,10 +43,11 @@ struct ArticleView: View {
             .lineLimit(2)
           Text(article.date)
             .font(.caption)
-            .foregroundColor(.gray)
+            .foregroundColor(Color(.secondaryLabel))
         }
       }
     }
+    .frame(maxWidth: .infinity, alignment: .leading)
   }
 }
 
@@ -69,13 +71,13 @@ struct NewsWidgetEntryView: View {
         if let article = entry.data.articles.first, let url = URL(string: article.imageUrl),
            let imageData = try? Data(contentsOf: url),
            let uiImage = UIImage(data: imageData) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipped() // Ensures the image doesn't overflow
+          Image(uiImage: uiImage)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .clipped() // Ensures the image doesn't overflow
         } else {
-            Color.gray
+          Color(.systemBackground)
         }
         
       } else {
@@ -86,60 +88,79 @@ struct NewsWidgetEntryView: View {
   
   @ViewBuilder
   private var smallView: some View {
-      if let article = entry.data.articles.first {
-          ZStack {
-             
-              // Text overlay
-              VStack {
-                  Spacer()
-                  Text(article.title)
-                      .font(.headline)
-                      .foregroundColor(.white)
-                      .multilineTextAlignment(.leading)
-                      .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
-                      .padding([.leading, .trailing], 0)
-              }
-              
-              // Logo overlay
-              VStack {
-                  HStack {
-                      Spacer()
-                        Image(.logo)
-                          .renderingMode(.template)
-                          .resizable()
-                          .frame(width: 18, height: 18)
-                          .padding(4)
-                          .background(Color.white.opacity(0.8))
-                          .clipShape(.circle)
-                          .tint(.black)
-                  }
-                Spacer()
-              }
+    if let article = entry.data.articles.first {
+      ZStack {
+        
+        // Text overlay
+        VStack {
+          Spacer()
+          Text(article.title)
+            .font(.headline)
+            .foregroundColor(.white)
+            .multilineTextAlignment(.leading)
+            .shadow(color: .black.opacity(0.7), radius: 2, x: 0, y: 1)
+            .padding([.leading, .trailing], 0)
+        }
+        
+        // Logo overlay
+        VStack {
+          HStack {
+            Spacer()
+            Image(.logo)
+              .renderingMode(.template)
+              .resizable()
+              .frame(width: 18, height: 18)
+              .padding(4)
+              .background(Color.white.opacity(0.8))
+              .clipShape(.circle)
+              .tint(.black)
           }
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .widgetURL(URL(string: article.href)!)
-          // Ensure ZStack fills the container
+          Spacer()
+        }
       }
+      .frame(maxWidth: .infinity, maxHeight: .infinity)
+      .widgetURL(URL(string: article.href)!)
+      // Ensure ZStack fills the container
+    }
   }
   
   @ViewBuilder
   private var mediumView: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      ForEach(entry.data.articles.prefix(2)) { article in
-        ArticleView(article: article)
+    ZStack {
+      
+      VStack(alignment: .leading, spacing: 8) {
+        ForEach(entry.data.articles.prefix(2)) { article in
+          ArticleView(article: article)
+        }
       }
+      VStack{
+        HStack {
+          Spacer()
+          Image(.logo)
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: 18, height: 18)
+            .padding(4)
+            .background(Color.white.opacity(0.8))
+            .clipShape(.circle)
+            .tint(.black)
+          
+        }
+        Spacer()
+      }
+      
     }
-    .padding()
+    
   }
   
   @ViewBuilder
   private var largeView: some View {
     VStack(alignment: .leading, spacing: 8) {
-      ForEach(entry.data.articles.prefix(4)) { article in
+      ForEach(entry.data.articles.prefix(6)) { article in
         ArticleView(article: article)
       }
     }
-    .padding()
+    
   }
 }
 
@@ -222,7 +243,7 @@ struct NewsWidget: Widget {
     StaticConfiguration(kind: kind, provider: NewsProvider()) { entry in
       NewsWidgetEntryView(entry: entry)
     }
-    .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+    .supportedFamilies([.systemSmall, .systemMedium])
     .configurationDisplayName("News")
     .description("View the latest news articles.")
   }
@@ -251,8 +272,8 @@ struct NewsWidgetEntryView_Previews: PreviewProvider {
       NewsWidgetEntryView(entry: entry)
         .previewContext(WidgetPreviewContext(family: .systemMedium))
       
-      NewsWidgetEntryView(entry: entry)
-        .previewContext(WidgetPreviewContext(family: .systemLarge))
+//      NewsWidgetEntryView(entry: entry)
+//        .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
   }
 }
