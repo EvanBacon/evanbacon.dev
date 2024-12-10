@@ -54,27 +54,31 @@ function updateWidgetData(
   ExtensionStorage.reloadWidget();
 }
 
-export default function App() {
-  const paddingBottom = useBottomTabOverflow();
+function sortRandomly<T>(arr: T[]) {
+  return arr.sort(() => Math.random() - 0.5);
+}
 
+function useLatestPostsInWidget() {
   useEffect(() => {
     if (process.env.EXPO_OS === 'ios') {
       (async () => {
         try {
           const posts = await Promise.all(
-            POSTS.slice(0, 3).map(async ({ title, img, date, href, slug }) => ({
-              title,
-              date: new Date(date).toISOString(),
-              imageUrl: new URL(
-                '/blog/' + slug + '.jpg',
-                window.location.href
-              ).toString(),
-              // imageUrl: !img
-              //   ? 'https://github.com/evanbacon.png'
-              //   : (await Asset.fromModule(img).downloadAsync()).localUri,
-              // imageUrl: 'https://github.com/evanbacon.png',
-              href: Linking.createURL(href.replace(/^\//, '')),
-            }))
+            sortRandomly(POSTS.slice(0, 6)).map(
+              async ({ title, img, date, href, slug }) => ({
+                title,
+                date: new Date(date).toISOString(),
+                imageUrl: new URL(
+                  '/blog/' + slug + '.jpg',
+                  window.location.href
+                ).toString(),
+                // imageUrl: !img
+                //   ? 'https://github.com/evanbacon.png'
+                //   : (await Asset.fromModule(img).downloadAsync()).localUri,
+                // imageUrl: 'https://github.com/evanbacon.png',
+                href: Linking.createURL(href.replace(/^\//, '')),
+              })
+            )
           );
 
           updateWidgetData(posts);
@@ -84,6 +88,12 @@ export default function App() {
       })();
     }
   }, []);
+}
+
+export default function App() {
+  useLatestPostsInWidget();
+
+  const paddingBottom = useBottomTabOverflow();
 
   if (process.env.EXPO_OS === 'web') {
     return (
