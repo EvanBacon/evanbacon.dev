@@ -21,7 +21,7 @@ const posts = mdxctx
   .map(key => mdxctx(key));
 
 const POSTS = posts
-  .map(({ title, shortTitle, subtitle, date, slug }) => ({
+  .map(({ title, shortTitle, subtitle, date, slug, featuredImage }) => ({
     title: shortTitle ?? title,
     description: subtitle,
     value: new Date(date).toLocaleDateString('en-US', {
@@ -31,11 +31,60 @@ const POSTS = posts
     }),
     date,
     href: `/blog/${slug}`,
+    slug,
+    img: featuredImage,
   }))
   .sort((a, b) => b.date.localeCompare(a.date));
 
+import { ExtensionStorage } from '@bacons/apple-targets';
+import { useEffect } from 'react';
+import * as Linking from 'expo-linking';
+
+const extStorage = new ExtensionStorage('group.bacon.data');
+
+function updateWidgetData(
+  data: {
+    imageUrl: string;
+    title: string;
+    date: string;
+    href: string;
+  }[]
+) {
+  extStorage.set('articlesData', data);
+  ExtensionStorage.reloadWidget();
+}
+
 export default function App() {
   const paddingBottom = useBottomTabOverflow();
+
+  useEffect(() => {
+    if (process.env.EXPO_OS === 'ios') {
+      (async () => {
+        try {
+          const posts = await Promise.all(
+            POSTS.slice(0, 3).map(async ({ title, img, date, href, slug }) => ({
+              title,
+              date: new Date(date).toISOString(),
+              imageUrl: new URL(
+                '/blog/' + slug + '.jpg',
+                window.location.href
+              ).toString(),
+              // imageUrl: !img
+              //   ? 'https://github.com/evanbacon.png'
+              //   : (await Asset.fromModule(img).downloadAsync()).localUri,
+              // imageUrl: 'https://github.com/evanbacon.png',
+              href: Linking.createURL(href.replace(/^\//, '')),
+            }))
+          );
+
+          updateWidgetData(posts);
+        } catch (error) {
+          console.error('error', error);
+        }
+      })();
+    }
+  }, []);
+
   if (process.env.EXPO_OS === 'web') {
     return (
       <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
