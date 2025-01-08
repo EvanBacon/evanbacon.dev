@@ -4,7 +4,10 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": ["ios", "web"],
+    "platforms": [
+      "ios",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "default",
     "userInterfaceStyle": "dark",
@@ -19,7 +22,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
@@ -52,6 +57,11 @@
       "expo-quick-actions"
     ],
     "extra": {
+      "router": {
+        "origin": "",
+        "headOrigin": "https://evanbacon.dev",
+        "asyncRoutes": true
+      },
       "eas": {
         "projectId": "64b8e4a4-baf5-4160-90fe-ecfa7a32e6b8"
       }
