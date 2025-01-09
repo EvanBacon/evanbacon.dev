@@ -9,8 +9,8 @@
     "ios": "expo run:ios"
   },
   "dependencies": {
-    "@bacons/apple-colors": "^0.0.6",
-    "@bacons/mdx": "^0.3.7",
+    "@bacons/apple-colors": "^0.0.8",
+    "@bacons/mdx": "^0.4.2",
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/source-code-pro": "^0.2.3",
     "@expo/html-elements": "^0.10.1",
