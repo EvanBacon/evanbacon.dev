@@ -4,10 +4,7 @@
     "slug": "bacon",
     "scheme": "bacon",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "web"
-    ],
+    "platforms": ["web"],
     "version": "1.0.0",
     "orientation": "default",
     "userInterfaceStyle": "dark",
@@ -22,9 +19,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",

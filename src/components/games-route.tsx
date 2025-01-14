@@ -381,7 +381,7 @@ const Projects: (Project & { button?: string })[] = [
     color: '#6dceea',
     actions: [
       {
-        url: 'https://crossyroad.netlify.app',
+        url: 'https://crossyroad.expo.app',
       },
       {
         url: 'https://github.com/evanbacon/expo-crossy-road',
