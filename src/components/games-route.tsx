@@ -399,7 +399,7 @@ const Projects: (Project & { button?: string })[] = [
     color: '#E07C4C',
     actions: [
       {
-        url: 'https://pillarvalley.netlify.app',
+        url: 'https://pillarvalley.expo.app',
       },
       {
         url: 'https://github.com/evanbacon/expo-pillar-valley',
