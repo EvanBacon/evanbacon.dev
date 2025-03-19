@@ -2,7 +2,7 @@ export function GET() {
   return new Response('Redirecting', {
     status: 301,
     headers: {
-      Location: '/blog/expo-2024',
+      Location: '/blog/expo-apps',
     },
   });
 }

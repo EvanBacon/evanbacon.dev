@@ -84,7 +84,7 @@ export function ShowcaseData({
             new Date(b.checkedAt!).getTime() - new Date(a.checkedAt!).getTime()
           );
         })
-        .slice(0, 50)
+        .slice(0, 100)
         .sort((a, b) => {
           return b.absoluteRating - a.absoluteRating;
         }),
