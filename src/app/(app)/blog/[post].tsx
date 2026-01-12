@@ -102,7 +102,10 @@ function BlogHead({ info }: { info: PostInfo }) {
 }
 
 export default function Page() {
-  const { post: postId } = useLocalSearchParams<{ post: string }>();
+  let { post: postId } = useLocalSearchParams<{ post: string }>();
+  if (postId === 'expo-2024') {
+    postId = 'expo-apps';
+  }
   const isFullScreen = useIsFullScreenRoute();
   const data = useData(postId);
   const Inter_900Black = useFont('Inter_900Black');
