@@ -3,23 +3,26 @@
     "name": "Bacon Blog",
     "slug": "bacon",
     "scheme": "bacon",
-    "privacy": "public",
-    "platforms": ["web"],
+    "platforms": [
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "default",
     "userInterfaceStyle": "dark",
-    "backgroundColor": "#000",
+    "backgroundColor": "#000000",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000"
+      "backgroundColor": "#000000"
     },
     "newArchEnabled": true,
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro",
@@ -49,7 +52,9 @@
           "asyncRoutes": true
         }
       ],
-      "expo-quick-actions"
+      "expo-quick-actions",
+      "expo-video",
+      "expo-web-browser"
     ],
     "extra": {
       "router": {

@@ -160,3 +160,12 @@ npx expo install --fix
 ```
 
 Build a custom dev client.
+
+## Removing patches
+
+Check if there are any outdated patches in the `patches/` directory. Remove them if they are no longer needed.
+
+## Postcss
+
+- autoprefixer isn't needed in SDK 53 and later.
+- use postcss.config.mjs in SDK 53 and later.
