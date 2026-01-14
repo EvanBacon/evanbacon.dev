@@ -169,3 +169,11 @@ Check if there are any outdated patches in the `patches/` directory. Remove them
 
 - autoprefixer isn't needed in SDK 53 and later.
 - use postcss.config.mjs in SDK 53 and later.
+
+## Metro
+
+Remove redundant metro config options:
+
+- resolver.unstable_enablePackageExports is enabled by default in SDK 53 and later.
+- `experimentalImportSupport` is enabled by default in SDK 54.
+- `EXPO_USE_FAST_RESOLVER=1` is removed in SDK 54 and later.
