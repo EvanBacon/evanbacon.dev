@@ -48,7 +48,8 @@
         {
           "origin": "",
           "headOrigin": "https://evanbacon.dev",
-          "asyncRoutes": true
+          "asyncRoutes": true,
+          "unstable_useServerDataLoaders": true
         }
       ],
       "expo-quick-actions",

@@ -3,39 +3,49 @@ import '../../../../global.css';
 import PageHeader from '@/components/PageHeader';
 import { useBottomTabOverflow } from '@/components/ui/TabBarBackground';
 import { B, Div, LI, Span, UL } from '@expo/html-elements';
-import { Link } from 'expo-router';
+import { Link, useLoaderData } from 'expo-router';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 type DataType = {
   title: string;
   description: string;
   value: string;
+  date: string;
   href: string;
 };
 
 const mdxctx = require.context('../../../../blog', true, /\.(mdx|js)$/);
 
-const posts = mdxctx
-  .keys()
-  .filter(i => i.match(/\.js$/))
-  .map(key => mdxctx(key));
+export async function loader(
+  _request: unknown,
+  _params: Record<string, string>
+): Promise<{ posts: DataType[] }> {
+  const posts = mdxctx
+    .keys()
+    .filter(i => i.match(/\.js$/))
+    .map(key => mdxctx(key));
 
-const POSTS = posts
-  .map(({ title, shortTitle, subtitle, date, slug }) => ({
-    title: shortTitle ?? title,
-    description: subtitle,
-    value: new Date(date).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    }),
-    date,
-    href: `/blog/${slug}`,
-  }))
-  .sort((a, b) => b.date.localeCompare(a.date));
+  const formattedPosts = posts
+    .map(({ title, shortTitle, subtitle, date, slug }) => ({
+      title: shortTitle ?? title,
+      description: subtitle,
+      value: new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      }),
+      date,
+      href: `/blog/${slug}`,
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+  return { posts: formattedPosts };
+}
 
 export default function App() {
+  const { posts } = useLoaderData<typeof loader>();
   const paddingBottom = useBottomTabOverflow();
+
   if (process.env.EXPO_OS === 'web') {
     return (
       <div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
@@ -43,7 +53,7 @@ export default function App() {
 
         <div className="mt-8 space-y-6">
           <ul className="divide-y divide-slate-800/50">
-            {POSTS.map((item, index) => (
+            {posts.map((item, index) => (
               <li key={index} className="py-4">
                 <LineItem key={index} {...item} />
               </li>
@@ -73,7 +83,7 @@ export default function App() {
 
       <Div className="mt-8 space-y-6">
         <UL className="divide-y divide-slate-800/50">
-          {POSTS.map((item, index) => (
+          {posts.map((item, index) => (
             <LI key={index} className="py-4">
               <LineItemNative key={index} {...item} />
             </LI>

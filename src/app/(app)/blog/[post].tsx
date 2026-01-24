@@ -4,18 +4,10 @@ import { useFont } from '@/components/useFont';
 import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import { LD_EVAN_BACON } from '@/data/structured';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
-import { router, Stack, useLocalSearchParams, usePathname } from 'expo-router';
+import { router, Stack, useLoaderData, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
 import { Clipboard, Text } from 'react-native';
-
-export async function generateStaticParams(): Promise<{ post: string }[]> {
-  return mdxctx
-    .keys()
-    .filter(i => i.match(/\.js$/))
-    .map(key => mdxctx(key).slug)
-    .map(post => ({ post }));
-}
 
 const mdxctx = require.context('../../../../blog', true, /\.(mdx|js)$/);
 
@@ -28,29 +20,30 @@ type PostInfo = {
   featuredImage: number;
 };
 
-function useData(
-  postId: string
-): null | {
-  MarkdownComponent: any;
-  info: PostInfo;
-} {
-  const MDKey = React.useMemo(
-    () => mdxctx.keys().find(p => p === './' + postId + '/index.mdx'),
-    [postId]
-  );
+export async function generateStaticParams(): Promise<{ post: string }[]> {
+  return mdxctx
+    .keys()
+    .filter(i => i.match(/\.js$/))
+    .map(key => mdxctx(key).slug)
+    .map(post => ({ post }));
+}
 
-  const mdinfo = React.useMemo(
-    () => mdxctx.keys().find(p => p === './' + postId + '/index.js'),
-    [postId]
-  );
+export async function loader(
+  _request: unknown,
+  params: { post: string }
+): Promise<{ info: PostInfo; postId: string } | null> {
+  let postId = params.post;
+  if (postId === 'expo-2024') {
+    postId = 'expo-apps';
+  }
 
-  const MD = MDKey ? mdxctx(MDKey).default : null;
-  const Info = mdinfo ? mdxctx(mdinfo) : null;
-
-  if (!MD || !Info) {
+  const mdinfo = mdxctx.keys().find(p => p === './' + postId + '/index.js');
+  if (!mdinfo) {
     return null;
   }
-  return { MarkdownComponent: MD, info: Info };
+
+  const info = mdxctx(mdinfo) as PostInfo;
+  return { info, postId };
 }
 
 function BlogHead({ info }: { info: PostInfo }) {
@@ -102,21 +95,16 @@ function BlogHead({ info }: { info: PostInfo }) {
 }
 
 export default function Page() {
-  let { post: postId } = useLocalSearchParams<{ post: string }>();
-  if (postId === 'expo-2024') {
-    postId = 'expo-apps';
-  }
+  const data = useLoaderData<typeof loader>();
   const isFullScreen = useIsFullScreenRoute();
-  const data = useData(postId);
   const Inter_900Black = useFont('Inter_900Black');
-
   const paddingBottom = useBottomTabOverflow();
 
   if (!data) {
-    return <Text>Not Found: {postId}</Text>;
+    return <Text>Not Found</Text>;
   }
 
-  const { info } = data;
+  const { info, postId } = data;
 
   return (
     <>
