@@ -32,11 +32,7 @@ export async function loader(
   _request: unknown,
   params: { post: string }
 ): Promise<{ info: PostInfo; postId: string } | null> {
-  let postId = params.post;
-  if (postId === 'expo-2024') {
-    postId = 'expo-apps';
-  }
-
+  const postId = params.post;
   const mdinfo = mdxctx.keys().find(p => p === './' + postId + '/index.js');
   if (!mdinfo) {
     return null;
