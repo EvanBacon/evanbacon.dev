@@ -1,0 +1,18 @@
+diff --git a/build/getServerManifest.js b/build/getServerManifest.js
+index bc0d75fb9295784a126fb1483121d9468aa79bcf..3cf609d209dfaf20dd8341d861a19ac0adaf09d2 100644
+--- a/build/getServerManifest.js
++++ b/build/getServerManifest.js
+@@ -68,9 +68,10 @@ function getServerManifest(route, options) {
+             redirect.absoluteRoutePath = redirect.route.destinationContextKey;
+         }
+         else {
+-            redirect.absoluteRoutePath =
+-                flat.find(({ route }) => route.contextKey === redirect.route.destinationContextKey)
+-                    ?.normalizedContextKey ?? '/';
++            // Use the stored destination path directly
++            // This preserves the actual destination like /blog/expo-apps
++            // instead of the route pattern like /blog/[post]
++            redirect.absoluteRoutePath = '/' + (redirect.route.destinationPath || redirect.route.route);
+         }
+         return redirect;
+     })

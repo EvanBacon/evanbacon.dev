@@ -71,5 +71,9 @@
   },
   "private": true,
   "name": "portfolio",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "patchedDependencies": {
+    "expo-router@55.0.0-beta.2": "patches/expo-router@55.0.0-beta.2.patch",
+    "@expo/router-server@55.0.2": "patches/@expo%2Frouter-server@55.0.2.patch"
+  }
 }
