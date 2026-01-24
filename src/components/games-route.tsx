@@ -1,7 +1,7 @@
 import PageHeader from '@/components/PageHeader';
 import { Project } from '@/Data';
 import cn from 'classnames';
-import { ResizeMode, Video } from 'expo-av';
+import { VideoView, useVideoPlayer } from 'expo-video';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Link } from 'expo-router';
 
@@ -92,8 +92,50 @@ export default function GamesRoute() {
 import * as WebBrowser from 'expo-web-browser';
 import { TouchableImpact } from './ui/TouchableImpact';
 import { useScrollRef, useScrollToTop } from '@/hooks/useTabToTop';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useBottomTabOverflow } from './ui/TabBarBackground';
+
+function LoopingVideo({ source }: { source: any; style?: any }) {
+  if (process.env.EXPO_OS === 'web') {
+    // Use native HTML5 video on web for better autoplay support
+    const src = typeof source === 'number' ? source : source?.uri ?? source;
+    return (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+        }}
+      />
+    );
+  }
+
+  const player = useVideoPlayer(source, (player) => {
+    player.loop = true;
+    player.muted = true;
+  });
+
+  useEffect(() => {
+    player.play();
+  }, [player]);
+
+  return (
+    <VideoView
+      player={player}
+      contentFit="cover"
+      nativeControls={false}
+      style={style}
+    />
+  );
+}
 
 function GridItemNative({
   buttonTitle,
@@ -157,16 +199,8 @@ function GridItemNative({
             }}
           >
             {video && (
-              <Video
+              <LoopingVideo
                 source={video}
-                isMuted
-                resizeMode={ResizeMode.COVER}
-                shouldPlay
-                isLooping
-                videoStyle={{
-                  width: '100%',
-                  height: '100%',
-                }}
                 style={[
                   StyleSheet.absoluteFill,
                   {
@@ -322,22 +356,11 @@ function GridItem({
             )}
           >
             {video && (
-              <Video
+              <LoopingVideo
                 source={video}
-                posterSource={image}
-                isMuted
-                resizeMode={ResizeMode.COVER}
-                shouldPlay
-                // shouldPlay={!isHoverEnabled() || isMobileSafari()}
-                isLooping
-                videoStyle={{
-                  width: '100%',
-                  height: '100%',
-                }}
                 style={[
                   StyleSheet.absoluteFill,
                   {
-                    // zIndex: -1,
                     borderRadius: '1rem',
                     width: '100%',
                     height: '100%',

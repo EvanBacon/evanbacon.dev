@@ -1,5 +1,5 @@
 import { Div, Footer, H3, P } from '@expo/html-elements';
-import { Video } from 'expo-av';
+import { VideoView, useVideoPlayer } from 'expo-video';
 import { BlurView } from 'expo-blur';
 import { Link } from 'expo-router';
 import React from 'react';
@@ -25,31 +25,35 @@ function MediaBackground({ resizeMode, isHovered, ...props }) {
     maxHeight: 360,
   };
 
-  const videoRef = React.useRef(null);
+  const shouldAutoPlay = !isHoverEnabled() || isMobileSafari();
+
+  const player = useVideoPlayer(props.video, (player) => {
+    player.loop = true;
+    player.muted = true;
+    if (shouldAutoPlay) {
+      player.play();
+    }
+  });
 
   React.useEffect(() => {
-    if (!videoRef.current) return;
+    if (!props.video || !player) return;
 
     if (isHoverEnabled()) {
       if (isHovered) {
-        videoRef.current.playAsync();
+        player.play();
       } else {
-        videoRef.current.pauseAsync();
+        player.pause();
       }
     }
-  }, [isHovered]);
+  }, [isHovered, player, props.video]);
 
   if (props.video) {
     return (
       <Div style={baseStyle}>
-        <Video
-          ref={videoRef}
-          source={props.video}
-          posterSource={props.image}
-          isMuted
-          resizeMode={resizeMode}
-          shouldPlay={!isHoverEnabled() || isMobileSafari()}
-          isLooping
+        <VideoView
+          player={player}
+          contentFit={resizeMode}
+          nativeControls={false}
           style={[StyleSheet.absoluteFill, { zIndex: -1 }]}
         />
         <Div

@@ -16,7 +16,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "newArchEnabled": true,
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -54,7 +53,8 @@
       ],
       "expo-quick-actions",
       "expo-video",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-font"
     ],
     "extra": {
       "router": {
