@@ -49,7 +49,19 @@
           "origin": "",
           "headOrigin": "https://evanbacon.dev",
           "asyncRoutes": true,
-          "unstable_useServerDataLoaders": true
+          "unstable_useServerDataLoaders": true,
+          "redirects": [
+            {
+              "source": "/blog/expo-2024",
+              "destination": "/blog/expo-apps",
+              "permanent": true
+            },
+            {
+              "source": "/expo/showcase",
+              "destination": "/blog/expo-apps",
+              "permanent": true
+            }
+          ]
         }
       ],
       "expo-quick-actions",
@@ -58,11 +70,6 @@
       "expo-font"
     ],
     "extra": {
-      "router": {
-        "origin": "",
-        "headOrigin": "https://evanbacon.dev",
-        "asyncRoutes": true
-      },
       "eas": {
         "projectId": "64b8e4a4-baf5-4160-90fe-ecfa7a32e6b8"
       }

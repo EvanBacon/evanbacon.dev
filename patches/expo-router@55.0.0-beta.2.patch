@@ -1,0 +1,76 @@
+diff --git a/build/getRoutesCore.js b/build/getRoutesCore.js
+index 500bec9b2adec470edd3b15d953408a2ca0386bc..7b5fca84b327a51bbb3ffdab8fe39c0e771b7306 100644
+--- a/build/getRoutesCore.js
++++ b/build/getRoutesCore.js
+@@ -138,10 +138,10 @@ function getDirectoryTree(contextModule, options) {
+                 }
+                 const validDestination = isExternalRedirect
+                     ? undefined
+-                    : getValidDestinations().find((key) => key.nameWithoutInvisible === targetDestinationName);
++                    : getValidDestinations().find((key) => matchesRouteWithDynamicSegments(key.nameWithoutInvisible, targetDestinationName));
+                 const destination = isExternalRedirect
+                     ? targetDestinationName
+-                    : validDestination?.nameWithoutInvisible;
++                    : validDestination ? targetDestinationName : undefined;
+                 const destinationContextKey = isExternalRedirect
+                     ? targetDestinationName
+                     : validDestination?.contextKey;
+@@ -181,8 +181,8 @@ function getDirectoryTree(contextModule, options) {
+                 if (ignoreList.some((regex) => regex.test(sourceContextKey))) {
+                     continue;
+                 }
+-                const validDestination = getValidDestinations().find((key) => key.nameWithoutInvisible === targetDestinationName);
+-                const destination = validDestination?.nameWithoutInvisible;
++                const validDestination = getValidDestinations().find((key) => matchesRouteWithDynamicSegments(key.nameWithoutInvisible, targetDestinationName));
++                const destination = validDestination ? targetDestinationName : undefined;
+                 const destinationContextKey = validDestination?.contextKey;
+                 if (!destinationContextKey || destination === undefined) {
+                     /*
+@@ -267,6 +267,7 @@ function getDirectoryTree(contextModule, options) {
+             }
+             const redirect = redirects[meta.route];
+             node.destinationContextKey = redirect.destinationContextKey;
++            node.destinationPath = redirect.destination;
+             node.permanent = redirect.permanent;
+             node.generated = true;
+             if (node.type === 'route') {
+@@ -439,6 +440,39 @@ function getNameFromRedirectPath(path) {
+ function getNameWithoutInvisibleSegmentsFromRedirectPath(path) {
+     return (0, matchers_1.stripInvisibleSegmentsFromPath)(getNameFromRedirectPath(path));
+ }
++/**
++ * Check if a route pattern (which may contain dynamic segments like [post])
++ * matches a destination path (which has concrete values like expo-apps).
++ */
++function matchesRouteWithDynamicSegments(routePattern, destinationPath) {
++    const routeParts = routePattern.split('/');
++    const destParts = destinationPath.split('/');
++    if (routeParts.length !== destParts.length) {
++        const lastRoutePart = routeParts[routeParts.length - 1];
++        const catchAll = (0, matchers_1.matchDynamicName)(lastRoutePart);
++        if (!catchAll?.deep) {
++            return false;
++        }
++        if (destParts.length < routeParts.length - 1) {
++            return false;
++        }
++    }
++    for (let i = 0; i < routeParts.length; i++) {
++        const routePart = routeParts[i];
++        const destPart = destParts[i];
++        const dynamicMatch = (0, matchers_1.matchDynamicName)(routePart);
++        if (dynamicMatch?.deep) {
++            return true;
++        }
++        if (dynamicMatch) {
++            continue;
++        }
++        if (routePart !== destPart) {
++            return false;
++        }
++    }
++    return true;
++}
+ // Creates fake context key for redirects and rewrites
+ function getSourceContextKeyFromRedirectSource(source) {
+     const name = getNameFromRedirectPath(source);

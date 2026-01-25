@@ -1,5 +1,3 @@
-import data from '@/expo-oss-showcase-data.json';
-
 export type AppItem = {
   name: string;
   id: string;
@@ -23,7 +21,12 @@ export type CategoryItem = {
 };
 
 export function getAppStoreData(): Record<string, AppItem[]> {
-  return data;
+  try {
+    return require('@/expo-oss-showcase-data.json');
+  } catch {
+    // Public environments...
+    return {};
+  }
 }
 
 export function getFrameworks(app: Partial<AppItem>) {
