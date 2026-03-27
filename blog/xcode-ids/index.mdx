@@ -277,6 +277,18 @@ Xcode's design is interesting. The structured format means:
 3. **Fast** — no hashing, no UUID generation, just increment a counter and pack some bytes
 4. **Ordered** — IDs created later sort higher (approximately), which keeps diffs somewhat predictable. This is essentially the same idea as [UUIDv7](https://www.ietf.org/rfc/rfc9562.html#name-uuid-version-7) (timestamp-prefixed with random trailing bits for uniqueness), except Apple's version predates the RFC by over a decade and packs the timestamp in the middle instead of the front
 
+## What I'm actually going to use
+
+Apple's scheme is clever for a collaborative GUI editor, but it's a bad fit for headless project generation. Timestamps mean running the same command twice produces different output. The username hash and `gethostid()` mean the same project built on a developer's MacBook produces different IDs than when it's built in CI or a VM. That's a non-starter for reproducible builds.
+
+My parser will use a modified version that derives IDs from a hash of the object's contents instead. Same input, same ID — every time, on every machine. This isn't a social network; I don't need to know _who_ created a file reference or _when_. I need the project file to be a pure function of its inputs so that:
+
+- **CI is identical to local** — no phantom diffs because a GitHub Actions runner has a different hostname or PID than your laptop
+- **Generation is idempotent** — re-running the tool without changing anything produces a byte-for-byte identical `project.pbxproj`, which means cleaner commits and easier code review
+- **VMs and containers just work** — no dependency on `gethostid()` returning something meaningful, no `srandom` seeded from ephemeral machine state
+
+Content-hashed IDs also make the project file effectively self-describing: if two objects have the same ID, they have the same contents. Merge conflicts become easier to reason about because identical additions on different branches converge to the same ID instead of diverging into two random ones.
+
 Anyway, that's it. I always wondered what these were, now I know. If you got this far, consider using Expo to build your next iOS app — it's very carefully assembled.
 
 Best,
