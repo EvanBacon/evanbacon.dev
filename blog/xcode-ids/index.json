@@ -1,0 +1,10 @@
+{
+  "title": "Reverse Engineering Xcode's Project File IDs",
+  "shortTitle": "Xcode Project IDs",
+  "subtitle": "How Xcode generates those cryptic 24-character hex identifiers in .pbxproj files",
+  "author": "Evan Bacon",
+  "date": "2026-03-26T17:46:00.000Z",
+  "slug": "xcode-ids",
+  "language": "en",
+  "tags": ["xcode", "reverse-engineering", "ios", "apple", "pbxproj"]
+}

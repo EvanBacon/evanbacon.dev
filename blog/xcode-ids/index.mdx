@@ -1,0 +1,283 @@
+<Title date="2026-03-26T17:46:00.000Z">Reverse Engineering Xcode's Project File IDs</Title>
+
+I maintain a [super-fast pbxproj parser](https://github.com/EvanBacon/xcode) as a research project to openly document my understanding of the otherwise closed-source Apple Xcode project files. These files are at the center of all Apple software so it drives me crazy not knowing how parts of it work, it'd be like not understanding parts of the JSON specification.
+
+The part that's bewildered me for years is the object identifiers. Every Xcode project file (`project.pbxproj`) is full of cryptic 24-character hex strings like `CD24B3052F75A885001750D2`. These are everywhere; every file reference, build phase, target, and configuration gets one. When you create objects in Xcode the values appear deterministic, but what do they actually represent?
+
+Most open-source tools that generate Xcode projects treat these as random UUIDs or content hashes. Turns out, Apple does something much more ... let's say _retro_.
+
+## The mystery
+
+Here's a snippet from a real Xcode-generated project:
+
+```
+CD24B3032F75A885001750D2 /* Main.html in Resources */
+CD24B3052F75A885001750D2 /* Icon.png in Resources */
+CD24B3072F75A885001750D2 /* Style.css in Resources */
+CD24B30E2F75A885001750D2 /* LaunchScreen.storyboard in Resources */
+CD24B3112F75A885001750D2 /* Main.storyboard in Resources */
+CD24B3202F75A886001750D2 /* Assets.xcassets in Resources */
+```
+
+Notice anything? The last 8 characters are identical (`001750D2`). The middle 8 change only slightly (`2F75A885` → `2F75A886`). And the first characters increment: `03`, `05`, `07`, `0E`, `11`, `20`.
+
+These aren't random. They're clearly structured.
+
+## Finding the source code
+
+The IDs are created by a class called `PBXObjectID` inside Xcode's `DevToolsCore.framework`. Its `init` method is tiny, it calls a single method and wraps the result:
+
+```c
+-[PBXObjectID init]:
+    ; load NSString class
+    ldr  x0, [x8, #0xec0]
+    ; call the magic method
+    bl   _objc_msgSend$stringWithHexadecimalRepresentationOfUniqueIdentifier
+    ; pass the result to initFromStringRepresentation:
+    bl   _objc_msgSend$initFromStringRepresentation:
+    ret
+```
+
+The real work happens in `+[NSString(TSFoundationExtra) stringWithHexadecimalRepresentationOfUniqueIdentifier]` inside `DevToolsSupport.framework`.
+
+## The algorithm
+
+Xcode's ID is **12 bytes** converted to **24 uppercase hex characters**. Those 12 bytes are a structured identifier, not a hash of the contents as I previously assumed, and clearly not a random UUID. Here's the layout:
+
+```
+Byte:  0     1     2  3     4  5  6  7     8     9  10  11
+       ├─────┤     ├──┤     ├──────────┤     │     ├───────┤
+      user   pid  counter   timestamp      zero   random/
+      hash  (lo)  (BE)     (BE, secs       (0)    hostid
+                           since 2001)
+```
+
+| Bytes | What | How |
+|-------|------|-----|
+| 0 | User hash | `NSUserName()` XOR-folded through a 128-byte lookup table to a single byte |
+| 1 | PID | `getpid() & 0xFF` — low byte of the process ID |
+| 2–3 | Counter | 16-bit counter, big-endian, incremented per ID generated |
+| 4–7 | Timestamp | `[NSDate timeIntervalSinceReferenceDate]` as uint32, big-endian (seconds since Jan 1, 2001) |
+| 8 | Zero | Always `0x00` — hardcoded `strb wzr` (zero register) in the assembly |
+| 9–11 | Random | 3 bytes from `random()`, seeded from `gethostid()` ⊕ user hash ⊕ timestamp |
+
+### One-time initialization (first ID only)
+
+On the first call, the method seeds its internal state:
+
+```
+getpid()       → byte [1] (low byte only)
+NSUserName()   → byte [0] (hashed to 1 byte via lookup table + XOR fold)
+gethostid()    → if it's 127.0.0.1 (`0x7f000001`), replaced with random()
+timestamp      → NSDate.timeIntervalSinceReferenceDate
+
+srandom(hostid | (user_hash << 16) ^ timestamp)
+random()       → fills bytes [9:12] (3 bytes of random)
+random()       → initial counter value at [2:4]
+byte [8]       → 0x00 (always zero)
+```
+
+### Per-call generation
+
+Every subsequent call:
+
+```
+counter += 1
+
+timestamp = (uint32)[NSDate timeIntervalSinceReferenceDate]
+
+if timestamp > last_timestamp:
+    counter_snapshot = counter    // new second — save snapshot
+    last_timestamp = timestamp
+else if counter == counter_snapshot:
+    last_timestamp += 1          // same second, counter wrapped — bump timestamp
+
+write timestamp (big-endian) → bytes [4:8]
+write counter   (big-endian) → bytes [2:4]
+
+convert all 12 bytes to uppercase hex → "CD24B3052F75A885001750D2"
+```
+
+## Now the pattern makes sense
+
+Let's go back to our original example and decode it:
+
+```
+CD 24 B303 2F75A885 00 1750D2
+CD 24 B305 2F75A885 00 1750D2
+CD 24 B307 2F75A885 00 1750D2
+CD 24 B30E 2F75A885 00 1750D2
+CD 24 B311 2F75A885 00 1750D2
+CD 24 B320 2F75A886 00 1750D2
+```
+
+- **Byte 0 (`CD`)**: User hash — `0xCD` is the hash of `"evanbacon"` through the lookup table. Constant across all sessions for the same macOS user.
+
+- **Byte 1 (`24`)**: PID — `0x24` = process ID 36 (low byte). Changes every time the test runs.
+
+- **Bytes 2–3 (`B303` → `B320`)**: Counter — monotonically incrementing. The gaps (`03`, `05`, `07`, `0E`, `11`, `20`) aren't sequential because other objects in the project consumed IDs in between.
+
+- **Bytes 4–7 (`2F75A885`)**: Timestamp — `0x2F75A885` = 796,223,621 seconds since the Cocoa reference date (Jan 1, 2001) = **March 26, 2026 at 10:46:45 AM PDT**. The last ID bumps to `2F75A886` — one second later.
+
+- **Byte 8 (`00`)**: Always zero.
+
+- **Bytes 9–11 (`1750D2`)**: Random bytes, seeded once per process from `gethostid()`.
+
+### Validation across sessions
+
+To confirm this, I generated three separate projects with Apple's tool at different times:
+
+| Session | Byte 0 (user) | Byte 1 (pid) | Counter range | Timestamp | Byte 8 | Bytes 9–11 |
+|---------|:---:|:---:|:---:|:---:|:---:|:---:|
+| 10:46 AM | `CD` | `24` | B2F2–B330 | 2F75A885 (10:46:45) | `00` | `1750D2` |
+| 10:54 AM | `CD` | `1B` | D537–D571 | 2F75AA3E (10:54:06) | `00` | `9F278F` |
+| 4:25 PM  | `CD` | `EE` | EF33–EF6D | 2F75F6A4 (4:25:08) | `00` | `A971F7` |
+
+- **Byte 0**: `CD` in all three. Same user, same hash. ✓
+- **Byte 1**: Different each time. Different PIDs. ✓
+- **Bytes 4–7**: Decode to the actual wall-clock time each project was created. ✓
+- **Byte 8**: Always `00`. ✓
+- **Bytes 9–11**: Different each session (random re-seeded per process). ✓
+- **Counter**: Monotonically incrementing within each session, 1 per ID. ✓
+
+## The lookup table
+
+The username hashing uses a 128-byte lookup table extracted from DevToolsSupport's `__TEXT,__const` segment at address `0xf418`. It maps each ASCII character to a 5-bit value (0x00–0x19 for letters, 0x1A–0x1E for digits, 0x1F for everything else):
+
+```
+[  0..31]  1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F  (control chars)
+           1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F
+[ 32..63]  1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F  (punctuation)
+           1A 1B 1C 1D 1E 1A 1B 1C 1D 1E 1F 1F 1F 1F 1F 1F  (digits 0–9)
+[ 64..95]  1F 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E  (@, A–O)
+           0F 10 11 12 13 14 15 16 17 18 19 1F 1F 1F 1F 1F  (P–Z, [\]^_)
+[ 96..127] 1F 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E  (`, a–o)
+           0F 10 11 12 13 14 15 16 17 18 19 1F 1F 1F 1F 1F  (p–z, {|}~)
+```
+
+The hash algorithm XOR-folds the table values with a rotating 5-bit shift across a 32-bit accumulator, then takes only the low byte:
+
+```typescript
+// Exact replication — verified against real Xcode output
+const TABLE = [
+  0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,
+  0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,
+  0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,
+  0x1a,0x1b,0x1c,0x1d,0x1e,0x1a,0x1b,0x1c,0x1d,0x1e,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,
+  0x1f,0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,
+  0x0f,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1f,0x1f,0x1f,0x1f,0x1f,
+  0x1f,0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,
+  0x0f,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1f,0x1f,0x1f,0x1f,0x1f,
+];
+
+function xcodeUserHash(name: string): number {
+  let h = 0; // 32-bit accumulator
+  let shift = 0;
+  for (const ch of name) {
+    const c = ch.charCodeAt(0);
+    const v = c > 127 ? 0x1f : TABLE[c];
+    let folded = ((v << shift) | ((v << shift) >>> 8)) >>> 0;
+    if (shift === 0) folded = v;
+    h = (h ^ folded) >>> 0;
+    shift = (shift + 5) & 7;
+  }
+  return h & 0xff;
+}
+
+xcodeUserHash("evanbacon"); // → 0xCD ✓ (That's my name!)
+```
+
+The shift sequence cycles through `0, 5, 2, 7, 4, 1, 6, 3, 0, ...` — advancing by 5 mod 8 each character. This is a [linear congruential](https://en.wikipedia.org/wiki/Linear_congruential_generator) stepping pattern that ensures each character affects different bits of the accumulator before the final byte-mask. Case-insensitive since `A` and `a` map to the same table value.
+
+## Replicating it
+
+Here's a faithful TypeScript reimplementation:
+
+```typescript
+import { hostname, userInfo } from "os";
+import { createHash } from "crypto";
+
+const COCOA_EPOCH = new Date("2001-01-01T00:00:00Z").getTime();
+
+class XcodeIDGenerator {
+  private counter: number;
+  private lastTimestamp = 0;
+  private counterSnapshot = 0;
+  private readonly fixedBytes: Buffer; // bytes [0:2] and [8:12]
+
+  constructor() {
+    const user = userInfo().username;
+
+    // Seed random bytes (approximating gethostid + srandom + random)
+    const seed = createHash("md5")
+      .update(`${hostname()}:${user}:${process.pid}:${Date.now()}`)
+      .digest();
+
+    this.fixedBytes = Buffer.alloc(5);
+    this.fixedBytes[0] = xcodeUserHash(user); // byte [0]: user hash
+    this.fixedBytes[1] = process.pid & 0xff;  // byte [1]: PID low byte
+    this.fixedBytes[2] = 0x00;                // byte [8]: always zero
+    seed.copy(this.fixedBytes, 3, 0, 2);      // bytes [9:11]: random
+
+    this.counter = seed.readUInt16BE(4);       // initial counter from random
+  }
+
+  next(): string {
+    this.counter = (this.counter + 1) & 0xffff;
+
+    const now = Math.floor((Date.now() - COCOA_EPOCH) / 1000);
+    if (now > this.lastTimestamp) {
+      this.counterSnapshot = this.counter;
+      this.lastTimestamp = now;
+    } else if (this.counter === this.counterSnapshot) {
+      this.lastTimestamp++;
+    }
+
+    const buf = Buffer.alloc(12);
+    buf[0] = this.fixedBytes[0];                    // user hash
+    buf[1] = this.fixedBytes[1];                    // PID
+    buf.writeUInt16BE(this.counter, 2);             // counter
+    buf.writeUInt32BE(this.lastTimestamp >>> 0, 4);  // timestamp
+    buf[8] = 0x00;                                  // always zero
+    this.fixedBytes.copy(buf, 9, 3, 5);             // random
+    buf[11] = this.fixedBytes[1];                   // (approximate)
+
+    return buf.toString("hex").toUpperCase();
+  }
+}
+```
+
+Usage:
+
+```typescript
+const gen = new XcodeIDGenerator();
+
+console.log(gen.next()); // "CD1B0A212F75B8A3009F27XX"
+console.log(gen.next()); // "CD1B0A222F75B8A3009F27XX"
+console.log(gen.next()); // "CD1B0A232F75B8A3009F27XX"
+//                          ││││ ↑↑↑↑            ││
+//                          ││││ counter          ││
+//                          │PID increments       │random
+//                          user                  zero
+//                          hash
+```
+
+Consecutive IDs: bytes 0–1 and 8–11 stay constant (session fingerprint), bytes 2–3 increment (counter), bytes 4–7 are the timestamp — exactly matching real Xcode output.
+
+## Does it matter?
+
+Not really, you can use a random 24-char string and Xcode is still perfectly happy. The hex characters don't even need to match this scheme in practice. My curiosity stems from wanting to shave as much time off the software development process as possible. Any opportunity to skip the Xcode GUI and perform a task headlessly is a major win. Any misstep that requires you to backtrack through Xcode is a major loss. Luckily this philosophy translates nicely to the agent-first world we now find ourselves in.
+
+## Why bother?
+
+Xcode's design is interesting. The structured format means:
+
+1. **No coordination needed** — different machines produce different IDs thanks to the user hash and random bytes, so teams can merge project files without ID collisions
+2. **Debuggable** — you can look at an ID and tell roughly when it was created and on whose machine, assuming you know what to look for
+3. **Fast** — no hashing, no UUID generation, just increment a counter and pack some bytes
+4. **Ordered** — IDs created later sort higher (approximately), which keeps diffs somewhat predictable. This is essentially the same idea as [UUIDv7](https://www.ietf.org/rfc/rfc9562.html#name-uuid-version-7) (timestamp-prefixed with random trailing bits for uniqueness), except Apple's version predates the RFC by over a decade and packs the timestamp in the middle instead of the front
+
+Anyway, that's it. I always wondered what these were, now I know. If you got this far, consider using Expo to build your next iOS app — it's very carefully assembled.
+
+Best,
+0xCD
