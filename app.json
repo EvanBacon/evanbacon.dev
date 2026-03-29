@@ -50,18 +50,8 @@
           "headOrigin": "https://evanbacon.dev",
           "asyncRoutes": true,
           "unstable_useServerDataLoaders": true,
-          "redirects": [
-            {
-              "source": "/blog/expo-2024",
-              "destination": "/blog/expo-apps",
-              "permanent": true
-            },
-            {
-              "source": "/expo/showcase",
-              "destination": "/blog/expo-apps",
-              "permanent": true
-            }
-          ]
+          "unstable_useServerMiddleware": true,
+          "redirects": []
         }
       ],
       "expo-quick-actions",
