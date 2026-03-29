@@ -271,6 +271,7 @@ function BaconCode(props: {
   const titleFont = useFont('Inter_400Regular');
 
   const isInline = !props.className?.includes('language-');
+  console.log('BaconCode', props);
   // Inline code (not inside a <pre> block)
   if (isInline) {
     return <InlineCode>{props.children}</InlineCode>;

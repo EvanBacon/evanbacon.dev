@@ -1,4 +1,21 @@
 const { resolveConfig, transform } = require('@svgr/core');
+const upstreamTransformer = require('@expo/metro-config/babel-transformer');
+const MdxTransformer = require('@bacons/mdx/metro-transformer');
+
+// MDX v3 no longer passes the meta string from fenced code blocks (e.g. ```jsx app.js)
+// as a prop. This remark plugin preserves it as `metastring` on the code element.
+function remarkCodeMeta() {
+  return async tree => {
+    const { visit } = await import('unist-util-visit');
+    visit(tree, 'code', node => {
+      if (node.meta) {
+        node.data = node.data || {};
+        node.data.hProperties = node.data.hProperties || {};
+        node.data.hProperties.metastring = node.meta;
+      }
+    });
+  };
+}
 
 async function transformSvg(props) {
   if (props.filename.endsWith('.svg')) {
@@ -37,11 +54,13 @@ async function transformSvg(props) {
     props.src = await transform(props.src, svgrConfig);
   }
 }
+const remarkMdxFrontmatter = require('remark-mdx-frontmatter').default;
 
-module.exports.transform = plugins(
-  require('@bacons/mdx/metro-transformer').transform,
-  transformSvg
-);
+const mdxTransformer = MdxTransformer.createTransformer({
+  remarkPlugins: [remarkCodeMeta, [remarkMdxFrontmatter, { name: 'meta' }]],
+});
+
+module.exports.transform = plugins(mdxTransformer.transform, transformSvg);
 
 function plugins(...fns) {
   return async function(props) {
@@ -58,6 +77,6 @@ function plugins(...fns) {
     }
 
     // Finally pass everything to the upstream transformer.
-    return require('@expo/metro-config/babel-transformer').transform(nextProps);
+    return upstreamTransformer.transform(nextProps);
   };
 }
