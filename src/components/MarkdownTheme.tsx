@@ -429,9 +429,13 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       }}
       ul={{
         marginBottom: '1.25em',
+        paddingLeft: '1.5em',
+        listStyleType: 'disc',
       }}
       ol={{
         marginBottom: '1.25em',
+        paddingLeft: '1.5em',
+        listStyleType: 'decimal',
       }}
       img={{
         borderRadius: '1rem',
