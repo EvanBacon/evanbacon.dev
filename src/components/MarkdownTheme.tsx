@@ -529,12 +529,21 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         }}
         blockquote={({ style, children }) => {
           const parsedChildren = React.Children.toArray(children);
-          const isQuote =
-            parsedChildren[0]?.props?.children?.[0] === '[!QUOTE]';
+          // Find the first <p> element child
+          const firstP = parsedChildren.find(
+            (child) => typeof child === 'object' && 'props' in child
+          );
+          const pChildren = firstP?.props?.children;
+          // pChildren is either an array like ["[!QUOTE]", "\ntext..."] or a single string "[!QUOTE]\ntext..."
+          const firstText = Array.isArray(pChildren) ? pChildren[0] : pChildren;
+          const isQuote = typeof firstText === 'string' && firstText.startsWith('[!QUOTE]');
 
           if (isQuote) {
-            const nextChildren = parsedChildren[0].props.children.slice(1);
-            let quote = nextChildren[0] as string;
+            // Extract the full text after [!QUOTE]
+            const fullText = Array.isArray(pChildren)
+              ? pChildren.slice(1).join('')
+              : firstText.slice('[!QUOTE]'.length);
+            let quote = fullText.trim();
             const possibleAuthor = quote?.match(/~(?:\s+)?(.*)/m)?.[1]?.trim();
 
             if (possibleAuthor) {
