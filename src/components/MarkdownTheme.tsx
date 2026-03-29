@@ -463,7 +463,6 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         fontFamily: useFont('Inter_400Regular'),
         borderCollapse: 'collapse',
         width: '100%',
-        marginBottom: '1.25em',
         fontSize: '0.875rem',
         lineHeight: '1.5',
         color: '#f2f5f7',
@@ -587,7 +586,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           </div>
         )}
         tr={({ style, children }) => (
-          <tr style={style} className="transition-colors hover:bg-[#ffffff08]">
+          <tr style={style} className="transition-colors hover:bg-[#ffffff08] last:*:border-b-0">
             {children}
           </tr>
         )}

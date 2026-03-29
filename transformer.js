@@ -61,7 +61,7 @@ const rehypeAutolinkHeadings = require('rehype-autolink-headings').default;
 
 const mdxTransformer = MdxTransformer.createTransformer({
   remarkPlugins: [remarkGfm, remarkCodeMeta, [remarkMdxFrontmatter, { name: 'meta' }]],
-  rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+  // rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
 });
 
 module.exports.transform = plugins(mdxTransformer.transform, transformSvg);
