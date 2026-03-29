@@ -1,6 +1,5 @@
-import { MDXComponents, MDXStyles } from '@bacons/mdx';
+import { MDXComponents, getDOMComponents, MDXStyles } from '@bacons/mdx';
 import React from 'react';
-import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 // import {
 //   TerminalSquareIcon,
 //   FileCode01Icon,
@@ -15,7 +14,6 @@ import {
   Inter_900Black,
 } from '@expo-google-fonts/inter';
 import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
-import { BlockQuote } from '@expo/html-elements';
 import { Title } from '@/components/PostTitle';
 import LegoSvg from '@/svg/lego.svg';
 import ExpoSvg from '@/svg/expo.svg';
@@ -241,6 +239,26 @@ function getIconForFile(filename: string) {
   return FileCode01Icon;
 }
 
+function InlineCode({ children }: { children: string }) {
+  return (
+    <code
+      style={{
+        fontFamily: 'SourceCodePro_400Regular',
+        borderRadius: 2,
+        fontSize: 'inherit',
+        color: '#ffffff',
+        backgroundColor: 'rgba(115, 125, 140, 0.17)',
+        paddingTop: 2,
+        paddingBottom: 2,
+        paddingLeft: 4,
+        paddingRight: 4,
+      }}
+    >
+      {children}
+    </code>
+  );
+}
+
 function BaconCode(props: {
   children: string;
   // language-ts
@@ -250,6 +268,14 @@ function BaconCode(props: {
   // "html.pre"
   parentName: string;
 }) {
+  const titleFont = useFont('Inter_400Regular');
+
+  const isInline = !props.className?.includes('language-');
+  // Inline code (not inside a <pre> block)
+  if (isInline) {
+    return <InlineCode>{props.children}</InlineCode>;
+  }
+
   let lang = props.className?.slice(9).toLowerCase() ?? 'txt';
   const isTerminal = ['terminal', 'term'].includes(lang.toLowerCase());
 
@@ -288,7 +314,7 @@ function BaconCode(props: {
               className="text-slate-50"
               style={{
                 fontWeight: 'bold',
-                fontFamily: useFont('Inter_400Regular'),
+                fontFamily: titleFont,
               }}
             >
               {title}
@@ -392,24 +418,6 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       strong={{
         color: '#B695F3',
       }}
-      code={{
-        fontFamily: 'SourceCodePro_400Regular',
-        borderRadius: 2,
-        color: '#ffffff',
-        backgroundColor: 'rgba(115, 125, 140, 0.17)',
-        padding: 20,
-        fontSize: 'unset',
-        marginTop: 0,
-      }}
-      inlineCode={{
-        fontFamily: 'SourceCodePro_400Regular',
-        borderRadius: 2,
-        fontSize: 15,
-        color: '#ffffff',
-        backgroundColor: 'rgba(115, 125, 140, 0.17)',
-        paddingVertical: 2,
-        paddingHorizontal: 4,
-      }}
       p={{
         fontFamily: useFont('Inter_400Regular'),
         lineHeight: '1.75',
@@ -445,7 +453,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       li={{
         fontFamily: useFont('Inter_400Regular'),
         fontSize: 16,
-        lineHeight: 30,
+        lineHeight: '1.75',
         color: '#f2f5f7',
       }}
       hr={{
@@ -459,23 +467,17 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
       }}
     >
       <MDXComponents
+        {...getDOMComponents()}
         components={{
           Title,
           Kbd,
         }}
         code={BaconCode}
-        pre={({ style, children }) => {
-          return <pre style={style} children={children} className="mb-5" />;
+        pre={({ children }) => {
+          return <div className="mb-5">{children}</div>;
         }}
-        em={({
-          firstChild,
-          firstOfType,
-          prevSibling,
-          lastChild,
-          parentName,
-          ...props
-        }) => <em {...props} />}
-        p={({ style, children, ...props }) => {
+        em={({ style, children }) => <em style={style}>{children}</em>}
+        p={({ style, children }) => {
           // NOTE(EvanBacon): Unclear why, but mdxjs is wrapping an image in a paragraph tag.
           const image = React.Children.toArray(children).find(child => {
             return (
@@ -486,7 +488,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             return <>{children}</>;
           }
 
-          return <Text style={style} children={children} />;
+          return <p style={style}>{children}</p>;
         }}
         br={() => <br />}
         strong={({ style, children }) => {
@@ -502,26 +504,13 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             return (
               <div className="p-1 inline bg-[#10141A] border rounded border-[#232731]">
                 <Logo className="inline w-5 h-5 mt-[-3px]" fill="white" />{' '}
-                <Text children={children} style={[style, localStyles]} />
+                <strong style={{ ...style, ...localStyles }}>{children}</strong>
               </div>
-              // <div className="px-1 inline-flex items-center gap-1 min-w-5 bg-[#10141A] border rounded border-[#232731]">
-              //   <ExpoRouterSvg className="inline w-5 h-5" fill="white" />
-              //   <Text children={children} style={[style, localStyles]} />
-              // </div>
             );
           }
-          return <Text children={children} style={[style, localStyles]} />;
+          return <strong style={{ ...style, ...localStyles }}>{children}</strong>;
         }}
-        blockquote={({
-          firstChild,
-          lastChild,
-          parentName,
-          style,
-          firstOfType,
-          children,
-          prevSibling,
-          ...props
-        }) => {
+        blockquote={({ style, children }) => {
           const parsedChildren = React.Children.toArray(children);
           const isQuote =
             parsedChildren[0]?.props?.children?.[0] === '[!QUOTE]';
@@ -538,9 +527,9 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           }
 
           return (
-            <BlockQuote {...props} style={[style]}>
+            <blockquote style={style}>
               {children}
-            </BlockQuote>
+            </blockquote>
           );
         }}
         a={({ href, children, style, className, ...props }) => {
@@ -559,45 +548,25 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           );
         }}
         img={Img}
-        li={({
-          firstChild,
-          lastChild,
-          parentName,
-          prevSibling,
-          firstOfType,
-          style,
-          ...props
-        }) => (
-          <li
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-            }}
-          >
-            <View
-              style={{
-                userSelect: 'none',
-                display: 'block',
-                marginTop: 12,
-                marginRight: 8,
-                width: 6,
-                height: 6,
-                borderRadius: 3,
-                backgroundColor: '#f2f5f7',
-              }}
-            />
-            <Text {...props} style={[style, { display: 'block' }]} />
-          </li>
+        li={({ style, children }) => (
+          <li style={style}>{children}</li>
         )}
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
         // )}
         hr={({ style }) => (
-          <View style={style}>
-            {['', '', ''].map((v, i) => (
-              <View
-                key={String(i)}
+          <div
+            style={{
+              ...style,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {[0, 1, 2].map(i => (
+              <div
+                key={i}
                 style={{
                   marginRight: i !== 2 ? 20 : 0,
                   width: 3,
@@ -607,7 +576,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
                 }}
               />
             ))}
-          </View>
+          </div>
         )}
       >
         {children}
@@ -642,7 +611,7 @@ function Img({ src, style }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = {
   a: {
     fontSize: 'unset',
     fontFamily: 'Inter_400Regular',
@@ -651,7 +620,7 @@ const styles = StyleSheet.create({
   standardLink: {
     textDecorationLine: 'underline',
   },
-});
+};
 
 function getAnchorBrand(text: string) {
   if (text.toString().match(/^expo[-\s]?router$/i)) {
