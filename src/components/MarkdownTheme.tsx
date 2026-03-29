@@ -568,7 +568,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         }}
         img={Img}
         li={({ style, children }) => (
-          <li style={style}>{children}</li>
+          <li style={style} className="[&>p]:my-0">{children}</li>
         )}
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
