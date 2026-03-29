@@ -1,6 +1,10 @@
 const { resolveConfig, transform } = require('@svgr/core');
 const upstreamTransformer = require('@expo/metro-config/babel-transformer');
 const MdxTransformer = require('@bacons/mdx/metro-transformer');
+const { rehypePrefixTagNames } = require('@bacons/mdx/build/server/plugins/rehype-prefix-tag-names');
+const { rehypeStripTableWhitespace } = require('@bacons/mdx/build/server/plugins/rehype-strip-table-whitespace');
+const { rehypeExpoLocalImages } = require('@bacons/mdx/build/server/plugins/rehype-expo-local-images');
+const { recmaExpoRuntime } = require('@bacons/mdx/build/server/plugins/recma-expo-runtime');
 
 // MDX v3 no longer passes the meta string from fenced code blocks (e.g. ```jsx app.js)
 // as a prop. This remark plugin preserves it as `metastring` on the code element.
@@ -56,10 +60,37 @@ async function transformSvg(props) {
 }
 const remarkMdxFrontmatter = require('remark-mdx-frontmatter').default;
 const remarkGfm = require('remark-gfm').default;
+const rehypeSlug = require('rehype-slug').default;
+const rehypeAutolinkHeadings = require('rehype-autolink-headings').default;
 
-const mdxTransformer = MdxTransformer.createTransformer({
-  remarkPlugins: [remarkGfm, remarkCodeMeta, [remarkMdxFrontmatter, { name: 'meta' }]],
-});
+const mdxTransformer = {
+  async transform(props) {
+    if (!props.filename.match(/\.mdx?$/)) {
+      return props;
+    }
+
+    const { visit: estreeVisit } = await import('estree-util-visit');
+    const compiler = await MdxTransformer.createSingletonCompiler({
+      remarkPlugins: [remarkGfm, remarkCodeMeta, [remarkMdxFrontmatter, { name: 'meta' }]],
+      rehypePlugins: [
+        [rehypeExpoLocalImages, {}],
+        rehypeStripTableWhitespace,
+        // Add slug IDs and autolink before prefix renames tags
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+        [rehypePrefixTagNames, { prefix: 'html.' }],
+      ],
+      recmaPlugins: [[recmaExpoRuntime, { visit: estreeVisit }]],
+    }, 'custom-transformer');
+
+    const { value } = await compiler.process({
+      value: props.src,
+      path: props.filename,
+    });
+
+    return { ...props, src: value.toString() };
+  },
+};
 
 module.exports.transform = plugins(mdxTransformer.transform, transformSvg);
 

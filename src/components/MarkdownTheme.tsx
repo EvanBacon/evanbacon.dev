@@ -557,6 +557,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           );
         }}
         a={({ href, children, style, className, ...props }) => {
+          const isAnchor = href?.startsWith('#');
           const brand =
             children?.props?.parentName === 'html.a' &&
             getAnchorBrand(children.props.children);
@@ -564,9 +565,9 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           return (
             <Link
               href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              style={[style, !brand && styles.standardLink]}
-              className={className}
+              target={!isAnchor && href.startsWith('http') ? '_blank' : undefined}
+              style={[style, !brand && !isAnchor && styles.standardLink]}
+              className={cn(className, isAnchor && 'no-underline hover:opacity-80')}
               children={children}
             />
           );
