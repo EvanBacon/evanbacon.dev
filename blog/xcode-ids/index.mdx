@@ -65,7 +65,7 @@ Byte:  0     1     2  3     4  5  6  7     8     9  10  11
 
 On the first call, the method seeds its internal state:
 
-```
+```sh
 getpid()       → byte [1] (low byte only)
 NSUserName()   → byte [0] (hashed to 1 byte via lookup table + XOR fold)
 gethostid()    → if it's 127.0.0.1 (`0x7f000001`), replaced with random()
@@ -81,7 +81,7 @@ byte [8]       → 0x00 (always zero)
 
 Every subsequent call:
 
-```
+```sh
 counter += 1
 
 timestamp = (uint32)[NSDate timeIntervalSinceReferenceDate]
@@ -102,7 +102,7 @@ convert all 12 bytes to uppercase hex → "CD24B3052F75A885001750D2"
 
 Let's go back to our original example and decode it:
 
-```
+```sh
 CD 24 B303 2F75A885 00 1750D2
 CD 24 B305 2F75A885 00 1750D2
 CD 24 B307 2F75A885 00 1750D2
@@ -144,7 +144,7 @@ To confirm this, I generated three separate projects with Apple's tool at differ
 
 The username hashing uses a 128-byte lookup table extracted from DevToolsSupport's `__TEXT,__const` segment at address `0xf418`. It maps each ASCII character to a 5-bit value (0x00–0x19 for letters, 0x1A–0x1E for digits, 0x1F for everything else):
 
-```
+```sh
 [  0..31]  1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F  (control chars)
            1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F
 [ 32..63]  1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F 1F  (punctuation)
@@ -157,7 +157,7 @@ The username hashing uses a 128-byte lookup table extracted from DevToolsSupport
 
 The hash algorithm XOR-folds the table values with a rotating 5-bit shift across a 32-bit accumulator, then takes only the low byte:
 
-```typescript
+```ts
 // Exact replication — verified against real Xcode output
 const TABLE = [
   0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,
@@ -193,7 +193,7 @@ The shift sequence cycles through `0, 5, 2, 7, 4, 1, 6, 3, 0, ...` — advancing
 
 Here's a faithful TypeScript reimplementation:
 
-```typescript
+```ts
 import { hostname, userInfo } from "os";
 import { createHash } from "crypto";
 
@@ -249,7 +249,7 @@ class XcodeIDGenerator {
 
 Usage:
 
-```typescript
+```ts
 const gen = new XcodeIDGenerator();
 
 console.log(gen.next()); // "CD1B0A212F75B8A3009F27XX"

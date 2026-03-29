@@ -259,21 +259,12 @@ function InlineCode({ children }: { children: string }) {
   );
 }
 
-const PreContext = React.createContext(false);
-
 function BaconCode(props: {
   children: string;
   className: string;
   metastring: string;
 }) {
   const titleFont = useFont('Inter_400Regular');
-  const isInsidePre = React.use(PreContext);
-
-  const isInline = !isInsidePre;
-  // Inline code (not inside a <pre> block)
-  if (isInline) {
-    return <InlineCode>{props.children}</InlineCode>;
-  }
 
   let lang = props.className?.slice(9).toLowerCase() ?? 'txt';
   const isTerminal = ['terminal', 'term'].includes(lang.toLowerCase());
@@ -495,8 +486,9 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           Kbd,
         }}
         code={BaconCode}
+        inlineCode={InlineCode}
         pre={({ children }) => {
-          return <PreContext value={true}><div className="mb-5">{children}</div></PreContext>;
+          return <div className="mb-5">{children}</div>;
         }}
         em={({ style, children }) => <em style={style}>{children}</em>}
         p={({ style, children }) => {
