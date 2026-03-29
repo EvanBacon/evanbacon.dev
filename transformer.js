@@ -55,9 +55,10 @@ async function transformSvg(props) {
   }
 }
 const remarkMdxFrontmatter = require('remark-mdx-frontmatter').default;
+const remarkGfm = require('remark-gfm').default;
 
 const mdxTransformer = MdxTransformer.createTransformer({
-  remarkPlugins: [remarkCodeMeta, [remarkMdxFrontmatter, { name: 'meta' }]],
+  remarkPlugins: [remarkGfm, remarkCodeMeta, [remarkMdxFrontmatter, { name: 'meta' }]],
 });
 
 module.exports.transform = plugins(mdxTransformer.transform, transformSvg);

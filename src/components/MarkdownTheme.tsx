@@ -466,6 +466,29 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         alignItems: 'center',
         paddingTop: 24,
       }}
+      table={{
+        fontFamily: useFont('Inter_400Regular'),
+        borderCollapse: 'collapse',
+        width: '100%',
+        marginBottom: '1.25em',
+        fontSize: '0.875rem',
+        lineHeight: '1.5',
+        color: '#f2f5f7',
+      }}
+      thead={{}}
+      tbody={{}}
+      th={{
+        fontFamily: useFont('Inter_700Bold'),
+        color: '#B695F3',
+        textAlign: 'left',
+        padding: '0.625rem 1rem',
+        borderBottom: '2px solid #B695F340',
+      }}
+      td={{
+        padding: '0.625rem 1rem',
+        borderBottom: '1px solid #ffffff12',
+      }}
+      tr={{}}
     >
       <MDXComponents
         {...getDOMComponents()}
@@ -555,6 +578,24 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         // ul={({ style, ...props }) => (
         //   <ul {...props} style={[{ marginBottom: '1rem' }, style]} />
         // )}
+        table={({ style, children }) => (
+          <div
+            className="rounded-2xl overflow-hidden mb-5"
+            style={{
+              backgroundColor: '#191A20',
+              boxShadow: 'inset 0 0 0 1px #ffffff1a',
+            }}
+          >
+            <div className="overflow-x-auto">
+              <table style={style}>{children}</table>
+            </div>
+          </div>
+        )}
+        tr={({ style, children }) => (
+          <tr style={style} className="transition-colors hover:bg-[#ffffff08]">
+            {children}
+          </tr>
+        )}
         hr={({ style }) => (
           <div
             style={{

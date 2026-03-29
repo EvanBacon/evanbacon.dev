@@ -44,22 +44,22 @@ The real work happens in `+[NSString(TSFoundationExtra) stringWithHexadecimalRep
 
 Xcode's ID is **12 bytes** converted to **24 uppercase hex characters**. Those 12 bytes are a structured identifier, not a hash of the contents as I previously assumed, and clearly not a random UUID. Here's the layout:
 
-```
+```sh
 Byte:  0     1     2  3     4  5  6  7     8     9  10  11
-       ├─────┤     ├──┤     ├──────────┤     │     ├───────┤
+       ├─────┤     ├──┤     ├────────┤     │     ├───────┤
       user   pid  counter   timestamp      zero   random/
       hash  (lo)  (BE)     (BE, secs       (0)    hostid
                            since 2001)
 ```
 
-| Bytes | What | How |
-|-------|------|-----|
-| 0 | User hash | `NSUserName()` XOR-folded through a 128-byte lookup table to a single byte |
-| 1 | PID | `getpid() & 0xFF` — low byte of the process ID |
-| 2–3 | Counter | 16-bit counter, big-endian, incremented per ID generated |
-| 4–7 | Timestamp | `[NSDate timeIntervalSinceReferenceDate]` as uint32, big-endian (seconds since Jan 1, 2001) |
-| 8 | Zero | Always `0x00` — hardcoded `strb wzr` (zero register) in the assembly |
-| 9–11 | Random | 3 bytes from `random()`, seeded from `gethostid()` ⊕ user hash ⊕ timestamp |
+| Bytes | What      | How |
+|-------|-----------|-----|
+| 0     | User hash | `NSUserName()` XOR-folded through a 128-byte lookup table to a single byte |
+| 1     | PID       | `getpid() & 0xFF` — low byte of the process ID |
+| 2–3   | Counter   | 16-bit counter, big-endian, incremented per ID generated |
+| 4–7   | Timestamp | `[NSDate timeIntervalSinceReferenceDate]` as uint32, big-endian (seconds since Jan 1, 2001) |
+| 8     | Zero      | Always `0x00` — hardcoded `strb wzr` (zero register) in the assembly |
+| 9–11  | Random    | 3 bytes from `random()`, seeded from `gethostid()` ⊕ user hash ⊕ timestamp |
 
 ### One-time initialization (first ID only)
 
