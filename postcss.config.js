@@ -1,6 +1,5 @@
 module.exports = {
-  syntax: 'postcss-scss',
   plugins: {
-    tailwindcss: {},
+    '@tailwindcss/postcss': {},
   },
 };

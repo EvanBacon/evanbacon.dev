@@ -1,4 +1,4 @@
-import styles from '@/styles/showcase.module.scss';
+import styles from '@/styles/showcase.module.css';
 
 export function AppIcon({ iconUrl, name }: { iconUrl: string; name: string }) {
   return (
