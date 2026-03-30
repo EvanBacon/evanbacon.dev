@@ -12,5 +12,5 @@ module.exports = {
       username: 'Baconbrix',
     },
   ],
-  featuredImage: require('./images/header.jpg'),
+  featuredImage: require('./images/header.avif'),
 };

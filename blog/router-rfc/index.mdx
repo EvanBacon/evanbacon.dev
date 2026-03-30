@@ -26,7 +26,7 @@ There are many applications for the new routing system. The most important goal 
 
 Expo Router is a nested system that generates links for each _leaf route_ in the app. This lets users open and share any part of the app instantly with anyone. This feature is critical for content-driven applications like social media, news, and e-commerce, really anything content-driven.
 
-![](./images/1YzCMKjZ6pS63hS-N_efNxg.png)
+![](./images/1YzCMKjZ6pS63hS-N_efNxg.avif)
 
 Imagine you wanted to share a photo with a friend so you sent them a link to _instagram.com_ and told them to search around until they find the exact page you were thinking about. This is effectively how an app without deep links operates, and that leads to poor user adoption.
 
@@ -34,7 +34,7 @@ The web solved this problem decades ago by associating every page with a URL tha
 
 Because Expo is multi-platform, you can develop your routes once and share them across iOS, Android, and the web. This means you can utilize the built-in URL handling of the browser to quickly build out your native app's routes.
 
-![](./images/1iLEJMJ2uFG_CfzdkTrotjQ.png)
+![](./images/1iLEJMJ2uFG_CfzdkTrotjQ.avif)
 
 Ultimately we'd like to make all native apps support [**app search and content indexing**](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/index.html) automatically. This will enable native search engines to index content in your app, making content discoverability radically better.
 
@@ -42,7 +42,7 @@ Ultimately we'd like to make all native apps support [**app search and content i
 
 Unlike web apps, native apps are all expected to work offline. This means that the app must be able to handle any incoming URL without a network connection or server.
 
-![Navigation is truly native and optimized for iOS and Android](./images/1pIlbQ1TbALbsTKH-ibhYOA.png)
+![Navigation is truly native and optimized for iOS and Android](./images/1pIlbQ1TbALbsTKH-ibhYOA.avif)
 
 Navigation is truly native and optimized for iOS and Android
 
@@ -54,7 +54,7 @@ The end-user experience is fast and light-weight since the router can change the
 
 One of the most exciting parts of React is the ability to divide your app's UI and data fetching into reusable components.
 
-![React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page.](./images/1wCKlTNGpkSBU0Uktj6HVmA.png)
+![React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page.](./images/1wCKlTNGpkSBU0Uktj6HVmA.avif)
 
 React Error Boundaries can be nested in layouts enabling users to navigate away or retry the page.
 
@@ -145,7 +145,7 @@ export default function Home() {
 
 You can start the app with `npx expo start` and visit the `/home` route on any device. I recommend using [`uri-scheme`](https://www.npmjs.com/package/uri-scheme) to test deep links on iOS and Android. You can also navigate to `/_sitemap` to reach the sitemap (development only):
 
-![Apache index throwback](./images/1iNCWIvukczHDJKPYsAFx-A.png)
+![Apache index throwback](./images/1iNCWIvukczHDJKPYsAFx-A.avif)
 
 Apache index throwback.
 
@@ -155,7 +155,7 @@ As you can imagine, this scales nicely and is very easy to maintain. You can cre
 
 If you navigate to a route that isn't matched, the default behavior is to have a 404-esque response which enables the user to navigate back to the root path `/` — this can be replaced by using a top-level [deep dynamic route](https://expo.github.io/router/docs/features/dynamic-routes#deep-dynamic-routes).
 
-![Virtual pages have a recurring theme.](./images/1gWG4Lvi9bcp-yyDVEi4jbw.png)
+![Virtual pages have a recurring theme.](./images/1gWG4Lvi9bcp-yyDVEi4jbw.avif)
 
 Virtual pages have a recurring theme.
 

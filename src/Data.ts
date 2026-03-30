@@ -264,7 +264,7 @@ export const Talks = [
   // },
   {
     title: 'Expo Router v2',
-    image: require('assets/talks/appjs-2023.jpg'),
+    image: require('assets/talks/appjs-2023.avif'),
     description: `Announcing Expo Router v2. Static Rendering, automatically typed routes, async bundle splitting, CSS for web, and more!`,
     presentedData: [
       {
@@ -277,7 +277,7 @@ export const Talks = [
   },
   {
     title: 'Expo Router',
-    image: require('assets/talks/modernfrontends.jpg'),
+    image: require('assets/talks/modernfrontends.avif'),
     description: `File-based routing for native apps with Expo Router.`,
     presentedData: [
       {
@@ -296,7 +296,7 @@ export const Talks = [
   },
   {
     title: 'React Native Panel (Error Stack Traces)',
-    image: require('assets/talks/react-native-bangalore.png'),
+    image: require('assets/talks/react-native-bangalore.avif'),
     description: `I give a brief overview of Error improvements in Expo SDK 41`,
     presentedData: [
       {
@@ -309,7 +309,7 @@ export const Talks = [
   },
   {
     title: 'React Native for React Developers',
-    image: require('assets/talks/expo-html.webp'),
+    image: require('assets/talks/expo-html.avif'),
     description: `React Native can be pretty intimidating for web developers. See what I've been doing at Expo to close the gap.`,
     presentedData: [
       {
@@ -336,7 +336,7 @@ export const Talks = [
   },
   {
     title: 'Expo for Web',
-    image: require('assets/talks/expo-for-web.jpg'),
+    image: require('assets/talks/expo-for-web.avif'),
     description:
       'Using Expo you can build an app that runs natively for iOS, Android, and in the web browser. You’ll see how Expo and React Native for web enable you to use cutting-edge browser functionality to create websites, progressive web apps, and Electron apps that emulate the functionality of your native app as closely as possible. You’ll also learn what you can do with it, why you would use it, and how it works with other popular web development tools.',
     presentedData: [
@@ -380,7 +380,7 @@ export const Talks = [
   },
   {
     title: 'Announcing Expo for web',
-    image: require('assets/talks/debut-expo-web.jpg'),
+    image: require('assets/talks/debut-expo-web.avif'),
     description:
       'Expo is on a mission to create the best possible end-to-end developer experiences for building and deploying apps on multiple platforms. Today we are very excited to announce experimental web support for the Expo CLI and SDK!',
     presentedData: [
@@ -400,7 +400,7 @@ export const Talks = [
   },
   {
     title: 'AR in React Native',
-    image: require('assets/talks/expo-ar.jpg'),
+    image: require('assets/talks/expo-ar.avif'),
     description:
       "Creating augmented reality apps with Expo is exciting and easy! We'll discuss how it's possible, what you can do with it, and why React Native + AR is an exciting new approach.",
     presentedData: [
@@ -419,7 +419,7 @@ export const Talks = [
   },
   {
     title: 'Using lit APIs to make dope games with Expo',
-    image: require('assets/talks/expo-gaming.jpg'),
+    image: require('assets/talks/expo-gaming.avif'),
     description:
       'In this expo symposium (exposium) 🎙 we shall cordially discuss the usage of recreational cyber-gaming frameworks and their place in the native development environment.📱👾',
     presentedData: [

@@ -395,7 +395,7 @@ const Projects: (Project & { button?: string })[] = [
     button: 'Play now',
     ratio: 'md:col-span-2 md:row-span-2',
     image: {
-      uri: '/projects/crossy-road/preview.jpg',
+      uri: '/projects/crossy-road/preview.avif',
     },
     video: require('../../public/projects/crossy-road/demo.mp4'),
     title: 'Crossy Platform',
@@ -414,7 +414,7 @@ const Projects: (Project & { button?: string })[] = [
   {
     button: 'Traverse Pillars',
     ratio: 'md:row-span-3',
-    image: { uri: '/projects/pillar-valley/preview.png' },
+    image: { uri: '/projects/pillar-valley/preview.avif' },
     video: require('../../public/projects/pillar-valley/demo.mp4'),
     description: 'Immerse yourself in a suave world of zen.',
     title: 'Pillar Valley',
@@ -430,7 +430,7 @@ const Projects: (Project & { button?: string })[] = [
     ],
   },
   {
-    image: { uri: '/projects/snake/preview.jpeg' },
+    image: { uri: '/projects/snake/preview.avif' },
     video: require('../../public/projects/snake/demo.mp4'),
     title: 'Snake',
     description: 'Slither your way through this retro snake adventure.',
@@ -447,7 +447,7 @@ const Projects: (Project & { button?: string })[] = [
   },
   {
     // ratio: 'row-span-4',
-    image: { uri: '/projects/doodle-jump/preview.jpeg' },
+    image: { uri: '/projects/doodle-jump/preview.avif' },
     video: require('../../public/projects/doodle-jump/demo.mp4'),
     title: 'Doodle Jump',
     description: 'Bounce for hours in this cute lil clone.',
@@ -465,7 +465,7 @@ const Projects: (Project & { button?: string })[] = [
   },
 
   {
-    image: { uri: '/projects/flappy-bird/preview.jpeg' },
+    image: { uri: '/projects/flappy-bird/preview.avif' },
     video: require('../../public/projects/flappy-bird/demo.mp4'),
     title: 'Flappy Bird',
     description: 'Infatuation knows no bounds in this maddening monstrosity.',
@@ -485,7 +485,7 @@ const Projects: (Project & { button?: string })[] = [
   {
     ratio: 'md:col-span-2 md:row-span-1',
     button: 'Play now',
-    image: { uri: '/projects/sunset-cyberspace/preview.png' },
+    image: { uri: '/projects/sunset-cyberspace/preview.avif' },
     video: require('../../public/projects/sunset-cyberspace/demo.mp4'),
     // ratio: 'row-span-2 col-span-1',
     title: 'Sunset Cyberspace',

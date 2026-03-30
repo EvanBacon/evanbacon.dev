@@ -1,4 +1,4 @@
 module.exports = {
   ...require('./index.json'),
-  featuredImage: require('./images/header.webp'),
+  featuredImage: require('./images/header.avif'),
 };

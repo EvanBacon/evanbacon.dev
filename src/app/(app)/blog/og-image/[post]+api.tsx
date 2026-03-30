@@ -25,7 +25,7 @@ export async function GET(req: Request, { post }: { post: string }) {
         justifyContent: 'center',
         flexDirection: 'column',
         backgroundImage: `url(${new URL(
-          '/og/og-background.jpg',
+          '/og/og-background.avif',
           req.url
         ).toString()})`,
       }}

@@ -50,7 +50,7 @@ const images: [string, string][] = [
   ],
 
   [
-    '/front/evan-lydia-addy.webp',
+    '/front/evan-lydia-addy.avif',
     'Addy Osmani, Evan Bacon, Lydia Hallie in San Francisco, 2022',
   ],
   [

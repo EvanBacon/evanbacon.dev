@@ -7,7 +7,7 @@
   "slug": "run-cmd",
   "url": "https://blog.expo.dev/introducing-expo-run-commands-835ae8da4813",
   "images": [
-    "introducing-expo-run-commands/images/1WdIKBmcJMH7xB0ya37M-iA.png",
+    "introducing-expo-run-commands/images/1WdIKBmcJMH7xB0ya37M-iA.avif",
     "introducing-expo-run-commands/images/1lGdcmmEH8EhXtYMSzfFnGg.gif",
     "introducing-expo-run-commands/images/1jZ8VN_Uj7rHc0rI7isQtRA.gif",
     "introducing-expo-run-commands/images/1DSOhg6KSi0PpM51pf41dJQ.gif",
@@ -16,10 +16,10 @@
     "introducing-expo-run-commands/images/1CpXm3T7VjNWxHRY_8TrEpQ.gif",
     "introducing-expo-run-commands/images/1mcQimZNoH5xotsLXd6PZgw.gif",
     "introducing-expo-run-commands/images/1zJK-fnYqLX2YQgvzCpROGQ.gif",
-    "introducing-expo-run-commands/images/1EqVrGDtbJpbNDtTEOAXTlw.png",
-    "introducing-expo-run-commands/images/1CLoy0BjZ5Yh3CKvN9DX_Sg.png",
-    "introducing-expo-run-commands/images/1FD2DMOZuwgFYVWVmopMFpA.png",
-    "introducing-expo-run-commands/images/1Uq_nRwiJ0PXJ8QxiyoV-VQ.png"
+    "introducing-expo-run-commands/images/1EqVrGDtbJpbNDtTEOAXTlw.avif",
+    "introducing-expo-run-commands/images/1CLoy0BjZ5Yh3CKvN9DX_Sg.avif",
+    "introducing-expo-run-commands/images/1FD2DMOZuwgFYVWVmopMFpA.avif",
+    "introducing-expo-run-commands/images/1Uq_nRwiJ0PXJ8QxiyoV-VQ.avif"
   ],
   "language": "en",
   "tags": [
@@ -36,5 +36,5 @@
       "userId": "16b715de038f"
     }
   ],
-  "featuredImage": "./images/1WdIKBmcJMH7xB0ya37M-iA.png"
+  "featuredImage": "./images/1WdIKBmcJMH7xB0ya37M-iA.avif"
 }

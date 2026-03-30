@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to my portfolio 👋</h1>
 
-<img alt="Product: demo" src="assets/shoes.jpeg" />
+<img alt="Product: demo" src="assets/shoes.avif" />
 
 ### 🏠 [**Try it now: evanbacon.dev**](https://evanbacon.dev)
 
