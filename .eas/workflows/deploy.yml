@@ -9,5 +9,7 @@ on:
 jobs:
   deploy_web:
     type: deploy
+    env:
+      DATA_ENCRYPTION_KEY: ${{ secrets.DATA_ENCRYPTION_KEY }}
     params:
       prod: true

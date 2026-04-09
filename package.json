@@ -2,6 +2,9 @@
   "main": "./index",
   "scripts": {
     "start": "expo",
+    "postinstall": "node ./scripts/decrypt-data.mjs",
+    "encrypt-data": "node ./scripts/encrypt-data.mjs",
+    "decrypt-data": "node ./scripts/decrypt-data.mjs",
     "predeploy:web": "expo export --platform web && node ./sitemap-gen.js",
     "deploy:web": "eas deploy",
     "android": "expo run:android",

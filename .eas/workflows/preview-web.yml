@@ -9,5 +9,7 @@ jobs:
     name: Deploy Web Preview
     type: deploy
     environment: preview
+    env:
+      DATA_ENCRYPTION_KEY: ${{ secrets.DATA_ENCRYPTION_KEY }}
     params:
       alias: pr-${{ github.event.pull_request.number }}
