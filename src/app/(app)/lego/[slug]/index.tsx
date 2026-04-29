@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 
 import Article, { type ArticleId } from '@/components/lego/Article';
 import Blog from '@/components/lego/Blog';
@@ -15,25 +15,21 @@ const BLOG_SLUGS: Record<string, BlogId> = {
 
 export default function LegoSlug() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
-  const router = useRouter();
-  const back = () => router.push('/lego' as never);
 
   const articleId = slug ? ARTICLE_SLUGS[slug] : undefined;
   if (articleId) {
     return (
       <Article
         articleId={articleId}
-        onBack={back}
-        onEnterBuild={() =>
-          router.push(`/lego/${slug}/build` as never)
-        }
+        backHref="/lego"
+        buildHref={`/lego/${slug}/build`}
       />
     );
   }
 
   const blogId = slug ? BLOG_SLUGS[slug] : undefined;
   if (blogId) {
-    return <Blog config={BLOG_CONFIGS[blogId]} onBack={back} />;
+    return <Blog config={BLOG_CONFIGS[blogId]} backHref="/lego" />;
   }
 
   return null;

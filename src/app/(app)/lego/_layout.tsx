@@ -10,10 +10,6 @@ export default function LegoLayout() {
     <>
       <Head>
         <title>LEGO Scene · Evan Bacon</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

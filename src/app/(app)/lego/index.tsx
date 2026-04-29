@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import ModelCard from "@/components/lego/ModelCard";
-import { router } from "expo-router";
 
 const SLUGS: Record<SplashTarget, string> = {
   batman: 'batman',
@@ -103,9 +102,6 @@ export default function LegoMainRoute() {
     };
   }, []);
 
-  const onExplore = (target: SplashTarget) => {
-    router.push(`/lego/${SLUGS[target]}` as never)
-  }
   return (
     <div className="splash">
       <div ref={stageRef} className="splash-stage">
@@ -117,7 +113,7 @@ export default function LegoMainRoute() {
               subtitle={HERO.subtitle}
               arHref={HERO.arHref}
               variant="hero"
-              onPrimary={onExplore && (() => onExplore(HERO.target))}
+              primaryHref={`/lego/${SLUGS[HERO.target]}`}
               primaryLabel="Explore the build"
               cameraPosition={HERO.cameraPosition}
               cameraFov={HERO.cameraFov}
@@ -133,7 +129,7 @@ export default function LegoMainRoute() {
                 title={c.title}
                 arHref={c.arHref}
                 variant="standard"
-                onPrimary={onExplore && (() => onExplore(c.target))}
+                primaryHref={`/lego/${SLUGS[c.target]}`}
                 primaryLabel="Read"
                 cameraPosition={c.cameraPosition}
                 cameraFov={c.cameraFov}

@@ -13,6 +13,7 @@ import {
   useThree,
   type ThreeToJSXElements,
 } from "@react-three/fiber";
+import { Link } from "expo-router";
 import {
   layoutNextLineRange,
   materializeLineRange,
@@ -1357,7 +1358,7 @@ function ChapterSection({
   silhouette,
   scrollY,
   onProgress,
-  onEnterBuild,
+  buildHref,
 }: {
   chapter: ChapterDef;
   index: number;
@@ -1367,7 +1368,7 @@ function ChapterSection({
   silhouette: Silhouette | null;
   scrollY: number;
   onProgress?: (p: number) => void;
-  onEnterBuild?: () => void;
+  buildHref?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [documentTop, setDocumentTop] = useState(0);
@@ -1486,17 +1487,13 @@ function ChapterSection({
           ))}
         </header>
         <div className="article-outro-actions">
-          {chapter.buildCTA && (
-            <button
-              type="button"
-              className="article-build-cta"
-              onClick={onEnterBuild}
-            >
+          {chapter.buildCTA && buildHref && (
+            <Link href={buildHref as never} className="article-build-cta">
               <span>{chapter.buildCTA.label}</span>
               <span className="article-build-cta__arrow" aria-hidden>
                 →
               </span>
-            </button>
+            </Link>
           )}
           {chapter.arHref && (
             <ARButton
@@ -1530,18 +1527,14 @@ function ChapterSection({
       {chapter.stats && (
         <StatsGrid stats={chapter.stats} dimensions={chapter.dimensions} />
       )}
-      {chapter.buildCTA && (
+      {chapter.buildCTA && buildHref && (
         <div className="article-build-cta-wrap">
-          <button
-            type="button"
-            className="article-build-cta"
-            onClick={onEnterBuild}
-          >
+          <Link href={buildHref as never} className="article-build-cta">
             <span>{chapter.buildCTA.label}</span>
             <span className="article-build-cta__arrow" aria-hidden>
               →
             </span>
-          </button>
+          </Link>
         </div>
       )}
     </section>
@@ -1821,12 +1814,12 @@ function useScrollY() {
 }
 
 export default function Article({
-  onBack,
-  onEnterBuild,
+  backHref,
+  buildHref,
   articleId = "batman",
 }: {
-  onBack?: () => void;
-  onEnterBuild?: () => void;
+  backHref?: string;
+  buildHref?: string;
   articleId?: ArticleId;
 }) {
   const content = ARTICLE_CONTENTS[articleId];
@@ -1977,11 +1970,6 @@ export default function Article({
         onSilhouette={setLiveSilhouette}
       />
 
-      <button className="article-back" onClick={onBack}>
-        <span aria-hidden>←</span>
-        <span>Back to splash</span>
-      </button>
-
       <div className="article-content">
         {fontReady && model && (
           <FlowedHeader
@@ -2007,7 +1995,7 @@ export default function Article({
               onProgress={
                 i === revealChapterIndex ? setRevealProgress : undefined
               }
-              onEnterBuild={onEnterBuild}
+              buildHref={buildHref}
             />
           ))}
 
@@ -2019,9 +2007,11 @@ export default function Article({
             <div className="article-foot__rule" />
             <div className="article-foot__row">
               <span className="article-eyebrow">END OF FEATURE</span>
-              <button className="article-cta" onClick={onBack}>
-                Return to splash <span aria-hidden>↺</span>
-              </button>
+              {backHref && (
+                <Link href={backHref as never} className="article-cta">
+                  Return to splash <span aria-hidden>↺</span>
+                </Link>
+              )}
             </div>
           </footer>
         )}

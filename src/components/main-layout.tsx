@@ -10,6 +10,16 @@ import classNames from 'classnames';
 import { Link } from 'expo-router';
 import React from 'react';
 
+function LegoSidebarIcon({ color }: { focused?: boolean; color: string }) {
+  return (
+    <svg width={30} height={30} viewBox="0 0 30 30" fill="none">
+      <rect x="6" y="11" width="18" height="12" rx="1.5" fill={color} />
+      <rect x="9" y="7" width="4" height="4" rx="1" fill={color} />
+      <rect x="17" y="7" width="4" height="4" rx="1" fill={color} />
+    </svg>
+  );
+}
+
 function HeaderLogo() {
   return (
     <TabbedNavigator.Link
@@ -71,6 +81,14 @@ function SideBar() {
                 scrollToTop
               >
                 Games
+              </SideBarTabItem>
+              <SideBarTabItem
+                name="lego"
+                icon={LegoSidebarIcon}
+                popup="Lego"
+                scrollToTop
+              >
+                Lego
               </SideBarTabItem>
             </div>
 

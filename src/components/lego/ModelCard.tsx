@@ -6,6 +6,7 @@ import {
   useThree,
   type ThreeToJSXElements,
 } from "@react-three/fiber";
+import { Link } from "expo-router";
 import { easing } from "maath";
 import * as THREE from "three/webgpu";
 import { loadOptimizedModel, type OptimizedModel } from "./loadModel";
@@ -29,8 +30,8 @@ export interface ModelCardProps {
   arHref: string;
   /** Hero gets the full-bleed treatment; standard is the smaller side card. */
   variant?: "hero" | "standard";
-  /** Optional primary CTA — usually only the hero wires this up. */
-  onPrimary?: () => void;
+  /** Optional primary CTA destination — usually only the hero wires this up. */
+  primaryHref?: string;
   /** Label for the primary CTA. */
   primaryLabel?: string;
   /** Camera framing — defaults are tuned for a head-and-torso shot at h=8. */
@@ -58,7 +59,7 @@ export default function ModelCard({
   subtitle,
   arHref,
   variant = "standard",
-  onPrimary,
+  primaryHref,
   primaryLabel = "Explore the build",
   targetHeight = 8,
   cameraPosition = [0, 4, 14],
@@ -127,7 +128,7 @@ export default function ModelCard({
         title={title}
         subtitle={subtitle}
         brickCount={model?.brickCount ?? 0}
-        onPrimary={onPrimary}
+        primaryHref={primaryHref}
         primaryLabel={primaryLabel}
         arHref={arHref}
         arLabel={`View ${title} in AR`}
@@ -246,7 +247,7 @@ function Overlay({
   title,
   subtitle,
   brickCount,
-  onPrimary,
+  primaryHref,
   primaryLabel,
   arHref,
   arLabel,
@@ -257,7 +258,7 @@ function Overlay({
   title: string;
   subtitle?: string;
   brickCount: number;
-  onPrimary?: () => void;
+  primaryHref?: string;
   primaryLabel: string;
   arHref: string;
   arLabel: string;
@@ -281,16 +282,15 @@ function Overlay({
         )}
         <div className="splash-stat model-card__stat">{stat}</div>
         <div className="splash-ctas model-card__ctas">
-          {onPrimary && (
-            <button
-              type="button"
+          {primaryHref && (
+            <Link
+              href={primaryHref as never}
               className="splash-cta"
-              onClick={onPrimary}
-              disabled={loading || !!error}
+              aria-disabled={loading || !!error}
             >
               {primaryLabel}
               <span className="splash-cta__arrow">→</span>
-            </button>
+            </Link>
           )}
           <ARButton
             href={arHref}

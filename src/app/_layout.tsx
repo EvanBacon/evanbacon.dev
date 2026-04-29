@@ -8,7 +8,6 @@ import { SourceCodePro_400Regular } from '@expo-google-fonts/source-code-pro';
 import { Slot, Tabs, usePathname } from 'expo-router';
 import Head from 'expo-router/head';
 import React from 'react';
-import Background from '@/components/background';
 import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
@@ -203,13 +202,6 @@ export default function App() {
           />
 
           <Tabs.Screen
-            name="lego"
-            options={{
-              href: null,
-            }}
-          />
-
-          <Tabs.Screen
             name="(games)"
             options={{
               title: 'Play',
@@ -232,7 +224,6 @@ export default function App() {
   return (
     <>
       <CustomHead />
-      <Background />
       <Slot />
     </>
   );

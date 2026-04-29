@@ -30,7 +30,7 @@ export default function CustomFooter() {
                     height={18}
                     fill="white"
                   />
-                  Follow on Twitter
+                  Follow on X
                 </>,
                 'https://x.com/baconbrix',
               ],

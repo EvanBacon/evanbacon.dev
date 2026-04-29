@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "expo-router";
 import ModelCard from "./ModelCard";
 
 export interface BlogSection {
@@ -39,10 +40,10 @@ export interface BlogConfig {
  */
 export default function Blog({
   config,
-  onBack,
+  backHref,
 }: {
   config: BlogConfig;
-  onBack?: () => void;
+  backHref?: string;
 }) {
   // Forwarded to the model card's internal parallax — same scroll progress
   // shape as `Splash` so the figure drifts up/down as the reader moves
@@ -61,10 +62,10 @@ export default function Blog({
 
   return (
     <div className="blog">
-      {onBack && (
-        <button type="button" className="article-back" onClick={onBack}>
+      {backHref && (
+        <Link href={backHref as never} className="article-back">
           ← Splash
-        </button>
+        </Link>
       )}
 
       <div className="blog-shell">
