@@ -265,7 +265,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     
   },
   {
-    heading: "III. Construction is bottom-up",
+    heading: "II. Construction is bottom-up",
     paragraphs: [
       "Every Rubrick model is engineered the way it was designed: bottom-up, each layer locking the previous one in place. The cape is the structural surprise — it's load-bearing. If you've held a 1,200-piece minifig and wondered why it doesn't sag, the cape is your answer, working as a back-brace from waist to shoulder.",
       "We tune layer count so no single layer takes more than five minutes. Steady progress, not a marathon. By the cowl, you've earned the moment.",
@@ -275,7 +275,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     pose: { azimuth: -17, radius: 12.5, cameraY: 3.6, targetY: 4.8, pivotX: 1.2 },
   },
   {
-    heading: "IV. By the numbers",
+    heading: "III. By the numbers",
     paragraphs: [
       "Cold figures, every brick weighed and tallied. Same reason architects keep elevations: they tell you, without poetry, what you've actually built.",
     ],
@@ -299,7 +299,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     revealAssembly: true,
   },
     {
-    heading: "VI. The bat-emblem, up close",
+    heading: "IV. The bat-emblem, up close",
     paragraphs: [
       "Twelve bricks make the bat. Two stacked plates per wing-point, one black slope on each shoulder of the curve, a single 1×2 tile across the centre. That's it.",
       "We tried a six-piece negative-space variant, a printed-tile shortcut, a stud-shooting compromise. The twelve-brick version won: twenty seconds to build, reads from across the room. Both non-negotiable for a heroic insignia.",
@@ -316,7 +316,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
       "The cowl from behind is the most honest part of the figure. No emblem, no scowl, no cinematic lighting. Just the geometry of a head that has to land on a neck of exactly the right thickness, or the upper body topples.",
     ],
     // Flip 180° to look at the cape spread from behind, slightly raised.
-    pose: { azimuth: 180, radius: 11, cameraY: 5.2, targetY: MODEL_EMBLEM_Y, pivotX: 0 },
+    pose: { azimuth: 180, radius: 11, cameraY: 5.2, targetY: MODEL_EMBLEM_Y, pivotX: 2.5 },
     // The cape is near-black; against the dark base palette it disappears.
     // Switching to paper inverts the contrast — the cape now reads as
     // silhouette and the construction seams become visible against light.
@@ -324,7 +324,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
   },
 
   {
-    heading: "VII. Signed by the bat",
+    heading: "VI. Signed by the bat",
     paragraphs: [
       "We built two of him. One stays on the studio shelf, cape rotated a quarter-turn each month so the polymer ages evenly. The other travels — back of a hatchback, folding table at a convention floor, propped up just unsteadily enough you'd want to ask before leaning on it.",
       "Kevin Conroy voiced Batman for a generation and was unfailingly generous to people who showed up with something handmade. He looked at the duplicate, asked which brick we wanted, and signed the emblem itself — silver paint marker across the central tile. Twenty seconds, dead steady.",
@@ -350,7 +350,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     modelOffset: [0, 0, -35],
   },
   {
-    heading: "VIII. Step into the workshop",
+    heading: "VII. Step into the workshop",
     // One short, punchy line — the outro layout shows it as a fixed lede in
     // the top-left, not flowed around the silhouette, so anything longer
     // would crowd the page.

@@ -76,7 +76,7 @@ function SideBar() {
                 Games
               </SideBarTabItem>
               <SideBarTabItem
-                name="lego"
+                name="lego/index"
                 icon={makeIcon('lego')}
                 popup="Lego"
                 scrollToTop

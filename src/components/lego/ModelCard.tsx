@@ -300,17 +300,15 @@ function Overlay({
         <div className="splash-stat model-card__stat font-['JetBrains_Mono',ui-monospace,monospace] text-[11px] uppercase tracking-[0.18em] text-white/55">
           {stat}
         </div>
-        <div className="splash-ctas model-card__ctas inline-flex flex-wrap items-center justify-center gap-[14px]">
+        <div className="splash-ctas model-card__ctas">
           {primaryHref && (
             <Link
               href={primaryHref as never}
-              className="splash-cta group/cta pointer-events-auto inline-flex cursor-pointer items-center gap-4 border border-white/45 bg-transparent px-[38px] py-4 font-['JetBrains_Mono',ui-monospace,monospace] text-[11.5px] font-medium uppercase tracking-[0.36em] text-white transition-[background-color,color,letter-spacing,border-color] duration-[250ms] ease-[ease] hover:border-white hover:bg-white hover:tracking-[0.42em] hover:text-[#050507] disabled:cursor-not-allowed disabled:opacity-40"
+              className="splash-cta"
               aria-disabled={loading || !!error}
             >
               {primaryLabel}
-              <span className="splash-cta__arrow font-['Inter',sans-serif] text-[14px] font-light tracking-normal transition-transform duration-[250ms] ease-[ease] group-hover/cta:translate-x-1">
-                →
-              </span>
+              <span className="splash-cta__arrow">→</span>
             </Link>
           )}
           <ARButton

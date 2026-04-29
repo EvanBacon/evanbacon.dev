@@ -492,7 +492,16 @@ export default function BuildView({ backHref }: { backHref?: string }) {
   }, []);
 
   return (
-    <div style={{ position: "fixed", inset: 0, background: "#ffffff" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        minHeight: "calc(100vh - 4rem)",
+        background: "#ffffff",
+        borderRadius: 16,
+        overflow: "hidden",
+      }}
+    >
       {backHref && (
         <Link href={backHref as never} className="article-back">
           <span aria-hidden>←</span>

@@ -258,13 +258,63 @@ body {
          `.splash-foot .splash-stat` overrides referenced by it have been removed
          along with the migration. */
 
-/* `.splash-title`, `.splash-subtitle`, `.splash-stat` (+ `__pulse`/`__err`),
-         `.splash-cta` (+ `__arrow`), `.splash-ctas` and `@keyframes pulse` now
-         live as inline Tailwind utilities in `ModelCard.tsx`; the keyframe
-         (`stat-pulse`) lives in `global.css`. The marker classes are still
-         attached to those elements so the descendant rules below
+/* `.splash-title`, `.splash-subtitle`, `.splash-stat` (+ `__pulse`/`__err`)
+         and `@keyframes pulse` now live as inline Tailwind utilities in
+         `ModelCard.tsx`; the keyframe (`stat-pulse`) lives in `global.css`.
+         `.splash-cta`, `.splash-cta__arrow` and `.splash-ctas` stayed in CSS
+         because the multi-property `transition` (animating letter-spacing along
+         with colors) and the hover-driven arrow nudge didn't translate cleanly
+         to Tailwind v4 arbitrary values. The marker classes are still attached
+         on the JSX so the descendant rules below
          (`.model-card--standard .splash-stat`, mobile `.splash-cta`/`.splash-ctas`
          overrides) and the shared `.splash-ar*` button styling continue to match. */
+
+.splash-cta {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 16px 38px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, letter-spacing 0.25s ease,
+    border-color 0.25s ease;
+}
+.splash-cta:hover:not(:disabled) {
+  background: #fff;
+  color: #050507;
+  border-color: #fff;
+  letter-spacing: 0.42em;
+}
+.splash-cta:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.splash-cta__arrow {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0;
+  transition: transform 0.25s ease;
+}
+.splash-cta:hover .splash-cta__arrow {
+  transform: translateX(4px);
+}
+
+.splash-ctas {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 /* AR Quick Look launcher.
          iOS Safari only triggers Quick Look when the anchor contains a single
