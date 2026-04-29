@@ -21,6 +21,12 @@
   }
 }
 
+@keyframes splash-fade {
+  to {
+    opacity: 1;
+  }
+}
+
 ::selection {
   background: #b695f3db;
   color: #ffffffdb;

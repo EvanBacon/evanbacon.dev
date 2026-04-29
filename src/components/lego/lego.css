@@ -32,12 +32,6 @@ body {
     #050507;
   color: #fff;
 }
-@keyframes splash-fade {
-  to {
-    opacity: 1;
-  }
-}
-
 /* Top nav bar, fixed across the whole splash. Lives above the cards
          and ignores pointer events so it doesn't block CTAs underneath. */
 .splash-overlay--top {
@@ -77,78 +71,11 @@ body {
   min-height: 0;
 }
 
-/* Reusable card chrome — shared by hero + side variants. The 3D canvas
-         absolutely fills the card; the overlay sits on top. */
-.model-card {
-  position: relative;
-  height: 100%;
-  border-radius: 22px;
-  overflow: hidden;
-  background: radial-gradient(
-      ellipse 80% 60% at 50% 110%,
-      rgba(80, 70, 90, 0.55) 0%,
-      rgba(0, 0, 0, 1) 60%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 0%,
-      rgba(40, 50, 80, 0.3) 0%,
-      rgba(0, 0, 0, 1) 65%
-    ),
-    #050507;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 30px 80px rgba(0, 0, 0, 0.6);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s ease, border-color 0.4s ease;
-}
-.model-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset,
-    0 36px 96px rgba(0, 0, 0, 0.72);
-}
-.model-card__canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.model-card__canvas canvas {
-  opacity: 0;
-  animation: splash-fade 1.4s ease 0.15s forwards;
-}
-.model-card__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px;
-  pointer-events: none;
-}
-.model-card__foot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-
-/* Hero variant — full label stack (title, italic subtitle, brick
-         count, primary CTA + AR pill). Padding gives the figure breathing
-         room above the type block. */
-.model-card--hero .model-card__overlay {
-  padding: 36px 36px 38px;
-}
-.model-card--hero .model-card__foot {
-  gap: 18px;
-}
-
-/* Standard variant — collapses the label stack: shorter title, no
-         subtitle (gated in JSX), tighter CTAs. Brick count stays as a
-         small caption so the cards still feel like build entries. */
-.model-card--standard .model-card__overlay {
-  padding: 18px 18px 20px;
-}
+/* Card chrome — `.model-card`, `.model-card__canvas`, `.model-card__overlay`,
+         `.model-card__foot`, and the hero/standard overlay+foot padding overrides
+         live as inline Tailwind in `ModelCard.tsx`. The standard-variant title /
+         splash-stat / splash-ar descendant tweaks stay here since their bases
+         (`.splash-title`, `.splash-stat`, `.splash-ar`) are still CSS-driven. */
 .model-card--standard .model-card__title {
   font-size: clamp(16px, 1.6vw, 26px);
   letter-spacing: 0.32em;
