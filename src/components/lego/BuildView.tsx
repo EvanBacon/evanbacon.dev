@@ -7,7 +7,6 @@ import {
   type ThreeToJSXElements,
 } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
-import { Link } from "expo-router";
 import * as THREE from "three/webgpu";
 import {
   attribute,
@@ -462,7 +461,7 @@ async function loadModel(filename: string): Promise<LoadedModel> {
 
 // ---- React tree ---------------------------------------------------------
 
-export default function BuildView({ backHref }: { backHref?: string }) {
+export default function BuildView() {
   const [model, setModel] = useState<LoadedModel | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [focusedLayer, setFocusedLayer] = useState(0);
@@ -498,16 +497,8 @@ export default function BuildView({ backHref }: { backHref?: string }) {
         width: "100%",
         minHeight: "calc(100vh - 4rem)",
         background: "#ffffff",
-        borderRadius: 16,
-        overflow: "hidden",
       }}
     >
-      {backHref && (
-        <Link href={backHref as never} className="article-back">
-          <span aria-hidden>←</span>
-          <span>Back to article</span>
-        </Link>
-      )}
 
       {error && (
         <div

@@ -56,6 +56,7 @@ body {
   height: 100vh;
   box-sizing: border-box;
   padding: 28px;
+  padding-top: 0px;
   display: grid;
   grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
   gap: 22px;
