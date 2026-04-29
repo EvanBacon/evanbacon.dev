@@ -16,6 +16,11 @@ function PossiblyCenter({ children }: { children: React.ReactNode }) {
 }
 
 export default function CustomFooter() {
+  const isFullScreen = useIsFullScreenRoute();
+
+  if (isFullScreen) {
+    return null;
+  }
   return (
     <PossiblyCenter>
       <footer className="border-t border-t-slate-800 mt-2 py-6">

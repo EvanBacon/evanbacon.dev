@@ -27,6 +27,12 @@
   }
 }
 
+@keyframes stat-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
 ::selection {
   background: #b695f3db;
   color: #ffffffdb;

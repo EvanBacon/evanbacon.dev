@@ -11,6 +11,8 @@ export type IconName =
   | 'blog-active'
   | 'home'
   | 'home-active'
+  | 'lego'
+  | 'lego-active'
   | 'messages'
   | 'notifications';
 

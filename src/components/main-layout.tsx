@@ -8,17 +8,10 @@ import {
 import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
 import classNames from 'classnames';
 import { Link } from 'expo-router';
+import Head from 'expo-router/head';
 import React from 'react';
 
-function LegoSidebarIcon({ color }: { focused?: boolean; color: string }) {
-  return (
-    <svg width={30} height={30} viewBox="0 0 30 30" fill="none">
-      <rect x="6" y="11" width="18" height="12" rx="1.5" fill={color} />
-      <rect x="9" y="7" width="4" height="4" rx="1" fill={color} />
-      <rect x="17" y="7" width="4" height="4" rx="1" fill={color} />
-    </svg>
-  );
-}
+import '@/components/lego/lego.css';
 
 function HeaderLogo() {
   return (
@@ -84,7 +77,7 @@ function SideBar() {
               </SideBarTabItem>
               <SideBarTabItem
                 name="lego"
-                icon={LegoSidebarIcon}
+                icon={makeIcon('lego')}
                 popup="Lego"
                 scrollToTop
               >
@@ -208,6 +201,19 @@ export default function ResponsiveNavigator() {
   const isFullScreen = useIsFullScreenRoute();
   return (
     <TabbedNavigator screenOptions={{}}>
+       <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Cinzel:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+
       <div className="flex flex-1 flex-col md:flex-row pr-safe pt-safe max-w-full">
         <div className="hidden md:flex">
           <SideBar />

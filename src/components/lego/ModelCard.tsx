@@ -266,12 +266,17 @@ function Overlay({
   arLabel: string;
 }) {
   const stat: ReactNode = loading ? (
-    <span className="splash-stat__pulse">Loading bricks…</span>
+    <span className="splash-stat__pulse animate-[stat-pulse_1.6s_ease-in-out_infinite]">
+      Loading bricks…
+    </span>
   ) : error ? (
-    <span className="splash-stat__err">{error}</span>
+    <span className="splash-stat__err text-[#d97777]">{error}</span>
   ) : (
     <>
-      <strong>{brickCount.toLocaleString()}</strong> bricks
+      <strong className="font-medium text-[#f5b400]">
+        {brickCount.toLocaleString()}
+      </strong>{" "}
+      bricks
     </>
   );
 
@@ -284,20 +289,28 @@ function Overlay({
       className={`model-card__overlay pointer-events-none absolute inset-0 z-[2] flex flex-col justify-end ${overlayPadding}`}
     >
       <footer className={`model-card__foot flex flex-col items-center ${footGap}`}>
-        <h1 className="splash-title model-card__title">{title.toUpperCase()}</h1>
+        <h1 className="splash-title model-card__title m-0 text-center font-['Cinzel','Trajan_Pro',Georgia,serif] text-[clamp(34px,4.8vw,64px)] font-light leading-[0.92] tracking-[0.42em] pl-[0.42em] text-[#f5f5f5] [text-shadow:0_6px_26px_rgba(0,0,0,0.85)]">
+          {title.toUpperCase()}
+        </h1>
         {variant === "hero" && subtitle && (
-          <h2 className="splash-subtitle">{subtitle}</h2>
+          <h2 className="splash-subtitle m-0 mt-2 text-center font-['Cinzel',serif] text-[14px] font-light italic tracking-[0.32em] text-white/60">
+            {subtitle}
+          </h2>
         )}
-        <div className="splash-stat model-card__stat">{stat}</div>
-        <div className="splash-ctas model-card__ctas">
+        <div className="splash-stat model-card__stat font-['JetBrains_Mono',ui-monospace,monospace] text-[11px] uppercase tracking-[0.18em] text-white/55">
+          {stat}
+        </div>
+        <div className="splash-ctas model-card__ctas inline-flex flex-wrap items-center justify-center gap-[14px]">
           {primaryHref && (
             <Link
               href={primaryHref as never}
-              className="splash-cta"
+              className="splash-cta group/cta pointer-events-auto inline-flex cursor-pointer items-center gap-4 border border-white/45 bg-transparent px-[38px] py-4 font-['JetBrains_Mono',ui-monospace,monospace] text-[11.5px] font-medium uppercase tracking-[0.36em] text-white transition-[background-color,color,letter-spacing,border-color] duration-[250ms] ease-[ease] hover:border-white hover:bg-white hover:tracking-[0.42em] hover:text-[#050507] disabled:cursor-not-allowed disabled:opacity-40"
               aria-disabled={loading || !!error}
             >
               {primaryLabel}
-              <span className="splash-cta__arrow">→</span>
+              <span className="splash-cta__arrow font-['Inter',sans-serif] text-[14px] font-light tracking-normal transition-transform duration-[250ms] ease-[ease] group-hover/cta:translate-x-1">
+                →
+              </span>
             </Link>
           )}
           <ARButton

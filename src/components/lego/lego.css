@@ -71,11 +71,11 @@ body {
   min-height: 0;
 }
 
-/* Card chrome — `.model-card`, `.model-card__canvas`, `.model-card__overlay`,
-         `.model-card__foot`, and the hero/standard overlay+foot padding overrides
-         live as inline Tailwind in `ModelCard.tsx`. The standard-variant title /
-         splash-stat / splash-ar descendant tweaks stay here since their bases
-         (`.splash-title`, `.splash-stat`, `.splash-ar`) are still CSS-driven. */
+/* Card chrome and the splash typography/CTA classes (`.splash-title`,
+         `.splash-subtitle`, `.splash-stat`, `.splash-cta`, `.splash-ctas`) live as
+         inline Tailwind in `ModelCard.tsx`. These standard-variant overrides stay
+         here as plain CSS so they keep beating Tailwind on specificity (0,2,0 vs
+         0,1,0); `.splash-ar*` is still CSS-driven and shared with Article. */
 .model-card--standard .model-card__title {
   font-size: clamp(16px, 1.6vw, 26px);
   letter-spacing: 0.32em;
@@ -254,110 +254,17 @@ body {
   letter-spacing: 0.45em;
   color: rgba(255, 255, 255, 0.55);
 }
-.splash-title {
-  font-family: 'Cinzel', 'Trajan Pro', Georgia, serif;
-  font-weight: 300;
-  font-size: clamp(34px, 4.8vw, 64px);
-  letter-spacing: 0.42em;
-  line-height: 0.92;
-  margin: 0;
-  padding-left: 0.42em; /* offset trailing letter-spacing so it optically centres */
-  color: #f5f5f5;
-  text-shadow: 0 6px 26px rgba(0, 0, 0, 0.85);
-  text-align: center;
-}
-.splash-subtitle {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-style: italic;
-  font-size: 14px;
-  letter-spacing: 0.32em;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 8px 0 0;
-  text-align: center;
-}
+/* `.splash-foot` is currently unused; the `.splash-foot .splash-title` and
+         `.splash-foot .splash-stat` overrides referenced by it have been removed
+         along with the migration. */
 
-.splash-foot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
-.splash-foot .splash-title {
-  margin-bottom: 4px;
-}
-.splash-foot .splash-stat {
-  margin-top: 6px;
-}
-.splash-stat {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.55);
-  text-transform: uppercase;
-}
-.splash-stat strong {
-  color: #f5b400;
-  font-weight: 500;
-}
-.splash-stat__pulse {
-  animation: pulse 1.6s ease-in-out infinite;
-}
-.splash-stat__err {
-  color: #d97777;
-}
-@keyframes pulse {
-  50% {
-    opacity: 0.45;
-  }
-}
-
-.splash-cta {
-  pointer-events: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  padding: 16px 38px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.36em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, letter-spacing 0.25s ease,
-    border-color 0.25s ease;
-}
-.splash-cta:hover:not(:disabled) {
-  background: #fff;
-  color: #050507;
-  border-color: #fff;
-  letter-spacing: 0.42em;
-}
-.splash-cta:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-.splash-cta__arrow {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  letter-spacing: 0;
-  transition: transform 0.25s ease;
-}
-.splash-cta:hover .splash-cta__arrow {
-  transform: translateX(4px);
-}
-
-.splash-ctas {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+/* `.splash-title`, `.splash-subtitle`, `.splash-stat` (+ `__pulse`/`__err`),
+         `.splash-cta` (+ `__arrow`), `.splash-ctas` and `@keyframes pulse` now
+         live as inline Tailwind utilities in `ModelCard.tsx`; the keyframe
+         (`stat-pulse`) lives in `global.css`. The marker classes are still
+         attached to those elements so the descendant rules below
+         (`.model-card--standard .splash-stat`, mobile `.splash-cta`/`.splash-ctas`
+         overrides) and the shared `.splash-ar*` button styling continue to match. */
 
 /* AR Quick Look launcher.
          iOS Safari only triggers Quick Look when the anchor contains a single
