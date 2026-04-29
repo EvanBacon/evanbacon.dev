@@ -203,6 +203,13 @@ export default function App() {
           />
 
           <Tabs.Screen
+            name="lego"
+            options={{
+              href: null,
+            }}
+          />
+
+          <Tabs.Screen
             name="(games)"
             options={{
               title: 'Play',
