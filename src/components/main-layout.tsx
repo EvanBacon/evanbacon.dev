@@ -5,10 +5,13 @@ import {
   TabbedNavigator,
   useTabScrollToTop,
 } from '@/components/top-nav/tab-slot';
-import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
+import { useIsFullScreenRoute, useIsImmersiveRoute } from '@/components/useIsFullScreenRoute';
 import classNames from 'classnames';
 import { Link } from 'expo-router';
+import Head from 'expo-router/head';
 import React from 'react';
+
+import '@/components/lego/lego.css';
 
 function HeaderLogo() {
   return (
@@ -43,7 +46,10 @@ function HeaderLogo() {
 function SideBar() {
   return (
     <div className="w-mdrail xl:w-[244px] mr-safe">
-      <div className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]">
+      <div
+        style={{ zIndex: 50 }}
+        className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]"
+      >
         <div className="items-stretch flex pl-safe xl:items-start">
           <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
             <HeaderLogo />
@@ -71,6 +77,14 @@ function SideBar() {
                 scrollToTop
               >
                 Games
+              </SideBarTabItem>
+              <SideBarTabItem
+                name="lego/index"
+                icon={makeIcon('lego')}
+                popup="Lego"
+                scrollToTop
+              >
+                Lego
               </SideBarTabItem>
             </div>
 
@@ -188,8 +202,22 @@ function SideBarTabItem({
 
 export default function ResponsiveNavigator() {
   const isFullScreen = useIsFullScreenRoute();
+  const isImmersive = useIsImmersiveRoute();
   return (
     <TabbedNavigator screenOptions={{}}>
+       <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Cinzel:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+
       <div className="flex flex-1 flex-col md:flex-row pr-safe pt-safe max-w-full">
         <div className="hidden md:flex">
           <SideBar />
@@ -199,15 +227,16 @@ export default function ResponsiveNavigator() {
 
         <div
           className={classNames(
-            'flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 overflow-x-hidden',
-
-            isFullScreen
-              ? 'px-0 mx-0 max-w-full'
-              : 'container mx-auto px-4 md:px-6 lg:px-0 max-w-3xl'
+            'flex flex-1 flex-col overflow-x-hidden',
+            isImmersive
+              ? 'mt-0 px-0 mx-0 max-w-full'
+              : isFullScreen
+                ? 'mt-14 md:mt-0 px-0 mx-0 max-w-full'
+                : 'container mx-auto pt-4 md:pt-8 gap-4 px-4 md:px-6 lg:px-0 max-w-3xl mt-14 md:mt-0'
           )}
         >
           <InnerSlot />
-          <CustomFooter />
+          {!isImmersive && <CustomFooter />}
         </div>
 
         <TabBar />

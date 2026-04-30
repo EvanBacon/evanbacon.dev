@@ -1,0 +1,447 @@
+/* Page-level reset for the Lego subroute. The rest of this stylesheet only
+   keeps rules that Tailwind can't express cleanly (slider thumbs, the
+   `splash-ar` / `article-ar` pills with their `::after` content swaps and
+   filter-invert hover, the splash CTA's letter-spacing-animating transition,
+   and the chapter-theme-aware `article-*-line` classes that get assigned
+   dynamically by FlowedRichText). Everything else lives as inline Tailwind
+   utilities in `Article.tsx`, `Blog.tsx`, `BuildView.tsx`, `ModelCard.tsx`,
+   `ARButton.tsx`, and `src/app/(app)/lego/index.tsx`. */
+
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #050507;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+#root {
+  min-height: 100%;
+}
+
+/* ---- Splash side-card overrides --------------------------------- */
+
+/* Standard variant tightens the title + stat pill since the side cards
+   are narrower than the hero. Stay in CSS so they win on specificity
+   (0,2,0) over the Tailwind utilities in `ModelCard.tsx` (0,1,0). */
+.model-card--standard .model-card__title {
+  font-size: clamp(16px, 1.6vw, 26px);
+  letter-spacing: 0.32em;
+  padding-left: 0.32em;
+}
+.model-card--standard .splash-stat {
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+}
+.model-card--standard .splash-ar {
+  padding: 11px 16px 11px 14px;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  gap: 8px;
+}
+.model-card--standard .splash-ar__poster {
+  width: 12px;
+  height: 12px;
+}
+
+/* ---- Splash CTA ------------------------------------------------- */
+
+/* The hover state animates `letter-spacing` along with colour — we keep this
+   as plain CSS because comma-separated multi-property `transition-[…]` and
+   the named-group hover used to nudge the arrow didn't translate cleanly to
+   Tailwind v4 arbitrary values. */
+.splash-cta {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 16px 38px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, letter-spacing 0.25s ease,
+    border-color 0.25s ease;
+}
+.splash-cta:hover:not(:disabled) {
+  background: #fff;
+  color: #050507;
+  border-color: #fff;
+  letter-spacing: 0.42em;
+}
+.splash-cta:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.splash-cta__arrow {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0;
+  transition: transform 0.25s ease;
+}
+.splash-cta:hover .splash-cta__arrow {
+  transform: translateX(4px);
+}
+.splash-ctas {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---- AR Quick Look pills ---------------------------------------- */
+
+/* iOS Safari only triggers Quick Look when the anchor contains a single
+   <img> child — extra spans or a `download` attribute force Safari into the
+   regular download path. The DOM stays as plain {a → img} and the button
+   label is painted with a CSS `::after` pseudo-element so the labelling can
+   swap between "View in AR" / "iOS only" without altering the DOM. Two
+   palettes: `splash-ar` (dark, glassmorphic) and `article-ar` (paper, on
+   the outro's white frame). Both share the variant modifier names; the
+   ARButton component appends `--ios-only` / `--disabled` to the className
+   it was given. */
+.splash-ar {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 16px 26px 16px 22px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    letter-spacing 0.25s ease;
+}
+.splash-ar::after {
+  content: 'View in AR';
+}
+.splash-ar:hover {
+  background: rgba(245, 180, 0, 0.95);
+  color: #050507;
+  border-color: rgba(245, 180, 0, 0.95);
+  letter-spacing: 0.36em;
+}
+.splash-ar--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.splash-ar--ios-only {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.splash-ar--ios-only::after {
+  content: 'iOS only';
+}
+.splash-ar--disabled:hover,
+.splash-ar--ios-only:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+  letter-spacing: 0.32em;
+}
+.splash-ar__poster {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
+}
+.splash-ar:hover .splash-ar__poster {
+  filter: invert(1);
+}
+.splash-ar--disabled:hover .splash-ar__poster,
+.splash-ar--ios-only:hover .splash-ar__poster {
+  filter: none;
+}
+
+.article-ar {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.04);
+  color: #050507;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  padding: 16px 26px 16px 22px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    letter-spacing 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.article-ar::after {
+  content: 'View in AR';
+}
+.article-ar:hover {
+  background: #f5b400;
+  color: #050507;
+  border-color: #f5b400;
+  letter-spacing: 0.36em;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(245, 180, 0, 0.35);
+}
+.article-ar--ios-only,
+.article-ar--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.article-ar--ios-only::after {
+  content: 'iOS only';
+}
+.article-ar--ios-only {
+  pointer-events: auto;
+}
+.article-ar--ios-only:hover,
+.article-ar--disabled:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #050507;
+  border-color: rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.32em;
+  transform: none;
+  box-shadow: none;
+}
+.article-ar__poster {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
+}
+
+/* Article keyframes (`article-enter`, `article-canvas-in`,
+   `article-content-rise`, `article-back-in`) live in `global.css` inside
+   `@theme` so Tailwind v4 generates `animate-article-*` utilities. JSX uses
+   those utilities directly; this file only keeps theme-driven classes. */
+
+/* ---- Article line classes (theme-driven) ------------------------ */
+
+/* Spans laid out by FlowedRichText receive one of these classes per block,
+   pulling colour + text-shadow from the chapter's theme via CSS variables
+   on `.article`. Animated on chapter change so the palette flip glides
+   instead of snapping. */
+.article-line {
+  color: var(--article-fg, rgba(255, 255, 255, 0.92));
+  text-shadow: var(
+    --article-shadow,
+    0 1px 8px rgba(0, 0, 0, 0.95),
+    0 0 2px rgba(0, 0, 0, 0.9)
+  );
+  transition: color 0.7s ease, text-shadow 0.7s ease;
+}
+.article-eyebrow-line {
+  color: var(--article-eyebrow, rgba(255, 255, 255, 0.55));
+  text-transform: uppercase;
+  text-shadow: var(--article-shadow-soft, 0 1px 6px rgba(0, 0, 0, 0.85));
+  transition: color 0.7s ease, text-shadow 0.7s ease;
+}
+.article-title-line {
+  color: var(--article-title, #f5f5f5);
+  text-shadow: var(
+    --article-shadow-strong,
+    0 4px 24px rgba(0, 0, 0, 0.9),
+    0 0 2px rgba(0, 0, 0, 0.95)
+  );
+  transition: color 0.7s ease, text-shadow 0.7s ease;
+}
+.article-lede-line {
+  color: var(--article-lede, rgba(255, 255, 255, 0.84));
+  text-shadow: var(
+    --article-shadow-strong,
+    0 2px 14px rgba(0, 0, 0, 0.9),
+    0 0 2px rgba(0, 0, 0, 0.95)
+  );
+  transition: color 0.7s ease, text-shadow 0.7s ease;
+}
+.article-h2-line {
+  color: var(--article-heading, #f5b400);
+  text-shadow: var(
+    --article-shadow-strong,
+    0 2px 14px rgba(0, 0, 0, 0.9),
+    0 0 2px rgba(0, 0, 0, 0.95)
+  );
+  transition: color 0.7s ease, text-shadow 0.7s ease;
+}
+
+/* ---- Workshop slider track + thumb ------------------------------ */
+
+/* Tailwind handles the input's layout (width/height/cursor/etc.); the
+   pseudo-element thumb and the progress-fill background can't be expressed
+   as a utility, so they live here. Keep the `.lego-slider` class on the
+   input so these rules continue to match. */
+.lego-slider {
+  --progress: 0%;
+  background: linear-gradient(
+    to right,
+    #8c64dc 0%,
+    #b695f3 var(--progress),
+    rgba(0, 0, 0, 0.08) var(--progress),
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+.lego-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: transparent;
+}
+.lego-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: transparent;
+}
+.lego-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #8c64dc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), 0 0 0 4px rgba(140, 100, 220, 0);
+  cursor: grab;
+  margin-top: -5px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.lego-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18), 0 0 0 4px rgba(140, 100, 220, 0.18);
+}
+.lego-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+.lego-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #8c64dc;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  cursor: grab;
+}
+@media (max-width: 720px) {
+  .lego-slider::-webkit-slider-runnable-track,
+  .lego-slider::-moz-range-track {
+    height: 6px;
+  }
+  .lego-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+  }
+  .lego-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* ---- Splash + Article responsive overrides ---------------------- */
+
+/* The mobile overrides for `.splash-cta*`, `.splash-ar*`, the model-card
+   subtitle/overlay/foot tweaks, and the article-ar pill stay here because
+   their bases live in this stylesheet (`.splash-cta`, `.splash-ar`,
+   `.article-ar`). The splash-grid and article structural overrides moved to
+   `max-[900px]:` / `max-[720px]:` Tailwind variants on their JSX elements. */
+
+@media (max-width: 720px) {
+  .splash-stat {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-align: center;
+  }
+  .model-card--standard .splash-stat {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+  .model-card--hero .splash-subtitle {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+  }
+  .model-card__ctas .splash-cta,
+  .model-card__ctas .splash-ar {
+    padding: 12px 18px;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    gap: 10px;
+  }
+  .model-card--hero .model-card__overlay {
+    padding: 24px 18px 26px;
+  }
+  .model-card--hero .model-card__foot {
+    gap: 14px;
+  }
+  .model-card--standard .splash-cta,
+  .model-card--standard .splash-ar {
+    padding: 9px 12px;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    gap: 6px;
+  }
+  .model-card--standard .splash-cta__arrow {
+    font-size: 12px;
+  }
+  /* Outro footer Workshop / AR pair becomes a full-width row, so the AR
+     pill needs to match the build CTA's tighter padding. */
+  .article-ar {
+    flex: 1;
+    padding: 14px 16px 14px 16px;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .model-card--standard .model-card__title {
+    font-size: clamp(18px, 5.6vw, 24px);
+    letter-spacing: 0.28em;
+    padding-left: 0.28em;
+  }
+  .model-card--standard .splash-cta,
+  .model-card--standard .splash-ar {
+    padding: 11px 16px;
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    gap: 8px;
+  }
+  .model-card--hero .splash-ctas {
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+  .model-card--hero .splash-cta,
+  .model-card--hero .splash-ar {
+    padding: 12px 14px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    gap: 8px;
+    flex: 0 1 auto;
+  }
+  .model-card--hero .splash-cta__arrow {
+    font-size: 12px;
+  }
+}

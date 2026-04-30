@@ -1,23 +1,85 @@
 @import "tailwindcss";
 @import "tailwindcss-safe-area";
 
+/* Tailwind v4's auto-scanner skips paths with parentheses (Expo Router
+   route groups like `src/app/(app)/...`), so register them explicitly. */
+@source "./src/app/**/*.{ts,tsx}";
+
 @custom-variant canhover (@media (hover: hover));
 
 @theme {
   --width-mdrail: calc(1.5rem + 65px);
-  --animate-kennyburns: kennyburns 1s ease 1s forwards;
-}
 
-@keyframes kennyburns {
-  0% {
-    opacity: 0;
-    clip-path: inset(5%);
-    transform: scale(111.11%);
+  --animate-kennyburns: kennyburns 1s ease 1s forwards;
+  --animate-splash-fade: splash-fade 1.4s ease 0.15s forwards;
+  --animate-stat-pulse: stat-pulse 1.6s ease-in-out infinite;
+  --animate-article-enter: article-enter 0.5s ease both;
+  --animate-article-canvas-in: article-canvas-in 1.2s cubic-bezier(0.22, 1, 0.36, 1)
+    0.1s forwards;
+  --animate-article-content-rise: article-content-rise 0.9s
+    cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  --animate-article-back-in: article-back-in 0.7s cubic-bezier(0.22, 1, 0.36, 1)
+    0.45s both;
+
+  @keyframes kennyburns {
+    0% {
+      opacity: 0;
+      clip-path: inset(5%);
+      transform: scale(111.11%);
+    }
+    100% {
+      opacity: 1;
+      clip-path: inset(0);
+      transform: scale(1);
+    }
   }
-  100% {
-    opacity: 1;
-    clip-path: inset(0);
-    transform: scale(1);
+  @keyframes splash-fade {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes stat-pulse {
+    50% {
+      opacity: 0.45;
+    }
+  }
+  @keyframes article-enter {
+    from {
+      background-color: #050507;
+    }
+    to {
+      background-color: var(--article-bg, #050507);
+    }
+  }
+  @keyframes article-canvas-in {
+    from {
+      opacity: 0;
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  @keyframes article-content-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 18px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes article-back-in {
+    from {
+      opacity: 0;
+      transform: translate3d(-12px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 }
 

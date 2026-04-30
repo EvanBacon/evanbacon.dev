@@ -3,5 +3,10 @@ import { usePathname } from 'expo-router';
 export function useIsFullScreenRoute() {
   const pathname = usePathname();
 
-  return pathname.match(/blog\/expo-apps/);
+  return pathname.match(/(blog\/expo-apps|lego\/?)/);
+}
+
+export function useIsImmersiveRoute() {
+  const pathname = usePathname();
+  return /\/lego\/[^/]+\/build\/?$/.test(pathname);
 }
