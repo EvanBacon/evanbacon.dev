@@ -103,10 +103,10 @@ export default function LegoMainRoute() {
   }, []);
 
   return (
-    <div className="splash">
-      <div ref={stageRef} className="splash-stage">
-        <div className="splash-grid">
-          <div className="splash-grid__hero">
+    <div className="relative min-h-screen bg-[radial-gradient(ellipse_100%_60%_at_50%_110%,rgba(80,70,90,0.45)_0%,rgba(0,0,0,1)_70%),radial-gradient(ellipse_100%_80%_at_50%_0%,rgba(40,50,80,0.28)_0%,rgba(0,0,0,1)_70%),#050507] text-white">
+      <div ref={stageRef} className="relative">
+        <div className="sticky top-0 box-border grid h-screen grid-cols-[minmax(0,1.85fr)_minmax(0,1fr)] gap-[22px] p-7 pt-0 max-[900px]:relative max-[900px]:top-auto max-[900px]:h-auto max-[900px]:grid-cols-1 max-[900px]:gap-4 max-[900px]:p-[64px_16px_20px] max-[560px]:grid-cols-1 max-[560px]:gap-3 max-[560px]:p-[56px_12px_16px]">
+          <div className="relative min-h-0 max-[900px]:h-[70vh] max-[900px]:min-h-[460px] max-[560px]:h-[64vh] max-[560px]:min-h-[420px]">
             <ModelCard
               modelFile={HERO.modelFile}
               title={HERO.title}
@@ -121,7 +121,7 @@ export default function LegoMainRoute() {
               parallax={scroll * (HERO.parallaxFactor ?? 0.4)}
             />
           </div>
-          <div className="splash-grid__side">
+          <div className="grid min-h-0 grid-rows-[1fr_1fr] gap-[22px] max-[900px]:grid-cols-2 max-[900px]:grid-rows-[auto] max-[900px]:gap-4 max-[560px]:grid-cols-1 max-[560px]:gap-3 [&_.model-card]:max-[900px]:h-[46vh] [&_.model-card]:max-[900px]:min-h-[280px] [&_.model-card]:max-[560px]:h-[52vh] [&_.model-card]:max-[560px]:min-h-[320px]">
             {SIDE_CARDS.map((c) => (
               <ModelCard
                 key={c.modelFile}

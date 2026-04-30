@@ -600,16 +600,17 @@ function InstructionsPanel({
   if (!expanded) {
     return (
       <button
-        className="lego-panel lego-launcher"
+        className="lego-launcher absolute right-6 top-6 z-10 inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-black/[0.08] bg-white/85 py-2 pl-2.5 pr-3.5 font-sans text-[12.5px] text-[#222] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-[14px] backdrop-saturate-[180%] antialiased transition-[transform,box-shadow,border-color] duration-150 ease-out hover:-translate-y-px hover:border-black/[0.14] hover:shadow-[0_2px_6px_rgba(0,0,0,0.06),0_12px_32px_rgba(0,0,0,0.1)] [@media(hover:none)]:transform-none [@media(hover:none)]:hover:translate-y-0 max-[720px]:bottom-[calc(16px+env(safe-area-inset-bottom))] max-[720px]:right-4 max-[720px]:top-auto max-[720px]:gap-2.5 max-[720px]:py-2.5 max-[720px]:pl-3 max-[720px]:pr-4 max-[720px]:text-[13px]"
         onClick={() => {
           setExpanded(true);
           onFocus(0);
         }}
-        style={{ position: "absolute", top: 24, right: 24, zIndex: 10 }}
       >
-        <span className="lego-launcher__play">▶</span>
+        <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-full bg-gradient-to-br from-[#f5b400] to-[#d99a00] pl-px text-[9px] leading-none text-white shadow-[0_1px_2px_rgba(217,154,0,0.4)] max-[720px]:h-[26px] max-[720px]:w-[26px] max-[720px]:text-[10px]">
+          ▶
+        </span>
         <span>Start build</span>
-        <span className="lego-launcher__count">{total} steps</span>
+        <span className="text-[12px] text-[#888]">{total} steps</span>
       </button>
     );
   }
@@ -617,34 +618,22 @@ function InstructionsPanel({
   const progress = total > 1 ? (clamped / (total - 1)) * 100 : 100;
 
   return (
-    <div
-      className="lego-panel lego-panel-card"
-      style={{
-        position: "absolute",
-        top: 24,
-        right: 24,
-        bottom: 24,
-        width: 280,
-        zIndex: 10,
-        padding: 14,
-        display: "flex",
-        flexDirection: "column",
-        gap: 10,
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <span className="lego-eyebrow">Instructions</span>
-          <span className="lego-step-count">
-            Step <strong className="lego-mono">{clamped + 1}</strong>
-            <span style={{ color: "#aaa" }}> / </span>
-            <span className="lego-mono">{total}</span>
+    <div className="absolute bottom-6 right-6 top-6 z-10 flex w-[280px] flex-col gap-2.5 rounded-[14px] border border-black/[0.06] bg-white/[0.82] p-3.5 font-sans text-[#1a1a1a] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.1)] backdrop-blur-[20px] backdrop-saturate-[180%] antialiased max-[720px]:bottom-[calc(12px+env(safe-area-inset-bottom))] max-[720px]:left-3 max-[720px]:right-3 max-[720px]:top-auto max-[720px]:max-h-[60vh] max-[720px]:w-auto max-[720px]:max-w-full max-[720px]:gap-2.5 max-[720px]:rounded-2xl max-[720px]:p-3">
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#6b6b6b] max-[720px]:text-[11px]">
+            Instructions
+          </span>
+          <span className="text-[11.5px] text-[#444] max-[720px]:text-[13px]">
+            Step <strong className="font-mono font-semibold tabular-nums text-[#111]">{clamped + 1}</strong>
+            <span className="text-[#aaa]"> / </span>
+            <span className="font-mono tabular-nums">{total}</span>
           </span>
         </div>
         <button
-          className="lego-close"
           onClick={() => setExpanded(false)}
           aria-label="Collapse instructions"
+          className="inline-flex h-[22px] w-[22px] cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-[13px] leading-none text-[#888] transition-[background-color,color] duration-100 ease-out hover:bg-black/[0.06] hover:text-[#222] max-[720px]:h-8 max-[720px]:w-8 max-[720px]:text-base"
         >
           ✕
         </button>
@@ -652,7 +641,7 @@ function InstructionsPanel({
 
       <input
         type="range"
-        className="lego-slider"
+        className="lego-slider my-1 h-1 w-full cursor-pointer appearance-none rounded-[2px] outline-none max-[720px]:my-2 max-[720px]:mb-1.5 max-[720px]:h-1.5 max-[720px]:[touch-action:pan-x]"
         min={0}
         max={total - 1}
         value={clamped}
@@ -661,15 +650,15 @@ function InstructionsPanel({
         style={{ ["--progress" as string]: `${progress}%` } as React.CSSProperties}
       />
 
-      <div className="lego-stats">
+      <div className="text-[11.5px] text-[#666] max-[720px]:text-[12.5px] [&_strong]:font-mono [&_strong]:font-semibold [&_strong]:tabular-nums [&_strong]:text-[#111]">
         {isFinal ? (
           <>
-            <strong className="lego-mono">{model.brickCount.toLocaleString()}</strong> bricks ·
+            <strong>{model.brickCount.toLocaleString()}</strong> bricks ·
             finished model
           </>
         ) : (
           <>
-            <strong className="lego-mono">
+            <strong>
               {(model.layers[clamped]?.brickCount ?? 0).toLocaleString()}
             </strong>{" "}
             bricks in this layer
@@ -677,58 +666,116 @@ function InstructionsPanel({
         )}
       </div>
 
-      <div ref={listRef} className="lego-list">
+      <div
+        ref={listRef}
+        className="min-h-0 flex-1 overflow-y-auto rounded-[10px] border border-black/[0.04] bg-black/[0.025] p-1 [scrollbar-color:rgba(0,0,0,0.18)_transparent] [scrollbar-width:thin] max-[720px]:max-h-[30vh] max-[720px]:p-1.5 max-[720px]:[-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-[3px] [&::-webkit-scrollbar-thumb]:bg-black/[0.15] [&::-webkit-scrollbar-thumb:hover]:bg-black/[0.28] [&::-webkit-scrollbar-track]:bg-transparent"
+      >
         {model.layers.map((layer, i) => {
           const isActive = i === clamped;
           const isBuilt = i <= clamped || isFinal;
-          const cls = ["lego-step"];
-          if (isBuilt) cls.push("lego-step--built");
-          if (isActive) cls.push("lego-step--active");
           return (
-            <button
+            <Step
               key={i}
               data-step={i}
-              className={cls.join(" ")}
+              num={i + 1}
+              label={`Step ${i + 1}`}
+              count={`${layer.brickCount.toLocaleString()} ${layer.brickCount === 1 ? "brick" : "bricks"}`}
+              isActive={isActive}
+              isBuilt={isBuilt}
               onClick={() => onFocus(i)}
-            >
-              <span className="lego-step__num">{i + 1}</span>
-              <span className="lego-step__label">Step {i + 1}</span>
-              <span className="lego-step__count">
-                {layer.brickCount.toLocaleString()} {layer.brickCount === 1 ? "brick" : "bricks"}
-              </span>
-            </button>
+            />
           );
         })}
-        <button
+        <Step
           data-step={layerCount}
-          className={
-            "lego-step lego-step--complete" + (isFinal ? " lego-step--complete-active" : "")
-          }
+          num={layerCount + 1}
+          label="Complete"
+          count={`${model.brickCount.toLocaleString()} total`}
+          isActive={isFinal}
+          isComplete
           onClick={() => onFocus(layerCount)}
-        >
-          <span className="lego-step__num">{layerCount + 1}</span>
-          <span className="lego-step__label">Complete</span>
-          <span className="lego-step__count">{model.brickCount.toLocaleString()} total</span>
-        </button>
+        />
       </div>
 
-      <div className="lego-controls">
-        <button
-          className="lego-btn"
-          onClick={() => onFocus(Math.max(0, clamped - 1))}
-          disabled={clamped === 0}
-        >
+      <div className="flex gap-1.5 max-[720px]:gap-2">
+        <PanelBtn onClick={() => onFocus(Math.max(0, clamped - 1))} disabled={clamped === 0}>
           ‹ Prev
-        </button>
-        <button
-          className="lego-btn"
-          onClick={() => onFocus(Math.min(total - 1, clamped + 1))}
-          disabled={clamped === total - 1}
-        >
+        </PanelBtn>
+        <PanelBtn onClick={() => onFocus(Math.min(total - 1, clamped + 1))} disabled={clamped === total - 1}>
           Next ›
-        </button>
+        </PanelBtn>
       </div>
     </div>
+  );
+}
+
+function PanelBtn({
+  children,
+  onClick,
+  disabled,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className="flex-1 cursor-pointer rounded-lg border border-black/[0.08] bg-white/70 px-2.5 py-[7px] font-sans text-[11.5px] text-[#222] transition-[background-color,border-color,transform,box-shadow] duration-100 ease-out enabled:hover:-translate-y-px enabled:hover:border-black/[0.16] enabled:hover:bg-white enabled:hover:shadow-[0_2px_6px_rgba(0,0,0,0.06)] enabled:active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-40 max-[720px]:min-h-[44px] max-[720px]:rounded-[10px] max-[720px]:px-3.5 max-[720px]:py-3 max-[720px]:text-[13px]"
+    >
+      {children}
+    </button>
+  );
+}
+
+function Step({
+  num,
+  label,
+  count,
+  isActive,
+  isBuilt,
+  isComplete,
+  onClick,
+  ...rest
+}: {
+  num: number;
+  label: string;
+  count: string;
+  isActive?: boolean;
+  isBuilt?: boolean;
+  isComplete?: boolean;
+  onClick: () => void;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  // Three text-color states: built (dark) / complete (green) / default (gray).
+  // Active row gets a colored gradient strip, font-weight bump and matching
+  // num/count tint. Complete + active uses the green palette; otherwise gold.
+  const textColor = isComplete
+    ? "text-[#1f5d2e] font-semibold"
+    : isBuilt
+      ? "text-[#222]"
+      : "text-[#555]";
+  const activeBg = isActive
+    ? isComplete
+      ? "bg-gradient-to-r from-[rgba(31,138,58,0.18)] to-[rgba(31,138,58,0.06)] shadow-[inset_3px_0_0_#1f8a3a]"
+      : "bg-gradient-to-r from-[rgba(245,180,0,0.22)] to-[rgba(245,180,0,0.08)] font-semibold shadow-[inset_3px_0_0_#d99a00] !text-[#4a3500] [&_.step-num]:text-[#6e4f00] [&_.step-count]:text-[#6e4f00]"
+    : "";
+  return (
+    <button
+      onClick={onClick}
+      className={`flex w-full cursor-pointer items-center gap-2.5 rounded-md border-0 bg-transparent px-2.5 py-1.5 text-left font-sans text-[11.5px] transition-[background-color] duration-100 ease-out [&+&]:mt-px hover:bg-black/[0.04] [@media(hover:none)]:hover:bg-transparent [@media(hover:none)]:active:bg-black/[0.06] max-[720px]:min-h-[44px] max-[720px]:gap-3 max-[720px]:px-3 max-[720px]:py-2.5 max-[720px]:text-[13px] ${textColor} ${activeBg}`}
+      {...rest}
+    >
+      <span
+        className={`step-num min-w-[30px] flex-none font-mono text-[10.5px] tabular-nums ${isBuilt && !isComplete ? "text-[#555]" : "text-[#999]"} max-[720px]:min-w-7 max-[720px]:text-[12px]`}
+      >
+        {num}
+      </span>
+      <span className="flex-1">{label}</span>
+      <span className="step-count font-mono text-[10.5px] tabular-nums text-[#888] max-[720px]:text-[12px]">
+        {count}
+      </span>
+    </button>
   );
 }
 

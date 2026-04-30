@@ -46,7 +46,10 @@ function HeaderLogo() {
 function SideBar() {
   return (
     <div className="w-mdrail xl:w-[244px] mr-safe">
-      <div className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]">
+      <div
+        style={{ zIndex: 50 }}
+        className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]"
+      >
         <div className="items-stretch flex pl-safe xl:items-start">
           <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">
             <HeaderLogo />
@@ -224,7 +227,6 @@ export default function ResponsiveNavigator() {
         <div
           className={classNames(
             'flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 overflow-x-hidden',
-
             isFullScreen
               ? 'px-0 mx-0 max-w-full'
               : 'container mx-auto px-4 md:px-6 lg:px-0 max-w-3xl'

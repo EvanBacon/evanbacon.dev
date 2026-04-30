@@ -762,7 +762,7 @@ function BackgroundCanvas({
 }) {
   const initialCam = poseToWorld(pose).cam;
   return (
-    <div className="article-bg">
+    <div className="pointer-events-none fixed inset-0 z-0 [&_canvas]:pointer-events-none [&_canvas]:animate-article-canvas-in [&_canvas]:opacity-0">
       <Canvas
         shadows
         camera={{ position: initialCam, fov: CAMERA_FOV, near: 0.3, far: 200 }}
@@ -1470,27 +1470,36 @@ function ChapterSection({
     return (
       <section
         ref={ref}
-        className="article-chapter article-chapter--outro"
-        style={{
-          position: "relative",
-          minHeight: `${chapter.minHeightVh ?? 100}vh`,
-          width: "100%",
-        }}
+        className="relative w-full overflow-hidden"
+        style={{ minHeight: `${chapter.minHeightVh ?? 100}vh` }}
       >
-        <header className="article-outro-header">
-          <span className="article-outro-eyebrow">WORKSHOP</span>
-          <h2 className="article-outro-h2">{chapter.heading}</h2>
+        <header className="pointer-events-none absolute left-14 top-24 z-[3] max-w-[min(580px,44vw)] max-[720px]:left-5 max-[720px]:right-5 max-[720px]:top-16 max-[720px]:max-w-none">
+          <span className="mb-[22px] block font-['JetBrains_Mono',ui-monospace,monospace] text-[10.5px] font-medium uppercase tracking-[0.4em] text-[var(--article-eyebrow,rgba(255,255,255,0.55))] [text-shadow:var(--article-shadow-soft,0_1px_6px_rgba(0,0,0,0.85))] transition-[color,text-shadow] duration-700 ease-out max-[720px]:mb-3.5 max-[720px]:text-[10px] max-[720px]:tracking-[0.3em]">
+            WORKSHOP
+          </span>
+          <h2 className="m-0 mb-[22px] font-['Cinzel',serif] text-[clamp(36px,4.4vw,56px)] font-light leading-[1.04] tracking-[0.04em] text-[var(--article-title,#050505)] [text-shadow:var(--article-shadow-strong,0_4px_24px_rgba(0,0,0,0.9))] transition-[color,text-shadow] duration-700 ease-out max-[720px]:mb-3.5 max-[720px]:text-[clamp(28px,9vw,40px)]">
+            {chapter.heading}
+          </h2>
           {chapter.paragraphs.map((p, i) => (
-            <p key={i} className="article-outro-lede">
+            <p
+              key={i}
+              className="m-0 font-['Inter',sans-serif] text-[18px] font-light leading-[1.5] text-[var(--article-lede,rgba(255,255,255,0.84))] [text-shadow:var(--article-shadow,0_1px_8px_rgba(0,0,0,0.95))] transition-[color,text-shadow] duration-700 ease-out max-[720px]:text-base max-[720px]:leading-[1.45]"
+            >
               {p}
             </p>
           ))}
         </header>
-        <div className="article-outro-actions">
+        <div className="absolute bottom-14 right-14 z-[3] inline-flex items-stretch gap-3 max-[720px]:bottom-7 max-[720px]:left-5 max-[720px]:right-5 max-[720px]:gap-2.5">
           {chapter.buildCTA && buildHref && (
-            <Link href={buildHref as never} className="article-build-cta">
+            <Link
+              href={buildHref as never}
+              className="group/build inline-flex cursor-pointer items-center gap-3.5 border border-[#050507] bg-[#050507] px-[30px] py-4 font-['JetBrains_Mono',ui-monospace,monospace] text-[11.5px] font-medium uppercase tracking-[0.32em] text-white transition-[background-color,color,border-color,letter-spacing,transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:border-[#f5b400] hover:bg-[#f5b400] hover:tracking-[0.36em] hover:text-[#050507] hover:shadow-[0_8px_28px_rgba(245,180,0,0.35)] max-[720px]:flex-1 max-[720px]:justify-center max-[720px]:gap-2.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[10.5px] max-[720px]:tracking-[0.22em]"
+            >
               <span>{chapter.buildCTA.label}</span>
-              <span className="article-build-cta__arrow" aria-hidden>
+              <span
+                className="font-['Inter',sans-serif] text-base font-light tracking-normal transition-transform duration-200 ease-out group-hover/build:translate-x-1"
+                aria-hidden
+              >
                 →
               </span>
             </Link>
@@ -1510,12 +1519,8 @@ function ChapterSection({
   return (
     <section
       ref={ref}
-      className={`article-chapter${chapter.stats ? " article-chapter--stats" : ""}`}
-      style={{
-        position: "relative",
-        minHeight: `${chapter.minHeightVh ?? 100}vh`,
-        width: "100%",
-      }}
+      className="relative w-full"
+      style={{ minHeight: `${chapter.minHeightVh ?? 100}vh` }}
     >
       <FlowedRichText
         blocks={blocks}
@@ -1528,10 +1533,16 @@ function ChapterSection({
         <StatsGrid stats={chapter.stats} dimensions={chapter.dimensions} />
       )}
       {chapter.buildCTA && buildHref && (
-        <div className="article-build-cta-wrap">
-          <Link href={buildHref as never} className="article-build-cta">
+        <div className="px-14 pt-10 max-[720px]:px-5">
+          <Link
+            href={buildHref as never}
+            className="group/build inline-flex cursor-pointer items-center gap-3.5 border border-[#050507] bg-[#050507] px-[30px] py-4 font-['JetBrains_Mono',ui-monospace,monospace] text-[11.5px] font-medium uppercase tracking-[0.32em] text-white transition-[background-color,color,border-color,letter-spacing,transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:border-[#f5b400] hover:bg-[#f5b400] hover:tracking-[0.36em] hover:text-[#050507] hover:shadow-[0_8px_28px_rgba(245,180,0,0.35)]"
+          >
             <span>{chapter.buildCTA.label}</span>
-            <span className="article-build-cta__arrow" aria-hidden>
+            <span
+              className="font-['Inter',sans-serif] text-base font-light tracking-normal transition-transform duration-200 ease-out group-hover/build:translate-x-1"
+              aria-hidden
+            >
               →
             </span>
           </Link>
@@ -1579,15 +1590,17 @@ function StatsGrid({
   }, []);
 
   return (
-    <div ref={ref} className="article-stats-wrap">
-      <div className="article-stats">
+    <div ref={ref}>
+      <div className="pointer-events-none relative mt-14 grid max-w-[min(640px,50%)] grid-cols-2 gap-x-14 gap-y-11 px-14 max-[720px]:mt-9 max-[720px]:max-w-full max-[720px]:grid-cols-1 max-[720px]:gap-7 max-[720px]:px-5">
         {stats.map((stat, i) => (
-          <div key={stat.label} className="article-stat">
-            <div className="article-stat__index">
+          <div key={stat.label} className="relative">
+            <div className="mb-2 font-['JetBrains_Mono',ui-monospace,monospace] text-[9.5px] font-medium tracking-[0.36em] text-[var(--article-heading,#f5b400)] opacity-85 transition-[color] duration-700 ease-out">
               {String(i + 1).padStart(2, "0")}
             </div>
-            <div className="article-stat__label">{stat.label}</div>
-            <div className="article-stat__value">
+            <div className="mb-3.5 font-['JetBrains_Mono',ui-monospace,monospace] text-[10.5px] font-medium uppercase tracking-[0.32em] text-[var(--article-eyebrow,rgba(255,255,255,0.55))] transition-[color] duration-700 ease-out">
+              {stat.label}
+            </div>
+            <div className="flex items-baseline font-['Cinzel','Trajan_Pro',serif] text-[clamp(46px,6.2vw,80px)] font-light leading-[0.92] tabular-nums tracking-[0.005em] text-[var(--article-heading,#f5b400)] [text-shadow:var(--article-shadow-strong,0_4px_24px_rgba(0,0,0,0.9),0_0_2px_rgba(0,0,0,0.95))] transition-[color,text-shadow] duration-700 ease-out max-[720px]:text-[clamp(40px,12vw,64px)]">
               <AnimatedNumber
                 value={stat.value}
                 active={started}
@@ -1597,22 +1610,26 @@ function StatsGrid({
                 delayMs={i * 130}
               />
             </div>
-            <div className="article-stat__rule" />
+            <div className="mt-[18px] h-px bg-current opacity-[0.18] transition-[background-color] duration-700 ease-out" />
           </div>
         ))}
       </div>
       {dimensions && (
         <div
-          className={`article-dims${started ? " article-dims--in" : ""}`}
+          className={`pointer-events-none mt-9 flex max-w-[min(640px,50%)] flex-wrap items-baseline gap-4 px-14 text-[var(--article-fg,rgba(255,255,255,0.85))] transition-[opacity,transform,color] duration-[900ms,900ms,700ms] ease-[cubic-bezier(0.2,0.7,0.2,1),cubic-bezier(0.2,0.7,0.2,1),ease] motion-reduce:transition-none motion-reduce:!translate-y-0 motion-reduce:!opacity-100 ${started ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"}`}
           style={{ transitionDelay: `${stats.length * 130 + 200}ms` }}
         >
-          <span className="article-dims__label">DIMENSIONS</span>
-          <span className="article-dims__value">
+          <span className="font-['JetBrains_Mono',ui-monospace,monospace] text-[10.5px] font-medium uppercase tracking-[0.32em] text-[var(--article-eyebrow,rgba(255,255,255,0.55))] transition-[color] duration-700 ease-out">
+            DIMENSIONS
+          </span>
+          <span className="font-['JetBrains_Mono',ui-monospace,monospace] text-[18px] font-medium tabular-nums tracking-[0.04em] text-[var(--article-heading,#f5b400)] [text-shadow:var(--article-shadow,0_1px_6px_rgba(0,0,0,0.85))] transition-[color,text-shadow] duration-700 ease-out">
             {dimensions.height_cm} × {dimensions.width_cm} ×{" "}
             {dimensions.depth_cm}
-            <span className="article-dims__unit"> cm</span>
+            <span className="ml-[0.18em] text-[0.78em] opacity-[0.72]"> cm</span>
           </span>
-          <span className="article-dims__hint">h × w × d</span>
+          <span className="font-['JetBrains_Mono',ui-monospace,monospace] text-[9.5px] uppercase tracking-[0.18em] opacity-55">
+            h × w × d
+          </span>
         </div>
       )}
     </div>
@@ -1679,7 +1696,11 @@ function AnimatedNumber({
     <>
       {prefix ?? ""}
       {formatted}
-      {suffix && <span className="article-stat__unit">{suffix}</span>}
+      {suffix && (
+        <span className="ml-[0.18em] font-['Inter',sans-serif] text-[0.34em] font-light tracking-[0.04em] opacity-[0.72]">
+          {suffix}
+        </span>
+      )}
     </>
   );
 }
@@ -1754,8 +1775,8 @@ function FlowedHeader({
   return (
     <header
       ref={ref}
-      className="article-header"
-      style={{ position: "relative", minHeight: "92vh", width: "100%" }}
+      className="relative w-full max-w-[720px] px-14 pb-14 pt-24 max-[720px]:px-5 max-[720px]:pb-8 max-[720px]:pt-14"
+      style={{ minHeight: "92vh" }}
     >
       <FlowedRichText
         blocks={blocks}
@@ -1955,7 +1976,10 @@ export default function Article({
   } as React.CSSProperties;
 
   return (
-    <div className="article" style={themeStyle}>
+    <div
+      className="relative min-h-screen animate-article-enter text-[var(--article-fg,#ececec)] [background-color:var(--article-bg,#050507)] transition-[background-color,color] duration-700 ease-out"
+      style={themeStyle}
+    >
       <BackgroundCanvas
         model={model}
         pose={pose}
@@ -1970,7 +1994,7 @@ export default function Article({
         onSilhouette={setLiveSilhouette}
       />
 
-      <div className="article-content">
+      <div className="relative z-[2] w-full animate-article-content-rise">
         {fontReady && model && (
           <FlowedHeader
             pageWidth={pageWidth}
@@ -2003,12 +2027,17 @@ export default function Article({
             rendering both produces a redundant "Return to splash" pill at
             the bottom of an otherwise clean white frame. */}
         {!CHAPTERS.some((c) => c.outro) && (
-          <footer className="article-foot">
-            <div className="article-foot__rule" />
-            <div className="article-foot__row">
-              <span className="article-eyebrow">END OF FEATURE</span>
+          <footer className="px-14 pb-24 pt-20 max-[720px]:px-5 max-[720px]:pb-16 max-[720px]:pt-12">
+            <div className="mb-7 h-px bg-current opacity-[0.16] transition-[background-color] duration-700 ease-out" />
+            <div className="flex items-center justify-between max-[720px]:flex-col max-[720px]:items-start max-[720px]:gap-[18px]">
+              <span className="font-['JetBrains_Mono',ui-monospace,monospace] text-[11px] uppercase tracking-[0.4em] text-white/55">
+                END OF FEATURE
+              </span>
               {backHref && (
-                <Link href={backHref as never} className="article-cta">
+                <Link
+                  href={backHref as never}
+                  className="inline-flex cursor-pointer items-center gap-3 border border-current bg-transparent px-[26px] py-3 font-['JetBrains_Mono',ui-monospace,monospace] text-[11px] font-medium uppercase tracking-[0.3em] text-[var(--article-fg,#fff)] transition-[background-color,color,border-color] duration-200 ease-out hover:border-current hover:bg-[var(--article-fg,#fff)] hover:text-[var(--article-bg,#050507)]"
+                >
                   Return to splash <span aria-hidden>↺</span>
                 </Link>
               )}

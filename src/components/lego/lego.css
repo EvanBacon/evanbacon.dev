@@ -1,3 +1,12 @@
+/* Page-level reset for the Lego subroute. The rest of this stylesheet only
+   keeps rules that Tailwind can't express cleanly (slider thumbs, the
+   `splash-ar` / `article-ar` pills with their `::after` content swaps and
+   filter-invert hover, the splash CTA's letter-spacing-animating transition,
+   and the chapter-theme-aware `article-*-line` classes that get assigned
+   dynamically by FlowedRichText). Everything else lives as inline Tailwind
+   utilities in `Article.tsx`, `Blog.tsx`, `BuildView.tsx`, `ModelCard.tsx`,
+   `ARButton.tsx`, and `src/app/(app)/lego/index.tsx`. */
+
 html {
   height: 100%;
 }
@@ -14,69 +23,11 @@ body {
   min-height: 100%;
 }
 
-/* ---- Splash scene ------------------------------------------- */
+/* ---- Splash side-card overrides --------------------------------- */
 
-.splash {
-  position: relative;
-  min-height: 100vh;
-  background: radial-gradient(
-      ellipse 100% 60% at 50% 110%,
-      rgba(80, 70, 90, 0.45) 0%,
-      rgba(0, 0, 0, 1) 70%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 0%,
-      rgba(40, 50, 80, 0.28) 0%,
-      rgba(0, 0, 0, 1) 70%
-    ),
-    #050507;
-  color: #fff;
-}
-/* Top nav bar, fixed across the whole splash. Lives above the cards
-         and ignores pointer events so it doesn't block CTAs underneath. */
-.splash-overlay--top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 28px 40px 0;
-  pointer-events: none;
-  z-index: 30;
-}
-
-/* Scroll stage: taller than the viewport so the user has room to
-         scroll. The grid inside is `position: sticky` so the cards stay
-         pinned in view while scroll progress drives the in-canvas parallax. */
-.splash-stage {
-  position: relative;
-}
-.splash-grid {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  box-sizing: border-box;
-  padding: 28px;
-  padding-top: 0px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
-  gap: 22px;
-}
-.splash-grid__hero {
-  position: relative;
-  min-height: 0;
-}
-.splash-grid__side {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 22px;
-  min-height: 0;
-}
-
-/* Card chrome and the splash typography/CTA classes (`.splash-title`,
-         `.splash-subtitle`, `.splash-stat`, `.splash-cta`, `.splash-ctas`) live as
-         inline Tailwind in `ModelCard.tsx`. These standard-variant overrides stay
-         here as plain CSS so they keep beating Tailwind on specificity (0,2,0 vs
-         0,1,0); `.splash-ar*` is still CSS-driven and shared with Article. */
+/* Standard variant tightens the title + stat pill since the side cards
+   are narrower than the hero. Stay in CSS so they win on specificity
+   (0,2,0) over the Tailwind utilities in `ModelCard.tsx` (0,1,0). */
 .model-card--standard .model-card__title {
   font-size: clamp(16px, 1.6vw, 26px);
   letter-spacing: 0.32em;
@@ -97,179 +48,12 @@ body {
   height: 12px;
 }
 
-.splash-overlay {
-  pointer-events: none;
-}
+/* ---- Splash CTA ------------------------------------------------- */
 
-/* ---- Blog (per-model long-form post) ----------------------- */
-
-.blog {
-  position: relative;
-  min-height: 100vh;
-  background: radial-gradient(
-      ellipse 100% 60% at 50% 110%,
-      rgba(80, 70, 90, 0.35) 0%,
-      rgba(0, 0, 0, 1) 70%
-    ),
-    #050507;
-  color: rgba(255, 255, 255, 0.92);
-  overflow-x: hidden;
-  animation: article-enter 0.5s ease both;
-}
-.blog-shell {
-  position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 96px 56px 96px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 48px;
-  align-items: start;
-}
-/* Left column: model viewer pinned in the viewport while the right
-         column scrolls past. Same `position: sticky` trick the splash uses,
-         scoped per blog post. */
-.blog-stage {
-  position: sticky;
-  top: 56px;
-  height: calc(100vh - 112px);
-  min-height: 480px;
-}
-.blog-stage .model-card {
-  height: 100%;
-}
-.blog-body {
-  padding: 8px 4px 0;
-}
-.blog-kicker {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  margin: 0 0 24px;
-}
-.blog-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-size: clamp(40px, 5.4vw, 72px);
-  letter-spacing: 0.04em;
-  line-height: 1;
-  color: #f5f5f5;
-  margin: 0 0 18px;
-}
-.blog-lede {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.78);
-  margin: 0;
-}
-.blog-rule {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.12);
-  margin: 40px 0 36px;
-}
-.blog-section + .blog-section {
-  margin-top: 48px;
-}
-.blog-section__eyebrow {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.36em;
-  text-transform: uppercase;
-  color: #f5b400;
-  margin: 0 0 12px;
-}
-.blog-section__heading {
-  font-family: 'Cinzel', serif;
-  font-weight: 400;
-  font-size: clamp(22px, 2.4vw, 30px);
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-  color: #f5f5f5;
-  margin: 0 0 18px;
-}
-.blog-section__p {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.78);
-  margin: 0 0 16px;
-}
-
-/* Mobile: stack the column. The model becomes a fixed-height hero
-         at the top instead of a sticky sidebar (sticky inside a single
-         column reads as a "stuck" affordance, not a pairing). */
-@media (max-width: 900px) {
-  .blog-shell {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 72px 20px 72px;
-  }
-  .blog-stage {
-    position: relative;
-    top: auto;
-    height: 64vh;
-    min-height: 360px;
-  }
-}
-.splash-eyebrow--top {
-  text-align: center;
-  align-self: center;
-  margin: -8px 0 0;
-}
-
-.splash-nav {
-  display: flex;
-  justify-content: center;
-  gap: 56px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  color: rgba(255, 255, 255, 0.55);
-}
-.splash-nav__item {
-  position: relative;
-  padding-bottom: 10px;
-}
-.splash-nav__item--active {
-  color: #fff;
-}
-.splash-nav__item--active::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 18px;
-  height: 1px;
-  background: #d99a00;
-  transform: translateX(-50%);
-}
-
-.splash-eyebrow {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.45em;
-  color: rgba(255, 255, 255, 0.55);
-}
-/* `.splash-foot` is currently unused; the `.splash-foot .splash-title` and
-         `.splash-foot .splash-stat` overrides referenced by it have been removed
-         along with the migration. */
-
-/* `.splash-title`, `.splash-subtitle`, `.splash-stat` (+ `__pulse`/`__err`)
-         and `@keyframes pulse` now live as inline Tailwind utilities in
-         `ModelCard.tsx`; the keyframe (`stat-pulse`) lives in `global.css`.
-         `.splash-cta`, `.splash-cta__arrow` and `.splash-ctas` stayed in CSS
-         because the multi-property `transition` (animating letter-spacing along
-         with colors) and the hover-driven arrow nudge didn't translate cleanly
-         to Tailwind v4 arbitrary values. The marker classes are still attached
-         on the JSX so the descendant rules below
-         (`.model-card--standard .splash-stat`, mobile `.splash-cta`/`.splash-ctas`
-         overrides) and the shared `.splash-ar*` button styling continue to match. */
-
+/* The hover state animates `letter-spacing` along with colour — we keep this
+   as plain CSS because comma-separated multi-property `transition-[…]` and
+   the named-group hover used to nudge the arrow didn't translate cleanly to
+   Tailwind v4 arbitrary values. */
 .splash-cta {
   pointer-events: auto;
   display: inline-flex;
@@ -308,7 +92,6 @@ body {
 .splash-cta:hover .splash-cta__arrow {
   transform: translateX(4px);
 }
-
 .splash-ctas {
   display: inline-flex;
   align-items: center;
@@ -317,11 +100,17 @@ body {
   justify-content: center;
 }
 
-/* AR Quick Look launcher.
-         iOS Safari only triggers Quick Look when the anchor contains a single
-         <img> child — extra spans or a `download` attribute force Safari into
-         the regular download path. So the DOM stays as plain {a → img}, and
-         the button label is painted with a CSS `::after` pseudo-element. */
+/* ---- AR Quick Look pills ---------------------------------------- */
+
+/* iOS Safari only triggers Quick Look when the anchor contains a single
+   <img> child — extra spans or a `download` attribute force Safari into the
+   regular download path. The DOM stays as plain {a → img} and the button
+   label is painted with a CSS `::after` pseudo-element so the labelling can
+   swap between "View in AR" / "iOS only" without altering the DOM. Two
+   palettes: `splash-ar` (dark, glassmorphic) and `article-ar` (paper, on
+   the outro's white frame). Both share the variant modifier names; the
+   ARButton component appends `--ios-only` / `--disabled` to the className
+   it was given. */
 .splash-ar {
   pointer-events: auto;
   display: inline-flex;
@@ -357,9 +146,6 @@ body {
   cursor: not-allowed;
   pointer-events: none;
 }
-/* Desktop / Android — same dim look, but pointer-events stays on so
-         the `title` tooltip surfaces on hover. Label switches to "iOS only"
-         so the user understands why the affordance isn't tappable. */
 .splash-ar--ios-only {
   opacity: 0.45;
   cursor: not-allowed;
@@ -367,8 +153,6 @@ body {
 .splash-ar--ios-only::after {
   content: 'iOS only';
 }
-/* Cancel the gold-fill hover treatment for both disabled variants
-         (.splash-ar:hover would otherwise repaint them). */
 .splash-ar--disabled:hover,
 .splash-ar--ios-only:hover {
   background: rgba(255, 255, 255, 0.06);
@@ -377,10 +161,6 @@ body {
   letter-spacing: 0.32em;
 }
 .splash-ar__poster {
-  /* The poster <img> is also the visible cube icon. The SVG stroke
-           is baked white because img-loaded SVGs don't inherit
-           currentColor; on hover (gold pill, black text) we invert the
-           image so the cube reads black against the fill. */
   width: 14px;
   height: 14px;
   display: block;
@@ -394,315 +174,75 @@ body {
   filter: none;
 }
 
-.splash-annotation {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 8px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  background: indianred;
-  color: #fff;
-  padding: 3px 12px;
-  border: none;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  white-space: nowrap;
-  box-shadow: inset 0 0 0 0.09px white;
-  cursor: pointer;
+.article-ar {
   pointer-events: auto;
-  transition: box-shadow 0.5s ease, color 0.5s ease;
-}
-.splash-annotation:hover {
-  box-shadow: inset 250px 0 0 0 white;
-  color: #050507;
-}
-
-/* ---- Article ------------------------------------------------ */
-
-.article {
-  position: relative;
-  color: var(--article-fg, #ececec);
-  background-color: var(--article-bg, #050507);
-  min-height: 100vh;
-  transition: background-color 0.7s ease, color 0.7s ease;
-  animation: article-enter 0.5s ease both;
-}
-@keyframes article-enter {
-  from {
-    background-color: #050507;
-  }
-  to {
-    background-color: var(--article-bg, #050507);
-  }
-}
-
-/* Fixed background canvas — the single Batman model lives here for the
-         whole article. The article-content layer scrolls above it; pretext
-         lays out text to one side of where the model lands on screen. */
-.article-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-.article-bg canvas {
-  opacity: 0;
-  animation: article-canvas-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
-}
-@keyframes article-canvas-in {
-  from {
-    opacity: 0;
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
-.article-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  animation: article-content-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
-}
-@keyframes article-content-rise {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 18px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.article-back {
-  position: fixed;
-  top: 24px;
-  left: 24px;
-  z-index: 20;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(20, 20, 24, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.85);
-  padding: 9px 16px 9px 14px;
-  border-radius: 999px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  animation: article-back-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
-}
-@keyframes article-back-in {
-  from {
-    opacity: 0;
-    transform: translate3d(-12px, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-.article-back:hover {
-  background: rgba(255, 255, 255, 0.95);
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.04);
   color: #050507;
-  border-color: rgba(255, 255, 255, 0.95);
-}
-
-.article-header {
-  padding: 96px 56px 56px;
-  max-width: 720px;
-}
-.article-eyebrow {
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  padding: 16px 26px 16px 22px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.4em;
-  color: rgba(255, 255, 255, 0.55);
-  text-transform: uppercase;
-  margin-bottom: 18px;
-}
-.article-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-size: clamp(48px, 6.5vw, 86px);
-  letter-spacing: 0.04em;
-  line-height: 1;
-  margin: 0 0 22px;
-  color: #f5f5f5;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
-}
-.article-lede {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 22px;
-  line-height: 1.42;
-  color: rgba(255, 255, 255, 0.82);
-  max-width: 620px;
-  margin: 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
-}
-
-.article-chapter {
-  position: relative;
-}
-
-/* ---- Stats chapter ----------------------------------------- */
-
-/* Numbers panel sits on the left half of the viewport while the
-         model assembles on the right. Padding keeps it off the body's
-         padding edge; max-width caps it so big monitors don't sprawl
-         the grid into the figure's area. */
-.article-stats {
-  position: relative;
-  margin: 56px 0 0;
-  padding: 0 56px;
-  max-width: min(640px, 50%);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 44px 56px;
-  pointer-events: none;
-}
-.article-stat {
-  position: relative;
-}
-.article-stat__index {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9.5px;
+  font-size: 11.5px;
   font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+    letter-spacing 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.article-ar::after {
+  content: 'View in AR';
+}
+.article-ar:hover {
+  background: #f5b400;
+  color: #050507;
+  border-color: #f5b400;
   letter-spacing: 0.36em;
-  color: var(--article-heading, #f5b400);
-  opacity: 0.85;
-  margin-bottom: 8px;
-  transition: color 0.7s ease;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(245, 180, 0, 0.35);
 }
-.article-stat__label {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--article-eyebrow, rgba(255, 255, 255, 0.55));
-  margin-bottom: 14px;
-  transition: color 0.7s ease;
-}
-.article-stat__value {
-  font-family: 'Cinzel', 'Trajan Pro', serif;
-  font-weight: 300;
-  font-size: clamp(46px, 6.2vw, 80px);
-  line-height: 0.92;
-  color: var(--article-heading, #f5b400);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.005em;
-  display: flex;
-  align-items: baseline;
-  text-shadow: var(
-    --article-shadow-strong,
-    0 4px 24px rgba(0, 0, 0, 0.9),
-    0 0 2px rgba(0, 0, 0, 0.95)
-  );
-  transition: color 0.7s ease, text-shadow 0.7s ease;
-}
-.article-stat__unit {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 0.34em;
-  opacity: 0.72;
-  margin-left: 0.18em;
-  letter-spacing: 0.04em;
-}
-.article-stat__rule {
-  height: 1px;
-  background: currentColor;
-  opacity: 0.18;
-  margin-top: 18px;
-  transition: background-color 0.7s ease;
-}
-
-/* Dimensions footer line under the stats grid. Single horizontal
-         line so the three numbers read as physical-envelope metadata
-         rather than four more big counters. Fades in slightly after the
-         counters land. */
-.article-dims {
-  margin: 36px 0 0;
-  padding: 0 56px;
-  max-width: min(640px, 50%);
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 16px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.7s ease;
-  color: var(--article-fg, rgba(255, 255, 255, 0.85));
+.article-ar--ios-only,
+.article-ar--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
   pointer-events: none;
 }
-.article-dims--in {
-  opacity: 1;
-  transform: none;
+.article-ar--ios-only::after {
+  content: 'iOS only';
 }
-.article-dims__label {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10.5px;
-  font-weight: 500;
+.article-ar--ios-only {
+  pointer-events: auto;
+}
+.article-ar--ios-only:hover,
+.article-ar--disabled:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: #050507;
+  border-color: rgba(0, 0, 0, 0.18);
   letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--article-eyebrow, rgba(255, 255, 255, 0.55));
-  transition: color 0.7s ease;
+  transform: none;
+  box-shadow: none;
 }
-.article-dims__value {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 18px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--article-heading, #f5b400);
-  text-shadow: var(--article-shadow, 0 1px 6px rgba(0, 0, 0, 0.85));
-  transition: color 0.7s ease, text-shadow 0.7s ease;
-}
-.article-dims__unit {
-  font-size: 0.78em;
-  opacity: 0.72;
-  margin-left: 0.18em;
-}
-.article-dims__hint {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-@media (prefers-reduced-motion: reduce) {
-  .article-dims {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
+.article-ar__poster {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
 }
 
-.article-h2 {
-  font-family: 'Cinzel', serif;
-  font-weight: 400;
-  font-size: 26px;
-  letter-spacing: 0.06em;
-  color: #f5b400;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
-}
+/* Article keyframes (`article-enter`, `article-canvas-in`,
+   `article-content-rise`, `article-back-in`) live in `global.css` inside
+   `@theme` so Tailwind v4 generates `animate-article-*` utilities. JSX uses
+   those utilities directly; this file only keeps theme-driven classes. */
 
-/* Pretext lines — each is a tiny absolutely-positioned span. The text
-         shadow is what keeps them legible when they pass over the model.
-         Colors + shadows come from per-chapter theme vars set on `.article`,
-         so the whole stack flips palette in sync with the camera pose. */
+/* ---- Article line classes (theme-driven) ------------------------ */
+
+/* Spans laid out by FlowedRichText receive one of these classes per block,
+   pulling colour + text-shadow from the chapter's theme via CSS variables
+   on `.article`. Animated on chapter change so the palette flip glides
+   instead of snapping. */
 .article-line {
   color: var(--article-fg, rgba(255, 255, 255, 0.92));
   text-shadow: var(
@@ -746,329 +286,14 @@ body {
   transition: color 0.7s ease, text-shadow 0.7s ease;
 }
 
-.article-foot {
-  padding: 80px 56px 96px;
-}
-.article-foot__rule {
-  height: 1px;
-  background: currentColor;
-  opacity: 0.16;
-  margin-bottom: 28px;
-  transition: background-color 0.7s ease;
-}
-.article-foot__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.article-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: transparent;
-  /* Theme-aware so the footer's "Return to splash" CTA stays legible
-           when chapter VIII flips the page to white. */
-  color: var(--article-fg, #fff);
-  border: 1px solid currentColor;
-  padding: 12px 26px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-.article-cta:hover {
-  background: var(--article-fg, #fff);
-  color: var(--article-bg, #050507);
-}
+/* ---- Workshop slider track + thumb ------------------------------ */
 
-/* ---- Outro chapter ----------------------------------------- */
-
-/* The closing chapter ditches the silhouette-flowed body and reads
-         like a studio reference plate: heading + lede pinned to the top-
-         left, action cluster (Workshop / AR) tucked into the bottom-right,
-         model dead-centre with nothing crossing it. */
-.article-chapter--outro {
-  position: relative;
-  overflow: hidden;
-}
-.article-outro-header {
-  position: absolute;
-  top: 96px;
-  left: 56px;
-  /* Wider than 38vw caused the figure to start crossing the heading
-           on narrow laptops; capping at 580px keeps the title comfortably
-           on two lines while leaving Batman uncluttered at his orbit pose. */
-  max-width: min(580px, 44vw);
-  z-index: 3;
-  pointer-events: none;
-}
-.article-outro-eyebrow {
-  display: block;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--article-eyebrow, rgba(255, 255, 255, 0.55));
-  margin-bottom: 22px;
-  text-shadow: var(--article-shadow-soft, 0 1px 6px rgba(0, 0, 0, 0.85));
-  transition: color 0.7s ease, text-shadow 0.7s ease;
-}
-.article-outro-h2 {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  /* Big, headline-weight — this is the "ending title" of the article
-           rather than a section header. Scales with viewport so it stays
-           punchy on big monitors and readable on tablets. */
-  font-size: clamp(36px, 4.4vw, 56px);
-  line-height: 1.04;
-  letter-spacing: 0.04em;
-  color: var(--article-title, #050505);
-  margin: 0 0 22px;
-  text-shadow: var(--article-shadow-strong, 0 4px 24px rgba(0, 0, 0, 0.9));
-  transition: color 0.7s ease, text-shadow 0.7s ease;
-}
-.article-outro-lede {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 1.5;
-  color: var(--article-lede, rgba(255, 255, 255, 0.84));
-  margin: 0;
-  text-shadow: var(--article-shadow, 0 1px 8px rgba(0, 0, 0, 0.95));
-  transition: color 0.7s ease, text-shadow 0.7s ease;
-}
-.article-outro-actions {
-  position: absolute;
-  bottom: 56px;
-  right: 56px;
-  z-index: 3;
-  display: inline-flex;
-  align-items: stretch;
-  gap: 12px;
-}
-
-/* Workshop entry CTA — paints as a black inverse pill against the
-         outro's white frame so it reads as a deliberate call-to-action,
-         pivots to the gold accent on hover (same palette as the splash
-         CTA — visual continuity across the two entry points). */
-.article-build-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  background: #050507;
-  color: #fff;
-  border: 1px solid #050507;
-  padding: 16px 30px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
-    letter-spacing 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-.article-build-cta:hover {
-  background: #f5b400;
-  color: #050507;
-  border-color: #f5b400;
-  letter-spacing: 0.36em;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 28px rgba(245, 180, 0, 0.35);
-}
-.article-build-cta__arrow {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  letter-spacing: 0;
-  transition: transform 0.2s ease;
-}
-.article-build-cta:hover .article-build-cta__arrow {
-  transform: translateX(4px);
-}
-
-/* AR Quick Look pill — paper variant. Same DOM structure as the
-         splash's `.splash-ar` (anchor + img + ::after label) but inverted
-         palette so it reads on the outro's white background. The shared
-         <ARButton> component swaps its base classname between the two
-         palettes; we just style each independently. */
-.article-ar {
-  pointer-events: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(0, 0, 0, 0.04);
-  color: #050507;
-  border: 1px solid rgba(0, 0, 0, 0.18);
-  padding: 16px 26px 16px 22px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
-    letter-spacing 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-.article-ar::after {
-  content: 'View in AR';
-}
-.article-ar:hover {
-  background: #f5b400;
-  color: #050507;
-  border-color: #f5b400;
-  letter-spacing: 0.36em;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 28px rgba(245, 180, 0, 0.35);
-}
-.article-ar--ios-only,
-.article-ar--disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-.article-ar--ios-only::after {
-  content: 'iOS only';
-}
-/* On desktop / Android we leave pointer-events on so the title-
-         attribute tooltip can surface. The hover repaint is cancelled so
-         the dim disabled look survives the cursor. */
-.article-ar--ios-only {
-  pointer-events: auto;
-}
-.article-ar--ios-only:hover,
-.article-ar--disabled:hover {
-  background: rgba(0, 0, 0, 0.04);
-  color: #050507;
-  border-color: rgba(0, 0, 0, 0.18);
-  letter-spacing: 0.32em;
-  transform: none;
-  box-shadow: none;
-}
-.article-ar__poster {
-  width: 14px;
-  height: 14px;
-  display: block;
-  pointer-events: none;
-}
-
-/* ---- Instructions panel ------------------------------------- */
-
-.lego-panel {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text',
-    'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-feature-settings: 'ss01', 'cv11';
-}
-.lego-mono {
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Launcher (collapsed state) */
-.lego-launcher {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 14px 8px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
-  color: #222;
-  cursor: pointer;
-  font: inherit;
-  font-size: 12.5px;
-  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.lego-launcher:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.1);
-  border-color: rgba(0, 0, 0, 0.14);
-}
-.lego-launcher__play {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f5b400, #d99a00);
-  color: #fff;
-  font-size: 9px;
-  line-height: 1;
-  padding-left: 1px;
-  box-shadow: 0 1px 2px rgba(217, 154, 0, 0.4);
-}
-.lego-launcher__count {
-  color: #888;
-  font-size: 12px;
-}
-
-/* Glass panel */
-.lego-panel-card {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 14px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.1);
-  color: #1a1a1a;
-}
-
-/* Header */
-.lego-eyebrow {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b6b6b;
-}
-.lego-step-count {
-  font-size: 11.5px;
-  color: #444;
-}
-.lego-step-count strong {
-  font-weight: 600;
-  color: #111;
-}
-.lego-close {
-  width: 22px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: #888;
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  line-height: 1;
-  transition: background 0.12s ease, color 0.12s ease;
-}
-.lego-close:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: #222;
-}
-
-/* Slider */
+/* Tailwind handles the input's layout (width/height/cursor/etc.); the
+   pseudo-element thumb and the progress-fill background can't be expressed
+   as a utility, so they live here. Keep the `.lego-slider` class on the
+   input so these rules continue to match. */
 .lego-slider {
   --progress: 0%;
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
   background: linear-gradient(
     to right,
     #d99a00 0%,
@@ -1076,9 +301,6 @@ body {
     rgba(0, 0, 0, 0.08) var(--progress),
     rgba(0, 0, 0, 0.08) 100%
   );
-  outline: none;
-  cursor: pointer;
-  margin: 4px 0;
 }
 .lego-slider::-webkit-slider-runnable-track {
   height: 4px;
@@ -1119,385 +341,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
   cursor: grab;
 }
-
-/* Stats line */
-.lego-stats {
-  font-size: 11.5px;
-  color: #666;
-}
-.lego-stats strong {
-  font-weight: 600;
-  color: #111;
-}
-
-/* Step list */
-.lego-list {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.025);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  padding: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
-}
-.lego-list::-webkit-scrollbar {
-  width: 6px;
-}
-.lego-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-.lego-list::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
-}
-.lego-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.28);
-}
-
-.lego-step {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  text-align: left;
-  padding: 6px 10px;
-  border: none;
-  background: transparent;
-  color: #555;
-  cursor: pointer;
-  font: inherit;
-  font-size: 11.5px;
-  border-radius: 6px;
-  transition: background 0.1s ease;
-}
-.lego-step + .lego-step {
-  margin-top: 1px;
-}
-.lego-step:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-.lego-step__num {
-  flex: 0 0 auto;
-  min-width: 30px;
-  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-  font-variant-numeric: tabular-nums;
-  font-size: 10.5px;
-  color: #999;
-}
-.lego-step__label {
-  flex: 1;
-}
-.lego-step__count {
-  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-  font-variant-numeric: tabular-nums;
-  font-size: 10.5px;
-  color: #888;
-}
-.lego-step--built {
-  color: #222;
-}
-.lego-step--built .lego-step__num {
-  color: #555;
-}
-.lego-step--active {
-  background: linear-gradient(
-    90deg,
-    rgba(245, 180, 0, 0.22),
-    rgba(245, 180, 0, 0.08)
-  );
-  color: #4a3500;
-  font-weight: 600;
-  box-shadow: inset 3px 0 0 #d99a00;
-}
-.lego-step--active .lego-step__num,
-.lego-step--active .lego-step__count {
-  color: #6e4f00;
-}
-.lego-step--complete {
-  color: #1f5d2e;
-  font-weight: 600;
-}
-.lego-step--complete-active {
-  background: linear-gradient(
-    90deg,
-    rgba(31, 138, 58, 0.18),
-    rgba(31, 138, 58, 0.06)
-  );
-  box-shadow: inset 3px 0 0 #1f8a3a;
-}
-
-/* Controls */
-.lego-controls {
-  display: flex;
-  gap: 6px;
-}
-.lego-btn {
-  flex: 1;
-  padding: 7px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.7);
-  color: #222;
-  font: inherit;
-  font-size: 11.5px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.12s ease, border-color 0.12s ease,
-    transform 0.12s ease, box-shadow 0.12s ease;
-}
-.lego-btn:hover:not(:disabled) {
-  background: #fff;
-  border-color: rgba(0, 0, 0, 0.16);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-.lego-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-.lego-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ---- Mobile (≤ 720px) ---------------------------------------- */
-
-/* The article's silhouette wrap and the splash's annotations both
-         assume desktop-class horizontal real-estate. Below 720px we shrink
-         padding, drop multi-column layouts to single-column, reposition
-         the outro corners as a stacked top/bottom layout, and trim the
-         workshop panel so it fits a phone viewport. */
-/* ---- Mid-tablet (≤ 900px): hero stacks above a 2-up side row ---- */
-@media (max-width: 900px) and (min-width: 561px) {
-  .splash-stage {
-    min-height: auto;
-  }
-  .splash-grid {
-    position: relative;
-    top: auto;
-    height: auto;
-    padding: 64px 16px 20px;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .splash-grid__hero {
-    height: 70vh;
-    min-height: 460px;
-  }
-  .splash-grid__side {
-    grid-template-rows: auto;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  .splash-grid__side .model-card {
-    height: 46vh;
-    min-height: 280px;
-  }
-}
-
-/* ---- Phone (≤ 720px) base tweaks ----------------------------- */
 @media (max-width: 720px) {
-  .splash-overlay--top {
-    padding: 16px 16px 0;
-  }
-  .splash-nav {
-    gap: 22px;
-    font-size: 10px;
-    letter-spacing: 0.26em;
-  }
-  /* Hero subtitle wraps to two lines on narrow screens at 14px /
-           0.32em tracking; tighten both so it stays one line. */
-  .model-card--hero .splash-subtitle {
-    font-size: 12px;
-    letter-spacing: 0.22em;
-  }
-  /* CTA pills get cramped at full splash padding. Tighten their
-           inner padding and keep them in a single row. */
-  .model-card__ctas .splash-cta,
-  .model-card__ctas .splash-ar {
-    padding: 12px 18px;
-    font-size: 10.5px;
-    letter-spacing: 0.26em;
-    gap: 10px;
-  }
-  .model-card--hero .model-card__overlay {
-    padding: 24px 18px 26px;
-  }
-  .model-card--hero .model-card__foot {
-    gap: 14px;
-  }
-  .splash-eyebrow--top {
-    margin-top: 4px;
-  }
-  .splash-foot {
-    gap: 14px;
-  }
-  .splash-stat {
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
-    text-align: center;
-  }
-  /* Side-card titles still wrap into 2 lines at the tablet column
-           width ("CAPTAIN AMERICA" being the worst offender). Drop the
-           tracking and shrink so they sit on a single line within the
-           narrower card. */
-  .model-card--standard .model-card__title {
-    font-size: clamp(14px, 4.6vw, 22px);
-    letter-spacing: 0.22em;
-    padding-left: 0.22em;
-  }
-  .model-card--standard .splash-stat {
-    font-size: 9px;
-    letter-spacing: 0.14em;
-  }
-  .model-card--standard .splash-cta,
-  .model-card--standard .splash-ar {
-    padding: 9px 12px;
-    font-size: 9.5px;
-    letter-spacing: 0.2em;
-    gap: 6px;
-  }
-  .model-card--standard .splash-cta__arrow {
-    font-size: 12px;
-  }
-
-  .article-back {
-    top: 16px;
-    left: 16px;
-    padding: 7px 12px 7px 10px;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    gap: 8px;
-  }
-
-  .article-header {
-    padding: 56px 20px 32px;
-  }
-
-  /* Stats grid spans the full column on mobile, stacks 1×4 instead
-           of 2×2, and lets the figure live behind the numbers since the
-           camera no longer steers the model out to one side. */
-  .article-stats {
-    padding: 0 20px;
-    margin-top: 36px;
-    max-width: 100%;
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-  .article-stat__value {
-    font-size: clamp(40px, 12vw, 64px);
-  }
-
-  .article-foot {
-    padding: 48px 20px 64px;
-  }
-  .article-foot__row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  /* Outro chapter — collapse the corner layout into a vertical
-           stack: heading at the top, model in the middle (3D canvas is
-           fixed behind), CTAs as a full-width pair at the bottom. */
-  .article-outro-header {
-    position: absolute;
-    top: 64px;
-    left: 20px;
-    right: 20px;
-    max-width: none;
-  }
-  .article-outro-eyebrow {
-    margin-bottom: 14px;
-    letter-spacing: 0.3em;
-    font-size: 10px;
-  }
-  .article-outro-h2 {
-    font-size: clamp(28px, 9vw, 40px);
-    margin-bottom: 14px;
-  }
-  .article-outro-lede {
-    font-size: 16px;
-    line-height: 1.45;
-  }
-  .article-outro-actions {
-    left: 20px;
-    right: 20px;
-    bottom: 28px;
-    flex-direction: row;
-    gap: 10px;
-  }
-  .article-build-cta,
-  .article-ar {
-    flex: 1;
-    padding: 14px 16px;
-    font-size: 10.5px;
-    letter-spacing: 0.22em;
-    gap: 10px;
-    justify-content: center;
-  }
-  .article-ar {
-    padding-left: 16px;
-  }
-
-  /* Workshop instructions panel docks to the bottom of the
-           screen as a sheet on phones, leaving the model fully
-           visible while scrubbing. Auto-height with a 60vh cap and
-           a step-list cap below so the sheet never crowds the
-           viewport. Tap targets are sized for fingers (≥44px) and
-           the slider thumb is enlarged for accurate scrubbing. */
-  .lego-panel-card {
-    top: auto !important;
-    right: 12px !important;
-    left: 12px !important;
-    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
-    width: auto !important;
-    max-width: 100%;
-    max-height: 60vh;
-    padding: 12px !important;
-    gap: 10px !important;
-    border-radius: 16px;
-  }
-  /* Launcher moves to bottom-right for thumb reach and grows
-           into a more obvious tap target. Inline-style top/right on
-           the JSX is overridden with !important. */
-  .lego-launcher {
-    top: auto !important;
-    right: 16px !important;
-    bottom: calc(16px + env(safe-area-inset-bottom)) !important;
-    padding: 10px 16px 10px 12px;
-    font-size: 13px;
-    gap: 10px;
-  }
-  .lego-launcher__play {
-    width: 26px;
-    height: 26px;
-    font-size: 10px;
-  }
-  .lego-launcher__count {
-    font-size: 12px;
-  }
-  .lego-close {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-  }
-  .lego-eyebrow {
-    font-size: 11px;
-  }
-  .lego-step-count {
-    font-size: 13px;
-  }
-  .lego-stats {
-    font-size: 12.5px;
-  }
-  /* Larger slider for finger scrubbing — taller track, bigger
-           thumb, more vertical breathing room around the hit zone. */
-  .lego-slider {
-    height: 6px;
-    margin: 8px 0 6px;
-    touch-action: pan-x;
-  }
   .lego-slider::-webkit-slider-runnable-track,
   .lego-slider::-moz-range-track {
     height: 6px;
@@ -1511,84 +355,66 @@ body {
     width: 22px;
     height: 22px;
   }
-  /* Step list capped so the panel stays compact even with
-           many layers; individual rows are tall enough to tap. */
-  .lego-list {
-    max-height: 30vh;
-    padding: 6px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .lego-step {
-    padding: 10px 12px;
-    font-size: 13px;
-    min-height: 44px;
-    gap: 12px;
-  }
-  .lego-step__num {
-    min-width: 28px;
-    font-size: 12px;
-  }
-  .lego-step__count {
-    font-size: 12px;
-  }
-  /* Prev/Next become primary thumb-reach controls. */
-  .lego-controls {
-    gap: 8px;
-  }
-  .lego-btn {
-    padding: 12px 14px;
-    font-size: 13px;
-    min-height: 44px;
-    border-radius: 10px;
-  }
 }
 
-/* Touch devices: hover-driven lift effects feel sticky on tap,
-         so neutralize them where the primary input has no hover. */
-@media (hover: none) {
-  .lego-launcher,
-  .lego-launcher:hover,
-  .lego-btn:hover:not(:disabled) {
-    transform: none;
-  }
-  .lego-step:hover {
-    background: transparent;
-  }
-  .lego-step:active {
-    background: rgba(0, 0, 0, 0.06);
-  }
-}
+/* ---- Splash + Article responsive overrides ---------------------- */
 
-/* ---- Phone (≤ 560px): cards stack vertically -------------------
-         Two side cards squeezed into a 2-column grid on a 390px viewport
-         leaves each card ~180px wide — too narrow for legible titles +
-         CTAs. On true phone widths we let them stack so each card gets
-         the full width and the CTAs sit comfortably side by side. */
-@media (max-width: 560px) {
-  .splash-grid {
-    padding: 56px 12px 16px;
-    grid-template-columns: 1fr;
-    gap: 12px;
+/* The mobile overrides for `.splash-cta*`, `.splash-ar*`, the model-card
+   subtitle/overlay/foot tweaks, and the article-ar pill stay here because
+   their bases live in this stylesheet (`.splash-cta`, `.splash-ar`,
+   `.article-ar`). The splash-grid and article structural overrides moved to
+   `max-[900px]:` / `max-[720px]:` Tailwind variants on their JSX elements. */
+
+@media (max-width: 720px) {
+  .splash-stat {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-align: center;
   }
-  .splash-grid__hero {
-    height: 64vh;
-    min-height: 420px;
+  .model-card--standard .splash-stat {
+    font-size: 9px;
+    letter-spacing: 0.14em;
   }
-  .splash-grid__side {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .splash-grid__side .model-card {
-    height: 52vh;
-    min-height: 320px;
-  }
-  .splash-nav {
-    gap: 18px;
-    font-size: 9.5px;
+  .model-card--hero .splash-subtitle {
+    font-size: 12px;
     letter-spacing: 0.22em;
   }
-  /* Side cards now span full width — restore the hero's typographic
-           breathing room, but stay on a single line. */
+  .model-card__ctas .splash-cta,
+  .model-card__ctas .splash-ar {
+    padding: 12px 18px;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    gap: 10px;
+  }
+  .model-card--hero .model-card__overlay {
+    padding: 24px 18px 26px;
+  }
+  .model-card--hero .model-card__foot {
+    gap: 14px;
+  }
+  .model-card--standard .splash-cta,
+  .model-card--standard .splash-ar {
+    padding: 9px 12px;
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    gap: 6px;
+  }
+  .model-card--standard .splash-cta__arrow {
+    font-size: 12px;
+  }
+  /* Outro footer Workshop / AR pair becomes a full-width row, so the AR
+     pill needs to match the build CTA's tighter padding. */
+  .article-ar {
+    flex: 1;
+    padding: 14px 16px 14px 16px;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
   .model-card--standard .model-card__title {
     font-size: clamp(18px, 5.6vw, 24px);
     letter-spacing: 0.28em;
@@ -1601,8 +427,6 @@ body {
     letter-spacing: 0.24em;
     gap: 8px;
   }
-  /* CTA pair: keep them on one row at 390px. Drop padding so the
-           combined width fits within the card's inner padding. */
   .model-card--hero .splash-ctas {
     flex-wrap: nowrap;
     width: 100%;
