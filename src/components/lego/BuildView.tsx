@@ -739,8 +739,8 @@ function Step({
       : "text-[#555]";
   const activeBg = isActive
     ? isComplete
-      ? "bg-gradient-to-r from-[rgba(31,138,58,0.18)] to-[rgba(31,138,58,0.06)] shadow-[inset_3px_0_0_#1f8a3a]"
-      : "bg-gradient-to-r from-[rgba(182,149,243,0.22)] to-[rgba(182,149,243,0.08)] font-semibold shadow-[inset_3px_0_0_#8c64dc] !text-[#2d1f5c] [&_.step-num]:text-[#4a3573] [&_.step-count]:text-[#4a3573]"
+      ? "bg-linear-to-r from-[rgba(31,138,58,0.18)] to-[rgba(31,138,58,0.06)] shadow-[inset_3px_0_0_#1f8a3a]"
+      : "bg-linear-to-r from-[rgba(182,149,243,0.22)] to-[rgba(182,149,243,0.08)] font-semibold shadow-[inset_3px_0_0_#8c64dc] !text-[#2d1f5c] [&_.step-num]:text-[#4a3573] [&_.step-count]:text-[#4a3573]"
     : "";
   return (
     <button
