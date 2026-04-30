@@ -2,7 +2,9 @@ module.exports = function(api) {
   // api.cache(true);
   const isServer = api.caller(caller => caller?.isServer);
   return {
-    presets: ['babel-preset-expo'],
+    presets: [['babel-preset-expo', {
+        unstable_transformImportMeta: true,
+    }]],
     plugins: [
       ['@babel/plugin-proposal-private-methods', { loose: true }],
       // '@expo/html-elements/babel',
