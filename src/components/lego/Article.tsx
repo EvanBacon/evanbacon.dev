@@ -253,10 +253,12 @@ interface ArticleContent {
 export type ArticleId = "batman" | "captainAmerica";
 
 const BATMAN_CHAPTERS: ChapterDef[] = [
+  // TODO: Rewrite all of this.
   {
     heading: "I. The silhouette comes first",
     paragraphs: [
-      "Every Rubrick build starts as a black-and-white silhouette. Batman is the easy case — the cape gives him away at thumbnail scale — but the discipline holds. Sketch eight directions, find the angles that read clean, voxelize.",
+    
+      "Every Lego build starts as a black-and-white silhouette. Batman is the easy case — the cape gives him away at thumbnail scale — but the discipline holds. Sketch eight directions, find the angles that read clean, voxelize.",
       "Voxelization is a search problem. Pick a target height, a brick budget, a palette. The rig samples the silhouette into a grid of LEGO-legal positions and asks: which arrangement reproduces the most distinctive features?",
       "For Batman, those are the cowl ears, the cape's hard angles, and the chest emblem. Everything else is filler. A stray brick on the cowl costs more than a stray brick on the thigh.",
     ],
@@ -267,7 +269,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
   {
     heading: "II. Construction is bottom-up",
     paragraphs: [
-      "Every Rubrick model is engineered the way it was designed: bottom-up, each layer locking the previous one in place. The cape is the structural surprise — it's load-bearing. If you've held a 1,200-piece minifig and wondered why it doesn't sag, the cape is your answer, working as a back-brace from waist to shoulder.",
+      "Each Lego model is engineered the way it was designed: bottom-up, each layer locking the previous one in place. The cape is the structural surprise — it's load-bearing. If you've held a 1,200-piece minifig and wondered why it doesn't sag, the cape is your answer, working as a back-brace from waist to shoulder.",
       "We tune layer count so no single layer takes more than five minutes. Steady progress, not a marathon. By the cowl, you've earned the moment.",
       "Instructions ship as a paper flipbook tucked behind the foam tray. Turning a real page between layers is a feel we couldn't replicate on screen — so we didn't try.",
     ],
@@ -326,7 +328,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
   {
     heading: "VI. Signed by the bat",
     paragraphs: [
-      "We built two of him. One stays on the studio shelf, cape rotated a quarter-turn each month so the polymer ages evenly. The other travels — back of a hatchback, folding table at a convention floor, propped up just unsteadily enough you'd want to ask before leaning on it.",
+      "I built two of him. One stays on the studio shelf, cape rotated a quarter-turn each month so the polymer ages evenly. The other travels — back of a hatchback, folding table at a convention floor, propped up just unsteadily enough you'd want to ask before leaning on it.",
       "Kevin Conroy voiced Batman for a generation and was unfailingly generous to people who showed up with something handmade. He looked at the duplicate, asked which brick we wanted, and signed the emblem itself — silver paint marker across the central tile. Twenty seconds, dead steady.",
       "He passed in 2022. The signed copy is the only model I won't replace a brick on. Some signatures are more load-bearing than the cape.",
     ],
