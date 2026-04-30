@@ -5,7 +5,7 @@ import {
   TabbedNavigator,
   useTabScrollToTop,
 } from '@/components/top-nav/tab-slot';
-import { useIsFullScreenRoute } from '@/components/useIsFullScreenRoute';
+import { useIsFullScreenRoute, useIsImmersiveRoute } from '@/components/useIsFullScreenRoute';
 import classNames from 'classnames';
 import { Link } from 'expo-router';
 import Head from 'expo-router/head';
@@ -202,6 +202,7 @@ function SideBarTabItem({
 
 export default function ResponsiveNavigator() {
   const isFullScreen = useIsFullScreenRoute();
+  const isImmersive = useIsImmersiveRoute();
   return (
     <TabbedNavigator screenOptions={{}}>
        <Head>
@@ -226,14 +227,16 @@ export default function ResponsiveNavigator() {
 
         <div
           className={classNames(
-            'flex flex-1 flex-col pt-4 mt-14 md:mt-0 md:pt-8 gap-4 overflow-x-hidden',
-            isFullScreen
-              ? 'px-0 mx-0 max-w-full'
-              : 'container mx-auto px-4 md:px-6 lg:px-0 max-w-3xl'
+            'flex flex-1 flex-col overflow-x-hidden',
+            isImmersive
+              ? 'mt-0 px-0 mx-0 max-w-full'
+              : isFullScreen
+                ? 'mt-14 md:mt-0 px-0 mx-0 max-w-full'
+                : 'container mx-auto pt-4 md:pt-8 gap-4 px-4 md:px-6 lg:px-0 max-w-3xl mt-14 md:mt-0'
           )}
         >
           <InnerSlot />
-          <CustomFooter />
+          {!isImmersive && <CustomFooter />}
         </div>
 
         <TabBar />

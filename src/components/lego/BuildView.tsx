@@ -475,7 +475,7 @@ export default function BuildView({ modelFile }: { modelFile: string }) {
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "calc(100vh - 4rem)",
+        minHeight: "100dvh",
         background: "#ffffff",
       }}
     >
