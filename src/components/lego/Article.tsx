@@ -1205,6 +1205,7 @@ function FlowedRichText({
   startY,
   silhouette,
   viewportYOffset,
+  xOffset = 0,
 }: {
   blocks: FlowBlock[];
   pageWidth: number;
@@ -1214,6 +1215,11 @@ function FlowedRichText({
    *  silhouette query uses its viewport-Y (lineTop + viewportYOffset) so
    *  wrap follows the model as the page scrolls past the fixed canvas. */
   viewportYOffset: number;
+  /** Viewport-X of the container's left edge. The silhouette is sampled
+   *  in full-viewport pixel coords (the canvas is `position: fixed; inset: 0`),
+   *  but text is laid out inside this container; subtract `xOffset` from
+   *  silhouette spans so wrap positions land in container coords. */
+  xOffset?: number;
 }) {
   const layout = useMemo(() => {
     const lines: FlowedLine[] = [];
@@ -1251,12 +1257,15 @@ function FlowedRichText({
         while (safety++ < 10000) {
           const lineTop = y;
           const lineBottom = y + block.lineHeight;
-          const span = silhouette
+          const rawSpan = silhouette
             ? silhouetteSpanForLine(
                 silhouette,
                 lineTop + viewportYOffset,
                 lineBottom + viewportYOffset,
               )
+            : null;
+          const span = rawSpan
+            ? { left: rawSpan.left - xOffset, right: rawSpan.right - xOffset }
             : null;
 
           let placedSomething = false;
@@ -1319,7 +1328,7 @@ function FlowedRichText({
       }
     }
     return { lines, height: y };
-  }, [blocks, pageWidth, silhouette, startY, viewportYOffset]);
+  }, [blocks, pageWidth, silhouette, startY, viewportYOffset, xOffset]);
 
   return (
     <div
@@ -1372,6 +1381,7 @@ function ChapterSection({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [documentTop, setDocumentTop] = useState(0);
+  const [documentLeft, setDocumentLeft] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
 
   useEffect(() => {
@@ -1380,6 +1390,7 @@ function ChapterSection({
     const update = () => {
       const rect = el.getBoundingClientRect();
       setDocumentTop(rect.top + window.scrollY);
+      setDocumentLeft(rect.left);
       setSectionHeight(rect.height);
     };
     update();
@@ -1528,6 +1539,7 @@ function ChapterSection({
         startY={56}
         silhouette={silhouette}
         viewportYOffset={viewportYOffset}
+        xOffset={documentLeft}
       />
       {chapter.stats && (
         <StatsGrid stats={chapter.stats} dimensions={chapter.dimensions} />
@@ -1725,6 +1737,7 @@ function FlowedHeader({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [documentTop, setDocumentTop] = useState(0);
+  const [documentLeft, setDocumentLeft] = useState(0);
 
   useEffect(() => {
     const el = ref.current;
@@ -1732,6 +1745,7 @@ function FlowedHeader({
     const updateTop = () => {
       const rect = el.getBoundingClientRect();
       setDocumentTop(rect.top + window.scrollY);
+      setDocumentLeft(rect.left);
     };
     updateTop();
     const ro = new ResizeObserver(updateTop);
@@ -1784,6 +1798,7 @@ function FlowedHeader({
         startY={92}
         silhouette={silhouette}
         viewportYOffset={viewportYOffset}
+        xOffset={documentLeft}
       />
     </header>
   );

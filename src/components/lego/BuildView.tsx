@@ -16,9 +16,8 @@ import {
   vec3,
   type ShaderNodeObject,
 } from "three/tsl";
-import { LDrawLoader } from "three/examples/jsm/loaders/LDrawLoader.js";
-import { LDrawConditionalLineMaterial as LDrawConditionalLineNodeMaterial } from "three/examples/jsm/materials/LDrawConditionalLineNodeMaterial.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import { fetchModelText, getLDrawLoader } from "./loadModel";
 
 declare module "@react-three/fiber" {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -26,11 +25,6 @@ declare module "@react-three/fiber" {
 }
 
 extend(THREE as unknown as Record<string, unknown>);
-
-// The workshop view always loads the Batman build — the article rejoins
-// this view at chapter VIII, and the rest of the collection isn't shipped
-// yet. Hard-coding it dodges a /api/models round-trip.
-const MODEL_FILE = "Batman.ldr";
 
 // Build-wave animation tuning (seconds). Bottom-up sweep climbs through
 // every brick; each individual brick fades + drops in over `BRICK_DURATION`
@@ -67,18 +61,6 @@ interface LoadedModel {
   brickCount: number;
   build: BuildAnim;
   layers: LayerData[];
-}
-
-// ---- Shared LDrawLoader so the parts cache survives across navigations --
-let loaderPromise: Promise<LDrawLoader> | null = null;
-function getLoader(): Promise<LDrawLoader> {
-  if (loaderPromise) return loaderPromise;
-  const loader = new LDrawLoader();
-  loader.setPartsLibraryPath("https://lego-ldraw-cdn.baconbrix.workers.dev/");
-  loader.setConditionalLineMaterial(LDrawConditionalLineNodeMaterial);
-  loader.smoothNormals = false;
-  loaderPromise = loader.preloadMaterials("https://lego-ldraw-cdn.baconbrix.workers.dev/LDConfig.ldr").then(() => loader);
-  return loaderPromise;
 }
 
 // ---- Geometry pipeline --------------------------------------------------
@@ -399,11 +381,9 @@ function disposeModel(model: LoadedModel) {
 }
 
 async function loadModel(filename: string): Promise<LoadedModel> {
-  const res = await fetch(`/lego/models/${encodeURIComponent(filename)}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${filename}`);
-  const text = await res.text();
+  const text = await fetchModelText(filename);
 
-  const loader = await getLoader();
+  const loader = await getLDrawLoader();
   const raw = await new Promise<THREE.Group>((resolve, reject) => {
     loader.parse(
       text,
@@ -461,14 +441,14 @@ async function loadModel(filename: string): Promise<LoadedModel> {
 
 // ---- React tree ---------------------------------------------------------
 
-export default function BuildView() {
+export default function BuildView({ modelFile }: { modelFile: string }) {
   const [model, setModel] = useState<LoadedModel | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [focusedLayer, setFocusedLayer] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
-    loadModel(MODEL_FILE)
+    loadModel(modelFile)
       .then((m) => {
         if (cancelled) {
           disposeModel(m);
@@ -488,7 +468,7 @@ export default function BuildView() {
         return null;
       });
     };
-  }, []);
+  }, [modelFile]);
 
   return (
     <div

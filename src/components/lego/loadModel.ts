@@ -11,9 +11,11 @@ export interface OptimizedModel {
   brickCount: number;
 }
 
-// Module-scoped so the LDraw parts cache survives across views (splash → article).
+// Module-scoped so the LDraw parts cache survives across views (splash →
+// article → build). Exported so the build view shares the same loader
+// instance — otherwise each route would refetch the parts library.
 let loaderPromise: Promise<LDrawLoader> | null = null;
-function getLoader(): Promise<LDrawLoader> {
+export function getLDrawLoader(): Promise<LDrawLoader> {
   if (loaderPromise) return loaderPromise;
   const loader = new LDrawLoader();
   loader.setPartsLibraryPath("https://lego-ldraw-cdn.baconbrix.workers.dev/");
@@ -21,6 +23,22 @@ function getLoader(): Promise<LDrawLoader> {
   loader.smoothNormals = false;
   loaderPromise = loader.preloadMaterials("https://lego-ldraw-cdn.baconbrix.workers.dev/LDConfig.ldr").then(() => loader);
   return loaderPromise;
+}
+
+// Cache the top-level .ldr file text per filename. The article view fetches
+// it on entry; the build view reuses the cached text instead of round-tripping
+// again. Sub-parts are cached internally by LDrawLoader.
+const modelTextCache = new Map<string, Promise<string>>();
+export function fetchModelText(filename: string): Promise<string> {
+  const hit = modelTextCache.get(filename);
+  if (hit) return hit;
+  const p = fetch(`/lego/models/${encodeURIComponent(filename)}`).then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${filename}`);
+    return res.text();
+  });
+  p.catch(() => modelTextCache.delete(filename));
+  modelTextCache.set(filename, p);
+  return p;
 }
 
 /**
@@ -35,11 +53,9 @@ export async function loadOptimizedModel(
   filename: string,
   targetHeight: number,
 ): Promise<OptimizedModel> {
-  const res = await fetch(`/lego/models/${encodeURIComponent(filename)}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${filename}`);
-  const text = await res.text();
+  const text = await fetchModelText(filename);
 
-  const loader = await getLoader();
+  const loader = await getLDrawLoader();
   const raw = await new Promise<THREE.Group>((resolve, reject) => {
     loader.parse(
       text,
