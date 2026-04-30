@@ -21,7 +21,7 @@ declare module "@react-three/fiber" {
 
 extend(THREE as unknown as Record<string, unknown>);
 
-const DEFAULT_MODEL = "Batman.ldr";
+const DEFAULT_MODEL = "batman.ldr";
 // Build animation tuning (seconds).
 const SWEEP_DURATION = 1.6; // time the build wave takes to climb the model
 const BRICK_DURATION = 0.35; // per-brick fall + fade-in

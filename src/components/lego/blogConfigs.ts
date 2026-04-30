@@ -4,8 +4,8 @@ export type BlogId = "masterChief";
 
 export const BLOG_CONFIGS: Record<BlogId, BlogConfig> = {
   masterChief: {
-    modelFile: "Master Chief Ground.ldr",
-    arHref: "/lego/ar/Master Chief Ground.usdz",
+    modelFile: "master-chief-ground.ldr",
+    arHref: "/lego/ar/master-chief-ground.usdz",
     title: "Master Chief",
     subtitle: "MJOLNIR armour, brick by brick",
     kicker: "Issue 03 · Master Chief",

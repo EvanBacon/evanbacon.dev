@@ -34,10 +34,10 @@ interface CardConfig {
 }
 
 const HERO: CardConfig = {
-  modelFile: "Batman.ldr",
+  modelFile: "batman.ldr",
   title: "Batman",
   subtitle: "A study in shadow & studs",
-  arHref: "/lego/ar/Batman.usdz",
+  arHref: "/lego/ar/batman.usdz",
   target: "batman",
   // Hero card is roughly square (wider than tall), so we pull the camera
   // back enough that the full figure plus headroom fits, with the look
@@ -50,9 +50,9 @@ const HERO: CardConfig = {
 
 const SIDE_CARDS: CardConfig[] = [
   {
-    modelFile: "Captain America.ldr",
+    modelFile: "captain-america.ldr",
     title: "Captain America",
-    arHref: "/lego/ar/Captain America.usdz",
+    arHref: "/lego/ar/captain-america.usdz",
     target: "captainAmerica",
     // Side cards span a range of aspect ratios across breakpoints
     // (landscape on desktop, portrait on phone). Camera is tuned for the
@@ -63,9 +63,9 @@ const SIDE_CARDS: CardConfig[] = [
     parallaxFactor: 0.55,
   },
   {
-    modelFile: "Master Chief Ground.ldr",
+    modelFile: "master-chief-ground.ldr",
     title: "Master Chief",
-    arHref: "/lego/ar/Master Chief Ground.usdz",
+    arHref: "/lego/ar/master-chief-ground.usdz",
     target: "masterChief",
     // Same portrait-friendly framing; aim slightly higher because the
     // ground base steals about a quarter of the model's normalised height.

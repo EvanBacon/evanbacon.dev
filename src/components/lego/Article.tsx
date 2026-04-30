@@ -367,7 +367,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     theme: WHITE_THEME,
     outro: true,
     buildCTA: { label: "Enter the studio" },
-    arHref: "/lego/ar/Batman.usdz",
+    arHref: "/lego/ar/batman.usdz",
   },
 ];
 
@@ -473,13 +473,13 @@ const CAPTAIN_AMERICA_CHAPTERS: ChapterDef[] = [
     theme: WHITE_THEME,
     outro: true,
     buildCTA: { label: "Enter the studio" },
-    arHref: "/lego/ar/Captain America.usdz",
+    arHref: "/lego/ar/captain-america.usdz",
   },
 ];
 
 const ARTICLE_CONTENTS: Record<ArticleId, ArticleContent> = {
   batman: {
-    modelFile: "Batman.ldr",
+    modelFile: "batman.ldr",
     intro: {
       title: "The knight in studs",
       lede: "A study in shadow & studs — how 3,650 bricks become Batman, and why colour is structural.",
@@ -487,7 +487,7 @@ const ARTICLE_CONTENTS: Record<ArticleId, ArticleContent> = {
     chapters: BATMAN_CHAPTERS,
   },
   captainAmerica: {
-    modelFile: "Captain America.ldr",
+    modelFile: "captain-america.ldr",
     intro: {
       title: "The shield-bearer",
       lede: "A four-foot Captain America, built live on the floor of Salt Lake Comic Con — three colours, one star, and a disc that pays the rent on the whole figure.",
