@@ -60,7 +60,13 @@ export function ARButton({
     );
   }
   return (
-    <a className={className} rel="ar" href={href} aria-label={aria}>
+    <a
+      className={className}
+      rel="ar"
+      href={href}
+      aria-label={aria}
+      onClick={(e) => e.stopPropagation()}
+    >
       <img className={posterClass} src={AR_ICON} alt={aria} />
     </a>
   );

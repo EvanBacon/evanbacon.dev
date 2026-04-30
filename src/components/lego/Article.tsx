@@ -350,7 +350,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     modelOffset: [0, 0, -35],
   },
   {
-    heading: "VII. Step into the workshop",
+    heading: "VII. Step into the studio",
     // One short, punchy line — the outro layout shows it as a fixed lede in
     // the top-left, not flowed around the silhouette, so anything longer
     // would crowd the page.
@@ -364,7 +364,7 @@ const BATMAN_CHAPTERS: ChapterDef[] = [
     pose: { azimuth: 0, radius: 19, cameraY: 4.0, targetY: 4.0, pivotX: 0 },
     theme: WHITE_THEME,
     outro: true,
-    buildCTA: { label: "Open the workshop" },
+    buildCTA: { label: "Enter the studio" },
     arHref: "/lego/ar/Batman.usdz",
   },
 ];
@@ -463,14 +463,14 @@ const CAPTAIN_AMERICA_CHAPTERS: ChapterDef[] = [
     modelOffset: [0, 0, -35],
   },
   {
-    heading: "VIII. Step into the workshop",
+    heading: "VIII. Step into the studio",
     paragraphs: [
       "Orbit freely. Scrub the build layer by layer. Or place him in your own room.",
     ],
     pose: { azimuth: 0, radius: 19, cameraY: 4.0, targetY: 4.0, pivotX: 0 },
     theme: WHITE_THEME,
     outro: true,
-    buildCTA: { label: "Open the workshop" },
+    buildCTA: { label: "Enter the studio" },
     arHref: "/lego/ar/Captain America.usdz",
   },
 ];
@@ -1486,7 +1486,7 @@ function ChapterSection({
       >
         <header className="pointer-events-none absolute left-14 top-24 z-[3] max-w-[min(580px,44vw)] max-[720px]:left-5 max-[720px]:right-5 max-[720px]:top-16 max-[720px]:max-w-none">
           <span className="mb-[22px] block font-['JetBrains_Mono',ui-monospace,monospace] text-[10.5px] font-medium uppercase tracking-[0.4em] text-[var(--article-eyebrow,rgba(255,255,255,0.55))] [text-shadow:var(--article-shadow-soft,0_1px_6px_rgba(0,0,0,0.85))] transition-[color,text-shadow] duration-700 ease-out max-[720px]:mb-3.5 max-[720px]:text-[10px] max-[720px]:tracking-[0.3em]">
-            WORKSHOP
+            STUDIO
           </span>
           <h2 className="m-0 mb-[22px] font-['Cinzel',serif] text-[clamp(36px,4.4vw,56px)] font-light leading-[1.04] tracking-[0.04em] text-[var(--article-title,#050505)] [text-shadow:var(--article-shadow-strong,0_4px_24px_rgba(0,0,0,0.9))] transition-[color,text-shadow] duration-700 ease-out max-[720px]:mb-3.5 max-[720px]:text-[clamp(28px,9vw,40px)]">
             {chapter.heading}
@@ -1504,8 +1504,12 @@ function ChapterSection({
           {chapter.buildCTA && buildHref && (
             <Link
               href={buildHref as never}
-              className="group/build inline-flex cursor-pointer items-center gap-3.5 border border-[#050507] bg-[#050507] px-[30px] py-4 font-['JetBrains_Mono',ui-monospace,monospace] text-[11.5px] font-medium uppercase tracking-[0.32em] text-white transition-[background-color,color,border-color,letter-spacing,transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:border-[#f5b400] hover:bg-[#f5b400] hover:tracking-[0.36em] hover:text-[#050507] hover:shadow-[0_8px_28px_rgba(245,180,0,0.35)] max-[720px]:flex-1 max-[720px]:justify-center max-[720px]:gap-2.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[10.5px] max-[720px]:tracking-[0.22em]"
+              className="group/build inline-flex cursor-pointer items-center gap-3 border border-[rgba(5,5,7,0.18)] bg-[rgba(5,5,7,0.04)] px-[22px] py-4 font-['JetBrains_Mono',ui-monospace,monospace] text-[11.5px] font-medium uppercase tracking-[0.32em] text-[#050507] no-underline transition-[background-color,color,border-color,letter-spacing,transform,box-shadow] duration-200 ease-out hover:-translate-y-px hover:border-[#f5b400] hover:bg-[#f5b400] hover:tracking-[0.36em] hover:text-[#050507] hover:shadow-[0_8px_28px_rgba(245,180,0,0.35)] max-[720px]:flex-1 max-[720px]:justify-center max-[720px]:gap-2.5 max-[720px]:px-4 max-[720px]:py-3.5 max-[720px]:text-[10.5px] max-[720px]:tracking-[0.22em]"
             >
+              <span
+                aria-hidden
+                className="inline-block h-[7px] w-[7px] rounded-full bg-[#f5b400] transition-transform duration-200 ease-out group-hover/build:scale-110"
+              />
               <span>{chapter.buildCTA.label}</span>
               <span
                 className="font-['Inter',sans-serif] text-base font-light tracking-normal transition-transform duration-200 ease-out group-hover/build:translate-x-1"
