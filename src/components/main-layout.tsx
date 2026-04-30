@@ -300,6 +300,7 @@ function TabBar() {
           { name: 'index', id: 'index', icon: 'home', scrollToTop: true },
           { name: 'blog/index', id: 'blog/index', icon: 'blog' },
           { name: 'games', id: 'games', icon: 'games', scrollToTop: true },
+          { name: 'lego/index', id: 'lego/index', icon: 'lego', scrollToTop: true },
           // { name: 'https://x.com/baconbrix', id: 'twitter', icon: 'twitter' },
         ].map((tab, i) => (
           <TabBarItem
