@@ -118,8 +118,8 @@ export default function LegoMainRoute() {
               subtitle={HERO.subtitle}
               arHref={HERO.arHref}
               variant="hero"
-              primaryHref={`/lego/${SLUGS[HERO.target]}`}
-              primaryLabel="Explore the build"
+              primaryHref={`/lego/${SLUGS[HERO.target]}/build`}
+              primaryLabel="Open in studio"
               cameraPosition={HERO.cameraPosition}
               cameraFov={HERO.cameraFov}
               lookY={HERO.lookY}
@@ -137,8 +137,8 @@ export default function LegoMainRoute() {
                   title={c.title}
                   arHref={c.arHref}
                   variant="standard"
-                  primaryHref={`/lego/${SLUGS[c.target]}`}
-                  primaryLabel="Read"
+                  primaryHref={`/lego/${SLUGS[c.target]}/build`}
+                  primaryLabel="Open in studio"
                   cameraPosition={c.cameraPosition}
                   cameraFov={c.cameraFov}
                   lookY={c.lookY}
