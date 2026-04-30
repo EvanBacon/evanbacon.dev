@@ -135,6 +135,13 @@ export default function ModelCard({
         arHref={arHref}
         arLabel={`View ${title} in AR`}
       />
+      {primaryHref && (
+        <Link
+          href={primaryHref as never}
+          aria-label={primaryLabel}
+          className="absolute inset-0 z-[1]"
+        />
+      )}
     </div>
   );
 }

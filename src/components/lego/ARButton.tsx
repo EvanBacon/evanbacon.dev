@@ -50,14 +50,7 @@ export function ARButton({
   const aria = label ?? "View in AR";
 
   if (!isIOS) {
-    return (
-      <span
-        className={`${className} ${className}--ios-only`}
-        title="AR Quick Look is iOS-only — open this page on iPhone or iPad to view in AR"
-      >
-        <img className={posterClass} src={AR_ICON} alt="" aria-hidden />
-      </span>
-    );
+    return null;
   }
   if (loading) {
     return (
