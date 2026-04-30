@@ -586,7 +586,7 @@ function InstructionsPanel({
           onFocus(0);
         }}
       >
-        <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-full bg-gradient-to-br from-[#f5b400] to-[#d99a00] pl-px text-[9px] leading-none text-white shadow-[0_1px_2px_rgba(217,154,0,0.4)] max-[720px]:h-[26px] max-[720px]:w-[26px] max-[720px]:text-[10px]">
+        <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-full bg-linear-to-br from-[#b695f3] to-[#8c64dc] pl-px text-[9px] leading-none text-white shadow-[0_1px_2px_rgba(140,100,220,0.4)] max-[720px]:h-[26px] max-[720px]:w-[26px] max-[720px]:text-[10px]">
           ▶
         </span>
         <span>Start build</span>
@@ -598,7 +598,9 @@ function InstructionsPanel({
   const progress = total > 1 ? (clamped / (total - 1)) * 100 : 100;
 
   return (
-    <div className="fixed right-6 top-6 z-10 flex h-[480px] max-h-[calc(100dvh-48px)] w-[280px] flex-col gap-2.5 rounded-[14px] border border-black/[0.06] bg-white/[0.82] p-3.5 font-sans text-[#1a1a1a] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.1)] backdrop-blur-[20px] backdrop-saturate-[180%] antialiased max-[720px]:bottom-[calc(12px+env(safe-area-inset-bottom))] max-[720px]:left-3 max-[720px]:right-3 max-[720px]:top-auto max-[720px]:h-auto max-[720px]:max-h-[60vh] max-[720px]:w-auto max-[720px]:max-w-full max-[720px]:gap-2.5 max-[720px]:rounded-2xl max-[720px]:p-3">
+    <div style={{
+      maxHeight: 300,
+    }} className="fixed right-6 top-6 z-10 flex h-[300px] w-[280px] flex-col gap-2.5 rounded-[14px] border border-black/[0.06] bg-white/[0.82] p-3.5 font-sans text-[#1a1a1a] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.1)] backdrop-blur-[20px] backdrop-saturate-[180%] antialiased max-[720px]:bottom-[calc(12px+env(safe-area-inset-bottom))] max-[720px]:left-3 max-[720px]:right-3 max-[720px]:top-auto max-[720px]:h-auto max-[720px]:max-h-[60vh] max-[720px]:w-auto max-[720px]:max-w-full max-[720px]:gap-2.5 max-[720px]:rounded-2xl max-[720px]:p-3">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-0.5">
           <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#6b6b6b] max-[720px]:text-[11px]">
@@ -738,7 +740,7 @@ function Step({
   const activeBg = isActive
     ? isComplete
       ? "bg-gradient-to-r from-[rgba(31,138,58,0.18)] to-[rgba(31,138,58,0.06)] shadow-[inset_3px_0_0_#1f8a3a]"
-      : "bg-gradient-to-r from-[rgba(245,180,0,0.22)] to-[rgba(245,180,0,0.08)] font-semibold shadow-[inset_3px_0_0_#d99a00] !text-[#4a3500] [&_.step-num]:text-[#6e4f00] [&_.step-count]:text-[#6e4f00]"
+      : "bg-gradient-to-r from-[rgba(182,149,243,0.22)] to-[rgba(182,149,243,0.08)] font-semibold shadow-[inset_3px_0_0_#8c64dc] !text-[#2d1f5c] [&_.step-num]:text-[#4a3573] [&_.step-count]:text-[#4a3573]"
     : "";
   return (
     <button
