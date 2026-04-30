@@ -1,144 +1,67 @@
-// Like <Slot /> from Expo Router but with stored tab history.
-import { CommonActions } from '@react-navigation/native';
-import { TabRouter } from '@react-navigation/routers';
-import { Link, Navigator } from 'expo-router';
-import { Screen as RouterScreen } from 'expo-router/build/views/Screen';
+// A custom slot navigator: a StackRouter under the hood so each navigation
+// pushes a real browser history entry, plus a per-tab pathname stack so
+// clicking a tab restores the last sub-page visited within that tab.
+import { StackRouter } from '@react-navigation/routers';
+import { Link, Navigator, router, usePathname } from 'expo-router';
 import * as React from 'react';
-import { ViewStyle } from 'react-native';
-import { Screen, ScreenContainer } from 'react-native-screens';
 
-import { useLinkBuilder } from './useLinkBuilder';
+const tabHistory = new Map<string, string[]>();
+
+function tabKeyForPath(pathname: string): string {
+  const seg = pathname.split('/').filter(Boolean)[0];
+  return seg ?? '';
+}
+
+function tabKeyForLinkName(linkName: string): string {
+  const base = linkName.replace(/\/index$/, '');
+  return base === 'index' || base === '' ? '' : base.split('/')[0];
+}
+
+function tabRootHref(linkName: string): string {
+  const base = linkName.replace(/\/index$/, '');
+  if (base === 'index' || base === '') return '/';
+  return '/' + base;
+}
+
+function recordPathname(key: string, pathname: string) {
+  const stack = tabHistory.get(key) ?? [];
+  const top = stack[stack.length - 1];
+  if (top === pathname) return;
+  if (stack[stack.length - 2] === pathname) {
+    tabHistory.set(key, stack.slice(0, -1));
+  } else {
+    tabHistory.set(key, [...stack, pathname]);
+  }
+}
 
 export function useTabScrollToTop() {
-  const { navigation, state } = Navigator.useContext();
-
-  React.useEffect(() => {
-    // @ts-expect-error: there may not be a tab navigator in parent
-    navigation?.addListener?.('tabPress', (e: any) => {
-      const isFocused = navigation.isFocused();
-
-      if (state.index === 0 && isFocused) {
-        // Scroll body to top
-        window.scrollTo(0, 0);
-      }
-    });
-  }, [navigation, state.index, state.key]);
+  // No-op: scroll-to-top is handled inline in TabLink.onPress.
 }
 
 function useNavigatorContext() {
-  const context = Navigator.useContext();
-
-  if (process.env.NODE_ENV !== 'production') {
-    if (
-      !(
-        context.router.name === 'TabRouter' ||
-        context.router instanceof TabRouter
-      )
-    ) {
-      throw new Error(
-        'useTabbedSlot must be used inside a Navigator with a tab router: <Navigator route={TabRouter} />'
-      );
-    }
-  }
-
-  return context;
+  return Navigator.useContext();
 }
 
 export function TabbedNavigator(props: React.ComponentProps<typeof Navigator>) {
-  return <Navigator {...props} router={TabRouter} />;
+  return <Navigator {...props} router={StackRouter} />;
 }
 
-export default function TabbedSlot({
-  detachInactiveScreens = true,
-  style,
-}: {
-  detachInactiveScreens?: boolean;
-  style?: ViewStyle;
-}) {
-  const { state, descriptors } = useNavigatorContext();
-  const focusedRouteKey = state.routes[state.index].key;
-  const [loaded, setLoaded] = React.useState([focusedRouteKey]);
-
-  if (!loaded.includes(focusedRouteKey)) {
-    setLoaded([...loaded, focusedRouteKey]);
-  }
-
-  const { routes } = state;
-
-  return (
-    <ScreenContainer
-      enabled={detachInactiveScreens}
-      hasTwoStates
-      style={{ $$css: true }}
-    >
-      {routes.map((route, index) => {
-        const descriptor = descriptors[route.key];
-        const { lazy = true, unmountOnBlur } = descriptor.options;
-        const isFocused = state.index === index;
-
-        if (unmountOnBlur && !isFocused) {
-          return null;
-        }
-
-        if (lazy && !loaded.includes(route.key) && !isFocused) {
-          // Don't render a lazy screen if we've never navigated to it
-          return null;
-        }
-
-        return (
-          <Screen
-            activityState={isFocused ? 2 : 0}
-            key={route.key}
-            style={[
-              {
-                // overflow: 'hidden',
-                zIndex: isFocused ? 0 : -1,
-              },
-              style,
-            ]}
-            accessibilityElementsHidden={!isFocused}
-            importantForAccessibility={
-              isFocused ? 'auto' : 'no-hide-descendants'
-            }
-            enabled={detachInactiveScreens}
-            freezeOnBlur={descriptor.options.freezeOnBlur}
-          >
-            {descriptor.render()}
-          </Screen>
-        );
-      })}
-    </ScreenContainer>
-  );
+export function useIsTabSelected(linkName: string): boolean {
+  const pathname = usePathname();
+  return tabKeyForPath(pathname) === tabKeyForLinkName(linkName);
 }
 
-function useContextRoute(name: string) {
-  const context = Navigator.useContext();
+export default function TabbedSlot() {
+  const { state, descriptors } = Navigator.useContext();
+  const pathname = usePathname();
 
-  const { state, navigation, descriptors } = context;
+  React.useEffect(() => {
+    recordPathname(tabKeyForPath(pathname), pathname);
+  }, [pathname]);
 
-  const current = state.routes.find((route, i) => {
-    return route.name === name;
-  });
-
-  if (!current) {
-    console.warn(
-      `Could not find route with name: ${name}. Options: ${state.routes
-        .map(r => r.name)
-        .join(', ')}`
-    );
-  }
-
-  if (!current) {
-    return null;
-  }
-
-  return {
-    route: current,
-    target: state.key,
-    navigation,
-    state,
-    descriptor: descriptors[current.key],
-  };
+  const focused = state.routes[state.index];
+  const descriptor = descriptors[focused.key];
+  return <>{descriptor.render()}</>;
 }
 
 export function TabLink({
@@ -149,56 +72,32 @@ export function TabLink({
   React.ComponentProps<typeof Link>,
   'href' | 'onPress' | 'onLongPress'
 >) {
-  const buildLink = useLinkBuilder();
+  const pathname = usePathname();
+  const root = tabRootHref(name);
+  const key = tabKeyForLinkName(name);
+  const isCurrent = tabKeyForPath(pathname) === key;
 
-  const ctxRoute = useContextRoute(name);
-
-  if (!ctxRoute) {
-    return null;
-  }
-
-  const { route, target, navigation } = ctxRoute;
-
-  const onPress = e => {
-    const event = navigation.emit({
-      type: 'tabPress',
-      target: route.key,
-      canPreventDefault: true,
-    });
-
-    if (!event.defaultPrevented) {
-      e.preventDefault();
-
-      if (scrollToTop && navigation.isFocused()) {
-        // Scroll body to top
-        window.scrollTo(0, 0);
-      }
-
-      navigation.dispatch({
-        ...CommonActions.navigate({ name: route.name, merge: true }),
-        target,
-      });
+  const onPress = (e: any) => {
+    e.preventDefault();
+    if (scrollToTop && isCurrent) {
+      window.scrollTo(0, 0);
     }
+
+    let target = root;
+    if (isCurrent) {
+      tabHistory.set(key, [root]);
+    } else {
+      const stored = tabHistory.get(key);
+      const last = stored?.[stored.length - 1];
+      if (last && last !== root) target = last;
+    }
+
+    router.navigate(target as any);
   };
 
-  const onLongPress = () => {
-    navigation.emit({
-      type: 'tabLongPress',
-      target: route.key,
-    });
-  };
-
-  return (
-    <Link
-      {...props}
-      href={buildLink(name)}
-      onPress={onPress}
-      onLongPress={onLongPress}
-    />
-  );
+  return <Link {...(props as any)} href={root as any} onPress={onPress} />;
 }
 
 TabbedNavigator.Slot = TabbedSlot;
 TabbedNavigator.Link = TabLink;
-TabbedNavigator.Screen = RouterScreen;
 TabbedNavigator.useContext = useNavigatorContext;

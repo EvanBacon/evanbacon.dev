@@ -3,6 +3,7 @@ import { Icon } from '@/components/top-nav/icon';
 import { makeIcon, TabBarIcon } from '@/components/top-nav/tab-bar-icon';
 import {
   TabbedNavigator,
+  useIsTabSelected,
   useTabScrollToTop,
 } from '@/components/top-nav/tab-slot';
 import { useIsFullScreenRoute, useIsImmersiveRoute } from '@/components/useIsFullScreenRoute';
@@ -101,15 +102,6 @@ function SideBar() {
       </div>
     </div>
   );
-}
-
-function useIsTabSelected(name: string): boolean {
-  const { navigation } = TabbedNavigator.useContext();
-
-  const state = navigation.getState();
-  const current = state.routes.find((route, i) => state.index === i);
-
-  return current?.name === name;
 }
 
 function TabBarItem({
