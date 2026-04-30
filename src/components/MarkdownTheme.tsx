@@ -519,10 +519,10 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
             localStyles.color = '#fff';
             const Logo = BRAND_TO_LOGO[brand];
             return (
-              <div className="p-1 inline bg-[#10141A] border rounded border-[#232731]">
+              <span className="p-1 inline bg-[#10141A] border rounded border-[#232731]">
                 <Logo className="inline w-5 h-5 mt-[-3px]" fill="white" />{' '}
                 <strong style={{ ...style, ...localStyles }}>{children}</strong>
-              </div>
+              </span>
             );
           }
           return <strong style={{ ...style, ...localStyles }}>{children}</strong>;

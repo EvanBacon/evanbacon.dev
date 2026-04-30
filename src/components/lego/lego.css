@@ -286,6 +286,29 @@ body {
   transition: color 0.7s ease, text-shadow 0.7s ease;
 }
 
+/* ---- Workshop wrapper ------------------------------------------- */
+
+/* The workshop canvas sits inside the immersive layout, which leaves the
+   mobile fixed AppHeader and TabBar overlapping the viewport. Pad the
+   wrapper by their heights on narrow screens so the model frames inside
+   the visible region instead of getting clipped. md+ uses the sidebar
+   layout (no overlays), so we drop the padding there. */
+.lego-build-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  background: #ffffff;
+}
+@media (max-width: 767px) {
+  .lego-build-wrap {
+    height: 100dvh;
+    min-height: 0;
+    padding-top: calc(56px + env(safe-area-inset-top));
+    padding-bottom: calc(48px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+  }
+}
+
 /* ---- Workshop slider track + thumb ------------------------------ */
 
 /* Tailwind handles the input's layout (width/height/cursor/etc.); the
