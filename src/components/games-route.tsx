@@ -32,7 +32,12 @@ export default function GamesRoute() {
 
         <br />
 
-        <div className="gap-2 grid grid-cols-1 md:grid-cols-2 grid-rows-4">
+        <div
+          className="gap-2 grid grid-cols-1 md:grid-cols-2"
+          style={{
+            gridTemplateRows: 'repeat(7, minmax(180px, 1fr))',
+          }}
+        >
           {Projects.map((project, index) => {
             return (
               <GridItem
@@ -333,19 +338,18 @@ function GridItem({
       // @ts-expect-error
       href={href}
       target="_blank"
-      className={cn(ratio, 'flex')}
+      className={cn(ratio, 'block h-full')}
     >
       <div
         className={cn(
-          'group flex-1 rounded-2xl overflow-hidden gap-2 bg-[#191A20] border border-[#2e2e2e] flex flex-col',
+          'group h-full min-h-0 rounded-2xl overflow-hidden gap-2 bg-[#191A20] border border-[#2e2e2e] flex flex-col',
           buttonTitle && 'p-2'
         )}
         style={{ borderRadius: '1.5rem' }}
       >
         <div
           className={cn(
-            'relative flex-1',
-            'aspect-video',
+            'relative flex-1 min-h-0',
             'transition-all canhover:grayscale group-hover:grayscale-0 overflow-hidden rounded-2xl'
           )}
         >
@@ -483,7 +487,7 @@ const Projects: (Project & { button?: string })[] = [
   },
 
   {
-    ratio: 'md:col-span-2 md:row-span-1',
+    ratio: 'md:col-span-2 md:row-span-2',
     button: 'Play now',
     image: { uri: '/projects/sunset-cyberspace/preview.avif' },
     video: require('../../public/projects/sunset-cyberspace/demo.mp4'),
