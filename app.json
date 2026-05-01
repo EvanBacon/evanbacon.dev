@@ -48,7 +48,7 @@
         {
           "origin": "",
           "headOrigin": "https://evanbacon.dev",
-          "asyncRoutes": true,
+          "asyncRoutes": false,
           "unstable_useServerDataLoaders": true,
           "unstable_useServerMiddleware": true,
           "redirects": []
