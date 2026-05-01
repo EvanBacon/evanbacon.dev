@@ -573,7 +573,7 @@ function InstructionsPanel({
   if (!expanded) {
     return (
       <button
-        className="lego-launcher fixed right-6 top-6 z-10 inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-black/[0.08] bg-white/85 py-2 pl-2.5 pr-3.5 font-sans text-[12.5px] text-[#222] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-[14px] backdrop-saturate-[180%] antialiased transition-[transform,box-shadow,border-color] duration-150 ease-out hover:-translate-y-px hover:border-black/[0.14] hover:shadow-[0_2px_6px_rgba(0,0,0,0.06),0_12px_32px_rgba(0,0,0,0.1)] [@media(hover:none)]:transform-none [@media(hover:none)]:hover:translate-y-0 max-[720px]:bottom-[calc(64px+env(safe-area-inset-bottom))] max-[720px]:right-4 max-[720px]:top-auto max-[720px]:gap-2.5 max-[720px]:py-2.5 max-[720px]:pl-3 max-[720px]:pr-4 max-[720px]:text-[13px]"
+        className="lego-launcher fixed right-6 top-6 z-10 inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-black/[0.08] bg-white/85 py-2 pl-2.5 pr-3.5 font-sans text-[12.5px] text-[#222] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-[14px] backdrop-saturate-[180%] antialiased transition-[transform,box-shadow,border-color] duration-150 ease-out hover:-translate-y-px hover:border-black/[0.14] hover:shadow-[0_2px_6px_rgba(0,0,0,0.06),0_12px_32px_rgba(0,0,0,0.1)] [@media(hover:none)]:transform-none [@media(hover:none)]:hover:translate-y-0 max-[720px]:gap-2.5 max-[720px]:py-2.5 max-[720px]:pl-3 max-[720px]:pr-4 max-[720px]:text-[13px]"
         onClick={() => {
           setExpanded(true);
           onFocus(0);
@@ -593,7 +593,7 @@ function InstructionsPanel({
   return (
     <div style={{
       maxHeight: 300,
-    }} className="fixed right-6 top-6 z-10 flex h-[300px] w-[280px] flex-col gap-2.5 rounded-[14px] border border-black/[0.06] bg-white/[0.82] p-3.5 font-sans text-[#1a1a1a] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.1)] backdrop-blur-[20px] backdrop-saturate-[180%] antialiased max-[720px]:bottom-[calc(60px+env(safe-area-inset-bottom))] max-[720px]:left-3 max-[720px]:right-3 max-[720px]:top-auto max-[720px]:h-auto max-[720px]:max-h-[60vh] max-[720px]:w-auto max-[720px]:max-w-full max-[720px]:gap-2.5 max-[720px]:rounded-2xl max-[720px]:p-3">
+    }} className="lego-panel fixed right-6 top-6 z-10 flex h-[300px] w-[280px] flex-col gap-2.5 rounded-[14px] border border-black/[0.06] bg-white/[0.82] p-3.5 font-sans text-[#1a1a1a] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_40px_rgba(0,0,0,0.1)] backdrop-blur-[20px] backdrop-saturate-[180%] antialiased max-[720px]:gap-2.5 max-[720px]:rounded-2xl max-[720px]:p-3">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-0.5">
           <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#6b6b6b] max-[720px]:text-[11px]">

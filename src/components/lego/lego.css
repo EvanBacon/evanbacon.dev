@@ -307,6 +307,25 @@ body {
     padding-bottom: calc(48px + env(safe-area-inset-bottom));
     box-sizing: border-box;
   }
+  /* The launcher (collapsed CTA) and panel (expanded instructions) sit in
+     the bottom-right thumb zone on mobile. Anchor them clear of the fixed
+     mobile TabBar (48px + safe-area-inset-bottom) with a 32px breathing
+     gap so the launcher's drop-shadow doesn't bleed into the tab bar. */
+  .lego-launcher {
+    top: auto;
+    right: 16px;
+    bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+  .lego-panel {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    height: auto;
+    max-height: 60vh;
+    width: auto;
+    max-width: 100%;
+  }
 }
 
 /* ---- Workshop slider track + thumb ------------------------------ */
