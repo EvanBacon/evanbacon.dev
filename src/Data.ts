@@ -55,7 +55,7 @@ export const Meta = {
   lego: {
     title: 'Lego',
     description:
-      "Extremely awesome Lego sculptures by World's Youngest Lego Master Builder Evan Bacon!",
+      'Lego sculptures and interactive 3D builds by Evan Bacon.',
     urlPath: 'lego',
     image: OpenGraphImages.lego,
   },

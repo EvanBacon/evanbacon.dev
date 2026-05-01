@@ -67,8 +67,13 @@ function CustomHead() {
   const pathname = usePathname();
 
   const currentPath = ensureSlash(pathname || '', false) || 'home';
+  const metaKey = currentPath in Meta
+    ? currentPath
+    : currentPath.split('/')[0] in Meta
+    ? currentPath.split('/')[0]
+    : null;
   const { image = {}, title = site.title, description = site.description } =
-    Meta[currentPath] || Meta.brand;
+    (metaKey && Meta[metaKey]) || Meta.brand;
 
   const injectMeta = [
     {
