@@ -219,7 +219,7 @@ export default function ResponsiveNavigator() {
 
         <div
           className={classNames(
-            'flex flex-1 flex-col overflow-x-hidden',
+            'flex flex-1 flex-col overflow-x-hidden isolate',
             isImmersive
               ? 'mt-0 px-0 mx-0 max-w-full'
               : isFullScreen
@@ -287,7 +287,10 @@ function TabBar() {
     <div className="flex md:hidden">
       <div className="h-12 pb-safe" />
 
-      <div className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch min-h-12 px-4 pb-safe">
+      <div
+        style={{ zIndex: 1000 }}
+        className="fixed bottom-0 left-0 right-0 flex flex-1 flex-row border-t border-t-[#30363d] bg-black justify-around items-stretch min-h-12 px-4 pb-safe"
+      >
         {[
           { name: 'index', id: 'index', icon: 'home', scrollToTop: true },
           { name: 'blog/index', id: 'blog/index', icon: 'blog' },

@@ -100,7 +100,7 @@ export default function ModelCard({
             }
           : undefined
       }
-      className={`model-card model-card--${variant} group relative h-full overflow-hidden rounded-[22px] border border-white/[0.07] bg-[radial-gradient(ellipse_80%_60%_at_50%_110%,rgba(80,70,90,0.55)_0%,rgba(0,0,0,1)_60%),radial-gradient(ellipse_100%_80%_at_50%_0%,rgba(40,50,80,0.3)_0%,rgba(0,0,0,1)_65%),#050507] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_30px_80px_rgba(0,0,0,0.6)] transition-[transform,box-shadow,border-color] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-white/[0.12] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_36px_96px_rgba(0,0,0,0.72)] ${primaryHref ? "cursor-pointer" : ""}`}
+      className={`model-card model-card--${variant} group relative h-full overflow-hidden rounded-[22px] border border-white/[0.07] bg-[radial-gradient(ellipse_80%_60%_at_50%_110%,rgba(80,70,90,0.55)_0%,rgba(0,0,0,1)_60%),radial-gradient(ellipse_100%_80%_at_50%_0%,rgba(40,50,80,0.3)_0%,rgba(0,0,0,1)_65%),#050507] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_30px_80px_rgba(0,0,0,0.6)] transition-[box-shadow,border-color] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-white/[0.12] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_36px_96px_rgba(0,0,0,0.72)] ${primaryHref ? "cursor-pointer" : ""}`}
     >
       <div className="model-card__canvas absolute inset-0 z-0 [&_canvas]:animate-splash-fade [&_canvas]:opacity-0">
         <Canvas

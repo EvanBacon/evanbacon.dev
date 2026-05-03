@@ -106,7 +106,7 @@ export default function LegoMainRoute() {
   return (
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_100%_60%_at_50%_110%,rgba(80,70,90,0.45)_0%,rgba(0,0,0,1)_70%),radial-gradient(ellipse_100%_80%_at_50%_0%,rgba(40,50,80,0.28)_0%,rgba(0,0,0,1)_70%),#050507] text-white">
       <div ref={stageRef} className="relative">
-        <div className="sticky top-0 box-border flex h-screen flex-col p-7 max-[900px]:relative max-[900px]:top-auto max-[900px]:h-auto max-[900px]:p-[16px_16px_20px] max-[560px]:p-[12px_12px_16px]">
+        <div className="sticky top-0 box-border flex h-screen flex-col p-7 max-[900px]:relative max-[900px]:top-auto max-[900px]:h-auto max-[900px]:p-[16px_16px_calc(20px+56px+env(safe-area-inset-bottom))] max-[560px]:p-[12px_12px_calc(16px+56px+env(safe-area-inset-bottom))]">
           <div className="px-0 pb-4 max-[900px]:px-2 max-[560px]:px-1 max-[900px]:pt-2">
             <PageHeader>Lego</PageHeader>
           </div>
