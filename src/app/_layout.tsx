@@ -12,6 +12,88 @@ import Colors from '@/constants/Colors';
 import { Meta } from '@/Data';
 import { loadAsync } from '@/components/useFont';
 import { HapticTab } from '@/components/HapticTab';
+import { LD_EVAN_BACON } from '@/data/structured';
+
+const blogCtx = require.context('../../blog', true, /\.(js)$/);
+
+type BlogPostInfo = {
+  tags: string[];
+  date: string;
+  title: string;
+  subtitle: string;
+  slug: string;
+  featuredImage: number;
+  // Stable, crawler-friendly JPEG/PNG path under /public (e.g. /og/blog-expo.jpg).
+  // Social scrapers reject AVIF/SVG, so OG images must be a raster JPEG/PNG.
+  ogImage?: string;
+};
+
+// Generic OG image for posts without a dedicated one. Already committed and live
+// on evanbacon.dev, so it validates immediately.
+const DEFAULT_BLOG_OG_IMAGE = '/og/talks.jpg';
+
+function BlogPostHead({
+  slug,
+  themeColor,
+}: {
+  slug: string;
+  themeColor: string;
+}) {
+  const key = blogCtx.keys().find(p => p === './' + slug + '/index.js');
+  if (!key) {
+    return null;
+  }
+
+  const info = blogCtx(key) as BlogPostInfo;
+  const imgUrl = `https://evanbacon.dev${info.ogImage ?? DEFAULT_BLOG_OG_IMAGE}`;
+  const url = `https://evanbacon.dev/blog/${slug}`;
+  const siteTitle = `${info.title} | ${site.title}`;
+
+  return (
+    <Head>
+      <title>{siteTitle}</title>
+      <meta name="description" content={info.subtitle} />
+      <meta name="keywords" content={info.tags.join(',')} />
+
+      <meta property="og:image:secure_url" content={imgUrl} />
+      <meta property="og:image" content={imgUrl} />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:alt" content={info.subtitle} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={info.title} />
+      <meta property="og:description" content={info.subtitle} />
+      <meta property="og:site_name" content="Evan Bacon" />
+      <meta property="og:url" content={url} />
+      <meta property="og:published_time" content={info.date} />
+
+      <meta property="twitter:url" content={url} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:creator" content={site.author} />
+      <meta name="twitter:title" content={info.title} />
+      <meta name="twitter:description" content={info.subtitle} />
+      <meta name="twitter:image" content={imgUrl} />
+
+      <meta name="theme-color" content={themeColor} />
+      <meta name="msapplication-TileColor" content={themeColor} />
+
+      <script id="ld+article" type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: info.title,
+          preview: info.subtitle,
+          slug: info.slug,
+          url,
+          status: 'Published',
+          image: [imgUrl],
+          datePublished: info.date,
+          dateModified: info.date,
+          author: [LD_EVAN_BACON],
+        })}
+      </script>
+    </Head>
+  );
+}
 
 import * as QuickActions from 'expo-quick-actions';
 import { RouterAction } from 'expo-quick-actions/router';
@@ -67,6 +149,16 @@ function CustomHead() {
   const pathname = usePathname();
 
   const currentPath = ensureSlash(pathname || '', false) || 'home';
+
+  // Blog post detail routes (/blog/<slug>) need per-post article meta. The
+  // page-level <Head> in [post].tsx isn't captured during static export (loader
+  // + DOM-component route), so emit the post's meta from here instead — this is
+  // the only <Head> that reliably serializes into the static HTML.
+  const blogPostMatch = currentPath.match(/^blog\/(.+)$/);
+  if (blogPostMatch) {
+    return <BlogPostHead slug={blogPostMatch[1]} themeColor={themeColor} />;
+  }
+
   const metaKey = currentPath in Meta
     ? currentPath
     : currentPath.split('/')[0] in Meta
@@ -153,6 +245,14 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import BlurTabBarBackground from '@/components/ui/TabBarBackground.ios';
 
 import * as AppleColors from '@bacons/apple-colors';
+
+
+export function SuspenseFallback() {
+  return (
+    <div className='flex flex-1'/>
+  );
+}
+
 
 export default function App() {
   loadAsync({

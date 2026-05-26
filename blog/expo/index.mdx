@@ -1,0 +1,146 @@
+import { PhotoGalleryProvider, Photo, PhotoGrid, Snapshot } from '@/components/photo-gallery';
+
+<Title date="2026-05-30T00:00:00.000Z">Things I Learned While Building Expo</Title>
+
+<PhotoGalleryProvider>
+
+I just finished my last week at Expo. For the past nine years, this project has been the center of my life.
+
+I discovered the early Exponent app when I was a teenager. I started building everything I could think of, from small apps to [games](https://x.com/Baconbrix/status/872141071949721600?s=20). Getting to actually join the team at 19 felt unreal. The thing I'd been obsessed with became the thing I got to work on all through my twenties.
+
+<PhotoGrid>
+  <Photo src={require('./images/expo_team.avif')} caption="The Expo team." />
+  <Photo src={require('./images/evan_starts_at_expo_austin_airport.avif')} caption="Leaving Austin to build Expo, 2017." />
+  <Photo src={require('./images/dev_tools_poland.avif')} caption="Expo Dev Tools team at App.js." />
+  <Photo src={require('./images/eas_hosting_hacker_house.avif')} caption="Building EAS Hosting in Milton Keynes." />
+  <Photo src={require('./images/charlie_bacon_mirmir.avif')} caption="Kardashian app with Charlie Cheever." />
+</PhotoGrid>
+
+
+It's been amazing to watch how much Expo has grown, and I want to thank the community for the support you've given us over the years.
+
+When I started, Expo did about 25,000 downloads a week on npm. People were building prototypes, games, and weekend side projects. Lots of them were first tries and hackathon demos.
+
+Fast-forward to today: Expo is at 5.6 million weekly downloads. We went from no business model to cash-flow positive with a [$45M Series B](https://expo.dev/blog/what-expo-s-series-b-funding-means-for-you). The open source under it powers [thousands](https://evanbacon.dev/blog/expo-apps) of the top apps on both app stores. Expo Go lives in the top 10 with 4.8 stars. The promise we kept is the one we started with: all you need to build an app is a great idea.
+
+It was the hardest, most rewarding project I've ever been a part of. I came in as a young engineer and left as a leader, recruiter, and — perhaps most importantly — professional yapper. I've learned a lot over the years, and I'd like to share some of it with you.
+
+
+## 1. Be your product's biggest fan
+
+When I discovered Exponent, I couldn't put it down. I built everything I could think of, and I never really stopped. I'm still doing it [today](https://x.com/Baconbrix/status/2057913722371547163?s=20). That obsession turned out to be the most useful thing I brought to the job, because if you use your own product constantly, you feel every rough edge before anyone has to report it.
+
+It sounds obvious, but you can always dogfood more. And the real signal is noticing when you _don't_ use it, then asking why. Every time I caught myself avoiding my own tools, there was a list of subtle problems hiding underneath.
+
+With Expo, that bottleneck kept moving.
+
+First it was how long it took to create a project, so we made that [instant](https://x.com/Baconbrix/status/1535256641205149696?s=20). Then it was too many questions during setup. Then scaffolding the basics, then deploying to the store, and now it's build times. Every time you fix one, you have to zoom back out and feel the whole process again, because the next papercut is always waiting.
+
+A lot of that friction hides in decisions the tools force you to make too early. The best lever I found was turning "irreversible" decisions into [Type 2 decisions](https://fs.blog/reversible-irreversible-decisions/).
+
+An example is when we rethought the iOS bundle identifier: Xcode makes you choose it up front, before you know anything about the project, and warns you it can never be changed. That made sense when deployment took days or weeks. But most "irreversible" decisions are really just a measure of how long something takes to undo, so we made creating and recreating an app nearly instant. Don't like a choice? Just redo it in seconds.
+
+To the average user, that's one or two fewer inputs. But I'd made thousands of projects, and every repetitive prompt was nails on a chalkboard. It's hard for a quick copy to really capture all the finer points without relentlessly stressing the details.
+
+<PhotoGrid>
+  <Photo src={require('./images/DSC03811.avif')} caption="Early Expo Router at App.js." />
+  <Photo src={require('./images/nyt.avif')} caption="On-call in Times Square." />
+  <Photo src={require('./images/sleepy.avif')} caption="Asleep at the keyboard." />
+  <Photo src={require('./images/charlie_bacon_vegas_npm.avif')} caption="Dogfooding in Vegas." />
+  <Photo src={require('./images/bacon_avp.avif')} caption="Apple Vision Pro with Cedric and Aman." />
+</PhotoGrid>
+
+## 2. Listen beyond the request
+
+People are usually right about what's bothering them, but rarely articulate exactly how to fix it.
+
+For a long time, Expo gave everyone the same fixed runtime. The more I used it for real projects, the more I hit the same wall: I couldn't add my own native code, and every feature we shipped got forced into every app, even the ones that didn't want it. So we sat on this huge backlog of "please add this library" requests. Adding one would make a handful of people happy but quietly tax everyone else. The advice going around was "don't use Exponent, you'll outgrow it eventually," and honestly they weren't wrong. The backlog was so scary I dressed as it for Halloween one year.
+
+Initially, we kept saying yes to more libraries, more requests. It took us a while to see that everyone was asking for the same thing ("add more!"), but what they actually wanted was a runtime that was _theirs_, not ours. So we stopped growing the fixed runtime and made it generate itself per project, from whatever you happened to install. It took months, but once it shipped, most of the backlog just disappeared. People could build exactly what they needed without asking us first.
+
+It's tempting to treat every request as a to-do and just grind through the list (now more than ever), but saying yes to everyone is its own kind of trap. Sometimes you have to step back from what people are asking for and solve what they actually need.
+
+<PhotoGrid>
+  <Photo src={require('./images/foot_race.avif')} caption="Team footrace." />
+  <Photo src={require('./images/IMG_5832_Original.avif')} caption="Dressed as the endless backlog for Halloween." />
+  <Photo src={require('./images/bacon_sleeping.avif')} caption="Jetlagged in Poland." />
+</PhotoGrid>
+
+## 3. Build developer trust
+
+When things get hard, you can feel like you have to throw everything out and start over. Software makes that easy, and agents make it nearly automatic.
+
+But writing the code is rarely the hard part. The hard part is getting people to believe you'll still be here next year.
+
+We have a saying on the office wall: **Build Developer Trust**. Developers are the hardest people in the world to win over; they're used to fixing things themselves, so trusting someone else's tool to do it is a big ask.
+
+The only thing that ever worked was being honest, building in the open, and showing up again the next day. Then repeat, over time.
+
+That's hardest when people are upset with you. The old system ("expo eject") rubbed a lot of people the wrong way, and they told me about it everywhere they could. My girlfriend even brought it up on our first date. Starting over would have been the easy way out.
+
+But we could see what Expo was going to become, basically what it is today, and we kept reminding ourselves that people were frustrated with the work, not with us. I watched this video about [No Man's Sky](https://youtube.com/watch?v=O5BJVO3PDeQ) (more times than I'd like to admit): it had a rough launch, then years of quiet fixes, until one day it became everything they'd promised and more.
+
+So we just kept going, one release at a time. A competitor can copy what you built, but no one can copy years of not letting people down. That only really happens if you stay a little longer than feels reasonable, every single time.
+
+<PhotoGrid>
+  <Photo src={require('./images/brent_kudo.avif')} caption="Brent and Kudo." />
+  <Photo src={require('./images/build_developer_trust.avif')} aspect="square" caption="Expo's motto." />
+  <Photo src={require('./images/nando_stage.avif')} caption="Fernando Rojo at App.js." />
+</PhotoGrid>
+
+## 4. Sometimes all you're missing is the right data
+
+On the web you can see if someone uses your tools with a couple of keystrokes. On mobile your guess is as good as anyone else's. For years I only knew someone shipped Expo in production if they told me, which left me relying on vibes. Fun, but the uncertainty ate at me, especially when I'd see some app blow up online.
+
+So one night I put together [a system](https://evanbacon.dev/blog/expo-apps) to figure out what the most popular apps were actually built with. It read the trending charts in real time, country by country, and detected the framework behind each app. Instead of measuring the top apps against a million obscure ones, we finally had real numbers.
+
+Two things surprised me: 1) our reach was way bigger than we'd assumed, and 2) the features doing most of the lifting were the "boring" ones nobody posts about, not the flashy ones we spent the most time talking about.
+
+But the most useful part was seeing where we _weren't_ getting traction. Once we knew which categories were working and which weren't, we knew exactly what to build.
+
+It settled arguments too! We'd held off on shipping certain defaults for years, worried they'd bloat everyone's app again — until the data showed people were already pulling in three or four (larger) libraries to do the same thing. No more stalemates.
+
+<PhotoGrid>
+  <Photo src={require('./images/react_conf_agent_demo.avif')} caption="Expo Agent at React Conf." />
+  <Photo src={require('./images/apps_react_conf.webp')} caption="Apps built with Expo, React Conf." />                                             
+  <Photo src={require('./images/IMG_3447.avif')} caption="Anthony Fu and Evan You on a boat." />
+  <Photo src={require('./images/AS_GitNation_Amsterdam_React_20240614_0989.avif')} caption="Accepting an award at React Summit, Amsterdam 2024." />
+  <Photo src={require('./images/frisbee.avif')} caption="Ultimate with Charlie and Eli White." />
+</PhotoGrid>
+
+## 5. Attention is all you have
+
+At some point I had enough ~~plates spinning~~ projects working that the only way to meaningfully scale was to build a great team. You hear "hire slow, fire fast" and "hell yes or no," but those are pretty hard to apply in practice.
+
+What worked for me was simpler: work as hard as I possibly could on the most complicated problems, all the time. Recruiting great people tended to be downstream of that. Hard problems make for exciting work, exciting work results in good content, good content attracts the best people, and together we can go after harder problems. Thus repeating the viciously productive cycle.
+
+It's not especially easy to do, but I found solace in knowing that most of the time it worked every time. What doesn't work is separating concerns. If you don't build, you won't be as good at presenting/selling/marketing. If you don't put yourself out there, great people won't want to work with you.
+
+Last part, which is admittedly the weirdest: a digital persona only gets you a list of great candidates. You still have to interview them. I've written some of my best code while dangerously dehydrated, but this translates poorly to anything interpersonal. Recruiting gets exponentially better when you're at your best. Specifically, when you're at your healthiest: sunshine, hydration, lifting heavy objects. My best recruiting has been proportional to my health. Ultimately, my happiest moments to date have been building a great team.
+
+Remember, attention is finite — every teammate spends some of it, so make sure the cost is always worth it.
+
+<PhotoGrid>
+  <Photo src={require('./images/jay_dev_tools.avif')} caption="Jay, Cedric, and Phil." />
+  <Photo src={require('./images/salt_mines_poland.avif')} caption="Polish Salt mine with the Meta team." />
+  <Photo src={require('./images/seth_bacon.avif')} caption="Seth Webster." />
+</PhotoGrid>
+
+## What's next?
+
+When I started down this path, building an app was slow and painful. This morning I built one for my Meta Ray-Bans from my phone, while watching the sunrise.
+
+Expo's moving really fast right now. [SDK 56](https://expo.dev/changelog/sdk-56) just shipped and it's faster everywhere. Seeing how close it's getting to apps that mostly build themselves makes me second-guess leaving, because it all just looks really fun.
+
+I've spent my life trying to build things that inspire and excite people. First with Legos, and then with mobile apps. Perhaps for my next act, I'll reach further than whatever's in my pockets.
+
+If you're working on something you're excited about, reach out and tell me about it. Thanks for reading!
+
+<PhotoGrid>
+  <Photo src={require('./images/meta_poland.avif')} caption="Nowy Kraftowy." />
+  <Photo src={require('./images/bacon_lydia_appjs.avif')} caption="Lydia Hallie in Utrecht." />
+  <Photo src={require('./images/vincent_eric_james.avif')} caption="Vincent, Eric, and James." />
+  <Photo src={require('./images/2B9D64C4-38EE-4557-A09A-0A98A64DE0B1.avif')} caption="Naomi and Collin at Quin's." />
+  <Photo src={require('./images/bacon_cheever.avif')} caption="Charlie × Bacon." />
+</PhotoGrid>
+</PhotoGalleryProvider>

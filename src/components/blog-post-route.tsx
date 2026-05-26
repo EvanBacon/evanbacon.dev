@@ -1,7 +1,7 @@
 'use dom';
 import { MarkdownTheme } from '@/components/MarkdownTheme';
 import CenterInFull from '@/components/center-in-full';
-import Thanks from '@/components/thanks.mdx';
+// import Thanks from '@/components/thanks.mdx';
 import classNames from 'classnames';
 import React from 'react';
 import { ScrollView, Text } from 'react-native';
@@ -76,13 +76,13 @@ export default function Page({
         <MarkdownTheme>
           <MarkdownComponent />
 
-          {isFullScreen ? (
+          {/* {isFullScreen ? (
             <CenterInFull>
               <Thanks />
             </CenterInFull>
           ) : (
             <Thanks />
-          )}
+          )} */}
         </MarkdownTheme>
       </div>
     </ScrollView>

@@ -228,7 +228,7 @@ export default function ResponsiveNavigator() {
           )}
         >
           <InnerSlot />
-          {!isImmersive && <CustomFooter />}
+          {/* {!isImmersive && <CustomFooter />} */}
         </div>
 
         <TabBar />

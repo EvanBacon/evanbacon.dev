@@ -1,0 +1,11 @@
+{
+  "title": "Farewell Expo",
+  "shortTitle": "Farewell Expo",
+  "subtitle": "Lessons I learned from 9 years building Expo.",
+  "author": "Evan Bacon",
+  "date": "2026-05-30T00:00:00.000Z",
+  "slug": "expo",
+  "tags": ["expo", "personal", "career"],
+  "featuredImage": "./images/bacon_stage.avif",
+  "ogImage": "/og/blog-expo.jpg"
+}
