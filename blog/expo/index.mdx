@@ -36,11 +36,11 @@ With Expo, that bottleneck kept moving.
 
 First it was how long it took to create a project, so we made that [instant](https://x.com/Baconbrix/status/1535256641205149696?s=20). Then it was too many questions during setup. Then scaffolding the basics, then deploying to the store, and now it's build times. Every time you fix one, you have to zoom back out and feel the whole process again, because the next papercut is always waiting.
 
-A lot of that friction hides in decisions the tools force you to make too early. The best lever I found was turning "irreversible" decisions into [Type 2 decisions](https://fs.blog/reversible-irreversible-decisions/).
+A lot of friction hides in decisions the tools force you to make too early. The best lever I found was turning "irreversible" decisions into [Type 2 decisions](https://fs.blog/reversible-irreversible-decisions/).
 
-An example is when we rethought the iOS bundle identifier: Xcode makes you choose it up front, before you know anything about the project, and warns you it can never be changed. That made sense when deployment took days or weeks. But most "irreversible" decisions are really just a measure of how long something takes to undo, so we made creating and recreating an app nearly instant. Don't like a choice? Just redo it in seconds.
+An example is when we rethought the iOS bundle identifier: Xcode makes you choose it up front, before you know anything about the project, and warns you it can never be changed. Extra caution made sense when deployment took days or weeks. But most "irreversible" decisions are really just reversible decisions that take an inconveniently long time to undo, so we made creating new apps nearly instant. Don't like a choice? Just make a new one in seconds.
 
-To the average user, that's one or two fewer inputs. But I'd made thousands of projects, and every repetitive prompt was nails on a chalkboard. It's hard for a quick copy to really capture all the finer points without relentlessly stressing the details.
+To the average user, that's one or two fewer inputs. But I'd made thousands of projects, and every repetitive prompt was nails on a chalkboard. Stressing the details is the best way to build a durable product.
 
 <PhotoGrid>
   <Photo src={require('./images/DSC03811.avif')} caption="Early Expo Router at App.js." />
