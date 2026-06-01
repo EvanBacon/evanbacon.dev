@@ -35,7 +35,7 @@ export const Meta = {
   },
   blog: {
     title: 'Blog',
-    description: 'Writing and releases by Evan Bacon',
+    description: 'Writing by Evan Bacon',
     urlPath: 'blog',
     image: OpenGraphImages.talks,
   },

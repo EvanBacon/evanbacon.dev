@@ -44,6 +44,8 @@ export async function loader(
 
 export default function App() {
   const { posts } = useLoaderData<typeof loader>();
+  
+
   const paddingBottom = useBottomTabOverflow();
 
   if (process.env.EXPO_OS === 'web') {
