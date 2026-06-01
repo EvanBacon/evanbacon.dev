@@ -45,7 +45,6 @@ export async function loader(
 export default function App() {
   const { posts } = useLoaderData<typeof loader>();
   
-
   const paddingBottom = useBottomTabOverflow();
 
   if (process.env.EXPO_OS === 'web') {
@@ -149,7 +148,7 @@ function LineItemNative({ title, description, value, href }: DataType) {
 
 function LineItem({ title, description, value, href }: DataType) {
   return (
-    <Link href={href}>
+    <Link href={href} prefetch>
       <div className="text-default text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out">
         <span className="inline">
           <b>

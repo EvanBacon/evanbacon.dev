@@ -49,7 +49,7 @@ function SideBar() {
     <div className="w-mdrail xl:w-[244px] mr-safe">
       <div
         style={{ zIndex: 50 }}
-        className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-[#30363d]"
+        className="xl:w-[244px] fixed h-full items-stretch flex min-w-20 pt-2 px-3 pb-5 bg-black border-r border-r-slate-800/50"
       >
         <div className="items-stretch flex pl-safe xl:items-start">
           <div className="z-[3] flex flex-1 flex-col h-full justify-between items-center xl:items-stretch">

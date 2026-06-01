@@ -67,12 +67,12 @@ function MasonryPhotoGrid({ images }: { images: [string, string][] }) {
           key={index}
           className={cn(
             'relative h-40 rounded-lg overflow-hidden bg-[#00000042]',
-            'hover:scale-105 transition-all duration-500 ease-in-out',
+            'bg-slate-800/20 transition-all duration-500 ease-in-out',
             index === 1 ? 'h-full row-span-2' : 'h-40'
           )}
         >
           <div
-            className="opacity-0 animate-kennyburns"
+            className="opacity-0 animate-kennyburns "
             style={{
               position: 'absolute',
               top: 0,

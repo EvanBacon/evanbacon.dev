@@ -17,7 +17,7 @@ export default function HomeRoute({
   return (
     <div
       className={classNames(
-        'flex flex-1 flex-col gap-4 overflow-x-hidden',
+        'flex flex-1 flex-col gap-4',
         IS_DOM && 'px-2'
       )}
       style={{ paddingBottom }}
