@@ -1,7 +1,20 @@
 import classNames from 'classnames';
 import { IS_DOM } from 'expo/dom';
 import React from 'react';
-import { Animated, Easing } from 'react-native';
+
+export type TextScrambleProps = {
+  children: string;
+  duration?: number;
+  speed?: number;
+  characterSet?: string;
+  as?: React.ElementType;
+  className?: string;
+  trigger?: boolean;
+  onScrambleComplete?: () => void;
+} & Omit<React.HTMLAttributes<HTMLElement>, 'children'>;
+
+const defaultChars =
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 export default function PageHeader({
   children,
@@ -12,55 +25,112 @@ export default function PageHeader({
 }) {
   if (IS_DOM || process.env.EXPO_OS !== 'web') return null;
 
-  const text = useGlitchText(children);
-
   return (
-    <h1
+    <TextScramble
+      as="h1"
+      duration={0.8}
+      speed={0.04}
       className={classNames(
         'text-5xl min-h-[3rem] font-bold my-3 mx-2 md:mx-0 text-slate-50',
         className
       )}
     >
-      {text}
-    </h1>
+      {children}
+    </TextScramble>
   );
 }
 
-function useGlitchText(children: string) {
-  const [text, setText] = React.useState('  ');
+export function TextScramble({
+  children,
+  duration = 0.8,
+  speed = 0.04,
+  characterSet = defaultChars,
+  className,
+  as: Component = 'p',
+  trigger = true,
+  onScrambleComplete,
+  ...props
+}: TextScrambleProps) {
+  const displayText = useScrambledText({
+    text: children,
+    duration,
+    speed,
+    characterSet,
+    trigger,
+    onScrambleComplete,
+  });
 
-  const animated = React.useRef(new Animated.Value(0)).current;
+  return React.createElement(
+    Component,
+    { className, ...props },
+    displayText
+  );
+}
+
+function useScrambledText({
+  text,
+  duration,
+  speed,
+  characterSet,
+  trigger,
+  onScrambleComplete,
+}: {
+  text: string;
+  duration: number;
+  speed: number;
+  characterSet: string;
+  trigger: boolean;
+  onScrambleComplete?: () => void;
+}) {
+  const [scrambledText, setScrambledText] = React.useState<string | null>(null);
+  const isAnimating = React.useRef(false);
+  const onScrambleCompleteRef = React.useRef(onScrambleComplete);
 
   React.useEffect(() => {
-    if (animated._value === 1) return;
-    const arr1 = children.split('');
-    const arr2 = [];
-    arr1.forEach((char, i) => (arr2[i] = randChar())); //fill arr2 with random characters
+    onScrambleCompleteRef.current = onScrambleComplete;
+  }, [onScrambleComplete]);
 
+  React.useEffect(() => {
+    if (!trigger || isAnimating.current) return;
+
+    isAnimating.current = true;
+    const steps = Math.max(1, duration / speed);
     let step = 0;
 
-    animated.addListener(({ value }) => {
-      const p = Math.floor(value * arr1.length);
-      if (step != p) {
-        step = p;
-        arr1.forEach((char, i) => (arr2[i] = randChar()));
-        const pt1 = arr1.join('').substring(p, 0);
-        const pt2 = arr2.join('').substring(arr2.length - p, 0);
-        setText(pt1 + pt2);
+    const interval = setInterval(() => {
+      let scrambled = '';
+      const progress = step / steps;
+
+      for (let i = 0; i < text.length; i++) {
+        if (text[i] === ' ') {
+          scrambled += ' ';
+        } else if (progress * text.length > i) {
+          scrambled += text[i];
+        } else {
+          scrambled +=
+            characterSet[Math.floor(Math.random() * characterSet.length)];
+        }
       }
-    });
 
-    Animated.timing(animated, {
-      toValue: 1.1,
-      duration: 200 * arr1.length,
-      // Power4: Easing.ease,
-      easing: Easing.inOut(Easing.exp),
-      useNativeDriver: false,
-      delay: 100,
-    }).start();
-  }, [children]);
+      setScrambledText(scrambled);
+      step++;
 
-  return text;
+      if (step > steps) {
+        clearInterval(interval);
+        setScrambledText(null);
+        isAnimating.current = false;
+        onScrambleCompleteRef.current?.();
+      }
+    }, speed * 1000);
+
+    return () => {
+      clearInterval(interval);
+      setScrambledText(null);
+      isAnimating.current = false;
+    };
+  }, [characterSet, duration, speed, text, trigger]);
+
+  return scrambledText ?? text;
 }
 
 export function GlitchText({
@@ -70,16 +140,7 @@ export function GlitchText({
   children: string;
   className?: string;
 }) {
-  const text = useGlitchText(children);
-
-  return <p className={classNames(className)}>{text}</p>;
-}
-
-function randChar() {
-  // let c = 'x';
-  let c = 'abcdefghijklmnopqrstuvwxyz';
-  // let c = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$^&*()…æ_+-=;[]/~`';
-  c = c[Math.floor(Math.random() * c.length)];
-  return c;
-  // return Math.random() > 0.5 ? c : c.toUpperCase();
+  return (
+    <TextScramble className={classNames(className)}>{children}</TextScramble>
+  );
 }

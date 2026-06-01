@@ -1,11 +1,16 @@
 import HeaderPhoto from '@/components/HeaderPhoto';
+import { TextScramble } from '@/components/PageHeader';
 import Colors from '@/constants/Colors';
 import { Link, usePathname } from 'expo-router';
 import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { useREM } from 'react-native-web-hooks';
 
-const TABS = [
+const TABS: {
+  title: string;
+  url: string;
+  target?: string;
+}[] = [
   {
     title: 'Home',
     url: '/',
@@ -58,7 +63,11 @@ const CustomHeader = ({ siteTitle }) => {
                 href="/"
                 className="text-2xl md:text-3xl font-bold text-white border-b border-b-transparent duration-200"
               >
-                {siteTitle}
+                {Platform.OS === 'web' ? (
+                  <TextScramble as="span">{siteTitle}</TextScramble>
+                ) : (
+                  siteTitle
+                )}
               </Link>
             </div>
           </div>
@@ -127,13 +136,13 @@ const styles = StyleSheet.create({
   }),
   headerLink: {
     fontWeight: 'bold',
-    fontSize: useREM(1),
+    fontSize: useREM(1) as number,
   },
   innerContainer: {
     maxWidth: 720,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: useREM(1.45),
+    paddingVertical: useREM(1.45) as number,
     flex: 1,
   },
   innerContainerLarge: {
