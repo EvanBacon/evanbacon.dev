@@ -12,6 +12,7 @@ type DataType = {
   value: string;
   date: string;
   href: string;
+  external?: boolean;
 };
 
 const mdxctx = require.context('../../../../blog', true, /\.(mdx|js)$/);
@@ -26,7 +27,7 @@ export async function loader(
     .map(key => mdxctx(key));
 
   const formattedPosts = posts
-    .map(({ title, shortTitle, subtitle, date, slug }) => ({
+    .map(({ title, shortTitle, subtitle, date, slug, url, external }) => ({
       title: shortTitle ?? title,
       description: subtitle,
       value: new Date(date).toLocaleDateString('en-US', {
@@ -35,7 +36,8 @@ export async function loader(
         day: 'numeric',
       }),
       date,
-      href: `/blog/${slug}`,
+      href: external && url ? url : `/blog/${slug}`,
+      external: !!external,
     }))
     .sort((a, b) => b.date.localeCompare(a.date));
 
@@ -97,7 +99,7 @@ export default function App() {
 
 function LineItemNative({ title, description, value, href }: DataType) {
   return (
-    <Link href={href} asChild>
+    <Link href={href as any} asChild>
       <TouchableOpacity>
         <Div
           style={{
@@ -112,6 +114,7 @@ function LineItemNative({ title, description, value, href }: DataType) {
             className="inline"
             style={{
               color: '#f8fafc',
+              flexShrink: 1,
             }}
           >
             <B>
@@ -136,6 +139,9 @@ function LineItemNative({ title, description, value, href }: DataType) {
           <Span
             style={{
               color: '#f8fafc',
+              flexShrink: 0,
+              textAlign: 'right',
+              width: 104,
             }}
           >
             {value}
@@ -146,11 +152,16 @@ function LineItemNative({ title, description, value, href }: DataType) {
   );
 }
 
-function LineItem({ title, description, value, href }: DataType) {
+function LineItem({ title, description, value, href, external }: DataType) {
   return (
-    <Link href={href} prefetch>
+    <Link
+      href={href as any}
+      prefetch={!external}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+    >
       <div className="text-default text-slate-50 rounded-lg flex flex-row items-center hover:bg-slate-200/5 p-4 transition-colors ease-in-out">
-        <span className="inline">
+        <span className="inline min-w-0">
           <b>
             {title}
             {'  '}
@@ -160,7 +171,9 @@ function LineItem({ title, description, value, href }: DataType) {
         </span>
         {/* divider pushing  */}
         <span className="flex-1 border-b border-dotted border-slate-800 mx-2 md:mx-3 min-w-[2rem]" />
-        <span>{value}</span>
+        <span className="w-24 md:w-28 shrink-0 whitespace-nowrap text-right">
+          {value}
+        </span>
       </div>
     </Link>
   );

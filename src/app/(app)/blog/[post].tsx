@@ -24,7 +24,9 @@ export async function generateStaticParams(): Promise<{ post: string }[]> {
   return mdxctx
     .keys()
     .filter(i => i.match(/\.js$/))
-    .map(key => mdxctx(key).slug)
+    .map(key => mdxctx(key))
+    .filter(info => !info.external)
+    .map(info => info.slug)
     .map(post => ({ post }));
 }
 
@@ -38,7 +40,11 @@ export async function loader(
     return null;
   }
 
-  const info = mdxctx(mdinfo) as PostInfo;
+  const info = mdxctx(mdinfo) as PostInfo & { external?: boolean };
+  if (info.external) {
+    return null;
+  }
+
   return { info, postId };
 }
 
