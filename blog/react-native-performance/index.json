@@ -4,7 +4,7 @@
   "subtitle": "Learn how to improve performance in React Native apps by optimizing JavaScript, enabling React Compiler, and leveraging Chrome DevTools and Reanimated worklets.",
   "author": "Evan Bacon",
   "date": "2025-04-22T16:00:00.000Z",
-  "slug": "expo-performance",
+  "slug": "react-native-performance",
   "language": "en",
   "url": "https://expo.dev/blog/best-practices-for-reducing-lag-in-expo-apps",
   "tags": [
