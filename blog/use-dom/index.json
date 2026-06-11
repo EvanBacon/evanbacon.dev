@@ -1,0 +1,18 @@
+{
+  "title": "Convert your website into a native app with Expo DOM Components",
+  "shortTitle": "\"use dom\"",
+  "subtitle": "Incrementally migrating web UI to native using webviews, directives, and multi-dimensional graphs.",
+  "author": "Evan Bacon",
+  "date": "2024-11-19T15:00:00.000Z",
+  "slug": "use-dom",
+  "language": "en",
+  "url": "https://expo.dev/blog/the-magic-of-expo-dom-components",
+  "tags": [
+    "expo",
+    "expo-router",
+    "react-native",
+    "react",
+    "webview",
+    "dom-components"
+  ]
+}
