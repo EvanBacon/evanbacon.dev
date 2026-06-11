@@ -26,6 +26,7 @@ import cn from 'classnames';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 import Quote from './Quote';
 import { YouTube } from './embeds/YouTube';
+import { Tweet } from './embeds/Twitter';
 
 (typeof global !== 'undefined' ? global : window).Prism = Prism;
 
@@ -489,6 +490,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
           Title,
           Kbd,
           YouTube,
+          Tweet,
         }}
         code={BaconCode}
         inlineCode={InlineCode}
