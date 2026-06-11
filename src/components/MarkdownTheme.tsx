@@ -25,6 +25,7 @@ import { Prism, Highlight, themes } from 'prism-react-renderer';
 import cn from 'classnames';
 import { resolveAssetUri } from '@/utils/resolveMetroAsset';
 import Quote from './Quote';
+import { YouTube } from './embeds/YouTube';
 
 (typeof global !== 'undefined' ? global : window).Prism = Prism;
 
@@ -487,6 +488,7 @@ export function MarkdownTheme({ children }: { children: React.ReactNode }) {
         components={{
           Title,
           Kbd,
+          YouTube,
         }}
         code={BaconCode}
         inlineCode={InlineCode}

@@ -25,9 +25,8 @@ export async function generateStaticParams(): Promise<{ post: string }[]> {
     .keys()
     .filter(i => i.match(/\.js$/))
     .map(key => mdxctx(key))
-    .filter(info => !info.external)
-    .map(info => info.slug)
-    .map(post => ({ post }));
+    .filter(info => !info.external && info.slug)
+    .map(info => ({ post: info.slug }));
 }
 
 export async function loader(
