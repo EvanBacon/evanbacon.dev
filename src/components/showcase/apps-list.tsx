@@ -26,8 +26,28 @@ function uniqueBy<T, K extends keyof T>(array: T[], key: K) {
   });
 }
 
+// Apps forced to the front of a category, keyed by category -> App Store ids.
+const PINNED_APPS: Record<string, string[]> = {
+  // Grok Bot
+  top: ['6794501026'],
+};
+
 function getAppData() {
-  return Object.entries(getAppStoreData())
+  const data = getAppStoreData();
+  const allApps = Object.values(data).flat();
+  const withPins = Object.fromEntries(
+    Object.entries(data).map(([category, apps]) => {
+      const pinnedIds = PINNED_APPS[category] ?? [];
+      if (!pinnedIds.length) return [category, apps];
+      const pinned = pinnedIds
+        .map(id => allApps.find(app => app.id === id))
+        .filter((app): app is AppItem => !!app);
+      const rest = apps.filter(app => !pinnedIds.includes(app.id));
+      return [category, [...pinned, ...rest]];
+    })
+  );
+
+  return Object.entries(withPins)
     .sort((a, b) => {
       // Sort by length of data array
       return b[1].length - a[1].length;
@@ -44,12 +64,19 @@ function getAppData() {
       // Sort the ranked apps by rank
       return [
         category[0],
-        category[1].sort(
-          (a, b) =>
-            //   b.absoluteRating - a.absoluteRating
-            b.absoluteRating * b.matches.length -
-            a.absoluteRating * a.matches.length
-        ),
+        (() => {
+          const pinnedIds = PINNED_APPS[category[0]] ?? [];
+          const pinned = category[1].filter(app => pinnedIds.includes(app.id));
+          const rest = category[1]
+            .filter(app => !pinnedIds.includes(app.id))
+            .sort(
+              (a, b) =>
+                //   b.absoluteRating - a.absoluteRating
+                b.absoluteRating * b.matches.length -
+                a.absoluteRating * a.matches.length
+            );
+          return [...pinned, ...rest];
+        })(),
       ] as const;
     });
 }
